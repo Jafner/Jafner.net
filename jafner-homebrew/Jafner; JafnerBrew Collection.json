@@ -1,0 +1,910 @@
+{
+	"_meta": {
+		"sources": [
+			{
+				"json": "JB",
+				"abbreviation": "JBrew",
+				"full": "JafnerBrew",
+				"authors": [
+					"Joey"
+				],
+				"convertedBy": "Jafner",
+				"version": "1.0",
+				"targetSchema": "1.0.0"
+			}
+		]
+	},
+	"spell": [
+		{
+			"name": "Karisar's Arcane Ward",
+			"level": 2,
+			"school": "A",
+			"time": [
+				{
+					"number": 1,
+					"unit": "action"
+				}
+			],
+			"range": {
+				"type": "point",
+				"distance": {
+					"type": "self"
+				}
+			},
+			"components": {
+				"v": true,
+				"s": true,
+				"m": "an empty glass vial, which the spell consumes"
+			},
+			"duration": [
+				{
+					"type": "timed",
+					"duration": {
+						"type": "hour",
+						"amount": 8
+					}
+				}
+			],
+			"classes": {
+				"fromClassList": [
+					{
+						"name": "Bard",
+						"source": "PHB"
+					},
+					{
+						"name": "Sorcerer",
+						"source": "PHB"
+					},
+					{
+						"name": "Wizard",
+						"source": "PHB"
+					}
+				]
+			},
+			"source": "JB",
+			"entries": [
+				"An invisible suit of magical armor forms around you. Your base AC becomes 13 + your spellcasting ability modifier. The spell ends if you don armor or if you dismiss the spell as an action."
+			],
+			"areaTags": [
+				"ST"
+			]
+		}
+	],
+	"item": [
+		{
+			"name": "Flameburst",
+			"type": "M",
+			"weaponCategory": "Martial",
+			"baseItem": "longsword|phb",
+			"rarity": "Rare",
+			"source": "JB",
+			"reqAttune": true,
+			"entries": [
+				"You have a +1 bonus to attack and damage rolls made with this longsword.",
+				"This magic longsword is inscribed with three runes. While attuned to this weapon, you can use an action to speak a command word and cast one of the following spells:",
+				{
+					"type": "list",
+					"items": [
+						"{@spell fireball}",
+						"{@spell wall of fire}",
+						"{@spell fire bolt}"
+					]
+				},
+				"When you use flameburst to cast fireball or wall of fire in this way, you take {@dice 2d6} fire damage and cannot do so again until you finish a long rest."
+			]
+		},
+		{
+			"name": "Banker's Coinpurse",
+			"wondrous": true,
+			"weight": 1,
+			"tier": "Minor",
+			"rarity": "Common",
+			"source": "JB",
+			"entries": [
+				"This small leather bag is enchanted with a special extradimensional space. The bag can hold up to 25,000 gp worth of coins and gems. It weighs 1 pound.",
+				"When a coin or gem is placed into the bag, it is converted to its gold piece value. As an action, you can speak the number and type of coins or gems you would like to withdraw and the bag will convert the requested coins or gems from the value stored within it."
+			]
+		},
+		{
+			"name": "Thunder Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Uncommon",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is enchanted with thunder magic. Upon striking an enemy, an ear-shattering boom is emitted from the head.",
+				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} thunder damage. When the arrow hits any target, any creatures within 10 feet of the target must succeed a DC 15 Constitution saving throw or become deafened."
+			]
+		},
+		{
+			"name": "Poison Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is coated in a powerful neurotoxin.",
+				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} poison damage and must succeed a DC 15 Constitution saving throw or become poisoned for 2 ({@dice 1d4}) rounds."
+			]
+		},
+		{
+			"name": "Lightning Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is enchanted with powerful lightning magic. Upon striking an enemy, electricty discharges into the target and potentially other targets nearby.",
+				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} lightning damage and any creatures within 5 feet wielding a metal weapon or shield, or wearing metal armor also take {@dice 1d4} damage (rolled separately)."
+			]
+		},
+		{
+			"name": "Ice Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is enchanted with powerful ice magic. Upon striking an enemy, the ice spreads quickly across the surface of the target's armor or skin and restrains its movement.",
+				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} cold damage and must succeed a DC 15 Strength saving throw or become restrained for 2 ({@dice 1d4}) rounds. A creature restrained in this manor can use an action to make a DC 15 Strength check to break free of the ice."
+			]
+		},
+		{
+			"name": "Healing Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Uncommon",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is a glass flask filled with reddish-brown liquid.",
+				"Instead of the normal weapon damage, a creature hit by this arrow takes 1 bludgeoning damage , then regains {@dice 1d4+1} hit points. A creature critically hit by this arrow takes 1 damage, then regains {@dice 2d4+2} hit points."
+			]
+		},
+		{
+			"name": "Fire Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is enchanted with powerful fire magic. Upon striking an enemy, flames burst from the head and engulf the target.",
+				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} fire damage and must succeed a DC 15 Dexterity saving throw or be set on fire for 2 ({@dice 1d4}) rounds. A creature on fire can drop prone and use its action to put out the fire."
+			]
+		},
+		{
+			"name": "Acid Arrow",
+			"type": "A",
+			"tier": "Minor",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"The head of this arrow is a glass flask filled with bright-green liquid.",
+				"Instead of the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} acid damage and becomes coated in acid. A creature coated in acid takes {@dice 1d4} acid damage at the beginning of its turn. A creature coated in acid can use an action to shake off the acid."
+			]
+		},
+		{
+			"name": "Ring of Prestidigitation",
+			"type": "RG",
+			"weight": 1,
+			"tier": "minor",
+			"rarity": "Common",
+			"source": "JB",
+			"entries": [
+				"While wearing this ring, you can cast the {@spell prestidigitation} spell at will."
+			]
+		},
+		{
+			"name": "Orb of Ill Portent",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Very rare",
+			"reqAttune": "by a wizard",
+			"source": "JB",
+			"entries": [
+				"The swirling purple and green mists within this glass orb reveal hints of future misfortune.",
+				"When you finish a long rest, roll two {@dice d10}s and record the numbers rolled. You can replace any attack roll, saving throw, or ability check made by a creature that you can see with one of these foretelling rolls. You must choose to do so before the roll, and you can replace a roll in this way only once per turn.",
+				"Each foretelling roll can be used only once. When you finish a long rest, you lose any unused foretelling roles."
+			]
+		},
+		{
+			"name": "Mantle of Galdur the Grey",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "rare",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"This headdress is made of the pelt of Galdur the Grey, the great cave bear of the Spine of the World. The visage of the dead great bear instills fear into the hearts of beasts.",
+				"While wearing this mantle, you have advantage on Intimidation checks against beasts.",
+				"Additionally, you have advantage on Animal Handling checks to influence the behavior of beasts you've intimidated."
+			]
+		},
+		{
+			"name": "Daggers of Shar",
+			"type": "M",
+			"weaponCategory": "Simple",
+			"baseItem": "dagger|phb",
+			"weight": 1,
+			"dmg1": "1d4",
+			"dmgType": "P",
+			"property": [
+				"F",
+				"L",
+				"T"
+			],
+			"range": "20/60",
+			"rarity": "Uncommon",
+			"source": "JB",
+			"reqAttune": true,
+			"entries": [
+				"This pair of daggers, when wielded together, carry a fragment of the power of Shar.",
+				"When you hit a creature with both daggers on your turn, you can choose one of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Gain {@dice 1d4+1} temporary hit points.",
+						"Deal an extra {@dice 1d4} necrotic damage to the target.",
+						"Force the target to make a DC 10 constitution saving throw. On a failure, the target's strength score is reduced by {@dice 1d4}."
+					]
+				}
+			]			
+		},
+		{
+			"name": "Frostbite",
+			"type": "M",
+			"weaponCategory": "Martial",
+			"baseItem": "longsword|PHB",
+			"weight": 3,
+			"dmg1": "1d8",
+			"dmg2": "1d10",
+			"dmgType": "S",
+			"property": [
+				"V"
+			],
+			"rarity": "Very rare",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"When you hit with an attack using this magic longsword, the target takes an extra {@dice 1d6} cold damage. In addition, while you hold the sword, you have resistance to fire damage.",
+				"In freezing temperatures, the blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.",
+				"When you draw this weapon, you can extinguish all nonmagical flames within 30 feet of you. This property can be used no more than once per hour."
+			]
+		},
+		{
+			"name": "Thorn",
+			"type": "M",
+			"weaponCategory": "Martial",
+			"baseItem": "longsword|PHB",
+			"weight": 3,
+			"dmg1": "1d8",
+			"dmg2": "1d10",
+			"dmgType": "S",
+			"property": [
+				"V"
+			],
+			"rarity": "Uncommon",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"You have a +1 bonus to attack rolls made with this magic weapon."
+			]
+		},
+		{
+			"name": "Crimson",
+			"type": "M",
+			"weaponCategory": "Martial",
+			"baseItem": "longsword|PHB",
+			"weight": 3,
+			"dmg1": "1d8",
+			"dmg2": "1d10",
+			"dmgType": "S",
+			"property": [
+				"V"
+			],
+			"rarity": "Uncommon",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"You have a +1 bonus to damage rolls made with this magic weapon.",
+				"In addition, this weapon deals lightning damage instead of its normal type."
+			]
+		},
+		{
+			"name": "Potion of Undeath",
+			"type": "P",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"When you drink this potion, make a DC 15 Constitution saving throw. On a success, you take {@dice 4d8} necrotic damage and gain 1 point of exhaustion. If the damage dealt on a success reduces you to zero hit points, you instead suffer the effects of a failure. On a failure, you fall to zero hit points and cannot receive any magical healing for 8 hours. If you die within 8 hours of drinking this potion, you become a zombie."
+			]
+		},
+		{
+			"name": "Amulet of Sigvid Karisar",
+			"wondrous": true,
+			"weight": 1,
+			"tier": "Major",
+			"rarity": "Rare",
+			"source": "JB",
+			"reqAttune": "by a wizard",
+			"entries": [
+				"This amulet imbues spells cast through it by the attuned wearer into living creatures. While attuned to the amulet, you can cast a spell through the amulet into a willing creature you can touch. The spell has no effect, other than to be imbued into the creature.",
+				"A creature can cast any spell imbued into it by this amulet. The spell uses the slot level, spell save DC, spell attack bonus, and spellcasting ability of the original caster, but it is otherwise treated as if the imbued creature cast the spell. The effect ends if the creature casts the imbued spell or after 24 hours have passed.",
+				"A creature can be imbued with a number of levels of spells equal to its CR, or its character level (minimum of 1 level of spells)."
+			]
+		},
+		{
+			"name": "Scepter of Elemental Affinity",
+			"type": "RD",
+			"weight": 2,
+			"tier": "Major",
+			"rarity": "Uncommon",
+			"source": "JB",
+			"reqAttune": true,
+			"entries": [
+				"This scepter is enchanted with unstable elemental energy. As an action, you may choose a point or creature within 60 feet of you and speak the activation word. When you activate the rod, make a DC 13 Arcana (Intelligence) ability check. On a success, choose an element and effect from the tables below. On a failure, roll 1d4 and a 1d6 to randomly determine the elemental type and effect.",
+				{
+					"type": "table",
+					"caption": "Element Type",
+					"colLabels": [
+						"{@dice d4}",
+						"Damage Type"
+					],
+					"colStyles": [
+						"col-1",
+						"col-11"
+					],
+					"rows": [
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 1
+								}
+							},
+							"Fire"
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 2
+								}
+							},
+							"Cold"
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 3
+								}
+							},
+							"Lightning"
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 4
+								}
+							},
+							"Thunder"
+						]
+					]
+				},
+				{
+					"type": "table",
+					"caption": "Effect Type",
+					"colLabels": [
+						"{@dice d6}",
+						"Effect"
+					],
+					"colStyles": [
+						"col-1",
+						"col-11"
+					],
+					"rows": [
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 1
+								}
+							},
+							"The elemental energy implodes. You take {@dice 1d10} force damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 2
+								}
+							},
+							"A bolt of elemental energy flies towards the target. Make a ranged spell attack. If the attack hits, deal {@dice 1d10} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 3
+								}
+							},
+							"Three rays of elemental energy fly toward the target. Make three ranged spell attacks. Each attack that hits deals {@dice 1d4+1} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 4
+								}
+							},
+							"A 30 ft. line of elemental energy flies out from the scepter. Each creature in the area of effect must succeed a DC 13 Dexterity save or take {@dice 1d8} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 5
+								}
+							},
+							"A 15 ft. cone of elemental energy erupts from the scepter. Each creature in the area of effect must succeed a DC 13 Dexterity save or take {@dice 1d8} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 6
+								}
+							},
+							"A burst of elemental energy explodes out from you. Each creature within a 10 ft. radius of you must succeed a DC 13 Dexterity saving throw or take {@dice 1d8} elemental damage."
+						]
+					]
+				}
+			]
+		}
+	],
+	"feat": [
+		{
+			"name": "Overwhelming Presence",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"cha": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the presence of the most affluent of leaders, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Charisma saving throws. If you are already proficient in them, you add double your proficiency bonus to Charisma saving throws you make.",
+						"While you are conscious, up to five friendly creatures within 30 feet of you who can see or hear you and who can understand you can gain a bonus to one Intelligence, Wisdom, or Charisma saving throw they make equal to your Charisma modifier. Once they’ve done so, they can’t do so again until they finish a short or long rest.",
+						"As an action, you can attempt to distract up to five creatures you can see within 30 feet of you. Each creature must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Charisma modifier). Any creature immune to being charmed is unaffected. If you or your companions are fighting a creature, it has advantage on the saving throw. On a failed save, for the next minute, a creature has disadvantage on Wisdom (Perception) checks made to perceive any creature other than you until the effect ends or until the target can no longer see or hear you. The feature ends early if you are incapacitated."
+					]
+				}
+			]
+		},
+		{
+			"name": "Exalted Awareness",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"wis": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the wisdom associated with the most renowned masters of the Force, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Wisdom saving throws. If you are already proficient in them, you add double your proficiency bonus to Wisdom saving throws you make.",
+						"Creatures within 60 feet of you have disadvantage on Dexterity (Stealth) checks made to hide from you.",
+						"As an action, you can sense the presence of illusions and other effects designed to deceive the senses within 30 feet of you, provided that you aren’t blinded or deafened. You sense that an effect is trying to trick you, but you gain no insight into what is hidden or its true nature. Once you’ve used this feature, you must complete a short or long rest before you can use it again."
+					]
+				}
+			]
+		},
+		{
+			"name": "Cunning Intellect",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"int": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the cunning of the most prolific scholars, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Intelligence saving throws. If you are already proficient in them, you add double your proficiency bonus to Intelligence saving throws you make.",
+						"Choose a tool and a skill with which you are proficient. You gain a bonus to ability checks you make with that tool and skill equal to your proficiency bonus. This bonus stacks with any proficiency bonuses you already have for that tool and skill.",
+						"Whenever you make an ability check that uses your Intelligence, you can add half your proficiency bonus (rounded down) if it doesn’t already include your proficiency bonus. Additionally, if you roll lower than half your level (rounded down) on an Intelligence check, you can instead use your level for the d20 roll."
+					]
+				}
+			]
+		},
+		{
+			"name": "Unnatural Resilience",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"con": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the fortitude often attributed to gods, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Constitution saving throws. If you are already proficient in them, you add double your proficiency bonus to saving throws you make.",
+						"Healing effects that would restore hit points to you can’t restore an amount less than half your level + your Constitution modifier. If this amount would exceed that maximum amount of hit points that effect could restore, you instead take that effect’s maximum.",
+						"You can add your Constitution modifier to death saving throws you make."
+					]
+				}
+			]
+		},
+		{
+			"name": "Blinding Agility",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"dex": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the reflexes one who can see things before they happen, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Dexterity saving throws. If you are already proficient in them, you add double your proficiency bonus to Dexterity saving throws you make.",
+						"Weapons that lack the two-handed, heavy, or special properties are considered to have the finesse property for you.",
+						"Opportunity attacks made against you have disadvantage."
+					]
+				}
+			]
+		},
+		{
+			"name": "Titan's Power",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"str": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the strength that legends tell of, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Strength saving throws. If you are already proficient in them, you add double your proficiency bonus to Strength saving throws you make.",
+						"You ignore the two-handed property of weapons with which you are proficient.",
+						"When you miss with a melee weapon attack, the creature takes damage equal to your Strength modifier. This damage is of the same type as the weapon’s damage."
+					]
+				}
+			]
+		},
+		{
+			"name": "Leadership (WIP)",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"cha": 15
+						}
+					],
+					"level": {
+						"level": 6
+					}
+				}
+			],
+			"entries": [
+				"You've put your heroic gravity to use, attracting followers of varying commitment and ability, but all regarding you as a hero. When you take this feat, you gain a leadership score and recruit a sidekick and a number of followers as described in the leadership score section below.",
+				{
+					"type": "entries",
+					"name": "Leadership Score",
+					"entries": [
+						"When you take this feat, you gain a Leadership Score, which is calculated as follows:",
+						{
+							"type": "abilityGeneric",
+							"name": "Leadership Score",
+							"text": "Your character level + your Charisma modifier",
+							"attributes": [
+								"cha"
+							]
+						}
+					]
+				},
+				"See the Leadership table for what sort of sidekick and how many followers you can recruit.",
+				{
+					"type": "table",
+					"caption": "Leadership table",
+					"colLabels": [
+						"Leadership Score",
+						"Sidekick Level",
+						"Common Followers",
+						"Expert Followers"
+					],
+					"colStyles": [
+						"col-2",
+						"col-4",
+						"col-4",
+						"col-2"
+					],
+					"rows": [
+						[
+							"8",
+							"1st",
+							"8",
+							"1"
+						],
+						[
+							"9",
+							"2nd",
+							"9",
+							"1"
+						],
+						[
+							"10",
+							"2nd",
+							"10",
+							"2"
+						],
+						[
+							"11",
+							"3rd",
+							"11",
+							"2"
+						],
+						[
+							"12",
+							"3rd",
+							"12",
+							"2"
+						],
+						[
+							"13",
+							"4th",
+							"13",
+							"2"
+						],
+						[
+							"14",
+							"4th",
+							"14",
+							"2"
+						],
+						[
+							"15",
+							"5th",
+							"15",
+							"3"
+						],
+						[
+							"16",
+							"5th",
+							"16",
+							"3"
+						],
+						[
+							"17",
+							"6th",
+							"17",
+							"3"
+						],
+						[
+							"18",
+							"6th",
+							"18",
+							"3"
+						],
+						[
+							"19",
+							"7th",
+							"19",
+							"3"
+						],
+						[
+							"20",
+							"7th",
+							"20",
+							"4"
+						],
+						[
+							"21",
+							"8th",
+							"21",
+							"4"
+						],
+						[
+							"22",
+							"8th",
+							"22",
+							"4"
+						],
+						[
+							"23",
+							"9th",
+							"23",
+							"4"
+						],
+						[
+							"24",
+							"9th",
+							"24",
+							"4"
+						],
+						[
+							"25",
+							"10th",
+							"25",
+							"5"
+						]
+					]
+				},
+				"Your leadership score applies when you first take this feat to recruit your starting followers and sidekick. For information about recruiting more followers, refer to the recruitment section below.",
+				{
+					"type": "entries",
+					"name": "Sidekick",
+					"entries": [
+						"Your sidekick is a loyal ally who joins the party and will fight with you in battle. The DM will either control your sidekick as an NPC or allow you to control your sidekick. Your sidekick acts on their own initiative.  The Sidekick Level column of the Leadership table determines the level of the sidekick you recruit when you take this feat. After being recruited, your sidekick gains levels through experience points as normal. The DM will either tell you which type of sidekick you recruit, or let you choose one. Refer to the Sidekicks rules from the Dragon of Icespire Peak adventure in the D&D Essentials Kit."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Common Followers",
+					"entries": [
+						"Common followers are villagers, townsfolk, and other citizens who've witnessed your heroism and decided to spread news of your deeds, as well as assist you with things within their purview. Common followers all use the commoner stat block. They will not follow you into battle, but they will regard you as a friend and assist you as they can within town."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Expert Followers",
+					"entries": [
+						"Expert followers are special followers who possess particular skills which may be of use to you. They are willing to fight with you, but will not sacrifice their lives for you. Expert followers are chosen by your DM from the following list: Acolyte, Guard, Noble, Scout, or Spy, each detailed in the Monster Manual. The DM can allow you to choose your own expert followers."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Recruitment",
+					"entries": [
+						"You can have a maximum number of common and expert followers equal to double your leadership score. To recruit more followers, you must first complete a heroic deed. The details of the heroic deed are determined by your DM, but it should take place as part of an adventure. Upon completion of the heroic deed, you can recruit one expert follower of your choice and a number of common followers equal to your Charisma modifier."
+					]
+				}
+			]
+		},
+		{
+			"name": "Second Wind",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"con": 13
+						}
+					]
+				}
+			],
+			"entries": [
+				"On your turn when you are below half your hit point maximum, you can use an action to expend any number of your hit dice. For each hit die you roll, you regain a number of hit points equal to the roll + your Constitution modifier. You cannot be healed above half your hit point maximum with this feature."
+			]
+		}
+	],
+	"variantrule": [
+		{
+			"name": "Revised Death and Dying",
+			"source": "JB",
+			"entries": [
+				"The following text replaces the text of the {@book \"Dropping to 0 Hit Points\"|PHB|9|Damage and Healing|5} section of the PHB.",
+				{
+					"type": "entries",
+					"name": "Revised Death and Dying",
+					"entries": [
+						"When you are reduced to 0 or fewer hit points, you either die outright or fall unconscious, as explained in the following sections.",
+						{
+							"type": "entries",
+							"name": "Instant Death",
+							"entries": [
+								"If you are reduced to a number of negative hit points greater than half your hit point maximum, you die.",
+								"Additionally, massive damage can kill you instantly When you take damage equal to or greater than your hit point maximum, roll a Constitution saving throw with a DC equal to half the damage taken or 20, whichever is lower. On a failed save, you die. On a success, you take the damage as normal.",
+								"For example, a cleric with a maximum of 12 hit points currently has 4 hit points. If she takes 10 damage, she would fall unconscious at -6 hit points, but she would still be alive. If she instead takes 11 damage, she would immediately die, as her hit points would be reduced to -7, a negative number greater than half her hit point maximum."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Falling Unconscious",
+							"entries": [
+								"If damage reduces you to 0 or fewer hit points and fails to kill you, you fall unconscious (see the appendix). This unconsciousness ends if your hit points are restored to 1 or more."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Bleeding Out and Death Saving Throws",
+							"entries": [
+								"When you start your turn with 0 or fewer hit points, you must succeed a special DC 10 Constitution saving throw, called a death saving throw, or take 1 damage. If your saving throw result is less than 5, you instead take 2 damage. If your result is greater than 20, you become stabilized and no longer need to make death saving throws."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Stabilizing a Creature",
+							"entries": [
+								"The best way to save a creature with 0 or fewer hit points is to heal it. If healing is unavailable, the creature can at least be stabilized so that it isn't killed by bleeding out.",
+								"You can use your action to administer first aid to an unconscious creature and attempt to stabilize it, which requires a successful DC 10 Wisdom (Medicine) check.",
+								"A stable creature doesn't make death saving throws, even though it has 0 or fewer hit points, but it does remain unconscious. If the creature takes any damage it stops being stable and must start making death saving throws again. A stable creature that isn't healed regains 1 hit point per hour until it becomes conscious."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Monsters and Death",
+							"entries": [
+								"Most DMs have a monster die the instant it drops to 0 hit points, rather than having it fall unconscious and make death saving throws.",
+								"Mighty villains and special nonplayer characters are common exceptions; the DM might have them fall unconscious and follow the same rules as player characters."
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Exhausted Spellcasting",
+			"source": "JB",
+			"entries": [
+				"Sometimes a spellcaster needs desperately to cast a spell to save themselves, their party, or even the world, but they're out of spell slots. In such situations, a character can attempt to cast a spell that they have prepared or memorized without any spell slots.",
+				"To cast a spell without expending a spell slot, a character's maximum hit points are reduced by a number equal to double the level of the spell until they finish a long rest.",
+				"Additionally, the character must make a Constitution saving throw. The DC equals 10 + the spell's level. On a failure, the character suffers a number of points of exhaustion equal to the spell's level. On a success, the character suffers half as many levels of exhaustion.",
+				"The character's hit point maximum is reduced and the points of exhaustion are suffered after the spell is cast."
+			]
+		},
+		{
+			"name": "Last Stand",
+			"source": "JB",
+			"entries": [
+				"When you are at death's doorstep and the world needs saving, you can sacrifice yourself to make one final action before death.",
+				"When an attack would reduce you to 0 hit points, you can take a turn. After your turn ends, you suffer 4 points of exhaustion and take the damage from the original attack."
+			]
+		}
+	]
+}
