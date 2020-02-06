@@ -927,5 +927,107 @@
 				"When an attack would reduce you to 0 hit points, you can take a turn. After your turn ends, you suffer 4 points of exhaustion and take the damage from the original attack."
 			]
 		}
+	],
+	"reward": [
+		{
+			"name": "Mark of Dragonhood",
+			"entries": [
+				"You can mutate your body to grant you some of the benefits of your patron's draconic form.",
+				"As an action, you can transform into a demi-dragon for 1 minute. While in demi-dragon form, you gain the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain a swim speed and fly speed equal to your walking speed.",
+						"You can breathe air and water.",
+						"You gain immunity to acid damage."
+					]
+				},
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Unhealth",
+			"entries": [
+				"You can channel your patron's venom into your strikes.",
+				"When you hit a creature with a melee weapon attack, you can choose to force the target to succeed a Constitution saving throw (using Nightscale's spell save DC) or become poisoned for 1 minute.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Terror",
+			"entries": [
+				"You can channel a fraction of your patron's frightful presence to imbue others with terror.",
+				"As an action, choose up to four creatures you can see and that can see you within 30 feet of you. You can force the creatures to make a Wisdom saving throw (using Nightscale's spell save DC) or become frightened for 1 minute. ",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Domination",
+			"entries": [
+				"You can channel a fragment of your patron's dominating presence to command others.",
+				"As an action, you can cast the command spell using Nightscale's spell save DC.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest.",
+				"Additionally, you have advantage on Intimidation (Charisma) checks to demand fealty."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Willpower",
+			"entries": [
+				"You are able to channel the indomitable willpower of your patron when your own in insufficient.",
+				"When you fail a Charisma saving throw, you can choose to reroll the saving throw, using Nightscale's Charisma saving throw bonus.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Acidification",
+			"entries": [
+				"Your blood becomes acidified. Your breath reeks of sulfur.",
+				"You can use a bonus action to imbue your weapon strikes with acidic energy. Until the start of your next turn, your weapon attacks deal acid damage instead of their normal damage type.",
+				"Additionally, when you fail a saving throw to avoid being poisoned by something you ingest, you can choose to succeed instead.",
+				"Once you use each of these features, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Acid Breath",
+			"entries": [
+				"You are granted a tiny fraction of the powerful breath weapon of your patron.",
+				"You can use a bonus action to cast dragon's breath on yourself using Nightscale's spell save DC. When cast in this way, the damage type is always acid, and the spell's damage becomes 5d6.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Detection",
+			"entries": [
+				"You can call upon the deific senses of your patron to replace your own.",
+				"As an action, you can channel Nightscale's abilities of supernatural perception. For 1 minute, you gain blindsight 60 ft. and darkvision 120 ft., and your Perception bonus becomes +16. When the effect ends, you become blinded for 1 minute.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		},
+		{
+			"name": "Mark of Befoulment",
+			"entries": [
+				"You can cause food and water to become ridden with rot and disease.",
+				"As an action, you can choose a 5-foot-radius sphere within 10 feet of you to become foul. Food or drink fouled in this way becomes putrid and any creature that ingests it must succeed a Constitution saving throw (using Nightscale's spell save DC) or become poisoned for 1 hour.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+			],
+			"source": "JB",
+			"type": "Mark"
+		}
 	]
 }
