@@ -72,6 +72,27 @@
 	],
 	"item": [
 		{
+			"name": "Fiora's Rose",
+			"type": "M",
+			"weaponCategory": "Martial",
+			"baseItem": "rapier|phb",
+			"rarity": "Very rare",
+			"source": "JB",
+			"reqAttune": true,
+			"entries": [
+				"You have a +1 bonus to attack and damage rolls made with this rapier.",
+				"The guard of this magic rapier is made of a ring of roses. While attuned to this weapon, you can speak a command word to cast one of the following spells:",
+				{
+					"type": "list",
+					"items": [
+						"{@spell shield of faith}",
+						"{@spell entangle}"
+					]
+				},
+				"When you use fiora's rose to cast {@spell shield of faith} or {@spell entangle} in this way, you cannot do so again until you finish a short or long rest."
+			]
+		},
+		{
 			"name": "Flameburst",
 			"type": "M",
 			"weaponCategory": "Martial",
@@ -210,7 +231,7 @@
 			"name": "Mantle of Galdur the Grey",
 			"wondrous": true,
 			"tier": "Major",
-			"rarity": "rare",
+			"rarity": "Rare",
 			"reqAttune": true,
 			"source": "JB",
 			"entries": [
