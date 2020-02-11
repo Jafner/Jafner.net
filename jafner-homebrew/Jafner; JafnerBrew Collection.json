@@ -2492,17 +2492,17 @@
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Unhealth",
 			"entries": [
 				"You can channel your patron's venom into your strikes.",
-				"When you hit a creature with a melee weapon attack, you can choose to force the target to succeed a Constitution saving throw (using Nightscale's spell save DC) or become poisoned for 1 minute.",
+				"When you hit a creature with a melee weapon attack, you can choose to force the target to succeed a Constitution saving throw (using Nightscale's spell save DC) or become {@condition poisoned} for 1 minute.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Terror",
@@ -2512,18 +2512,19 @@
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Domination",
 			"entries": [
-				"You can channel a fragment of your patron's dominating presence to command others.",
-				"As an action, you can cast the command spell using Nightscale's spell save DC.",
-				"Once you use this feature, you cannot use it again until you finish a short or long rest.",
-				"Additionally, you have advantage on Intimidation (Charisma) checks to demand fealty."
+				"You have advantage on Intimidation (Charisma) checks to demand fealty.",
+				"Additionally, you can channel a fragment of your patron's dominating presence to command others.",
+				"As an action, you can cast the {@spell command} spell using Nightscale's spell save DC.",
+				"Once you use this feature, you cannot use it again until you finish a short or long rest."
+				
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Willpower",
@@ -2533,7 +2534,7 @@
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Acidification",
@@ -2544,27 +2545,27 @@
 				"Once you use each of these features, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Acid Breath",
 			"entries": [
 				"You are granted a tiny fraction of the powerful breath weapon of your patron.",
-				"You can use a bonus action to cast dragon's breath on yourself using Nightscale's spell save DC. When cast in this way, the damage type is always acid, and the spell's damage becomes 5d6.",
+				"You can use a bonus action to cast {@spell dragon's breath|xge} on yourself using Nightscale's spell save DC. When cast in this way, the damage type is always acid, and the spell's damage becomes {@dice 5d6}.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Detection",
 			"entries": [
 				"You can call upon the deific senses of your patron to replace your own.",
-				"As an action, you can channel Nightscale's abilities of supernatural perception. For 1 minute, you gain blindsight 60 ft. and darkvision 120 ft., and your Perception bonus becomes +16. When the effect ends, you become blinded for 1 minute.",
+				"As an action, you can channel Nightscale's abilities of supernatural perception. For 1 minute, you gain blindsight 60 ft. and darkvision 120 ft., and your Perception bonus becomes +16. When the effect ends, you become {@condition blinded} for 1 minute.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
 		},
 		{
 			"name": "Mark of Befoulment",
@@ -2574,7 +2575,103 @@
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
 			"source": "JB",
-			"type": "Mark"
+			"type": "Mark of Nightscale"
+		},
+		{
+			"name": "Mark of the Undying",
+			"entries": [
+				"When you take damage which would kill you, you instead fall to 1 hit point and immediately take a turn. At then end of that turn, you fall to 0 hit points.",
+				"After you use this feature, a part of your body becomes marked with a sign of undeath, such as decayed flesh, rot, thinned hair, or exposed bone.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of the Ghoul",
+			"entries": [
+				"As an action, you can cast {@spell create undead} without any material components, targeting a single corpse of a Medium or Small humanoid within range.",
+				"After you use this feature, a part of your body becomes marked with a sign of necrotic magic, such as pale skin, bloodshot eyes, or blackened blood.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of the Blood Lord",
+			"entries": [
+				"As an action, choose up to four undead of CR 1/2 or lower. You assert control over the chosen creatures as with the {@spell animate dead} spell.",
+				"After you use this feature, a part of your body becomes marked with a sign of necrotic magic, such as pale skin, bloodshot eyes, or blackened blood.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of Blight",
+			"entries": [
+				"When you score a critical hit with a weapon attack against a creature, you can use a bonus action to reduc the target's ability scores by {@dice 1d4} each.",
+				"After you use this feature, your weapon becomes scarred with necrotic magic, its blade becomes permanently bloodstained or blackened, or in moments of silence, faint screams can be heard emanating from it.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of True Undeath",
+			"entries": [
+				"When you die, your patron binds your sould to your dead body.",
+				"You are restored to full health an you make the following changes to your statistics:",
+				{
+					"type": "list",
+					"items": [
+						"You gain the undead subtype and you do not age.",
+						"You gain the Undead Fortitude trait.",
+						"You gian immunity to poison damage, and the {@condition exhaustion} and {@condition poisoned} conditions."
+					]
+				},
+				"If you are killed after you have become undead in this manner, you are returned to unlife 7 days afterward."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of Madness",
+			"entries": [
+				"As an action, you can cast {@spell crown of madness} using your patron's spell save DC.",
+				"After you use this feature, a part of your body changes to make you appear more demonlike, new horns, deeper-set eyes, or cloven hooves.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of the Necromancer",
+			"entries": [
+				"Your patron grants you an undead servant. Choose either a {@creature minotaur skeleton} or {@creature ogre zombie}.",
+				"Your patron summons the undead of your choice, placing it under your control indefinitely and you can use a bonus action on your turn to command it, as with the {@spell animate dead} spell. If your undead servant dies, it is returned to unlife under your control 24 hours later."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of Speaking",
+			"entries": [
+				"You can speak and understand Abyssal.",
+				"Additionally, you can use an action to cast {@spell speak with dead} without any material components. When cast in this way, the target can be an undead.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Mark of Necrosis",
+			"entries": [
+				"As a bonus action on your turn, you can imbue your weapon strikes with vampiric energy. Until the end of your next turn, whenever you hit a creature with a weapon attack, the damage dealt is necrotic and you regain hit points equal to half the damage dealt.",
+				"After you use this feature, you cannot use it again until you finish a long rest."
+			],
+			"source": "JB",
+			"type": "Mark of Orcus"
 		}
 	]
 }
