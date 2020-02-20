@@ -14,6 +14,12 @@
 			}
 		]
 	},
+	"itemProperty": [
+		{
+			"abbreviation": "Ri",
+			"source": "JB",
+		}
+	],
 	"class": [
 		{
 			"name": "Variant Bard",
@@ -1587,7 +1593,7 @@
 						"{@spell entangle}"
 					]
 				},
-				"When you use fiora's rose to cast {@spell shield of faith} or {@spell entangle} in this way, you cannot do so again until you finish a short or long rest."
+				"Once one of these spells has been cast, this sword cannot be used to cast that spell again until the next dawn."
 			]
 		},
 		{
@@ -1595,6 +1601,9 @@
 			"type": "M",
 			"weaponCategory": "Martial",
 			"baseItem": "longsword|phb",
+			"property": [
+				"Ri"
+			],
 			"rarity": "Uncommon",
 			"source": "JB",
 			"reqAttune": true,
@@ -1613,8 +1622,13 @@
 			"reqAttune": true,
 			"entries": [
 				"This magic longsword is inscribed with three runes, though two lie dormant.",
-				"While attuned to this weapon, you can use an action to cast {@spell fire bolt} from it using your spell attack modifier, or +6, whichever is higher.",
-				"Additionally, when you are hit with a melee attack, you can use a reaction to cause flames to surround you, granting you the benefits of the {@spell fire shield} spell for 1 minute. Once you use this feature, you cannot use it again until you finish a long rest."
+				"While drawn, you can use an action to speak this magic sword's command word, causing the weapon's pommel to glow a bright red and shed bright light in a 20-foot-radius, and dim light for an additional 20 feet. The glowing lasts until you use an action to speak the command word again or until you drop or sheathe the sword.",
+				{
+					"type": "entries",
+					"name": "Ritual",
+					"entries": [
+						"You must take 10 fire damage while wielding this sword. Upon completion of this ritual, this item becomes {@item scorch|JB}."]
+				}
 			]
 		},
 		{
