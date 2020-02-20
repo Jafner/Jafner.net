@@ -17,7 +17,7 @@
 	"itemProperty": [
 		{
 			"abbreviation": "Ri",
-			"source": "JB",
+			"source": "JB"
 		}
 	],
 	"class": [
@@ -1601,9 +1601,6 @@
 			"type": "M",
 			"weaponCategory": "Martial",
 			"baseItem": "longsword|phb",
-			"property": [
-				"Ri"
-			],
 			"rarity": "Uncommon",
 			"source": "JB",
 			"reqAttune": true,
@@ -1617,6 +1614,9 @@
 			"type": "M",
 			"weaponCategory": "Martial",
 			"baseItem": "longsword|phb",
+			"property": [
+				"Ri"
+			],
 			"rarity": "Rare",
 			"source": "JB",
 			"reqAttune": true,
