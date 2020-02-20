@@ -17,7 +17,8 @@
 	"itemProperty": [
 		{
 			"abbreviation": "Ri",
-			"source": "JB"
+			"source": "JB",
+			"name": "Ritual"
 		}
 	],
 	"class": [
@@ -1597,69 +1598,6 @@
 			]
 		},
 		{
-			"name": "Scorch",
-			"type": "M",
-			"weaponCategory": "Martial",
-			"baseItem": "longsword|phb",
-			"rarity": "Uncommon",
-			"source": "JB",
-			"reqAttune": true,
-			"entries": [
-				"This magic longsword is inscribed with three runes, though they all lie dormant.",
-				"While attuned to this weapon, you can use an action to cast {@spell fire bolt} from it using your spell attack modifier, or +5, whichever is higher."
-			]
-		},
-		{
-			"name": "Cinderblade",
-			"type": "M",
-			"weaponCategory": "Martial",
-			"baseItem": "longsword|phb",
-			"property": [
-				"Ri"
-			],
-			"rarity": "Rare",
-			"source": "JB",
-			"reqAttune": true,
-			"entries": [
-				"This magic longsword is inscribed with three runes, though two lie dormant.",
-				"While drawn, you can use an action to speak this magic sword's command word, causing the weapon's pommel to glow a bright red and shed bright light in a 20-foot-radius, and dim light for an additional 20 feet. The glowing lasts until you use an action to speak the command word again or until you drop or sheathe the sword.",
-				{
-					"type": "entries",
-					"name": "Ritual",
-					"entries": [
-						"You must take 10 fire damage while wielding this sword. Upon completion of this ritual, this item becomes {@item scorch|JB}."]
-				}
-			]
-		},
-		{
-			"name": "Flameburst",
-			"type": "M",
-			"weaponCategory": "Martial",
-			"baseItem": "longsword|phb",
-			"rarity": "Rare",
-			"source": "JB",
-			"reqAttune": true,
-			"entries": [
-				"This magic longsword is inscribed with three runes, though one lies dormant.",
-				"While attuned to this weapon, you can use an action to cast {@spell fire bolt} from it using your spell attack modifier, or +7, whichever is higher.",
-				"Additionally, you can use an action to cast the {@spell fireball} spell from it, targeted on yourself. When you do, you are immune to fire damage, including the damage from this spell, until the start of your next turn."
-			]
-		},
-		{
-			"name": "Eye of Ashardalon",
-			"type": "M",
-			"weaponCategory": "Martial",
-			"baseItem": "longsword|phb",
-			"rarity": "Legendary",
-			"source": "JB",
-			"reqAttune": true,
-			"entries": [
-				"This magic longsword is inscribed with three runes, though they all lie dormant.",
-				"While attuned to this weapon, you can use an action to cast {@spell fire bolt} from it using your spell attack modifier, or +8, whichever is higher.",
-				"While attuned to this weapon, you can use an action to expel fire in a 30-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking {@dice 12d6} fire damage on a failed save, or half as much damage on a successful one. Once you use this feature, you cannot use it again until you finish a long rest."
-			]
-		},
-		{
 			"name": "Banker's Coinpurse",
 			"wondrous": true,
 			"weight": 1,
@@ -2026,22 +1964,6 @@
 						]
 					]
 				}
-			]
-		},
-		{
-			"name": "Mother of the Sea",
-			"type": "M",
-			"weaponCategory": "Martial",
-			"baseItem": "longsword|phb",
-			"property": [
-				"R"
-			],
-			"rarity": "Very rare",
-			"source": "JB",
-			"reqAttune": true,
-			"entries": [
-				"You have a +1 bonus to attack and damage rolls made with this magic longsword.",
-				"While attuned to this weapon, you can choose a creature within 30 feet and use an action to restore {@dice 2d6} hit points and {@spell bless} it."
 			]
 		}
 	],
