@@ -34,6 +34,7 @@
 			"source": "WoL",
 			"reqAttune": true,
 			"entries": [
+				"This sword has an obsidian black steel blade with three ancient dragonic runes inscribed along it near the hilt. Its pommel holds a bright ruby which flickers with the glow of a small inferno.",
 				"While drawn, you can use an action to speak this magic sword's command word, causing the weapon's pommel to glow a bright red and shed bright light in a 20-foot-radius, and dim light for an additional 20 feet. The glowing lasts until you use a bonus action to speak the command word again or until you drop or sheathe the sword.",
 				{
 					"type": "entries",
@@ -55,13 +56,14 @@
 			"source": "WoL",
 			"reqAttune": true,
 			"entries": [
+				"This sword has an obsidian black steel blade with three ancient dragonic runes inscribed along it near the hilt. Its pommel holds a bright ruby which flickers with the glow of a small inferno.",
 				"The first of the runes on the blade glows white hot.",
 				"While attuned to this weapon, you can use an action to cast the {@spell fire bolt} cantrip from it. When you make the spell's attack, you do so with an attack bonus of {@hit +5}.",
 				{
 					"type": "entries",
 					"name": "Ritual",
 					"entries": [
-						"ou must engulf the sword in magical fire for 24 hours. Upon completion of this ritual, this item becomes {@item flameburst|WoL}."
+						"You must engulf the sword in magical fire for 24 hours. Upon completion of this ritual, this item becomes {@item flameburst|WoL}."
 					]
 				}
 			]
@@ -78,6 +80,7 @@
 			"source": "WoL",
 			"reqAttune": true,
 			"entries": [
+				"This sword has an obsidian black steel blade with three ancient dragonic runes inscribed along it near the hilt. Its pommel holds a bright ruby which flickers with the glow of a small inferno.",
 				"The second of the blade's runes now glows instead of the first, though it is cool to the touch.",
 				"As an action while you are wielding this weapon, you can cast the {@spell fireball} spell from it, centered on yourself (DC 13). The sword cannot be used in this way again until the next dawn.",
 				"You have resistance to fire damage.",
@@ -102,9 +105,9 @@
 			"source": "WoL",
 			"reqAttune": true,
 			"entries": [
+				"This sword has an obsidian black steel blade with three ancient dragonic runes inscribed along it near the hilt. Its pommel holds a bright ruby which flickers with the glow of a small inferno.",
 				"The third of the blade's runes now glows instead of the second.",
 				"As an action while you are wielding this weapon, you can cast the {@spell investiture of flame|xge} spell from it (DC 15). When cast in this way, the spell's duration is 1 minute and does not require concentration. The sword cannot be used in this way again until the next dawn.",
-				"You have resistance to fire damage.",
 				{
 					"type": "entries",
 					"name": "Ritual",
@@ -123,6 +126,7 @@
 			"source": "WoL",
 			"reqAttune": true,
 			"entries": [
+				"This sword has an obsidian black steel blade with three ancient dragonic runes inscribed along it near the hilt. Its pommel holds a bright ruby which flickers with the glow of a small inferno.",
 				"All of the runes on the blade now glow a deep red.",
 				"You can use an action while you are wielding this weapon to expel fire in a 30-foot cone. Each creature in that area must make a DC 17 Dexterity saving throw, taking {@dice 18d6} fire damage on a failed save, or half as much damage on a successful one. The sword cannot be used in this way again until the next dawn."
 			]
