@@ -2608,6 +2608,16 @@
 			],
 			"source": "JB",
 			"type": "Mark of Orcus"
+		},
+		{
+			"name": "Binding of Soul",
+			"entries": [
+				"You have bound your soul to Shar as collateral in exchange for your life and continued patronage. In doing so, you have irrevocably tied your interests to Shar's. When you act in accordance with Shar's will, you will be empowered. When you act contrary to Shar's will, you will be castigated.",
+				"Upon being marked with the Binding of Soul, you gain a concordance score. Refer to the {@book concordance rules in Stronghold's & Followers|saf|5|Concordance}. Your concordance begins equal to your cleric level.",
+				"If your concordance score falls below 0, you lose all features granted by your cleric class levels until you attone."
+			],
+			"source": "JB",
+			"type": "Binding"
 		}
 	]
 }
