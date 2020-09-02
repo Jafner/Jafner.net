@@ -530,7 +530,7 @@
 					{
 						"name": "Epiphany (d6)",
 						"entries": [
-							"Beginning at 2nd level, you have a d6 epiphany die. When you make an ability check, attack roll, or saving throw, you can roll the die and add the number rolled to your total. You can wait until after you roll the {@dice d20} before deciding to use the Epiphany die, but you must decide before the DM says whether the roll succeeds or fails. Once you use this feature, you cannot do so again until you finish a short or long rest.",
+							"Beginning at 2nd level, you have a d6 epiphany die. When you make an ability check, attack roll, or saving throw using your intelligence modifier, you can roll the die and add the number rolled to your total. You can wait until after you roll the {@dice d20} before deciding to use the Epiphany die, but you must decide before the DM says whether the roll succeeds or fails. Once you use this feature, you cannot do so again until you finish a short or long rest.",
 							"The die size increase when you reach certain levels in this class: to {@dice 1d8} at 9th level, to {@dice 1d10} at 13th level, and to {@dice 1d12} at 17th level."
 						]
 					}
