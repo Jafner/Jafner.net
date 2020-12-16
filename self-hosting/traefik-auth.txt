@@ -1,0 +1,5 @@
+Username: jafner
+Password: ujzOHs1Rv!oZG6Wo
+Hashed:   jafner:$apr1$ugeTFvTj$5X0sC5xDsWDYBK7vNuvim/
+Hashed and Escaped:
+jafner:$$apr1$$ugeTFvTj$$5X0sC5xDsWDYBK7vNuvim/
