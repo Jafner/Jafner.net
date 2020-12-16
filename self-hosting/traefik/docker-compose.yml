@@ -1,0 +1,24 @@
+version: '2'
+services:
+        traefik:
+                image: traefik:v1.7.12-alpine
+                container_name: traefik
+                command: --configFile=/traefik.toml
+                restart: unless-stopped
+                networks:
+                        - web
+                ports:
+                        - "80:80"
+                        - "443:443"
+                volumes: 
+                        - /var/run/docker.sock:/var/run/docker.sock
+                        - ./traefik.toml:/traefik.toml
+                        - ./acme.json:/acme.json
+                labels:
+                        - "traefik.enable=true"
+                        - "traefik.frontend.rule=Host:traefik.jafner.net"
+                        - "traefik.port=8080"
+
+networks:
+        web:
+                external: true

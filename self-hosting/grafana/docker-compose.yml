@@ -1,0 +1,15 @@
+version: "2"
+services:
+        grafana:
+                image: grafana/grafana
+                networks:
+                        - web
+                user: "1000"
+                labels:
+                        - "traefik.enable=true"
+                        - "traefik.frontend.rule=Host:grafana.jafner.net"
+                        - "traefik.port=3000"
+                        - "traefik.docker.network=web"
+networks:
+        web:
+                external: true

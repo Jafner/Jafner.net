@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+        mc-enigmatica2-server:
+                image: acearcher/mc-enigmatica2-server:latest
+                container_name: mc-enigmatica2-server
+                environment:
+                        - MAX_RAM=10G
+                volumes:
+                        - './data:/fromhost'
+                ports:
+                        - '25565:25565'
