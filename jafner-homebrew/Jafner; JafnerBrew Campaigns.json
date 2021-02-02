@@ -16,21 +16,21 @@
 	},
 	"spell": [
 		{
-		"name": "Karisar's Arcane Ward",
-		"level": 2,
-		"school": "A",
-		"time": [
-			{
-				"number": 1,
-				"unit": "action"
-			}
-		],
-		"range": {
-			"type": "point",
-			"distance": {
-				"type": "self"
-			}
-		},
+			"name": "Karisar's Arcane Ward",
+			"level": 2,
+			"school": "A",
+			"time": [
+				{
+					"number": 1,
+					"unit": "action"
+				}
+			],
+			"range": {
+				"type": "point",
+				"distance": {
+					"type": "self"
+				}
+			},
 		"components": {
 			"v": true,
 			"s": true,
