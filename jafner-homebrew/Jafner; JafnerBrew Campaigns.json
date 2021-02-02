@@ -61,7 +61,7 @@
 				}
 			]
 		},
-		"source": "JB",
+		"source": "JBC",
 		"entries": [
 			"An invisible suit of magical armor forms around you. Your base AC becomes 13 + your spellcasting ability modifier. The spell ends if you don armor or if you dismiss the spell as an action."
 		],
@@ -77,7 +77,7 @@
 			"weaponCategory": "Martial",
 			"baseItem": "rapier|phb",
 			"rarity": "Very rare",
-			"source": "JB",
+			"source": "JBC",
 			"reqAttune": true,
 			"entries": [
 				"You have a +1 bonus to attack and damage rolls made with this rapier.",
@@ -98,7 +98,7 @@
 			"tier": "Major",
 			"rarity": "Rare",
 			"reqAttune": true,
-			"source": "JB",
+			"source": "JBC",
 			"entries": [
 				"This headdress is made of the pelt of Galdur the Grey, the great cave bear of the Spine of the World. The visage of the dead great bear instills fear into the hearts of beasts.",
 				"While wearing this mantle, you have advantage on Intimidation checks against beasts.",
@@ -120,7 +120,7 @@
 			],
 			"range": "20/60",
 			"rarity": "Uncommon",
-			"source": "JB",
+			"source": "JBC",
 			"reqAttune": true,
 			"entries": [
 				"This pair of daggers, when wielded together, carry a fragment of the power of Shar.",
@@ -149,7 +149,7 @@
 			],
 			"rarity": "Very rare",
 			"reqAttune": true,
-			"source": "JB",
+			"source": "JBC",
 			"entries": [
 				"When you hit with an attack using this magic longsword, the target takes an extra {@dice 1d6} cold damage. In addition, while you hold the sword, you have resistance to fire damage.",
 				"In freezing temperatures, the blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.",
@@ -170,7 +170,7 @@
 			],
 			"rarity": "Uncommon",
 			"reqAttune": true,
-			"source": "JB",
+			"source": "JBC",
 			"entries": [
 				"You have a +1 bonus to attack rolls made with this magic weapon."
 			]
@@ -189,7 +189,7 @@
 			],
 			"rarity": "Uncommon",
 			"reqAttune": true,
-			"source": "JB",
+			"source": "JBC",
 			"entries": [
 				"You have a +1 bonus to damage rolls made with this magic weapon.",
 				"In addition, this weapon deals lightning damage instead of its normal type."
@@ -201,7 +201,7 @@
 			"weight": 1,
 			"tier": "Major",
 			"rarity": "Rare",
-			"source": "JB",
+			"source": "JBC",
 			"reqAttune": "by a wizard",
 			"entries": [
 				"This amulet imbues spells cast through it by the attuned wearer into living creatures. While attuned to the amulet, you can cast a spell through the amulet into a willing creature you can touch. The spell has no effect, other than to be imbued into the creature.",
@@ -226,7 +226,7 @@
 				},
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -236,7 +236,7 @@
 				"When you hit a creature with a melee weapon attack, you can choose to force the target to succeed a Constitution saving throw (using Nightscale's spell save DC) or become {@condition poisoned} for 1 minute.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -246,7 +246,7 @@
 				"As an action, choose up to four creatures you can see and that can see you within 30 feet of you. You can force the creatures to make a Wisdom saving throw (using Nightscale's spell save DC) or become frightened for 1 minute. ",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -258,7 +258,7 @@
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 				
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -268,7 +268,7 @@
 				"When you fail a Charisma saving throw, you can choose to reroll the saving throw, using Nightscale's Charisma saving throw bonus.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -279,7 +279,7 @@
 				"Additionally, when you fail a saving throw to avoid being poisoned by something you ingest, you can choose to succeed instead.",
 				"Once you use each of these features, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -289,7 +289,7 @@
 				"You can use a bonus action to cast {@spell dragon's breath|xge} on yourself using Nightscale's spell save DC. When cast in this way, the damage type is always acid, and the spell's damage becomes {@dice 5d6}.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -299,7 +299,7 @@
 				"As an action, you can channel Nightscale's abilities of supernatural perception. For 1 minute, you gain blindsight 60 ft. and darkvision 120 ft., and your Perception bonus becomes +16. When the effect ends, you become {@condition blinded} for 1 minute.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -309,7 +309,7 @@
 				"As an action, you can choose a 5-foot-radius sphere within 10 feet of you to become foul. Food or drink fouled in this way becomes putrid and any creature that ingests it must succeed a Constitution saving throw (using Nightscale's spell save DC) or become poisoned for 1 hour.",
 				"Once you use this feature, you cannot use it again until you finish a short or long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Nightscale"
 		},
 		{
@@ -319,7 +319,7 @@
 				"After you use this feature, a part of your body becomes marked with a sign of undeath, such as decayed flesh, rot, thinned hair, or exposed bone.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -329,7 +329,7 @@
 				"After you use this feature, a part of your body becomes marked with a sign of necrotic magic, such as pale skin, bloodshot eyes, or blackened blood.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -339,7 +339,7 @@
 				"After you use this feature, a part of your body becomes marked with a sign of necrotic magic, such as pale skin, bloodshot eyes, or blackened blood.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -349,7 +349,7 @@
 				"After you use this feature, your weapon becomes scarred with necrotic magic, its blade becomes permanently bloodstained or blackened, or in moments of silence, faint screams can be heard emanating from it.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -367,7 +367,7 @@
 				},
 				"If you are killed after you have become undead in this manner, you are returned to unlife 7 days afterward."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -377,7 +377,7 @@
 				"After you use this feature, a part of your body changes to make you appear more demonlike, new horns, deeper-set eyes, or cloven hooves.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -386,7 +386,7 @@
 				"Your patron grants you an undead servant. Choose either a {@creature minotaur skeleton} or {@creature ogre zombie}.",
 				"Your patron summons the undead of your choice, placing it under your control indefinitely and you can use a bonus action on your turn to command it, as with the {@spell animate dead} spell. If your undead servant dies, it is returned to unlife under your control 24 hours later."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -396,7 +396,7 @@
 				"Additionally, you can use an action to cast {@spell speak with dead} without any material components. When cast in this way, the target can be an undead.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -405,7 +405,7 @@
 				"As a bonus action on your turn, you can imbue your weapon strikes with vampiric energy. Until the end of your next turn, whenever you hit a creature with a weapon attack, the damage dealt is necrotic and you regain hit points equal to half the damage dealt.",
 				"After you use this feature, you cannot use it again until you finish a long rest."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Mark of Orcus"
 		},
 		{
@@ -415,7 +415,7 @@
 				"Upon being marked with the Binding of Soul, you gain a concordance score. Refer to the {@book concordance rules in Stronghold's & Followers|saf|5|Concordance}. Your concordance begins equal to your cleric level.",
 				"If your concordance score falls below 0, you lose all features granted by your cleric class levels until you attone."
 			],
-			"source": "JB",
+			"source": "JBC",
 			"type": "Binding"
 		}
 	]
