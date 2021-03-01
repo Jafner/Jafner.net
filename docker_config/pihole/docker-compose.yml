@@ -1,0 +1,28 @@
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+    networks:
+      - web
+    env_file:
+      - ../.env
+    environment:
+      TZ: '${TZ}'
+      WEBPASSWORD: '***REMOVED***'
+      DNS1: 1.1.1.1
+      DNS2: 1.0.0.1
+    volumes:
+       - '${DOCKER_DATA}/pihole/etc-pihole/:/etc/pihole/'
+       - '${DOCKER_DATA}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true

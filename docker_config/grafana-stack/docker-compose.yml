@@ -1,0 +1,67 @@
+version: '3'
+services:
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: unless-stopped
+    networks:
+      - grafana
+    ports:
+      - 8086:8086
+      - 8089:8089/udp
+    volumes:
+      - ./influxdb.conf:/etc/influxdb/influxdb.conf:ro
+      - ./influxdb/db:/var/lib/influxdb
+    environment:
+      - TZ=America/Los_Angeles
+      - INFLUXDB_HTTP_ENABLED=true
+      - INFLUXDB_DB=host
+    command: -config /etc/influxdb/influxdb.conf
+
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf
+    restart: unless-stopped
+    networks:
+      - grafana
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+
+  grafana:
+    image: mbarmem/grafana-render:latest
+    container_name: grafana
+    restart: unless-stopped
+    networks:
+      - grafana
+      - web
+    user: "0"
+    volumes:  
+      - ./grafana:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel,grafana-piechart-panel
+    labels:
+      - traefik.http.routers.grafana.rule=Host(`dash.jafner.net`)
+      - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
+      - traefik.http.routers.grafana.tls=true
+      - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
+      - traefik.port=3000
+
+  speedtest:
+    image: atribe/speedtest-for-influxdb-and-grafana:latest
+    container_name: speedtest
+    restart: unless-stopped
+    networks:
+      - grafana
+    volumes:
+      - ./speedtest.ini:/src/config.ini
+
+networks:
+  grafana:
+  web:
+    external: true
+

@@ -1,0 +1,31 @@
+version: '3'
+services:
+  joplin:
+    image: joplin/server:latest
+    container_name: joplin
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - joplin_db
+    networks:
+      - web
+      - joplin
+    labels:
+      - traefik.http.routers.joplin.rule=Host(`joplin.jafner.net`)
+      - traefik.http.routers.joplin.tls=true
+      - traefik.http.routers.joplin.tls.certresolver=lets-encrypt
+      - traefik.http.services.joplin.loadbalancer.server.port=22300
+  joplin_db:
+    image: postgres:13.1
+    container_name: joplin_db
+    restart: unless-stopped
+    networks:
+      - joplin
+    env_file:
+      - .env
+
+networks:
+  joplin:
+  web: 
+    external: true

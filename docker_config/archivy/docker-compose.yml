@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  archivy:
+    image: uzayg/archivy:v1.0.0
+    container_name: archivy
+    networks:
+      - web
+      - archivy
+    environment:
+      - FLASK_DEBUG=0
+      - ELASTICSEARCH_ENABLED=1
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./archivy_data:/archivy/data:rw
+      - archivy_config:/archivy/.local/share/archivy
+    labels:
+      - traefik.http.routers.archivy.rule=Host(`archivy.jafner.net`)
+      - traefik.http.routers.archivy.tls=true
+      - traefik.http.routers.archivy.tls.certresolver=lets-encrypt
+      - traefik.http.routers.archivy.middlewares=lan-only@file
+  elasticsearch:
+    image: elasticsearch:7.9.0
+    container_name: elasticsearch
+    networks:
+      - archivy
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    environment:
+      - "discovery.type=single-node"
+
+volumes:
+  elasticsearch_data:
+  archivy_config:
+
+networks:
+  web:
+    external: true
+  archivy:

@@ -1,0 +1,15 @@
+[http.middlewares.simpleauth.basicAuth]
+  usersFile = "/.htpasswd"
+
+[http.middlewares]
+  [http.middlewares.lan-only.ipWhiteList]
+    sourceRange = ["127.0.0.1/32", "192.168.1.1/24"]
+
+[http.routers.api]
+  rule = "Host(`traefik.jafner.net`)"
+  entrypoints = ["websecure"]
+  middlewares = ["simpleauth"]
+  service = "api@internal"
+  [http.routers.api.tls]
+    certResolver = "lets-encrypt"
+

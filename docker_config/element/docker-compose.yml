@@ -1,0 +1,17 @@
+version: '3'
+services:
+  element:
+    image: vectorim/element-web
+    container_name: element-web
+    networks:
+      - web
+    volumes:
+      - ./config.json:/app/config.json
+    labels:
+      - traefik.http.routers.element.rule=Host(`element.jafner.net`)
+      - traefik.http.routers.element.tls=true
+      - traefik.http.routers.element.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
