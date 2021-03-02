@@ -9,18 +9,18 @@ services:
     networks:
       - web
       - archivebox
+    env_file:
+      - .env
     environment:
       - USE_COLOR=TRUE
       - SHOW_PROGRESS=TRUE
       - SEARCH_BACKEND_ENGINE=sonic
       - SEARCH_BACKEND_HOST_NAME=sonic
-      - SEARCH_BACKEND_PASSWORD=joeyyeoj
     volumes:
-      - ./data:/data:z
+      - "${DOCKER_DATA}/archivebox_data:/data:z"
     depends_on:
       - sonic
     labels:
-      - traefik.enabled=true
       - traefik.http.routers.archivebox.rule=Host(`archive.jafner.net`)
       - traefik.http.routers.archivebox.tls=true
       - traefik.http.routers.archivebox.tls.certresolver=lets-encrypt
@@ -29,11 +29,11 @@ services:
     container_name: sonic
     networks:
       - archivebox
-    environment:
-      - SEARCH_BACKEND_PASSWORD=joeyyeoj
+    env_file:
+      - .env
     volumes:
-      - ./etc:/etc:z
-      - ./data:/var/lib/sonic/store/:z
+      - "${DOCKER_DATA}/sonic_etc:/etc:z"
+      - "${DOCKER_DATA}/sonic_data:/var/lib/sonic/store/:z"
     labels:
       - traefik.enabled=false
 networks:
