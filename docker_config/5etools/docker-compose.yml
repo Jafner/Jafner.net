@@ -8,15 +8,7 @@ services:
     networks:
       - web
     volumes:
-<<<<<<< HEAD
-<<<<<<< HEAD
       - "${DOCKER_DATA}/htdocs:/usr/local/apache2/htdocs"
-=======
-      - ${DOCKER_DATA}/htdocs:/usr/local/apache2/htdocs
->>>>>>> 79fb142ddb9c7422cbecfec24bd5abeaa6e7b5f2
-=======
-      - "${DOCKER_DATA}/htdocs:/usr/local/apache2/htdocs"
->>>>>>> 6906ce88723c1aa9377e354b69bdc3c538cd5494
     labels:
       - traefik.http.routers.5etools.rule=Host(`5e.jafner.net`)
       - traefik.http.routers.5etools.tls=true
