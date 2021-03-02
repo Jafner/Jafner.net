@@ -1,5 +1,4 @@
----
-version: "2"
+version: '3'
 services:
   calibre-web:
     image: linuxserver/calibre-web
@@ -10,7 +9,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web_data:/config
-      - /mnt/nas/Ebooks/Calibre:/books
+      - ${LIBRARY_DIR}:/books
     labels:
       - traefik.http.routers.calibre.rule=Host(`calibre.jafner.net`)
       - traefik.http.routers.calibre.tls=true

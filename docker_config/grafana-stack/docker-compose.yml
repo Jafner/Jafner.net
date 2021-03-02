@@ -11,7 +11,7 @@ services:
       - 8089:8089/udp
     volumes:
       - ./influxdb.conf:/etc/influxdb/influxdb.conf:ro
-      - ./influxdb/db:/var/lib/influxdb
+      - ${DOCKER_DATA}/influxdb:/var/lib/influxdb
     environment:
       - TZ=America/Los_Angeles
       - INFLUXDB_HTTP_ENABLED=true

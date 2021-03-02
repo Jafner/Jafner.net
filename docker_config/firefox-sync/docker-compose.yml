@@ -6,13 +6,10 @@ services:
     container_name: firefox-sync
     volumes:
       - firefox_sync_data:/data
-    env_file:
-      - .env
     labels:
       - traefik.http.routers.firefox-sync.rule=Host(`firefox-sync.jafner.net`)
       - traefik.http.routers.firefox-sync.tls=true
       - traefik.http.routers.firefox-sync.tls.certresolver=letsencrypt
-      - traefik.port=5000
     restart: unless-stopped
 
 volumes:
