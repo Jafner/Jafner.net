@@ -1,5 +1,4 @@
----
-version: "2"
+version: '3'
 services:
   bookstack:
     image: linuxserver/bookstack
@@ -13,18 +12,17 @@ services:
       - DB_DATABASE=bookstackapp
       - APP_URL=https://docs.jafner.net
     volumes:
-      - /home/joey/docker/bookstack/config:/config
+      - ./config:/config
     restart: unless-stopped
     depends_on:
       - bookstack_db
     networks:
-            - web 
-            - bookstack
+      - web 
+      - bookstack
     labels:
-            - traefik.http.routers.bookstack.rule=Host(`docs.jafner.net`)
-            - traefik.http.routers.bookstack.tls=true
-            - traefik.http.routers.bookstack.tls.certresolver=lets-encrypt
-            - traefik.port=80
+      - traefik.http.routers.bookstack.rule=Host(`docs.jafner.net`)
+      - traefik.http.routers.bookstack.tls=true
+      - traefik.http.routers.bookstack.tls.certresolver=lets-encrypt
 
   bookstack_db:
     image: linuxserver/mariadb
@@ -38,14 +36,12 @@ services:
       - MYSQL_USER=bookstack
       - MYSQL_PASSWORD=yourdbpass
     volumes:
-      - /home/joey/docker/bookstack/config_db:/config
+      - ./config_db:/config
     restart: unless-stopped
     networks:
-            - bookstack
-    labels:
-            - traefik.enable=false
+      - bookstack
 
 networks:
-        web:
-                external: true
-        bookstack:
+  web:
+    external: true
+  bookstack:
