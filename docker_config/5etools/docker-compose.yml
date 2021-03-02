@@ -3,10 +3,12 @@ services:
   5etools:
     container_name: 5etools
     image: httpd
+    env_file:
+      - .env
     networks:
       - web
     volumes:
-      - ${DOCKER_DATA}/5etools/htdocs:/usr/local/apache2/htdocs
+      - "${DOCKER_DATA}/htdocs:/usr/local/apache2/htdocs"
     labels:
       - traefik.http.routers.5etools.rule=Host(`5e.jafner.net`)
       - traefik.http.routers.5etools.tls=true

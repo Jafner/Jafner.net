@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # based on: https://wiki.5e.tools/index.php/5eTools_Install_Guide
-
-cd ${DOCKER_DATA}/5etools/htdocs
+source .env
+cd ${DOCKER_DATA}/htdocs
 
 FN=`curl -s -I https://get.5e.tools/release/|grep filename|cut -d"=" -f2 | awk '{print $1}'`
 FN=${FN//[$'\t\r\n"']}
