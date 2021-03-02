@@ -3,8 +3,6 @@ services:
   5etools:
     container_name: 5etools
     image: httpd
-    env_file:
-      - .env
     networks:
       - web
     volumes:
