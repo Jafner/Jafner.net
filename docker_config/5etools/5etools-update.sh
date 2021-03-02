@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # based on: https://wiki.5e.tools/index.php/5eTools_Install_Guide
+<<<<<<< HEAD
 source .env
+=======
+
+>>>>>>> 79fb142ddb9c7422cbecfec24bd5abeaa6e7b5f2
 cd ${DOCKER_DATA}/htdocs
 
 FN=`curl -s -I https://get.5e.tools/release/|grep filename|cut -d"=" -f2 | awk '{print $1}'`
