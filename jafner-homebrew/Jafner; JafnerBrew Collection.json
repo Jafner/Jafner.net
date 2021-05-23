@@ -797,5 +797,289 @@
 				}
 			]
 		}
+	],
+	"monster": [
+		{
+			"name": "Rockwyrm",
+			"size": "L",
+			"type": "dragon",
+			"source": "JB",
+			"alignment": [
+				"N"
+			],
+			"ac": [
+				{
+					"ac": 16,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "8d12 + 24",
+				"average": 76
+			},
+			"speed": {
+				"walk": 30,
+				"fly": 50,
+				"canHover": false
+			},
+			"str": 20,
+			"dex": 14,
+			"con": 17,
+			"int": 12,
+			"wis": 14,
+			"cha": 11,
+			"passive": 15,
+			"cr": "8",
+			"senses": [
+				"darkvision 120 ft."
+			],
+			"senseTags": [
+				"SD"
+			],
+			"languages": [
+				"Common",
+				"Draconic"
+			],
+			"languageTags": [
+				"C",
+				"DR"
+			],
+			"save": {
+				"str": "+8",
+				"wis": "+5"
+			},
+			"skill": {
+				"deception": "+3",
+				"survival": "+5",
+				"perception": "+5"
+			},
+			"resist": [
+				{
+					"resist": [
+						"bludgeoning",
+						"piercing",
+						"slashing"
+					],
+					"note": "from non-magical weapons"
+				}
+			],
+			"conditionImmune": [
+				"paralyzed",
+				"petrified",
+				"prone"
+			],
+			"trait": [
+				{
+					"name": "Ambusher",
+					"entries": [
+						"The rockwyrm has advantage on attack rolls against any creature it has surprised."
+					]
+				}
+			],
+			"traitTags": [
+				"Ambusher"
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"The rockwyrm makes three attacks: one with its bite and two with its claws. It can replace its bite with a paralyzing ray."
+					]
+				},
+				{
+					"name": "Bite",
+					"entries": [
+						"{@atk mw} {@hit 8} to hit, reach 5 ft., one target. {@h}14 ({@damage 2d10 + 5}) piercing damage."
+					]
+				},
+				{
+					"name": "Claw",
+					"entries": [
+						"{@atk mw} {@hit 8} to hit, reach 5 ft., one target. {@h}12 ({@damage 2d6 + 5}) slashing damage."
+					]
+				},
+				{
+					"name": "Paralyzing Ray {@recharge 5}",
+					"entries": [
+						"The rockwyrm opens its third eye, emitting a magical ray at a creature it can see within 75 feet of it. The targeted creature must succeed on a {@dc 16} Constitution saving throw or be {@condition paralyzed} for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+					]
+				}
+			],
+			"damageTags": [
+				"P",
+				"S"
+			],
+			"miscTags": [
+				"MW"
+			],
+			"actionTags": [
+				"Multiattack"
+			],
+			"environment": [
+				"arctic",
+				"hill",
+				"mountain"
+			],
+			"fluff": {
+				"entries": [
+					"Rockwyrms are often mistaken for dragons. These reptiles resemble dragons and wyverns, but they tend to be sly and cunning ambushers rather than wide-ranging hunters. Since rockwyrms are careful to slay and devour isolated victims while avoiding groups of creatures, their kills are often blamed on other predators or brigands. Sometimes called \"false dragons,\" rockwyrms have rough hides of mottled gray and brown scales, smallish wings that are more suited for fighting than flying, and blunt faces with powerful jaws and a large third eye in the middle of their foreheads. Rockwyrm foreclaws are nimble enough to serve as hands for most purposes, and their tails are long and powerful.",
+					"Rockwyrms are found in cold, mountainous areas across Faerûn. As settlers in the Silver Marches push into the wilderness, and steadings rise in many long-uninhabited places, rockwyrms are becoming an increasing problem. There are even rumors that these hunters work together, shulking and spying, so as to better avoid armed bands and guards and strike at unprotected and isolated targets.",
+					"Rockwyrms stash treasure (coins, gems, tools, and other items taken from prey they deem useful for later trade or personal ransom) in rock clefts or hollows that they can conceal and guard with clever traps, but have no single, true lair. They sleep in the same fashion that they hunt-- lying motionless covered by their wings, with their scaly hides matching their surroundings (usually gray rocks or white snow) in hue.",
+					"Rockwyrms speak common and draconic, and also master small working vocabularies in many other languages-- depending on what prey they come into contact with."
+				]
+			},
+			"conditionInflict": [
+				"paralyzed"
+			]
+		},
+		{
+			"name": "Duergar Acolyte of Orcus",
+			"size": "M",
+			"type": {
+				"type": "humanoid",
+				"tags": [
+					"dwarf"
+				]
+			},
+			"source": "JBC",
+			"alignment": [
+				"L",
+				"E"
+			],
+			"ac": [
+				{
+					"ac": 14,
+					"from": [
+						"{@item scale mail|phb}"
+					]
+				}
+			],
+			"hp": {
+				"formula": "5d8 + 10",
+				"average": 32
+			},
+			"speed": {
+				"walk": 25
+			},
+			"str": 14,
+			"dex": 11,
+			"con": 14,
+			"int": 11,
+			"wis": 16,
+			"cha": 9,
+			"passive": 10,
+			"cr": "5",
+			"senses": [
+				"darkvision 120 ft."
+			],
+			"senseTags": [
+				"SD"
+			],
+			"languages": [
+				"Dwarvish",
+				"Undercommon"
+			],
+			"languageTags": [
+				"D",
+				"U"
+			],
+			"save": {
+				"wis": "+6"
+			},
+			"resist": [
+				"poison"
+			],
+			"trait": [
+				{
+					"name": "Duergar Resilience",
+					"entries": [
+						"The duergar acolyte of orcus has advantage on saving throws against poison, spells, and illusions, as well as to resist being {@condition charmed} or {@condition paralyzed}."
+					]
+				},
+				{
+					"name": "Sunlight Sensitivity",
+					"entries": [
+						"While in sunlight, the duergar acolyte of orcus has disadvantage on attack rolls, as well as on Wisdom ({@skill Perception}) checks that rely on sight."
+					]
+				}
+			],
+			"traitTags": [
+				"Sunlight Sensitivity"
+			],
+			"action": [
+				{
+					"name": "Enlarge (Recharges after a Short or Long Rest)",
+					"entries": [
+						"For 1 minute, the duergar acolyte of orcus magically increases in size, along with anything it is wearing or carrying. While enlarged, the duergar acolyte of orcus is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the duergar acolyte of orcus lacks the room to become Large, it attains the maximum size possible in the space available."
+					]
+				},
+				{
+					"name": "Invisibility (Recharges after a Short or Long Rest)",
+					"entries": [
+						"The duergar acolyte of orcus magically turns {@condition invisible} until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the duergar acolyte of orcus wears or carries is {@condition invisible} with it."
+					]
+				},
+				{
+					"name": "Morningstar",
+					"entries": [
+						"{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d8 + 2}) piercing damage, plus 9 ({@damage 2d8}) necrotic damage."
+					]
+				}
+			],
+			"spellcasting": [
+				{
+					"name": "Spellcasting",
+					"headerEntries": [
+						"The duergar acolyte of orcus is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save {@dc 14}, +6 to hit with spell attacks). The duergar acolyte of orcus has the following spells prepared:"
+					],
+					"spells": {
+						"0": {
+							"spells": [
+								"{@spell guidance}",
+								"{@spell mending}",
+								"{@spell sacred flame}"
+							]
+						},
+						"1": {
+							"spells": [
+								"{@spell bane}",
+								"{@spell command}",
+								"{@spell ray of sickness}"
+							],
+							"slots": 4
+						},
+						"2": {
+							"spells": [
+								"{@spell gentle repose}",
+								"{@spell hold person}",
+								"{@spell spiritual weapon}"
+							],
+							"slots": 3
+						},
+						"3": {
+							"spells": [
+								"{@spell animate dead}",
+								"{@spell bestow curse}"
+							],
+							"slots": 2
+						}
+					},
+					"ability": "wis",
+					"type": "spellcasting"
+				}
+			],
+			"damageTags": [
+				"P",
+				"N"
+			],
+			"miscTags": [
+				"MW"
+			],
+			"environment": [
+				"underdark"
+			]
+		}
 	]
 }
