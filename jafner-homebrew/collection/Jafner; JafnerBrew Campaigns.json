@@ -31,43 +31,43 @@
 					"type": "self"
 				}
 			},
-		"components": {
-			"v": true,
-			"s": true,
-			"m": "an empty glass vial, which the spell consumes"
-		},
-		"duration": [
-			{
-				"type": "timed",
-				"duration": {
-					"type": "hour",
-					"amount": 8
+			"components": {
+				"v": true,
+				"s": true,
+				"m": "an empty glass vial, which the spell consumes"
+			},
+			"duration": [
+				{
+					"type": "timed",
+					"duration": {
+						"type": "hour",
+						"amount": 8
+					}
 				}
-			}
-		],
-		"classes": {
-			"fromClassList": [
-				{
-					"name": "Bard",
-					"source": "PHB"
-				},
-				{
-					"name": "Sorcerer",
-					"source": "PHB"
-				},
-				{
-					"name": "Wizard",
-					"source": "PHB"
-				}
+			],
+			"classes": {
+				"fromClassList": [
+					{
+						"name": "Bard",
+						"source": "PHB"
+					},
+					{
+						"name": "Sorcerer",
+						"source": "PHB"
+					},
+					{
+						"name": "Wizard",
+						"source": "PHB"
+					}
+				]
+			},
+			"source": "JBC",
+			"entries": [
+				"An invisible suit of magical armor forms around you. Your base AC becomes 13 + your spellcasting ability modifier. The spell ends if you don armor or if you dismiss the spell as an action."
+			],
+			"areaTags": [
+				"ST"
 			]
-		},
-		"source": "JBC",
-		"entries": [
-			"An invisible suit of magical armor forms around you. Your base AC becomes 13 + your spellcasting ability modifier. The spell ends if you don armor or if you dismiss the spell as an action."
-		],
-		"areaTags": [
-			"ST"
-		]
 		}
 	],
 	"item": [
