@@ -28,83 +28,6 @@
 			]
 		},
 		{
-			"name": "Thunder Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Uncommon",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is enchanted with thunder magic. Upon striking an enemy, an ear-shattering boom is emitted from the head.",
-				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} thunder damage. When the arrow hits any target, any creatures within 10 feet of the target must succeed a DC 15 Constitution saving throw or become deafened."
-			]
-		},
-		{
-			"name": "Poison Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Rare",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is coated in a powerful neurotoxin.",
-				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} poison damage and must succeed a DC 15 Constitution saving throw or become poisoned for 2 ({@dice 1d4}) rounds."
-			]
-		},
-		{
-			"name": "Lightning Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Rare",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is enchanted with powerful lightning magic. Upon striking an enemy, electricty discharges into the target and potentially other targets nearby.",
-				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} lightning damage and any creatures within 5 feet wielding a metal weapon or shield, or wearing metal armor also take {@dice 1d4} damage (rolled separately)."
-			]
-		},
-		{
-			"name": "Ice Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Rare",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is enchanted with powerful ice magic. Upon striking an enemy, the ice spreads quickly across the surface of the target's armor or skin and restrains its movement.",
-				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} cold damage and must succeed a DC 15 Strength saving throw or become restrained for 2 ({@dice 1d4}) rounds. A creature restrained in this manor can use an action to make a DC 15 Strength check to break free of the ice."
-			]
-		},
-		{
-			"name": "Healing Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Uncommon",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is a glass flask filled with reddish-brown liquid.",
-				"Instead of the normal weapon damage, a creature hit by this arrow takes 1 bludgeoning damage , then regains {@dice 1d4+1} hit points. A creature critically hit by this arrow takes 1 damage, then regains {@dice 2d4+2} hit points."
-			]
-		},
-		{
-			"name": "Fire Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Rare",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is enchanted with powerful fire magic. Upon striking an enemy, flames burst from the head and engulf the target.",
-				"In addition to the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} fire damage and must succeed a DC 15 Dexterity saving throw or be set on fire for 2 ({@dice 1d4}) rounds. A creature on fire can drop prone and use its action to put out the fire."
-			]
-		},
-		{
-			"name": "Acid Arrow",
-			"type": "A",
-			"tier": "Minor",
-			"rarity": "Rare",
-			"source": "JB",
-			"entries": [
-				"The head of this arrow is a glass flask filled with bright-green liquid.",
-				"Instead of the normal weapon damage, a creature hit by this arrow takes {@dice 1d4} acid damage and becomes coated in acid. A creature coated in acid takes {@dice 1d4} acid damage at the beginning of its turn. A creature coated in acid can use an action to shake off the acid."
-			]
-		},
-		{
 			"name": "Ring of Prestidigitation",
 			"type": "RG",
 			"weight": 1,
@@ -126,6 +49,32 @@
 				"The swirling purple and green mists within this glass orb reveal hints of future misfortune.",
 				"When you finish a long rest, roll two {@dice d10}s and record the numbers rolled. You can replace any attack roll, saving throw, or ability check made by a creature that you can see with one of these foretelling rolls. You must choose to do so before the roll, and you can replace a roll in this way only once per turn.",
 				"Each foretelling roll can be used only once. When you finish a long rest, you lose any unused foretelling roles."
+			]
+		},
+		{
+			"name": "Blinkstone Amulet",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Rare",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"A polished onyx sits in a simple silver frame on this amulet.",
+				"This amulet has 3 charges. When a creature would hit you with a weapon attack while you are wearing this amulet, you can expend a charge use your reaction to cause the attack to miss. When you do, you can also teleport to a point you can see within 10 feet of you.",
+				"The amulet regains 1d3 charges daily at dawn."
+			]
+		},
+		{
+			"name": "Ethereal Gemstone",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Uncommon",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"This pale blue gemstone seems to fade in and out of existance in your hand, oscilating between material and the ethereal.",
+				"While you are holding the *Ethereal Gemstone*, you can use a bonus action and crush the stone with your fists. When you do, your unarmed strikes become magical and you gain a +1 bonus to attack and damage rolls for your unarmed strikes.",
+				"After 1 minute, the effect ends and the stone reforms in your hand, its power exhausted until the next dawn."
 			]
 		},
 		{
@@ -265,6 +214,39 @@
 						]
 					]
 				}
+			]
+		},
+		{
+			"name": "Ring of Heat",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Uncommon",
+			"reqAttune": false,
+			"source": "JB",
+			"entries": [
+				"This golden ring glows red hot at all times, and emanates as much heat as a lit torch. It cannot be put out or turned off. If placed in water, it can boil one gallon of water per 5 minutes.",
+				"A creature who touches the ring takes 1 fire damage per round, which is reduced to 0 if the creature has resistance to fire damage."
+			]
+		},
+		{
+			"name": "Jar of Brain Brine",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Rare",
+			"reqAttune": false,
+			"source": "JB",
+			"entries": [
+				"This large jar contains the eye of a mindwitness and some of the sickly green fluid from an ilithid elder brain pool.",
+				"You can place up to 1 lb. of food into the jar. If you allow the food to pickle for 1 day, it will be imbued with some psionic power. Counterintuitively, pickling with this jar causes the food to become rotten and inedible 1 day after it is removed from the brine. When you eat food that has been pickled in this way, you gain the following benefits, which last for 8 hours:",
+				{
+					"type": "list",
+					"items": [
+						"You can speak telepathically to any creature you can see within 60 feet of you. Your telepathic utterances are in a language you know, and the creature understands you only if it knows that language. Your communication doesn't give the creature the ability to respond to you telepathically.",
+						"You have darkvision out to a range of 60 feet. If you already have darkvision, you become able to distinguish color instead of shades of gray.",
+						"You can cast the {@spell command} spell with a DC of 15. Once you use this feature, you cannot use it again."
+					]
+				}
+
 			]
 		}
 	],
@@ -741,7 +723,7 @@
 					"name": "Resources",
 					"entries": [
 						"Making a spell permanent takes an amount of time and money related to the level of the spell the character wants to make permenent, as shown in the Spell Permanency Costs table. In addition, the character must have proficiency with the Arcana skill and must provide any material components required for the casting of the spell. Moreover, the character must have the spell prepared, or it must be among the character's known spells, in order to make imbue a creature with that spell.",
-						"For a spell to be eligible for permanency, it myst meet the following requirements.",
+						"For a spell to be eligible for permanency, it must meet the following requirements.",
 						{
 							"type": "list",
 							"items": [
@@ -1080,6 +1062,218 @@
 			"environment": [
 				"underdark"
 			]
+		}
+	],
+	"variant": [
+		{
+			"name": "Blink Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The head of this ammunition is imbued with powerful teleportation magic.",
+				"When you fire this piece of ammunition and it hits a creature, you can use your reaction to swap places with that creature. If you instead hit a wall or floor, you can use your reaction to teleport to an unoccupied space within 5 feet of where it hit."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Blink ",
+				"source": "JB",
+				"rarity": "rare",
+				"entries": [
+					"The head of this ammunition is imbued with powerful teleportation magic.",
+					"When you fire this piece of ammunition and it hits a creature, you can use your reaction to swap places with that creature. If you instead hit a wall or floor, you can use your reaction to teleport to an unoccupied space within 5 feet of where it hit."
+				]
+			}
+		},
+		{
+			"name": "Explosive Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The head of this piece of ammunition contains a small amount of a potent explosive. Upon striking a target, it detonates.",
+				"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 2d8 fire damage and is pushed 10 feet away from the origin. On a successful save, the creature takes half as much damage and isn't pushed."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Explosive ",
+				"source": "JB",
+				"rarity": "rare",
+				"entries": [
+					"The head of this piece of ammunition contains a small amount of a potent explosive. Upon striking a target, it detonates.",
+					"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 2d8 fire damage and is pushed 10 feet away from the origin. On a successful save, the creature takes half as much damage and isn't pushed."
+				]
+			}
+		},
+		{
+			"name": "Seeker Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"This piece of ammunition is enchanted with minor sentience, allowing it to make small adjustments mid-flight to hit its target.",
+				"When you make a ranged weapon attack using this ammunition and you miss by 5 or less, the ammunition adjusts its trajectory and you hit instead. If your attack roll exceeds the target's Armor Class by 5 or more, the attack is automatically a critical hit.",
+				"If either of these effects are triggered, the ammunition is no longer magical."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Seeker ",
+				"source": "JB",
+				"rarity": "legendary",
+				"entries": [
+					"This piece of ammunition is enchanted with minor sentience, allowing it to make small adjustments mid-flight to hit its target.",
+					"When you make a ranged weapon attack using this ammunition and you miss by 5 or less, the ammunition adjusts its trajectory and you hit instead. If your attack roll exceeds the target's Armor Class by 5 or more, the attack is automatically a critical hit.",
+					"If either of these effects are triggered, the ammunition is no longer magical."
+				]
+			}
+		},
+		{
+			"name": "Stunning Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The head of this piece of ammunition is imbued with thunder magic. Upon striking a target, it detonates.",
+				"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 1d8 thunder damage and is deafened and blinded for one minute. On a successful save, the creature takes half as much damage and isn't pushed.",
+				"Once it hits a target, the ammunition is no longer magical."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Stunning ",
+				"source": "JB",
+				"rarity": "rare",
+				"entries": [
+					"The head of this piece of ammunition is imbued with thunder magic. Upon striking a target, it detonates.",
+					"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 1d8 thunder damage and is deafened and blinded for one minute. On a successful save, the creature takes half as much damage and isn't pushed.",
+					"Once it hits a target, the ammunition is no longer magical."
+				]
+			}
+		},
+		{
+			"name": "Heavy Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The shaft of this ammunition is crafted from a heavier material than wood, increasing its damage, but decreasing its range.",
+				"You have a +2 to damage rolls for attacks made with this piece of ammunition. When using this ammunition, your weapon's short and long range is reduced by half."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Heavy ",
+				"source": "JB",
+				"rarity": "none",
+				"value": 10,
+				"entries": [
+					"The shaft of this ammunition is crafted from a heavier material than wood, increasing its damage, but decreasing its range.",
+					"You have a +2 to damage rolls for attacks made with this piece of ammunition. When using this ammunition, your weapon's short and long range is reduced by half."
+				]
+			}
+		},
+		{
+			"name": "Light Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The shaft of this ammunition is crafted from a lighter material than wood, decreasing its damage, but increasing its range.",
+				"You have a -2 penalty to damage rolls for attacks made with this piece of ammunition (minimum 1). When using this ammunition, your weapon's short and long range is increased by half."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Light ",
+				"source": "JB",
+				"rarity": "none",
+				"value": 10,
+				"entries": [
+					"The shaft of this ammunition is crafted from a lighter material than wood, decreasing its damage, but increasing its range.",
+					"You have a -2 penalty to damage rolls for attacks made with this piece of ammunition (minimum 1). When using this ammunition, your weapon's short and long range is increased by half."
+				]
+			}
+		},
+		{
+			"name": "Masterwork Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"Ranged weapon attacks with this ammunition score a critical hit on an attack roll of 19 or 20.",
+				"If you use this ammunition with a masterwork ranged weapon, you also score a critical hit on a roll of 18."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Masterwork ",
+				"source": "JB",
+				"rarity": "none",
+				"value": 10,
+				"entries": [
+					"Ranged weapon attacks with this ammunition score a critical hit on an attack roll of 19 or 20.",
+					"If you use this ammunition with a masterwork ranged weapon, you also score a critical hit on a roll of 18."
+				]
+			}
+		},
+		{
+			"name": "Masterwork Weapon",
+			"type": "GV",
+			"requires": [
+				{
+					"weapon": true
+				}
+			],
+			"excludes": {
+				"net": true
+			},
+			"inherits": {
+				"namePrefix": "Masterwork ",
+				"source": "JB",
+				"tier": "major",
+				"rarity": "none",
+				"entries": [
+					"Attacks you make with this weapon score a critical hit on a roll of 19 or 20."
+				]
+			}
 		}
 	]
 }
