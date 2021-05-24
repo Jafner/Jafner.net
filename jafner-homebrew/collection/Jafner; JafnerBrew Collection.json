@@ -1274,6 +1274,27 @@
 					"Attacks you make with this weapon score a critical hit on a roll of 19 or 20."
 				]
 			}
+		},
+		{
+			"name": "Fiendsbane Weapon",
+			"type": "GV",
+			"requires": [
+				{
+					"weapon": true
+				}
+			],
+			"excludes": {
+				"net": true
+			},
+			"inherits": {
+				"namePrefix": "Fiendsbane ",
+				"source": "JB",
+				"tier": "major",
+				"rarity": "Very rare",
+				"entries": [
+					"This weapon is inscribed with ancient runes of protection against evil. Damage dealt by this weapon is radiant damage. When you score a critical hit against a fiend with this weapon, you deal an additional 2d8 radiant damage."
+				]
+			}
 		}
 	]
 }
