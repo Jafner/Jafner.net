@@ -451,133 +451,113 @@
 					"caption": "Leadership table",
 					"colLabels": [
 						"Leadership Score",
-						"Sidekick Level",
 						"Common Followers",
 						"Expert Followers"
 					],
 					"colStyles": [
-						"col-2",
 						"col-4",
 						"col-4",
-						"col-2"
+						"col-4"
 					],
 					"rows": [
 						[
 							"8",
-							"1st",
 							"8",
 							"1"
 						],
 						[
 							"9",
-							"2nd",
 							"9",
 							"1"
 						],
 						[
 							"10",
-							"2nd",
 							"10",
 							"2"
 						],
 						[
 							"11",
-							"3rd",
 							"11",
 							"2"
 						],
 						[
 							"12",
-							"3rd",
 							"12",
 							"2"
 						],
 						[
 							"13",
-							"4th",
 							"13",
 							"2"
 						],
 						[
 							"14",
-							"4th",
 							"14",
 							"2"
 						],
 						[
 							"15",
-							"5th",
 							"15",
 							"3"
 						],
 						[
 							"16",
-							"5th",
 							"16",
 							"3"
 						],
 						[
 							"17",
-							"6th",
 							"17",
 							"3"
 						],
 						[
 							"18",
-							"6th",
 							"18",
 							"3"
 						],
 						[
 							"19",
-							"7th",
 							"19",
 							"3"
 						],
 						[
 							"20",
-							"7th",
 							"20",
 							"4"
 						],
 						[
 							"21",
-							"8th",
 							"21",
 							"4"
 						],
 						[
 							"22",
-							"8th",
 							"22",
 							"4"
 						],
 						[
 							"23",
-							"9th",
 							"23",
 							"4"
 						],
 						[
 							"24",
-							"9th",
 							"24",
 							"4"
 						],
 						[
 							"25",
-							"10th",
 							"25",
 							"5"
 						]
 					]
 				},
-				"Your leadership score applies when you first take this feat to recruit your starting followers and sidekick. For information about recruiting more followers, refer to the recruitment section below.",
+				"Your leadership score applies when you first take this feat to recruit your starting followers. For information about recruiting more followers, refer to the recruitment section below.",
 				{
 					"type": "entries",
 					"name": "Sidekick",
 					"entries": [
-						"Your sidekick is a loyal ally who joins the party and will fight with you in battle. The DM will either control your sidekick as an NPC or allow you to control your sidekick. Your sidekick acts on their own initiative.  The Sidekick Level column of the Leadership table determines the level of the sidekick you recruit when you take this feat. After being recruited, your sidekick gains levels through experience points as normal. The DM will either tell you which type of sidekick you recruit, or let you choose one. Refer to the {@variantrule Sidekicks|TCE} rules from Tasha's Cauldron of Everything for more information."
+						"When you take this feat, you can designate a loyal follower as your sidekick. Refer to the Sidekicks rules on page 142 of Tasha's Cauldron of Everything. Your sidekick is a loyal ally who joins the party and will fight with you in battle. The DM will either control your sidekick as an NPC or allow you to control your sidekick. Your sidekick acts on their own initiative. The DM will either tell you which type of sidekick you recruit, or let you choose one."
 					]
 				},
 				{
