@@ -596,7 +596,7 @@
 				}
 			],
 			"entries": [
-				"On your turn when you are below half your hit point maximum, you can use an action to expend any number of your hit dice. For each hit die you roll, you regain a number of hit points equal to the roll + your Constitution modifier. You cannot be healed above half your hit point maximum with this feature.",
+				"On your turn when you are below half your hit point maximum, you can use an action to expend any number of your hit dice. For each hit die you roll, you regain a number of hit points equal to the roll + your Constitution modifier.",
 				"Once you use this feature, you must finish a short or long rest before you can use it again."
 			]
 		}
