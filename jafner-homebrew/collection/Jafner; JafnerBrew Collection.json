@@ -1296,5 +1296,77 @@
 				]
 			}
 		}
+	],
+	"background": [
+		{
+			"name": "Tavernkeep",
+			"source": "JB",
+			"entries": [
+				{
+					"type": "list",
+					"style": "list-hang-notitle",
+					"items": [
+						{
+							"type": "item",
+							"name": "Skill Proficiencies",
+							"entry": "{@skill Persuasion}, {@skill History}"
+						},
+						{
+							"type": "item",
+							"name": "Tool Proficiencies",
+							"entry": "{@item Brewer's supplies|phb}"
+						},
+						{
+							"type": "item",
+							"name": "Languages",
+							"entry": "Two of your choice"
+						},
+						{
+							"type": "item",
+							"name": "Equipment",
+							"entry": "{@item Brewer's supplies|phb}, a set of {@item common clothes|phb}, and a belt {@item pouch|phb} containing 10 gp."
+						}
+					]
+				},
+				{
+					"name": "Feature: One of those people",
+					"type": "entries",
+					"entries": [
+						"Over the years of tending bar, celebrating and commiserating with the common folk, you have developed a knack for active listening. Conversing with people in a comfortable setting, such as a bar or inn, people will happily share with you rumors or stories they know."
+					],
+					"data": {
+						"isFeature": true
+					}
+				}
+			],
+			"skillProficiencies": [
+				{
+					"persuasion": true,
+					"history": true
+				}
+			],
+			"languageProficiencies": [
+				{
+					"anyStandard": 2
+				}
+			],
+			"toolProficiencies": [
+				{
+					"brewer's supplies": true
+				}
+			],
+			"startingEquipment": [
+				{
+					"_": [
+						"brewer's supplies|phb",
+						"common clothes|phb",
+						{
+							"item": "pouch|phb",
+							"containsValue": 1000
+						}
+					]
+				}
+			]
+		}
 	]
 }
