@@ -1,0 +1,89 @@
+{
+	"_meta": {
+		"sources": [
+			{
+				"json": "LToK",
+				"abbreviation": "LToK",
+				"full": "Legendary Tomes of Knowledge",
+				"authors": [
+					"Joey"
+				],
+				"convertedBy": "Jafner",
+				"version": "1.0",
+				"targetSchema": "1.0.0"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Legendary Tome of Knowledge (Exploit Weakness)",
+			"wondrous": true,
+			"weight": 1,
+			"tier": "Major",
+			"rarity": "Legendary",
+			"source": "LToK",
+			"entries": [
+				"A legendary tome of knowledge was written long ago by someone at the pinnacle of expertise in a niche of their profession. You can spend 8 hours reading one of these figuratively and literally dense and dry tomes. Upon completion, you gain the feature described below.",
+				{
+					"type": "entries",
+					"name": "Feature: Exploit Weakness",
+					"entries": [
+						"When you have advantage on an attack roll with a hand crossbow, you can choose to make the attack roll without advantage. If you hit, you deal an additional {@dice 3d6} of the weapon's damage type. This attack counts as having advantage for the purpose of the {@classFeature Sneak Attack|Rogue||1} feature."
+					]
+				},
+				"You lose this feature if you suffer some effect that erases your memory."
+			]
+		},
+		{
+			"name": "Legendary Tome of Knowledge (Patient Shot)",
+			"wondrous": true,
+			"weight": 1,
+			"tier": "Major",
+			"rarity": "Legendary",
+			"source": "LToK",
+			"entries": [
+				"A legendary tome of knowledge was written long ago by someone at the pinnacle of expertise in a niche of their profession. You can spend 8 hours reading one of these figuratively and literally dense and dry tomes. Upon completion, you gain the feature described below.",
+				{
+					"type": "entries",
+					"name": "Feature: Patient Shot",
+					"entries": [
+						"As an action, you can choose a creature you can see. You steady your aim and focus deeply, anticipating a moment of weakness in your target. On your next turn, your proficiency bonus is doubled for ranged weapon attacks you make with a bow or crossbow with which you are proficient against your chosen target."
+					]
+				},
+				"You lose this feature if you suffer some effect that erases your memory."
+			]
+		},
+		{
+			"name": "Legendary Tome of Knowledge (Underdark Survivalist)",
+			"wondrous": true,
+			"weight": 1,
+			"tier": "Major",
+			"rarity": "Legendary",
+			"source": "LToK",
+			"entries": [
+				"A legendary tome of knowledge was written long ago by someone at the pinnacle of expertise in a niche of their profession. You can spend 8 hours reading one of these figuratively and literally dense and dry tomes. Upon completion, you gain the feature described below.",
+				{
+					"type": "entries",
+					"name": "Feature: Underdark Survivalist",
+					"entries": [
+						"You have advantage on Wisdom (Survival) checks to forage in the Underdark.",
+						"You have advantage on Intelligence (Nature) checks to learn or recall information about a creature native to the Underdark.",
+						"As an action, you can make an Intelligence (Nature) check to discern or recall information about a creature you can see that is native to the Underdark. The DC of this check is equal to 10 + the CR of the creature (or level, if applicable). If you succeed, you can learn any one of the following pieces of information about the creature:",
+						{
+							"type": "list",
+							"items": [
+								"Its strength, dexterity, and constitution scores.",
+								"Its armor class and maximum hit points (rounded to nearest 10 hit points).",
+								"Its preferred diet, habitat, and lair, if applicable.",
+								"Its skill and saving throw proficiencies.",
+								"Its damage resistances, immunities, and vulnerabilities."
+							]
+						},
+						"If you fail this check, you cannot attempt it again for 24 hours."
+					]
+				},
+				"You lose this feature if you suffer some effect that erases your memory."
+			]
+		}
+	]
+}
