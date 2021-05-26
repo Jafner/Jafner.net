@@ -23,15 +23,14 @@
 			"rarity": "Legendary",
 			"source": "LToK",
 			"entries": [
-				"A legendary tome of knowledge was written long ago by someone at the pinnacle of expertise in a niche of their profession. You can spend 8 hours reading one of these figuratively and literally dense and dry tomes. Upon completion, you gain the feature described below.",
+				"This old, dense tome contains highly advanced techniques for maximizing the damage you deal to an unsuspecting opponent. If you have expertise with the Stealth skill, you can spend 8 hours reading this tome. Upon completion, you gain the feature described below. You lose this feature if you suffer some effect that erases your memory.",
 				{
 					"type": "entries",
 					"name": "Feature: Exploit Weakness",
 					"entries": [
-						"When you have advantage on an attack roll with a hand crossbow, you can choose to make the attack roll without advantage. If you hit, you deal an additional {@dice 3d6} of the weapon's damage type. This attack counts as having advantage for the purpose of the {@classFeature Sneak Attack|Rogue||1} feature."
+						"When you have advantage on an attack roll against a creature which cannot see you, you can choose to make the attack roll without advantage. If you hit, you deal an additional {@dice 3d6} of the weapon's damage type. This attack counts as having advantage for the purpose of the {@classFeature Sneak Attack|Rogue||1} feature."
 					]
-				},
-				"You lose this feature if you suffer some effect that erases your memory."
+				}
 			]
 		},
 		{
@@ -42,15 +41,14 @@
 			"rarity": "Legendary",
 			"source": "LToK",
 			"entries": [
-				"A legendary tome of knowledge was written long ago by someone at the pinnacle of expertise in a niche of their profession. You can spend 8 hours reading one of these figuratively and literally dense and dry tomes. Upon completion, you gain the feature described below.",
+				"This old, dense tome contains highly advanced techniques for reading wind contitions, controlling nerves, and reading the gait of your quarry. If you have a Dexterity score of 20 or higher and a Wisdom score of 15 or higher, you can spend 8 hours reading this tome. Upon completion, you gain the feature described below. You lose this feature if you suffer some effect that erases your memory.",
 				{
 					"type": "entries",
 					"name": "Feature: Patient Shot",
 					"entries": [
 						"As an action, you can choose a creature you can see. You steady your aim and focus deeply, anticipating a moment of weakness in your target. On your next turn, your proficiency bonus is doubled for ranged weapon attacks you make with a bow or crossbow with which you are proficient against your chosen target."
 					]
-				},
-				"You lose this feature if you suffer some effect that erases your memory."
+				}
 			]
 		},
 		{
@@ -61,7 +59,7 @@
 			"rarity": "Legendary",
 			"source": "LToK",
 			"entries": [
-				"A legendary tome of knowledge was written long ago by someone at the pinnacle of expertise in a niche of their profession. You can spend 8 hours reading one of these figuratively and literally dense and dry tomes. Upon completion, you gain the feature described below.",
+				"This old, dense tome contains highly advanced knowledge about the flora, fauna, and geology of the Underdark. If you can read Undercommon and have proficiency with the Survival and Nature skills, you can spend 8 hours reading this tome. Upon completion, you gain the feature described below. You lose this feature if you suffer some effect that erases your memory.",
 				{
 					"type": "entries",
 					"name": "Feature: Underdark Survivalist",
@@ -81,8 +79,7 @@
 						},
 						"If you fail this check, you cannot attempt it again for 24 hours."
 					]
-				},
-				"You lose this feature if you suffer some effect that erases your memory."
+				}
 			]
 		}
 	]
