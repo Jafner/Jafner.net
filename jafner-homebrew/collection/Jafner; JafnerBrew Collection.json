@@ -1811,8 +1811,6 @@
 	"legendaryGroup": [
 		{
 			"name": "Lolth",
-			"regionalEffects": [],
-			"mythicEncounter": [],
 			"source": "JB",
 			"lairActions": [
 				"On Initiative count 20 (losing initiative ties), Lolth can take a lair action to cause one of the following effects; she can't use the same effect two rounds in a row:",
