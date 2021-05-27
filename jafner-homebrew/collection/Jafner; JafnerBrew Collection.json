@@ -1249,6 +1249,258 @@
 				"type": "external",
 				"url": "https://5e.jafner.net/audio/bestiary/iron-golem.mp3"
 			}
+		},
+		{
+			"name": "Lolth",
+			"size": "G",
+			"type": {
+				"type": "fiend",
+				"tags": [
+					"demon"
+				]
+			},
+			"source": "JB",
+			"alignment": [
+				"C",
+				"E"
+			],
+			"ac": [
+				{
+					"ac": 23,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "30d20 + 90",
+				"average": 405
+			},
+			"speed": {
+				"walk": 60,
+				"climb": 60
+			},
+			"str": 16,
+			"dex": 26,
+			"con": 17,
+			"int": 30,
+			"wis": 26,
+			"cha": 30,
+			"passive": 34,
+			"cr": {
+				"cr": "26",
+				"lair": "30"
+			},
+			"senses": [
+				"truesight 120 ft."
+			],
+			"senseTags": [
+				"U"
+			],
+			"save": {
+				"dex": "+16",
+				"wis": "+16",
+				"cha": "+18",
+				"int": "+18"
+			},
+			"skill": {
+				"arcana": "+18",
+				"deception": "+18",
+				"insight": "+16",
+				"perception": "+24"
+			},
+			"resist": [
+				{
+					"resist": [
+						"cold"
+					]
+				},
+				{
+					"resist": [
+						"fire"
+					]
+				},
+				{
+					"resist": [
+						"lightning"
+					]
+				}
+			],
+			"immune": [
+				"bludgeoning",
+				"piercing",
+				"slashing"
+			],
+			"conditionImmune": [
+				"charmed",
+				"exhaustion",
+				"frightened",
+				"poisoned"
+			],
+			"legendaryActions": 5,
+			"isNamedCreature": true,
+			"trait": [
+				{
+					"name": "Legendary Resistance (5/Day)",
+					"entries": [
+						"If Lolth fails a saving throw, she can choose to succeed instead."
+					]
+				},
+				{
+					"name": "Magic Weapons",
+					"entries": [
+						"Lolth's weapon attacks are magical."
+					]
+				},
+				{
+					"name": "Limited Magic Immunity",
+					"entries": [
+						"Lolth can't be affected or detected by spells of 6th level or lower unless she wishes to be. She has advantage on saving throws against all other spells and magical effects."
+					]
+				},
+				{
+					"name": "Sneak Attack (1/Turn)",
+					"entries": [
+						"Once per turn, Lolth deals an extra 52 ({@damage 15d6}) damage when she hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of Lolth that isn't {@condition incapacitated} and Lolth doesn't have disadvantage on the attack roll."
+					]
+				},
+				{
+					"name": "Discorporation",
+					"entries": [
+						"When Lolth drops to 0 hit points or dies, her body is destroyed but her essence travels back to her domain in the Demonweb, and she is unable to take physical form for a time. "
+					]
+				},
+				{
+					"name": "Shapechanger",
+					"entries": [
+						"Lolth can use her action to polymorph into a form that resembles any Medium humanoid, or back into her true form. Other than her size and speed, her statistics are the same in each form. Any equipment she is wearing or carrying isn't transformed. "
+					]
+				}
+			],
+			"traitTags": [
+				"Legendary Resistances",
+				"Magic Weapons",
+				"Shapechanger",
+				"Sneak Attack"
+			],
+			"languages": [
+				"Undercommon"
+			],
+			"languageTags": [
+				"U"
+			],
+			"shortName": "Lolth",
+			"spellcasting": [
+				{
+					"name": "Innate Spellcasting",
+					"headerEntries": [
+						"Lolth's spellcasting ability is Charisma (spell save {@dc 26}). Lolth can innately cast the following spells, requiring no material components:"
+					],
+					"will": [
+						"{@spell charm person}",
+						"{@spell crown of madness}",
+						"{@spell detect magic}",
+						"{@spell dispel magic}",
+						"{@spell dissonant whispers}"
+					],
+					"daily": {
+						"1e": [
+							"{@spell dominate monster}",
+							"{@spell greater invisibility}"
+						],
+						"3e": [
+							"{@spell counterspell}",
+							"{@spell darkness}",
+							"{@spell divine word}",
+							"{@spell dominate person}",
+							"{@spell sanctuary}",
+							"{@spell telekinesis}",
+							"{@spell teleport}"
+						]
+					},
+					"ability": "cha",
+					"type": "spellcasting"
+				}
+			],
+			"spellcastingTags": [
+				"I"
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"Lolth can cast a spell. She then makes two dagger attacks and one bite attack. "
+					]
+				},
+				{
+					"name": "Dagger",
+					"entries": [
+						"{@atk mw,rw} {@hit 16} to hit, reach 5 ft. or range 20/60 ft., one target. {@h}18 ({@damage 4d4 + 8}) piercing damage in melee, or 18 ({@damage 4d4 + 8}) piercing damage at range. Her dagger immediately returns to her hand after the thrown attack."
+					]
+				},
+				{
+					"name": "Bite",
+					"entries": [
+						"{@atk mw} {@hit 16} to hit, reach 5 ft., one target. {@h}34 ({@damage 4d12 + 8}) piercing damage, and the target must succeed a {@dc 23} Constitution saving throw or become {@condition poisoned} for 1 hour."
+					]
+				}
+			],
+			"actionTags": [
+				"Multiattack"
+			],
+			"damageTags": [
+				"P"
+			],
+			"miscTags": [
+				"RW",
+				"MW",
+				"THW"
+			],
+			"conditionInflict": [
+				"poisoned"
+			],
+			"legendary": [
+				{
+					"name": "Attack",
+					"entries": [
+						"Lolth can attack once with a dagger or her bite."
+					]
+				},
+				{
+					"name": "Command Thrall",
+					"entries": [
+						"One creature {@condition charmed} by Lolth that Lolth can see must use its reaction to move up to its speed as Lolth directs."
+					]
+				},
+				{
+					"name": "Teleport",
+					"entries": [
+						"Lolth casts {@spell teleport}."
+					]
+				}
+			],
+			"legendaryHeader": [
+				"Lolth can take 5 legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature's turn. Lolth regains spent legendary actions at the start of her turn."
+			],
+			"fluff": {
+				"entries": [
+					"Lolth appears as either a tall, beautiful female drow or as a massive black widow spider with a female drow's head. She maintains a ruthless, tyrannical reign over the drow, ruling through a combination of fear and the promise of power.",
+					"It was Lolth who first spread evil among the elves, and it was she who led the drow to break away from the rest of elven society and to dwell underground. Drow scoff at any attempt to suggest that they were banished from the surface. Nevertheless, Lolth has sworn vengeance against Corellon Larethian and his people."
+				],
+				"images": [
+					{
+						"type": "image",
+						"href": {
+							"type": "external",
+							"url": "https://5e.jafner.net/img/JBrew/Lolth.png"
+						}
+					}
+				]
+			},
+			"legendaryGroup": {
+				"name": "Lolth",
+				"source": "JB"
+			}
 		}
 	],
 	"variant": [
@@ -1551,6 +1803,25 @@
 							"item": "pouch|phb",
 							"containsValue": 1000
 						}
+					]
+				}
+			]
+		}
+	],
+	"legendaryGroup": [
+		{
+			"name": "Lolth",
+			"regionalEffects": [],
+			"mythicEncounter": [],
+			"source": "JB",
+			"lairActions": [
+				"On Initiative count 20 (losing initiative ties), Lolth can take a lair action to cause one of the following effects; she can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"Lolth cries out to her arachnid children. Her calls are answered by six {@creature giant spider||giant spiders}, which appear anywhere she can see within her lair and act on her initiative.",
+						"Lolth summons webbing to impede her enemies in an area on the ground in a 20-foot square that she can see. They last until the next initiative count 20. Each creature in that area when the webs are summoned must succeed a DC 26 Strength saving throw or be restrained until the webs disappear. ",
+						"Lolth transforms one drow within her lair into a drider. The painful transformation causes the new drider to be stunned until the end of its next turn. All of the drow's game statistics are replaced by this new form, and Lolth chooses whether its personality is left intact."
 					]
 				}
 			]
