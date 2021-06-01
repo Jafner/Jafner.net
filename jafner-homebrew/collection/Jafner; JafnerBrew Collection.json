@@ -20,11 +20,23 @@
 			"wondrous": true,
 			"weight": 1,
 			"tier": "Minor",
-			"rarity": "Common",
+			"rarity": "Uncommon",
 			"source": "JB",
 			"entries": [
-				"This small leather bag is enchanted with a special extradimensional space. The bag can hold up to 25,000 gp worth of coins and gems. It weighs 1 pound.",
-				"When a coin or gem is placed into the bag, it is converted to its gold piece value. As an action, you can speak the number and type of coins or gems you would like to withdraw and the bag will convert the requested coins or gems from the value stored within it."
+				"This small leather bag is enchanted with a special extradimensional space. The bag can hold up to 25,000 gp worth of coins. It weighs 1 pound.",
+				"When a coin is placed into the bag, it is converted to its gold piece value. As an action, you can speak the number and type of coins you would like to withdraw and the bag will convert the requested coins from the value stored within it."
+			]
+		},
+		{
+			"name": "Pouch of the High Mage",
+			"wondrous": true,
+			"weight": 2,
+			"tier": "Minor",
+			"rarity": "Very rare",
+			"source": "JB",
+			"entries": [
+				"This small, watertight leather belt pouch functions as a component pouch, and is enchanted with a special extradimensional space. The bag can hold up to 25,000 gp worth of gems. It weighs 2 pounds.",
+				"When a coin or gem is placed into the bag, it is converted to its gold piece value. As an action, you can speak the number and type of gems you would like to withdraw and the bag will convert the requested gems from the value stored within it."
 			]
 		},
 		{
