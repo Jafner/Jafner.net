@@ -1743,7 +1743,25 @@
 				"tier": "major",
 				"rarity": "Very rare",
 				"entries": [
-					"This weapon is inscribed with ancient runes of protection against evil. Damage dealt by this weapon is radiant damage. When you score a critical hit against a fiend with this weapon, you deal an additional 2d8 radiant damage."
+					"This spellcasting focus is crafted from highly magical materials. When you cast a spell with a material component with this focus, you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your spells."
+				]
+			}
+		},
+		{
+			"name": "+1 Spellcasting Focus",
+			"type": "GV",
+			"requires": [
+				{
+					"focus": true
+				}
+			],
+			"inherits": {
+				"namePrefix": "+1 ",
+				"source": "JB",
+				"tier": "major",
+				"rarity": "Uncommon",
+				"entries": [
+					"This spellcasting focus is crafted from highly magical materials. When you cast a spell with a material component with this focus, you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your spells."
 				]
 			}
 		}
