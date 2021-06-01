@@ -1752,7 +1752,7 @@
 			"type": "GV",
 			"requires": [
 				{
-					"focus": true
+					"type": "SCF"
 				}
 			],
 			"inherits": {
