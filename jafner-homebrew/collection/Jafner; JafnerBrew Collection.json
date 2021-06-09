@@ -1513,7 +1513,353 @@
 				"name": "Lolth",
 				"source": "JB"
 			}
-		}
+		},
+		{
+			"name": "Demogorgon, Prince of Demons",
+			"isNamedCreature": true,
+			"source": "JB",
+			"size": "G",
+			"type": {
+				"type": "fiend",
+				"tags": [
+					"demon"
+				]
+			},
+			"alignment": [
+				"C",
+				"E"
+			],
+			"ac": [
+				{
+					"ac": 22,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "30d12 + 300",
+				"average": 495
+			},
+			"speed": {
+				"walk": 60,
+				"swim": 60
+			},
+			"str": 30,
+			"dex": 14,
+			"con": 30,
+			"int": 20,
+			"wis": 17,
+			"cha": 26,
+			"save": {
+				"dex": "+12",
+				"con": "+20",
+				"wis": "+13",
+				"cha": "+18"
+			},
+			"skill": {
+				"insight": "+13",
+				"perception": "+23"
+			},
+			"senses": [
+				"truesight 120 ft."
+			],
+			"passive": 33,
+			"resist": [
+				"cold",
+				"fire",
+				"lightning"
+			],
+			"immune": [
+				"poison",
+				{
+					"immune": [
+						"bludgeoning",
+						"piercing",
+						"slashing"
+					],
+					"note": "from nonmagical attacks",
+					"cond": true
+				}
+			],
+			"conditionImmune": [
+				"charmed",
+				"exhaustion",
+				"frightened",
+				"poisoned"
+			],
+			"languages": [
+				"all",
+				"telepathy 120 ft."
+			],
+			"cr": "28",
+			"spellcasting": [
+				{
+					"name": "Innate Spellcasting",
+					"headerEntries": [
+						"Demogorgon's spellcasting ability is Charisma (spell save {@dc 23}). Demogorgon can innately cast the following spells, requiring no material components:"
+					],
+					"will": [
+						"{@spell command}",
+						"{@spell detect magic}",
+						"{@spell major image}"
+					],
+					"daily": {
+						"3e": [
+							"{@spell dispel magic}",
+							"{@spell fear}",
+							"{@spell telekinesis}"
+						],
+						"1e": [
+							"{@spell feeblemind}",
+							"{@spell project image}"
+						]
+					},
+					"ability": "cha",
+					"type": "spellcasting"
+				}
+			],
+			"trait": [
+				{
+					"name": "Legendary Resistance (5/Day)",
+					"entries": [
+						"If Demogorgon fails a saving throw, he can choose to succeed instead."
+					]
+				},
+				{
+					"name": "Magic Weapons",
+					"entries": [
+						"Demogorgon's weapon attacks are magical."
+					]
+				},
+				{
+					"name": "Two Heads",
+					"entries": [
+						"Demogorgon has advantage on saving throws against being {@condition blinded}, {@condition deafened}, {@condition stunned}, or knocked {@condition unconscious}."
+					]
+				},
+				{
+					"name": "Prince of Demons",
+					"entries": [
+						"Any demon with a CR of 20 or lower within 120 feet of Demogorgon becomes automatically {@condition charmed} by Demogorgon and cannot take any action which would harm Demogorgon. "
+					]
+				},
+				{
+					"name": "Limited Magic Immunity",
+					"entries": [
+						"Demogorgon can't be affected or detected by spells of 6th level or lower unless he wishes to be. He has advantage on saving throws against all other spells and magical effects."
+					]
+				}
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"Demogorgon makes four tentacle attacks."
+					]
+				},
+				{
+					"name": "Tentacle",
+					"entries": [
+						"{@atk mw} {@hit 17} to hit, reach 10 ft., one target. {@h}28 ({@damage 3d12 + 9}) bludgeoning damage. If the target is a creature, it must succeed on a {@dc 23} Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if its hit point maximum is reduced to 0."
+					]
+				},
+				{
+					"name": "Gaze",
+					"entries": [
+						"Demogorgon turns his magical gaze toward one creature that he can see within 120 feet of him. That target must make a {@dc 23} Wisdom saving throw or suffer one of the following effects of Demogorgon's choice or at random:",
+						"1. Beguiling Gaze. The target is {@condition stunned} until the start of Demogorgon's next turn or until Demogorgon is no longer within line of sight.",
+						"2. Hypnotic Gaze. The target is {@condition charmed} by Demogorgon until the start of Demogorgon's next turn. Demogorgon chooses how the {@condition charmed} target uses its actions, reactions, and movement. Because this gaze requires Demogorgon to focus both heads on the target, he can't use his Maddening Gaze legendary action until the start of his next turn.",
+						"3. Insanity Gaze. The target suffers the effect of the {@spell confusion} spell without making a saving throw. The effect lasts until the start of Demogorgon's next turn. Demogorgon doesn't need to concentrate on the spell."
+					]
+				}
+			],
+			"legendaryActions": 4,
+			"legendary": [
+				{
+					"name": "Tail",
+					"entries": [
+						"{@atk mw} {@hit 17} to hit, reach 15 ft., one target. {@h}20 ({@damage 2d10 + 9}) bludgeoning damage plus 11 ({@damage 2d10}) necrotic damage."
+					]
+				},
+				{
+					"name": "Maddening Gaze",
+					"entries": [
+						"Demogorgon uses his Gaze action, and must choose either the Beguiling Gaze or the Insanity Gaze effect."
+					]
+				},
+				{
+					"name": "Demonic Command (0 actions)",
+					"entries": [
+						"Demogorgon casts {@spell command} on the creature whose turn just ended. He can only use this action on a demon."
+					]
+				}
+			],
+			"legendaryGroup": {
+				"name": "Demogorgon",
+				"source": "MTF"
+			},
+			"traitTags": [
+				"Legendary Resistances",
+				"Magic Weapons"
+			],
+			"senseTags": [
+				"U"
+			],
+			"actionTags": [
+				"Multiattack",
+				"Tentacles"
+			],
+			"languageTags": [
+				"XX",
+				"TP"
+			],
+			"damageTags": [
+				"B",
+				"N"
+			],
+			"spellcastingTags": [
+				"I"
+			],
+			"miscTags": [
+				"MW",
+				"RCH"
+			],
+			"conditionInflict": [
+				"stunned",
+				"charmed"
+			],
+			"conditionInflictSpell": [
+				"blinded",
+				"deafened",
+				"frightened",
+				"restrained"
+			],
+			"hasFluff": true,
+			"hasFluffImages": true,
+			"tokenUrl": "https://5e.jafner.net/img/MTF/Demogorgon.png",
+			"fluff": {
+				"name": "Demogorgon",
+				"source": "MTF",
+				"entries": [
+					{
+						"type": "entries",
+						"entries": [
+							{
+								"type": "entries",
+								"entries": [
+									{
+										"type": "entries",
+										"name": "Demogorgon",
+										"entries": [
+											"Prince of Demons, the Sibilant Beast, and Master of the Spiraling Depths, Demogorgon is the embodiment of chaos, madness, and destruction, seeking to corrupt all that is good and undermine order in the multiverse, to see everything dragged howling into the infinite depths of the Abyss.",
+											"The demon lord is a meld of different forms, with a saurian lower body and clawed, webbed feet, as well as suckered tentacles sprouting from the shoulders of a great apelike torso, surmounted by two hideous simian heads, named Aameul and Hathradiah, both equally mad. Their gaze brings madness and confusion to any who confront it.",
+											"Similarly, the spiraling Y sign of Demogorgon's cult can inspire madness in those who contemplate it for too long. All the followers of the Prince of Demons go mad, sooner or later."
+										]
+									}
+								]
+							},
+							{
+								"type": "entries",
+								"name": "Demogorgon's Lair",
+								"entries": [
+									"Demogorgon makes his lair in a palace called Abysm, found on a layer of the Abyss known as the Gaping Maw. Demogorgon's lair is a place of madness and duality; the portion of the palace that lies above water takes the form of two serpentine towers, each crowned by a skull-shaped minaret. There, Demogorgon's heads contemplate the mysteries of the arcane while arguing about how best to obliterate their rivals. The bulk of this palace extends deep underwater, in chill and darkened caverns."
+								]
+							}
+						]
+					},
+					{
+						"type": "entries",
+						"entries": [
+							{
+								"type": "entries",
+								"name": "Lair Actions",
+								"entries": [
+									"On Initiative count 20 (losing initiative ties), Demogorgon can take a lair action to cause one of the following effects: Demogorgon can't use the same effect two rounds in a row:",
+									{
+										"type": "list",
+										"items": [
+											"Demogorgon creates an illusory duplicate of himself, which appears in his own space and lasts until initiative count 20 of the next round. On his turn, Demogorgon can move the illusory duplicate a distance equal to his walking speed (no action required). The first time a creature or object interacts physically with Demogorgon (for example, hitting him with an attack), there is a 50 percent chance that it is the illusory duplicate that is being affected, not Demogorgon himself, in which case the illusion disappears.",
+											"Demogorgon casts the {@spell darkness} spell four times at its lowest level, targeting different areas with the spell. Demogorgon doesn't need to concentrate on the spells, which end on initiative count 20 of the next round."
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "entries",
+						"entries": [
+							{
+								"type": "entries",
+								"name": "Regional Effects",
+								"entries": [
+									"The region containing Demogorgon's lair is warped by his magic, creating one or more of the following effects:",
+									{
+										"type": "list",
+										"items": [
+											"The area within 6 miles of the lair becomes overpopulated with lizards, poisonous snakes, and other venomous beasts.",
+											"Beasts within 1 mile of the lair become violent and crazed-even creatures that are normally docile.",
+											"If a humanoid spends at least 1 hour within 1 mile of the lair, that creature must succeed on a {@dc 23} Wisdom saving throw or descend into a madness determined by the Madness of Demogorgon table. A creature that succeeds on this saving throw can't be affected by this regional effect again for 24 hours."
+										]
+									},
+									"If Demogorgon dies, these effects fade over the course of {@dice 1d10} days.",
+									{
+										"type": "entries",
+										"name": "Madness of Demogorgon",
+										"entries": [
+											"If a creature goes mad in Demogorgon's lair or within line of sight of the demon lord, roll on the Madness of Demogorgon table to determine the nature of the madness, which is a character flaw that lasts until cured. See the {@book Dungeon Master's Guide|dmg|8|madness} for more on madness.",
+											{
+												"type": "table",
+												"caption": "Madness of Demogorgon",
+												"colLabels": [
+													"d100",
+													"Flaw (lasts until cured)"
+												],
+												"colStyles": [
+													"col-1",
+													"col-11"
+												],
+												"rows": [
+													[
+														"01–20",
+														"\"Someone is plotting to kill me. I need to strike first to stop them!\""
+													],
+													[
+														"21–40",
+														"\"There is only one solution to my problems: kill them all!\""
+													],
+													[
+														"41–60",
+														"\"There is more than one mind inside my head.\""
+													],
+													[
+														"61–80",
+														"\"If you don't agree with me, I'll beat you into submission to get my way.\""
+													],
+													[
+														"81–00",
+														"\"I can't allow anyone to touch anything that belongs to me. They might try to take it away from me!\""
+													]
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				],
+				"images": [
+					{
+						"type": "image",
+						"href": {
+							"type": "internal",
+							"path": "bestiary/MTF/Demogorgon.jpg"
+						}
+					}
+				]
+			}
 	],
 	"variant": [
 		{
