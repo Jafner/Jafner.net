@@ -260,6 +260,27 @@
 				}
 
 			]
+		},
+		{
+			"name": "Mercurial Greatsword",
+			"source": "JB",
+			"type": "M",
+			"rarity": "none",
+			"weight": 8,
+			"value": 25000,
+			"weaponCategory": "martial",
+			"property": [
+				"H",
+				"2H"
+			],
+			"dmg1": "2d6",
+			"dmgType": "S",
+			"sword": true,
+			"weapon": true,
+			"entries": [
+				"This black steel greatsword has a channel inside the blade which is filled with liquid mercury. This shifting weight inside the blade makes it unwieldy, but can amplify the force of its strikes.",
+				"When you make a melee weapon attack with this sword, you automatically miss on a d20 roll of 9 or lower. If you score a critical hit with a melee weapon attack with this sword, roll the weapon's damage dice four times instead of twice."
+			]
 		}
 	],
 	"feat": [
