@@ -11,7 +11,7 @@ services:
                         WORDPRESS_DB_PASSWORD: wordpress
                         WORDPRESS_DB_NAME: wordpressdb
                 volumes:
-                        - ./html:/var/www/html
+                        - ${DOCKER_DATA}/html:/var/www/html
                         - ./docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini:ro
                 labels:
                         - traefik.http.routers.landing.rule=Host(`www.jafner.net`)
@@ -36,7 +36,7 @@ services:
                         MYSQL_PASSWORD: wordpress
                         MYSQL_RANDOM_ROOT_PASSWORD: '1'
                 volumes:
-                        - ./db:/var/lib/mysql
+                        - ${DOCKER_DATA}/db:/var/lib/mysql
                 labels:
                         - traefik.enable=false
 

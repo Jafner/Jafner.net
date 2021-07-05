@@ -19,11 +19,12 @@ services:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
+      - PLEX_CLAIM=claim-rhRVSZqgpKBqpkxVaNDg
       - ADVERTISE_IP="https://plex.jafner.net:443"
     volumes:
       - /mnt/nas/Video/Movies:/movies
       - /mnt/nas/Video/Shows:/shows
-      - /home/joey/docker/plex/config:/config
+      - "${DOCKER_DATA}/config:/config"
     labels:
       - traefik.enable=true
       - traefik.http.routers.plex.rule=Host(`plex.jafner.net`)
@@ -41,7 +42,7 @@ services:
       - PGID=1000
       - TZ=America/Los_Angeles
     volumes:
-      - ./config:/config
+      - "${DOCKER_DATA}/config:/config"
     labels:
       - traefik.http.routers.ombi.rule=Host(`ombi.jafner.net`)
       - traefik.http.routers.ombi.tls=true

@@ -1,26 +1,32 @@
 version: "3"
+
 services:
   peertube:
-    image: ${PEERTUBE_DOCKER_IMAGE}
-    container_name: peertube
+    # If you don't want to use the official image and build one from sources:
+    # build:
+    #   context: .
+    #   dockerfile: ./support/docker/production/Dockerfile.buster
+    image: chocobozzz/peertube:production-buster
+    # Use a static IP for this container because nginx does not handle proxy host change without reload
+    # This container could be restarted on crash or until the postgresql database is ready for connection
     networks:
-      - default
-      - web
+      default:
+        ipv4_address: 172.18.0.42
+      web:
     env_file:
       - .env
-    environment:
-      - PEERTUBE_TRUST_PROXY=["127.0.0.1", "loopback", "172.69.0.0/16", "10.0.0.0/16", "173.245.48.0/20", "103.21.244.0/22","103.22.200.0/22","103.31.4.0/22","141.101.64.0/18","108.162.192.0/18","190.93.240.0/20","188.114.96.0/20","197.234.240.0/22","198.41.128.0/17","162.158.0.0/15","104.16.0.0/12","172.64.0.0/13","131.0.72.0/22"]
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_us:en
-      - LC_ALL=en_US.UTF-8
-    labels: 
+    ports:
+     - "1935:1935" # If you don't want to use the live feature, you can comment this line
+    #  - "9000:9000" # If you provide your own webserver and reverse-proxy, otherwise not suitable for production
+    labels:
       - traefik.http.routers.peertube.rule=Host(`peertube.jafner.net`)
       - traefik.http.routers.peertube.tls=true
       - traefik.http.routers.peertube.tls.certresolver=lets-encrypt
       - traefik.http.services.peertube.loadbalancer.server.port=9000
     volumes:
-      - ./docker-volume/data:/data
-      - ./config:/config
+      - assets:/app/client/dist
+      - ${DOCKER_DATA}/data:/data
+      - ${DOCKER_DATA}/config:/config
     depends_on:
       - postgres
       - redis
@@ -28,26 +34,25 @@ services:
     restart: "always"
 
   postgres:
-    image: postgres:10-alpine
-    container_name: peertube_postgres
-    environment:
-      POSTGRES_USER: ${PEERTUBE_DB_USERNAME}
-      POSTGRES_PASSWORD: ${PEERTUBE_DB_PASSWORD}
-      POSTGRES_DB: peertube
+    image: postgres:13-alpine
+    env_file:
+      - .env
     volumes:
-      - ./docker-volume/db:/var/lib/postgresql/data
+      - ${DOCKER_DATA}/db:/var/lib/postgresql/data
     restart: "always"
 
   redis:
-    image: redis:4-alpine
-    container_name: peertube_redis
+    image: redis:6-alpine
     volumes:
-      - ./docker-volume/redis:/data
+      - ${DOCKER_DATA}/redis:/data
     restart: "always"
+
   postfix:
     image: mwader/postfix-relay
-    environment:
-      - POSTFIX_myhostname=${PEERTUBE_WEBSERVER_HOSTNAME}
+    env_file:
+      - .env
+    volumes:
+      - ${DOCKER_DATA}/opendkim/keys:/etc/opendkim/keys
     restart: "always"
 
 networks:
@@ -55,6 +60,9 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet:  172.69.0.0/16
+      - subnet: 172.18.0.0/16
   web:
     external: true
+
+volumes:
+  assets:

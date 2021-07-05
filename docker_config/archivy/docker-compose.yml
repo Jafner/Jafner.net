@@ -13,7 +13,7 @@ services:
       - ELASTICSEARCH_ENABLED=1
       - ELASTICSEARCH_URL=http://elasticsearch:9200
     volumes:
-      - ${DOCKER_DATA}:/archivy/data:rw
+      - ./archivy_data:/archivy/data:rw
       - archivy_config:/archivy/.local/share/archivy
     labels:
       - traefik.http.routers.archivy.rule=Host(`archivy.jafner.net`)

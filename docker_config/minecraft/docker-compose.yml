@@ -1,51 +1,52 @@
 version: '3'
 
 services:
-  vanilla:
-    image: itzg/minecraft-server
-    container_name: vanilla
+  cavesncliffs:
+    image: itzg/minecraft-server:java16
+    container_name: cavesncliffs
     environment:
       - EULA=TRUE
+      - MAX_MEMORY=3G
     volumes:
-      - ./vanilla:/data:rw
+      - $DOCKER_DATA/cavesncliffs:/data:rw
     networks:
       - mc-router
     depends_on:
       - router
     labels:
       - traefik.enable=false
-  enigmatica2:
-    image: acearcher/mc-enigmatica2-server:latest
-    container_name: enigmatica2
-    environment:
-      - MAX_RAM=8G
-    volumes:
-      - ./data:/home/minecraft/enigmatica2:rw
-    networks:
-      - mc-router
-    depends_on:
-      - router
-    labels:
-      - traefik.enable=false
-  enigmatica6:
-    image: itzg/minecraft-server
-    container_name: enigmatica6
+  e6:
+    image: itzg/minecraft-server:java8
+    container_name: e6
     environment:
       - EULA=TRUE
-      - TYPE=CURSEFORGE
-      - CF_SERVER_MOD=/modpacks/Enigmatica6Server-0.4.1.zip
+      - MAX_MEMORY=8G
+      - TYPE=FORGE
+      - FORGEVERSION=36.1.31
+      - VERSION=1.16.5
+      - OPS=jafner425
+    volumes:
+      - $DOCKER_DATA/e6:/data:rw
+    networks:
+      - mc-router
+    labels:
+      - traefik.enable=false
+  litv:
+    image: itzg/minecraft-server:java8
+    container_name: litv
+    environment:
+      - EULA=TRUE
       - MAX_MEMORY=6G
-#      - USE_MODPACK_START_SCRIPT=false
-      - ENABLE_RCON=true
+      - TYPE=FORGE
+      - FORGEVERSION=36.1.15
+      - VERSION=1.16.5
+    volumes:
+      - $DOCKER_DATA/litv:/data:rw
     networks:
       - mc-router
-    depends_on:
-      - router
-    volumes:
-      - ./enigmatica6:/data
-      - ./modpacks:/modpacks:ro
     labels:
       - traefik.enable=false
+
   router:
     image: itzg/mc-router
     container_name: mc-router
@@ -53,7 +54,7 @@ services:
       - mc-router
     ports:
       - 25565:25565
-    command: --mapping=mc-vanilla.jafner.net=vanilla:25565,mc-enigmatica2.jafner.net=enigmatica2:25565,mc-enigmatica6.jafner.net=enigmatica6:25565
+    command: --mapping=cavesncliffs.jafner.net=cavesncliffs:25565,e6.jafner.net=e6:25565,litv.jafner.net=litv:25565
     labels:
       - traefik.enable=false
 

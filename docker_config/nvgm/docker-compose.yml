@@ -11,7 +11,7 @@ services:
                         WORDPRESS_DB_PASSWORD: wordpress
                         WORDPRESS_DB_NAME: wordpressdb
                 volumes:
-                        - ./html:/var/www/html
+                        - ${DOCKER_DATA}/html:/var/www/html
                 labels:
                         - traefik.http.routers.nvgm.rule=Host(`nvgm.jafner.net`)
                         - traefik.http.routers.nvgm.tls=true
@@ -37,7 +37,7 @@ services:
                 labels:
                         - traefik.enable=false
                 volumes:
-                        - ./db:/var/lib/mysql
+                        - ${DOCKER_DATA}/db:/var/lib/mysql
 
 networks:
         web:

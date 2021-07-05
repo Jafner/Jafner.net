@@ -51,15 +51,6 @@ services:
       - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
       - traefik.port=3000
 
-  speedtest:
-    image: atribe/speedtest-for-influxdb-and-grafana:latest
-    container_name: speedtest
-    restart: unless-stopped
-    networks:
-      - grafana
-    volumes:
-      - ./speedtest.ini:/src/config.ini
-
 networks:
   grafana:
   web:

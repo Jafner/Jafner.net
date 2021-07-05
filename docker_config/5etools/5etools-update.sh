@@ -3,7 +3,7 @@
 source .env
 cd ${DOCKER_DATA}/htdocs
 
-FN=`curl -s -I https://get.5e.tools/release/|grep filename|cut -d"=" -f2 | awk '{print $1}'`
+FN=`curl -s -I https://get.5e.tools/src/|grep filename|cut -d"=" -f2 | awk '{print $1}'`
 FN=${FN//[$'\t\r\n"']}
 echo "FN: $FN"
 FN_IMG=`curl -s -I https://get.5e.tools/img/|grep filename|cut -d"=" -f2 | awk '{print $1}'`
@@ -25,7 +25,7 @@ then
 
   echo " === Downloading new remote version..."
   cd ./download/
-  curl --progress-bar -O -J https://get.5e.tools/release/ -C -
+  curl --progress-bar -O -J https://get.5e.tools/src/ -C -
   curl --progress-bar -O -J https://get.5e.tools/img/ -C -
   cd ..
 

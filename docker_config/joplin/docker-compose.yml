@@ -1,9 +1,11 @@
 version: '3'
 services:
   joplin:
-    image: joplin/server:latest
+    image: joplin/server:2.0.4-beta
     container_name: joplin
     restart: unless-stopped
+    volumes:
+      - joplin-data:/home/joplin
     env_file:
       - .env
     depends_on:
@@ -20,10 +22,16 @@ services:
     image: postgres:13.1
     container_name: joplin_db
     restart: unless-stopped
+    volumes:
+      - joplin-db:/var/lib/postresql/data
     networks:
       - joplin
     env_file:
       - .env
+
+volumes:
+  joplin-data:
+  joplin-db:
 
 networks:
   joplin:
