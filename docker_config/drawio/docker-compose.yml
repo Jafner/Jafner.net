@@ -2,6 +2,7 @@ version: '3'
 services:
   plantuml-server:
     image: jgraph/plantuml-server
+    container_name: drawio_plantuml-server
     expose:
       - "8080"
     networks:
@@ -10,6 +11,7 @@ services:
       - fonts_volume:/usr/share/fonts/drawio
   image-export:
     image: jgraph/export-server
+    container_name: drawio_export-server
     expose:
       - "8000"
     networks:
@@ -20,6 +22,7 @@ services:
       - DRAWIO_SERVER_URL=${DRAWIO_BASE_URL}
   drawio:
     image: jgraph/drawio
+    container_name: drawio_drawio
     links:
       - plantuml-server:plantuml-server
       - image-export:image-export
