@@ -1,0 +1,16 @@
+version: "3"
+services:
+  drawio:
+    image: jgraph/drawio
+    container_name: drawio
+    restart: unless-stopped
+    labels:
+      - traefik.http.routers.drawio.rule=Host(`draw.jafner.net`)
+      - traefik.http.routers.drawio.tls=true
+      - traefik.http.routers.drawio.tls.certresolver=lets-encrypt
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
