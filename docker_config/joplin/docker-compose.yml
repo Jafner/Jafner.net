@@ -1,7 +1,7 @@
 version: '3'
 services:
   joplin:
-    image: joplin/server:2.0.4-beta
+    image: joplin/server:2.2.5-beta
     container_name: joplin
     restart: unless-stopped
     volumes:
