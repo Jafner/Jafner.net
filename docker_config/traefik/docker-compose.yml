@@ -6,7 +6,6 @@ services:
     image: traefik:latest
     networks:
       - web
-      - traefik
     ports:
       - 80:80
       - 443:443
@@ -21,4 +20,3 @@ services:
 networks:
   web:
     external: true
-  traefik:
