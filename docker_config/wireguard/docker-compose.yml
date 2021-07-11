@@ -1,9 +1,10 @@
----
-version: "2.1"
+version: "3"
 services:
   wireguard:
     image: linuxserver/wireguard
     container_name: wireguard
+    ports:
+      - 53820:51820/udp
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -11,18 +12,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
+      - PEERS=1
       - SERVERPORT=53820
-      - SERVERURL=auto
-      - PEERS=3
-      - PEERDNS=192.168.1.22
-      - INTERNAL_SUBNET=10.13.14.0
     volumes:
-      - /home/joey/docker/wireguard/config:/config
+      - ./config:/config
       - /lib/modules:/lib/modules
-    ports:
-      - 53820:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
-    labels:
-            - traefik.enable=false
-    restart: unless-stopped
