@@ -10,6 +10,7 @@ services:
     labels:
       - traefik.http.routers.5etools.rule=Host(`5e.jafner.net`)
       - traefik.http.routers.5etools.tls.certresolver=lets-encrypt
+      - traefik.http.routers.5etools.middlewares=authelia@file
 networks:
   web:
     external: true
