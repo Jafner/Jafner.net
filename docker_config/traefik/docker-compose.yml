@@ -4,6 +4,8 @@ services:
   traefik:
     container_name: traefik
     image: traefik:latest
+    depends_on: 
+      - authelia
     restart: unless-stopped
     networks:
       - web
@@ -16,6 +18,23 @@ services:
       - ./traefik_dynamic.toml:/traefik_dynamic.toml
       - ./acme.json:/acme.json
       - ./.htpasswd:/.htpasswd
+  authelia:
+    image: authelia/authelia
+    container_name: authelia
+    volumes:
+      - ./authelia:/config
+    networks:
+      - web
+    labels:
+      - 'traefik.http.routers.authelia.rule=Host(`login.jafner.net`)'
+      - 'traefik.http.routers.authelia.entrypoints=https'
+      - 'traefik.http.routers.authelia.tls=true'
+      - 'traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://login.jafner.net/'
+      - 'traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true'
+      - 'traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email'
+      - 'traefik.http.middlewares.authelia-basic.forwardauth.address=http://authelia:9091/api/verify?auth=basic'
+      - 'traefik.http.middlewares.authelia-basic.forwardauth.trustForwardHeader=true'
+      - 'traefik.http.middlewares.authelia-basic.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email'
               
 
 networks:

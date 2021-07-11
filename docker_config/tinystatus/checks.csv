@@ -7,6 +7,5 @@ http,   200,  calibre-dev.jafner.net,   https://calibre-dev.jafner.net
 http,   200,  docs.jafner.net,          https://docs.jafner.net
 http,   200,  nvgm.jafner.net,          https://nvgm.jafner.net
 http,   200,  portfolio.jafner.net,     https://portfolio.jafner.net
-http,   200,  traefik.jafner.net,       https://traefik.jafner.net
 http,   200,  ombi.jafner.net,          https://ombi.jafner.net
 http,   200,  plex.jafner.net,          https://plex.jafner.net/web/index.html

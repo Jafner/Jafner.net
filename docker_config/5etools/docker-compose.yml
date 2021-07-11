@@ -11,6 +11,7 @@ services:
       - traefik.http.routers.5etools.rule=Host(`5e.jafner.net`)
       - traefik.http.routers.5etools.tls=true
       - traefik.http.routers.5etools.tls.certresolver=lets-encrypt
+      - traefik.http.routers.5etools.middlewares=authelia-basic@docker
 networks:
   web:
     external: true
