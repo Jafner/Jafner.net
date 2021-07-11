@@ -10,7 +10,7 @@ users:
   jafner:
     displayname: "Joey"
     # Password is Authelia
-    password: "$6$rounds=50000$BpLnfgDsc2WD8F2q$Zis.ixdg9s/UOJYrs56b5QEZFiZECu0qZVNsIYxBaNJ7ucIL.nlxVCT5tqh8KHG8X4tlwCFm5r6NTOZZ5qRFN/"  # yamllint disable-line rule:line-length
+    password: "$argon2id$v=19$m=1048576,t=1,p=8$SnZSUm83RENqaXN3cUxjbg$bHuc5vLvXZEVKXJ8zFNOGdHZeI0WGzUnFFS0acFigUU"  # yamllint disable-line rule:line-length
     email: jafner425@gmail.com
     groups:
       - admins

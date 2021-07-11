@@ -8,7 +8,7 @@
 [http.routers.api]
   rule = "Host(`traefik.jafner.net`)"
   entrypoints = ["websecure"]
-  middlewares = ["simpleauth"]
+  middlewares = ["authelia@docker"]
   service = "api@internal"
   [http.routers.api.tls]
     certResolver = "lets-encrypt"
