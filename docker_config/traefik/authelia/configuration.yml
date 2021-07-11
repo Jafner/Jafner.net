@@ -27,15 +27,9 @@ access_control:
   default_policy: deny
   rules:
     # Rules applied to everyone
-    - domain: 5e.jafner.net
-      policy: bypass
     - domain: 
       - "*.jafner.net"
       - "jafner.net"
-      policy: one_factor
-    - domain:
-      - "traefik.jafner.net"
-      - "portainer.jafner.net"
       policy: two_factor
 
 session:
