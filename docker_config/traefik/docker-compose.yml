@@ -26,16 +26,25 @@ services:
     networks:
       - web
     labels:
-      - 'traefik.http.routers.authelia.rule=Host(`login.jafner.net`)'
+      - 'traefik.http.routers.authelia.rule=Host(`auth.jafner.net`)'
       - 'traefik.http.routers.authelia.entrypoints=https'
       - 'traefik.http.routers.authelia.tls=true'
-      - 'traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://login.jafner.net/'
+      - 'traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://auth.jafner.net/'
       - 'traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true'
       - 'traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email'
       - 'traefik.http.middlewares.authelia-basic.forwardauth.address=http://authelia:9091/api/verify?auth=basic'
       - 'traefik.http.middlewares.authelia-basic.forwardauth.trustForwardHeader=true'
       - 'traefik.http.middlewares.authelia-basic.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email'
-              
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    volumes:
+      ./redis
+    networks:
+      - web
+    expose:
+      - 6379
 
 networks:
   web:
