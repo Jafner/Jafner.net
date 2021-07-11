@@ -19,7 +19,6 @@ services:
       - "${DOCKER_DATA}/generator:/usr/local/apache2/htdocs"
     labels:
       - traefik.http.routers.rpg-cards.rule=Host(`rpg-cards.jafner.net`)
-      - traefik.http.routers.rpg-cards.tls=true
       - traefik.http.routers.rpg-cards.tls.certresolver=lets-encrypt
 networks:
   web:

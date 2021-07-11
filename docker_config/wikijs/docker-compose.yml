@@ -36,7 +36,6 @@ services:
       - ${PWD}/id_rsa.pub:/id_rsa.pub
     labels:
       - traefik.http.routers.wikijs.rule=Host(`wikijs.jafner.net`)
-      - traefik.http.routers.wikijs.tls=true
       - traefik.http.routers.wikijs.tls.certresolver=lets-encrypt
       - traefik.http.services.wikijs.loadbalancer.server.port=3000
 

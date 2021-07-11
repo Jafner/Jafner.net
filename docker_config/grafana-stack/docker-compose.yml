@@ -46,8 +46,8 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel,grafana-piechart-panel
     labels:
       - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
-      - traefik.http.routers.grafana.tls=true
       - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
+      - traefik.http.routers.grafana.middlewares=authelia@file
 
 networks:
   grafana:

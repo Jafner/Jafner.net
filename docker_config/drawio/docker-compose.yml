@@ -61,7 +61,6 @@ services:
       - DRAWIO_MXPUSHER_ENDPOINT=${DRAWIO_MXPUSHER_ENDPOINT}
     labels:
       - traefik.http.routers.drawio.rule=Host(`draw.jafner.net`)
-      - traefik.http.routers.drawio.tls=true
       - traefik.http.routers.drawio.tls.certresolver=lets-encrypt
 
 networks:

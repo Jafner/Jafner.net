@@ -9,7 +9,6 @@ services:
       - "${DOCKER_DATA}/DragonDex:/usr/local/apache2/htdocs"
     labels:
       - traefik.http.routers.dragondex.rule=Host(`dragondex.jafner.net`)
-      - traefik.http.routers.dragondex.tls=true
       - traefik.http.routers.dragondex.tls.certresolver=lets-encrypt
 networks:
   web:

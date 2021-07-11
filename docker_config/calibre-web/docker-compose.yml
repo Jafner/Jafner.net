@@ -14,6 +14,7 @@ services:
       - traefik.http.routers.calibre-dev.rule=Host(`calibre-dev.jafner.net`)
       - traefik.http.routers.calibre-dev.tls=true
       - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
+      - traefik.http.routers.calibre-dev.middlewares=authelia@file
     networks:
       - web
   calibre-web-prod:
