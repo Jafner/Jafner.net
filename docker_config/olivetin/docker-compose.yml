@@ -3,10 +3,12 @@ services:
   olivetin:
     image: jamesread/olivetin
     container_name: olivetin
+    #user: root
     volumes:
-      ./config:/config
+      - ./config:/config
+      - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.http.routers.olivetin.rule=Host(`run.jafner.net`)
       - traefik.http.routers.olivetin.tls.certresolver=lets-encrypt
       - traefik.http.services.olivetin.loadbalancer.server.port=1337
-      - traefik.http.routers.olivetin.middlewares=authelia@file
+      #- traefik.http.routers.olivetin.middlewares=authelia@file
