@@ -2,7 +2,7 @@
 title: NAS
 description: Configuration information for the NAS
 published: true
-date: 2021-07-17T04:26:13.474Z
+date: 2021-07-17T18:42:11.342Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:26:11.985Z
@@ -10,10 +10,10 @@ dateCreated: 2021-07-17T04:26:11.985Z
 
 # System Info Report
 ```
-System:    Host: joey-nas.local Kernel: FreeBSD 12.2-RELEASE-p3 amd64 bits: 64 Console: tty pts/3 OS: FreeBSD 12.2-RELEASE-p3 
+System:    Host: joey-nas.local Kernel: FreeBSD 12.2-RELEASE-p3 amd64 bits: 64 Console: tty pts/4 OS: FreeBSD 12.2-RELEASE-p3 
 Machine:   Type: Desktop Mobo: Gigabyte model: X99-SLI-CF v: x.x serial: N/A UEFI: American Megatrends v: F24a rev: 5.6 
            date: 01/11/2018 
-Memory:    RAM: total: 63.79 GiB used: 61.53 GiB (96.5%) 
+Memory:    RAM: total: 63.79 GiB used: 61.45 GiB (96.3%) 
            Array-1: capacity: 512 GiB note: check slots: 8 EC: None 
            Device-1: DIMM_A1 size: 8 GiB speed: 2133 MT/s 
            Device-2: DIMM_A2 size: 8 GiB speed: 2133 MT/s 
@@ -59,6 +59,4 @@ Partition: ID-1: / size: 62.32 GiB used: 26.81 GiB (43.0%) fs: zfs logical: free
            ID-4: swap-3 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap2.eli 
            ID-5: swap-4 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap3.eli 
            ID-6: swap-5 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap4.eli 
-Weather:   Message: Error: You have exceeded maximum permitted use of this resource. 
-Info:      Processes: 188 Uptime: 5d 11h 51m Init: init (BSD) Shell: Zsh inxi: 3.3.05 
 ```
