@@ -2,7 +2,7 @@
 title: Server
 description: Configuration information for the main server
 published: true
-date: 2021-07-17T18:54:04.806Z
+date: 2021-07-17T19:07:40.663Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:23:08.530Z
@@ -34,3 +34,7 @@ Partition: ID-1: / size: 434.75 GiB used: 184.88 GiB (42.5%) fs: ext4 dev: /dev/
 ```
 
 # Graceful Reboot
+1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
+2. Reboot the host with `sudo reboot now`.
+3. When the host has finished booting, re-mount the NAS SMB shares defined in `/etc/fstab` with `sudo mount -a`
+4. Start all Docker containers with `docker start $(docker ps -aq)`.
