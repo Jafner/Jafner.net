@@ -2,7 +2,7 @@
 title: Server
 description: Configuration information for the main server
 published: true
-date: 2021-07-17T18:41:16.233Z
+date: 2021-07-17T18:54:04.806Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:23:08.530Z
@@ -32,3 +32,5 @@ Drives:    Local Storage: total: 447.13 GiB used: 373.61 GiB (83.6%)
 Partition: ID-1: / size: 434.75 GiB used: 184.88 GiB (42.5%) fs: ext4 dev: /dev/sda2 
            ID-2: swap-1 size: 3.93 GiB used: 3.85 GiB (98.0%) fs: swap dev: /dev/sda3
 ```
+
+# Graceful Reboot
