@@ -2,7 +2,7 @@
 title: Seedbox
 description: Configuration information for the seedbox
 published: true
-date: 2021-07-17T05:34:16.189Z
+date: 2021-07-17T18:24:05.452Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:24:15.927Z
@@ -32,3 +32,9 @@ Weather:   Temperature: 16.5 C (62 F) Conditions: Few clouds Current Time: Fri 1
            Source: WeatherBit.io 
 Info:      Processes: 275 Uptime: 5d 18h 39m Init: systemd runlevel: 5 Shell: bash inxi: 3.0.32
 ```
+
+# Graceful Reboot
+1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
+2. Reboot the host with `sudo reboot now`.
+3. When the host has finished booting, re-mount the NAS SMB share (defined in `/etc/fstab`) with `sudo mount /mnt/torrenting`.
+4. Start all Docker containers with `docker start $(docker ps -aq)`.
