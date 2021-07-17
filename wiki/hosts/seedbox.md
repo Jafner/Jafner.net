@@ -2,7 +2,7 @@
 title: Seedbox
 description: Configuration information for the seedbox
 published: true
-date: 2021-07-17T18:40:17.497Z
+date: 2021-07-17T19:05:28.822Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:24:15.927Z
@@ -33,5 +33,5 @@ Partition: ID-1: / size: 100.68 GiB used: 29.10 GiB (28.9%) fs: ext4 dev: /dev/s
 # Graceful Reboot
 1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
 2. Reboot the host with `sudo reboot now`.
-3. When the host has finished booting, re-mount the NAS SMB share (defined in `/etc/fstab`) with `sudo mount /mnt/torrenting`.
+3. When the host has finished booting, re-mount all NAS shares defined in `/etc/fstab` with `sudo mount -a`.
 4. Start all Docker containers with `docker start $(docker ps -aq)`.
