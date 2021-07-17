@@ -2,7 +2,7 @@
 title: Seedbox
 description: Configuration information for the seedbox
 published: true
-date: 2021-07-17T04:24:17.382Z
+date: 2021-07-17T05:34:16.189Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:24:15.927Z
@@ -10,7 +10,6 @@ dateCreated: 2021-07-17T04:24:15.927Z
 
 # System Info Report
 ```
-joey@joey-seedbox:~$ sudo inxi -CDGImMNPS -W 98405
 System:    Host: joey-seedbox Kernel: 4.19.0-17-amd64 x86_64 bits: 64 Console: tty 0 Distro: Debian GNU/Linux 10 (buster) 
 Machine:   Type: Desktop Mobo: ASUSTeK model: PRIME A320M-K v: Rev X.0x serial: 200569832803322 UEFI: American Megatrends 
            v: 5409 date: 01/07/2020 
