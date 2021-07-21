@@ -2,7 +2,7 @@
 title: PiHole
 description: Configuration information for the Pihole
 published: true
-date: 2021-07-21T00:58:06.693Z
+date: 2021-07-21T01:04:12.409Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:25:03.232Z
@@ -37,11 +37,12 @@ delete system name-server 192.168.1.191
 set system name-server 1.1.1.1
 commit; save; exit
 ```
-3. Reboot the Pi with `sudo reboot now`
-4. Switch back to the router and run the following:
+2. Reboot the Pi with `sudo reboot now`
+3. Switch back to the router and run the following:
 ```
 configure 
 delete system name-server 1.1.1.1
 set system name-server 192.168.1.191
 commit; save; exit
 ```
+4. Done.
