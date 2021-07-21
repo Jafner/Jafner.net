@@ -2,7 +2,7 @@
 title: Grafana Setup Information
 description: 
 published: true
-date: 2021-07-20T20:15:20.009Z
+date: 2021-07-21T00:28:30.298Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-19T20:35:25.196Z
@@ -87,6 +87,12 @@ Below are excerpts from the `telegraf.conf` and accompanying files for each host
 [[inputs.netstat]]
 [[inputs.zfs]]
   poolMetrics = true
+[[inputs.exec]]
+  name_override = "diskhealth"
+  commands = ["/root/telegraf/diskstatus.sh"]
+  timeout = "30s"
+  data_format = "json"
+  tag_keys = ["disk","health"]
 ```
 
 ## Seedbox
