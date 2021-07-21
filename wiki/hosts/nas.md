@@ -2,7 +2,7 @@
 title: NAS
 description: Configuration information for the NAS
 published: true
-date: 2021-07-17T18:42:11.342Z
+date: 2021-07-21T01:11:19.367Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:26:11.985Z
@@ -60,3 +60,12 @@ Partition: ID-1: / size: 62.32 GiB used: 26.81 GiB (43.0%) fs: zfs logical: free
            ID-5: swap-4 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap3.eli 
            ID-6: swap-5 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap4.eli 
 ```
+
+# Graceful Reboot
+The NAS is relied upon for many other hosts on the network, which need to be offlined before the NAS can be shut down.
+1. Offline the seedbox. Follow the graceful reboot instructions described on [the seedbox page](/hosts/seedbox) to shut it down.
+2. Offline the server. Follow the graceful reboot instructions described on [the server page](/hosts/server) to shut it down.
+3. Offline the NAS. SSH into the NAS and run `sudo shutdown now`.
+4. Perform necessary maintenance, then reboot the NAS.
+
+WIP
