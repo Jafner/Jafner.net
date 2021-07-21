@@ -2,7 +2,7 @@
 title: PiHole
 description: Configuration information for the Pihole
 published: true
-date: 2021-07-17T18:43:03.387Z
+date: 2021-07-21T00:58:06.693Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:25:03.232Z
@@ -26,4 +26,22 @@ Drives:    Local Storage: total: 29.72 GiB used: 1.47 GiB (4.9%)
            ID-1: /dev/mmcblk0 vendor: Samsung model: SP32G size: 29.72 GiB 
 Partition: ID-1: / size: 28.99 GiB used: 1.44 GiB (5.0%) fs: ext4 dev: /dev/mmcblk0p2 
            ID-2: /boot size: 252.0 MiB used: 29.3 MiB (11.6%) fs: vfat dev: /dev/mmcblk0p1 
+```
+
+# Graceful Reboot
+The PiHole is relied upon for DNS resolution for all devices on the network which have not manually configured another DNS resolver.
+1. Log into `router` via SSH and run the following:
+```
+configure
+delete system name-server 192.168.1.191
+set system name-server 1.1.1.1
+commit; save; exit
+```
+3. Reboot the Pi with `sudo reboot now`
+4. Switch back to the router and run the following:
+```
+configure 
+delete system name-server 1.1.1.1
+set system name-server 192.168.1.191
+commit; save; exit
 ```
