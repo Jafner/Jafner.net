@@ -2,7 +2,7 @@
 title: Grafana Setup Information
 description: 
 published: true
-date: 2021-07-21T00:28:30.298Z
+date: 2021-07-25T21:59:55.861Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-19T20:35:25.196Z
@@ -54,18 +54,44 @@ Below are excerpts from the `telegraf.conf` and accompanying files for each host
   report_active = false
 [[inputs.disk]]
   ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
-[[inputs.diskio]]
-[[inputs.kernel]]
 [[inputs.mem]]
-[[inputs.processes]]
-[[inputs.swap]]
 [[inputs.system]]
 [[inputs.docker]]
   endpoint = "unix:///var/run/docker.sock"
-[[inputs.hddtemp]]
-[[inputs.net]]
-[[inputs.netstat]]
 [[inputs.sensors]]
+[[inputs.file]]
+  files = ["/.forgetps.json"]
+  data_format = "json"
+  name_override = "tickinfo"
+  tag_keys = ["dim"] 
+```
+
+### Getting Forge Server Tick Info
+The main server's Telegraf instance gets information about my Forge server using a chain of tools. `cron` runs `docker exec e6 rcon-cli forge
+```bash
+#!/bin/bash
+# this script converts the output of the "forge tps" command (in the form of the .forgetps file) into json for sending to influxdb
+# by default it reads from stdin and outputs to a .forgetps.json file
+while IFS= read -r line; do
+  if [ "$line" != "" ]; then
+    DIM=$(echo -n "$line" | awk '{print $2}')
+    if [ "$DIM" = "Mean" ]; then
+      DIM="Overall"
+    fi
+    TPT=$(echo "$line" | grep -oE 'Mean tick time: .+ms' | awk '{print $4}')
+    TPS=$(echo "$line" | grep -oE 'Mean TPS: .+' | awk '{print $3}')
+    JSON+=\{$(echo \"dim\":\"$DIM\",\"tpt\":$TPT,\"tps\":$TPS)\}, 
+  fi
+#done < .forgetps # inputs from .forgetps file
+done <$1 # inputs from file passed via stdin
+JSON=$(echo ${JSON} | sed 's/,$//')
+
+#echo [${JSON}] >&1 # outputs to stdout
+echo [${JSON}] > .forgetps.json # uncomment this to output to file
+```
+
+```
+* * * * * cd /home/joey/docker_config/grafana-stack/scripts/ && docker exec e6 rcon-cli forge tps > .forgetps && ./forgetps-to-json.sh .forgetps
 ```
 
 ## NAS
@@ -78,13 +104,10 @@ Below are excerpts from the `telegraf.conf` and accompanying files for each host
 [[inputs.cpu]]
   percpu = true
   totalcpu = true
-[[inputs.io]]
 [[inputs.mem]]
 [[inputs.net]]
-[[inputs.swap]]
 [[inputs.system]]
 [[inputs.diskio]]
-[[inputs.netstat]]
 [[inputs.zfs]]
   poolMetrics = true
 [[inputs.exec]]
@@ -93,6 +116,11 @@ Below are excerpts from the `telegraf.conf` and accompanying files for each host
   timeout = "30s"
   data_format = "json"
   tag_keys = ["disk","health"]
+[[inputs.exec]]
+  name_override = "cputemps"
+  commands = ["sh /root/telegraf/cputemp.sh"]
+  timeout = "5s"
+  data_format = "influx"
 ```
 
 ## Seedbox
@@ -119,17 +147,10 @@ Below are excerpts from the `telegraf.conf` and accompanying files for each host
   report_active = false
 [[inputs.disk]]
   ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
-[[inputs.diskio]]
-[[inputs.kernel]]
 [[inputs.mem]]
-[[inputs.processes]]
-[[inputs.swap]]
 [[inputs.system]]
 [[inputs.docker]]
   endpoint = "unix:///var/run/docker.sock"
-[[inputs.hddtemp]]
-[[inputs.net]]
-[[inputs.netstat]]
 [[inputs.sensors]]
 ```
 ## PiHole
