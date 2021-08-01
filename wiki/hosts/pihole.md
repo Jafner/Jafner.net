@@ -2,7 +2,7 @@
 title: PiHole
 description: Configuration information for the Pihole
 published: true
-date: 2021-08-01T22:33:50.735Z
+date: 2021-08-01T22:39:33.396Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:25:03.232Z
