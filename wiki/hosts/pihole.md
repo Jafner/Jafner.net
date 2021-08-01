@@ -2,7 +2,7 @@
 title: PiHole
 description: Configuration information for the Pihole
 published: true
-date: 2021-07-21T01:04:12.409Z
+date: 2021-08-01T22:33:50.735Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T04:25:03.232Z
@@ -33,7 +33,7 @@ The PiHole is relied upon for DNS resolution for all devices on the network whic
 1. Log into `router` via SSH and run the following:
 ```
 configure
-delete system name-server 192.168.1.191
+delete system name-server 192.168.1.22
 set system name-server 1.1.1.1
 commit; save; exit
 ```
@@ -42,7 +42,7 @@ commit; save; exit
 ```
 configure 
 delete system name-server 1.1.1.1
-set system name-server 192.168.1.191
+set system name-server 192.168.1.22
 commit; save; exit
 ```
 4. Done.
