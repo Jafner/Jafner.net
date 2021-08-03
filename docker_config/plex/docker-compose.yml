@@ -22,11 +22,11 @@ services:
       - PGID=1000
       - VERSION=latest
       - ADVERTISE_IP="https://plex.jafner.net:443"
-      #- PLEX_CLAIM=
+      - PLEX_CLAIM=claim-DPRoiMnzcby-YxKdFpqJ
     volumes:
       - /mnt/nas/Video/Movies:/movies
       - /mnt/nas/Video/Shows:/shows
-      - "${DOCKER_DATA}/config:/config"
+      - "${DOCKER_DATA}/plex:/config"
     labels:
       - traefik.http.routers.plex.rule=Host(`plex.jafner.net`)
       - traefik.http.routers.plex.tls.certresolver=lets-encrypt
@@ -42,10 +42,9 @@ services:
       - PGID=1000
       - TZ=America/Los_Angeles
     volumes:
-      - "${DOCKER_DATA}/config:/config"
+      - "${DOCKER_DATA}/ombi:/config"
     labels:
       - traefik.http.routers.ombi.rule=Host(`ombi.jafner.net`)
-      - traefik.http.routers.ombi.tls=true
       - traefik.http.routers.ombi.tls.certresolver=lets-encrypt
       - traefik.http.services.ombi.loadbalancer.server.port=3579
     

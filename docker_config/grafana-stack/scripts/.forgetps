@@ -1,0 +1,10 @@
+Dim minecraft:overworld (minecraft:overworld): Mean tick time: 29.736 ms. Mean TPS: 20.000
+Dim minecraft:the_nether (minecraft:the_nether): Mean tick time: 0.030 ms. Mean TPS: 20.000
+Dim minecraft:the_end (minecraft:the_end): Mean tick time: 15.044 ms. Mean TPS: 20.000
+Dim compactmachines:compact_world (null): Mean tick time: 0.023 ms. Mean TPS: 20.000
+Dim rats:ratlantis (rats:ratlantis): Mean tick time: 0.016 ms. Mean TPS: 20.000
+Dim atum:atum (atum:atum): Mean tick time: 0.023 ms. Mean TPS: 20.000
+Dim mythicbotany:alfheim (mythicbotany:alfheim): Mean tick time: 0.016 ms. Mean TPS: 20.000
+Dim undergarden:undergarden (undergarden:undergarden): Mean tick time: 0.017 ms. Mean TPS: 20.000
+Overall: Mean tick time: 47.341 ms. Mean TPS: 20.000
+

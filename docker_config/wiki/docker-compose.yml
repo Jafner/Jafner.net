@@ -36,7 +36,7 @@ services:
       - ${PWD}/wiki_id_rsa.pub:/wiki_id_rsa.pub
       - ${DOCKER_DATA}:/data
     labels:
-      - traefik.http.routers.wiki.rule=Host(`wiki.jafner.net`)
+      - traefik.http.routers.wiki.rule=Host(`docs.jafner.net`)
       - traefik.http.routers.wiki.tls.certresolver=lets-encrypt
       - traefik.http.services.wiki.loadbalancer.server.port=3000
 

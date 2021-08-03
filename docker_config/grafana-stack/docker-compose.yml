@@ -22,10 +22,13 @@ services:
     image: telegraf:latest
     container_name: telegraf
     restart: unless-stopped
+    depends_on:
+      - influxdb
     networks:
       - grafana
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./scripts/.forgetps.json:/.forgetps.json:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
@@ -35,6 +38,9 @@ services:
     image: mbarmem/grafana-render:latest
     container_name: grafana
     restart: unless-stopped
+    depends_on:
+      - influxdb
+      - telegraf
     networks:
       - grafana
       - web

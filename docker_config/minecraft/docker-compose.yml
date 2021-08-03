@@ -1,37 +1,61 @@
 version: '3'
 
 services:
-  e6:
+  e6-050:
     image: itzg/minecraft-server:java8
-    container_name: e6
+    container_name: e6-050
+    depends_on:
+      - router
     environment:
       - EULA=TRUE
-      - MAX_MEMORY=8G
+      - MAX_MEMORY=16G
       - TYPE=FORGE
       - FORGEVERSION=36.1.31
       - VERSION=1.16.5
       - OPS=jafner425
+      - ENABLE_RCON=true
+      - RCON_PASSWORD=${RCON_PASSWORD}
     volumes:
-      - $DOCKER_DATA/e6:/data:rw
+      - $DOCKER_DATA/e6-050:/data:rw
     networks:
       - mc-router
     labels:
       - traefik.enable=false
-  litv:
+  e6-056:
     image: itzg/minecraft-server:java8
-    container_name: litv
+    container_name: e6-056
+    depends_on:
+      - router
     environment:
       - EULA=TRUE
-      - MAX_MEMORY=6G
+      - MAX_MEMORY=12G
       - TYPE=FORGE
-      - FORGEVERSION=36.1.15
       - VERSION=1.16.5
+      - FORGEVERSION=36.1.31
+      - OPS=jafner425
+      - ENABLE_RCON=true
+      - RCON_PASSWORD=${RCON_PASSWORD}
     volumes:
-      - $DOCKER_DATA/litv:/data:rw
+      - $DOCKER_DATA/e6-056:/data:rw
     networks:
       - mc-router
     labels:
       - traefik.enable=false
+    
+  vanilla:
+    image: itzg/minecraft-server:java16
+    container_name: vanilla
+    depends_on:
+      - router
+    environment:
+      - EULA=TRUE
+      - VERSION=1.17.1
+      - OPS=mollymsmom
+      - MAX_MEMORY=6G
+    volumes:
+      - $DOCKER_DATA/vanilla:/data:rw
+    networks:
+      - mc-router
 
   router:
     image: itzg/mc-router
@@ -40,7 +64,7 @@ services:
       - mc-router
     ports:
       - 25565:25565
-    command: --mapping=cavesncliffs.jafner.net=cavesncliffs:25565,e6.jafner.net=e6:25565,litv.jafner.net=litv:25565
+    command: --mapping=e6.jafner.net=e6-056:25565,e6-050.jafner.net=e6-050:25565,vanilla.jafner.net=vanilla:25565
     labels:
       - traefik.enable=false
 

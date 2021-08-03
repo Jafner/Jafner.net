@@ -12,7 +12,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
-      - PEERS=1
+      - PEERS=phone,laptop,temp1,temp2,temp3
+      - SERVERURL=www.jafner.net
       - SERVERPORT=53820
     volumes:
       - ./config:/config
