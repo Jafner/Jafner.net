@@ -2,7 +2,7 @@
 title: Router
 description: Configuration information for the Edgerouter 10X
 published: true
-date: 2021-09-18T02:20:53.284Z
+date: 2021-09-18T02:32:20.878Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T18:45:24.630Z
