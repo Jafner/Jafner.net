@@ -2,7 +2,7 @@
 title: Router
 description: Configuration information for the Edgerouter 10X
 published: true
-date: 2021-07-17T18:45:24.630Z
+date: 2021-09-18T02:20:53.284Z
 tags: 
 editor: markdown
 dateCreated: 2021-07-17T18:45:24.630Z
@@ -22,3 +22,10 @@ Graphics:  Message: No MIPS data found for this feature.
 Network:   Device-1: mt7621-eth driver: mtk_soc_eth 
 Drives:    Local Storage: total: 0 KiB used: 154.2 MiB
 ```
+
+# Graceful Reboot
+The router is relied upon by all clients on the network, so they all need to be offlined or prepared.
+1. Offline the [seedbox](/hosts/seedbox).
+2. Offline the [server](/hosts/server).
+3. Offline the [NAS](/hosts/nas).
+4. Run `shutdown`.
