@@ -1,0 +1,11 @@
+version: "3"
+services:
+  5etools-docker:
+    container_name: 5etools-docker
+    image: jafner/5etools-docker:latest
+    volumes:
+      - ${PWD}/htdocs:/usr/local/apache2/htdocs # this assumes your docker-compose.yml file is inside a "5etools-docker" directory.
+    environment:
+      - IMG=true
+      - PUID=1000
+      - PGID=1000

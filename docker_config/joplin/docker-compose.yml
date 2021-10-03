@@ -1,13 +1,9 @@
 version: '3'
 services:
   joplin:
-    image: joplin/server:2.2.5-beta
+    image: joplin/server:2
     container_name: joplin
     restart: unless-stopped
-    volumes:
-      - joplin-data:/home/joplin
-    env_file:
-      - .env
     depends_on:
       - joplin_db
     networks:
@@ -15,7 +11,6 @@ services:
       - joplin
     labels:
       - traefik.http.routers.joplin.rule=Host(`joplin.jafner.net`)
-      - traefik.http.routers.joplin.tls=true
       - traefik.http.routers.joplin.tls.certresolver=lets-encrypt
       - traefik.http.services.joplin.loadbalancer.server.port=22300
   joplin_db:
@@ -23,15 +18,9 @@ services:
     container_name: joplin_db
     restart: unless-stopped
     volumes:
-      - joplin-db:/var/lib/postresql/data
+      - ${DOCKER_DATA}/db:/var/lib/postresql/data
     networks:
       - joplin
-    env_file:
-      - .env
-
-volumes:
-  joplin-data:
-  joplin-db:
 
 networks:
   joplin:

@@ -17,22 +17,7 @@ services:
       - $DOCKER_DATA/e6-056:/data:rw
     networks:
       - mc-router
-    labels:
-      - traefik.enable=false
-    
-  vanilla:
-    image: itzg/minecraft-server:java16
-    container_name: vanilla
-    environment:
-      - EULA=TRUE
-      - VERSION=1.17.1
-      - OPS=mollymsmom
-      - MAX_MEMORY=6G
-    volumes:
-      - $DOCKER_DATA/vanilla:/data:rw
-    networks:
-      - mc-router
-
+    restart: always
 networks:
   mc-router:
     external: true

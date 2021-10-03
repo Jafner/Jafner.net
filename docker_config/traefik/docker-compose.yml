@@ -30,6 +30,13 @@ services:
       - 'traefik.http.routers.authelia.rule=Host(`auth.jafner.net`)'
       - 'traefik.http.routers.authelia.entrypoints=websecure'
       - 'traefik.http.routers.authelia.tls.certresolver=lets-encrypt'
+      - "traefik.http.middlewares.security.headers.sslRedirect=true"
+      - "traefik.http.middlewares.security.headers.stsSeconds=15768000"
+      - "traefik.http.middlewares.security.headers.browserXSSFilter=true"
+      - "traefik.http.middlewares.security.headers.contentTypeNosniff=true"
+      - "traefik.http.middlewares.security.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.security.headers.stsPreload=true"
+      - "traefik.http.middlewares.security.headers.frameDeny=true"
 
   redis:
     image: redis:alpine

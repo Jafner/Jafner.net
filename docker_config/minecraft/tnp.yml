@@ -1,0 +1,21 @@
+version: '3'
+services:
+  tnp:
+    image: itzg/minecraft-server:java8
+    container_name: tnp
+    environment:
+      - EULA=TRUE
+      - MAX_MEMORY=6G
+      - TYPE=FORGE
+      - VERSION=1.16.5
+      - FORGEVERSION=36.2.2
+      - ENABLE_RCON=true
+      - RCON_PASSWORD=${RCON_PASSWORD}
+    volumes:
+      - $DOCKER_DATA/tnp:/data:rw
+    networks:
+      - mc-router
+
+networks:
+  mc-router:
+    external: true
