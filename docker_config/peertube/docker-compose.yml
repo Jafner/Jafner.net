@@ -1,45 +1,13 @@
 version: "3.3"
 
 services:
-  webserver:
-    image: chocobozzz/peertube-webserver:latest
-    container_name: peertube_webserver
-    env_file:
-      - .env
-    networks:
-      - web
-      - peertube
-    volumes:
-      - type: bind
-        source: ${DOCKER_VOLUME}/nginx/peertube
-        target: /etc/nginx/conf.d/peertube.template
-      - assets:/var/www/peertube/peertube-latest/client/dist:ro
-      - ${DOCKER_VOLUME}/data:/var/www/peertube/storage
-      - certbot-www:/var/www/certbot
-      - ${DOCKER_VOLUME}/certbot/conf:/etc/letsencrypt
-    depends_on:
-      - peertube
-    restart: "always"
-
-  certbot:
-    container_name: peertube_certbot
-    image: certbot/certbot
-    networks:
-      - peertube
-    volumes:
-      - ${DOCKER_VOLUME}/certbot/conf:/etc/letsencrypt
-      - certbot-www:/var/www/certbot
-    restart: unless-stopped
-    entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot; sleep 12h & wait $${!}; done;"
-    depends_on:
-      - webserver
-
   peertube:
     image: chocobozzz/peertube:production-buster
     container_name: peertube_peertube
     networks:
+      web:
       peertube:
-        ipv4_address: 172.18.0.42
+        ipv4_address: 172.80.0.42
     env_file:
       - .env
     ports:
@@ -48,6 +16,10 @@ services:
       - assets:/app/client/dist
       - ${DOCKER_VOLUME}/data:/data
       - ${DOCKER_VOLUME}/config:/config
+    labels:
+      - "traefik.http.routers.peertube.rule=Host(`peertube.jafner.net`)"
+      - "traefik.http.routers.peertube.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.peertube.loadbalancer.server.port=9000"
     depends_on:
       - postgres
       - redis
@@ -90,10 +62,9 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.18.0.0/16
+      - subnet: 172.80.0.0/16
   web:
     external: true
 
 volumes:
   assets:
-  certbot-www:
