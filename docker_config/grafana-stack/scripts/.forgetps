@@ -1,20 +1,20 @@
-Dim minecraft:overworld (minecraft:overworld): Mean tick time: 71.258 ms. Mean TPS: 14.033
-Dim minecraft:the_nether (minecraft:the_nether): Mean tick time: 0.552 ms. Mean TPS: 20.000
-Dim minecraft:the_end (minecraft:the_end): Mean tick time: 0.026 ms. Mean TPS: 20.000
-Dim rftoolsdim:coaldim (rftoolsdim:normal_time): Mean tick time: 1.714 ms. Mean TPS: 20.000
-Dim compactmachines:compact_world (null): Mean tick time: 4.401 ms. Mean TPS: 20.000
-Dim rats:ratlantis (rats:ratlantis): Mean tick time: 0.290 ms. Mean TPS: 20.000
-Dim rftoolsdim:dim1 (rftoolsdim:normal_time): Mean tick time: 0.018 ms. Mean TPS: 20.000
-Dim rftoolsdim:fluoritedim (rftoolsdim:normal_time): Mean tick time: 1.706 ms. Mean TPS: 20.000
-Dim rftoolsdim:dim2 (rftoolsdim:normal_time): Mean tick time: 0.024 ms. Mean TPS: 20.000
-Dim rftoolsdim:dim3 (rftoolsdim:normal_time): Mean tick time: 0.018 ms. Mean TPS: 20.000
-Dim rftoolsdim:dim4 (rftoolsdim:normal_time): Mean tick time: 0.016 ms. Mean TPS: 20.000
-Dim rftoolsdim:uraniumtendrils (rftoolsdim:normal_time): Mean tick time: 0.018 ms. Mean TPS: 20.000
-Dim rftoolsdim:dim5 (rftoolsdim:normal_time): Mean tick time: 0.016 ms. Mean TPS: 20.000
+Dim minecraft:overworld (minecraft:overworld): Mean tick time: 41.095 ms. Mean TPS: 20.000
+Dim minecraft:the_nether (minecraft:the_nether): Mean tick time: 0.402 ms. Mean TPS: 20.000
+Dim minecraft:the_end (minecraft:the_end): Mean tick time: 0.019 ms. Mean TPS: 20.000
+Dim rftoolsdim:coaldim (rftoolsdim:normal_time): Mean tick time: 1.440 ms. Mean TPS: 20.000
+Dim compactmachines:compact_world (null): Mean tick time: 3.734 ms. Mean TPS: 20.000
+Dim rats:ratlantis (rats:ratlantis): Mean tick time: 0.021 ms. Mean TPS: 20.000
+Dim rftoolsdim:dim1 (rftoolsdim:normal_time): Mean tick time: 0.015 ms. Mean TPS: 20.000
+Dim rftoolsdim:fluoritedim (rftoolsdim:normal_time): Mean tick time: 1.457 ms. Mean TPS: 20.000
+Dim rftoolsdim:dim2 (rftoolsdim:normal_time): Mean tick time: 0.022 ms. Mean TPS: 20.000
+Dim rftoolsdim:dim3 (rftoolsdim:normal_time): Mean tick time: 0.016 ms. Mean TPS: 20.000
+Dim rftoolsdim:dim4 (rftoolsdim:normal_time): Mean tick time: 0.015 ms. Mean TPS: 20.000
+Dim rftoolsdim:uraniumtendrils (rftoolsdim:normal_time): Mean tick time: 0.015 ms. Mean TPS: 20.000
+Dim rftoolsdim:dim5 (rftoolsdim:normal_time): Mean tick time: 0.014 ms. Mean TPS: 20.000
 Dim rftoolsdim:dim6 (rftoolsdim:normal_time): Mean tick time: 0.015 ms. Mean TPS: 20.000
-Dim atum:atum (atum:atum): Mean tick time: 0.017 ms. Mean TPS: 20.000
-Dim mythicbotany:alfheim (mythicbotany:alfheim): Mean tick time: 0.015 ms. Mean TPS: 20.000
-Dim undergarden:undergarden (undergarden:undergarden): Mean tick time: 0.014 ms. Mean TPS: 20.000
-Dim rftoolsdim:uraniumdim (rftoolsdim:normal_time): Mean tick time: 0.315 ms. Mean TPS: 20.000
-Overall: Mean tick time: 80.452 ms. Mean TPS: 12.430
+Dim atum:atum (atum:atum): Mean tick time: 0.025 ms. Mean TPS: 20.000
+Dim rftoolsdim:uraniumdim (rftoolsdim:normal_time): Mean tick time: 0.181 ms. Mean TPS: 20.000
+Dim mythicbotany:alfheim (mythicbotany:alfheim): Mean tick time: 0.016 ms. Mean TPS: 20.000
+Dim undergarden:undergarden (undergarden:undergarden): Mean tick time: 0.015 ms. Mean TPS: 20.000
+Overall: Mean tick time: 48.535 ms. Mean TPS: 20.000
 

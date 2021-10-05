@@ -1,0 +1,99 @@
+version: "3.3"
+
+services:
+  webserver:
+    image: chocobozzz/peertube-webserver:latest
+    container_name: peertube_webserver
+    env_file:
+      - .env
+    networks:
+      - web
+      - peertube
+    volumes:
+      - type: bind
+        source: ./docker-volume/nginx/peertube
+        target: /etc/nginx/conf.d/peertube.template
+      - assets:/var/www/peertube/peertube-latest/client/dist:ro
+      - ./docker-volume/data:/var/www/peertube/storage
+      - certbot-www:/var/www/certbot
+      - ./docker-volume/certbot/conf:/etc/letsencrypt
+    depends_on:
+      - peertube
+    restart: "always"
+
+  certbot:
+    container_name: peertube_certbot
+    image: certbot/certbot
+    networks:
+      - peertube
+    volumes:
+      - ./docker-volume/certbot/conf:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    restart: unless-stopped
+    entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot; sleep 12h & wait $${!}; done;"
+    depends_on:
+      - webserver
+
+  peertube:
+    image: chocobozzz/peertube:production-buster
+    container_name: peertube_peertube
+    networks:
+      peertube:
+        ipv4_address: 172.18.0.42
+    env_file:
+      - .env
+    ports:
+     - "1935:1935" # If you don't want to use the live feature, you can comment this line
+    volumes:
+      - assets:/app/client/dist
+      - ./docker-volume/data:/data
+      - ./docker-volume/config:/config
+    depends_on:
+      - postgres
+      - redis
+      - postfix
+    restart: "always"
+
+  postgres:
+    image: postgres:13-alpine
+    container_name: peertube_postgres
+    networks:
+      - peertube
+    env_file:
+      - .env
+    volumes:
+      - ./docker-volume/db:/var/lib/postgresql/data
+    restart: "always"
+
+  redis:
+    image: redis:6-alpine
+    container_name: peertube_redis
+    networks:
+      - peertube
+    volumes:
+      - ./docker-volume/redis:/data
+    restart: "always"
+
+  postfix:
+    image: mwader/postfix-relay
+    container_name: peertube_postfix
+    networks:
+      - peertube
+    env_file:
+      - .env
+    volumes:
+      - ./docker-volume/opendkim/keys:/etc/opendkim/keys
+    restart: "always"
+
+networks:
+  peertube:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.0.0/16
+  web:
+    external: true
+
+volumes:
+  assets:
+  certbot-www:
