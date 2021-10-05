@@ -11,12 +11,12 @@ services:
       - peertube
     volumes:
       - type: bind
-        source: ./docker-volume/nginx/peertube
+        source: ${DOCKER_VOLUME}/nginx/peertube
         target: /etc/nginx/conf.d/peertube.template
       - assets:/var/www/peertube/peertube-latest/client/dist:ro
-      - ./docker-volume/data:/var/www/peertube/storage
+      - ${DOCKER_VOLUME}/data:/var/www/peertube/storage
       - certbot-www:/var/www/certbot
-      - ./docker-volume/certbot/conf:/etc/letsencrypt
+      - ${DOCKER_VOLUME}/certbot/conf:/etc/letsencrypt
     depends_on:
       - peertube
     restart: "always"
@@ -27,7 +27,7 @@ services:
     networks:
       - peertube
     volumes:
-      - ./docker-volume/certbot/conf:/etc/letsencrypt
+      - ${DOCKER_VOLUME}/certbot/conf:/etc/letsencrypt
       - certbot-www:/var/www/certbot
     restart: unless-stopped
     entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot; sleep 12h & wait $${!}; done;"
@@ -46,8 +46,8 @@ services:
      - "1935:1935" # If you don't want to use the live feature, you can comment this line
     volumes:
       - assets:/app/client/dist
-      - ./docker-volume/data:/data
-      - ./docker-volume/config:/config
+      - ${DOCKER_VOLUME}/data:/data
+      - ${DOCKER_VOLUME}/config:/config
     depends_on:
       - postgres
       - redis
@@ -62,7 +62,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./docker-volume/db:/var/lib/postgresql/data
+      - ${DOCKER_VOLUME}/db:/var/lib/postgresql/data
     restart: "always"
 
   redis:
@@ -71,7 +71,7 @@ services:
     networks:
       - peertube
     volumes:
-      - ./docker-volume/redis:/data
+      - ${DOCKER_VOLUME}/redis:/data
     restart: "always"
 
   postfix:
@@ -82,7 +82,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./docker-volume/opendkim/keys:/etc/opendkim/keys
+      - ${DOCKER_VOLUME}/opendkim/keys:/etc/opendkim/keys
     restart: "always"
 
 networks:
