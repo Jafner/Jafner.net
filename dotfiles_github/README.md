@@ -13,6 +13,7 @@ ssh-add ~/.ssh/id_rsa
 ## Autostart
 1. Set Spotify, PulseEffects, and Ferdi to start automatically.
 2. `chmod +x window_reposition.sh`
+3. `sudo cp .scripts/window_reposition.sh /usr/bin/window_reposition`
 3. Run the window_reposition script at startup.
 
 
@@ -40,3 +41,6 @@ sudo sed -i 's/#user = "root"/user = "joey"/' /etc/libvirt/qemu.conf && \
 sudo sed -i 's/#group = "root"/group = "joey"/' /etc/libvirt/qemu.conf && \
 sudo systemctl restart libvirtd
 ```
+
+Reboot.
+
