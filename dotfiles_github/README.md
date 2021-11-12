@@ -14,3 +14,6 @@ ssh-add ~/.ssh/id_rsa
 ## Tiling and corner-snapping
 Using GNOME, disable all extensions. Install [Tiling Assistant](https://extensions.gnome.org/extension/3733/tiling-assistant/)
 Set Windows and Screen Edges gaps to 12px.
+
+## Virtualization
+Install QEMU, KVM, libvirt, virtmanager.
