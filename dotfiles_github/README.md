@@ -24,3 +24,4 @@ Set Windows and Screen Edges gaps to 12px.
 Install `libvirt`.
 `nano /etc/default/grub` and add `amd_iommu=on iommu=pt` to the `GRUB_CMDLINE_LINUX_DEFAULT` variable.
 `sudo grub-mkconfig -o /boot/grub/grub.cfg` to update the bootloader.
+Install QEMU, KVM, libvirt, virtmanager.
