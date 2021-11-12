@@ -1,10 +1,3 @@
-firefox 
-ferdi 
-steam 
-spotify 
-vscodium 
-pulseeffects 
-Github-desktop
 lutris
 upwork
 tabby
