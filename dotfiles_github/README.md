@@ -24,4 +24,19 @@ Set Windows and Screen Edges gaps to 12px.
 Install `libvirt`.
 `nano /etc/default/grub` and add `amd_iommu=on iommu=pt` to the `GRUB_CMDLINE_LINUX_DEFAULT` variable.
 `sudo grub-mkconfig -o /boot/grub/grub.cfg` to update the bootloader.
-Install QEMU, KVM, libvirt, virtmanager.
+Install QEMU, KVM, libvirt, virtmanager. `sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat ovmf`
+
+Configure `libvirtd`
+
+```bash
+sudo sed -i 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf && \
+sudo sed -i 's/#unix_sock_rw_perms = "0770"/unix_sock_rw_perms = "0770"/' /etc/libvirt/libvirtd.conf && \
+sudo bash -c 'echo "log_filters=\"1:qemu\"" >> /etc/libvirt/libvirtd.conf' && \
+sudo bash -c 'echo "log_outputs=\"1:file:/var/log/libvirt/libvirtd.log\"" >> /etc/libvirt/libvirtd.conf' && \
+sudo usermod -aG libvirt $USER && \
+sudo systemctl enable libvirtd && \
+sudo systemctl start libvirtd && \
+sudo sed -i 's/#user = "root"/user = "joey"/' /etc/libvirt/qemu.conf && \
+sudo sed -i 's/#group = "root"/group = "joey"/' /etc/libvirt/qemu.conf && \
+sudo systemctl restart libvirtd
+```
