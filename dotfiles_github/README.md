@@ -6,6 +6,5 @@
 eval $(ssh-agent -s) && \
 ssh-add ~/.ssh/id_rsa
 ```
-
 4. Clone the repo with `git clone git@github.com:Jafner/dotfiles.git ~/Git/dotfiles`
-5. Copy the file contents over with `cp -rf ~/Git/dotfiles/* ~/`
+5. Place the dotfiles where they need to be with `chmod +x install_dotfiles.sh && ./install_dotfiles.sh`
