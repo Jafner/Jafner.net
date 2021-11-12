@@ -8,3 +8,9 @@ ssh-add ~/.ssh/id_rsa
 ```
 4. Clone the repo with `git clone git@github.com:Jafner/dotfiles.git ~/Git/dotfiles`
 5. Place the dotfiles where they need to be with `chmod +x install_dotfiles.sh && ./install_dotfiles.sh`
+
+# Other Stuff
+
+## Tiling and corner-snapping
+Using GNOME, disable all extensions. Install [Tiling Assistant](https://extensions.gnome.org/extension/3733/tiling-assistant/)
+Set Windows and Screen Edges gaps to 12px.
