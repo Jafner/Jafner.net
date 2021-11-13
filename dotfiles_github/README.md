@@ -44,3 +44,18 @@ sudo systemctl restart libvirtd
 
 Reboot.
 
+Set up the VM, following the [RisingPrism wiki](https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis).
+
+Open Nvidia X Server Settings, go to GPU 0 and check the VBIOS version. 
+Browse to https://www.techpowerup.com/vgabios/ and download the correct VBIOS file. 
+Rename the file to `vbios.rom`.
+
+Place the VBIOS file.
+```bash
+sudo mkdir /usr/share/vbios && \
+sudo cp ~/Downloads/vbios.rom /usr/share/vbios/vbios.rom && \
+cd /usr/share/vbios && \
+sudo chmod -R 660 vbios.rom && \
+sudo chown joey:joey vbios.rom
+```
+
