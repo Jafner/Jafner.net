@@ -22,12 +22,17 @@ Using GNOME, disable all extensions. Install [Tiling Assistant](https://extensio
 Set Windows and Screen Edges gaps to 12px.
 
 ## Virtualization
-Install `libvirt`.
-`nano /etc/default/grub` and add `amd_iommu=on iommu=pt` to the `GRUB_CMDLINE_LINUX_DEFAULT` variable.
-`sudo grub-mkconfig -o /boot/grub/grub.cfg` to update the bootloader.
-Install QEMU, KVM, libvirt, virtmanager. `sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat ovmf`
 
-Configure `libvirtd`
+1. Install necessary packages.
+`sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat ovmf`
+
+2. Prepare the bootloader (GRUB)
+```bash
+sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash apparmor=1 security=apparmor udev.log_priority=3"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash apparmor=1 security=apparmor amd_iommu=on iommu=pt udev.log_priority=3"/' /etc/default/grub && \
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+3. Configure `libvirtd`
 
 ```bash
 sudo sed -i 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf && \
@@ -42,33 +47,14 @@ sudo sed -i 's/#group = "root"/group = "joey"/' /etc/libvirt/qemu.conf && \
 sudo systemctl restart libvirtd
 ```
 
-Reboot.
+4. Dump the GPU vbios.
+Run the script to dump the vbios.
 
-Set up the VM, following the [RisingPrism wiki](https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis).
+5. Patch the GPU vbios with Bless Hex Editor.
+Follow [Mutahar's guide](https://youtu.be/BUSrdUoedTo?t=874) (timestamped) for this bit.
+Save the patched version as `vbios_patched.rom`. Restrict its permissions with `chmod 660 vbios_patched.rom && sudo chown joey:joey vbios_patched.rom` then copy it to the share folder with `sudo mkdir /usr/share/vbios && sudo cp vbios_patched.rom /usr/share/vbios/vbios.rom`
 
-Open Nvidia X Server Settings, go to GPU 0 and check the VBIOS version. 
-Browse to https://www.techpowerup.com/vgabios/ and download the correct VBIOS file. 
-Rename the file to `vbios.rom`.
+6. Set up the VM.
+Follow page 5 of the [RisingPrism wiki](https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/) for details on configuring the VM. 
 
-Actually, dump and patch your own ROM with techpowerup's nvflash and the Bless hex editor.
-This will require unloading all of the nvidia kernel modules, so connect via SSH from another host.
-
-Stop the display manager, then unload the nvidia kernel modules
-`sudo systemctl stop gdm.service && sudo modprobe -r i2c_nvidia_gpu nvidia_uvm nvidia nvidia_drm`
-Then dump the rom.
-`sudo ./nvflash --save vbios.rom`
-
-Reload the kernel modules and restart the display manager
-`sudo modprobe i2c_nvidia_gpu nvidia_uvm nvidia nvidia_drm && sudo systemctl start gdm.service`
-
-Open the new vbios file in Bless hex editor, search for 'VIDEO' in text mode. Delete all lines up to the `U` character on that line (exclusive). Save the patched version as `vbios_patched.rom`. Restrict its permissions with `chmod 660 vbios_patched.rom` then copy it to the share folder with `sudo cp vbios_patched.rom /usr/share/vbios/vbios.rom`
-
-Place the VBIOS file.
-```bash
-sudo mkdir /usr/share/vbios && \
-sudo cp ~/Downloads/vbios.rom /usr/share/vbios/vbios.rom && \
-cd /usr/share/vbios && \
-sudo chmod -R 660 vbios.rom && \
-sudo chown joey:joey vbios.rom
-```
-
+7. Reboot to effect the changes we made to the bootloader.
