@@ -23,6 +23,8 @@ Set Windows and Screen Edges gaps to 12px.
 
 ## Virtualization
 
+Steps 1 through 4 can be handled automatically by running `install_virtualization.sh`.
+
 1. Install necessary packages.
 `sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat ovmf`
 
