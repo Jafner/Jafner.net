@@ -50,6 +50,19 @@ Open Nvidia X Server Settings, go to GPU 0 and check the VBIOS version.
 Browse to https://www.techpowerup.com/vgabios/ and download the correct VBIOS file. 
 Rename the file to `vbios.rom`.
 
+Actually, dump and patch your own ROM with techpowerup's nvflash and the Bless hex editor.
+This will require unloading all of the nvidia kernel modules, so connect via SSH from another host.
+
+Stop the display manager, then unload the nvidia kernel modules
+`sudo systemctl stop gdm.service && sudo modprobe -r i2c_nvidia_gpu nvidia_uvm nvidia nvidia_drm`
+Then dump the rom.
+`sudo ./nvflash --save vbios.rom`
+
+Reload the kernel modules and restart the display manager
+`sudo modprobe i2c_nvidia_gpu nvidia_uvm nvidia nvidia_drm && sudo systemctl start gdm.service`
+
+Open the new vbios file in Bless hex editor, search for 'VIDEO' in text mode. Delete all lines up to the `U` character on that line (exclusive). Save the patched version as `vbios_patched.rom`. Restrict its permissions with `chmod 660 vbios_patched.rom` then copy it to the share folder with `sudo cp vbios_patched.rom /usr/share/vbios/vbios.rom`
+
 Place the VBIOS file.
 ```bash
 sudo mkdir /usr/share/vbios && \
