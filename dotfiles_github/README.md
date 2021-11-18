@@ -7,7 +7,23 @@ eval $(ssh-agent -s) && \
 ssh-add ~/.ssh/id_rsa
 ```
 4. Clone the repo with `git clone git@github.com:Jafner/dotfiles.git ~/Git/dotfiles`
-5. Place the dotfiles where they need to be with `chmod +x install_dotfiles.sh && ./install_dotfiles.sh`
+5. Update the system with `sudo pacman -Syu`
+
+# Installing Dotfiles
+## Set Up SSHD
+Run `chmod +x ./setup_sshd.sh && ./setup_sshd.sh`
+
+## Install Flatpaks
+Run `chmod +x ./install_flatpaks.sh && ./install_flatpaks.sh`
+
+## Install `pamidi`
+Run `chmod +x ./install_pamidi.sh && ./install_pamidi.sh`
+
+## Install Lutris
+Just run `chmod +x ./iinstall_lutris.sh && ./install_lutris.sh` It's so many packages oh my god
+
+## Install other applications
+
 
 # Other Stuff
 ## Autostart
@@ -15,7 +31,6 @@ ssh-add ~/.ssh/id_rsa
 2. `chmod +x window_reposition.sh`
 3. `sudo cp .scripts/window_reposition.sh /usr/bin/window_reposition`
 3. Run the window_reposition script at startup.
-
 
 ## Tiling and corner-snapping
 Using GNOME, disable all extensions. Install [Tiling Assistant](https://extensions.gnome.org/extension/3733/tiling-assistant/)
