@@ -34,7 +34,7 @@ Configure Ferdi with the following basic apps:
 * Slack
 * Element
 
-Then add the following custom recipes (from `~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`):
+Then add the following custom recipes (with `cp -r ~/Git/dotfiles/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`):
 * PrivateEmail
 * Upwork
 
