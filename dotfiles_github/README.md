@@ -27,17 +27,14 @@ Just run `chmod +x ./install_lutris.sh && ./install_lutris.sh` It's so many pack
 
 
 # Other Stuff
-## Ferdi
-Configure Ferdi with the following basic apps:
-* Discord
-* Gmail
-* LinkedIn
-* Slack
-* Element
 
-Then add the following custom recipes (with `cp -r ~/Git/dotfiles/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`):
-* PrivateEmail
-* Upwork
+## Set Flatpaks to use Breeze-Dark Gtk3 Theme
+`flatpak install flathub org.gtk.Gtk3theme.Breeze-Dark`
+
+## Ferdi
+Configure Ferdi by logging into Ferdi sync. This will set up the basic apps, but custom apps will still need to be copied into the dev recipes folder.
+
+Add the custom recipes (with `mkdir -p ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev && cp -r ~/Git/dotfiles/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`).
 
 ## Autostart
 1. Set Spotify, PulseEffects, and Ferdi to start automatically.
