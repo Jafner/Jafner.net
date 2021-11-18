@@ -17,3 +17,7 @@ sudo sed -i 's/#group = "root"/group = "joey"/' /etc/libvirt/qemu.conf && \
 sudo systemctl restart libvirtd
 
 source ./.virtualization/dump_rom.sh
+
+sudo cp ./.virtualization/win10.xml /etc/libvirt/qemu/win10.xml
+sudo chown root:root /etc/libvirt/qemu/win10.xml 
+sudo chmod 600 /etc/libvirt/qemu/win10.xml
