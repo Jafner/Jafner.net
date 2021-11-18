@@ -26,6 +26,18 @@ Just run `chmod +x ./iinstall_lutris.sh && ./install_lutris.sh` It's so many pac
 
 
 # Other Stuff
+## Ferdi
+Configure Ferdi with the following basic apps:
+* Discord
+* Gmail
+* LinkedIn
+* Slack
+* Element
+
+Then add the following custom recipes (from `~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`):
+* PrivateEmail
+* Upwork
+
 ## Autostart
 1. Set Spotify, PulseEffects, and Ferdi to start automatically.
 2. `chmod +x window_reposition.sh`
