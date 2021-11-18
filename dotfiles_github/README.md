@@ -15,6 +15,7 @@ Run `chmod +x ./setup_sshd.sh && ./setup_sshd.sh`
 
 ## Install Flatpaks
 Run `chmod +x ./install_flatpaks.sh && ./install_flatpaks.sh`
+You will need to accept some prompts.
 
 ## Install `pamidi`
 Run `chmod +x ./install_pamidi.sh && ./install_pamidi.sh`
