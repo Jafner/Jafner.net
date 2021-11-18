@@ -18,6 +18,7 @@ Run `chmod +x ./install_flatpaks.sh && ./install_flatpaks.sh`
 You will need to accept some prompts.
 
 ## Install `pamidi`
+Install `xdotool` with `sudo pacman -S xdotool`
 Run `chmod +x ./install_pamidi.sh && ./install_pamidi.sh`
 
 ## Install Lutris
@@ -42,7 +43,7 @@ Add the custom recipes (with `mkdir -p ~/.var/app/com.getferdi.Ferdi/config/Ferd
 3. `sudo cp .scripts/window_reposition.sh /usr/bin/window_reposition`
 3. Run the window_reposition script at startup.
 
-## Tiling and corner-snapping
+## Tiling and corner-snapping for GNOME Desktop
 Using GNOME, disable all extensions. Install [Tiling Assistant](https://extensions.gnome.org/extension/3733/tiling-assistant/)
 Set Windows and Screen Edges gaps to 12px.
 
