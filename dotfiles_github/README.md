@@ -21,7 +21,7 @@ You will need to accept some prompts.
 Run `chmod +x ./install_pamidi.sh && ./install_pamidi.sh`
 
 ## Install Lutris
-Just run `chmod +x ./iinstall_lutris.sh && ./install_lutris.sh` It's so many packages oh my god
+Just run `chmod +x ./install_lutris.sh && ./install_lutris.sh` It's so many packages oh my god
 
 ## Install other applications
 
