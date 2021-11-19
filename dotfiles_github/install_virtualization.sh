@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netcat ovmf
 
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash apparmor=1 security=apparmor udev.log_priority=3"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash apparmor=1 security=apparmor amd_iommu=on iommu=pt udev.log_priority=3"/' /etc/default/grub && \
@@ -16,8 +18,17 @@ sudo sed -i 's/#user = "root"/user = "joey"/' /etc/libvirt/qemu.conf && \
 sudo sed -i 's/#group = "root"/group = "joey"/' /etc/libvirt/qemu.conf && \
 sudo systemctl restart libvirtd
 
-source ./.virtualization/dump_rom.sh
+cd .virtualization
+source dump_rom.sh
 
 sudo cp ./.virtualization/win10.xml /etc/libvirt/qemu/win10.xml
 sudo chown root:root /etc/libvirt/qemu/win10.xml 
 sudo chmod 600 /etc/libvirt/qemu/win10.xml
+
+sudo virsh net-autostart default
+
+sudo chmod +x start.sh stop.sh qemu
+sudo mkdir -p /etc/libvirt/hooks && sudo cp qemu /etc/libvirt/hooks/qemu
+sudo cp start.sh /bin/start.sh
+sudo cp stop.sh /bin/stop.sh
+

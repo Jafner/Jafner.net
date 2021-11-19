@@ -1,4 +1,4 @@
-systemctl stop gdm.service
+systemctl stop display-manager.service
 
 sleep 3
 
@@ -26,4 +26,4 @@ modprobe nvidia_uvm
 
 sleep 3
 
-systemctl start gdm.service
+systemctl start display-manager.service
