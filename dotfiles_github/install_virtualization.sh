@@ -36,9 +36,9 @@ cd .virtualization
 #source dump_rom.sh
 
 # import patched vbios
-sudo chmod -R 660 vbios_patched.rom
-sudo chown joey:joey vbios_patched.rom
 sudo mkdir -p /usr/share/vbios && sudo cp vbios_patched.rom /usr/share/vbios/vbios.rom
+sudo chmod -R 660 /usr/share/vbios/vbios.rom
+sudo chown joey:joey /usr/share/vbios/vbios.rom
 
 # import vm parameters
 sudo cp ./.virtualization/win10.xml /etc/libvirt/qemu/win10.xml
