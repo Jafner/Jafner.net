@@ -5,7 +5,6 @@ set -x
 
 # stop display manager
 systemctl stop display-manager.service
-killall gdm-x-session
 
 # unbind VTconsoles
 echo 0 > /sys/class/vtconsole/vtcon0/bind

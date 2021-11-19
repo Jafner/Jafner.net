@@ -31,5 +31,5 @@ modprobe drm
 modprobe nvidia_uvm
 
 # restart display manager
-systemctl start gdm.service
+systemctl start display-manager.service
 
