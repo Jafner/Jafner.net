@@ -1,4 +1,4 @@
 for app in ./.flatpak/*
 do
-    flatpak install $app
+    flatpak install -y $app
 done
