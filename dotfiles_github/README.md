@@ -15,28 +15,27 @@ Run `chmod +x ./setup_sshd.sh && ./setup_sshd.sh`
 
 ## Install Flatpaks
 Run `chmod +x ./install_flatpaks.sh && ./install_flatpaks.sh`
+You will need to accept some prompts.
 
 ## Install `pamidi`
+Install `xdotool` with `sudo pacman -S xdotool`
 Run `chmod +x ./install_pamidi.sh && ./install_pamidi.sh`
 
 ## Install Lutris
-Just run `chmod +x ./iinstall_lutris.sh && ./install_lutris.sh` It's so many packages oh my god
+Just run `chmod +x ./install_lutris.sh && ./install_lutris.sh` It's so many packages oh my god
 
 ## Install other applications
 
 
 # Other Stuff
-## Ferdi
-Configure Ferdi with the following basic apps:
-* Discord
-* Gmail
-* LinkedIn
-* Slack
-* Element
 
-Then add the following custom recipes (with `cp -r ~/Git/dotfiles/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`):
-* PrivateEmail
-* Upwork
+## Set Flatpaks to use Breeze-Dark Gtk3 Theme
+`flatpak install flathub org.gtk.Gtk3theme.Breeze-Dark`
+
+## Ferdi
+Configure Ferdi by logging into Ferdi sync. This will set up the basic apps, but custom apps will still need to be copied into the dev recipes folder.
+
+Add the custom recipes (with `mkdir -p ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev && cp -r ~/Git/dotfiles/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev ~/.var/app/com.getferdi.Ferdi/config/Ferdi/recipes/dev`).
 
 ## Autostart
 1. Set Spotify, PulseEffects, and Ferdi to start automatically.
@@ -44,7 +43,7 @@ Then add the following custom recipes (with `cp -r ~/Git/dotfiles/.var/app/com.g
 3. `sudo cp .scripts/window_reposition.sh /usr/bin/window_reposition`
 3. Run the window_reposition script at startup.
 
-## Tiling and corner-snapping
+## Tiling and corner-snapping for GNOME Desktop
 Using GNOME, disable all extensions. Install [Tiling Assistant](https://extensions.gnome.org/extension/3733/tiling-assistant/)
 Set Windows and Screen Edges gaps to 12px.
 
