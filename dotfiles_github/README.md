@@ -18,7 +18,8 @@ Run `chmod +x ./install_flatpaks.sh && ./install_flatpaks.sh`
 You will need to accept some prompts.
 
 ```
-sudo flatpak override --filesystem=/usr/share/themes
+mkdir -p ~/.themes && cp -r /usr/share/themes/Breeze-Dark ~/.themes/
+sudo flatpak override --filesystem=~/.themes
 ```
 
 ## Install `pamidi`
