@@ -17,6 +17,10 @@ Run `chmod +x ./setup_sshd.sh && ./setup_sshd.sh`
 Run `chmod +x ./install_flatpaks.sh && ./install_flatpaks.sh`
 You will need to accept some prompts.
 
+```
+sudo flatpak override --filesystem=/usr/share/themes
+```
+
 ## Install `pamidi`
 Install `xdotool` with `sudo pacman -S xdotool`
 Run `chmod +x ./install_pamidi.sh && ./install_pamidi.sh`
