@@ -1,5 +1,10 @@
 lutris
 tabby
 multimc
-docker
-docker-compose
+spotify
+ferdi
+joplin
+github-desktop
+xdotool
+pamidi
+vscodium
