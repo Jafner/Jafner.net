@@ -1,5 +1,4 @@
 lutris
-upwork
 tabby
 multimc
 docker
