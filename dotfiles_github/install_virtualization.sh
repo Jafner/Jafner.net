@@ -10,7 +10,7 @@ sudo pacman -S virt-manager qemu vde2 ebtables dnsmasq bridge-utils openbsd-netc
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash apparmor=1 security=apparmor udev.log_priority=3"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash apparmor=1 security=apparmor amd_iommu=on iommu=pt udev.log_priority=3"/' /etc/default/grub && \
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# edit libvirtd.conf 
+# edit /etc/libvirt/libvirtd.conf
 sudo sed -i 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf && \
 sudo sed -i 's/#unix_sock_rw_perms = "0770"/unix_sock_rw_perms = "0770"/' /etc/libvirt/libvirtd.conf && \
 sudo bash -c 'echo "log_filters=\"1:qemu\"" >> /etc/libvirt/libvirtd.conf' && \
