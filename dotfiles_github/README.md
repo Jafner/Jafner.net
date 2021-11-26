@@ -1,3 +1,6 @@
+# Objective
+Minimize the amount of manual work to configure a fresh Manjaro KDE installation to my liking.
+
 # Start with a `sudo pacman -Syu`
 
 # Cloning the repository
