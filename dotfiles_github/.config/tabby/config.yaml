@@ -1,0 +1,670 @@
+terminal:
+  searchOptions: {}
+  colorScheme:
+    name: Material
+    foreground: '#eceff1'
+    background: rgba(38, 50, 56, 1)
+    selection: null
+    cursor: '#FFCC00'
+    colors:
+      - '#000000'
+      - '#D62341'
+      - '#9ECE58'
+      - '#FAED70'
+      - '#396FE2'
+      - '#BB80B3'
+      - '#2DDAFD'
+      - '#d0d0d0'
+      - rgba(255, 255, 255, 0.2)
+      - '#FF5370'
+      - '#C3E88D'
+      - '#FFCB6B'
+      - '#82AAFF'
+      - '#C792EA'
+      - '#89DDFF'
+      - '#ffffff'
+  bell: visual
+  fontSize: 14
+  profile: local:binbash
+  customColorSchemes: []
+  warnOnMultilinePaste: false
+  showBuiltinProfiles: false
+hotkeys:
+  shell: {}
+  profile:
+    wsl-/-default-distro:
+      - - Ctrl-N
+  ssh:
+    - - Ctrl-T
+  close-tab:
+    - - Ctrl-W
+  new-tab: []
+  toggle-window:
+    - Ctrl-Space
+  copy:
+    - Ctrl-Shift-C
+  paste:
+    - Ctrl-Shift-V
+    - Shift-Insert
+  home:
+    - Home
+  end:
+    - End
+  previous-word:
+    - Ctrl-Left
+  next-word:
+    - Ctrl-Right
+  delete-previous-word:
+    - Ctrl-Backspace
+  delete-next-word:
+    - Ctrl-Delete
+  clear: []
+  zoom-in:
+    - Ctrl-=
+    - Ctrl-Shift-=
+  zoom-out:
+    - Ctrl--
+    - Ctrl-Shift--
+  reset-zoom:
+    - Ctrl-0
+  ctrl-c:
+    - Ctrl-C
+  copy-current-path: []
+  search:
+    - Ctrl-Shift-F
+  pane-focus-all:
+    - Ctrl-Shift-I
+  restart-telnet-session: []
+  restart-ssh-session: []
+  launch-winscp: []
+  settings:
+    - Ctrl-,
+  new-window:
+    - Ctrl-Shift-N
+  profile-selector:
+    - Ctrl-Shift-T
+  toggle-fullscreen:
+    - F11
+    - Alt-Enter
+  rename-tab:
+    - Ctrl-Shift-R
+  reopen-tab:
+    - Ctrl-Shift-T
+  toggle-last-tab: []
+  next-tab:
+    - Ctrl-Shift-Right
+    - Ctrl-Tab
+  previous-tab:
+    - Ctrl-Shift-Left
+    - Ctrl-Shift-Tab
+  move-tab-left:
+    - Ctrl-Shift-PageUp
+  move-tab-right:
+    - Ctrl-Shift-PageDown
+  rearrange-panes:
+    - Ctrl-Shift
+  tab-1:
+    - Alt-1
+  tab-2:
+    - Alt-2
+  tab-3:
+    - Alt-3
+  tab-4:
+    - Alt-4
+  tab-5:
+    - Alt-5
+  tab-6:
+    - Alt-6
+  tab-7:
+    - Alt-7
+  tab-8:
+    - Alt-8
+  tab-9:
+    - Alt-9
+  tab-10:
+    - Alt-0
+  tab-11: []
+  tab-12: []
+  tab-13: []
+  tab-14: []
+  tab-15: []
+  tab-16: []
+  tab-17: []
+  tab-18: []
+  tab-19: []
+  tab-20: []
+  split-right:
+    - Ctrl-Shift-E
+  split-bottom:
+    - Ctrl-Shift-D
+  split-left: []
+  split-top: []
+  pane-maximize:
+    - Ctrl-Alt-Enter
+  pane-nav-up:
+    - Ctrl-Alt-Up
+  pane-nav-down:
+    - Ctrl-Alt-Down
+  pane-nav-left:
+    - Ctrl-Alt-Left
+  pane-nav-right:
+    - Ctrl-Alt-Right
+  pane-nav-previous:
+    - Ctrl-Alt-[
+  pane-nav-next:
+    - Ctrl-Alt-]
+  switch-profile:
+    - Ctrl-Alt-T
+  close-pane: []
+  profile-selectors: {}
+  select-all:
+    - Ctrl-Shift-A
+  serial:
+    - Alt-K
+  restart-serial-session: []
+  show-quick-cmds:
+    - Alt-Q
+  duplicate-tab: []
+serial: {}
+ssh: {}
+appearance:
+  opacity: 0.71
+  vibrancy: false
+enableWelcomeTab: false
+pluginBlacklist:
+  - clickable-links
+  - serial
+clickableLinks: {}
+qc:
+  cmds:
+    - name: Install Docker on New Host
+      text: >-
+        sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y
+        install git docker docker-compose && sudo systemctl enable docker &&
+        sudo usermod -aG docker $USER && logout
+      appendCR: true
+      group: null
+    - name: Down, edit, up, logs
+      text: >-
+        docker-compose down && vim docker-compose.yml && docker-compose up -d &&
+        docker-compose logs -f
+      appendCR: true
+      group: null
+    - name: Build, run, logs
+      text: ''
+      appendCR: true
+      group: null
+version: 3
+profiles:
+  - icon: fas fa-desktop
+    name: dev-env
+    group: GreenFrog
+    options:
+      name: snapshot
+      group: GreenFrog
+      host: 147.182.192.153
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      scripts: []
+      forwardedPorts: []
+    id: ssh:custom:dev-env:f34e8f4b-b52d-4e5f-9219-58f17cdde6bd
+    type: ssh
+  - icon: fas fa-desktop
+    name: xtouch
+    group: local
+    options:
+      name: pi
+      group: local
+      host: xtouch.local
+      user: pi
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+    id: ssh:custom:pi-copy:80434af9-a66b-4529-b099-95b796f05161
+    type: ssh
+  - icon: fas fa-desktop
+    name: DO matrix
+    group: cloud
+    options:
+      name: digital ocean
+      group: cloud
+      host: 143.110.157.109
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/digital_ocean
+      scripts: []
+      forwardedPorts: []
+    id: ssh:custom:digital-ocean-copy:890ce4d4-bca6-4bb8-b4fe-d90f73e915d0
+    type: ssh
+  - id: ssh:046860a7-21ec-41b1-a23f-5011c812a240
+    icon: fas fa-desktop
+    name: joey-server
+    group: local
+    options:
+      name: joey-server
+      group: local
+      host: joey-server.local
+      user: joey
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+    type: ssh
+  - id: ssh:356091a3-aae0-4627-9e3e-2a52a6692086
+    icon: fas fa-desktop
+    name: joey-nas
+    group: local
+    options:
+      name: joey-nas
+      group: local
+      host: joey-nas.local
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      scripts: []
+      forwardedPorts: []
+    type: ssh
+  - id: ssh:f610b2cb-eea8-4fcb-bb44-2ea481285d44
+    icon: fas fa-desktop
+    name: joey-seedbox
+    group: local
+    options:
+      name: joey-seedbox
+      group: local
+      host: joey-seedbox.local
+      user: joey
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      scripts: []
+      forwardedPorts: []
+    type: ssh
+  - id: ssh:0cf17a52-6895-499a-a524-2e70ee2f01c9
+    icon: fas fa-desktop
+    name: router
+    group: local
+    options:
+      name: router
+      group: local
+      host: router.jafner.net
+      user: admin
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      forwardedPorts: []
+      scripts: []
+    type: ssh
+  - id: ssh:36015f10-1a8e-4506-ba40-4c9cd4a35d9a
+    icon: fas fa-desktop
+    name: pi
+    group: local
+    options:
+      name: pi
+      group: local
+      host: 192.168.1.22
+      user: pi
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      forwardedPorts: []
+      scripts: []
+    type: ssh
+  - id: ssh:b2e6b90a-fba5-4418-b23b-e29342d50090
+    icon: fas fa-desktop
+    name: snapshot
+    group: GreenFrog
+    options:
+      name: snapshot
+      group: GreenFrog
+      host: 143.110.236.23
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      scripts: []
+      forwardedPorts: []
+    type: ssh
+  - id: ssh:8fd323b3-45e3-499a-b4a3-d438c1c1ab90
+    icon: fas fa-desktop
+    name: DO 5etools
+    group: cloud
+    options:
+      name: digital ocean
+      group: cloud
+      host: 143.110.151.123
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/digital_ocean
+      forwardedPorts: []
+      scripts: []
+    type: ssh
+  - id: ssh:d9c82a17-d5f1-4b20-a89f-925c55ea53db
+    icon: fas fa-desktop
+    name: joey-dev
+    group: GreenFrog
+    options:
+      name: joey-dev-env
+      group: GreenFrog
+      host: 143.244.182.163
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file:///home/joey/.ssh/id_rsa
+      scripts: []
+      forwardedPorts: []
+    type: ssh
+configSync:
+  parts: {}
+  token: >-
+    d411c124a4cfd51855b74cceb57d242b9f6d8b31e99dd55dcb27eef444ff35856aa32720465a5a100d9760ed285dd7a04ce91bf5ff881794de0034b4caa28314
+  configID: 170
+profileDefaults:
+  ssh:
+    type: ssh
+    options:
+      algorithms: {}
+      privateKeys:
+        - file:///home/joey/.ssh\id_rsa
+      auth: publicKey
