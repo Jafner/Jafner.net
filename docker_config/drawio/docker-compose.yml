@@ -3,6 +3,7 @@ services:
   plantuml-server:
     image: jgraph/plantuml-server
     container_name: drawio_plantuml-server
+    restart: unless-stopped
     expose:
       - "8080"
     networks:
@@ -12,6 +13,7 @@ services:
   image-export:
     image: jgraph/export-server
     container_name: drawio_export-server
+    restart: unless-stopped
     expose:
       - "8000"
     networks:

@@ -1,22 +1,22 @@
 version: '3'
 services:
-  calibre-web-dev:
-    image: linuxserver/calibre-web
-    container_name: calibre-web-dev
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
-    volumes:
-      - calibre-web-dev_data:/config
-      - /mnt/calibre/Development:/books
-    labels:
-      - traefik.http.routers.calibre-dev.rule=Host(`calibre-dev.jafner.net`)
-      - traefik.http.routers.calibre-dev.tls=true
-      - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
-      - traefik.http.routers.calibre-dev.middlewares=authelia@file
-    networks:
-      - web
+#  calibre-web-dev:
+#    image: linuxserver/calibre-web
+#    container_name: calibre-web-dev
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=America/Los_Angeles
+#    volumes:
+#      - calibre-web-dev_data:/config
+#      - /mnt/calibre/Development:/books
+#    labels:
+#      - traefik.http.routers.calibre-dev.rule=Host(`calibre-dev.jafner.net`)
+#      - traefik.http.routers.calibre-dev.tls=true
+#      - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
+#      #- traefik.http.routers.calibre-dev.middlewares=authelia@file
+#    networks:
+#      - web
   calibre-web-prod:
     image: linuxserver/calibre-web
     container_name: calibre-web-prod
@@ -38,5 +38,5 @@ networks:
   web:
     external: true
 volumes:
-  calibre-web-dev_data:
+#  calibre-web-dev_data:
   calibre-web-prod_data:

@@ -3,6 +3,7 @@ services:
   db:
     image: postgres:11-alpine
     container_name: wiki_db
+    restart: unless-stopped
     environment:
       POSTGRES_DB: wiki
       POSTGRES_PASSWORD: wikijsrocks
@@ -11,13 +12,13 @@ services:
       - wikijs
     logging:
       driver: "none"
-    restart: unless-stopped
     volumes:
       - wiki_db:/var/lib/postgresql/data
 
   wiki:
     image: requarks/wiki:2
     container_name: wiki_wiki
+    restart: unless-stopped
     depends_on:
       - db
     networks:
@@ -30,7 +31,6 @@ services:
       DB_USER: wikijs
       DB_PASS: wikijsrocks
       DB_NAME: wiki
-    restart: unless-stopped
     volumes:
       - ${PWD}/wiki_id_rsa:/wiki_id_rsa
       - ${PWD}/wiki_id_rsa.pub:/wiki_id_rsa.pub

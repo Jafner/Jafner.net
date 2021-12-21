@@ -1,0 +1,82 @@
+version: "3"
+services:
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/nas/Video/Movies:/movies
+      - "${DOCKER_DATA}/radarr_config:/config"
+      - "${DOWNLOAD_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.radarr.rule=Host(`radarr.jafner.net`)
+      - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.radarr.loadbalancer.server.port=7878
+      - traefik.http.routers.radarr.middlewares=lan-only@file
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/nas/Video/Shows:/shows
+      - "${DOCKER_DATA}/sonarr_config:/config"
+      - "${DOWNLOAD_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.sonarr.rule=Host(`sonarr.jafner.net`)
+      - traefik.http.routers.sonarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+      - traefik.http.routers.sonarr.middlewares=lan-only@file
+  
+  nzbhydra2:
+    image: linuxserver/nzbhydra2
+    container_name: nzbhydra2
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - "${DOCKER_DATA}/nzbhydra2_config:/config"
+      - "${DOWNLOAD_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.nzbhydra2.rule=Host(`nzbhydra.jafner.net`)
+      - traefik.http.routers.nzbhydra2.tls.certresolver=lets-encrypt
+      - traefik.http.services.nzbhydra2.loadbalancer.server.port=5076
+      - traefik.http.routers.nzbhydra2.middlewares=lan-only@file
+  
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    container_name: sabnzbd
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    ports:
+      - 8085:8080
+    volumes:
+      - "${DOCKER_DATA}/sabnzbd_config:/config"
+      - "${DOWNLOAD_DIR}:/downloads"
+      - "${INCOMPLETE_DOWNLOAD_DIR}:/incomplete-downloads"
+    labels:
+      - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.jafner.net`)
+      - traefik.http.routers.sabnzbd.tls.certresolver=lets-encrypt
+      - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
+      - traefik.http.routers.sabnzbd.middlewares=lan-only@file
+          
+networks:
+  web:
+    external: true
+

@@ -3,6 +3,7 @@ services:
   wireguard:
     image: linuxserver/wireguard
     container_name: wireguard
+    restart: unless-stopped
     ports:
       - 53820:51820/udp
     cap_add:
@@ -12,7 +13,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
-      - PEERS=phone,laptop,temp1,temp2,temp3
+      - PEERS=joey-phone,joey-xps13,maddie-phone
       - SERVERURL=www.jafner.net
       - SERVERPORT=53820
     volumes:

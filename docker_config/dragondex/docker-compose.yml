@@ -3,6 +3,7 @@ services:
   dragondex:
     container_name: dragondex
     image: httpd
+    restart: unless-stopped
     networks:
       - web
     volumes:

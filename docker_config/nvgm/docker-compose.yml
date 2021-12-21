@@ -1,45 +1,45 @@
 version: '3.1'
 
 services:
-        nvgm:
-                image: wordpress
-                container_name: nvgm
-                restart: always
-                environment:
-                        WORDPRESS_DB_HOST: nvgm_db
-                        WORDPRESS_DB_USER: wordpress
-                        WORDPRESS_DB_PASSWORD: wordpress
-                        WORDPRESS_DB_NAME: wordpressdb
-                volumes:
-                        - ${DOCKER_DATA}/html:/var/www/html
-                labels:
-                        - traefik.http.routers.nvgm.rule=Host(`nvgm.jafner.net`)
-                        - traefik.http.routers.nvgm.tls=true
-                        - traefik.http.routers.nvgm.tls.certresolver=lets-encrypt
-                        - traefik.port=80
-                networks:
-                        - web
-                        - nvgm
-                depends_on:
-                        - nvgm_db
+    nvgm:
+        image: wordpress
+        container_name: nvgm
+        restart: unless-stopped
+        environment:
+            WORDPRESS_DB_HOST: nvgm_db
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+            WORDPRESS_DB_NAME: wordpressdb
+        volumes:
+            - ${DOCKER_DATA}/html:/var/www/html
+        labels:
+            - traefik.http.routers.nvgm.rule=Host(`nvgm.jafner.net`)
+            - traefik.http.routers.nvgm.tls=true
+            - traefik.http.routers.nvgm.tls.certresolver=lets-encrypt
+            - traefik.port=80
+        networks:
+            - web
+            - nvgm
+        depends_on:
+            - nvgm_db
 
-        nvgm_db:
-                image: mysql:5.7
-                container_name: nvgm_db
-                restart: always
-                networks:
-                        - nvgm
-                environment:
-                        MYSQL_DATABASE: wordpressdb
-                        MYSQL_USER: wordpress
-                        MYSQL_PASSWORD: wordpress
-                        MYSQL_RANDOM_ROOT_PASSWORD: '1'
-                labels:
-                        - traefik.enable=false
-                volumes:
-                        - ${DOCKER_DATA}/db:/var/lib/mysql
+    nvgm_db:
+        image: mysql:5.7
+        container_name: nvgm_db
+        restart: unless-stopped
+        networks:
+            - nvgm
+        environment:
+            MYSQL_DATABASE: wordpressdb
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+            MYSQL_RANDOM_ROOT_PASSWORD: '1'
+        labels:
+            - traefik.enable=false
+        volumes:
+            - ${DOCKER_DATA}/db:/var/lib/mysql
 
 networks:
-        web:
-                external: true
-        nvgm:
+    web:
+        external: true
+    nvgm:

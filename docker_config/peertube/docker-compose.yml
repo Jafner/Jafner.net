@@ -24,7 +24,7 @@ services:
       - postgres
       - redis
       - postfix
-    restart: "always"
+    restart: "unless-stopped"
 
   postgres:
     image: postgres:13-alpine
@@ -35,7 +35,7 @@ services:
       - .env
     volumes:
       - ${DOCKER_VOLUME}/db:/var/lib/postgresql/data
-    restart: "always"
+    restart: "unless-stopped"
 
   redis:
     image: redis:6-alpine
@@ -44,7 +44,7 @@ services:
       - peertube
     volumes:
       - ${DOCKER_VOLUME}/redis:/data
-    restart: "always"
+    restart: "unless-stopped"
 
   postfix:
     image: mwader/postfix-relay
@@ -55,7 +55,7 @@ services:
       - .env
     volumes:
       - ${DOCKER_VOLUME}/opendkim/keys:/etc/opendkim/keys
-    restart: "always"
+    restart: "unless-stopped"
 
 networks:
   peertube:

@@ -3,6 +3,7 @@ version: '3'
 services:
   telegraf:
     image: telegraf:1.13
+    restart: unless-stopped
     ports:
     - 8094:8094
     volumes:
@@ -10,6 +11,7 @@ services:
   monitor:
     image: itzg/mc-monitor
     command: gather-for-telegraf
+    restart: unless-stopped
     environment:
       GATHER_INTERVAL: 10s
       GATHER_TELEGRAF_ADDRESS: telegraf:8094

@@ -3,6 +3,7 @@ services:
   rpg-cards-node:
     container_name: rpg-cards_node
     image: node:alpine
+    restart: unless-stopped
     user: "node"
     working_dir: /home/node/app
     environment:
@@ -13,6 +14,7 @@ services:
   rpg-cards-web:
     container_name: rpg-cards_web
     image: httpd
+    unless-stopped
     networks:
       - web
     volumes:

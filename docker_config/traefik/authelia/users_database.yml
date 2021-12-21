@@ -15,4 +15,8 @@ users:
     groups:
       - admins
       - dev
+  #guest:
+    #displayname: "Guest"
+    #password: ""
+    #groups:
 ...

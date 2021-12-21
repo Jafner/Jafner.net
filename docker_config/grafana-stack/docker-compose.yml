@@ -53,7 +53,7 @@ services:
     labels:
       - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
       - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
-      - traefik.http.routers.grafana.middlewares=authelia@file
+      #- traefik.http.routers.grafana.middlewares=authelia@file
 
 networks:
   grafana:

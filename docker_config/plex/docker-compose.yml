@@ -3,7 +3,7 @@ services:
   plex:
     image: linuxserver/plex
     container_name: plex
-    restart: unless-stopped
+    restart: "no"
     networks:
       - web
     ports:
@@ -34,7 +34,7 @@ services:
   ombi:
     image: ghcr.io/linuxserver/ombi
     container_name: ombi
-    restart: unless-stopped
+    restart: "no"
     networks:
       - web
     environment:
