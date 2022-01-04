@@ -18,6 +18,9 @@ services:
       - ./traefik_dynamic.toml:/traefik_dynamic.toml
       - ./acme.json:/acme.json
       - ./.htpasswd:/.htpasswd
+    labels:
+      - traefik.http.routers.traefik.rule=Host(`traefik.jafner.net`)
+      - traefik.http.routers.traefik.tls.certresolver=lets-encrypt
 
   authelia:
     image: authelia/authelia

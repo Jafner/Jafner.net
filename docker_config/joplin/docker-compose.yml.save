@@ -4,8 +4,7 @@ services:
     image: joplin/server:2.6-beta
     container_name: joplin
     restart: unless-stopped
-    env_file:
-      - .env
+    env
     depends_on:
       - joplin_db
     networks:
@@ -21,8 +20,6 @@ services:
     image: postgres:13.1
     container_name: joplin_db
     restart: unless-stopped
-    env_file: 
-      - .env
     volumes:
       - ${DOCKER_DATA}/db:/var/lib/postresql/data
     networks:

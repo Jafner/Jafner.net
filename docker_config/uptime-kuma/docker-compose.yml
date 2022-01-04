@@ -4,11 +4,18 @@
 version: '3.3'
 
 services:
-  uptime-kuma:
-    image: louislam/uptime-kuma
-    container_name: uptime-kuma
-    restart: unless-stopped
-    volumes:
-      - ./data:/app/data
-    ports:
-      - 3001:3001
+    uptime-kuma:
+        image: louislam/uptime-kuma
+        container_name: uptime-kuma
+        restart: unless-stopped
+        volumes:
+            - ./data:/app/data
+        networks:
+            - web
+        labels:
+            - traefik.http.routers.uptime-kuma.rule=Host(`uptime.jafner.net`)
+            - traefik.http.routers.uptime-kuma.tls.certresolver=lets-encrypt
+
+networks:
+    web: 
+        external: true
