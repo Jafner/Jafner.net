@@ -46,7 +46,7 @@ profiles:
     options:
       name: digital ocean
       group: cloud
-      host: 143.110.157.109
+      host: jafner.chat
       algorithms:
         hmac:
           - hmac-sha1
@@ -122,8 +122,6 @@ profiles:
       privateKeys:
         - file://C:\Users\jafne\.ssh\id_rsa
       x11: true
-      forwardedPorts: []
-      scripts: []
     type: ssh
   - id: ssh:356091a3-aae0-4627-9e3e-2a52a6692086
     icon: fas fa-desktop
@@ -132,7 +130,7 @@ profiles:
     options:
       name: joey-nas
       group: local
-      host: joey-nas.local
+      host: jafner.nas
       algorithms:
         hmac:
           - hmac-sha1
@@ -163,6 +161,8 @@ profiles:
           - ssh-rsa
       privateKeys:
         - file://C:\Users\jafne\.ssh\id_rsa
+      forwardedPorts: []
+      scripts: []
     type: ssh
   - id: ssh:f610b2cb-eea8-4fcb-bb44-2ea481285d44
     icon: fas fa-desktop
@@ -171,7 +171,7 @@ profiles:
     options:
       name: joey-seedbox
       group: local
-      host: joey-seedbox.local
+      host: jafner.seedbox
       user: joey
       algorithms:
         hmac:
@@ -253,7 +253,7 @@ profiles:
     options:
       name: pi
       group: local
-      host: pihole
+      host: jafner.pi1
       user: pi
       algorithms:
         hmac:
@@ -294,7 +294,7 @@ profiles:
     options:
       name: digital ocean
       group: cloud
-      host: 143.110.151.123
+      host: jafner.tools
       algorithms:
         hmac:
           - hmac-sha1
@@ -326,6 +326,4 @@ profiles:
           - ssh-rsa
       privateKeys:
         - file://C:\Users\jafne\.ssh\digital_ocean
-      forwardedPorts: []
-      scripts: []
     type: ssh
