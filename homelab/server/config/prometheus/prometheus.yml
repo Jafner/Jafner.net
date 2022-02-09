@@ -1,0 +1,59 @@
+global:
+    scrape_interval: 15s
+
+scrape_configs:
+    -   job_name: 'prometheus'
+        scrape_interval: 60s
+        static_configs:
+            -   targets: ['localhost:9090']
+    
+    -   job_name: '5e.jafner.tools'
+        scrape_interval: 60s
+        static_configs:
+            -   targets: ['5e-jafner-tools:9117']
+        metrics_path: "/metrics"
+
+    -   job_name: 'pihole.jafner.net'
+        scrape_interval: 60s
+        static_configs:
+            -   targets: ['pihole-jafner-net:9617']
+        metrics_path: "/metrics"
+
+    -   job_name: 'uptime-kuma'
+        scrape_interval: 60s
+        static_configs:
+            -   targets: ['uptime.jafner.net']
+        basic_auth:
+            username: Jafner
+            password: ***REMOVED***
+    
+    - job_name: 'mc-monitor'
+      scrape_interval: 60s
+      static_configs:
+            - targets: ['monitor:8080']
+
+
+    - job_name: 'jafner.tools'
+      scrape_interval: 60s
+      static_configs:
+           - targets: ['143.110.151.123:9100']
+
+    - job_name: 'jafner.chat'
+      scrape_interval: 60s
+      static_configs:
+          - targets: ['143.110.157.109:9100']
+
+    - job_name: 'joey-seedbox'
+      scrape_interval: 60s
+      static_configs:
+          - targets: ['joey-seedbox.local:9100']
+
+    - job_name: 'joey-server'
+      scrape_interval: 60s
+      static_configs:
+          - targets: ['joey-server.local:9100']
+
+    - job_name: 'pihole'
+      scrape_interval: 60s
+      static_configs:
+          - targets: ['pihole.local:9100']

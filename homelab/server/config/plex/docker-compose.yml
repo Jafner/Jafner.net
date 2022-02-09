@@ -1,0 +1,82 @@
+version: "3"
+services:
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    restart: "no"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    networks:
+      - web
+    ports:
+      - 32400:32400/tcp
+      - 32400:32400/udp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=latest
+      - ADVERTISE_IP="https://plex.jafner.net:443"
+      - PLEX_CLAIM=claim-DPRoiMnzcby-YxKdFpqJ
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - "${MEDIA_DIR}/Video/Movies:/movies"
+      - "${MEDIA_DIR}/Video/Shows:/shows"
+      - "${DOCKER_DATA}/plex:/config"
+    labels:
+      - traefik.http.routers.plex.rule=Host(`plex.jafner.net`)
+      - traefik.http.routers.plex.tls.certresolver=lets-encrypt
+      - traefik.http.services.plex.loadbalancer.server.port=32400
+  ombi:
+    image: ghcr.io/linuxserver/ombi
+    container_name: ombi
+    restart: "no"
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - "${DOCKER_DATA}/ombi:/config"
+    labels:
+      - traefik.http.routers.ombi.rule=Host(`ombi.jafner.net`)
+      - traefik.http.routers.ombi.tls.certresolver=lets-encrypt
+      - traefik.http.services.ombi.loadbalancer.server.port=3579
+  
+  tautulli:
+    image: lscr.io/linuxserver/tautulli
+    container_name: tautulli
+    restart: "no"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angles
+    volumes:
+      - ${DOCKER_DATA}/tautulli:/config
+    networks:
+      - monitoring
+      - web
+    labels:
+      - traefik.http.routers.tautulli.rule=Host(`tautulli.jafner.net`)
+      - traefik.http.routers.tautulli.tls.certresolver=lets-encrypt
+    
+    
+networks:
+  web:
+    external: true
+  monitoring:
+    external: true

@@ -1,0 +1,49 @@
+version: '3'
+services:
+    prometheus:
+        image: prom/prometheus:latest
+        container_name: prometheus
+        networks:
+            - monitoring
+            - web
+        ports:
+            -   9090:9090
+        volumes:
+            -   ./prometheus.yml:/etc/prometheus/prometheus.yml
+        restart: unless-stopped
+        command:
+            -   "--config.file=/etc/prometheus/prometheus.yml"
+        labels:
+            -   traefik.http.routers.prometheus.rule=Host(`prometheus.jafner.net`)
+            -   traefik.http.routers.prometheus.tls.certresolver=lets-encrypt
+
+    5e-jafner-tools:
+        image: lusotycoon/apache-exporter
+        container_name: prometheus-5e-jafner-tools
+        restart: unless-stopped
+        networks:
+            - monitoring
+        command: '--scrape_uri "https://5e.jafner.tools/server-status/?auto"'
+        labels:
+            - traefik.enable=false
+    
+    pihole-jafner-net:
+        image: ekofr/pihole-exporter:latest
+        container_name: prometheus-pihole-jafner-net
+        restart: unless-stopped
+        networks:
+            -   monitoring
+        environment:
+            -   PIHOLE_HOSTNAME=pihole.jafner.net
+            -   PIHOLE_PASSWORD=***REMOVED***
+            -   INTERVAL=15s
+            -   PORT=9617
+        labels:
+            - traefik.enable=false
+
+
+networks:
+    monitoring:
+        external: true
+    web:
+        external: true

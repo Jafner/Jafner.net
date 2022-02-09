@@ -1,0 +1,209 @@
+---
+
+title: "Homer"
+subtitle: "Dashboard"
+
+header: false
+footer: false
+
+columns: auto
+connectivityCheck: true
+
+# Optional theme customization
+theme: default
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Jafner.tools"
+    icon: "fas fa-cloud"
+    items:
+      - name: "5eTools"
+        logo: assets/icons/5et-192.png
+        subtitle: "D&D 5e Complete Reference"
+        url: "https://5e.jafner.tools"
+      - name: "Joplin"
+        logo: assets/icons/joplin-512.png
+        subtitle: "Sync server for the Joplin notes app"
+        url: "https://joplin.jafner.tools"
+      - name: "Bitwarden"
+        logo: assets/icons/bitwarden-512.png
+        subtitle: "Sync server for the Bitwarden password manager"
+        url: "https://bitwarden.jafner.tools"
+      - name: "Uptime Kuma"
+        logo: assets/icons/uptimekuma-512.png
+        subtitle: "Web monitoring dashboard"
+        url: "https://uptime.jafner.tools/dashboard"
+
+  - name: "Jafner.chat"
+    icon: "fas fa-cloud"
+    items:
+      - name: "Element"
+        logo: assets/icons/element-512.webp
+        subtitle: "Web-based Matrix client for the jafner.chat homeserver"
+        url: "https://element.jafner.chat"
+      - name: "Synapse Admin"
+        subtitle: "Web admin portal for the Synapse homeserver"
+        url: "https://matrix.jafner.chat/synapse-admin"
+
+  - name: "Jafner.pi1"
+    icon: "fas fa-server"
+    items:
+      - name: "Pihole Admin"
+        logo: assets/icons/pihole-1200.png
+        subtitle: "Ad-blocking DNS server"
+        url: "http://jafner.pi1/admin"
+    
+  - name: "Jafner.nas"
+    icon: "fas fa-hdd"
+    items:
+      - name: "TrueNAS Admin"
+        logo: assets/icons/truenas-280.png
+        subtitle: "BSD-based ZFS NAS appliance OS"
+        url: "http://nas.jafner.net"
+
+  - name: "Jafner.seedbox"
+    icon: "fas fa-server"
+    items:
+      - name: "GGN"
+        logo: assets/icons/deluge-1200.png
+        subtitle: "Deluge Torrent Web UI for GGN"
+        url: "http://jafner.seedbox:52000/"
+      - name: "MAM"
+        logo: assets/icons/deluge-1200.png
+        subtitle: "Deluge Torrent Web UI for MAM"
+        url: "http://jafner.seedbox:52100/"
+      - name: "EMP"
+        logo: assets/icons/deluge-1200.png
+        subtitle: "Deluge Torrent Web UI for EMP"
+        url: "http://jafner.seedbox:52200/"
+
+  - name: "Jafner.net"
+    icon: "fas fa-server"
+    items:
+      - name: "Traefik"
+        logo: assets/icons/traefik-400.png
+        subtitle: "Reverse proxy dashboard"
+        url: "https://traefik.jafner.net"
+      - name: "Authentik"
+        logo: assets/icons/authentik-200.png
+        subtitle: "Fully-featured, self-hosted SSO"
+        url: "https://authentik.jafner.net"
+
+      - name: "Portainer"
+        logo: assets/icons/portainer-200.webp
+        subtitle: "Docker management web interface"
+        url: "https://portainer.jafner.net"
+
+      - name: "Gitea"
+        logo: assets/icons/gitea-880.png
+        subtitle: "Lightweight Git server"
+        url: "https://git.jafner.net"
+
+      - name: "Prometheus"
+        logo: assets/icons/prometheus-1200.png
+        subtitle: "Integrated data visualization interface for collected metrics"
+        url: "https://prometheus.jafner.net"
+      - name: "Grafana"
+        logo: assets/icons/grafana-1200.png
+        subtitle: "Metrics visualization tool"
+        url: "https://grafana.jafner.net"
+      
+      - name: "ShareX"
+        logo: assets/icons/sharex-256.png
+        subtitle: "ShareX upload endpoint"
+        url: "https://share.jafner.net"
+
+      - name: "Plex"
+        logo: assets/icons/plex-580.png
+        subtitle: "TV show and movie server"
+        url: "https://plex.jafner.net"
+      - name: "Ombi"
+        logo: assets/icons/ombi-256.png
+        subtitle: "Web interface for wishlisting movies and shows to be added to Plex"
+        url: "https://ombi.jafner.net"
+      - name: "Tautulli"
+        logo: assets/icons/tautulli-350.png
+        subtitle: "Data collector for Plex"
+        url: "https://tautulli.jafner.net"
+      - name: "NZBHydra"
+        logo: assets/icons/nzbhydra-256.png
+        subtitle: "NZB index search provider"
+        url: "https://nzbhydra.jafner.net"
+      - name: "SABNzbd"
+        logo: assets/icons/sabnzbd-256.png
+        subtitle: "NZB download client"
+        url: "https://sabnzbd.jafner.net"
+      - name: "Radarr"
+        logo: assets/icons/radarr-256.png
+        subtitle: "Movie collection manager"
+        url: "https://radarr.jafner.net"
+      - name: "Sonarr"
+        logo: assets/icons/sonarr-256.png
+        subtitle: "TV show collection manager"
+        url: "https://sonarr.jafner.net"
+      - name: "Tdarr"
+        logo: assets/icons/tdarr.png
+        subtitle: "Transcode management system for media library"
+        url: "https://tdarr.jafner.net"
+
+      - name: "Peertube"
+        logo: assets/icons/peertube-1534.png
+        subtitle: "Video hosting platform"
+        url: "https://peertube.jafner.net"
+
+      - name: "NVGM"
+        logo: assets/icons/wordpress-1200.png
+        subtitle: "Blog-style repository for D&D 5e musings"
+        url: "https://nvgm.jafner.net"
+
+      - name: "Calibre SFF"
+        logo: assets/icons/calibre-1024.png
+        subtitle: "Calibre-web instance serving a large collection of sci-fi and fantasy books"
+        url: "https://calibre-sff.jafner.net"
+      - name: "Calibre RPG"
+        logo: assets/icons/calibre-1024.png
+        subtitle: "Calibre-web instance serving a collection of Dungeons & Dragons books"
+        url: "https://calibre-rpg.jafner.net"
+      - name: "Calibre Ace"
+        logo: assets/icons/calibre-1024.png
+        subtitle: "Calibre-web instance serving a collection of whatever Ace wants to put on it"
+        url: "https://calibre-ace.jafner.net"
+      
+      - name: "ExaTorrent"
+        icon: fas fa-sort
+        subtitle: "Lightweight torrent client written in GO"
+        url: "https://exa.jafner.net"
+
+      - name: "Homer"
+        logo: assets/icons/homer-458.png
+        subtitle: "This."
+        url: "https://home.jafner.net"

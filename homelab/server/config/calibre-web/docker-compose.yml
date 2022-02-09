@@ -1,0 +1,78 @@
+version: '3'
+services:
+  calibre-web-rpg:
+    image: linuxserver/calibre-web
+    container_name: calibre-web-rpg
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - calibre-web-rpg_data:/config
+      - /mnt/calibre/rpg:/books
+    labels:
+      - traefik.http.routers.calibre-rpg.rule=Host(`calibre-rpg.jafner.net`)
+      - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
+      #- traefik.http.routers.calibre-rpg.middlewares=authentik@docker
+    networks:
+      - web
+
+  calibre-web-sff:
+    image: linuxserver/calibre-web
+    container_name: calibre-web-sff
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - calibre-web-sff_data:/config
+      - /mnt/calibre/sff:/books
+    labels:
+      - traefik.http.routers.calibre-sff.rule=Host(`calibre-sff.jafner.net`)
+      - traefik.http.routers.calibre-sff.tls.certresolver=lets-encrypt
+      #- traefik.http.routers.calibre-sff.middlewares=authentik@docker
+    networks:
+      - web
+
+  calibre-web-ace:
+    image: linuxserver/calibre-web
+    container_name: calibre-web-ace
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - calibre-web-ace_data:/config
+      - /mnt/md0/calibre/ace:/books
+    labels:
+      - traefik.http.routers.calibre-ace.rule=Host(`calibre-ace.jafner.net`)
+      - traefik.http.routers.calibre-ace.tls.certresolver=lets-encrypt
+      #- traefik.http.routers.calibre-ace.middlewares=authentik@docker
+    networks:
+      - web
+
+  calibre-web-dev:
+    image: linuxserver/calibre-web
+    container_name: calibre-web-dev
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - calibre-web-dev_data:/config
+      - /mnt/md0/calibre/dev:/books
+    labels:
+      - traefik.http.routers.calibre-dev.rule=Host(`calibre-dev.jafner.net`)
+      - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
+      - traefik.http.routers.calibre-dev.middlewares=authentik@docker
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+volumes:
+  calibre-web-rpg_data:
+  calibre-web-sff_data:
+  calibre-web-ace_data:
+  calibre-web-dev_data:

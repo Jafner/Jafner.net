@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+    olivetin:
+        image: jamesread/olivetin
+        container_name: olivetin
+        volumes:
+            - ./config:/config
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: unless-stopped
+        networks:
+            - web
+        labels:
+            - traefik.http.routers.olivetin.rule=Host(`olive.jafner.net`)
+            - traefik.http.routers.olivetin.tls.certresolver=lets-encrypt
+            - traefik.http.routers.olivetin.middlewares=lan-only@file
+            - traefik.http.services.olivetin.loadbalancer.server.port=1337
+
+
+networks:
+    web:
+        external: true

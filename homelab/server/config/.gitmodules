@@ -1,0 +1,6 @@
+[submodule "ass/ass"]
+	path = ass/ass
+	url = https://github.com/tycrek/ass.git
+[submodule "exatorrent/exatorrent"]
+	path = exatorrent/exatorrent
+	url = git@github.com:Jafner/exatorrent.git

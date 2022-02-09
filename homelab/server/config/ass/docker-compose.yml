@@ -1,0 +1,38 @@
+version: "3.6"
+services:
+  ass:
+    build: ./ass
+    command: npm start
+    container_name: ass
+    restart: unless-stopped
+    networks:
+      - web
+    ports:
+      - "40115:40115"
+    volumes:
+      - ${DOCKER_DATA}/uploads:/opt/ass/uploads
+      - ${DOCKER_DATA}/share:/opt/ass/share
+      - type: bind
+        source: ./config.json
+        target: /opt/ass/config.json
+      - type: bind
+        source: ./auth.json
+        target: /opt/ass/auth.json
+      - type: bind
+        source: ./data.json
+        target: /opt/ass/data.json
+    tmpfs: /tmp # temp files such as uploads are stored here
+    working_dir: /opt/ass
+    tty: true
+    environment:
+      - NODE_ENV=production # for production
+      - ASS_ENV=docker # docker, local, production (not widely used yet)
+      - LOG_LEVEL=debug # debug, info, warn, error
+      - FORCE_COLOR=3 # force color output
+    labels:
+      - traefik.http.routers.ass.rule=Host(`share.jafner.net`)
+      - traefik.http.routers.ass.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true

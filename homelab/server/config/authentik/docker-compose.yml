@@ -1,0 +1,88 @@
+version: '3.2'
+
+services:
+  postgresql:
+    image: postgres:12-alpine
+    restart: unless-stopped
+    networks:
+      - authentik
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_USER=${PG_USER:-authentik}
+      - POSTGRES_DB=${PG_DB:-authentik}
+    env_file:
+      - .env
+
+  redis:
+    image: redis:alpine
+    networks:
+      - authentik
+    restart: unless-stopped
+
+  server:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.1.3}
+    networks:
+      authentik:
+      web:
+        aliases:
+          - authentik-server
+    #ports: 
+    #  - 9000:9000
+    restart: unless-stopped
+    command: server
+    environment:
+      AUTHENTIK_HOST: http://authentik-server:9000
+      AUTHENTIK_HOST_BROWSER: https://authentik.jafner.net
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+    volumes:
+      - ${DOCKER_DATA}/media:/media
+      - ${DOCKER_DATA}/custom-templates:/templates
+    env_file:
+      - .env
+    labels:
+      traefik.http.routers.authentik.priority: 1
+      traefik.http.routers.authentik.rule: Host(`authentik.jafner.net`)
+      traefik.http.routers.authentik.tls.certresolver: lets-encrypt
+      traefik.http.services.authentik.loadbalancer.server.port: 9000
+      traefik.http.middlewares.authentik.forwardauth.address: http://ak-outpost-forward-auth:9000/akprox/auth/traefik
+      traefik.http.middlewares.authentik.forwardauth.trustForwardHeader: true
+      traefik.http.middlewares.authentik.forwardauth.authResponseHeaders: X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version
+
+  worker:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.1.3}
+    restart: unless-stopped
+    networks:
+      - authentik
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+    user: root
+    volumes:
+      - ${DOCKER_DATA}/backups:/backups
+      - ${DOCKER_DATA}/media:/media
+      - ${DOCKER_DATA}/certs:/certs
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DOCKER_DATA}/custom-templates:/templates
+    env_file:
+      - .env
+    labels:
+      traefik.enable: false
+
+volumes:
+  database:
+    driver: local
+
+networks:
+  authentik:
+  web:
+    external: true

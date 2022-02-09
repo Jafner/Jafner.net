@@ -1,0 +1,75 @@
+version: "3.4"
+services:
+  tdarr:
+    container_name: tdarr
+    image: haveagitgat/tdarr:latest
+    networks:
+      web:
+      tdarr: 
+        ipv4_address: 172.110.0.10
+    ports:
+      - 8265:8265 # webUI port
+      - 8266:8266 # server port
+      - 8267:8267 # node port
+    labels:
+      - traefik.http.routers.tdarr.rule=Host(`tdarr.jafner.net`)
+      - traefik.http.routers.tdarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.tdarr.loadbalancer.server.port=8265
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK_SET=002
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+    volumes:
+      - ${DOCKER_DATA}/server:/app/server
+      - ${DOCKER_DATA}/configs:/app/configs
+      - ${DOCKER_DATA}/logs:/app/logs
+      - ${MEDIA_DIR}/Movies:/movies
+      - ${MEDIA_DIR}/Shows:/shows
+      - ${TRANSCODE_DIR}/transcode_cache:/temp
+
+  tdarr-node:
+    container_name: tdarr-node
+    image: haveagitgat/tdarr_node:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+        limits:
+          cpus: '12.00'
+    networks:
+      tdarr:
+        ipv4_address: 172.110.0.20
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK_SET=002
+      - nodeID=MainNode
+      - nodeIP=172.110.0.20
+      - nodePort=8267
+      - serverIP=172.110.0.10
+      - serverPort=8266
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - ${DOCKER_DATA}/configs:/app/configs
+      - ${DOCKER_DATA}/logs:/app/logs
+      - ${MEDIA_DIR}/Movies:/movies
+      - ${MEDIA_DIR}/Shows:/shows
+      - ${TRANSCODE_DIR}/transcode_cache:/temp
+
+networks:
+  web:
+    external: true
+  tdarr:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.110.0.0/24"

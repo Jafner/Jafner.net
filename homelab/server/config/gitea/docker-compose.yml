@@ -1,0 +1,27 @@
+version: "3"
+
+networks:
+  web:
+    external: true
+
+services:
+  server:
+    image: gitea/gitea:1.15.10
+    container_name: gitea
+    environment:
+      - USER_UID=9988
+      - USER_GID=9988
+    restart: always
+    networks:
+      - web
+    volumes:
+      - ${DOCKER_DATA}:/data
+      - ./app.ini:/data/gitea/app.ini
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "2228:22"
+    labels:
+      - traefik.http.routers.gitea.rule=Host(`gitea.jafner.net`)
+      - traefik.http.routers.gitea.tls.certresolver=lets-encrypt
+      - traefik.http.services.gitea.loadbalancer.server.port=3000

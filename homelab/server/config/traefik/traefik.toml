@@ -1,0 +1,27 @@
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+    [entryPoints.web.http.redirections.entryPoint]
+      to = "websecure"
+      scheme = "https"
+  [entryPoints.websecure]
+    address = ":443"
+
+[metrics]
+  [metrics.prometheus]
+
+[certificatesResolvers.lets-encrypt.acme]
+  email = "jafner425@gmail.com"
+  storage = "acme.json"
+  [certificatesResolvers.lets-encrypt.acme.tlsChallenge]
+
+[api]
+  insecure = true
+  dashboard = true
+
+[providers.docker]
+  watch = true
+  network = "web"
+
+[providers.file]
+  directory = "/config"

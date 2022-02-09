@@ -1,0 +1,16 @@
+[http.routers]
+    [http.routers.nas]
+    rule = "Host(`nas.jafner.net`)"
+    entrypoints = ["websecure"]
+    middlewares = "lan-only@file"
+    service = "nas@file"
+    [http.routers.nas.tls]
+        certResolver = "lets-encrypt"
+
+
+[http.services]
+  [http.services.nas.loadBalancer]
+    [[http.services.nas.loadBalancer.servers]]
+      url = "http://192.168.1.10/"
+
+      

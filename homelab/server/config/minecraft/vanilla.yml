@@ -1,0 +1,18 @@
+version: '3'
+services:
+  vanilla:
+    image: itzg/minecraft-server:latest
+    container_name: vanilla
+    environment:
+      - EULA=TRUE
+      - VERSION=1.18.1
+      - OPS=mollymsmom
+      - MAX_MEMORY=6G
+    volumes:
+      - $DOCKER_DATA/vanilla:/data:rw
+    networks:
+      - mc-router
+
+networks:
+  mc-router:
+    external: true

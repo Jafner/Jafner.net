@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  monitor:
+    image: itzg/mc-monitor
+    command: export-for-prometheus
+    restart: unless-stopped
+    networks:
+      - monitoring
+      - mc-router
+    environment:
+      EXPORT_SERVERS: e6-056,vanilla,bmcp
+
+networks:
+  monitoring:
+    external: true
+  mc-router:
+    external: true

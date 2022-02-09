@@ -1,0 +1,3 @@
+actions:
+  - title: "Restart BMCP"
+    shell: shell docker restart bmcp
