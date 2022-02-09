@@ -1,0 +1,16 @@
+version: '3'
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      - ./data:/data
+    labels:
+      - traefik.http.routers.vaultwarden.rule=Host(`bitwarden.jafner.tools`)
+      - traefik.http.routers.vaultwarden.tls.certresolver=lets-encrypt
+networks:
+  web:
+    external: true

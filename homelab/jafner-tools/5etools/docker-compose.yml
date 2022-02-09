@@ -1,0 +1,20 @@
+version: "3"
+services:
+  5etools:
+    container_name: 5etools
+    image: jafner/5etools-docker
+    restart: always
+    volumes:
+      - ./htdocs:/usr/local/apache2/htdocs
+    environment:
+      # using defaults
+      - IMG=false
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.5etools.rule=Host(`5e.jafner.tools`)
+      - traefik.http.routers.5etools.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
