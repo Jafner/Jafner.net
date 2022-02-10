@@ -1,3 +1,6 @@
+stages:
+  - deploy
+
 before_script:
   # update and install git
   - apt-get update -qq
