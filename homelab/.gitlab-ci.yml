@@ -15,10 +15,10 @@ before_script:
 
 server-deploy:    
   stage: deploy
+  when: manual
   rules:
     - changes:
         - server/
-      when: manual
       
   script:
     - ssh joey@joey-server "cd /home/joey && git archive --remote=ssh://git@gitlab.jafner.net:2229/Jafner/homelab.git main server/ | tar xvf -"
