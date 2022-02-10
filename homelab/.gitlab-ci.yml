@@ -10,12 +10,14 @@ before_script:
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
-  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrickHostKeyChecking no\n\n" > ~/.ssh/config'
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 
 server-deploy:    
   stage: deploy
   when: manual
+  only:
+    - "server/"
   script:
     - ssh joey@joey-server "cd /home/joey && git archive --remote=ssh://git@gitlab.jafner.net:2229/Jafner/homelab.git main server/ | tar xvf -"
     - ssh joey@joey-server "cp -r server/config/* ../docker_config/"
