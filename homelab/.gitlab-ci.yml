@@ -15,6 +15,7 @@ before_script:
 
 server-deploy:    
   stage: deploy
+  when: manual
   only:
     - "server/"
   script:
