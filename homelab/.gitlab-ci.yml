@@ -10,7 +10,8 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrickHostKeyChecking no\n\n" > ~/.ssh/config'
 
 
-server-deploy:      
+server-deploy:    
+  when: manual
   stage: deploy
   only:
     - "server/"
