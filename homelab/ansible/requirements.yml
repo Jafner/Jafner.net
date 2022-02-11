@@ -1,0 +1,2 @@
+- src: https://github.com/feffi/ansible-arch-inxi.git
+  name: ansible-arch-inxi
