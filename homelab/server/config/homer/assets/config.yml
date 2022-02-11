@@ -123,10 +123,6 @@ services:
         subtitle: "Docker management web interface"
         url: "https://portainer.jafner.net"
 
-      - name: "Gitea"
-        logo: assets/icons/gitea-880.png
-        subtitle: "Lightweight Git server"
-        url: "https://gitea.jafner.net"
       - name: "Gitlab"
         logo: assets/icons/gitlab.png
         subtitle: "Fully-featured, self-hosted Git server"
@@ -202,11 +198,6 @@ services:
         logo: assets/icons/calibre-1024.png
         subtitle: "Calibre-web instance serving a collection of whatever Ace wants to put on it"
         url: "https://calibre-ace.jafner.net"
-      
-      - name: "ExaTorrent"
-        icon: fas fa-sort
-        subtitle: "Lightweight torrent client written in GO"
-        url: "https://exa.jafner.net"
 
       - name: "Homer"
         logo: assets/icons/homer-458.png
