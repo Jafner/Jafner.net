@@ -1,0 +1,26 @@
+stages:
+  - deploy
+
+before_script:
+  # update and install git
+  - apt-get update -qq
+  - apt-get install -qq git
+  # configure SSH keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+
+server-deploy:    
+  stage: deploy
+  when: manual
+  rules:
+    - changes:
+        - server/
+      
+  script:
+    - ssh joey@joey-server "cd /home/joey && git archive --remote=ssh://git@gitlab.jafner.net:2229/Jafner/homelab.git main server/ | tar xvf -"
+    - ssh joey@joey-server "cp -r server/config/* ./docker_config/"
+    - ssh joey@joey-server "rm -rf server/"
