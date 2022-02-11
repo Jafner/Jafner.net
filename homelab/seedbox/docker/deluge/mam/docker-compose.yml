@@ -1,0 +1,21 @@
+---
+version: "2.1"
+services:
+  deluge-mam0:
+    image: linuxserver/deluge:amd64-2.0.0-0201906082034ubuntu18.04.1-ls23
+    container_name: deluge-mam0
+    restart: "no"
+    ports:
+      - 52100:8112
+      - 51100:51100
+      - 51100:51100/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+      - UMASK_SET=022 #optional
+      - DELUGE_LOGLEVEL=info #optional
+    volumes:
+      - /home/joey/docker/deluge/mam/0:/config
+      - /mnt/torrenting/MAM/0:/downloads
+      - /mnt/torrenting/MAM/0T:/watch
