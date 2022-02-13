@@ -68,36 +68,47 @@ services:
     items:
       - name: "Amazon Web Services"
         subtitle: "Management console for the AWS public cloud"
+        logo: assets/icons/aws.png
         url: "https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1#"
       - name: "Microsoft Azure"
         subtitle: "Management portal for the Microsoft Azure public cloud"
+        logo: assets/icons/azure.png
         url: "https://portal.azure.com/"
       - name: "Google Cloud Platform" 
         subtitle: "Management console for the Google Cloud Platform public cloud"
+        logo: assets/icons/gcp.png
         url: "https://console.cloud.google.com"
       - name: "Digital Ocean"
         subtitle: "Management console for the Digital Ocean public cloud"
+        logo: assets/icons/digital_ocean.png
         url: "https://cloud.digitalocean.com"
       - name: "Oracle Cloud"
         subtitle: "Management console for the Oracle Cloud public cloud"
+        logo: assets/icons/oracle_cloud.png
         url: "https://cloud.oracle.com"
       - name: "Mega"
         subtitle: "Account dashboard for the Mega.io cloud storage service"
+        logo: assets/icons/mega.svg
         url: "https://mega.io/"
       - name: "1Fichier"
         subtitle: "Account console for the 1Fichier cloud storage service"
+        logo: assets/icons/1fichier.png
         url: "https://1fichier.com/console/index.pl"
       - name: "NameCheap"
         subtitle: "Account dashboard for the NameCheap DNS registrar"
+        logo: assets/icons/namecheap.png
         url: "https://ap.www.namecheap.com"
       - name: "Cloudflare"
         subtitle: "Account dashboard for the Cloudflare cloud networking service"
+        logo: assets/icons/cloudflare.png
         url: "https://dash.cloudflare.com"
       - name: "ZeroTier"
         subtitle: "Account management dashboard for the ZeroTier cloud mesh VPN platform"
+        logo: assets/icons/zerotier.webp
         url: "https://my.zerotier.com/network"
       - name: "SendGrid"
         subtitle: "Account management dashboard for the SendGrid email messaging platform"
+        logo: assets/icons/sendgrid.png
         url: "https://app.sendgrid.com/"
 
   - name: "Jafner.chat"

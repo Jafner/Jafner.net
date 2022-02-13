@@ -1,0 +1,74 @@
+---
+- hosts: toprovision
+  become: true
+
+  tasks:
+    # initial system update and upgrade
+    - name: Update to Debian 11 (Bullseye)
+      copy: 
+        src: provisioning/sources.list
+        dest: /etc/apt/sources.list
+    - name: Full system upgrade
+      apt: 
+        update_cache: yes
+        upgrade: full
+
+    # user and group provisioning
+    - name: Create sudo group
+      group:
+        name: wheel
+        state: present
+    - name: Allow 'wheel' sudo group to have passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+    - name: Create regular user with sudo privileges
+      user:
+        name: "joey"
+        state: present
+        groups: wheel
+        append: true
+        create_home: true
+        shell: /bin/bash
+    - name: Configure SSH authorized_keys for user
+      authorized_key:
+        user: "joey"
+        state: present
+        key: id_rsa.pub # requires the existence of an ssh_pubkey ansible var
+    - name: Disable password authentication for root
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin prohibit-password'
+
+    # install packages
+    - name: Install packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'docker', 'docker-compose', 'git']
+    
+    # configure docker
+    - name: Enable Docker daemon
+      systemd: 
+        name: docker
+        state: started
+    - name: Add user to docker group
+      user: 
+        name: "joey"
+        state: present
+        groups: wheel,docker
+    - name: Install Docker module for Python
+      pip: 
+        name: docker
+
+    # configure ssh
+    - name: Create ssh dir
+      shell: mkdir -p /home/joey/.ssh
+    - name: Copy ssh key
+      copy:
+        src: provisioning/id_rsa
+        dest: /home/joey/.ssh/id_rsa
+        mode: '0600'
