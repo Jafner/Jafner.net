@@ -145,7 +145,7 @@ services:
       - name: "PUB"
         logo: assets/icons/deluge-1200.png
         subtitle: "Deluge Torrent Web UI for public torrents"
-        url: "http://jafner.seedbox:53200/"
+        url: "http://jafner.seedbox:52300/"
 
   - name: "Jafner.net"
     icon: "fas fa-server"
