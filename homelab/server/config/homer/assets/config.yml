@@ -43,26 +43,6 @@ colors:
 # First level array represent a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
-  - name: "Jafner.tools"
-    icon: "fas fa-cloud"
-    items:
-      - name: "5eTools"
-        logo: assets/icons/5et-192.png
-        subtitle: "D&D 5e Complete Reference"
-        url: "https://5e.jafner.tools"
-      - name: "Joplin"
-        logo: assets/icons/joplin-512.png
-        subtitle: "Sync server for the Joplin notes app"
-        url: "https://joplin.jafner.tools"
-      - name: "Bitwarden"
-        logo: assets/icons/bitwarden-512.png
-        subtitle: "Sync server for the Bitwarden password manager"
-        url: "https://bitwarden.jafner.tools"
-      - name: "Uptime Kuma"
-        logo: assets/icons/uptimekuma-512.png
-        subtitle: "Web monitoring dashboard"
-        url: "https://uptime.jafner.tools/dashboard"
-
   - name: "Public Cloud"
     icon: "fas fa-cloud"
     items:
@@ -110,6 +90,25 @@ services:
         subtitle: "Account management dashboard for the SendGrid email messaging platform"
         logo: assets/icons/sendgrid.png
         url: "https://app.sendgrid.com/"
+  - name: "Jafner.tools"
+    icon: "fas fa-cloud"
+    items:
+      - name: "5eTools"
+        logo: assets/icons/5et-192.png
+        subtitle: "D&D 5e Complete Reference"
+        url: "https://5e.jafner.tools"
+      - name: "Joplin"
+        logo: assets/icons/joplin-512.png
+        subtitle: "Sync server for the Joplin notes app"
+        url: "https://joplin.jafner.tools"
+      - name: "Bitwarden"
+        logo: assets/icons/bitwarden-512.png
+        subtitle: "Sync server for the Bitwarden password manager"
+        url: "https://bitwarden.jafner.tools"
+      - name: "Uptime Kuma"
+        logo: assets/icons/uptimekuma-512.png
+        subtitle: "Web monitoring dashboard"
+        url: "https://uptime.jafner.tools/dashboard"
 
   - name: "Jafner.chat"
     icon: "fas fa-cloud"
@@ -153,6 +152,10 @@ services:
         logo: assets/icons/deluge-1200.png
         subtitle: "Deluge Torrent Web UI for EMP"
         url: "http://jafner.seedbox:52200/"
+      - name: "PUB"
+        logo: assets/icons/deluge-1200.png
+        subtitle: "Deluge Torrent Web UI for public torrents"
+        url: "http://jafner.seedbox:53200/"
 
   - name: "Jafner.net"
     icon: "fas fa-server"
