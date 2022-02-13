@@ -90,6 +90,7 @@ services:
         subtitle: "Account management dashboard for the SendGrid email messaging platform"
         logo: assets/icons/sendgrid.png
         url: "https://app.sendgrid.com/"
+  
   - name: "Jafner.tools"
     icon: "fas fa-cloud"
     items:
@@ -109,17 +110,6 @@ services:
         logo: assets/icons/uptimekuma-512.png
         subtitle: "Web monitoring dashboard"
         url: "https://uptime.jafner.tools/dashboard"
-
-  - name: "Jafner.chat"
-    icon: "fas fa-cloud"
-    items:
-      - name: "Element"
-        logo: assets/icons/element-512.webp
-        subtitle: "Web-based Matrix client for the jafner.chat homeserver"
-        url: "https://element.jafner.chat"
-      - name: "Synapse Admin"
-        subtitle: "Web admin portal for the Synapse homeserver"
-        url: "https://matrix.jafner.chat/synapse-admin"
 
   - name: "Jafner.pi1"
     icon: "fas fa-server"
