@@ -12,6 +12,11 @@ before_script:
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
+do-nothing:
+  stage: deploy
+  when: always
+  script:
+    - echo "Nothing'd successfully!
 
 #server-deploy:    
 #  stage: deploy
