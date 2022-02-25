@@ -5,17 +5,13 @@ services:
     image: linuxserver/deluge
     container_name: deluge-ggn0
     restart: "no"
+    env_file:
+      - .env
     ports:
       - 52000:8112
       - 51000:58946
       - 51000:58946/udp
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
-      - UMASK_SET=022 #optional
-      - DELUGE_LOGLEVEL=info #optional
     volumes:
-      - /home/joey/docker/deluge/ggn/0:/config
+      - $DOCKER_DATA:/config
       - /mnt/torrenting/GGN/0:/downloads
       - /mnt/torrenting/GGN/0T:/watch

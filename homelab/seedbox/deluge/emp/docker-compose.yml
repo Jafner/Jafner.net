@@ -5,17 +5,13 @@ services:
     image: linuxserver/deluge
     container_name: deluge-emp0
     restart: "no"
+    env_file:
+      - .env
     ports:
       - 52200:8112
       - 51200:58946
       - 51200:58946/udp
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
-      - UMASK_SET=022 #optional
-      - DELUGE_LOGLEVEL=info #optional
     volumes:
-      - /home/joey/docker/deluge/emp/0:/config
+      - $DOCKER_DATA:/config
       - /mnt/torrenting/EMP/0:/downloads
       - /mnt/torrenting/EMP/0T:/watch

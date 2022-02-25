@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+  deluge-pub:
+    image: linuxserver/deluge
+    container_name: deluge-pub
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52300:8112
+      - 51300:58946
+      - 51300:58946/udp
+    volumes:
+      - $DOCKER_DATA:/config
+      - /mnt/torrenting/PUB/0:/downloads
+      - /mnt/torrenting/PUB/0T:/watch
