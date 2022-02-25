@@ -12,20 +12,12 @@ before_script:
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-do-nothing:
+server-deploy:    
   stage: deploy
   when: always
+  rules:
+    - changes:
+        - server/
+      when: manual
   script:
-    - echo "Nothing'd successfully!"
-
-#server-deploy:    
-#  stage: deploy
-#  when: always
-#  rules:
-#    - changes:
-#        - server/
-#      when: manual
-#  script:
-#    - ssh joey@joey-server "cd /home/joey && git archive --remote=ssh://git@gitlab.jafner.net:2229/Jafner/homelab.git main server/ | tar xvf -"
-#    - ssh joey@joey-server "cp -r server/config/* ./docker_config/"
-#    - ssh joey@joey-server "rm -rf server/"
+    - ssh joey@joey-server "cd /home/joey/homelab && git pull"
