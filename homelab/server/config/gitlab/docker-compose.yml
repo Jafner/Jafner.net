@@ -19,7 +19,7 @@ services:
       #- '443:443'
       - '2229:22'
     volumes:
-      - '${DOCKER_CONFIG}/config:/etc/gitlab'
+      - '${DOCKER_DATA}/config:/etc/gitlab'
       - '${DOCKER_DATA}/logs:/var/log/gitlab'
       - '${DOCKER_DATA}/data:/var/opt/gitlab'
     shm_size: '256m'
