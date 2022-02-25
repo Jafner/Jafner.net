@@ -14,7 +14,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.toml:/traefik.toml
       - ./config:/config
-      - ./acme.json:/acme.json
+      - $DOCKER_DATA/acme.json:/acme.json
       - ./.htpasswd:/.htpasswd
 
 networks:
