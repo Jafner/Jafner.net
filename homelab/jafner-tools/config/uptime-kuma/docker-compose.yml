@@ -5,7 +5,7 @@ services:
         container_name: uptime-kuma
         restart: always
         volumes:
-            - ./data:/app/data
+            - $DOCKER_DATA/data:/app/data
         networks:
             - web
         labels:

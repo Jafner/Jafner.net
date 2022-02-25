@@ -5,7 +5,7 @@ services:
     image: jafner/5etools-docker
     restart: always
     volumes:
-      - ./htdocs:/usr/local/apache2/htdocs
+      - $DOCKER_DATA/htdocs:/usr/local/apache2/htdocs
     environment:
       # using defaults
       - IMG=false

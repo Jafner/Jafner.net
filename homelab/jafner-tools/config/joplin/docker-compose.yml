@@ -14,7 +14,7 @@ services:
     labels:
       - traefik.http.routers.joplin.rule=Host(`joplin.jafner.tools`)
       - traefik.http.routers.joplin.tls.certresolver=lets-encrypt
-      - traefik.http.middlewares.joplin.headers.customrequestheaders.X-Forwarded-Proto = http
+      #- traefik.http.middlewares.joplin.headers.customrequestheaders.X-Forwarded-Proto = http
       - traefik.http.services.joplin.loadbalancer.server.port=22300
       - traefik.http.services.joplin.loadbalancer.passhostheader=true
   joplin_db:
@@ -24,7 +24,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - $DOCKER_DATA/db:/var/lib/postgresql/data
     networks:
       - joplin
 
