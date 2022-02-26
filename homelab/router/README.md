@@ -68,6 +68,7 @@ Via: https://thehomeofthefuture.com/how-to/use-an-ssh-key-with-an-ubiquiti-edger
 2. `configure`
 3. 
 ```sh
+set system login user admin authentication public-keys jafner425@gmail.com
 set system login user admin authentication public-keys jafner425@gmail.com type ssh-rsa
 set system login user admin authentication public-keys jafner425@gmail.com key $KEY_VALUE
 ```
