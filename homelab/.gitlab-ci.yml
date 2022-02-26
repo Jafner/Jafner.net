@@ -3,8 +3,8 @@ stages:
   - deploy
 
 before_script:
-  - apt-get update
-  - apt-get install git docker docker-compose
+  - apt-get -y update
+  - apt-get -y install git docker docker-compose
   # configure SSH keys
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
   - eval $(ssh-agent -s)
