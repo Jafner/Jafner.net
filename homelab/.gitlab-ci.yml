@@ -4,7 +4,7 @@ stages:
 
 before_script:
   - apt-get -y update
-  - apt-get -y install git docker docker-compose
+  - apt-get -y install git docker
   # configure SSH keys
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
   - eval $(ssh-agent -s)
@@ -22,7 +22,6 @@ docker-compose-test:
         - jafner-tools/config/
   script:
     - docker --version
-    - docker-compose --version
     - find ~+ -type f -name docker-compose.yml > composes.txt
     - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
     - for file in `cat composes.txt`; do docker-compose -f $file config; done
