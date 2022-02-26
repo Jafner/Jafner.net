@@ -12,6 +12,18 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+ 
+docker-compose-test:
+  image: docker/compose
+  stage: test
+  when: always
+  rules:
+    - changes:
+        - docker-compose.yml
+        - server/config/minecraft/
+      when: manual
+  script:
+    - ls
   
 
 server-deploy:    
