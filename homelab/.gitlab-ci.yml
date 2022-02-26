@@ -1,4 +1,5 @@
 stages:
+  - test
   - deploy
 
 before_script:
@@ -11,6 +12,7 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  
 
 server-deploy:    
   stage: deploy
@@ -21,3 +23,23 @@ server-deploy:
       when: manual
   script:
     - ssh joey@joey-server "cd /home/joey/homelab && git pull"
+
+seedbox-deploy:    
+  stage: deploy
+  when: always
+  rules:
+    - changes:
+        - seedbox/
+      when: manual
+  script:
+    - ssh joey@joey-seedbox "cd /home/joey/homelab && git pull"
+
+jafner-tools-deploy:    
+  stage: deploy
+  when: always
+  rules:
+    - changes:
+        - jafner-tools/
+      when: manual
+  script:
+    - ssh root@jafner.tools "cd /root/homelab && git pull"
