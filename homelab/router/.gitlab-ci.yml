@@ -1,4 +1,0 @@
-update-config-dump:    
-  image: debian:bullseye
-  script:
-    - scp admin@router.jafner.net:/config/config.boot ~+/router/config/config.boot
