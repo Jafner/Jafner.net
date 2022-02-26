@@ -1,5 +1,3 @@
-image: debian:bullseye
-
 stages:
   - test
   - deploy
@@ -15,6 +13,7 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
  
 docker-compose-test:
+  image: debian:bullseye
   stage: test
   when: always
   rules:
@@ -27,6 +26,7 @@ docker-compose-test:
   
 
 server-deploy:    
+  image: debian:bullseye
   stage: deploy
   when: always
   rules:
@@ -37,6 +37,7 @@ server-deploy:
     - ssh joey@joey-server "cd /home/joey/homelab && git pull"
 
 seedbox-deploy:    
+  image: debian:bullseye
   stage: deploy
   when: always
   rules:
@@ -47,6 +48,7 @@ seedbox-deploy:
     - ssh joey@joey-seedbox "cd /home/joey/homelab && git pull"
 
 jafner-tools-deploy:    
+  image: debian:bullseye
   stage: deploy
   when: always
   rules:
