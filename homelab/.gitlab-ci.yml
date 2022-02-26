@@ -4,7 +4,8 @@ stages:
 
 before_script:
   - apt-get -y update
-  - apt-get -y install git docker
+  - apt-get -y install git
+  - apt-get -y install docker
   # configure SSH keys
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
   - eval $(ssh-agent -s)
