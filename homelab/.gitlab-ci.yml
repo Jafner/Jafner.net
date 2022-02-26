@@ -15,12 +15,10 @@ before_script:
 docker-compose-test:
   image: debian:bullseye
   stage: test
-  when: always
   rules:
     - changes:
         - docker-compose.yml
         - server/config/minecraft/
-      #when: manual
   script:
     - find ~+ -type f -name docker-compose.yml > composes.txt
     - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
@@ -31,32 +29,26 @@ docker-compose-test:
 server-deploy:    
   image: debian:bullseye
   stage: deploy
-  when: always
   rules:
     - changes:
         - server/
-      #when: manual
   script:
     - ssh joey@joey-server "cd /home/joey/homelab && git pull"
 
 seedbox-deploy:    
   image: debian:bullseye
   stage: deploy
-  when: always
   rules:
     - changes:
         - seedbox/
-      #when: manual
   script:
     - ssh joey@joey-seedbox "cd /home/joey/homelab && git pull"
 
 jafner-tools-deploy:    
   image: debian:bullseye
   stage: deploy
-  when: always
   rules:
     - changes:
         - jafner-tools/
-      #when: manual
   script:
     - ssh root@jafner.tools "cd /root/homelab && git pull"
