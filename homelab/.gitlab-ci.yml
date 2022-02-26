@@ -21,7 +21,6 @@ docker-compose-test:
         - server/config/
         - jafner-tools/config/
   script:
-    - git pull
     - find ~+ -type f -name docker-compose.yml > composes.txt
     - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
     - for file in `cat composes.txt`; do docker-compose -f $file config; done
