@@ -32,6 +32,8 @@ services:
       - ADVERTISE_IP="https://plex.jafner.net:443"
       - PLEX_CLAIM=claim-DPRoiMnzcby-YxKdFpqJ
       - NVIDIA_VISIBLE_DEVICES=all
+    env_file:
+      - .env
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${MEDIA_DIR}/Video/Shows:/shows"
@@ -50,6 +52,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
+    env_file:
+      - .env
     volumes:
       - "${DOCKER_DATA}/ombi:/config"
     labels:
@@ -65,6 +69,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angles
+    env_file:
+      - .env
     volumes:
       - ${DOCKER_DATA}/tautulli:/config
     networks:
