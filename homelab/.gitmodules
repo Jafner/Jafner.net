@@ -1,0 +1,3 @@
+[submodule "ass/ass"]
+	path = server/config/ass/ass
+	url = https://github.com/tycrek/ass.git
