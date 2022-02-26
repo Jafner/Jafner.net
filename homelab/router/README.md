@@ -24,7 +24,7 @@ graph TD;
     Client --> Router;
     Router --> PiHole;
     PiHole -- Ad --> /dev/null;
-    PiHole -- Real --> Cloudflare DNS; 
+    PiHole -- Real --> Cloudflare;
 ```
 
 # DHCP Configuration Parameters
@@ -51,3 +51,24 @@ graph TD;
 * [EdgeOS User Guide PDF](https://dl.ubnt.com/guides/edgemax/EdgeOS_UG.pdf)
 * EdgeOS is built on [Vyatta](https://en.wikipedia.org/wiki/Vyatta)
 * To make configuration changes in the CLI, run `configure`, make the changes (e.g. `set interfaces ethernet eth0 dhcpv6-pd pd 0 interface eth1`), then save the changes with `commit; save; exit`.
+
+## Configure SSH Keys
+Via: https://thehomeofthefuture.com/how-to/use-an-ssh-key-with-an-ubiquiti-edgerouter/
+
+### Via WebUI
+1. Navigate to the Config Tree
+2. Dig down to `system / login / user / admin / authentication / public-keys /`
+3. Add a new "public-keys" value with the name of the key.
+4. Refresh the tree and open the newly-created sub-directory named after the key.
+5. Add the key information here. Leave "options" empty. Omit `ssh-rsa` and the comment from the key, place the type in the "type" field.
+6. Click "Preview" then "Apply"
+
+### Via SSH
+1. SSH into system
+2. `configure`
+3. 
+```sh
+set system login user admin authentication public-keys jafner425@gmail.com type ssh-rsa
+set system login user admin authentication public-keys jafner425@gmail.com key $KEY_VALUE
+```
+4. `commit; save; exit`
