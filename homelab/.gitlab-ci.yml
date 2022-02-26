@@ -1,8 +1,12 @@
+image: debian:bullseye
+
 stages:
   - test
   - deploy
 
 before_script:
+  - apt-get update
+  - apt-get install git docker docker-compose
   # configure SSH keys
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
   - eval $(ssh-agent -s)
