@@ -1,3 +1,6 @@
+include:
+  - router/.gitlab-ci.yml
+
 stages:
   - test
   - deploy
