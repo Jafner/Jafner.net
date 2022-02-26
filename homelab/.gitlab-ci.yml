@@ -20,7 +20,7 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 docker-compose-test:
-  image: docker
+  image: debian:bullseye
   stage: test
   rules:
     - changes:
