@@ -20,7 +20,7 @@ docker-compose-test:
     - changes:
         - docker-compose.yml
         - server/config/minecraft/
-      when: manual
+      #when: manual
   script:
     - find ~+ -type f -name docker-compose.yml > composes.txt
     - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
@@ -35,7 +35,7 @@ server-deploy:
   rules:
     - changes:
         - server/
-      when: manual
+      #when: manual
   script:
     - ssh joey@joey-server "cd /home/joey/homelab && git pull"
 
@@ -46,7 +46,7 @@ seedbox-deploy:
   rules:
     - changes:
         - seedbox/
-      when: manual
+      #when: manual
   script:
     - ssh joey@joey-seedbox "cd /home/joey/homelab && git pull"
 
@@ -57,6 +57,6 @@ jafner-tools-deploy:
   rules:
     - changes:
         - jafner-tools/
-      when: manual
+      #when: manual
   script:
     - ssh root@jafner.tools "cd /root/homelab && git pull"
