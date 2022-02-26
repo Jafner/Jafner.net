@@ -17,8 +17,9 @@ docker-compose-test:
   stage: test
   rules:
     - changes:
-        - docker-compose.yml
-        - server/config/minecraft/
+        - seedbox/config/
+        - server/config/
+        - jafner-tools/config/
   script:
     - find ~+ -type f -name docker-compose.yml > composes.txt
     - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
