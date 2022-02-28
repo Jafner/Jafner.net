@@ -1,9 +1,11 @@
 # NAS
 The NAS is relied upon for many other hosts on the network, which need to be offlined before the NAS can be shut down.
-1. Offline the seedbox. Follow the graceful reboot instructions described in its note to shut it down.
-2. Offline the server. Follow the graceful reboot instructions described in its note to shut it down.
-3. Offline the NAS. SSH into the NAS and run `shutdown now`.
-4. Perform necessary maintenance, then reboot the NAS.
+1. Determine which service stacks rely on the NAS by running `grep -rnwli ~+ -e '/mnt/media\|/mnt/torrenting\|/mnt/calibre'` from the root of the `homelab` repo.
+2. `docker-compose down` the stacks which rely on the NAS
+3. `cat /etc/fstab` to get the list of mount points which rely on the NAS
+4. For each NAS mount, run `sudo umount` for that share.
+5. Offline the NAS. SSH into the NAS and run `shutdown now`.
+6. Perform necessary maintenance, then reboot the NAS.
 
 # Seedbox
 1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
