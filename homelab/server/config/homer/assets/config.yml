@@ -183,6 +183,10 @@ services:
         logo: assets/icons/sharex-256.png
         subtitle: "ShareX upload endpoint"
         url: "https://share.jafner.net"
+      - name: "Sharry"
+        logo: assets/icons/sharry.png
+        subtitle: "Click-to-upload file sharing server"
+        url: "https://file.jafner.net"
 
       - name: "Plex"
         logo: assets/icons/plex-580.png
