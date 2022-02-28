@@ -6,6 +6,8 @@ The NAS is relied upon for many other hosts on the network, which need to be off
 4. For each NAS mount, run `sudo umount` for that share.
 5. Offline the NAS. SSH into the NAS and run `shutdown now`.
 6. Perform necessary maintenance, then reboot the NAS.
+7. After the NAS WebUI is available, SSH into the server and run `sudo  mount -a`
+8. Online the stacks affected by step 2.
 
 # Seedbox
 1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
