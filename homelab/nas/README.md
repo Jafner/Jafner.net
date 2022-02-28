@@ -88,7 +88,47 @@ Partition: ID-1: / size: 62.24 GiB used: 26.84 GiB (43.1%) fs: zfs logical: free
 </details>
 
 # Services
-TODO
+## S.M.A.R.T.
+All values default. 
+| Parameter | Value |
+|:---------:|:-----:|
+| Start Automatically | Yes |
+| Check interval | 30 minutes |
+| Difference | 0 &deg;C |
+| Informational | 0 &deg;C |
+| Critical | 0 &deg;C |
+
+## SMB
+| Parameter | Value |
+|:---------:|:-----:|
+| Start Automatically | Yes |
+| NetBIOS Name | joey-nas |
+| NetBIOS Alias | - |
+| Workgroup | WORKGROUP |
+| Description | FreeNAS Server |
+| Enable SMB1 Support | No |
+| NTLMv1 Auth | No |
+| UNIX Charset | UTF-8 | 
+| Log Level | Minimum |
+| Use Syslog Only | No |
+| Local Master | Yes |
+| Enable Apple SMB2/3 Protocol Extensions | No |
+| Administrators Group | - |
+| Guest Account | nobody |
+| File Mask | - |
+| Directory Mask | - |
+| Bind IP Addresses | 192.168.1.10,192.168.50.1 |
+| Auxilliary Parameters | - |
+
+## SSH
+| Parameter | Value |
+|:---------:|:-----:|
+| Start Automatically | Yes |
+| TCP Port | 22 |
+| Log in as Root with Password | Yes |
+| Allow Password Authentication | Yes |
+| Allow Kerberos Authentication | No |
+| Allow TCP Port Forwarding | No |
 
 # Users, Groups, Permissions
-TODO
+TODO, not yet designed.
