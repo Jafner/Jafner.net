@@ -38,7 +38,7 @@ Each cell contains the serial number for the drive in the mapped bay.
 
 <details>
 <summary>Output of `inxi -CDGmMNPS`</summary>
-```
+<code>
 System:    Host: joey-nas.local Kernel: FreeBSD 12.2-RELEASE-p3 amd64 bits: 64 Console: tty pts/0 OS: FreeBSD 12.2-RELEASE-p3 
 Machine:   Type: Desktop Mobo: Gigabyte model: X99-SLI-CF v: x.x serial: N/A UEFI: American Megatrends v: F24a rev: 5.6 
            date: 01/11/2018 
@@ -84,7 +84,7 @@ Partition: ID-1: / size: 62.24 GiB used: 26.84 GiB (43.1%) fs: zfs logical: free
            ID-4: swap-3 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap2.eli 
            ID-5: swap-4 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap3.eli 
            ID-6: swap-5 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap4.eli
-```
+</code>
 </details>
 
 # Services
