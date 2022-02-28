@@ -37,7 +37,7 @@ Each cell contains the serial number for the drive in the mapped bay.
 | Expander | HP 4K1065 | [HP Enterprise](https://support.hpe.com/hpesc/public/docDisplay?docId=emr_na-c04495958) |
 
 <details>
-<summary>Output of `inxi -CDGmMNPS`</summary>
+<summary>Output of <code>inxi -CDGmMNPS</code></summary>
 <pre><code>
 System:    Host: joey-nas.local Kernel: FreeBSD 12.2-RELEASE-p3 amd64 bits: 64 Console: tty pts/0 OS: FreeBSD 12.2-RELEASE-p3 
 Machine:   Type: Desktop Mobo: Gigabyte model: X99-SLI-CF v: x.x serial: N/A UEFI: American Megatrends v: F24a rev: 5.6 
