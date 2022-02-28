@@ -4,7 +4,7 @@ The NAS is relied upon for many other hosts on the network, which need to be off
 2. `docker-compose down` the stacks which rely on the NAS
 3. `cat /etc/fstab` to get the list of mount points which rely on the NAS
 4. For each NAS mount, run `sudo umount` for that share.
-5. Offline the NAS. SSH into the NAS and run `shutdown now`.
+5. Offline the NAS. Press the physical power button on the NAS.
 6. Perform necessary maintenance, then reboot the NAS.
 7. After the NAS WebUI is available, SSH into the server and run `sudo  mount -a`
 8. Online the stacks affected by step 2.
