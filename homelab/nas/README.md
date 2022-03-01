@@ -30,7 +30,7 @@ Each cell contains the serial number for the drive in the mapped bay.
 | CPU | Intel i7-5930k | [Intel Ark](https://www.intel.com/content/www/us/en/products/sku/82931/intel-core-i75930k-processor-15m-cache-up-to-3-70-ghz/specifications.html) |
 | Motherboard | Gigabyte GA-X99-SLI | [Gigabyte](https://www.gigabyte.com/Motherboard/GA-X99-SLI-rev-10/sp#sp) |
 | RAM | 8x GeIL EVO Potenza 8GB | [GeilMemory](http://www.geilmemory.com/product/?id=22) |
-| GPU | PNY Nvidia Quadro T400 2GB | [PNY](https://www.pny.com/nvidia-t400) |
+| GPU | Zotac Nvidia Geforce GT 710 2GB | [Zotac](https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-710-2gb) |
 | NIC | Intel I218-V | [Intel Ark](https://ark.intel.com/content/www/us/en/ark/products/71305/intel-ethernet-connection-i218v.html)
 | NIC2 | Mellanox MT26448 ConnectX-2 | [Nvidia](https://network.nvidia.com/related-docs/prod_adapter_cards/ConnectX-2_QSFP_IB_and_%20SFP_10GigE_Card_User_Manual_MHZH29.pdf)
 | HBA | HP LSI SAS9217-4i4e | [SSDWorks](https://www.ssdworks.com/datasheets/LSI_SAS9217-4i4e_PB.pdf) |
