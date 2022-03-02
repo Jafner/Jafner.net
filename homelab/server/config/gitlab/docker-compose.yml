@@ -10,6 +10,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
+        registry_external_url 'https://gitlab.jafner.net:5050'
         gitlab_rails['gitlab_shell_ssh_port'] = 2229
         nginx['listen_https'] = false
         nginx['listen_port'] = 80
@@ -18,6 +19,7 @@ services:
       #- '80:80'
       #- '443:443'
       - '2229:22'
+      - '5050:5050'
     volumes:
       - '${DOCKER_DATA}/config:/etc/gitlab'
       - '${DOCKER_DATA}/logs:/var/log/gitlab'
