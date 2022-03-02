@@ -29,6 +29,13 @@ services:
       - traefik.http.routers.gitlab.rule=Host(`gitlab.jafner.net`)
       - traefik.http.routers.gitlab.tls.certresolver=lets-encrypt
       - traefik.http.services.gitlab.loadbalancer.server.port=80
+  gitlab-runner:
+    image: 'gitlab/gitlab-runner:latest'
+    container_name: gitlab-runner
+    restart: always
+    volumes:
+      - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   web:
