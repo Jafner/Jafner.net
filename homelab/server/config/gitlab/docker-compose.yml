@@ -10,7 +10,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
-        registry_external_url 'https://gitlab.jafner.net:5050'
+        registry_external_url 'https://gitlab.jafner.net'
         gitlab_rails['gitlab_shell_ssh_port'] = 2229
         nginx['listen_https'] = false
         nginx['listen_port'] = 80
