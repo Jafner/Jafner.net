@@ -33,6 +33,8 @@ services:
     image: 'gitlab/gitlab-runner:latest'
     container_name: gitlab-runner
     restart: always
+    environment:
+      - GODEBUG="x509ignoreCN=0"
     volumes:
       - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
