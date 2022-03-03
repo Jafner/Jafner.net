@@ -1,6 +1,6 @@
 # NAS
 The NAS is relied upon for many other hosts on the network, which need to be offlined before the NAS can be shut down.
-1. Determine which service stacks rely on the NAS by running `grep -rnwli ~+ -e '/mnt/media\|/mnt/torrenting\|/mnt/calibre'` from the root of the `homelab` repo.
+1. Determine which service stacks rely on the NAS by running `grep -rnwli ~+ -e '/mnt/nas/media\|/mnt/torrenting\|/mnt/nas/calibre'` from the root of the `homelab` repo.
 2. `docker-compose down` the stacks which rely on the NAS
 3. `cat /etc/fstab` to get the list of mount points which rely on the NAS
 4. For each NAS mount, run `sudo umount` for that share.

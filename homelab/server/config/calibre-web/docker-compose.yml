@@ -9,7 +9,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web-rpg_data:/config
-      - /mnt/calibre/rpg:/books
+      - /mnt/nas/calibre/rpg:/books
     labels:
       - traefik.http.routers.calibre-rpg.rule=Host(`calibre-rpg.jafner.net`)
       - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
@@ -26,7 +26,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web-sff_data:/config
-      - /mnt/calibre/sff:/books
+      - /mnt/nas/calibre/sff:/books
     labels:
       - traefik.http.routers.calibre-sff.rule=Host(`calibre-sff.jafner.net`)
       - traefik.http.routers.calibre-sff.tls.certresolver=lets-encrypt
