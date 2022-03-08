@@ -12,7 +12,7 @@ services:
       - web
       - sharry
     labels:
-      - traefik.http.routers.sharry.rule=Host(`file.jafner.net`)
+      - traefik.http.routers.sharry.rule=Host(`share.jafner.net`)
       - traefik.http.routers.sharry.tls.certresolver=lets-encrypt
   db:
     image: postgres:14.2
@@ -20,7 +20,7 @@ services:
     networks:
       - sharry
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - $DOCKER_DATA:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=dbpass
