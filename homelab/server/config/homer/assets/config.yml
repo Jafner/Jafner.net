@@ -179,14 +179,10 @@ services:
         subtitle: "Metrics visualization tool"
         url: "https://grafana.jafner.net"
       
-      - name: "ShareX"
-        logo: assets/icons/sharex-256.png
-        subtitle: "ShareX upload endpoint"
-        url: "https://share.jafner.net"
       - name: "Sharry"
         logo: assets/icons/sharry.png
         subtitle: "Click-to-upload file sharing server"
-        url: "https://file.jafner.net"
+        url: "https://share.jafner.net"
 
       - name: "Plex"
         logo: assets/icons/plex-580.png
