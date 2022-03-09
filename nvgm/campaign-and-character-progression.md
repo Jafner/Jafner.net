@@ -1,5 +1,5 @@
 # Campaign and Character Progression
-> By NVGM
+> By NVGM  
 > Written February 2019
 
 You’ve decided to start your new campaign at 5th level. The core rules of 5th-edition D&D do not give explicit guidelines for handling the myriad questions arising in such a scenario. How much XP should you budget for one adventuring day with this party? How much gold should the party have acquired in the time before the campaign started? And how many adventuring days have the party completed together? According to the guidelines in the Player’s Handbook, Dungeon Master’s Guide, and Xanathar’s Guide to Everything, as well as some arithmetic, the answers are 3,500 per character, about 1,300 gp, and 10 respectively. After looking through the full collection of 5th-edition published works, I’ve assembled a spreadsheet to answer any questions about advancement pacing and wealth and magic item acquisition rates in an “average” campaign.

@@ -1,4 +1,4 @@
-> By NVGM
+> By NVGM  
 > Written February 2019
 
 The introduction to the Dungeon Master’s Guide endeavors to exposit the role of the GM through a menagerie of verbs and epithets, but presents no unified understanding of relevant skills.
