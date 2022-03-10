@@ -1,7 +1,7 @@
 ```mermaid
 flowchart TD;
 	Internet<--Symmetrical 1Gbit Fiber-->ONT;
-		ONT<--???-->Modem[ISP Modem/Router];
+		ONT<--Cat5e-->Modem[ISP Modem/Router];
 			Modem<--Cat5e-->Router[Ubiquiti EdgeRouter 10X];
 				Router<--Cat5e-->switch_homelab[NetGear 8-Port Switch for Homelab];
 					switch_homelab<--Cat6-->desktop_joey[Joey's Desktop];
