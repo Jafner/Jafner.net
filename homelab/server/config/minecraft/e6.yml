@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  e6-056:
+  e6:
     image: itzg/minecraft-server:java8
     container_name: e6
     environment:
