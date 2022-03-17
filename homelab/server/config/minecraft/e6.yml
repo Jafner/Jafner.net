@@ -6,13 +6,13 @@ services:
     container_name: e6
     environment:
       - EULA=TRUE
-      - MAX_MEMORY=12G
+      - MAX_MEMORY=8G
       - TYPE=FORGE
       - VERSION=1.16.5
       - FORGEVERSION=36.2.29
       - OPS=jafner425
       - ENABLE_RCON=true
-      
+
       - RCON_PASSWORD=${RCON_PASSWORD}
     volumes:
       - $DOCKER_DATA/e6:/data:rw

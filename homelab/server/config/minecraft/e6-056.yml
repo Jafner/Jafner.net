@@ -6,7 +6,7 @@ services:
     container_name: e6-056
     environment:
       - EULA=TRUE
-      - MAX_MEMORY=12G
+      - MAX_MEMORY=6G
       - TYPE=FORGE
       - VERSION=1.16.5
       - FORGEVERSION=36.1.31

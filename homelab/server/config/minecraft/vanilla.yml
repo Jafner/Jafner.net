@@ -7,7 +7,7 @@ services:
       - EULA=TRUE
       - VERSION=1.18.1
       - OPS=mollymsmom
-      - MAX_MEMORY=6G
+      - MAX_MEMORY=4G
     volumes:
       - $DOCKER_DATA/vanilla:/data:rw
     networks:

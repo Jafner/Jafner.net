@@ -6,7 +6,7 @@ services:
     container_name: bmcp
     environment:
       - EULA=TRUE
-      - MAX_MEMORY=8G
+      - MAX_MEMORY=4G
       - TYPE=FORGE
       - VERSION=1.16.5
       - FORGEVERSION=36.2.22

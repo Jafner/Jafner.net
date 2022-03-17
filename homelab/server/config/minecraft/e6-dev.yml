@@ -7,9 +7,18 @@ services:
     environment:
       EULA: "TRUE"
       VERSION: "1.16.5"
-      MAX_MEMORY: 12G
+      MAX_MEMORY: 8G
       TYPE: CURSEFORGE
       CF_SERVER_MOD: "https://media.forgecdn.net/files/3683/595/Enigmatica6Server-1.0.0.zip"
+      
+      OVERRIDE_SERVER_PROPERTIES: "true"
+      MOTD: "Jafner.net's Enigmatica 6 server! (v1.0.0)"
+      DIFFICULTY: "normal"
+      OPS: "jafner425"
+      MAX_TICK_TIME: "120000"
+      VIEW_DISTANCE: "16"
+      ALLOW_FLIGHT: "TRUE"
+
 #      ENABLE_RCON: "true"
 #      RCON_PORT: 25575      
 #      RCON_PASSWORD: ${RCON_PASSWORD}
