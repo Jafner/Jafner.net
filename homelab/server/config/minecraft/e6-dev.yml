@@ -6,6 +6,7 @@ services:
     container_name: e6-dev
     environment:
       EULA: "TRUE"
+      VERSION: "1.16.5"
       MAX_MEMORY: 12G
       TYPE: CURSEFORGE
       CF_SERVER_MOD: "https://media.forgecdn.net/files/3683/595/Enigmatica6Server-1.0.0.zip"
