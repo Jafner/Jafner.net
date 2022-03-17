@@ -7,18 +7,18 @@ services:
     environment:
       EULA: TRUE
       MAX_MEMORY: 12G
-      TYPE=CURSEFORGE
+      TYPE: CURSEFORGE
       CF_SERVER_MOD: "https://media.forgecdn.net/files/3683/595/Enigmatica6Server-1.0.0.zip"
       ENABLE_RCON: true
       RCON_PORT: 25575      
       RCON_PASSWORD: ${RCON_PASSWORD}
       EXEC_DIRECTLY: true
-      USE_AIKAR_FLAGS:true
+      USE_AIKAR_FLAGS: true
 #      RCON_CMDS_FIRST_CONNECT: |-
 #        /pregen stop
 #      RCON_CMDS_LAST_DISCONNECT: |-
 #        /pregen start 200
-      
+
     volumes:
       - $DOCKER_DATA/e6-dev:/data:rw
     networks:
