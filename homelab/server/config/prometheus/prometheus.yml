@@ -28,10 +28,9 @@ scrape_configs:
             password: ***REMOVED***
     
     - job_name: 'mc-monitor'
-      scrape_interval: 60s
+      scrape_interval: 10s
       static_configs:
             - targets: ['mc-monitor:8080']
-
 
     - job_name: 'jafner.tools'
       scrape_interval: 60s
