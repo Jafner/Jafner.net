@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  monitor:
-    image: itzg/mc-monitor
+  mc-monitor:
+    image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
+    container_name: mc-monitor
     command: export-for-prometheus
     restart: unless-stopped
     networks:
