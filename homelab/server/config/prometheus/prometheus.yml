@@ -28,7 +28,7 @@ scrape_configs:
             password: ***REMOVED***
     
     - job_name: 'mc-monitor'
-      scrape_interval: 10s
+      scrape_interval: 15s
       static_configs:
             - targets: ['mc-monitor:8080']
 
@@ -56,3 +56,9 @@ scrape_configs:
       scrape_interval: 60s
       static_configs:
           - targets: ['pihole.local:9100']
+
+    - job_name: 'tasmota'
+      scrape_interval: 60s
+      static_configs:
+          - targets: ['tasmota-F6441E-1054','tasmota-F6D7D3-6099','tasmota-F6F062-4194
+tasmota-F6F062-4194']
