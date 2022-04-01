@@ -60,4 +60,4 @@ scrape_configs:
     - job_name: 'tasmota'
       scrape_interval: 60s
       static_configs:
-          - targets: ['tasmota-F6441E-1054','tasmota-F6D7D3-6099','tasmota-F6F062-4194']
+          - targets: ['tasmota-1','tasmota-2','tasmota-3']
