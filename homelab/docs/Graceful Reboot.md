@@ -46,3 +46,33 @@ set system name-server 192.168.1.22
 commit; save; exit
 ```
 4. Done.
+
+# Full Lab
+To offline the whole lab:
+
+```sh
+ssh joey@joey-server docker stop $(docker ps -aq)
+ssh joey@joey-server sudo shutdown now
+ssh joey@joey-seedbox docker stop $(docker ps -aq)
+ssh joey@joey-seedbox sudo shutdown now
+ssh root@joey-nas shutdown now
+ssh admin@192.168.1.1 configure; delete system name-server 192.168.1.22; set system name-server 1.1.1.1; commit; save; exit
+ssh pi@pihole sudo shutdown now
+```
+
+Perform necessary maintenance, then power hosts back on in the following order:
+
+1. PiHole
+2. NAS (ensure smb server is online)
+3. Server
+4. Seedbox
+
+After all hosts are back on the network:
+
+```sh
+ssh admin@192.168.1.1 configure; delete system name-server 1.1.1.1; set system name-server 192.168.1.22; commit; save; exit
+ssh joey@joey-server sudo mount -a
+ssh joey@joey-server docker start $(docker ps -aq)
+ssh joey@joey-seedbox sudo mount -a
+ssh joey@joey-seedbox docker start $(docker ps -aq)
+```
