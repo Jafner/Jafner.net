@@ -1,0 +1,42 @@
+version: "3"
+services:
+  chibisafe:
+    build:
+      context: ./chibisafe
+      dockerfile: ./chibisafe/docker/chibisafe/Dockerfile
+    expose:
+      - "5000"
+      - "5001"
+    restart: unless-stopped
+    environment:
+      OVERWRITE_SETTINGS: "false"
+      CHUNK_SIZE: 90
+      ROUTE_PREFIX: /api
+      RATE_LIMIT_WINDOW: 2
+      RATE_LIMIT_MAX: 5
+      BLOCKED_EXTENSIONS: ".jar,.exe,.msi,.com,.bat,.cmd,.scr,.ps1,.sh"
+      SECRET: $CHIBISAFE_SECRET
+      MAX_LINKS_PER_ALBUM: 5
+      META_THEME_COLOR: "#20222b"
+      META_DESCRIPTION: "Jafner.net's file sharing server"
+      META_KEYWORDS: ""
+      META_TWITTER_HANDLE: ""
+      SERVER_PORT: 5000
+      DOMAIN: "http://localhost:5000"
+      SERVICE_NAME: chibisafe
+      MAX_SIZE: 5000
+      GENERATE_THUMBNAILS: "true"
+      GENERATE_ZIPS: "true"
+      STRIP_EXIF: "true"
+      SERVE_WITH_NODE: "true"
+      GENERATED_FILENAME_LENGTH: 16
+      GENERATED_ALBUM_LENGTH: 8
+      PUBLIC_MODE: "false"
+      USER_ACCOUNTS: "true"
+      ADMIN_ACCOUNT: $CHIBISAFE_ADMIN_USER
+      ADMIN_PASSWORD: $CHIBISAFE_ADMIN_PASS
+      DB_CLIENT: "sqlite3"
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASS
+      DB_DATABASE: $DB_DB
