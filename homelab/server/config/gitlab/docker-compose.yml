@@ -18,7 +18,7 @@ services:
         gitlab_rails['smtp_address'] = "smtp.gmail.com"
         gitlab_rails['smtp_port'] = 465
         gitlab_rails['smtp_user_name'] = "noreply@jafner.net"
-        gitlab_rails['smtp_password'] = "4jtX%u#^77jNsoh$z3GqLvUN3trowf#b"
+        gitlab_rails['smtp_password'] = "kvdunrhjsqbslson"
         gitlab_rails['smtp_domain'] = "jafner.net"
         gitlab_rails['smtp_authentication'] = "login"
         gitlab_rails['smtp_enable_starttls_auto'] = true
