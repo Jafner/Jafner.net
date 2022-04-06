@@ -9,6 +9,7 @@ The settings page may incorrectly report that the server is inaccessible.
 
 # LG WebOS TV Video Format Support 
 From LG's documentation:
-![lg_webos_playing_video_files.png](docs/img/lg_webos_playing_video_files.png)
-![lg_webos_video_codec.png](docs/img/lg_webos_video_codec.png)
-![lg_webos_video_playback_supporting_file.png](docs/img/lg_webos_video_playback_supporting_file.png)
+
+<img src=docs/img/lg_webos_playing_video_files.png width="400">
+<img src=docs/img/lg_webos_video_codec.png width="400">
+<img src=docs/img/lg_webos_video_playback_supporting_file.png width="400">
