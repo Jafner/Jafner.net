@@ -11,5 +11,7 @@ The settings page may incorrectly report that the server is inaccessible.
 From LG's documentation:
 
 <img src=docs/img/lg_webos_playing_video_files.png width="400">
+
 <img src=docs/img/lg_webos_video_codec.png width="400">
+
 <img src=docs/img/lg_webos_video_playback_supporting_file.png width="400">
