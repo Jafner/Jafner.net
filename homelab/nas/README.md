@@ -94,6 +94,12 @@ Partition: ID-1: / size: 62.24 GiB used: 26.84 GiB (43.1%) fs: zfs logical: free
 4. Wait 12-16 hours (for 8 TB disk).
 5. Remove and re-insert the disk.
 
+## Perform a large copy operation in the background
+0. `cd ~` for consistent placement of `nohup.out`
+1. Use `nohup cp -rv /mnt/[from_pool]/[from_dataset]/ /mnt/[to_pool]/[to_dataset]` (pay attention to trailing slashes) to run the copy in the background. This will persist closing the terminal and completely closing the SSH connection.
+2. Use `cmdwatch du -h ~/nohup.out` to watch the size of the log file increase (to confirm it is still copying)
+3. Use `tail -f ~/nohup.out` to follow the actual logs. The original command writes to this file in batches when it is in the background, so don't expect it to be as smooth as running the command in the foreground.
+
 # Services
 ## S.M.A.R.T.
 All values default. 
@@ -139,3 +145,4 @@ All values default.
 
 # Users, Groups, Permissions
 TODO, not yet designed.
+
