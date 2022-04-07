@@ -87,6 +87,13 @@ Partition: ID-1: / size: 62.24 GiB used: 26.84 GiB (43.1%) fs: zfs logical: free
 </code></pre>
 </details>
 
+## Convert a 512B-sector disk to 4096B sectors
+1. Make sure the disk is not currently in use. 
+2. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script.
+3. Run `sg_format --size=4096 --format --fmtpinfo=0 /dev/[disknum]` for the disk.
+4. Wait 12-16 hours (for 8 TB disk).
+5. Remove and re-insert the disk.
+
 # Services
 ## S.M.A.R.T.
 All values default. 
