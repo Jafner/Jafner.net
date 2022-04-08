@@ -179,10 +179,10 @@ services:
         subtitle: "Metrics visualization tool"
         url: "https://grafana.jafner.net"
       
-      - name: "Sharry"
-        logo: assets/icons/sharry.png
-        subtitle: "Click-to-upload file sharing server"
-        url: "https://share.jafner.net"
+      - name: "XBackBone"
+        logo: assets/icons/xbackbone.png
+        subtitle: "Lightweight file manager"
+        url: "https://xbackbone.jafner.net"
 
       - name: "Plex"
         logo: assets/icons/plex-580.png
