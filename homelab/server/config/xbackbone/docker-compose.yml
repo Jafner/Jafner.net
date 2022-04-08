@@ -16,3 +16,9 @@ services:
       - "traefik.http.routers.xbackbone.rule=Host(`xbackbone.jafner.net`)"
       - "traefik.http.routers.xbackbone.tls.certresolver=lets-encrypt"
       - "traefik.http.services.xbackbone.loadbalancer.server.port=80"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
