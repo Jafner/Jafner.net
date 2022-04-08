@@ -146,3 +146,9 @@ All values default.
 # Users, Groups, Permissions
 TODO, not yet designed.
 
+# Share Dependence
+| Share      | Dependent Service(s) |
+|:----------:|:-----------------:|
+| Text       | server/calibre |
+| Torrenting | seedbox/EMP, seedbox/GGN, seedbox/MAM, seedbox/PUB |
+| Media      | server/autopirate, server/plex |
