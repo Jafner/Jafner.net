@@ -10,6 +10,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - $DOCKER_DATA:/config
+      - ./php-local.ini:/config/php/php-local.ini
     ports:
       - 45885:80
     labels:
