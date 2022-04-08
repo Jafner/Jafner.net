@@ -148,7 +148,8 @@ TODO, not yet designed.
 
 # Share Dependence
 | Share      | Dependent Service(s) |
-|:----------:|:-----------------:|
-| Text       | server/calibre-web |
+|:----------:|:--------------------:|
+| Text       | server/calibre-web   |
 | Torrenting | seedbox/EMP, seedbox/GGN, seedbox/MAM, seedbox/PUB |
 | Media      | server/autopirate, server/plex |
+| Backups    | server/cron          |
