@@ -10,3 +10,8 @@ This server runs a bunch of stuff behind the `jafner.net` domain.
 For a living portal listing all user-facing services, go to https://home.jafner.net
 
 This repository is automatically pushed to the host when a change is made to a file in this subdirectory.
+
+## Sharing Files
+For files smaller than 2 GB, use [XBackBone](https://xbackbone.jafner.net).
+For files between 2 GB and 400 GB, use [Mega](https://mega.io/).
+For files greater than 400 GB, ship a drive.
