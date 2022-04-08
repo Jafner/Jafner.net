@@ -10,6 +10,8 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - $DOCKER_DATA:/config
+    ports:
+      - 80085:80
     labels:
       - "traefik.http.routers.xbackbone.rule=Host(`xbackbone.jafner.net`)"
       - "traefik.http.routers.xbackbone.tls.certresolver=lets-encrypt"
