@@ -153,3 +153,15 @@ TODO, not yet designed.
 | Torrenting | seedbox/EMP, seedbox/GGN, seedbox/MAM, seedbox/PUB |
 | Media      | server/autopirate, server/plex |
 | Backups    | server/cron          |
+
+## Offlining dependent services
+- Text: `cd ~/homelab/server/config/calibre-web && docker-compose down ; sudo umount /mnt/nas/calibre`
+- Torrenting: `cd ~/homelab/seedbox/config/deluge/ ; for DIR in emp ggn mam pub; do cd ./$DIR && docker-compose down && cd ../ ; done ; sudo umount /mnt/torrenting`
+- Media: `cd ~/homelab/server/config/autopirate && docker-compose down ; cd ~/homelab/server/config/plex && docker-compose down ; sudo umount /mnt/nas/media`
+- Backups: This cron job runs once per day at midnight. If possible, perform maintenance between runs. If not possible, comment out the jobs via `crontab -e`.
+
+## Online dependent services
+- Text: `sudo mount /mnt/nas/calibre && cd ~/homelab/server/config/calibre-web && docker-compose up -d`
+- Torrenting: `sudo mount /mnt/torrenting && cd ~/homelab/seedbox/config/deluge/ ; for DIR in emp ggn mam pub; do cd ./$DIR && docker-compose up -d && cd ../ ; done`
+- Media: `sudo mount /mnt/nas/media && cd ~/homelab/server/config/autopirate && docker-compose up -d ; cd ~/homelab/server/config/plex && docker-compose up -d`
+- Backups: Uncomment the commented lines with `crontab -e`.
