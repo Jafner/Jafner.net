@@ -15,11 +15,11 @@ This pool's vdevs comprise mirrored 7.15 TiB drives.
 
 # Physical Disk Locations (DS4243)
 Each cell contains the serial number for the drive in the mapped bay.
-|  | X1 | X2 | X3 | X4 |
-|:-:|:-:|:-:|:-:|:-:|
-| Y1 | VJGPS30X             | -                    | - | - | 
-| Y2 | VJGR6TNX             | -                    | - | - | 
-| Y3 | VJG282NX             | -                    | - | - | 
+|    | X1                   | X2                   | X3       | X4       |
+|:--:|:--------------------:|:--------------------:|:--------:|:--------:|
+| Y1 | VJGPS30X             | -                    | -        | -        | 
+| Y2 | VJGR6TNX             | -                    | -        | -        | 
+| Y3 | VJG282NX             | -                    | -        | -        | 
 | Y4 | VJGRGD2X             | 001526PL8AVV2EGL8AVV | 2EKA903X | VJGRRG9X |
 | Y5 | 001703PXPS1VVLKXPS1V | 001528PNPVWV2EGNPVWV | 2EKATR2X | VKH3Y3XX |
 | Y6 | 001703PV9N8VVLKV9N8V | 001708P4W2VVR5G4W2VV | 2EKA92XX | VKGW5YGX |
