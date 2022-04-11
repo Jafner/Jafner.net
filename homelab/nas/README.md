@@ -1,17 +1,9 @@
 # Pools
-I have 4 pools, separated by a soft performance profile heuristic.
-## Archival - Infrequent reads/writes
-This pool has one dataset: backups, which contains things I want to preserve as a priority.
-This pool's vdevs comprise mirrored 7.28 TiB drives.
-## Hi-IOPS - Frequent reads/writes
-This pool has one dataset: Torrenting, which stores all data referenced by torrent clients. All data is copied to another dataset before it is used by any other service. This dataset also serves the autopirate stack, which follows the same rules. 
-This pool's vdevs comprise mirrored 7.15 TiB drives.
+I have 2 pools, one for "Media" and one for everything else. All disks are 8 TB HGST/Hitachi drives with a sector size of 4096B. All pools use vdevs of 3 drives in RAIDZ1.
 ## Media - High-bandwidth sequential reads/writes
 This pool contains one dataset: Media, which holds all non-text data (3d models, audio, images, video). As of writing, only the `./Media/Video/Movies` and `Media/Video/Shows` are accessed by services. Everything else is manipulated manually.
-This pool's vdevs comprise RAID-Z1 7.28 TiB drives.
-## WORM - Write-once, read-many
-This pool contains two datasets: Software, which handles all binaries and scripts, and Text, which handles ebooks and documents.
-This pool's vdevs comprise mirrored 7.15 TiB drives.
+## Tank
+THis pool contains all other datasets. 
 
 # Physical Disk Locations (DS4243)
 Each cell contains the serial number for the drive in the mapped bay.
@@ -39,10 +31,10 @@ Each cell contains the serial number for the drive in the mapped bay.
 <details>
 <summary>Output of <code>inxi -CDGmMNPS</code></summary>
 <pre><code>
-System:    Host: joey-nas.local Kernel: FreeBSD 12.2-RELEASE-p3 amd64 bits: 64 Console: tty pts/0 OS: FreeBSD 12.2-RELEASE-p3 
+System:    Host: joey-nas.local Kernel: FreeBSD 12.2-RELEASE-p3 amd64 bits: 64 Console: tty pts/1 OS: FreeBSD 12.2-RELEASE-p3 
 Machine:   Type: Desktop Mobo: Gigabyte model: X99-SLI-CF v: x.x serial: N/A UEFI: American Megatrends v: F24a rev: 5.6 
            date: 01/11/2018 
-Memory:    RAM: total: 63.79 GiB used: 62.25 GiB (97.6%) 
+Memory:    RAM: total: 63.79 GiB used: 62.13 GiB (97.4%) 
            Array-1: capacity: 512 GiB note: check slots: 8 EC: None 
            Device-1: DIMM_A1 size: 8 GiB speed: 2133 MT/s 
            Device-2: DIMM_A2 size: 8 GiB speed: 2133 MT/s 
@@ -55,35 +47,28 @@ Memory:    RAM: total: 63.79 GiB used: 62.25 GiB (97.6%)
 CPU:       Info: 12-Core model: Intel Core i7-5930K bits: 64 type: MCP cache: L2: 1.5 MiB note: check 
            Speed: 3500 MHz min/max: N/A Core speed (MHz): N/A 
 Graphics:  Device-1: NVIDIA GK208B [GeForce GT 710] driver: vgapci 
-           Display: server: No display server data found. Headless machine? tty: 177x51 
+           Display: server: No display server data found. Headless machine? tty: 177x47 
            Message: Unable to show advanced data. Required tool glxinfo missing. 
 Network:   Device-1: Intel Ethernet I218-V driver: em 
            Device-2: Mellanox MT26448 [ConnectX EN 10GigE PCIe 2.0 5GT/s] driver: mlx4_core 
-Drives:    Local Storage: total: raw: 123.17 TiB usable: 85.52 TiB used: 26.49 TiB (31.0%) 
+Drives:    Local Storage: total: raw: 109.23 TiB usable: 78.36 TiB used: 29.51 TiB (37.7%) 
            ID-1: /dev/ada0 vendor: Intel model: SSDSCKGW080A4 DC31 size: 74.53 GiB scheme: GPT 
-           ID-2: /dev/da0 vendor: Western Digital model: ATA WDC WD80EZAZ-11T 0A83 size: 7.28 TiB scheme: GPT 
-           ID-3: /dev/da1 vendor: Seagate model: ATA ST8000DM004-2CX1 0001 size: 7.28 TiB scheme: GPT 
-           ID-4: /dev/da10 vendor: HGST (Hitachi) model: HUH728080AL4200 A7D8 size: 7.28 TiB scheme: GPT 
-           ID-5: /dev/da11 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
-           ID-6: /dev/da12 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB 
-           ID-7: /dev/da13 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PD51 size: 7.15 TiB 
+           ID-2: /dev/da0 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
+           ID-3: /dev/da1 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
+           ID-4: /dev/da10 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
+           ID-5: /dev/da11 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PAG1 size: 7.28 TiB 
+           ID-6: /dev/da12 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PD51 size: 7.28 TiB scheme: GPT 
+           ID-7: /dev/da13 vendor: HGST (Hitachi) model: HUH728080AL4200 A7D8 size: 7.28 TiB scheme: GPT 
            ID-8: /dev/da14 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
-           ID-9: /dev/da15 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
-           ID-10: /dev/da16 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB 
-           ID-11: /dev/da2 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PD51 size: 7.15 TiB scheme: GPT 
-           ID-12: /dev/da3 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PD51 size: 7.15 TiB scheme: GPT 
-           ID-13: /dev/da4 vendor: HGST (Hitachi) model: HUH728080AL4200 A7D8 size: 7.28 TiB scheme: GPT 
-           ID-14: /dev/da5 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
-           ID-15: /dev/da6 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PAG1 size: 7.15 TiB scheme: GPT 
-           ID-16: /dev/da7 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PAG1 size: 7.15 TiB scheme: GPT 
-           ID-17: /dev/da8 vendor: HGST (Hitachi) model: HUH728080AL4200 A7D8 size: 7.28 TiB scheme: GPT 
-           ID-18: /dev/da9 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
-Partition: ID-1: / size: 62.24 GiB used: 26.84 GiB (43.1%) fs: zfs logical: freenas-boot/ROOT/FreeNAS-12.0-U2 
-           ID-2: swap-1 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap0.eli 
-           ID-3: swap-2 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap1.eli 
-           ID-4: swap-3 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap2.eli 
-           ID-5: swap-4 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap3.eli 
-           ID-6: swap-5 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/mirror/swap4.eli
+           ID-9: /dev/da2 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
+           ID-10: /dev/da3 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
+           ID-11: /dev/da4 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PD51 size: 7.28 TiB scheme: GPT 
+           ID-12: /dev/da5 vendor: HGST (Hitachi) model: HUH728080AL4200 A7D8 size: 7.28 TiB scheme: GPT 
+           ID-13: /dev/da6 vendor: Hitachi model: HUH72808CLAR8000 M7K0 size: 7.28 TiB scheme: GPT 
+           ID-14: /dev/da7 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PAG1 size: 7.28 TiB scheme: GPT 
+           ID-15: /dev/da8 vendor: HGST (Hitachi) model: H7280A520SUN8.0T PD51 size: 7.28 TiB scheme: GPT 
+           ID-16: /dev/da9 vendor: HGST (Hitachi) model: HUH728080AL4200 A7D8 size: 7.28 TiB scheme: GPT 
+Partition: ID-1: / size: 62.23 GiB used: 26.85 GiB (43.1%) fs: zfs logical: freenas-boot/ROOT/FreeNAS-12.0-U2
 </code></pre>
 </details>
 
