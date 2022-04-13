@@ -37,6 +37,7 @@ services:
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${MEDIA_DIR}/Video/Shows:/shows"
+      - "${MEDIA_DIR}/Audio/Music:/music"
       - "${DOCKER_DATA}/plex:/config"
     labels:
       - traefik.http.routers.plex.rule=Host(`plex.jafner.net`)
