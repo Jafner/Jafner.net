@@ -2,7 +2,7 @@ version: '3'
 services:
   calibre-web-rpg:
     image: linuxserver/calibre-web
-    container_name: calibre-web-rpg
+    container_name: calibre-web_rpg
     environment:
       - PUID=1000
       - PGID=1000
@@ -19,7 +19,7 @@ services:
 
   calibre-web-sff:
     image: linuxserver/calibre-web
-    container_name: calibre-web-sff
+    container_name: calibre-web_sff
     environment:
       - PUID=1000
       - PGID=1000
@@ -36,7 +36,7 @@ services:
 
   calibre-web-ace:
     image: linuxserver/calibre-web
-    container_name: calibre-web-ace
+    container_name: calibre-web_ace
     environment:
       - PUID=1000
       - PGID=1000
@@ -53,7 +53,7 @@ services:
 
   calibre-web-dev:
     image: linuxserver/calibre-web
-    container_name: calibre-web-dev
+    container_name: calibre-web_dev
     environment:
       - PUID=1000
       - PGID=1000

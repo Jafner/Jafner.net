@@ -2,7 +2,7 @@ version: '3'
 services:
   vanilla:
     image: itzg/minecraft-server:latest
-    container_name: vanilla
+    container_name: minecraft_vanilla
     environment:
       - EULA=TRUE
       - VERSION=1.18.1

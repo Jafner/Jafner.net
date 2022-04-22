@@ -3,7 +3,7 @@ version: '3.1'
 services:
     landing:
         image: wordpress
-        container_name: landing
+        container_name: wordpress_landing
         restart: always
         environment:
             WORDPRESS_DB_HOST: landing_db
@@ -26,7 +26,7 @@ services:
 
     landing_db:
         image: mysql:5.7
-        container_name: landing_db
+        container_name: wordpress_landing-db
         restart: always
         networks:
             - landing

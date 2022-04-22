@@ -6,7 +6,7 @@ version: '3.3'
 services:
     uptime-kuma:
         image: louislam/uptime-kuma
-        container_name: uptime-kuma
+        container_name: monitoring_uptime-kuma
         restart: unless-stopped
         volumes:
             - ${DOCKER_DATA}/data:/app/data

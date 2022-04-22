@@ -3,7 +3,7 @@ version: '3.1'
 services:
     nvgm:
         image: wordpress
-        container_name: nvgm
+        container_name: wordpress_nvgm
         restart: unless-stopped
         environment:
             WORDPRESS_DB_HOST: nvgm_db
@@ -25,7 +25,7 @@ services:
 
     nvgm_db:
         image: mysql:5.7
-        container_name: nvgm_db
+        container_name: wordpress_nvgm-db
         restart: unless-stopped
         networks:
             - nvgm

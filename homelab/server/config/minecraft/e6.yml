@@ -3,7 +3,7 @@ version: '3'
 services:
   e6:
     image: itzg/minecraft-server:java8
-    container_name: e6
+    container_name: minecraft_e6
     environment:
       - EULA=TRUE
       - MAX_MEMORY=8G

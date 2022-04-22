@@ -3,7 +3,7 @@ version: '3'
 services:
   bmcp:
     image: itzg/minecraft-server:java8
-    container_name: bmcp
+    container_name: minecraft_bmcp
     environment:
       - EULA=TRUE
       - MAX_MEMORY=4G

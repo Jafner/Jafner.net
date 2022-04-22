@@ -2,7 +2,7 @@ version: '3'
 services:
   xbackbone:
     image: linuxserver/xbackbone
-    container_name: xbackbone
+    container_name: xbackbone_xbackbone
     restart: unless-stopped
     environment:
       - PUID=1000

@@ -3,7 +3,7 @@ version: '3.1'
 services:
     portfolio:
         image: wordpress
-        container_name: portfolio
+        container_name: wordpress_portfolio
         restart: always
         environment:
             WORDPRESS_DB_HOST: portfolio_db
@@ -25,7 +25,7 @@ services:
 
     portfolio_db:
         image: mysql:5.7
-        container_name: portfolio_db
+        container_name: wordpress_portfolio-db
         restart: always
         networks:
             - portfolio

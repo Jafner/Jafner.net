@@ -3,7 +3,7 @@ version: '3'
 services:
   e6-dev:
     image: itzg/minecraft-server:java8-multiarch
-    container_name: e6-dev
+    container_name: minecraft_e6-dev
     environment:
       EULA: "TRUE"
       VERSION: "1.16.5"

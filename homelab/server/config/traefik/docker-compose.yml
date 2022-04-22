@@ -2,8 +2,8 @@ version: "3"
 
 services:
   traefik:
-    container_name: traefik
     image: traefik:latest
+    container_name: traefik_traefik
     restart: unless-stopped
     networks:
       - web

@@ -2,7 +2,7 @@ version: "3"
 services:
   plex:
     image: linuxserver/plex
-    container_name: plex
+    container_name: plex_plex
     restart: "no"
     deploy:
       resources:
@@ -45,7 +45,7 @@ services:
       - traefik.http.services.plex.loadbalancer.server.port=32400
   ombi:
     image: ghcr.io/linuxserver/ombi
-    container_name: ombi
+    container_name: plex_ombi
     restart: "no"
     networks:
       - web
@@ -64,7 +64,7 @@ services:
   
   tautulli:
     image: lscr.io/linuxserver/tautulli
-    container_name: tautulli
+    container_name: plex_tautulli
     restart: "no"
     environment:
       - PUID=1000

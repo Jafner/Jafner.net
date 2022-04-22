@@ -2,7 +2,7 @@ version: '3'
 services:
     homer:
         image: b4bz/homer
-        container_name: homer
+        container_name: homepage_homer
         restart: "unless-stopped"
         environment:
             - UID=1000
