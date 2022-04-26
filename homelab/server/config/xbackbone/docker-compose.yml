@@ -8,6 +8,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
+    ports:
+      - 8183:80
     volumes:
       - $DOCKER_DATA:/config
       - ./php-local.ini:/config/php/php-local.ini
