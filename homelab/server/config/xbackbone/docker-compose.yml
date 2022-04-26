@@ -22,18 +22,14 @@ services:
     image: linuxserver/xbackbone
     container_name: xbackbone_xbackbone_test
     restart: unless-stopped
+    ports:
+      - 8082:80
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
     volumes:
       - ./php-local.ini:/config/php/php-local.ini
-    labels:
-      - "traefik.http.routers.xbackbone-test.rule=Host(`xbackbone-test.jafner.net`)"
-      - "traefik.http.routers.xbackbone-test.tls.certresolver=lets-encrypt"
-      - "traefik.http.services.xbackbone-test.loadbalancer.server.port=80"
-    networks:
-      - web
 
 networks:
   web:
