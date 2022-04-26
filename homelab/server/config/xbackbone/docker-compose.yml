@@ -8,15 +8,30 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Los_Angeles
-    ports:
-      - 8183:80
     volumes:
       - $DOCKER_DATA:/config
       - ./php-local.ini:/config/php/php-local.ini
-    #labels:
-    #  - "traefik.http.routers.xbackbone.rule=Host(`xbackbone.jafner.net`)"
-    #  - "traefik.http.routers.xbackbone.tls.certresolver=lets-encrypt"
-    #  - "traefik.http.services.xbackbone.loadbalancer.server.port=80"
+    labels:
+      - "traefik.http.routers.xbackbone.rule=Host(`xbackbone.jafner.net`)"
+      - "traefik.http.routers.xbackbone.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.xbackbone.loadbalancer.server.port=80"
+    networks:
+      - web
+
+  xbackbone_test:
+    image: linuxserver/xbackbone
+    container_name: xbackbone_xbackbone_test
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - ./php-local.ini:/config/php/php-local.ini
+    labels:
+      - "traefik.http.routers.xbackbone.rule=Host(`xbackbone-test.jafner.net`)"
+      - "traefik.http.routers.xbackbone.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.xbackbone.loadbalancer.server.port=80"
     networks:
       - web
 
