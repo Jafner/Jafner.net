@@ -18,19 +18,6 @@ services:
     networks:
       - web
 
-  xbackbone_test:
-    image: linuxserver/xbackbone
-    container_name: xbackbone_xbackbone_test
-    restart: unless-stopped
-    ports:
-      - 8082:80
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
-    volumes:
-      - ./php-local.ini:/config/php/php-local.ini
-
 networks:
   web:
     external: true
