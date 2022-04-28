@@ -4,11 +4,14 @@ services:
     image: weejewel/wg-easy
     container_name: wireguard_wg-easy
     restart: unless-stopped
+    env_file:
+      - .env
+      - .secret
     ports:
       - 53820:51820/udp
     environment:
       - WG_HOST=vpn.jafner.net
-      - PASSWORD=***REMOVED***
+      - PASSWORD=${PASSWORD}
     networks:
       - web
     volumes:
