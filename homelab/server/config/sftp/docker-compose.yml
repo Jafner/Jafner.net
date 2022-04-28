@@ -1,23 +1,12 @@
 version: "3"
 services:
   sftp:
-    image: linuxserver/wireguard
+    image: atmoz/sftp
     container_name: sftp_sftp
     restart: unless-stopped
     ports:
-      - 53820:51820/udp
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
-      - PEERS=joey-phone,joey-xps13,maddie-phone,acearcher,nas,jafner-chat,jafner-tools
-      - SERVERURL=www.jafner.net
-      - SERVERPORT=53820
+      - 20340:22
     volumes:
-      - ${DOCKER_DATA}/config:/config
+      - ${DOCKER_DATA}/data:/home/sftp/upload
+      - ./users.conf:/etc/sftp/users.conf:ro
       - /lib/modules:/lib/modules
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
