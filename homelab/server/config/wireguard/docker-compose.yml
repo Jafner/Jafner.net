@@ -8,9 +8,6 @@ services:
       - .secret
     ports:
       - 53820:51820/udp
-    environment:
-      - WG_HOST=vpn.jafner.net
-      - PASSWORD=$PASSWORD
     networks:
       - web
     volumes:
