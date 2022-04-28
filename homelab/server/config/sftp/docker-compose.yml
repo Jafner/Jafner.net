@@ -9,3 +9,7 @@ services:
     volumes:
       - ${DOCKER_DATA}/data:/home/sftp/upload
       - ./users.conf:/etc/sftp/users.conf:ro
+
+# https://hub.docker.com/r/atmoz/sftp
+# hash a password:
+# echo -n "your-password" | docker run -i --rm atmoz/makepasswd --crypt-md5 --clearfrom=-
