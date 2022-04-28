@@ -10,11 +10,11 @@ services:
       - 53820:51820/udp
     environment:
       - WG_HOST=vpn.jafner.net
-      - PASSWORD=${PASSWORD}
+      - PASSWORD=$PASSWORD
     networks:
       - web
     volumes:
-      - ${DOCKER_DATA}/wg-easy:/etc/wireguard
+      - $DOCKER_DATA/wg-easy:/etc/wireguard
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
