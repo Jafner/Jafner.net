@@ -5,8 +5,7 @@ services:
     container_name: sftp_sftp
     restart: unless-stopped
     ports:
-      - 20340:22
+      - 23450:22/tcp
     volumes:
       - ${DOCKER_DATA}/data:/home/sftp/upload
       - ./users.conf:/etc/sftp/users.conf:ro
-      - /lib/modules:/lib/modules
