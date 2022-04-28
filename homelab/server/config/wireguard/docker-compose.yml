@@ -30,6 +30,8 @@ services:
     environment:
       - WG_HOST=vpn.jafner.net
       - PASSWORD=***REMOVED***
+    networks:
+      - web
     volumes:
       - ${DOCKER_DATA}/wg-easy:/etc/wireguard
     cap_add:
@@ -42,3 +44,7 @@ services:
       - traefik.http.routers.wg-easy.rule=Host(`vpn.jafner.net`)
       - traefik.http.routers.wg-easy.tls.certresolver=lets-encrypt
       - traefik.http.services.wg-easy.loadbalancer.server.port=51821
+
+networks:
+  web:
+    external: true
