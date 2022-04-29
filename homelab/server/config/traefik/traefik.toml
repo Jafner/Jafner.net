@@ -9,8 +9,8 @@
 
 [metrics]
   [metrics.prometheus]
-    addEntryPointsLabels = true
-    addRoutersLabels = true
+    #addEntryPointsLabels = true
+    #addRoutersLabels = true
     addServicesLabels = true
 
 [certificatesResolvers.lets-encrypt.acme]
