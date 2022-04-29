@@ -3,7 +3,7 @@ version: "2.1"
 services:
   deluge-pub:
     image: linuxserver/deluge
-    container_name: deluge-pub
+    container_name: deluge_pub
     restart: "no"
     env_file:
       - .env

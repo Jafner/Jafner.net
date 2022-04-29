@@ -2,7 +2,7 @@ version: '3'
 services:
   joplin:
     image: joplin/server:2.6-beta
-    container_name: joplin
+    container_name: joplin_server
     restart: unless-stopped
     env_file:
       - .env 

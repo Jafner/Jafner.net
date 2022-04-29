@@ -2,7 +2,7 @@ version: '3.3'
 services:
     uptime-kuma:
         image: louislam/uptime-kuma
-        container_name: uptime-kuma
+        container_name: uptime-kuma_uptime-kuma
         restart: always
         volumes:
             - $DOCKER_DATA/data:/app/data

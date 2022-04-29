@@ -38,7 +38,7 @@ services:
 
   grafana:
     image: mbarmem/grafana-render:latest
-    container_name: grafana+grafana
+    container_name: grafana_grafana
     restart: unless-stopped
     depends_on:
       - influxdb

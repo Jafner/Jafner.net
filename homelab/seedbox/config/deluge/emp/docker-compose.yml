@@ -3,7 +3,7 @@ version: "2.1"
 services:
   deluge-emp0:
     image: linuxserver/deluge
-    container_name: deluge-emp0
+    container_name: deluge_emp0
     restart: "no"
     env_file:
       - .env

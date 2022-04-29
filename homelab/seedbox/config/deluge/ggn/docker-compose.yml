@@ -3,7 +3,7 @@ version: "2.1"
 services:
   deluge-ggn0:
     image: linuxserver/deluge
-    container_name: deluge-ggn0
+    container_name: deluge_ggn0
     restart: "no"
     env_file:
       - .env
