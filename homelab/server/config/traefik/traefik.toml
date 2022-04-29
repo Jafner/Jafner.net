@@ -9,7 +9,7 @@
 
 [metrics]
   [metrics.prometheus]
-    entryPoint = "metrics"
+    #entryPoint = "metrics"
     #addEntryPointsLabels = true
     #addRoutersLabels = true
     #addServicesLabels = true
