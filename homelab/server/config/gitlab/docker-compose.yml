@@ -46,6 +46,8 @@ services:
     volumes:
       - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=false
 
 networks:
   web:
