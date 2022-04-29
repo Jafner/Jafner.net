@@ -9,10 +9,9 @@
 
 [metrics]
   [metrics.prometheus]
-    #entryPoint = "metrics"
-    #addEntryPointsLabels = true
-    #addRoutersLabels = true
-    #addServicesLabels = true
+    addEntryPointsLabels = true
+    addRoutersLabels = true
+    addServicesLabels = true
 
 [certificatesResolvers.lets-encrypt.acme]
   email = "jafner425@gmail.com"
