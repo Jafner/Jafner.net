@@ -244,3 +244,18 @@ services:
         logo: assets/icons/homer-458.png
         subtitle: "This."
         url: "https://home.jafner.net"
+
+  - name: "IoT"
+    icon: "fas fa-house-signal"
+    items:
+      - name: "CloudFree SmartPlug2 - 1"
+        subtitle: "Monitoring Joey's desktop"
+        url: http://192.168.1.50
+
+      - name: "CloudFree SmartPlug2 - 2"
+        subtitle: "Monitoring second refrigerator"
+        url: http://192.168.1.51
+      
+      - name: "CloudFree SmartPlug2 - 3"
+        subtitle: "Monitoring downstairs freezer"
+        url: http://192.168.1.52
