@@ -1,0 +1,78 @@
+version: '3'
+services:
+  deluge-ggn:
+    image: linuxserver/deluge
+    container_name: deluge_ggn
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.20
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52000:8112
+      - 51000:58946
+      - 51000:58946/udp
+    volumes:
+      - $DOCKER_DATA/ggn:/config
+      - /mnt/torrenting/GGN/0:/downloads
+      - /mnt/torrenting/GGN/0T:/watch
+
+  deluge-mam:
+    image: linuxserver/deluge:amd64-2.0.0-0201906082034ubuntu18.04.1-ls23
+    container_name: deluge_mam
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.21
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52100:8112
+      - 51100:51100
+      - 51100:51100/udp
+    volumes:
+      - $DOCKER_DATA/mam:/config
+      - /mnt/torrenting/MAM/0:/downloads
+      - /mnt/torrenting/MAM/0T:/watch
+
+  deluge-emp:
+    image: linuxserver/deluge
+    container_name: deluge_emp
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.22
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52200:8112
+      - 51200:58946
+      - 51200:58946/udp
+    volumes:
+      - $DOCKER_DATA/emp:/config
+      - /mnt/torrenting/EMP/0:/downloads
+      - /mnt/torrenting/EMP/0T:/watch
+
+
+
+  deluge-pub:
+    image: linuxserver/deluge
+    container_name: deluge_pub
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.23
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52300:8112
+      - 51300:58946
+      - 51300:58946/udp
+    volumes:
+      - $DOCKER_DATA/pub:/config
+      - /mnt/torrenting/PUB/0:/downloads
+      - /mnt/torrenting/PUB/0T:/watch
+
+networks:
+  deluge:

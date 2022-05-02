@@ -1,28 +1,14 @@
 version: '3'
 services:
-    deluge-exporter_emp:
-        image: tobbez/deluge_exporter:latest
-        container_name: monitoring_deluge-exporter_emp
-        networks:
-          deluge:
-            ipv4_address: 172.25.0.30
-        ports:
-          - 53200:9354
-        environment:
-          - DELUGE_HOST=172.25.0.20
-        volumes:
-          - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
-    
     deluge-exporter_ggn:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_ggn
         networks:
-          deluge:
-            ipv4_address: 172.25.0.31
+          - deluge
         ports:
           - 53000:9354
         environment:
-          - DELUGE_HOST=172.25.0.21
+          - DELUGE_HOST=172.25.0.20
         volumes:
           - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
 
@@ -30,21 +16,31 @@ services:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_mam
         networks:
-          deluge:
-            ipv4_address: 172.25.0.32
+          - deluge
         ports:
           - 53100:9354
         environment:
-          - DELUGE_HOST=172.25.0.22
+          - DELUGE_HOST=172.25.0.21
         volumes:
           - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
+
+    deluge-exporter_emp:
+        image: tobbez/deluge_exporter:latest
+        container_name: monitoring_deluge-exporter_emp
+        networks:
+          - deluge
+        ports:
+          - 53200:9354
+        environment:
+          - DELUGE_HOST=172.25.0.22
+        volumes:
+          - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
 
     deluge-exporter_pub:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_pub
         networks:
-          deluge:
-            ipv4_address: 172.25.0.33
+          - deluge
         ports:
           - 53300:9354
         environment:
