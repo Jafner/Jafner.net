@@ -14,6 +14,7 @@ services:
         gitlab_rails['gitlab_shell_ssh_port'] = 2229
         nginx['listen_https'] = false
         nginx['listen_port'] = 80
+        gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '192.168.1.0/24']
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_address'] = "smtp.gmail.com"
         gitlab_rails['smtp_port'] = 465
