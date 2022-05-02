@@ -4,7 +4,7 @@ services:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_ggn
         networks:
-          - deluge
+          - deluge_deluge
         ports:
           - 53000:9354
         environment:
@@ -16,7 +16,7 @@ services:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_mam
         networks:
-          - deluge
+          - deluge_deluge
         ports:
           - 53100:9354
         environment:
@@ -28,7 +28,7 @@ services:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_emp
         networks:
-          - deluge
+          - deluge_deluge
         ports:
           - 53200:9354
         environment:
@@ -40,7 +40,7 @@ services:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_pub
         networks:
-          - deluge
+          - deluge_deluge
         ports:
           - 53300:9354
         environment:
@@ -49,5 +49,5 @@ services:
           - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
 
 networks:
-  deluge:
+  deluge_deluge:
     external: true
