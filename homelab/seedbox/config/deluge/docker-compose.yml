@@ -54,8 +54,6 @@ services:
       - /mnt/torrenting/EMP/0:/downloads
       - /mnt/torrenting/EMP/0T:/watch
 
-
-
   deluge-pub:
     image: linuxserver/deluge
     container_name: deluge_pub
@@ -76,3 +74,7 @@ services:
 
 networks:
   deluge:
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24
+          gateway: 172.25.0.1
