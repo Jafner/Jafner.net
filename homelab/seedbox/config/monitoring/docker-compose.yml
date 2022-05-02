@@ -11,8 +11,8 @@ services:
           - DELUGE_HOST=172.25.0.20
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58946
-        volumes:
-          - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
+        #volumes:
+        #  - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
 
     deluge-exporter_mam:
         image: tobbez/deluge_exporter:latest
@@ -25,8 +25,8 @@ services:
           - DELUGE_HOST=172.25.0.21
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58946
-        volumes:
-          - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
+        #volumes:
+        #  - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
 
     deluge-exporter_emp:
         image: tobbez/deluge_exporter:latest
@@ -39,8 +39,8 @@ services:
           - DELUGE_HOST=172.25.0.22
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58946
-        volumes:
-          - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
+        #volumes:
+        #  - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
 
     deluge-exporter_pub:
         image: tobbez/deluge_exporter:latest
@@ -53,8 +53,8 @@ services:
           - DELUGE_HOST=172.25.0.23
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58946
-        volumes:
-          - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
+        #volumes:
+        #  - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
 
 networks:
   deluge_deluge:
