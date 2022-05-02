@@ -10,6 +10,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.20
           - LISTEN_ADDRESS=0.0.0.0
+          - DELUGE_PORT=58946
         volumes:
           - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
 
@@ -23,6 +24,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.21
           - LISTEN_ADDRESS=0.0.0.0
+          - DELUGE_PORT=58946
         volumes:
           - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
 
@@ -36,6 +38,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.22
           - LISTEN_ADDRESS=0.0.0.0
+          - DELUGE_PORT=58946
         volumes:
           - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
 
@@ -49,6 +52,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.23
           - LISTEN_ADDRESS=0.0.0.0
+          - DELUGE_PORT=58946
         volumes:
           - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
 
