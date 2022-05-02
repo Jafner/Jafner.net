@@ -17,16 +17,6 @@ services:
             -   traefik.http.routers.prometheus.rule=Host(`prometheus.jafner.net`)
             -   traefik.http.routers.prometheus.tls.certresolver=lets-encrypt
 
-    5e-jafner-tools:
-        image: lusotycoon/apache-exporter
-        container_name: monitoring_prometheus-5e-jafner-tools
-        restart: unless-stopped
-        networks:
-            - monitoring
-        command: '--scrape_uri "https://5e.jafner.tools/server-status/?auto"'
-        labels:
-            - traefik.enable=false
-    
     pihole-jafner-net:
         image: ekofr/pihole-exporter:latest
         container_name: monitoring_prometheus-pihole-jafner-net
