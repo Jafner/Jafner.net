@@ -1,0 +1,14 @@
+version: '3'
+services:
+    deluge-exporter_ggn:
+        image: tobbez/deluge_exporter:latest
+        container_name: monitoring_deluge-exporter_ggn
+        ports:
+          - 9354:9354
+        environment:
+          - DELUGE_HOST=jafner.seedbox
+          - DELUGE_PORT=52000
+          - DELUGE_USER=localclient
+          - DELUGE_PASSWORD=deluge
+        volumes:
+          - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
