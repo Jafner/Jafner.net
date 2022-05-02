@@ -1,9 +1,11 @@
----
-version: "2.1"
+version: '3'
 services:
   deluge-pub:
     image: linuxserver/deluge
     container_name: deluge_pub
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.23
     restart: "no"
     env_file:
       - .env
@@ -15,3 +17,7 @@ services:
       - $DOCKER_DATA:/config
       - /mnt/torrenting/PUB/0:/downloads
       - /mnt/torrenting/PUB/0T:/watch
+
+networks:
+  deluge:
+    external: true

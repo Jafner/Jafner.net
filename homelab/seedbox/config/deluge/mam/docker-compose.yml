@@ -1,9 +1,11 @@
----
-version: "2.1"
+version: '3'
 services:
-  deluge-mam0:
+  deluge-mam:
     image: linuxserver/deluge:amd64-2.0.0-0201906082034ubuntu18.04.1-ls23
-    container_name: deluge_mam0
+    container_name: deluge_mam
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.22
     restart: "no"
     env_file:
       - .env
@@ -15,3 +17,7 @@ services:
       - $DOCKER_DATA:/config
       - /mnt/torrenting/MAM/0:/downloads
       - /mnt/torrenting/MAM/0T:/watch
+
+networks:
+  deluge:
+    external: true

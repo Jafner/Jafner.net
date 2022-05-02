@@ -1,9 +1,11 @@
----
-version: "2.1"
+version: '3'
 services:
-  deluge-ggn0:
+  deluge-ggn:
     image: linuxserver/deluge
-    container_name: deluge_ggn0
+    container_name: deluge_ggn
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.21
     restart: "no"
     env_file:
       - .env
@@ -15,3 +17,7 @@ services:
       - $DOCKER_DATA:/config
       - /mnt/torrenting/GGN/0:/downloads
       - /mnt/torrenting/GGN/0T:/watch
+
+networks:
+  deluge:
+    external: true

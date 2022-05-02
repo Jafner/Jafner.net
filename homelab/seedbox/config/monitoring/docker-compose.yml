@@ -1,14 +1,57 @@
 version: '3'
 services:
+    deluge-exporter_emp:
+        image: tobbez/deluge_exporter:latest
+        container_name: monitoring_deluge-exporter_emp
+        networks:
+          deluge:
+            ipv4_address: 172.25.0.30
+        ports:
+          - 53200:9354
+        environment:
+          - DELUGE_HOST=172.25.0.20
+        volumes:
+          - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
+    
     deluge-exporter_ggn:
         image: tobbez/deluge_exporter:latest
         container_name: monitoring_deluge-exporter_ggn
+        networks:
+          deluge:
+            ipv4_address: 172.25.0.31
         ports:
-          - 9354:9354
+          - 53000:9354
         environment:
-          - DELUGE_HOST=jafner.seedbox
-          - DELUGE_PORT=52000
-          - DELUGE_USER=localclient
-          - DELUGE_PASSWORD=deluge
+          - DELUGE_HOST=172.25.0.21
         volumes:
           - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
+
+    deluge-exporter_mam:
+        image: tobbez/deluge_exporter:latest
+        container_name: monitoring_deluge-exporter_mam
+        networks:
+          deluge:
+            ipv4_address: 172.25.0.32
+        ports:
+          - 53100:9354
+        environment:
+          - DELUGE_HOST=172.25.0.22
+        volumes:
+          - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
+
+    deluge-exporter_pub:
+        image: tobbez/deluge_exporter:latest
+        container_name: monitoring_deluge-exporter_pub
+        networks:
+          deluge:
+            ipv4_address: 172.25.0.33
+        ports:
+          - 53300:9354
+        environment:
+          - DELUGE_HOST=172.25.0.23
+        volumes:
+          - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
+
+networks:
+  deluge:
+    external: true

@@ -1,9 +1,11 @@
----
-version: "2.1"
+version: '3'
 services:
-  deluge-emp0:
+  deluge-emp:
     image: linuxserver/deluge
-    container_name: deluge_emp0
+    container_name: deluge_emp
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.20
     restart: "no"
     env_file:
       - .env
@@ -15,3 +17,7 @@ services:
       - $DOCKER_DATA:/config
       - /mnt/torrenting/EMP/0:/downloads
       - /mnt/torrenting/EMP/0T:/watch
+
+networks:
+  deluge:
+    external: true
