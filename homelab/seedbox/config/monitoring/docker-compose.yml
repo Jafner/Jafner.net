@@ -13,8 +13,8 @@ services:
           - DELUGE_PORT=58946
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
-        #volumes:
-        #  - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
+        volumes:
+          - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
 
     deluge-exporter_mam:
         image: tobbez/deluge_exporter:latest
@@ -29,8 +29,8 @@ services:
           - DELUGE_PORT=58946
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
-        #volumes:
-        #  - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
+        volumes:
+          - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
 
     deluge-exporter_emp:
         image: tobbez/deluge_exporter:latest
@@ -45,8 +45,8 @@ services:
           - DELUGE_PORT=58946
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
-        #volumes:
-        #  - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
+        volumes:
+          - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
 
     deluge-exporter_pub:
         image: tobbez/deluge_exporter:latest
@@ -61,8 +61,8 @@ services:
           - DELUGE_PORT=58946
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
-        #volumes:
-        #  - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
+        volumes:
+          - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
 
 networks:
   deluge_deluge:
