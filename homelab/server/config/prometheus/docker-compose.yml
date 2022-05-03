@@ -51,8 +51,9 @@ services:
         networks:
             - monitoring
         command: 
-            - "--plex-server=http://localhost:32400"
+            - "--plex-server=https://plex.jafner.net"
             - "--token=***REMOVED***"
+            - "--auto-discover"
         
 
 networks:
