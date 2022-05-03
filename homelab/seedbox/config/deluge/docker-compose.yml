@@ -13,6 +13,7 @@ services:
       - 52000:8112
       - 51000:58946
       - 51000:58946/udp
+      - 58846
     volumes:
       - $DOCKER_DATA/ggn:/config
       - /mnt/torrenting/GGN/0:/downloads
@@ -31,6 +32,7 @@ services:
       - 52100:8112
       - 51100:51100
       - 51100:51100/udp
+      - 58846
     volumes:
       - $DOCKER_DATA/mam:/config
       - /mnt/torrenting/MAM/0:/downloads
@@ -49,6 +51,7 @@ services:
       - 52200:8112
       - 51200:58946
       - 51200:58946/udp
+      - 58846
     volumes:
       - $DOCKER_DATA/emp:/config
       - /mnt/torrenting/EMP/0:/downloads
@@ -67,6 +70,7 @@ services:
       - 52300:8112
       - 51300:58946
       - 51300:58946/udp
+      - 58846
     volumes:
       - $DOCKER_DATA/pub:/config
       - /mnt/torrenting/PUB/0:/downloads
