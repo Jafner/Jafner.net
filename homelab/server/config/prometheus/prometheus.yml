@@ -75,21 +75,29 @@ scrape_configs:
       scrape_interval: 5s
       static_configs:
         - targets: ['192.168.1.21:53000']
+          labels:
+            instance: 'ggn'
     
     - job_name: 'deluge_mam'
       scrape_interval: 5s
       static_configs:
         - targets: ['192.168.1.21:53100']
+          labels:
+            instance: 'mam'
     
     - job_name: 'deluge_emp'
       scrape_interval: 5s
       static_configs:
         - targets: ['192.168.1.21:53200']
+          labels:
+            instance: 'emp'
     
     - job_name: 'deluge_pub'
       scrape_interval: 5s
       static_configs:
         - targets: ['192.168.1.21:53300']
+          labels:
+            instance: 'pub'
 
     # scrape IoT devices
     - job_name: 'tasmota'
