@@ -44,6 +44,17 @@ services:
         labels:
             - traefik.enable=false
 
+    plex-exporter:
+        image: maduflavins/plex-exporter
+        container_name: monitoring_plex-exporter
+        restart: unless-stopped
+        networks:
+            - monitoring
+        command: 
+            - "--plex-server=http://localhost:32400"
+            - "--token=***REMOVED***"
+        
+
 networks:
     monitoring:
         external: true
