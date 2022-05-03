@@ -45,7 +45,7 @@ services:
             - traefik.enable=false
 
     plex-exporter:
-        image: maduflavins/plex-exporter
+        image: granra/plex_exporter
         container_name: monitoring_plex-exporter
         restart: unless-stopped
         networks:
