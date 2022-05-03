@@ -71,10 +71,25 @@ scrape_configs:
         - targets: ['5e-jafner-tools:9117']
       metrics_path: "/metrics"
 
-    - job_name: 'deluge'
+    - job_name: 'deluge_ggn'
       scrape_interval: 5s
       static_configs:
-        - targets: ['192.168.1.21:53000','192.168.1.21:53100','192.168.1.21:53200','192.168.1.21:53300']
+        - targets: ['192.168.1.21:53000']
+    
+    - job_name: 'deluge_mam'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['192.168.1.21:53100']
+    
+    - job_name: 'deluge_emp'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['192.168.1.21:53200']
+    
+    - job_name: 'deluge_pub'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['192.168.1.21:53300']
 
     # scrape IoT devices
     - job_name: 'tasmota'
