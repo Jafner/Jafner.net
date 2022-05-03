@@ -87,6 +87,11 @@ scrape_configs:
           labels:
             tracker: 'pub'
 
+    - job_name: 'plex'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['plex-exporter:9594']
+
     # scrape IoT devices
     - job_name: 'tasmota'
       scrape_interval: 5s
