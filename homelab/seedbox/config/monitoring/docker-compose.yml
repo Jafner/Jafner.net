@@ -12,7 +12,7 @@ services:
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58846
           - DELUGE_USER=localclient
-          - DELUGE_PASSWORD=
+          - DELUGE_PASSWORD=deluge
         volumes:
           - $DOCKER_DATA/deluge/ggn:/root/.config/deluge/
 
@@ -28,7 +28,7 @@ services:
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58846
           - DELUGE_USER=localclient
-          - DELUGE_PASSWORD=
+          - DELUGE_PASSWORD=deluge
         volumes:
           - $DOCKER_DATA/deluge/mam:/root/.config/deluge/
 
@@ -44,7 +44,7 @@ services:
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58846
           - DELUGE_USER=localclient
-          - DELUGE_PASSWORD=
+          - DELUGE_PASSWORD=deluge
         volumes:
           - $DOCKER_DATA/deluge/emp:/root/.config/deluge/
 
@@ -60,7 +60,7 @@ services:
           - LISTEN_ADDRESS=0.0.0.0
           - DELUGE_PORT=58846
           - DELUGE_USER=localclient
-          - DELUGE_PASSWORD=
+          - DELUGE_PASSWORD=deluge
         volumes:
           - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
 
