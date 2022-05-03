@@ -10,7 +10,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.20
           - LISTEN_ADDRESS=0.0.0.0
-          - DELUGE_PORT=58946
+          - DELUGE_PORT=58846
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
         volumes:
@@ -26,7 +26,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.21
           - LISTEN_ADDRESS=0.0.0.0
-          - DELUGE_PORT=58946
+          - DELUGE_PORT=58846
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
         volumes:
@@ -42,7 +42,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.22
           - LISTEN_ADDRESS=0.0.0.0
-          - DELUGE_PORT=58946
+          - DELUGE_PORT=58846
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
         volumes:
@@ -58,7 +58,7 @@ services:
         environment:
           - DELUGE_HOST=172.25.0.23
           - LISTEN_ADDRESS=0.0.0.0
-          - DELUGE_PORT=58946
+          - DELUGE_PORT=58846
           - DELUGE_USER=localclient
           - DELUGE_PASSWORD=deluge
         volumes:
