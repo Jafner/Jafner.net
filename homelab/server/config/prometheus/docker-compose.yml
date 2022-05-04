@@ -54,6 +54,8 @@ services:
             - "--plex-server=https://plex.jafner.net"
             - "--token=***REMOVED***"
             - "--auto-discover"
+        labels:
+            - traefik.enable=false
         
 
 networks:
