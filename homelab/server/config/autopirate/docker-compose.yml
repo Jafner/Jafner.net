@@ -37,6 +37,25 @@ services:
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
       - traefik.http.routers.sonarr.middlewares=lan-only@file
 
+  headphones:
+    image: linuxserver/headphones
+    container_name: autopirate_headphones
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - "${DOCKER_DATA}/headphones:/config"
+      - "${DOWNLOAD_DIR}:/downloads"
+      - "${MEDIA_DIR}/Audio/Music:/music"
+    labels:
+      - traefik.http.routers.headphones.rule=Host(`headphones.jafner.net`)
+      - traefik.http.routers.headphones.tls.certresolver=lets-encrypt
+      - trarfik.http.services.headphones.loadbalancer.server.port=8181
+      - traefik.http.routers.headphones.middlewares=lan-only@file
+
   nzbhydra2:
     image: linuxserver/nzbhydra2
     container_name: autopirate_nzbhydra2
