@@ -212,6 +212,10 @@ services:
         logo: assets/icons/sonarr-256.png
         subtitle: "TV show collection manager"
         url: "https://sonarr.jafner.net"
+      - name: "Lidarr"
+        logo: assets/icons/lidarr.png
+        subtitle: "Music collection manager"
+        url: "https://lidarr.jafner.net"
       - name: "Tdarr"
         logo: assets/icons/tdarr.png
         subtitle: "Transcode management system for media library"
