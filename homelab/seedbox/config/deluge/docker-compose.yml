@@ -76,6 +76,25 @@ services:
       - /mnt/torrenting/PUB/0:/downloads
       - /mnt/torrenting/PUB/0T:/watch
 
+  deluge-red:
+    image: linuxserver/deluge
+    container_name: deluge_red
+    networks:
+      deluge:
+        ipv4_address: 172.25.0.24
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52400:8112
+      - 51400:58946
+      - 51400:58946/udp
+      - 58846
+    volumes:
+      - $DOCKER_DATA/red:/config
+      - /mnt/torrenting/RED/0:/downloads
+      - /mnt/torrenting/RED/0T:/watch
+
 networks:
   deluge:
     ipam:

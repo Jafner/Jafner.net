@@ -64,6 +64,22 @@ services:
         volumes:
           - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
 
+    deluge-exporter_red:
+        image: tobbez/deluge_exporter:latest
+        container_name: monitoring_deluge-exporter_red
+        networks:
+          - deluge_deluge
+        ports:
+          - 53400:9354
+        environment:
+          - DELUGE_HOST=172.25.0.24
+          - LISTEN_ADDRESS=0.0.0.0
+          - DELUGE_PORT=58846
+          - DELUGE_USER=localclient
+          #- DELUGE_PASSWORD=deluge
+        volumes:
+          - $DOCKER_DATA/deluge/pub:/root/.config/deluge/
+
 networks:
   deluge_deluge:
     external: true
