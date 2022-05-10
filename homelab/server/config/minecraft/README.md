@@ -18,3 +18,14 @@ Check the following server.properties values:
 | `rcon.password` | `thanksitzg` | Set a simple password to protect the rcon port |
 | `rcon.port` | `25575` | Set this to what itzg's rcon-cli expects as default |
 | `view-distance` | 10 for lightweight servers, 6 for heavy servers | View distance has great impact on server load |
+
+## Pregenerating Chunks
+Make sure that the [Chunk Pregenerator](https://www.curseforge.com/minecraft/mc-mods/chunkpregenerator) mod is installed. It is compatible with most Minecraft versions between 1.7.2 and 1.16.5.
+To pregen chunks, first connect to the server's RCON CLI. Then, run the following, 
+`pregen start gen radius Pregen SQUARE 0 0 100`
+This should take about half an hour and will generate about 40,000 chunks (2r^2). 
+For a job closer to 8 hours, run
+`pregen start gen radius Pregen SQUARE 0 0 500`
+Which will generate about 500,000 chunks.
+
+A Ryzen 7 5800X generates chunks at about 1.35 chunks per tick (27 chunks per second @ 20 TPS).
