@@ -12,9 +12,12 @@ For a living portal listing all user-facing services, go to https://home.jafner.
 This repository is automatically pushed to the host when a change is made to a file in this subdirectory.
 
 ## Sharing Files
-For files smaller than 2 GB, use [XBackBone](https://xbackbone.jafner.net).
-For files between 2 GB and 400 GB, use [Mega](https://mega.io/).
-For files greater than 400 GB, ship a drive.
+For files smaller than 2 GB, use [XBackBone](https://xbackbone.jafner.net).  
+For files greater than 2 GB, use one of the following:
+
+* [Mega](https://mega.io/) - For transfers up to 400 GB
+* [SFTP](./config/sftp/README.md) - For transfers up to the free space of `/mnt/md0/sftp`
+* [BitTorrent](/seedbox/config/deluge/README.md)
 
 ## System `/etc/fstab`
 ```
