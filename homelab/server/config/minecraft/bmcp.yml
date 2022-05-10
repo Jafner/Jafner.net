@@ -14,6 +14,12 @@ services:
       - ENABLE_RCON=true # This does not override server.properties
       - RCON_PORT=25575 # This does not override server.properties
       - RCON_PASSWORD=${RCON_PASSWORD} # This does not override server.properties
+      - RCON_CMDS_STARTUP= |-
+        /pregen start gen radius Pregen SQUARE 0 0 500
+      - RCON_CMDS_FIRST_CONNECT= |-
+        /pregen pause
+      - RCON_CMDS_LAST_DISCONNECT= |-
+        /pregen continue
     volumes:
       - $DOCKER_DATA/bmcp:/data:rw
     networks:
