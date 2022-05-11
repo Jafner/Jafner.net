@@ -92,6 +92,11 @@ scrape_configs:
       static_configs:
         - targets: ['plex-exporter:9594']
 
+    - job_name: 'sabnzbd'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['sabnzbd_exporter:9387']
+
     # scrape IoT devices
     - job_name: 'tasmota'
       scrape_interval: 5s
