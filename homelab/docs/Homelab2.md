@@ -11,7 +11,10 @@ The practical benefits of making the [pet-to-cattle paradigm shift](http://cloud
 - Efficiency. By implementing the same technologies used by [hyper-scale](https://en.wikipedia.org/wiki/Hyperscale_computing) cloud providers, the system can scale dynamically with load for many applications. 
 
 ## How?
-- Will have to distinguish between Stateless and Stateful applications.
+The first stage is research. There are several prerequisite research steps before any infrastructural change can begin. 
+So let's break down what we need to learn before we can break ground:
+- Take inventory of currently provided applications. 
+- Distinguish between Stateless and Stateful applications.
 - Will use [Kubernetes](https://github.com/kubernetes/kubernetes) to manage nodes and workloads.
 - Will need to determine whether to use a "General Purpose OS" like [Debian](https://www.debian.org/), or a "Container Optimized OS" like [Talos OS](https://www.siderolabs.com/platform/talos-os-for-kubernetes/).
 - Will likely need to re-architect NAS. Switch to [TrueNAS Scale](https://www.truenas.com/truenas-scale/) and implement Minio S3 for object storage.
