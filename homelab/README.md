@@ -23,4 +23,6 @@ git checkout main
 
 ## Disabling Sparse Checkout
 To disable sparse checkout, simply run `git sparse-checkout disable`. 
+With this, it can also be re-eneabled with `git sparse-checkout init`.
+You can use these two commands to toggle sparse checkout.
 Per: https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled
