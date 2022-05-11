@@ -20,3 +20,7 @@ git remote add -f origin ssh://git@gitlab.jafner.net:2229/Jafner/homelab.git
 echo "<deployment name; e.g. server/>" > .git/info/sparse-checkout
 git checkout main
 ```
+
+## Disabling Sparse Checkout
+To disable sparse checkout, simply run `git sparse-checkout disable`. 
+Per: https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled
