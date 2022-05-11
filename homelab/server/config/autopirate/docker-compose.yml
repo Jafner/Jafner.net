@@ -18,6 +18,7 @@ services:
       - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
       - traefik.http.services.radarr.loadbalancer.server.port=7878
       - traefik.http.routers.radarr.middlewares=lan-only@file
+  
   sonarr:
     image: linuxserver/sonarr
     container_name: autopirate_sonarr
@@ -79,6 +80,7 @@ services:
     container_name: autopirate_sabnzbd
     networks:
       - web
+      - monitoring
     environment:
       - PUID=1000
       - PGID=1000
@@ -94,7 +96,6 @@ services:
       - traefik.http.routers.sabnzbd.tls.certresolver=lets-encrypt
       - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
       - traefik.http.routers.sabnzbd.middlewares=lan-only@file
-
 
   tdarr:
     image: haveagitgat/tdarr:latest
@@ -169,4 +170,5 @@ networks:
         - subnet: "172.110.0.0/24"
   web:
     external: true
-
+  monitoring:
+    external: true

@@ -56,7 +56,17 @@ services:
             - "--auto-discover"
         labels:
             - traefik.enable=false
-        
+
+    sabnzbd_exporter:
+        image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
+        container_name: monitoring_sabnzbd_exporter
+        restart: unless-stopped
+        networks:
+            - monitoring
+        environment:
+            - SABNZBD_BASEURLS=https://sabnzbd.jafner.net:443
+            - SABNZBD_APIKEYS=***REMOVED***
+
 
 networks:
     monitoring:
