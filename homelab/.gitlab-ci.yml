@@ -1,54 +1,54 @@
-stages:
-  - test
-  - deploy
+#stages:
+#  - test
+#  - deploy
 
-before_script:
-  # configure SSH keys
-  - apt-get update
-  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-  - eval $(ssh-agent -s)
-  - ssh-add <(echo "$SSH_PRIVATE_KEY")
-  - mkdir -p ~/.ssh
-  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#before_script:
+#  # configure SSH keys
+#  - apt-get update
+#  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+#  - eval $(ssh-agent -s)
+#  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#  - mkdir -p ~/.ssh
+#  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-docker-compose-test:
-  image: jafner/debian-bullseye-docker:latest
-  stage: test
-  rules:
-    - changes:
-        - seedbox/config/
-        - server/config/
-        - jafner-tools/config/
-  script:
-    - find ~+ -type f -name docker-compose.yml > composes.txt
-    - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
-    - for file in `cat composes.txt`; do docker compose -f $file config; done
-    - rm composes.txt
+#docker-compose-test:
+#  image: jafner/debian-bullseye-docker:latest
+#  stage: test
+#  rules:
+#    - changes:
+#        - seedbox/config/
+#        - server/config/
+#        - jafner-tools/config/
+#  script:
+#    - find ~+ -type f -name docker-compose.yml > composes.txt
+#    - find ~+/server/config/minecraft/ -type f -name *.yml >> composes.txt
+#    - for file in `cat composes.txt`; do docker compose -f $file config; done
+#    - rm composes.txt
   
 
-server-deploy:    
-  image: debian:bullseye
-  stage: deploy
-  rules:
-    - changes:
-        - server/
-  script:
-    - ssh joey@joey-server "cd /home/joey/homelab && git pull"
+#server-deploy:    
+#  image: debian:bullseye
+#  stage: deploy
+#  rules:
+#    - changes:
+#        - server/
+#  script:
+#    - ssh joey@joey-server "cd /home/joey/homelab && git pull"
 
-seedbox-deploy:    
-  image: debian:bullseye
-  stage: deploy
-  rules:
-    - changes:
-        - seedbox/
-  script:
-    - ssh joey@joey-seedbox "cd /home/joey/homelab && git pull"
+#seedbox-deploy:    
+#  image: debian:bullseye
+#  stage: deploy
+#  rules:
+#    - changes:
+#        - seedbox/
+#  script:
+#    - ssh joey@joey-seedbox "cd /home/joey/homelab && git pull"
 
-jafner-tools-deploy:    
-  image: debian:bullseye
-  stage: deploy
-  rules:
-    - changes:
-        - jafner-tools/
-  script:
-    - ssh root@jafner.tools "cd /root/homelab && git pull"
+#jafner-tools-deploy:    
+#  image: debian:bullseye
+#  stage: deploy
+#  rules:
+#    - changes:
+#        - jafner-tools/
+#  script:
+#    - ssh root@jafner.tools "cd /root/homelab && git pull"
