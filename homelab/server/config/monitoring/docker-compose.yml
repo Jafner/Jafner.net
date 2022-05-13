@@ -19,6 +19,7 @@ services:
     prometheus:
         image: prom/prometheus:latest
         container_name: monitoring_prometheus
+        user: "1000:1000"
         networks:
             - monitoring
             - web
