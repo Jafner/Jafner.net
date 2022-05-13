@@ -1,5 +1,21 @@
 version: '3'
 services:
+    grafana:
+        image: grafana/grafana-oss:latest
+        container_name: grafana_grafana
+        restart: unless-stopped
+        networks:
+            - monitoring
+            - web
+        user: "0"
+        volumes:  
+            - ${DOCKER_DATA}/grafana:/var/lib/grafana
+            - ./grafana.ini:/etc/grafana/grafana.ini
+        labels:
+            - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
+            - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
+            #- traefik.http.routers.grafana.middlewares=authelia@file
+
     prometheus:
         image: prom/prometheus:latest
         container_name: monitoring_prometheus
