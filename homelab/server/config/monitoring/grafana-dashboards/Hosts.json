@@ -48,7 +48,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -133,7 +133,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -211,7 +211,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -290,7 +290,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -352,7 +352,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -437,7 +437,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -560,7 +560,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -681,7 +681,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -875,7 +875,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -924,7 +924,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "sBp1YgX7k"
+            "uid": "7z5wqRXnz"
           },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{job=\"joey-server\"} * 100) / node_memory_MemTotal_bytes{job=\"joey-server\"})",
@@ -1011,7 +1011,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -1169,7 +1169,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Percentage of secondary disk used",
       "fieldConfig": {
@@ -1275,7 +1275,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -1384,7 +1384,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -1469,7 +1469,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -1547,7 +1547,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -1626,7 +1626,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -1688,7 +1688,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -1771,7 +1771,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -1893,7 +1893,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -2024,7 +2024,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -2168,7 +2168,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -2286,7 +2286,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -2395,7 +2395,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -2480,7 +2480,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -2558,7 +2558,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -2637,7 +2637,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -2699,7 +2699,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -2821,7 +2821,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -2942,7 +2942,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -3073,7 +3073,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -3217,7 +3217,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -3335,7 +3335,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -3444,7 +3444,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -3528,7 +3528,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -3605,7 +3605,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -3683,7 +3683,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -3744,7 +3744,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -3826,7 +3826,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -3948,7 +3948,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -4079,7 +4079,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -4223,7 +4223,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -4341,7 +4341,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -4450,7 +4450,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -4534,7 +4534,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -4611,7 +4611,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -4689,7 +4689,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -4750,7 +4750,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -4832,7 +4832,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -4954,7 +4954,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -5085,7 +5085,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -5229,7 +5229,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -5347,7 +5347,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Used Swap",
       "fieldConfig": {

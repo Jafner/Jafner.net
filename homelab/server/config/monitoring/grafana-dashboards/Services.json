@@ -48,7 +48,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -143,7 +143,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -232,7 +232,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -338,7 +338,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "",
       "fieldConfig": {
@@ -425,7 +425,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -529,7 +529,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -592,7 +592,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -691,7 +691,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -813,7 +813,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -888,7 +888,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -951,7 +951,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1047,7 +1047,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1133,7 +1133,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1192,7 +1192,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1278,7 +1278,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1381,7 +1381,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1447,7 +1447,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1512,7 +1512,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1616,7 +1616,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "description": "Each point is a counter for the last 24 hours.",
       "fieldConfig": {
@@ -1687,7 +1687,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "sBp1YgX7k"
+        "uid": "7z5wqRXnz"
       },
       "fieldConfig": {
         "defaults": {
