@@ -131,7 +131,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -252,7 +252,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -446,7 +446,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -578,7 +578,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -696,7 +696,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -832,7 +832,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Percentage of secondary disk used",
       "fieldConfig": {
@@ -934,7 +934,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -1019,7 +1019,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -1097,7 +1097,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -1176,7 +1176,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -1238,7 +1238,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -1317,7 +1317,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -1423,7 +1423,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -1545,7 +1545,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -1676,7 +1676,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -1820,7 +1820,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -1938,7 +1938,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -2030,7 +2030,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -2114,7 +2114,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -2191,7 +2191,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -2269,7 +2269,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -2330,7 +2330,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -2468,7 +2468,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -2589,7 +2589,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -2720,7 +2720,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -2864,7 +2864,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -2982,7 +2982,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -3074,7 +3074,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -3158,7 +3158,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -3235,7 +3235,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -3313,7 +3313,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -3374,7 +3374,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -3469,7 +3469,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -3553,7 +3553,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -3630,7 +3630,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -3708,7 +3708,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -3769,7 +3769,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -3851,7 +3851,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -3973,7 +3973,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -4104,7 +4104,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -4248,7 +4248,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
@@ -4366,7 +4366,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -4475,7 +4475,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total disk capacity",
       "fieldConfig": {
@@ -4559,7 +4559,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total number of CPU cores",
       "fieldConfig": {
@@ -4636,7 +4636,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total RAM",
       "fieldConfig": {
@@ -4714,7 +4714,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Total SWAP",
       "fieldConfig": {
@@ -4792,7 +4792,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "System uptime",
       "fieldConfig": {
@@ -4857,7 +4857,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Percentage of boot disk used",
       "fieldConfig": {
@@ -4979,7 +4979,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "decimals": 2,
       "description": "Percentage of CPU utilized (averaged over last minute)",
@@ -5110,7 +5110,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -5230,7 +5230,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Used Swap",
       "fieldConfig": {
@@ -5350,7 +5350,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "qs3pp-0nk"
+        "uid": "sBp1YgX7k"
       },
       "description": "Basic network info per interface",
       "fieldConfig": {
