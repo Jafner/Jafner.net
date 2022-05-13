@@ -24,49 +24,10 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 15,
+  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 4,
-        "x": 0,
-        "y": 0
-      },
-      "id": 74,
-      "options": {
-        "alertName": "",
-        "dashboardAlerts": false,
-        "dashboardTitle": "",
-        "maxItems": 10,
-        "showOptions": "current",
-        "sortOrder": 1,
-        "stateFilter": {
-          "alerting": false,
-          "execution_error": false,
-          "no_data": false,
-          "ok": false,
-          "paused": false,
-          "pending": false
-        },
-        "tags": []
-      },
-      "pluginVersion": "8.5.2",
-      "targets": [
-        {
-          "queryType": "randomWalk",
-          "refId": "A"
-        }
-      ],
-      "title": "Alerts",
-      "type": "alertlist"
-    },
     {
       "collapsed": false,
       "datasource": {
@@ -77,12 +38,480 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 0
       },
       "id": 2,
       "panels": [],
       "title": "Joey-server",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Total disk capacity",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 12,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_filesystem_size_bytes{job=\"joey-server\",mountpoint=~\"/|/root.dev\",fstype!=\"rootfs\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Boot Disk Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Total number of CPU cores",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 34,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "count(count(node_cpu_seconds_total{job=\"joey-server\"}) by (cpu))",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "CPU Cores",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Total RAM",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 1
+      },
+      "id": 46,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_memory_MemTotal_bytes{job=\"joey-server\"}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "RAM Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "System uptime",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "id": 62,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_time_seconds{job=\"joey-server\"} - node_boot_time_seconds{job=\"joey-server\"}",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Host Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Total disk capacity",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 72,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_filesystem_size_bytes{job=\"joey-server\",mountpoint=~\"/mnt/md0\",fstype!=\"rootfs\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Secondary Disk Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Total SWAP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 70,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_memory_SwapTotal_bytes{job=\"joey-server\"}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "SWAP Total",
+      "type": "stat"
     },
     {
       "alert": {
@@ -143,10 +572,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
+        "h": 9,
+        "w": 4,
         "x": 0,
-        "y": 13
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 22,
@@ -266,10 +695,10 @@
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 3,
-        "y": 13
+        "h": 9,
+        "w": 4,
+        "x": 4,
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 33,
@@ -458,10 +887,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 6,
-        "y": 13
+        "h": 9,
+        "w": 4,
+        "x": 8,
+        "y": 4
       },
       "hiddenSeries": false,
       "hideTimeOverride": false,
@@ -493,6 +922,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "sBp1YgX7k"
+          },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{job=\"joey-server\"} * 100) / node_memory_MemTotal_bytes{job=\"joey-server\"})",
           "format": "time_series",
@@ -590,10 +1023,10 @@
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 9,
-        "y": 13
+        "h": 9,
+        "w": 4,
+        "x": 12,
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 58,
@@ -690,102 +1123,6 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Used Swap",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 12,
-        "y": 13
-      },
-      "hiddenSeries": false,
-      "id": 69,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.5.2",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "((node_memory_SwapTotal_bytes{job=\"joey-server\"} - node_memory_SwapFree_bytes{job=\"joey-server\"}) / (node_memory_SwapTotal_bytes{job=\"joey-server\"} )) * 100",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Swap Utilization",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Swap Utilization",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:456",
-          "format": "percent",
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:457",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
       "alert": {
         "alertRuleTags": {},
         "conditions": [
@@ -844,10 +1181,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 15,
-        "y": 13
+        "h": 9,
+        "w": 4,
+        "x": 16,
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 71,
@@ -932,6 +1269,119 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Used Swap",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 20,
+        "y": 4
+      },
+      "hiddenSeries": false,
+      "id": 69,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "((node_memory_SwapTotal_bytes{job=\"joey-server\"} - node_memory_SwapFree_bytes{job=\"joey-server\"}) / (node_memory_SwapTotal_bytes{job=\"joey-server\"} )) * 100",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Swap Utilization",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Swap Utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:456",
+          "format": "percent",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:457",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 4,
+      "panels": [],
+      "title": "Joey-seedbox",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "sBp1YgX7k"
@@ -976,12 +1426,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 20
+        "y": 14
       },
-      "id": 12,
+      "id": 16,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1003,7 +1453,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_filesystem_size_bytes{job=\"joey-server\",mountpoint=~\"/|/root.dev\",fstype!=\"rootfs\"}",
+          "expr": "node_filesystem_size_bytes{job=\"joey-seedbox\",mountpoint=~\"/|/root.dev\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1056,12 +1506,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 3,
-        "y": 20
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 14
       },
-      "id": 34,
+      "id": 32,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1083,7 +1533,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "count(count(node_cpu_seconds_total{job=\"joey-server\"}) by (cpu))",
+          "expr": "count(count(node_cpu_seconds_total{job=\"joey-seedbox\"}) by (cpu))",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1135,12 +1585,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 6,
-        "y": 20
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 14
       },
-      "id": 46,
+      "id": 44,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1162,7 +1612,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_memory_MemTotal_bytes{job=\"joey-server\"}",
+          "expr": "node_memory_MemTotal_bytes{job=\"joey-seedbox\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1200,12 +1650,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 9,
-        "y": 20
+        "h": 3,
+        "w": 8,
+        "x": 12,
+        "y": 14
       },
-      "id": 62,
+      "id": 61,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
@@ -1225,7 +1675,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_time_seconds{job=\"joey-server\"} - node_boot_time_seconds{job=\"joey-server\"}",
+          "expr": "node_time_seconds{job=\"joey-seedbox\"} - node_boot_time_seconds{job=\"joey-seedbox\"}",
           "interval": "",
           "legendFormat": "",
           "queryType": "randomWalk",
@@ -1276,12 +1726,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 12,
-        "y": 20
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 14
       },
-      "id": 70,
+      "id": 68,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1303,7 +1753,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_memory_SwapTotal_bytes{job=\"joey-server\"}",
+          "expr": "node_memory_SwapTotal_bytes{job=\"joey-seedbox\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1313,108 +1763,6 @@
       ],
       "title": "SWAP Total",
       "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Total disk capacity",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 70
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 15,
-        "y": 20
-      },
-      "id": 72,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.2",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "node_filesystem_size_bytes{job=\"joey-server\",mountpoint=~\"/mnt/md0\",fstype!=\"rootfs\"}",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "Secondary Disk Total",
-      "type": "stat"
-    },
-    {
-      "collapsed": false,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 27
-      },
-      "id": 4,
-      "panels": [],
-      "title": "Joey-seedbox",
-      "type": "row"
     },
     {
       "aliasColors": {},
@@ -1435,10 +1783,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
+        "h": 9,
+        "w": 4,
         "x": 0,
-        "y": 28
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 20,
@@ -1559,10 +1907,10 @@
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 3,
-        "y": 28
+        "h": 9,
+        "w": 4,
+        "x": 4,
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 31,
@@ -1688,10 +2036,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 6,
-        "y": 28
+        "h": 9,
+        "w": 4,
+        "x": 8,
+        "y": 17
       },
       "hiddenSeries": false,
       "hideTimeOverride": false,
@@ -1832,10 +2180,10 @@
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 9,
-        "y": 28
+        "h": 9,
+        "w": 8,
+        "x": 12,
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 57,
@@ -1950,10 +2298,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 12,
-        "y": 28
+        "h": 9,
+        "w": 4,
+        "x": 20,
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 67,
@@ -2028,6 +2376,23 @@
       }
     },
     {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Jafner-tools",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "sBp1YgX7k"
@@ -2054,7 +2419,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgba(50, 172, 45, 0.97)"
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -2071,12 +2437,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 35
+        "y": 27
       },
-      "id": 16,
+      "id": 13,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -2094,11 +2460,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_filesystem_size_bytes{job=\"joey-seedbox\",mountpoint=~\"/|/root.dev\",fstype!=\"rootfs\"}",
+          "expr": "node_filesystem_size_bytes{job=\"jafner.tools\",mountpoint=~\"/|/root.dev\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2137,7 +2503,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2150,12 +2517,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 3,
-        "y": 35
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 27
       },
-      "id": 32,
+      "id": 24,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -2173,11 +2540,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
-          "expr": "count(count(node_cpu_seconds_total{job=\"joey-seedbox\"}) by (cpu))",
+          "expr": "count(count(node_cpu_seconds_total{job=\"jafner.tools\"}) by (cpu))",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -2215,7 +2582,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2228,12 +2596,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 6,
-        "y": 35
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 27
       },
-      "id": 44,
+      "id": 38,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -2251,11 +2619,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_memory_MemTotal_bytes{job=\"joey-seedbox\"}",
+          "expr": "node_memory_MemTotal_bytes{job=\"jafner.tools\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -2283,7 +2651,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2292,12 +2661,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 9,
-        "y": 35
+        "h": 3,
+        "w": 8,
+        "x": 12,
+        "y": 27
       },
-      "id": 61,
+      "id": 50,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
@@ -2313,11 +2682,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_time_seconds{job=\"joey-seedbox\"} - node_boot_time_seconds{job=\"joey-seedbox\"}",
+          "expr": "node_time_seconds{job=\"jafner.tools\"} - node_boot_time_seconds{job=\"jafner.tools\"}",
           "interval": "",
           "legendFormat": "",
           "queryType": "randomWalk",
@@ -2354,7 +2723,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2367,12 +2737,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 12,
-        "y": 35
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 27
       },
-      "id": 68,
+      "id": 54,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -2390,11 +2760,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_memory_SwapTotal_bytes{job=\"joey-seedbox\"}",
+          "expr": "node_memory_SwapTotal_bytes{job=\"jafner.tools\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -2404,23 +2774,6 @@
       ],
       "title": "SWAP Total",
       "type": "stat"
-    },
-    {
-      "collapsed": false,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 42
-      },
-      "id": 10,
-      "panels": [],
-      "title": "Jafner-tools",
-      "type": "row"
     },
     {
       "alert": {
@@ -2480,10 +2833,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
+        "h": 9,
+        "w": 4,
         "x": 0,
-        "y": 43
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 19,
@@ -2504,7 +2857,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2603,10 +2956,10 @@
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 3,
-        "y": 43
+        "h": 9,
+        "w": 4,
+        "x": 4,
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 26,
@@ -2631,7 +2984,7 @@
         "alertThreshold": true
       },
       "percentage": true,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2732,10 +3085,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 6,
-        "y": 43
+        "h": 9,
+        "w": 4,
+        "x": 8,
+        "y": 30
       },
       "hiddenSeries": false,
       "hideTimeOverride": false,
@@ -2757,7 +3110,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2876,10 +3229,10 @@
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 9,
-        "y": 43
+        "h": 9,
+        "w": 8,
+        "x": 12,
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 48,
@@ -2906,7 +3259,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2994,10 +3347,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 12,
-        "y": 43
+        "h": 9,
+        "w": 4,
+        "x": 20,
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 52,
@@ -3018,7 +3371,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3072,384 +3425,6 @@
       }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Total disk capacity",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 70
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 0,
-        "y": 50
-      },
-      "id": 13,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.0",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "node_filesystem_size_bytes{job=\"jafner.tools\",mountpoint=~\"/|/root.dev\",fstype!=\"rootfs\"}",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "Boot Disk Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Total number of CPU cores",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 3,
-        "y": 50
-      },
-      "id": 24,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.0",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "count(count(node_cpu_seconds_total{job=\"jafner.tools\"}) by (cpu))",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "CPU Cores",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Total RAM",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 6,
-        "y": 50
-      },
-      "id": 38,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.0",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "node_memory_MemTotal_bytes{job=\"jafner.tools\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "RAM Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "System uptime",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 9,
-        "y": 50
-      },
-      "id": 50,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.0",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "node_time_seconds{job=\"jafner.tools\"} - node_boot_time_seconds{job=\"jafner.tools\"}",
-          "interval": "",
-          "legendFormat": "",
-          "queryType": "randomWalk",
-          "refId": "A"
-        }
-      ],
-      "title": "Host Uptime",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Total SWAP",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 12,
-        "y": 50
-      },
-      "id": 54,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.0",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "node_memory_SwapTotal_bytes{job=\"jafner.tools\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "SWAP Total",
-      "type": "stat"
-    },
-    {
       "collapsed": false,
       "datasource": {
         "type": "datasource",
@@ -3459,7 +3434,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 39
       },
       "id": 8,
       "panels": [],
@@ -3513,7 +3488,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 58
+        "y": 40
       },
       "id": 14,
       "links": [],
@@ -3533,7 +3508,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -3592,7 +3567,7 @@
         "h": 3,
         "w": 4,
         "x": 4,
-        "y": 58
+        "y": 40
       },
       "id": 28,
       "links": [],
@@ -3612,7 +3587,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -3670,7 +3645,7 @@
         "h": 3,
         "w": 4,
         "x": 8,
-        "y": 58
+        "y": 40
       },
       "id": 40,
       "links": [],
@@ -3690,7 +3665,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -3732,9 +3707,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 8,
         "x": 12,
-        "y": 58
+        "y": 40
       },
       "id": 59,
       "options": {
@@ -3752,7 +3727,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -3807,9 +3782,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 58
+        "w": 4,
+        "x": 20,
+        "y": 40
       },
       "id": 64,
       "links": [],
@@ -3829,7 +3804,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -3866,7 +3841,7 @@
         "h": 11,
         "w": 4,
         "x": 0,
-        "y": 61
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 21,
@@ -3887,7 +3862,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3990,7 +3965,7 @@
         "h": 11,
         "w": 4,
         "x": 4,
-        "y": 61
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 27,
@@ -4015,7 +3990,7 @@
         "alertThreshold": true
       },
       "percentage": true,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -4119,7 +4094,7 @@
         "h": 11,
         "w": 4,
         "x": 8,
-        "y": 61
+        "y": 43
       },
       "hiddenSeries": false,
       "hideTimeOverride": false,
@@ -4141,7 +4116,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -4261,9 +4236,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 11,
-        "w": 3,
+        "w": 8,
         "x": 12,
-        "y": 61
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 55,
@@ -4290,7 +4265,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -4379,9 +4354,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 11,
-        "w": 3,
-        "x": 15,
-        "y": 61
+        "w": 4,
+        "x": 20,
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 63,
@@ -4402,7 +4377,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -4465,7 +4440,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 54
       },
       "id": 6,
       "panels": [],
@@ -4516,10 +4491,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 73
+        "y": 55
       },
       "id": 15,
       "links": [],
@@ -4539,7 +4514,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -4595,10 +4570,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 73
+        "y": 55
       },
       "id": 30,
       "links": [],
@@ -4618,7 +4593,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -4673,10 +4648,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 73
+        "y": 55
       },
       "id": 42,
       "links": [],
@@ -4696,7 +4671,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -4709,6 +4684,67 @@
         }
       ],
       "title": "RAM Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "System uptime",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 12,
+        "y": 55
+      },
+      "id": 60,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_time_seconds{job=\"router\"} - node_boot_time_seconds{job=\"router\"}",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Host Uptime",
       "type": "stat"
     },
     {
@@ -4751,10 +4787,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
-        "x": 12,
-        "y": 73
+        "x": 20,
+        "y": 55
       },
       "id": 66,
       "links": [],
@@ -4774,7 +4810,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "targets": [
         {
           "exemplar": true,
@@ -4787,67 +4823,6 @@
         }
       ],
       "title": "SWAP Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "System uptime",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 73
-      },
-      "id": 60,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.0",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "node_time_seconds{job=\"router\"} - node_boot_time_seconds{job=\"router\"}",
-          "interval": "",
-          "legendFormat": "",
-          "queryType": "randomWalk",
-          "refId": "A"
-        }
-      ],
-      "title": "Host Uptime",
       "type": "stat"
     },
     {
@@ -4872,7 +4847,7 @@
         "h": 10,
         "w": 4,
         "x": 0,
-        "y": 77
+        "y": 58
       },
       "hiddenSeries": false,
       "id": 18,
@@ -4893,7 +4868,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -4996,7 +4971,7 @@
         "h": 10,
         "w": 4,
         "x": 4,
-        "y": 77
+        "y": 58
       },
       "hiddenSeries": false,
       "id": 29,
@@ -5021,7 +4996,7 @@
         "alertThreshold": true
       },
       "percentage": true,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -5125,7 +5100,7 @@
         "h": 10,
         "w": 4,
         "x": 8,
-        "y": 77
+        "y": 58
       },
       "hiddenSeries": false,
       "hideTimeOverride": false,
@@ -5147,7 +5122,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -5224,102 +5199,6 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "sBp1YgX7k"
-      },
-      "description": "Used Swap",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 4,
-        "x": 12,
-        "y": 77
-      },
-      "hiddenSeries": false,
-      "id": 65,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.1.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "((node_memory_SwapTotal_bytes{job=\"router\"} - node_memory_SwapFree_bytes{job=\"router\"}) / (node_memory_SwapTotal_bytes{job=\"router\"} )) * 100",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Swap Utilization",
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Swap Utilization",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:456",
-          "format": "percent",
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:457",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
       "aliasColors": {
         "Recv_bytes_eth2": "#7EB26D",
         "Recv_bytes_lo": "#0A50A1",
@@ -5364,8 +5243,8 @@
       "gridPos": {
         "h": 10,
         "w": 8,
-        "x": 16,
-        "y": 77
+        "x": 12,
+        "y": 58
       },
       "hiddenSeries": false,
       "id": 56,
@@ -5392,7 +5271,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.1.0",
+      "pluginVersion": "8.5.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -5460,6 +5339,102 @@
       "yaxis": {
         "align": false
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "description": "Used Swap",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 4,
+        "x": 20,
+        "y": 58
+      },
+      "hiddenSeries": false,
+      "id": 65,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "((node_memory_SwapTotal_bytes{job=\"router\"} - node_memory_SwapFree_bytes{job=\"router\"}) / (node_memory_SwapTotal_bytes{job=\"router\"} )) * 100",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Swap Utilization",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Swap Utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:456",
+          "format": "percent",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:457",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
     }
   ],
   "refresh": "",
@@ -5477,6 +5452,6 @@
   "timezone": "",
   "title": "Hosts",
   "uid": "NpcZRCl7k",
-  "version": 33,
+  "version": 5,
   "weekStart": ""
 }

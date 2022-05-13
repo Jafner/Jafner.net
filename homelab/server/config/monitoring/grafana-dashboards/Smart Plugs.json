@@ -1,818 +1,818 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
           "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
-    "id": 7,
-    "links": [],
-    "liveNow": false,
-    "panels": [
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
         },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "kwatth"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 0,
-          "y": 0
-        },
-        "id": 5,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "delta(tasmota_energy_power_kilowatts_total[30d])",
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Total Usage (last month)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "kwatth"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 7,
-          "y": 0
-        },
-        "id": 6,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "delta(tasmota_energy_power_kilowatts_total[7d])",
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Total Usage (last week)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "kwatth"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 14,
-          "y": 0
-        },
-        "id": 4,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "delta(tasmota_energy_power_kilowatts_total[24h])",
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Total Usage (last 24h)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "currencyUSD"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 0,
-          "y": 5
-        },
-        "id": 11,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "delta(tasmota_energy_power_kilowatts_total[30d])*0.08192",
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Power Cost (last month)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "currencyUSD"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 7,
-          "y": 5
-        },
-        "id": 12,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "delta(tasmota_energy_power_kilowatts_total[7d])*0.08192",
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Power Cost (last week)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "currencyUSD"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 14,
-          "y": 5
-        },
-        "id": 13,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "delta(tasmota_energy_power_kilowatts_total[24h])*0.08192",
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Power Cost (last 24h)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "axisSoftMin": 0,
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "watt"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "tasmota_energy_power_active_watts{instance=\"tasmota-1:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Joey's PC"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "tasmota_energy_power_active_watts{instance=\"tasmota-2:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "YA Fridge"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "tasmota_energy_power_active_watts{instance=\"tasmota-3:80\", job=\"tasmota\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Freezer"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 11,
-          "w": 17,
-          "x": 0,
-          "y": 10
-        },
-        "id": 2,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "tasmota_energy_power_active_watts{}",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "randomWalk",
-            "refId": "A"
-          }
-        ],
-        "title": "Power Draw",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "sBp1YgX7k"
-        },
-        "gridPos": {
-          "h": 11,
-          "w": 3,
-          "x": 17,
-          "y": 10
-        },
-        "id": 8,
-        "options": {
-          "content": "| Service | Charge |\n|:-------:|:------:|\n| Energy | $0.045351/kWh |\n| Distribution | $0.036569/kWh |\n| Total | $0.08192/kWh |",
-          "mode": "markdown"
-        },
-        "pluginVersion": "8.5.2",
-        "targets": [
-          {
-            "channel": "plugin/testdata/random-20Hz-stream",
-            "exemplar": true,
-            "expr": "",
-            "filter": {
-              "fields": [
-                "Time",
-                "Value"
-              ]
-            },
-            "interval": "",
-            "legendFormat": "",
-            "queryType": "measurements",
-            "refId": "A"
-          }
-        ],
-        "title": "Power Rates",
-        "type": "text"
+        "type": "dashboard"
       }
-    ],
-    "refresh": "5s",
-    "schemaVersion": 36,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": []
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 7,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(tasmota_energy_power_kilowatts_total[30d])",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Usage (last month)",
+      "type": "stat"
     },
-    "time": {
-      "from": "now-6h",
-      "to": "now"
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 7,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(tasmota_energy_power_kilowatts_total[7d])",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Usage (last week)",
+      "type": "stat"
     },
-    "timepicker": {},
-    "timezone": "",
-    "title": "Smart Plugs",
-    "uid": "A5-cSus7z",
-    "version": 14,
-    "weekStart": ""
-  }
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 14,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(tasmota_energy_power_kilowatts_total[24h])",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Usage (last 24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 5
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(tasmota_energy_power_kilowatts_total[30d])*0.08192",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Cost (last month)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 7,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(tasmota_energy_power_kilowatts_total[7d])*0.08192",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Cost (last week)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 14,
+        "y": 5
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(tasmota_energy_power_kilowatts_total[24h])*0.08192",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Cost (last 24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tasmota_energy_power_active_watts{instance=\"tasmota-1:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Joey's PC"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tasmota_energy_power_active_watts{instance=\"tasmota-2:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "YA Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tasmota_energy_power_active_watts{instance=\"tasmota-3:80\", job=\"tasmota\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Freezer"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 17,
+        "x": 0,
+        "y": 10
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tasmota_energy_power_active_watts{}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Draw",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sBp1YgX7k"
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 3,
+        "x": 17,
+        "y": 10
+      },
+      "id": 8,
+      "options": {
+        "content": "| Service | Charge |\n|:-------:|:------:|\n| Energy | $0.045351/kWh |\n| Distribution | $0.036569/kWh |\n| Total | $0.08192/kWh |",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "channel": "plugin/testdata/random-20Hz-stream",
+          "exemplar": true,
+          "expr": "",
+          "filter": {
+            "fields": [
+              "Time",
+              "Value"
+            ]
+          },
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "measurements",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Rates",
+      "type": "text"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Smart Plugs",
+  "uid": "A5-cSus7z",
+  "version": 14,
+  "weekStart": ""
+}
