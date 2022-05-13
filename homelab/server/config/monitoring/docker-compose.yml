@@ -10,7 +10,7 @@ services:
         user: "0"
         volumes:  
             - ${DOCKER_DATA}/grafana:/var/lib/grafana
-            - ./grafana.ini:/etc/grafana/grafana.ini
+            - ./custom.ini:/etc/grafana/custom.ini
         labels:
             - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
             - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
