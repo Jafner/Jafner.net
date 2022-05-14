@@ -1,0 +1,30 @@
+version: '3'
+services:
+  send:
+    image: registry.gitlab.com/timvisee/send:latest
+    container_name: send_send
+    restart: always
+    networks:
+      - web
+    volumes:
+      - ${DOCKER_DATA}/uploads:/uploads
+    environment:
+      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_PORT=1234
+      - DHPARAM_GENERATION=false
+      - NODE_ENV=production
+      - BASE_URL=${SEND_BASE_URL}
+      - PORT=1234
+      - REDIS_HOST=redis
+      - FILE_DIR=/uploads
+    labels:
+      - traefik.http.routers.send.rule=Host(`send.jafner.net`)
+      - traefik.http.routers.send.tls.certresolver=lets-encrypt
+  redis:
+    image: 'redis:alpine'
+    restart: always
+    volumes:
+      - send-redis:/data
+
+volumes:
+  send-redis:
