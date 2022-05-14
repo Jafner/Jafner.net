@@ -5,6 +5,7 @@ services:
     container_name: send_send
     restart: always
     networks:
+      - send
       - web
     volumes:
       - ${DOCKER_DATA}/uploads:/uploads
@@ -25,6 +26,8 @@ services:
   redis:
     image: 'redis:alpine'
     container_name: send_redis
+    networks:
+      - send
     restart: always
     volumes:
       - send-redis:/data
@@ -35,3 +38,4 @@ volumes:
 networks:
   web:
     external: true
+  send:
