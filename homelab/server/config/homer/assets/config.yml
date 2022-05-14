@@ -110,6 +110,10 @@ services:
         logo: assets/icons/uptimekuma-512.png
         subtitle: "Web monitoring dashboard"
         url: "https://uptime.jafner.tools/dashboard"
+      - name: "Xbackbone"
+        logo: assets/icons/xbackbone.png
+        subtitle: "Lightweight file manager"
+        url: "https://xbackbone.jafner.tools"
 
   - name: "Jafner.pi1"
     icon: "fas fa-server"
@@ -173,6 +177,10 @@ services:
         subtitle: "Fully-featured, self-hosted Git server"
         url: "https://gitlab.jafner.net"
       
+      - name: "Send"
+        logo: assets/icons/send.svg
+        subtitle: "Simple, private file sharing"
+        url: "https://send.jafner.net"
 
       - name: "Prometheus"
         logo: assets/icons/prometheus-1200.png
@@ -200,6 +208,7 @@ services:
         logo: assets/icons/tautulli-350.png
         subtitle: "Data collector for Plex"
         url: "https://tautulli.jafner.net"
+      
       - name: "NZBHydra"
         logo: assets/icons/nzbhydra-256.png
         subtitle: "NZB index search provider"
