@@ -1,0 +1,22 @@
+version: "3"
+services:
+  librespeed:
+    container_name: librespeed
+    image: adolfintel/speedtest
+    restart: always
+    environment:
+      - TITLE=LibreSpeed@Jafner.tools
+      - TELEMETRY=true
+      - ENABLE_ID_OBFUSCATION=true
+      - PASSWORD=***REMOVED***
+      - EMAIL=joey@jafner.net
+      - IPINFO_APIKEY=83d2ff4e618bd7
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.librespeed.rule=Host(`speedtest.jafner.tools`)
+      - traefik.http.routers.librespeed.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
