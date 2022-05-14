@@ -247,15 +247,15 @@ services:
       - name: "Calibre SFF"
         logo: assets/icons/calibre-1024.png
         subtitle: "Calibre-web instance serving a large collection of sci-fi and fantasy books"
-        url: "https://calibre-sff.jafner.net"
+        url: "https://sff.calibre.jafner.net"
       - name: "Calibre RPG"
         logo: assets/icons/calibre-1024.png
         subtitle: "Calibre-web instance serving a collection of Dungeons & Dragons books"
-        url: "https://calibre-rpg.jafner.net"
+        url: "https://sff.calibre.jafner.net"
       - name: "Calibre Ace"
         logo: assets/icons/calibre-1024.png
         subtitle: "Calibre-web instance serving a collection of whatever Ace wants to put on it"
-        url: "https://calibre-ace.jafner.net"
+        url: "https://ace.calibre.jafner.net"
 
       - name: "Homer"
         logo: assets/icons/homer-458.png
