@@ -9,7 +9,7 @@ services:
     volumes:
       - ${DOCKER_DATA}/uploads:/uploads
     environment:
-      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_HOST=0.0.0.0
       - VIRTUAL_PORT=1234
       - DHPARAM_GENERATION=false
       - NODE_ENV=production
@@ -20,6 +20,8 @@ services:
     labels:
       - traefik.http.routers.send.rule=Host(`send.jafner.net`)
       - traefik.http.routers.send.tls.certresolver=lets-encrypt
+      - traefik.http.services.send.loadbalancer.server.port=1234
+
   redis:
     image: 'redis:alpine'
     restart: always
