@@ -11,7 +11,7 @@ services:
       - calibre-web-rpg_data:/config
       - /mnt/nas/calibre/rpg:/books
     labels:
-      - traefik.http.routers.calibre-rpg.rule=Host(`calibre-rpg.jafner.net`)
+      - traefik.http.routers.calibre-rpg.rule=Host(`rpg.calibre.jafner.net`)
       - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
       #- traefik.http.routers.calibre-rpg.middlewares=authentik@docker
     networks:
@@ -28,7 +28,7 @@ services:
       - calibre-web-sff_data:/config
       - /mnt/nas/calibre/sff:/books
     labels:
-      - traefik.http.routers.calibre-sff.rule=Host(`calibre-sff.jafner.net`)
+      - traefik.http.routers.calibre-sff.rule=Host(`sff.calibre.jafner.net`)
       - traefik.http.routers.calibre-sff.tls.certresolver=lets-encrypt
       #- traefik.http.routers.calibre-sff.middlewares=authentik@docker
     networks:
@@ -45,7 +45,7 @@ services:
       - calibre-web-ace_data:/config
       - /mnt/md0/calibre/ace:/books
     labels:
-      - traefik.http.routers.calibre-ace.rule=Host(`calibre-ace.jafner.net`)
+      - traefik.http.routers.calibre-ace.rule=Host(`ace.calibre.jafner.net`)
       - traefik.http.routers.calibre-ace.tls.certresolver=lets-encrypt
       #- traefik.http.routers.calibre-ace.middlewares=authentik@docker
     networks:
