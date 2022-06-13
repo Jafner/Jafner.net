@@ -1,6 +1,7 @@
 ## Connecting to a server's CLI
 To connect to a server's RCON Minecraft console, run
 `docker exec -it minecraft_e6 rcon-cli --password thanksitzg`
+If you get "Failed to connect to RCON serverrcon: authentication failed", check the `server.properties` values for `enable-rcon` and `rcon.password`.
 Do not prefix commands with `/`. 
 
 - https://github.com/itzg/docker-minecraft-server#interactive-and-color-console
