@@ -1,0 +1,74 @@
+version: '3'
+services:
+  qbittorrent-ggn:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_ggn
+    networks:
+      - qbittorrent
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52000:6881
+    volumes:
+      - $DOCKER_DATA/ggn:/config
+      - /mnt/torrenting/GGN/0:/downloads
+
+  qbittorrent-mam:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_mam
+    networks:
+      - qbittorrent
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52100:6881
+    volumes:
+      - $DOCKER_DATA/mam:/config
+      - /mnt/torrenting/MAM/0:/downloads
+
+  qbittorrent-emp:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_emp
+    networks:
+      - qbittorrent
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52200:6881
+    volumes:
+      - $DOCKER_DATA/emp:/config
+      - /mnt/torrenting/EMP/0:/downloads
+
+  qbittorrent-pub:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_pub
+    networks:
+      - qbittorrent
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52300:6881
+    volumes:
+      - $DOCKER_DATA/pub:/config
+      - /mnt/torrenting/PUB/0:/downloads
+
+  qbittorrent-red:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_red
+    networks:
+      - qbittorrent
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52400:6881
+    volumes:
+      - $DOCKER_DATA/red:/config
+      - /mnt/torrenting/RED/0:/downloads
+
+networks:
+  qbittorrent:

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  qbittorrent-pub:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_pub
+    networks:
+      - qbittorrent
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 52300:6881
+    volumes:
+      - $DOCKER_DATA/pub:/config
+      - /mnt/torrenting/PUB/0:/downloads
+
+networks:
+  qbittorrent:
