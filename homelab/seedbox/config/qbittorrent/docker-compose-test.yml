@@ -10,6 +10,7 @@ services:
       - .env
     ports:
       - 42300:6881
+      - 42310:8080
     volumes:
       - $DOCKER_DATA/pub:/config
       - /mnt/torrenting/PUB/0:/downloads
