@@ -1,0 +1,14 @@
+[http.routers]
+    [http.routers.dev]
+    rule = "Host(`*.jafner.dev`)"
+    entrypoints = ["websecure"]
+    middlewares = "lan-only@file"
+    service = "dev@file"
+    [http.routers.dev.tls]
+        certResolver = "lets-encrypt"
+
+
+[http.services]
+  [http.services.dev.loadBalancer]
+    [[http.services.dev.loadBalancer.servers]]
+      url = "http://192.168.1.21/"
