@@ -8,6 +8,8 @@ services:
             - monitoring
             - web
         user: "0"
+        environment:
+            - GF_INSTALL_PLUGINS=grafana-image-renderer
         volumes:  
             - ${DOCKER_DATA}/grafana:/var/lib/grafana
             - ./custom.ini:/etc/grafana/grafana.ini
