@@ -1,0 +1,23 @@
+version: "3"
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    user: 1000:1000
+    networks:
+      - web
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    environment:
+      ND_BASEURL: "navidrome.jafner.net"
+    volumes:
+      - "$DOCKER_DATA:/data"
+      - "$MUSIC_DIR:/music:ro"
+    labels:
+      - traefik.http.routers.navidrome.rule=Host(`navidrome.jafner.net`)
+      - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
+      - traefik.http.routers.navidrome.middlewares=lan-only@file
+
+networks:
+  web:
+    external: true
