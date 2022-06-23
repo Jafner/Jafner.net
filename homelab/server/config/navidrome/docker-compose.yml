@@ -7,7 +7,7 @@ services:
       - web
     restart: unless-stopped
     environment:
-      ND_BASEURL: "navidrome.jafner.net"
+      ND_BASEURL: ""
     volumes:
       - "$DOCKER_DATA:/data"
       - "$MUSIC_DIR:/music:ro"
