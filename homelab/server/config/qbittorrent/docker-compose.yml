@@ -1,0 +1,19 @@
+version: "3"
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    networks:
+      - web
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - 50000:6881
+    labels:
+      - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
+      - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
