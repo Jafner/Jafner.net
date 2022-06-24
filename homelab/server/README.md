@@ -28,3 +28,25 @@ For files greater than 2 GB, use one of the following:
 
 /dev/md0 /mnt/md0 ext4 defaults,nofail,discard 0 0
 ```
+
+## Example docker-compose.yml for Web app
+```
+version: "3"
+services:
+  <SERVICE>:
+    container_name: <SERVICE>
+    image: 
+    restart: unless-stopped
+    volumes:
+    environment:
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.<SERVICE>.rule=Host(`<SERVICE>.jafner.net`)
+      - traefik.http.routers.<SERVICE>.tls.certresolver=lets-encrypt
+      # - traefik.http.routers.<SERVICE>.middlewares=lan-only@file # optional lan-only testing
+
+networks:
+  web:
+    external: true
+```
