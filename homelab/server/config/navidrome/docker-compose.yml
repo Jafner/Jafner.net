@@ -15,7 +15,6 @@ services:
       - traefik.http.routers.navidrome.rule=Host(`navidrome.jafner.net`)
       - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
 
-
 networks:
   web:
     external: true
