@@ -13,6 +13,7 @@ services:
     labels:
       - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
+      - traefik.http.services.qbt.loadbalancer.server.port=8080
 
 networks:
   web:
