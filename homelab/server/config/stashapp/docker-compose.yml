@@ -1,0 +1,27 @@
+version: "3"
+services:
+  stash:
+    container_name: stash
+    image: stashapp/stash:latest
+    restart: unless-stopped
+    volumes:
+      - $DOCKER_DATA/.stash/generated:/generated
+      - $DOCKER_DATA/.stash/metadata:/metadata
+      - $DOCKER_DATA/.stash/cache:/cache
+      - $DOCKER_DATA/Videos:/media/Galleries
+      - $DOCKER_DATA/Galleries:/media/Videos
+    environment:
+      - STASH_STASH=/media/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.stash.rule=Host(`stash.jafner.net`)
+      - traefik.http.routers.stash.tls.certresolver=lets-encrypt
+      # - traefik.http.routers.stash.middlewares=lan-only@file # optional lan-only testing
+
+networks:
+  web:
+    external: true
