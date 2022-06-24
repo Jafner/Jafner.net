@@ -5,9 +5,11 @@ services:
     image: stashapp/stash:latest
     restart: unless-stopped
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - $DOCKER_DATA/.stash/generated:/generated
       - $DOCKER_DATA/.stash/metadata:/metadata
       - $DOCKER_DATA/.stash/cache:/cache
+      - $DOCKER_DATA/.stash/config:/root/.stash
       - $DOCKER_DATA/Videos:/media/Galleries
       - $DOCKER_DATA/Galleries:/media/Videos
     environment:
