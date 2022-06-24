@@ -9,8 +9,8 @@ services:
       - $METADATA_DIR/generated:/generated
       - $METADATA_DIR/metadata:/metadata
       - $METADATA_DIR/cache:/cache
-      - $MEDIA_DIR/Videos:/media/Galleries
-      - $MEDIA_DIR/Galleries:/media/Videos
+      - $MEDIA_DIR/Videos:/media/Videos
+      - $MEDIA_DIR/Galleries:/media/Galleries
       - $DOCKER_DATA:/root/.stash
     environment:
       - STASH_STASH=/media/
