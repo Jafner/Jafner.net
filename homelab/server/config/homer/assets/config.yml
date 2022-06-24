@@ -257,6 +257,11 @@ services:
         subtitle: "Calibre-web instance serving a collection of whatever Ace wants to put on it"
         url: "https://ace.calibre.jafner.net"
 
+      - name: "Stasg"
+        logo: assets/icons/stash.svg
+        subtitle: "Password-protected media vault"
+        url: "https://stash.jafner.net"
+
       - name: "Homer"
         logo: assets/icons/homer-458.png
         subtitle: "This."
