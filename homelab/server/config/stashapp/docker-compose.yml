@@ -6,12 +6,12 @@ services:
     restart: unless-stopped
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - $DOCKER_DATA/.stash/generated:/generated
-      - $DOCKER_DATA/.stash/metadata:/metadata
-      - $DOCKER_DATA/.stash/cache:/cache
-      - $DOCKER_DATA/.stash/config:/root/.stash
-      - $DOCKER_DATA/Videos:/media/Galleries
-      - $DOCKER_DATA/Galleries:/media/Videos
+      - $METADATA_DIR/generated:/generated
+      - $METADATA_DIR/metadata:/metadata
+      - $METADATA_DIR/cache:/cache
+      - $MEDIA_DIR/Videos:/media/Galleries
+      - $MEDIA_DIR/Galleries:/media/Videos
+      - $DOCKER_DATA:/root/.stash
     environment:
       - STASH_STASH=/media/
       - STASH_GENERATED=/generated/
@@ -22,7 +22,7 @@ services:
     labels:
       - traefik.http.routers.stash.rule=Host(`stash.jafner.net`)
       - traefik.http.routers.stash.tls.certresolver=lets-encrypt
-      # - traefik.http.routers.stash.middlewares=lan-only@file # optional lan-only testing
+      - traefik.http.routers.stash.middlewares=lan-only@file # optional lan-only testing
 
 networks:
   web:
