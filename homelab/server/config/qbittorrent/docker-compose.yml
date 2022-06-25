@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     ports:
-      - 50000:6881
+      - 50000:50000
     labels:
       - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
