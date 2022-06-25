@@ -6,6 +6,9 @@ services:
     networks:
       - web
     restart: "no"
+    volumes:
+      - $DOCKER_DATA:/config
+      - $TORRENT_DATA:/torrenting
     env_file:
       - .env
     ports:
