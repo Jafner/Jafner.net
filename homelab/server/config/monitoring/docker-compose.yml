@@ -58,7 +58,7 @@ services:
             - monitoring
             - mc-router
         environment:
-            EXPORT_SERVERS: e6-056,vanilla,bmcp,e6,e6-dev
+            EXPORT_SERVERS: e6-056,vanilla,bmcp,e6,e6-dev,fan
         labels:
             - traefik.enable=false
 
