@@ -131,30 +131,6 @@ services:
         subtitle: "BSD-based ZFS NAS appliance OS"
         url: "http://nas.jafner.net"
 
-  - name: "Jafner.seedbox"
-    icon: "fas fa-server"
-    items:
-      - name: "GGN"
-        logo: assets/icons/deluge-1200.png
-        subtitle: "Deluge Torrent Web UI for GGN"
-        url: "http://jafner.seedbox:52000/"
-      - name: "MAM"
-        logo: assets/icons/deluge-1200.png
-        subtitle: "Deluge Torrent Web UI for MAM"
-        url: "http://jafner.seedbox:52100/"
-      - name: "EMP"
-        logo: assets/icons/deluge-1200.png
-        subtitle: "Deluge Torrent Web UI for EMP"
-        url: "http://jafner.seedbox:52200/"
-      - name: "PUB"
-        logo: assets/icons/deluge-1200.png
-        subtitle: "Deluge Torrent Web UI for public torrents"
-        url: "http://jafner.seedbox:52300/"
-      - name: "RED"
-        logo: assets/icons/deluge-1200.png
-        subtitle: "Deluge Torrent Web UI for RED"
-        url: "http://jafner.seedbox:52400/"
-
   - name: "Jafner.net"
     icon: "fas fa-server"
     items:
@@ -190,7 +166,7 @@ services:
         logo: assets/icons/grafana-1200.png
         subtitle: "Metrics visualization tool"
         url: "https://grafana.jafner.net"
-      
+
       - name: "XBackBone"
         logo: assets/icons/xbackbone.png
         subtitle: "Lightweight file manager"
@@ -233,6 +209,15 @@ services:
         logo: assets/icons/tdarr.png
         subtitle: "Transcode management system for media library"
         url: "https://tdarr.jafner.net"
+
+      - name: "Qbittorrent"
+        logo: assets/icons/qbittorrent.svg
+        subtitle: "Torrent client web UI"
+        url: "https://qbt.jafner.net"
+      - name: "Jdownloader"
+        logo: assets/icons/jdownloader.png
+        subtitle: "Web downloader web UI"
+        url: "https://jdl.jafner.net"
 
       - name: "Peertube"
         logo: assets/icons/peertube-1534.png
