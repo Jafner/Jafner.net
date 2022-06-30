@@ -1,0 +1,18 @@
+version: '3'
+services:
+  jdl:
+    image: jlesage/jdownloader-2
+    container_name: jdownloader2
+    networks:
+      - web
+    volumes:
+      - "$DOCKER_DATA:/config:rw"
+      - "$DOWNLOAD_DIR:/output:rw"
+    labels:
+      - traefik.http.routers.jdl.rule=Host(`jdl.jafner.net`)
+      - traefik.http.routers.jdl.tls.certresolver=lets-encrypt
+      - traefik.http.routers.jdl.middlewares=lan-only@file
+
+networks:
+  web:
+    external: true
