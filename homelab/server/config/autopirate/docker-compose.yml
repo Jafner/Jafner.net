@@ -12,7 +12,7 @@ services:
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${DOCKER_DATA}/radarr_config:/config"
-      - "${DOWNLOAD_DIR}:/downloads"
+      - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.radarr.rule=Host(`radarr.jafner.net`)
       - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
@@ -31,7 +31,7 @@ services:
     volumes:
       - "${MEDIA_DIR}/Video/Shows:/shows"
       - "${DOCKER_DATA}/sonarr_config:/config"
-      - "${DOWNLOAD_DIR}:/downloads"
+      - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.sonarr.rule=Host(`sonarr.jafner.net`)
       - traefik.http.routers.sonarr.tls.certresolver=lets-encrypt
@@ -49,7 +49,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - "${DOCKER_DATA}/lidarr:/config"
-      - "${DOWNLOAD_DIR}:/downloads"
+      - "${NZB_DIR}:/downloads"
       - "${MEDIA_DIR}/Audio/Music:/music"
     labels:
       - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
@@ -68,7 +68,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - "${DOCKER_DATA}/nzbhydra2_config:/config"
-      - "${DOWNLOAD_DIR}:/downloads"
+      - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.nzbhydra2.rule=Host(`nzbhydra.jafner.net`)
       - traefik.http.routers.nzbhydra2.tls.certresolver=lets-encrypt
@@ -89,8 +89,8 @@ services:
       - 8085:8080
     volumes:
       - "${DOCKER_DATA}/sabnzbd_config:/config"
-      - "${DOWNLOAD_DIR}:/downloads"
-      - "${INCOMPLETE_DOWNLOAD_DIR}:/incomplete-downloads"
+      - "${NZB_DIR}:/downloads"
+      - "${INCOMPLETE_NZB_DIR}:/incomplete-downloads"
     labels:
       - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.jafner.net`)
       - traefik.http.routers.sabnzbd.tls.certresolver=lets-encrypt
@@ -161,6 +161,25 @@ services:
       - ${MEDIA_DIR}/Video/Movies:/movies
       - ${MEDIA_DIR}/Video/Shows:/shows
       - ${TRANSCODE_DIR}/transcode_cache:/temp
+
+  jackett:
+    image: linuxserver/jackett
+    container_name: autopirate_jackett
+    networks:
+      - web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+      - AUTO_UPDATE=false
+    volumes:
+      - "${DOCKER_DATA}/jackett_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.jackett.rule=Host(`jackett.jafner.net`)
+      - traefik.http.routers.jackett.tls.certresolver=lets-encrypt
+      - traefik.http.services.jackett.loadbalancer.server.port=8989
+      - traefik.http.routers.jackett.middlewares=lan-only@file
 
 networks:
   tdarr:
