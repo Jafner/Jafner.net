@@ -178,7 +178,7 @@ services:
     labels:
       - traefik.http.routers.jackett.rule=Host(`jackett.jafner.net`)
       - traefik.http.routers.jackett.tls.certresolver=lets-encrypt
-      - traefik.http.services.jackett.loadbalancer.server.port=8989
+      - traefik.http.services.jackett.loadbalancer.server.port=9117
       - traefik.http.routers.jackett.middlewares=lan-only@file
 
 networks:
