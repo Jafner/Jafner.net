@@ -209,6 +209,10 @@ services:
         logo: assets/icons/tdarr.png
         subtitle: "Transcode management system for media library"
         url: "https://tdarr.jafner.net"
+      - name: "Jackett"
+        logo: assets/icons/jackett.png
+        subtitle: "Torrent tracker search aggregator with API for automation"
+        url: "https://jackett.jafner.net"
 
       - name: "Qbittorrent"
         logo: assets/icons/qbittorrent.svg
