@@ -59,7 +59,6 @@ services:
     env_file:
       - .env
     labels:
-      traefik.http.routers.authentik.priority: 1
       traefik.http.routers.authentik.rule: Host(`authentik.jafner.net`)
       traefik.http.routers.authentik.tls.certresolver: lets-encrypt
       traefik.http.services.authentik.loadbalancer.server.port: 9000

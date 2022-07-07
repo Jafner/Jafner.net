@@ -30,7 +30,7 @@ services:
     labels:
       - traefik.http.routers.calibre-sff.rule=Host(`sff.calibre.jafner.net`)
       - traefik.http.routers.calibre-sff.tls.certresolver=lets-encrypt
-      #- traefik.http.routers.calibre-sff.middlewares=authentik@docker
+      #- traefik.http.routers.calibre-sff.middlewares=authentik@file
     networks:
       - web
 
@@ -47,7 +47,7 @@ services:
     labels:
       - traefik.http.routers.calibre-ace.rule=Host(`ace.calibre.jafner.net`)
       - traefik.http.routers.calibre-ace.tls.certresolver=lets-encrypt
-      #- traefik.http.routers.calibre-ace.middlewares=authentik@docker
+      #- traefik.http.routers.calibre-ace.middlewares=authentik@file
     networks:
       - web
 
@@ -64,7 +64,7 @@ services:
   #  labels:
   #    - traefik.http.routers.calibre-dev.rule=Host(`calibre-dev.jafner.net`)
   #    - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
-  #    #- traefik.http.routers.calibre-dev.middlewares=authentik@docker
+  #    #- traefik.http.routers.calibre-dev.middlewares=authentik@file
   #  networks:
   #    - web
 
