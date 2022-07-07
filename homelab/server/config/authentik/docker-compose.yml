@@ -89,16 +89,6 @@ services:
     labels:
       traefik.enable: false
 
-  adminer:
-    image: adminer:4.8.1
-    hostname: authentik_adminer
-    container_name: adminer
-    restart: unless-stopped
-    ports:
-      - 8686:8080
-    networks:
-      - authentik
-
 volumes:
   database:
     driver: local
