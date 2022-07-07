@@ -13,7 +13,7 @@ services:
     labels:
       - traefik.http.routers.calibre-rpg.rule=Host(`rpg.calibre.jafner.net`)
       - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
-      - traefik.http.routers.calibre-rpg.middlewares=authentik@file,securityheaders@file
+      #- traefik.http.routers.calibre-rpg.middlewares=authentik@file,securityheaders@file
     networks:
       - web
 
