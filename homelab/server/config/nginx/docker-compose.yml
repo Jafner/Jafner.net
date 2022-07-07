@@ -19,7 +19,7 @@ services:
       - traefik.http.routers.nginx-auth.tls.certresolver=lets-encrypt
       - traefik.http.routers.nginx-auth.middlewares=authentik@file
 
-  nginx:
+  nginx_secure:
     image: nginx
     container_name: nginx_secure
     networks:
