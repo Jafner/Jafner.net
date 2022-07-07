@@ -61,7 +61,7 @@ services:
     labels:
       traefik.http.routers.authentik.rule: Host(`authentik.jafner.net`)
       traefik.http.routers.authentik.tls.certresolver: lets-encrypt
-      traefik.http.routers.authentik.middlewares: security-headers
+      traefik.http.routers.authentik.middlewares: security-headers@file
       traefik.http.services.authentik.loadbalancer.server.port: 9000
 
   worker:

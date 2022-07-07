@@ -24,20 +24,20 @@ http:
           - X-authentik-meta-app
           - X-authentik-meta-version
     security-headers:
-        headers:
-          customResponseHeaders:
-            X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex"
-            server: ""
-          sslProxyHeaders:
-            X-Forwarded-Proto: https
-          referrerPolicy: "same-origin"
-          hostsProxyHeaders:
-            - "X-Forwarded-Host"
-          customRequestHeaders:
-            X-Forwarded-Proto: "https"
-          contentTypeNosniff: true
-          browserXssFilter: true
-          forceSTSHeader: true
-          stsIncludeSubdomains: true
-          stsSeconds: 63072000
-          stsPreload: true
+      headers:
+        customResponseHeaders:
+          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex"
+          server: ""
+        sslProxyHeaders:
+          X-Forwarded-Proto: https
+        referrerPolicy: "same-origin"
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        contentTypeNosniff: true
+        browserXssFilter: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsSeconds: 63072000
+        stsPreload: true
