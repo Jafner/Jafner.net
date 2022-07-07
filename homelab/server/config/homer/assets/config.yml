@@ -108,7 +108,7 @@ services:
         url: "https://bitwarden.jafner.tools"
       - name: "Uptime Kuma"
         logo: assets/icons/uptimekuma-512.png
-        subtitle: "Web monitoring dashboard"
+        subtitle: "Fancy self-hosted monitoring tool "
         url: "https://uptime.jafner.tools/dashboard"
       - name: "Xbackbone"
         logo: assets/icons/xbackbone.png
@@ -240,11 +240,31 @@ services:
       - name: "Calibre RPG"
         logo: assets/icons/calibre-1024.png
         subtitle: "Calibre-web instance serving a collection of Dungeons & Dragons books"
-        url: "https://sff.calibre.jafner.net"
+        url: "https://rpg.calibre.jafner.net"
       - name: "Calibre Ace"
         logo: assets/icons/calibre-1024.png
         subtitle: "Calibre-web instance serving a collection of whatever Ace wants to put on it"
         url: "https://ace.calibre.jafner.net"
+
+      - name: "Navidrome"
+        logo: assets/icons/navidrome.png
+        subtitle: "Music library"
+        url: "https://navidrome.jafner.net"
+
+      - name: "Librespeed"
+        logo: assets/icons/librespeed.svg
+        subtitle: "Speedtest for HTML5 and more"
+        url: "https://speedtest.jafner.net"
+
+      - name: "WG Easy"
+        logo: assets/icons/wireguard.svg
+        subtitle: "Admin UI for Wireguard peer management"
+        url: "https://vpn.jafner.net"
+
+      - name: "Uptime Kuma"
+        logo: assets/icons/uptimekuma-512.png
+        subtitle: "Fancy self-hosted monitoring tool "
+        url: "https://uptime.jafner.net"
 
       - name: "Stash"
         logo: assets/icons/stash.svg
