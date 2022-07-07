@@ -1,14 +1,33 @@
 version: '3'
 services:
-  nginx:
+  nginx_insecure:
     image: nginx
-    container_name: nginx_test
+    container_name: nginx_insecure
     networks:
       - web
     labels:
-      - traefik.http.routers.nginx.rule=Host(`nginx.jafner.net`)
-      - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
-      #- traefik.http.routers.nginx.middlewares=authentik@file,securityheaders@file
+      - traefik.http.routers.nginx-insecure.rule=Host(`insecure.nginx.jafner.net`)
+      - traefik.http.routers.nginx-insecure.tls.certresolver=lets-encrypt
+  
+  nginx_auth:
+    image: nginx
+    container_name: nginx_auth
+    networks:
+      - web
+    labels_auth:
+      - traefik.http.routers.nginx-auth.rule=Host(`auth.nginx.jafner.net`)
+      - traefik.http.routers.nginx-auth.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nginx-auth.middlewares=authentik@file
+
+  nginx:
+    image: nginx
+    container_name: nginx_secure
+    networks:
+      - web
+    labels_secure:
+      - traefik.http.routers.nginx-secure.rule=Host(`secure.nginx.jafner.net`)
+      - traefik.http.routers.nginx-secure.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nginx-secure.middlewares=securityheaders@file
 
 networks:
   web:
