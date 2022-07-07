@@ -14,7 +14,7 @@ services:
     container_name: nginx_auth
     networks:
       - web
-    labels_auth:
+    labels:
       - traefik.http.routers.nginx-auth.rule=Host(`auth.nginx.jafner.net`)
       - traefik.http.routers.nginx-auth.tls.certresolver=lets-encrypt
       - traefik.http.routers.nginx-auth.middlewares=authentik@file
@@ -24,7 +24,7 @@ services:
     container_name: nginx_secure
     networks:
       - web
-    labels_secure:
+    labels:
       - traefik.http.routers.nginx-secure.rule=Host(`secure.nginx.jafner.net`)
       - traefik.http.routers.nginx-secure.tls.certresolver=lets-encrypt
       - traefik.http.routers.nginx-secure.middlewares=securityheaders@file
