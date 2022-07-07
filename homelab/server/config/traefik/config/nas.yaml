@@ -1,0 +1,16 @@
+http:
+  routers:
+    nas:
+      rule: "Host(`nas.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: "lan-only@file"
+      service: "nas@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  services:
+    nas:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.10/"
+      
