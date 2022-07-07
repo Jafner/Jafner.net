@@ -38,11 +38,10 @@ services:
   server:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.7.1}
     container_name: authentik_authentik
+    hostname: authentik
     networks:
       authentik:
       web:
-        aliases:
-          - authentik-server
     restart: unless-stopped
     command: server
     environment:
