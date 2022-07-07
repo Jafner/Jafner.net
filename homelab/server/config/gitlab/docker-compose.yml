@@ -10,7 +10,8 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
-        registry_external_url 'https://gitlab.jafner.net'
+        registry_external_url 'https://registry.gitlab.jafner.net'
+        gitlab_rails['registry_host'] = "registry.gitlab.jafner.net"
         gitlab_rails['gitlab_shell_ssh_port'] = 2229
         nginx['listen_https'] = false
         nginx['listen_port'] = 80
@@ -36,6 +37,7 @@ services:
     shm_size: '256m'
     labels:
       - traefik.http.routers.gitlab.rule=Host(`gitlab.jafner.net`)
+      - traefik.http.routers.gitlab.rule=Host(`registry.gitlab.jafner.net`)
       - traefik.http.routers.gitlab.tls.certresolver=lets-encrypt
       - traefik.http.services.gitlab.loadbalancer.server.port=80
   gitlab-runner:
