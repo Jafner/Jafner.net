@@ -10,11 +10,14 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
-        registry_external_url 'https://registry.gitlab.jafner.net'
-        gitlab_rails['registry_host'] = "registry.gitlab.jafner.net"
         gitlab_rails['gitlab_shell_ssh_port'] = 2229
         nginx['listen_https'] = false
         nginx['listen_port'] = 80
+        nginx['proxy_set_headers'] = {
+          "X-Forwarded-Proto" => "https",
+          "X-Forwarded-Ssl" => "on"
+        }
+        letsencrypt['enable'] = false
         gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '192.168.1.0/24']
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_address'] = "smtp.gmail.com"
@@ -27,9 +30,15 @@ services:
         gitlab_rails['smtp_openssl_verify_mode'] = 'peer'
         gitlab_rails['gitlab_email_from'] = 'gitlab@jafner.net'
         gitlab_rails['gitlab_email_reply_to'] = 'noreply@jafner.net'
+        registry_external_url 'https://registry.gitlab.jafner.net'
+        gitlab_rails['registry_enabled'] = true
+        gitlab_rails['registry_host'] = "registry.gitlab.jafner.net"
+        gitlab_rails['api_url'] = 'https://registry.gitlab.jafner.net'
+        registry_nginx['enable'] = false
+        registry['registry_http_addr'] = "0.0.0.0:5000"
+
     ports:
       - '2229:22'
-      - '5050:5050'
     volumes:
       - '${DOCKER_DATA}/config:/etc/gitlab'
       - '${DOCKER_DATA}/logs:/var/log/gitlab'
@@ -37,9 +46,12 @@ services:
     shm_size: '256m'
     labels:
       - traefik.http.routers.gitlab.rule=Host(`gitlab.jafner.net`)
-      - traefik.http.routers.gitlab.rule=Host(`registry.gitlab.jafner.net`)
       - traefik.http.routers.gitlab.tls.certresolver=lets-encrypt
       - traefik.http.services.gitlab.loadbalancer.server.port=80
+      - traefik.http.routers.gitlab-registry.rule=Host(`registry.gitlab.jafner.net`)
+      - traefik.http.routers.gitlab-registry.tls.certresolver=lets-encrypt
+      - traefik.http.routers.gitlab-registry.service=gitlab-registry
+      - traefik.http.services.gitlab-registry.loadbalancer.server.port=5000
   gitlab-runner:
     image: 'gitlab/gitlab-runner:latest'
     container_name: gitlab_runner
