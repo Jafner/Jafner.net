@@ -40,7 +40,7 @@ services:
         container_name: monitoring_loki
         user: "1000:1000"
         networks:
-            - montitoring
+            - monitoring
             - web
         ports:
             - "3100:3100"
