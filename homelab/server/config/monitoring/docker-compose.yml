@@ -60,7 +60,7 @@ services:
         networks:
             - monitoring
         volumes:
-            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /var/run/docker.sock:/var/run/docker.sock:
             - ${DOCKER_DATA}/promtail:/etc/promtail
             - ./promtail-config.yml:/etc/promtail/promtail-config.yml # not sure if this works. If not, just edit the config within the data volume
         restart: unless-stopped
