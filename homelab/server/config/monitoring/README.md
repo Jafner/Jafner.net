@@ -36,8 +36,8 @@ All monitors use a Prometheus exporter.
 # Adding Loki and Promtail
 Followed [this guide from Techno Tim](https://docs.technotim.live/posts/grafana-loki/).
 Non-tracked changes include:
-    1. `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions` to install the Loki docker plugin.
-    2. Edit `/etc/docker/daemon.json` to add the following block:
+1. `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions` to install the Loki docker plugin.
+2. Edit `/etc/docker/daemon.json` to add the following block:
 
 ```json
 {
@@ -49,5 +49,4 @@ Non-tracked changes include:
     }
 }
 ```
-
-    3. Refer to the documentation for [restarting the docker daemon](/homelab/docs/Restart the Docker Daemon.md)
+3. Refer to the documentation for [restarting the docker daemon](/homelab/docs/Restart the Docker Daemon.md)
