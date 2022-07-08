@@ -56,7 +56,7 @@ services:
     promtail:
         image: grafana/promtail:2.5.0
         container_name: monitoring_promtail
-        user: "1000:1000"
+        user: "0:0" # change back to 1000:1000 after testing
         networks:
             - monitoring
         volumes:
