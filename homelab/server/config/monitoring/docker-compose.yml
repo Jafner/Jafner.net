@@ -56,11 +56,11 @@ services:
     promtail:
         image: grafana/promtail:2.5.0
         container_name: monitoring_promtail
-        user: "0:0" # change back to 1000:1000 after testing
+        user: "1000:1000" 
         networks:
             - monitoring
         volumes:
-            - /var/lib/docker/:/var/lib/docker:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
             - ${DOCKER_DATA}/promtail:/etc/promtail
             - ./promtail-config.yml:/etc/promtail/promtail-config.yml # not sure if this works. If not, just edit the config within the data volume
         restart: unless-stopped
