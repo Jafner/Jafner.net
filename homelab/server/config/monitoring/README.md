@@ -49,4 +49,4 @@ Non-tracked changes include:
     }
 }
 ```
-3. Refer to the documentation for [restarting the docker daemon](/homelab/docs/Restart the Docker Daemon.md)
+3. Refer to the documentation for [restarting the docker daemon](/docs/Restart the Docker Daemon.md)
