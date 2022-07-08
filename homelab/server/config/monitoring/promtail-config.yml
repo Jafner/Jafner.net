@@ -9,25 +9,25 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: docker
-    pipeline_stages:
-      - docker: {}
-    static_configs:
-      - labels:
-          job: docker
-          __path__: /var/lib/docker/containers/*/*-json.log
+  # - job_name: docker
+  #   pipeline_stages:
+  #     - docker: {}
+  #   static_configs:
+  #     - labels:
+  #         job: docker
+  #         __path__: /var/lib/docker/containers/*/*-json.log
 
-  - job_name: docker_sd
-    docker_sd_configs:
-      - host: unix:///var/run/docker.sock
-        refresh_interval: 5s
-        filters:
-          - name: name
-            values: [flog] 
-    relabel_configs:
-      - source_labels: ['__meta_docker_container_name']
-        regex: '/(.*)'
-        target_label: 'container'
+  # - job_name: docker_sd
+  #   docker_sd_configs:
+  #     - host: unix:///var/run/docker.sock
+  #       refresh_interval: 5s
+  #       filters:
+  #         - name: name
+  #           values: [flog] 
+  #   relabel_configs:
+  #     - source_labels: ['__meta_docker_container_name']
+  #       regex: '/(.*)'
+  #       target_label: 'container'
 
 # per: https://gist.github.com/ruanbekker/c6fa9bc6882e6f324b4319c5e3622460?permalink_comment_id=3764474
   - job_name: containers
