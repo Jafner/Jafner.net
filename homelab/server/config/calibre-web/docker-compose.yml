@@ -9,7 +9,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web-rpg_data:/config
-      - /mnt/nas/calibre/rpg:/books
+      - $LIBRARY_DIR/rpg:/books
     labels:
       - traefik.http.routers.calibre-rpg.rule=Host(`rpg.calibre.jafner.net`)
       - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
@@ -26,7 +26,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web-sff_data:/config
-      - /mnt/nas/calibre/sff:/books
+      - $LIBRARY_DIR/sff:/books
     labels:
       - traefik.http.routers.calibre-sff.rule=Host(`sff.calibre.jafner.net`)
       - traefik.http.routers.calibre-sff.tls.certresolver=lets-encrypt
@@ -43,7 +43,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web-ace_data:/config
-      - /mnt/md0/calibre/ace:/books
+      - $LIBRARY_DIR/ace:/books
     labels:
       - traefik.http.routers.calibre-ace.rule=Host(`ace.calibre.jafner.net`)
       - traefik.http.routers.calibre-ace.tls.certresolver=lets-encrypt
@@ -59,7 +59,7 @@ services:
       - TZ=America/Los_Angeles
     volumes:
       - calibre-web-dev_data:/config
-      - /mnt/md0/calibre/dev:/books
+      - $LIBRARY_DIR/dev:/books
     labels:
       - traefik.http.routers.calibre-dev.rule=Host(`dev.calibre.jafner.net`)
       - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
