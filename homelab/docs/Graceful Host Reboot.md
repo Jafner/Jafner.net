@@ -9,12 +9,6 @@ The NAS is relied upon for many other hosts on the network, which need to be off
 7. After the NAS WebUI is available, SSH into the server and run `sudo  mount -a`
 8. Online the stacks affected by step 2.
 
-# Seedbox
-1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
-2. Reboot the host with `sudo reboot now`.
-3. When the host has finished booting, re-mount all NAS shares defined in `/etc/fstab` with `sudo mount -a`.
-4. Start all Docker containers with `docker start $(docker ps -aq)`.
-
 # Server
 1. Stop all Docker containers with `docker stop $(docker ps -aq)`.
 2. Reboot the host with `sudo reboot now`.

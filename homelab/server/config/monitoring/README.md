@@ -37,19 +37,17 @@ All monitors use a Prometheus exporter.
 Followed [this guide from Techno Tim](https://docs.technotim.live/posts/grafana-loki/).
 Non-tracked changes include:
     1. `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions` to install the Loki docker plugin.
-    2. Edit `/etc/docker/daemon.json` to look like:
+    2. Edit `/etc/docker/daemon.json` to add the following block:
+
 ```json
 {
+    "live-restore": true
     "log-driver": "loki",
     "log-opts": {
         "loki-url": "http://localhost:3100/loki/api/v1/push",
         "loki-batch-size": "400"
-    },
-    "runtimes": {
-        "nvidia": {
-            "path": "nvidia-container-runtime",
-            "runtimeArgs": []
-        }
-    } 
+    }
 }
 ```
+
+    3. Refer to the documentation for [restarting the docker daemon](/homelab/docs/Restart the Docker Daemon.md)
