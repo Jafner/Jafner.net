@@ -9,6 +9,13 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
+  - job_name: docker 
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - labels:
+        job: docker
+        __path__: /var/lib/docker/containers/*/*-json.log
 
 # local machine logs
 #
@@ -19,16 +26,6 @@ scrape_configs:
 #    labels:
 #      job: varlogs
 #      __path__: /var/log/*log
-  
-## docker logs
-
-- job_name: docker 
- pipeline_stages:
-   - docker: {}
- static_configs:
-   - labels:
-       job: docker
-       __path__: /var/lib/docker/containers/*/*-json.log
 
 # syslog target
 
