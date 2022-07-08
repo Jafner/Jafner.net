@@ -14,8 +14,8 @@ scrape_configs:
       - docker: {}
     static_configs:
       - labels:
-        job: docker
-        __path__: /var/lib/docker/containers/*/*-json.log
+          job: docker
+          __path__: /var/lib/docker/containers/*/*-json.log
 
 # local machine logs
 #
