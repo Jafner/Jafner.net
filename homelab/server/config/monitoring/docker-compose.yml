@@ -34,6 +34,38 @@ services:
         labels:
             -   traefik.http.routers.prometheus.rule=Host(`prometheus.jafner.net`)
             -   traefik.http.routers.prometheus.tls.certresolver=lets-encrypt
+    
+    loki:
+        image: grafana/loki:2.5.0
+        container_name: monitoring_loki
+        user: "1000:1000"
+        networks:
+            - montitoring
+            - web
+        ports:
+            - "3100:3100"
+        volumes:
+            - ${DOCKER_DATA}/loki:/etc/loki
+            - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
+        restart: unless-stopped
+        command: -config.file=/etc/loki/loki-config.yml
+        labels:
+            - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
+            - traefik.http.routers.prometheus.tls.certresolver=lets-encrypt
+
+    promtail:
+        image: grafana/promtail:2.5.0
+        container_name: monitoring_promtail
+        user: "1000:1000"
+        networks:
+            - monitoring
+        volumes:
+            - /var/log:/var/log
+            - ${DOCKER_DATA}/promtail:/etc/promtail
+            - ./promtail-config.yml:/etc/promtail/promtail-config.yml # not sure if this works. If not, just edit the config within the data volume
+        restart: unless-stopped
+        command: -config.file=/etc/promtail/promtail-config.yml
+
 
     pihole-jafner-net:
         image: ekofr/pihole-exporter:latest

@@ -32,3 +32,18 @@ All monitors use a Prometheus exporter.
 | tasmota-1 | tasmota-F6441E-1054 | 192.168.1.50 | 
 | tasmota-2 | tasmota-F6D7D3-6099 | 192.168.1.51 |
 | tasmota-3 | tasmota-F6F062-4194 | 192.168.1.52 |
+
+# Adding Loki and Promtail
+Followed [this guide from Techno Tim](https://docs.technotim.live/posts/grafana-loki/).
+Non-tracked changes include:
+    1. `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions` to install the Loki docker plugin.
+    2. Edit `/etc/docker/daemon.json` to look like:
+    ```
+    {
+        "log-driver": "loki",
+        "log-opts": {
+            "loki-url": "http://localhost:3100/loki/api/v1/push",
+            "loki-batch-size": "400"
+        }
+    }
+    ```
