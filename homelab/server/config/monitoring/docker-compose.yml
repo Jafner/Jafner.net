@@ -38,7 +38,6 @@ services:
     loki:
         image: grafana/loki:2.5.0
         container_name: monitoring_loki
-        user: "1000:1000"
         networks:
             - monitoring
             - web
