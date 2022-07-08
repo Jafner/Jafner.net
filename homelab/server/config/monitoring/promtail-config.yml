@@ -31,7 +31,7 @@ scrape_configs:
 
 # per: https://gist.github.com/ruanbekker/c6fa9bc6882e6f324b4319c5e3622460?permalink_comment_id=3764474
   - job_name: containers
-    entry_parser: raw
+    #entry_parser: raw # not sure why this didn't work
     static_configs:
     - targets:
       - localhost
