@@ -22,6 +22,7 @@ services:
       - traefik.http.routers.send.rule=Host(`send.jafner.net`)
       - traefik.http.routers.send.tls.certresolver=lets-encrypt
       - traefik.http.services.send.loadbalancer.server.port=1234
+      - traefik.http.routers.send.middlewares=authentik@file
 
   redis:
     image: 'redis:alpine'
