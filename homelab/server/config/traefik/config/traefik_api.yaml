@@ -3,6 +3,7 @@ http:
     api:
       rule: "Host(`traefik.jafner.net`)"
       entryPoints: "websecure"
+      middlewares: authentik@file
       service: "api@internal"
       tls:
         certResolver: "lets-encrypt"

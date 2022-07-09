@@ -13,12 +13,9 @@ services:
       - 28080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.toml:/traefik.toml
+      - ./traefik.yaml:/traefik.yaml
       - ./config:/config
       - $DOCKER_DATA/acme.json:/acme.json
-      - ./.htpasswd:/.htpasswd
-    labels:
-      - traefik.http.routers.traefik.middlewares=authentik@file
 
 networks:
   web:
