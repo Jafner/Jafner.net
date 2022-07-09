@@ -4,11 +4,6 @@ global:
 scrape_configs:
 
     # scrape hosts
-    - job_name: 'joey-seedbox'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['joey-seedbox.local:9100']
-
     - job_name: 'joey-server'
       scrape_interval: 5s
       static_configs:
@@ -70,22 +65,6 @@ scrape_configs:
       static_configs:
         - targets: ['5e-jafner-tools:9117']
       metrics_path: "/metrics"
-
-    - job_name: 'deluge'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['192.168.1.21:53000']
-          labels:
-            tracker: 'ggn'
-        - targets: ['192.168.1.21:53100']
-          labels:
-            tracker: 'mam'
-        - targets: ['192.168.1.21:53200']
-          labels:
-            tracker: 'emp'
-        - targets: ['192.168.1.21:53300']
-          labels:
-            tracker: 'pub'
 
     - job_name: 'plex'
       scrape_interval: 5s
