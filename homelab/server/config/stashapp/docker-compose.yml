@@ -22,7 +22,7 @@ services:
     labels:
       - traefik.http.routers.stash.rule=Host(`stash.jafner.net`)
       - traefik.http.routers.stash.tls.certresolver=lets-encrypt
-      - traefik.http.routers.stash.middlewares=lan-only@file # optional lan-only testing
+      - traefik.http.routers.stash.middlewares=lan-only@file,authentik@file
 
 networks:
   web:

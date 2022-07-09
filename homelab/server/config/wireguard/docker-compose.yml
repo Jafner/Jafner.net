@@ -22,6 +22,7 @@ services:
       - traefik.http.routers.wg-easy.rule=Host(`vpn.jafner.net`)
       - traefik.http.routers.wg-easy.tls.certresolver=lets-encrypt
       - traefik.http.services.wg-easy.loadbalancer.server.port=51821
+      - traefik.http.routers.wg-easy.middlewares=authentik@file
 
 networks:
   web:

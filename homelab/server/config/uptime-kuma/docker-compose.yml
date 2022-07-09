@@ -15,6 +15,7 @@ services:
         labels:
             - traefik.http.routers.uptime-kuma.rule=Host(`uptime.jafner.net`)
             - traefik.http.routers.uptime-kuma.tls.certresolver=lets-encrypt
+            - traefik.http.routers.uptime-kuma.middlewares=authentik@file
 
 networks:
     web: 
