@@ -17,6 +17,8 @@ services:
       - ./config:/config
       - $DOCKER_DATA/acme.json:/acme.json
       - ./.htpasswd:/.htpasswd
+    labels:
+      - traefik.http.routers.traefik.middlewares=authentik@file
 
 networks:
   web:
