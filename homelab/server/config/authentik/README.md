@@ -25,4 +25,16 @@
 | Policy engine mode | ANY, any policy must match to grant access. |
 
 5. Leave UI settings as default, save by clicking the Create button.
-6. Open the OAuth2 configuration settings in the new application
+6. Open the OAuth2 configuration settings in the new application and apply settings as follows:
+
+| Common Application Configuration Term | Value (or *Authentik key*) |
+|:-------------------------------------:|:--------------------------:|
+| Client Type | Confidential |
+| Client ID | *Client ID* |
+| Client Secret | *Client Secret* |
+| Scopes | `email openid profile` |
+| Auth URL | *Authorize URL* |
+| Token URL | *Token URL* |
+| API URl | *Userinfo URL* |
+
+7. Apply and restart the application.
