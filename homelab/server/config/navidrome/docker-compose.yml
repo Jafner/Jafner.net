@@ -2,6 +2,7 @@ version: "3"
 services:
   navidrome:
     image: deluan/navidrome:latest
+    container_name: navidrome_navidrome
     user: 1000:1000
     networks:
       - web
