@@ -18,7 +18,7 @@ services:
       - PORT=1234
       - REDIS_HOST=redis
       - FILE_DIR=/uploads
-      - MAX_FILE_SIZE=4294967296
+      - MAX_FILE_SIZE=42949672960
     labels:
       - traefik.http.routers.send.rule=Host(`send.jafner.net`)
       - traefik.http.routers.send.tls.certresolver=lets-encrypt
