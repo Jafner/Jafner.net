@@ -50,6 +50,7 @@ services:
       - traefik.http.routers.calibre-ace.middlewares=authentik@file,securityheaders@file
     networks:
       - web
+  
   calibre-web-dev:
     image: registry.gitlab.jafner.net/jafner/docker-calibre-web/docker-calibre-web:latest
     container_name: calibre-web_dev
@@ -63,7 +64,7 @@ services:
     labels:
       - traefik.http.routers.calibre-dev.rule=Host(`dev.calibre.jafner.net`)
       - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
-      - traefik.http.routers.calibre-dev.middlewares=authentik@file,securityheaders@file
+      - traefik.http.routers.calibre-dev.middlewares=securityheaders@file
     networks:
       - web
 
