@@ -52,7 +52,7 @@ services:
       - web
   
   calibre-web-dev:
-    image: registry.gitlab.jafner.net/jafner/docker-calibre-web/master:latest
+    image: registry.gitlab.jafner.net/jafner/docker-calibre-web/docker-calibre-web:latest
     container_name: calibre-web_dev
     environment:
       - PUID=1000
