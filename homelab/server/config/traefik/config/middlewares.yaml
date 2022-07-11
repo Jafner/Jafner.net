@@ -46,3 +46,5 @@ http:
       headers:
         customResponseHeaders: 
           X-Scheme: https
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
