@@ -45,9 +45,9 @@ http:
 
     testSchemeHeaders:
       headers:
-        customResponseHeaders: 
+        #customResponseHeaders: 
+        #  X-Scheme: https
+        customRequestHeaders:
           X-Scheme: https
-        #customRequestHeaders:
-        #  X-Forwarded-Proto: "https"
         #hostsProxyHeaders:
         #  - "X-Scheme"
