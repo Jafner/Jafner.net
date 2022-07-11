@@ -51,7 +51,7 @@ services:
         command: -config.file=/etc/loki/loki-config.yml
         labels:
             - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
-            - traefik.http.routers.prometheus.tls.certresolver=lets-encrypt
+            - traefik.http.routers.loki.tls.certresolver=lets-encrypt
 
     pihole-jafner-net:
         image: ekofr/pihole-exporter:latest
