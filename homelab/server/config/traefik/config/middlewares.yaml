@@ -47,7 +47,7 @@ http:
       headers:
         #customResponseHeaders: 
         #  X-Scheme: https
-        #customRequestHeaders:
-        #  X-Forwarded-Proto: "https"
-        hostsProxyHeaders:
-          - "X-Scheme"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        #hostsProxyHeaders:
+        #  - "X-Scheme"
