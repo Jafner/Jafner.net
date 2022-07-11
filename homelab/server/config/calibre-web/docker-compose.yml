@@ -65,6 +65,7 @@ services:
       - traefik.http.routers.calibre-dev.rule=Host(`dev.calibre.jafner.net`)
       - traefik.http.routers.calibre-dev.tls.certresolver=lets-encrypt
       - traefik.http.routers.calibre-dev.middlewares=testSchemeHeaders@file
+    networks:
       - web
 
 networks:
