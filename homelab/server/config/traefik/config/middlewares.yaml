@@ -42,3 +42,7 @@ http:
         stsIncludeSubdomains: true
         stsSeconds: 63072000
         stsPreload: true
+    testSchemeHeaders:
+      headers:
+        customResponseHeaders: 
+          X-Scheme: https
