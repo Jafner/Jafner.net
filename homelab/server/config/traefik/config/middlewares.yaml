@@ -31,13 +31,11 @@ http:
           server: ""
         sslProxyHeaders:
           X-Forwarded-Proto: https
-          X-Scheme: https
         referrerPolicy: "same-origin"
         hostsProxyHeaders:
           - "X-Forwarded-Host"
         customRequestHeaders:
           X-Forwarded-Proto: "https"
-          X-Scheme: "https"
         contentTypeNosniff: true
         browserXssFilter: true
         forceSTSHeader: true
@@ -45,3 +43,11 @@ http:
         stsSeconds: 63072000
         stsPreload: true
 
+    testSchemeHeaders:
+      headers:
+        #customResponseHeaders: 
+        #  X-Scheme: https
+        #customRequestHeaders:
+        #  X-Forwarded-Proto: "https"
+        hostsProxyHeaders:
+          - "X-Scheme"
