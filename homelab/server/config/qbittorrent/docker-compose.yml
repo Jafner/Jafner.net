@@ -18,10 +18,10 @@ services:
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
       - traefik.http.routers.qbt.middlewares=authentik@file
       - traefik.http.routers.qbt.priority=10
-      - traefik.http.service.qbt.loadbalancer.server.port=8080
+      - traefik.http.services.qbt.loadbalancer.server.port=8080
       - traefik.http.routers.qbt-auth.rule=Host(`qbt.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
       - traefik.http.routers.qbt-auth.priority=15
-      - traefik.http.routers.qbt-auth.services=http://authentik-server:9000/outpost.goauthentik.io
+      - traefik.http.routers.qbt-auth.service=http://authentik-server:9000/outpost.goauthentik.io
 
 networks:
   web:
