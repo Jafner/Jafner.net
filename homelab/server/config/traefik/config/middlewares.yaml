@@ -44,11 +44,3 @@ http:
         stsSeconds: 63072000
         stsPreload: true
 
-    testSchemeHeaders:
-      headers:
-        #customResponseHeaders: 
-        #  X-Scheme: https
-        customRequestHeaders:
-          X-Scheme: https
-        #hostsProxyHeaders:
-        #  - "X-Scheme"
