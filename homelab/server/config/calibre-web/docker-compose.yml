@@ -52,7 +52,7 @@ services:
       - web
   
   calibre-web-dev:
-    image: registry.gitlab.jafner.net/jafner/calibre-web/calibre-web:latest
+    image: registry.gitlab.jafner.net/jafner/calibre-web/calibre-web:nodb-latest
     container_name: calibre-web_dev
     environment:
       - PUID=1000
