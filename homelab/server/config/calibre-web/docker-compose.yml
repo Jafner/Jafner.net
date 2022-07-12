@@ -59,7 +59,7 @@ services:
       - PGID=1000
       - TZ=America/Los_Angeles
     volumes:
-      #- calibre-web-dev_data:/config
+      - calibre-web-dev_data:/config
       - $LIBRARY_DIR/dev:/books
     labels:
       - traefik.http.routers.calibre-dev.rule=Host(`dev.calibre.jafner.net`)
