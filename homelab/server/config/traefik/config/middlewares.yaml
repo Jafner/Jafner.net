@@ -36,6 +36,7 @@ http:
           - "X-Forwarded-Host"
         customRequestHeaders:
           X-Forwarded-Proto: "https"
+          X-Scheme: https
         contentTypeNosniff: true
         browserXssFilter: true
         forceSTSHeader: true
