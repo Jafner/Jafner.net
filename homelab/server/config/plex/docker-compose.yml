@@ -3,6 +3,13 @@ services:
   plex:
     image: linuxserver/plex
     container_name: plex_plex
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     restart: "no"
     deploy:
       resources:
@@ -11,7 +18,6 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-
     networks:
       - web
     ports:
@@ -46,6 +52,13 @@ services:
   ombi:
     image: ghcr.io/linuxserver/ombi
     container_name: plex_ombi
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     restart: "no"
     networks:
       - web
@@ -65,6 +78,13 @@ services:
   tautulli:
     image: lscr.io/linuxserver/tautulli
     container_name: plex_tautulli
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     restart: "no"
     environment:
       - PUID=1000

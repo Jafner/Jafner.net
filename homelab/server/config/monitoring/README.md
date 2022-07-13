@@ -63,10 +63,10 @@ services:
     logging:
       driver: loki
       options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-url: http://localhost:3100/loki/api/v1/push
         loki-batch-size: "50"
-        loki-retries: 1
-        loki-timeout: 2s
+        loki-retries: "1"
+        loki-timeout: "2s"
 ```
 NOTE: The batch size here is in lines for *only the selected container*. 
 

@@ -4,6 +4,13 @@ services:
   peertube:
     image: chocobozzz/peertube:production-buster
     container_name: peertube_peertube
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       web:
       peertube:

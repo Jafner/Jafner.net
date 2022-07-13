@@ -4,6 +4,13 @@ services:
   traefik:
     image: traefik:latest
     container_name: traefik_traefik
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     restart: "no"
     networks:
       - web

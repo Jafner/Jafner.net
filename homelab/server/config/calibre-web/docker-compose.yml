@@ -3,6 +3,13 @@ services:
   calibre-web-rpg:
     image: linuxserver/calibre-web
     container_name: calibre-web_rpg
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     environment:
       - PUID=1000
       - PGID=1000
@@ -20,6 +27,13 @@ services:
   calibre-web-sff:
     image: linuxserver/calibre-web
     container_name: calibre-web_sff
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     environment:
       - PUID=1000
       - PGID=1000
@@ -37,6 +51,13 @@ services:
   calibre-web-ace:
     image: linuxserver/calibre-web
     container_name: calibre-web_ace
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     environment:
       - PUID=1000
       - PGID=1000
@@ -54,6 +75,13 @@ services:
   calibre-web-dev:
     image: registry.gitlab.jafner.net/jafner/calibre-web/calibre-web:master-latest
     container_name: calibre-web_dev
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     environment:
       - PUID=1000
       - PGID=1000

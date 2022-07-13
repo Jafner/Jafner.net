@@ -3,6 +3,13 @@ services:
   radarr:
     image: linuxserver/radarr
     container_name: autopirate_radarr
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       - web
     environment:
@@ -22,6 +29,13 @@ services:
   sonarr:
     image: linuxserver/sonarr
     container_name: autopirate_sonarr
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       - web
     environment:
@@ -41,6 +55,13 @@ services:
   lidarr:
     image: linuxserver/lidarr
     container_name: autopirate_lidarr
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       - web
     environment:
@@ -60,6 +81,13 @@ services:
   nzbhydra2:
     image: linuxserver/nzbhydra2
     container_name: autopirate_nzbhydra2
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       - web
     environment:
@@ -78,6 +106,13 @@ services:
   sabnzbd:
     image: linuxserver/sabnzbd
     container_name: autopirate_sabnzbd
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       - web
       - monitoring
@@ -100,6 +135,13 @@ services:
   tdarr:
     image: haveagitgat/tdarr:latest
     container_name: autopirate_tdarr
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       web:
       tdarr: 
@@ -132,6 +174,13 @@ services:
   tdarr-node:
     image: haveagitgat/tdarr_node:latest
     container_name: autopirate_tdarr-node
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     deploy:
       resources:
         reservations:
@@ -166,6 +215,13 @@ services:
   jackett:
     image: linuxserver/jackett
     container_name: autopirate_jackett
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     networks:
       - web
     environment:

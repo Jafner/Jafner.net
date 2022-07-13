@@ -4,6 +4,13 @@ services:
   e6:
     image: itzg/minecraft-server:java8
     container_name: minecraft_e6
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
     environment:
       - EULA=TRUE
       - MAX_MEMORY=8G

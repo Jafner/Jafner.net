@@ -1,113 +1,162 @@
 version: '3'
 services:
-    grafana:
-        image: grafana/grafana-oss:latest
-        container_name: monitoring_grafana
-        restart: "no"
-        networks:
-            - monitoring
-            - web
-        user: "0"
-        volumes:  
-            - ${DOCKER_DATA}/grafana:/var/lib/grafana
-            - ./custom.ini:/etc/grafana/grafana.ini
-        labels:
-            - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
-            - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
-            #- traefik.http.routers.grafana.middlewares=authelia@file
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: monitoring_grafana
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    restart: "no"
+    networks:
+      - monitoring
+      - web
+    user: "0"
+    volumes:  
+      - ${DOCKER_DATA}/grafana:/var/lib/grafana
+      - ./custom.ini:/etc/grafana/grafana.ini
+    labels:
+      - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
+      - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
+      #- traefik.http.routers.grafana.middlewares=authelia@file
 
-    prometheus:
-        image: prom/prometheus:latest
-        container_name: monitoring_prometheus
-        user: "1000:1000"
-        networks:
-            - monitoring
-            - web
-        ports:
-            -   9090:9090
-        volumes:
-            - ./prometheus.yml:/etc/prometheus/prometheus.yml
-            - ${DOCKER_DATA}/prometheus:/prometheus
-        restart: "no"
-        command:
-            -   "--config.file=/etc/prometheus/prometheus.yml"
-        labels:
-            - traefik.http.routers.prometheus-monitoring.rule=Host(`prometheus.jafner.net`)
-            - traefik.http.routers.prometheus-monitoring.tls.certresolver=lets-encrypt
-            - traefik.http.routers.prometheus-monitoring.middlewares=authentik@file
-    
-    loki:
-        image: grafana/loki:2.5.0
-        container_name: monitoring_loki
-        networks:
-            - monitoring
-            - web
-        ports:
-            - "3100:3100"
-        volumes:
-            - ${DOCKER_DATA}/loki:/etc/loki
-            - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
-        restart: "no"
-        command: -config.file=/etc/loki/loki-config.yml
-        labels:
-            - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
-            - traefik.http.routers.loki.tls.certresolver=lets-encrypt
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: monitoring_prometheus
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    user: "1000:1000"
+    networks:
+      - monitoring
+      - web
+    ports:
+      -   9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ${DOCKER_DATA}/prometheus:/prometheus
+    restart: "no"
+    command:
+      -   "--config.file=/etc/prometheus/prometheus.yml"
+    labels:
+      - traefik.http.routers.prometheus-monitoring.rule=Host(`prometheus.jafner.net`)
+      - traefik.http.routers.prometheus-monitoring.tls.certresolver=lets-encrypt
+      - traefik.http.routers.prometheus-monitoring.middlewares=authentik@file
+  
+  loki:
+    image: grafana/loki:2.5.0
+    container_name: monitoring_loki
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    networks:
+      - monitoring
+      - web
+    ports:
+      - "3100:3100"
+    volumes:
+      - ${DOCKER_DATA}/loki:/etc/loki
+      - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
+    restart: "no"
+    command: -config.file=/etc/loki/loki-config.yml
+    labels:
+      - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
+      - traefik.http.routers.loki.tls.certresolver=lets-encrypt
 
-    pihole-jafner-net:
-        image: ekofr/pihole-exporter:latest
-        container_name: monitoring_prometheus-pihole-jafner-net
-        restart: "no"
-        networks:
-            -   monitoring
-        environment:
-            -   PIHOLE_HOSTNAME=pihole.jafner.net
-            -   PIHOLE_PASSWORD=***REMOVED***
-            -   INTERVAL=15s
-            -   PORT=9617
-        labels:
-            - traefik.enable=false
+  pihole-jafner-net:
+    image: ekofr/pihole-exporter:latest
+    container_name: monitoring_prometheus-pihole-jafner-net
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    restart: "no"
+    networks:
+      -   monitoring
+    environment:
+      -   PIHOLE_HOSTNAME=pihole.jafner.net
+      -   PIHOLE_PASSWORD=***REMOVED***
+      -   INTERVAL=15s
+      -   PORT=9617
+    labels:
+      - traefik.enable=false
 
-    mc-monitor:
-        image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
-        container_name: monitoring_mc-monitor
-        command: export-for-prometheus
-        restart: "no"
-        networks:
-            - monitoring
-            - mc-router
-        environment:
-            EXPORT_SERVERS: e6-056,vanilla,bmcp,e6,e6-dev,fan
-        labels:
-            - traefik.enable=false
+  mc-monitor:
+    image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
+    container_name: monitoring_mc-monitor
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    command: export-for-prometheus
+    restart: "no"
+    networks:
+      - monitoring
+      - mc-router
+    environment:
+      EXPORT_SERVERS: e6-056,vanilla,bmcp,e6,e6-dev,fan
+    labels:
+      - traefik.enable=false
 
-    plex-exporter:
-        image: granra/plex_exporter
-        container_name: monitoring_plex-exporter
-        restart: "no"
-        networks:
-            - monitoring
-        command: 
-            - "--plex-server=https://plex.jafner.net"
-            - "--token=***REMOVED***"
-            - "--auto-discover"
-        labels:
-            - traefik.enable=false
+  plex-exporter:
+    image: granra/plex_exporter
+    container_name: monitoring_plex-exporter
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    restart: "no"
+    networks:
+      - monitoring
+    command: 
+      - "--plex-server=https://plex.jafner.net"
+      - "--token=***REMOVED***"
+      - "--auto-discover"
+    labels:
+      - traefik.enable=false
 
-    sabnzbd_exporter:
-        image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
-        container_name: monitoring_sabnzbd_exporter
-        restart: "no"
-        networks:
-            - monitoring
-        environment:
-            - SABNZBD_BASEURLS=https://sabnzbd.jafner.net:443
-            - SABNZBD_APIKEYS=***REMOVED***
+  sabnzbd_exporter:
+    image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
+    container_name: monitoring_sabnzbd_exporter
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    restart: "no"
+    networks:
+      - monitoring
+    environment:
+      - SABNZBD_BASEURLS=https://sabnzbd.jafner.net:443
+      - SABNZBD_APIKEYS=***REMOVED***
 
 
 networks:
-    monitoring:
-        external: true
-    web:
-        external: true
-    mc-router:
-        external: true
+  monitoring:
+    external: true
+  web:
+    external: true
+  mc-router:
+    external: true

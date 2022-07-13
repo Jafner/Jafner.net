@@ -1,21 +1,28 @@
 version: '3'
 services:
-    homer:
-        image: b4bz/homer
-        container_name: homepage_homer
-        restart: "unless-stopped"
-        environment:
-            - UID=1000
-            - GID=1000
-        volumes:
-            - ./assets:/www/assets
-        networks:
-            - web
-        labels:
-            - traefik.http.routers.homer.rule=Host(`home.jafner.net`)
-            - traefik.http.routers.homer.tls.certresolver=lets-encrypt
-            - traefik.http.routers.homer.middlewares=authentik@file
+  homer:
+    image: b4bz/homer
+    container_name: homepage_homer  
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    restart: "unless-stopped"
+    environment:
+      - UID=1000
+      - GID=1000
+    volumes:
+      - ./assets:/www/assets
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.homer.rule=Host(`home.jafner.net`)
+      - traefik.http.routers.homer.tls.certresolver=lets-encrypt
+      - traefik.http.routers.homer.middlewares=authentik@file
 
 networks:
-    web:
-        external: true
+  web:
+  external: true
