@@ -46,3 +46,5 @@ flowchart TD;
 3. Shut down the host: `sudo shutdown now`. Wait 30 seconds.
 4. Press the power button on the front of the chassis to begin booting. Take note of any POST beeps during this time. Wait for the host to be accessible via SSH. 
 5. Check current running docker containers
+6. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
+7. Start Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
