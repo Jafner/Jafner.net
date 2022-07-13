@@ -25,10 +25,6 @@ services:
       - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
       - traefik.http.services.radarr.loadbalancer.server.port=7878
       - traefik.http.routers.radarr.middlewares=lan-only@file,authentik@file
-      - traefik.http.routers.radarr.priority=10
-      - traefik.http.routers.radarr-auth.rule=Host(`radarr.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
-      - traefik.http.routers.radarr-auth.priority=15
-      - traefik.http.routers.radarr-auth.service=http://authentik-server:9000/outpost.goauthentik.io
   
   sonarr:
     image: linuxserver/sonarr
@@ -55,6 +51,10 @@ services:
       - traefik.http.routers.sonarr.tls.certresolver=lets-encrypt
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
       - traefik.http.routers.sonarr.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.sonarr.priority=10
+      - traefik.http.routers.sonarr-auth.rule=Host(`sonarr.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.sonarr-auth.priority=15
+      - traefik.http.routers.sonarr-auth.service=http://authentik-server:9000/outpost.goauthentik.io
 
   lidarr:
     image: linuxserver/lidarr
