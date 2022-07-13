@@ -81,9 +81,22 @@ services:
       - traefik.http.routers.gitlab-registry.tls.certresolver=lets-encrypt
       - traefik.http.routers.gitlab-registry.service=gitlab-registry
       - traefik.http.services.gitlab-registry.loadbalancer.server.port=5000
-  gitlab-runner:
+  
+  gitlab-runner-0:
     image: 'gitlab/gitlab-runner:latest'
-    container_name: gitlab_runner
+    container_name: gitlab_runner_0
+    restart: always
+    environment:
+      - GODEBUG="x509ignoreCN=0"
+    volumes:
+      - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=false
+
+  gitlab-runner-1:
+    image: 'gitlab/gitlab-runner:latest'
+    container_name: gitlab_runner_1
     restart: always
     environment:
       - GODEBUG="x509ignoreCN=0"
