@@ -71,3 +71,25 @@ services:
 NOTE: The batch size here is in lines for *only the selected container*. 
 
 See [loki log-opts](https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#supported-log-opt-options) for list of available configuration options for loki logging driver.
+See [docker-compose logging](https://docs.docker.com/compose/compose-file/compose-file-v3/#logging) for Docker-compose logging reference.
+
+## Instrumenting: Default Docker Logging
+Per: [Docker docs](https://docs.docker.com/config/containers/logging/configure/)
+> The default logging driver is `json-file`.
+
+The configuration options for the `json-file` logging driver are [here](https://docs.docker.com/config/containers/logging/json-file/).
+
+Docker-compose adds a few labels to containers it starts. This feature is not comprehensively documented, but here: [Compose Specification](https://docs.docker.com/compose/compose-file/). And we can see what labels are added by default by simply looking at a deployed application (wg-easy):
+
+| Label Key | Value |
+|:---------:|:-----:|
+| `com.docker.compose.config-hash` | `f75588baa1056ddc618b1741805d2600b4380e13c5114106de6c8322f79dfd3f` |
+| `com.docker.compose.container-number` | `1` |
+| `com.docker.compose.oneoff` | `False` |
+| `com.docker.compose.project` | `wireguard` |
+| `com.docker.compose.project.config_files` | `docker-compose.yml` |
+| `com.docker.compose.project.working_dir` | `/home/joey/homelab/server/config/wireguard` |
+| `com.docker.compose.service` | `wg-easy` |
+| `com.docker.compose.version` | `1.29.2` |
+
+These are *labels* on the container, which are distinct from *tags* in the actual json log payload. 
