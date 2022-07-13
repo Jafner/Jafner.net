@@ -4,14 +4,14 @@ services:
     image: weejewel/wg-easy
     container_name: wireguard_wg-easy
     restart: "no"
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: 50
-        loki-retries: 1
-        loki-timeout: 2s
-        loki-labels: "com.docker.compose.project,com.docker.compose.service"
+    # logging:
+    #   driver: loki
+    #   options:
+    #     loki-url: http://localhost:3100/loki/api/v1/push
+    #     loki-batch-size: 50
+    #     loki-retries: 1
+    #     loki-timeout: 2s
+    #     loki-labels: "com.docker.compose.project,com.docker.compose.service"
     env_file:
       - .env
     ports:
