@@ -92,4 +92,4 @@ Docker-compose adds a few labels to containers it starts. This feature is not co
 | `com.docker.compose.service` | `wg-easy` |
 | `com.docker.compose.version` | `1.29.2` |
 
-These are *labels* on the container, which are distinct from *tags* in the actual json log payload. 
+These are *labels* on the container, which are distinct from *tags* in the actual json log payload. Log tags are [documented here](https://docs.docker.com/config/containers/logging/log_tags/).
