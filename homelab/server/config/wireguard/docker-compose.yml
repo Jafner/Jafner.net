@@ -11,7 +11,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
-        loki-labels: "com.docker.compose.project,com.docker.compose.service"
+        labels: "com.docker.compose.project,com.docker.compose.service"
     env_file:
       - .env
     ports:
