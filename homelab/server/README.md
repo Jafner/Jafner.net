@@ -66,42 +66,49 @@ SMTP_TLS=false
 ```yml
 version: '3'
 services:
-    <service>:
-        image: 
-        container_name: <stack>_<service>
-        user: "1000:1000"
-        restart: "no"
-        environment:
-            PUID: ${PUID}
-            PGID: ${PGID}
-        volumes:
-            - ${DOCKER_DATA}/<service>:/path/to/data
-        labels:
-            - traefik.http.routers.<service>.rule=Host(`<service>.jafner.net`)
-            - traefik.http.routers.<service>.tls.certresolver=lets-encrypt
-            - traefik.http.routers.<service>.middlewares=<middlewares> # available middlewares are available in homelab/server/config/traefik/config/middlewares.yaml
-            - traefik.http.services.<service>.loadbalancer.server.port=<port>
-        networks:
-            - web
-            - <service>
-        depends_on:
-            - landing_db
-    <service>_db:
-        image: 
-        container_name: <service>_db
-        user: "1000:1000"
-        restart: "no"
-        networks:
-            - <service>
-        environment:
-            PUID: ${PUID}
-            PGID: ${PGID}
-        volumes:
-            - ${DOCKER_DATA}/db:/var/lib/mysql
-        labels:
-            - traefik.enable=false
+  <service>:
+    image: 
+    container_name: <stack>_<service>
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+    user: "1000:1000"
+    restart: "no"
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+    volumes:
+      - ${DOCKER_DATA}/<service>:/path/to/data
+    labels:
+      - traefik.http.routers.<service>.rule=Host(`<service>.jafner.net`)
+      - traefik.http.routers.<service>.tls.certresolver=lets-encrypt
+      - traefik.http.routers.<service>.middlewares=<middlewares> # available middlewares are available in homelab/server/config/traefik/config/middlewares.yaml
+      - traefik.http.services.<service>.loadbalancer.server.port=<port>
+    networks:
+      - web
+      - <service>
+    depends_on:
+      - landing_db
+  <service>_db:
+    image: 
+    container_name: <service>_db
+    user: "1000:1000"
+    restart: "no"
+    networks:
+      - <service>
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+    volumes:
+      - ${DOCKER_DATA}/db:/var/lib/mysql
+    labels:
+      - traefik.enable=false
 networks:
-    web:
-        external: true
-    <service>:
+  web:
+    external: true
+<service>:
 ```
