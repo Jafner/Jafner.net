@@ -55,3 +55,31 @@ Some applications should be available only to members of the Jafner.net Admins g
 3. Click "Create Binding", switch from "Policy" to "Group" (or "User", if preferred). From the drop-down, select the group which should be permitted to access the application, then click "Create". 
 
 All done.
+
+# Set up SSO for an application
+1. Add the following Traefik labels to the application:
+
+```yml
+labels:
+      - traefik.http.routers.<service>.rule=Host(`<service>.jafner.net`)
+      - traefik.http.routers.<service>.tls.certresolver=lets-encrypt
+      - traefik.http.routers.<service>.middlewares=authentik@file
+      - traefik.http.routers.<service>.priority=10
+      - traefik.http.routers.<service>-auth.rule=Host(`<service>.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.<service>-auth.priority=15
+      - traefik.http.routers.<service>-auth.service=http://authentik-server:9000/outpost.goauthentik.io
+```
+
+2. In the Authentik admin interface, navigate to *Applications --> Providers* and create a new provider. 
+    2a. Select type Proxy Provider. 
+    2b. Set the name to the name of the service (e.g. Sonarr). 
+    2c. Use the `default-provider-authorization-implicit-consent` Authorization flow. 
+    2d. Select the "Forward auth (single application)" configuration.
+    2e. For External host, use the value of the host rule label prepended with `https://` (e.g. `https://sonarr.jafner.net`).
+    2f. Leave the rest of the configuration as default. Click Finish to create the provider.
+3. In the Authentik admin interface, navigate to *Applications --> Applications* and create a new application. 
+    2a. Set the Name to the name of the service (e.g. Sonarr).
+    2b. Set the Slug to a URL-compliant version of the Name (e.g. `sonarr`)
+    2c. Set the Group if the service is part of a *group of services) (e.g. autopirate).
+    2d. Use the provider created in step 2 as Provider.
+    2e. Leave the rest of the configuration as default. Click Create to create the application. 
