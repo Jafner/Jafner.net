@@ -3,7 +3,7 @@ services:
   router:
     image: itzg/mc-router
     container_name: minecraft_mc-router
-    restart: always
+    restart: "no"
     networks:
       - mc-router
     ports:

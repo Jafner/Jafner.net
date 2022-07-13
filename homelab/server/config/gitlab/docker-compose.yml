@@ -3,7 +3,7 @@ services:
   gitlab:
     image: 'gitlab/gitlab-ee:latest'
     container_name: gitlab_gitlab
-    restart: unless-stopped
+    restart: "no"
     hostname: 'gitlab.jafner.net'
     networks:
       - web
@@ -85,7 +85,7 @@ services:
   gitlab-runner-0:
     image: 'gitlab/gitlab-runner:latest'
     container_name: gitlab_runner_0
-    restart: always
+    restart: "no"
     environment:
       - GODEBUG="x509ignoreCN=0"
     volumes:
@@ -97,7 +97,7 @@ services:
   gitlab-runner-1:
     image: 'gitlab/gitlab-runner:latest'
     container_name: gitlab_runner_1
-    restart: always
+    restart: "no"
     environment:
       - GODEBUG="x509ignoreCN=0"
     volumes:

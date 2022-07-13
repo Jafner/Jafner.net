@@ -7,7 +7,7 @@ services:
     uptime-kuma:
         image: louislam/uptime-kuma
         container_name: monitoring_uptime-kuma
-        restart: unless-stopped
+        restart: "no"
         volumes:
             - ${DOCKER_DATA}/data:/app/data
         networks:

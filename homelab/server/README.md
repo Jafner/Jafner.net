@@ -70,7 +70,7 @@ services:
         image: 
         container_name: <stack>_<service>
         user: "1000:1000"
-        restart: unless-stopped
+        restart: "no"
         environment:
             PUID: ${PUID}
             PGID: ${PGID}
@@ -90,7 +90,7 @@ services:
         image: 
         container_name: <service>_db
         user: "1000:1000"
-        restart: unless-stopped
+        restart: "no"
         networks:
             - <service>
         environment:

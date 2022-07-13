@@ -3,7 +3,7 @@ services:
     grafana:
         image: grafana/grafana-oss:latest
         container_name: monitoring_grafana
-        restart: unless-stopped
+        restart: "no"
         networks:
             - monitoring
             - web
@@ -28,7 +28,7 @@ services:
         volumes:
             - ./prometheus.yml:/etc/prometheus/prometheus.yml
             - ${DOCKER_DATA}/prometheus:/prometheus
-        restart: unless-stopped
+        restart: "no"
         command:
             -   "--config.file=/etc/prometheus/prometheus.yml"
         labels:
@@ -47,7 +47,7 @@ services:
         volumes:
             - ${DOCKER_DATA}/loki:/etc/loki
             - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
-        restart: unless-stopped
+        restart: "no"
         command: -config.file=/etc/loki/loki-config.yml
         labels:
             - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
@@ -56,7 +56,7 @@ services:
     pihole-jafner-net:
         image: ekofr/pihole-exporter:latest
         container_name: monitoring_prometheus-pihole-jafner-net
-        restart: unless-stopped
+        restart: "no"
         networks:
             -   monitoring
         environment:
@@ -71,7 +71,7 @@ services:
         image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
         container_name: monitoring_mc-monitor
         command: export-for-prometheus
-        restart: unless-stopped
+        restart: "no"
         networks:
             - monitoring
             - mc-router
@@ -83,7 +83,7 @@ services:
     plex-exporter:
         image: granra/plex_exporter
         container_name: monitoring_plex-exporter
-        restart: unless-stopped
+        restart: "no"
         networks:
             - monitoring
         command: 
@@ -96,7 +96,7 @@ services:
     sabnzbd_exporter:
         image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
         container_name: monitoring_sabnzbd_exporter
-        restart: unless-stopped
+        restart: "no"
         networks:
             - monitoring
         environment:

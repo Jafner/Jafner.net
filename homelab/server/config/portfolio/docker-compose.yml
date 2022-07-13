@@ -4,7 +4,7 @@ services:
     portfolio:
         image: wordpress
         container_name: wordpress_portfolio
-        restart: always
+        restart: "no"
         environment:
             WORDPRESS_DB_HOST: portfolio_db
             WORDPRESS_DB_USER: wordpress
@@ -26,7 +26,7 @@ services:
     portfolio_db:
         image: mysql:5.7
         container_name: wordpress_portfolio-db
-        restart: always
+        restart: "no"
         networks:
             - portfolio
         environment:

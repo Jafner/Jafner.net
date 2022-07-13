@@ -4,7 +4,7 @@ services:
     landing:
         image: wordpress
         container_name: wordpress_landing
-        restart: always
+        restart: "no"
         environment:
             WORDPRESS_DB_HOST: landing_db
             WORDPRESS_DB_USER: wordpress
@@ -27,7 +27,7 @@ services:
     landing_db:
         image: mysql:5.7
         container_name: wordpress_landing-db
-        restart: always
+        restart: "no"
         networks:
             - landing
         environment:

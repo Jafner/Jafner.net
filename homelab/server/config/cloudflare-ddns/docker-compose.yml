@@ -3,7 +3,7 @@ services:
   cloudflare-ddns:
     image: oznu/cloudflare-ddns
     container_name: ddns_cloudflare-ddns
-    restart: unless-stopped
+    restart: "no"
     environment:
       - API_KEY=***REMOVED***
       - ZONE=jafner.net

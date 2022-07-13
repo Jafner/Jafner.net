@@ -17,7 +17,7 @@ services:
       - $DOCKER_DATA/e6:/data:rw
     networks:
       - mc-router
-    restart: always
+    restart: "no"
 networks:
   mc-router:
     external: true

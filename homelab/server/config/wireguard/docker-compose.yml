@@ -3,7 +3,7 @@ services:
   wg-easy:
     image: weejewel/wg-easy
     container_name: wireguard_wg-easy
-    restart: unless-stopped
+    restart: "no"
     env_file:
       - .env
     ports:

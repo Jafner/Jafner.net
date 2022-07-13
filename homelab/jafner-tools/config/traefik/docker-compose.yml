@@ -3,7 +3,7 @@ services:
   traefik:
     container_name: traefik_traefik
     image: traefik:latest
-    restart: always
+    restart: "no"
     networks:
       - web
     ports:

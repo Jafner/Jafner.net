@@ -3,7 +3,7 @@ services:
   sftp:
     image: atmoz/sftp
     container_name: sftp_sftp
-    restart: unless-stopped
+    restart: "no"
     ports:
       - 23450:22/tcp
     volumes:

@@ -3,7 +3,7 @@ services:
   5etools:
     container_name: 5etools
     image: jafner/5etools-docker
-    restart: always
+    restart: "no"
     volumes:
       - $DOCKER_DATA/htdocs:/usr/local/apache2/htdocs
     environment:

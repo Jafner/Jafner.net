@@ -24,7 +24,7 @@ services:
       - $DOCKER_DATA/bmcp:/data:rw
     networks:
       - mc-router
-    restart: always
+    restart: "no"
 networks:
   mc-router:
     external: true

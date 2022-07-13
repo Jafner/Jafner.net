@@ -3,7 +3,7 @@ services:
   portainer:
     image: portainer/portainer-ce
     container_name: portainer_portainer
-    restart: unless-stopped
+    restart: "no"
     command: -H unix:///var/run/docker.sock
     networks:
         - web

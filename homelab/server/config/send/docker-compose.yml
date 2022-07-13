@@ -3,7 +3,7 @@ services:
   send:
     image: registry.gitlab.com/timvisee/send:latest
     container_name: send_send
-    restart: always
+    restart: "no"
     networks:
       - send
       - web
@@ -30,7 +30,7 @@ services:
     container_name: send_redis
     networks:
       - send
-    restart: always
+    restart: "no"
     volumes:
       - send-redis:/data
 

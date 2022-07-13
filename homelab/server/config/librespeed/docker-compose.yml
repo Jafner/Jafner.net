@@ -3,7 +3,7 @@ services:
   librespeed:
     container_name: librespeed
     image: adolfintel/speedtest
-    restart: always
+    restart: "no"
     environment:
       - TITLE=LibreSpeed@Jafner.net
       - TELEMETRY=true
