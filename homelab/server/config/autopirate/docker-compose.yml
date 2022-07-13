@@ -24,7 +24,12 @@ services:
       - traefik.http.routers.radarr.rule=Host(`radarr.jafner.net`)
       - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
       - traefik.http.services.radarr.loadbalancer.server.port=7878
-      - traefik.http.routers.radarr.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.radarr.middlewares=authentik@file
+      - traefik.http.routers.radarr.priority=10
+      - traefik.http.routers.radarr-auth.rule=Host(`radarr.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.radarr-auth.priority=15
+      - traefik.http.routers.radarr-auth.service=http://authentik-server:9000/outpost.goauthentik.io
+      
   
   sonarr:
     image: linuxserver/sonarr
@@ -80,7 +85,11 @@ services:
       - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
       - traefik.http.routers.lidarr.tls.certresolver=lets-encrypt
       - trarfik.http.services.lidarr.loadbalancer.server.port=8686
-      - traefik.http.routers.lidarr.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.lidarr.middlewares=authentik@file
+      - traefik.http.routers.lidarr.priority=10
+      - traefik.http.routers.lidarr-auth.rule=Host(`lidarr.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.lidarr-auth.priority=15
+      - traefik.http.routers.lidarr-auth.service=http://authentik-server:9000/outpost.goauthentik.io
 
   nzbhydra2:
     image: linuxserver/nzbhydra2
@@ -105,7 +114,11 @@ services:
       - traefik.http.routers.nzbhydra2.rule=Host(`nzbhydra.jafner.net`)
       - traefik.http.routers.nzbhydra2.tls.certresolver=lets-encrypt
       - traefik.http.services.nzbhydra2.loadbalancer.server.port=5076
-      - traefik.http.routers.nzbhydra2.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.nzbhydra2.middlewares=authentik@file
+      - traefik.http.routers.nzbhydra2.priority=10
+      - traefik.http.routers.nzbhydra2-auth.rule=Host(`nzbhydra.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.nzbhydra2-auth.priority=15
+      - traefik.http.routers.nzbhydra2-auth.service=http://authentik-server:9000/outpost.goauthentik.io
   
   sabnzbd:
     image: linuxserver/sabnzbd
@@ -134,7 +147,11 @@ services:
       - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.jafner.net`)
       - traefik.http.routers.sabnzbd.tls.certresolver=lets-encrypt
       - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
-      - traefik.http.routers.sabnzbd.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.sabnzbd.middlewares=authentik@file
+      - traefik.http.routers.sabnzbd.priority=10
+      - traefik.http.routers.sabnzbd-auth.rule=Host(`sabnzbd.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.sabnzbd-auth.priority=15
+      - traefik.http.routers.sabnzbd-auth.service=http://authentik-server:9000/outpost.goauthentik.io
 
   tdarr:
     image: haveagitgat/tdarr:latest
@@ -159,6 +176,10 @@ services:
       - traefik.http.routers.tdarr.tls.certresolver=lets-encrypt
       - traefik.http.routers.tdarr.middlewares=authentik@file
       - traefik.http.services.tdarr.loadbalancer.server.port=8265
+      - traefik.http.routers.tdarr.priority=10
+      - traefik.http.routers.tdarr-auth.rule=Host(`tdarr.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.tdarr-auth.priority=15
+      - traefik.http.routers.tdarr-auth.service=http://authentik-server:9000/outpost.goauthentik.io
     environment:
       - TZ=${TZ}
       - PUID=${PUID}
@@ -240,7 +261,11 @@ services:
       - traefik.http.routers.jackett.rule=Host(`jackett.jafner.net`)
       - traefik.http.routers.jackett.tls.certresolver=lets-encrypt
       - traefik.http.services.jackett.loadbalancer.server.port=9117
-      - traefik.http.routers.jackett.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.jackett.middlewares=authentik@file
+      - traefik.http.routers.jackett.priority=10
+      - traefik.http.routers.jackett-auth.rule=Host(`jackett.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.jackett-auth.priority=15
+      - traefik.http.routers.jackett-auth.service=http://authentik-server:9000/outpost.goauthentik.io
 
 networks:
   tdarr:
