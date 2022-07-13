@@ -50,7 +50,7 @@ services:
       - traefik.http.routers.sonarr.rule=Host(`sonarr.jafner.net`)
       - traefik.http.routers.sonarr.tls.certresolver=lets-encrypt
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
-      - traefik.http.routers.sonarr.middlewares=lan-only@file,authentik@file
+      - traefik.http.routers.sonarr.middlewares=authentik@file
       - traefik.http.routers.sonarr.priority=10
       - traefik.http.routers.sonarr-auth.rule=Host(`sonarr.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
       - traefik.http.routers.sonarr-auth.priority=15
