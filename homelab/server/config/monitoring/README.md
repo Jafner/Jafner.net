@@ -37,16 +37,37 @@ All monitors use a Prometheus exporter.
 Followed [this guide from Techno Tim](https://docs.technotim.live/posts/grafana-loki/).
 Non-tracked changes include:
 1. `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions` to install the Loki docker plugin.
-2. Edit `/etc/docker/daemon.json` to add the following block:
+
+## Instrumenting: Daemon-Level Logging
+Edit `/etc/docker/daemon.json` to add the following block:
 
 ```json
 {
-    "live-restore": true
     "log-driver": "loki",
     "log-opts": {
         "loki-url": "http://localhost:3100/loki/api/v1/push",
-        "loki-batch-size": "400"
+        "loki-batch-size": "400",
+        "loki-retries": "1",
+        "loki-timeout": "2s"
     }
 }
 ```
-3. Refer to the documentation for [restarting the docker daemon](/docs/Restart the Docker Daemon.md)
+NOTE: All logging will fail if the Loki container is inaccessible. This may cause the Docker daemon to lock up. These parameters are applied when a container is created, so all containers must be destroyed to resolve the issue.
+NOTE: The batch size here is in lines for *all docker logs*.
+
+## Instrumenting: Per-Container Logging 
+Add the following logging parameter to each main-service container within a stack. 
+```yml
+services:
+  <some-service>:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-batch-size: "50"
+        loki-retries: 1
+        loki-timeout: 2s
+```
+NOTE: The batch size here is in lines for *only the selected container*. 
+
+See [loki log-opts](https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#supported-log-opt-options) for list of available configuration options for loki logging driver.
