@@ -6,7 +6,7 @@
 |:---------:|:-----:|
 | Provider type | OAuth2/OpenID Provider |
 | Name | *Name of new application (e.g. Grafana)* |
-| Authorization flow | Authorize Application (default-provider-authorization-explicit-consent) |
+| Authorization flow | Authorize Application (default-provider-authorization-implicit-consent) |
 | Client type | Confidential |
 | Client ID | *Copy this value for later use* |
 | Client Secret | *Copy this value for later use* |
@@ -38,3 +38,20 @@
 | API URl | *Userinfo URL* |
 
 7. Apply and restart the application.
+
+# Switching to single-screen (autofill compatible) login
+The default out-of-box configuration for Authentik uses two separate screens for inputting username and password (and an optional third for MFA). This breaks compatibility with password managers. To switch to using single-stage username and password login, 
+
+1. Navigate to *Flows & Stages --> Stages --> default-authentication-identification* and edit the "Password stage" to use `default-authentication-password`. 
+2. Navigate to *Flows & Stages --> Flows --> default-authentication-flow* and open it. Go to Stage Bindings, select the `default-authentication-password` stage and delete it from the flow (as it is now included in the previous stage). 
+
+All done.
+
+# Make Application Admin-only
+Some applications should be available only to members of the Jafner.net Admins group. To protect an application behind this role, 
+
+1. Navigate to *Applications --> Applications* and open the relevant application. 
+2. Switch to the "Policy / Group / User Bindings" tab.
+3. Click "Create Binding", switch from "Policy" to "Group" (or "User", if preferred). From the drop-down, select the group which should be permitted to access the application, then click "Create". 
+
+All done.
