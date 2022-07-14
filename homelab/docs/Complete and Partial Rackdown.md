@@ -72,3 +72,8 @@ delete service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-se
 set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 192.168.1.23
 commit; save; exit
 ```
+
+### Recreate all Docker containers one-liner
+```bash
+STACKS_RESTARTED=0 && for app in ~/homelab/server/config/*; do echo "===== RECREATING $app =====" && cd $app && docker-compose up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== RECREATING $service =====" && docker-compose -f $service up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) ====="
+```
