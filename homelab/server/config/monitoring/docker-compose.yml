@@ -10,6 +10,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     networks:
       - monitoring
@@ -33,6 +34,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     user: "1000:1000"
     networks:
       - monitoring
@@ -60,6 +62,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - monitoring
       - web
@@ -84,6 +87,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     networks:
       -   monitoring
@@ -105,6 +109,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     command: export-for-prometheus
     restart: "no"
     networks:
@@ -125,6 +130,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     networks:
       - monitoring
@@ -145,6 +151,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     networks:
       - monitoring

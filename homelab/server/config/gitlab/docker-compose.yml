@@ -10,6 +10,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     hostname: 'gitlab.jafner.net'
     networks:
@@ -99,6 +100,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     environment:
       - GODEBUG="x509ignoreCN=0"
@@ -118,6 +120,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     restart: "no"
     environment:
       - GODEBUG="x509ignoreCN=0"

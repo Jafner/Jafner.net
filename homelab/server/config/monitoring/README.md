@@ -67,6 +67,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
 ```
 NOTE: The batch size here is in lines for *only the selected container*. 
 

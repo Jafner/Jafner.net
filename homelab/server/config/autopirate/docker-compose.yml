@@ -10,6 +10,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - web
     environment:
@@ -41,6 +42,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - web
     environment:
@@ -71,6 +73,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - web
     environment:
@@ -101,6 +104,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - web
     environment:
@@ -130,6 +134,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - web
       - monitoring
@@ -163,6 +168,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       web:
       tdarr: 
@@ -206,6 +212,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     deploy:
       resources:
         reservations:
@@ -247,6 +254,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     networks:
       - web
     environment:

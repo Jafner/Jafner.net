@@ -76,6 +76,7 @@ services:
         loki-batch-size: "50"
         loki-retries: "1"
         loki-timeout: "2s"
+        keep-file: "true"
     user: "1000:1000"
     restart: "no"
     environment:
