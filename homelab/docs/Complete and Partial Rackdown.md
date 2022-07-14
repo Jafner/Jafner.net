@@ -28,23 +28,47 @@ flowchart TD;
 				Router<-->desktop_gus[Gus' Desktop];	
 ```
 
-## Booting the ONT
+# Per-Node Reboot Instructions
+For each of these, it is assumed that all dependent nodes have already been shut down as necessary.
+## Rebooting the ONT
 1. Unplug the 6-pin power plug. Wait 15 seconds.
 2. Plug the power plug back in. Wait for the top three lights to be solid green.
 
-## Booting the modem (Zyxel C3000Z)
+## Rebooting the modem (Zyxel C3000Z)
 1. Unplug the barrel power plug. Wait 15 seconds.
 2. Plug the power plug back in. Wait for the "Power" and "WAN/LAN" lights to be solid green (the WAN/LAN light might flicker, that's okay. )
 
-## Booting the Router (Ubiquiti EdgeRouter 10X)
+## Rebooting the Router (Ubiquiti EdgeRouter 10X)
 1. Uplug the barrel power plug. Wait 15 seconds. 
 2. Plug the power plug back in. Wait for the indicator LED to be solid white.
 
-## Booting the Server
-1. Shut down most services: `for app in ~/homelab/server/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
-2. Shut down Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
-3. Shut down the host: `sudo shutdown now`. Wait 30 seconds.
-4. Press the power button on the front of the chassis to begin booting. Take note of any POST beeps during this time. Wait for the host to be accessible via SSH. 
-5. Check current running docker containers
-6. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
-7. Start Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
+## Rebooting the Server
+1. SSH into the router to reconfigure its DNS resolution.
+2. Reconfigure the router's DNS resolution: 
+
+```
+configure
+delete system name-server 192.168.1.23
+set system name-server 1.1.1.1
+delete service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 192.168.1.23
+set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 1.1.1.1
+commit; save; exit
+```
+
+3. Shut down most services: `for app in ~/homelab/server/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
+4. Shut down Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
+5. Shut down the host: `sudo shutdown now`. Wait 30 seconds.
+6. Press the power button on the front of the chassis to begin booting. Take note of any POST beeps during this time. Wait for the host to be accessible via SSH. 
+7. Check current running docker containers
+8. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
+9. Start Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
+10. Reconfigure the router's DNS resolution:
+
+```
+configure
+delete system name-server 1.1.1.1
+set system name-server 192.168.1.23
+delete service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 1.1.1.1
+set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 192.168.1.23
+commit; save; exit
+```

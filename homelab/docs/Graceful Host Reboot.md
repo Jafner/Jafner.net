@@ -27,16 +27,15 @@ The PiHole is relied upon for DNS resolution for all devices on the network whic
 1. Log into `router` via SSH and run the following:
 ```
 configure
-delete system name-server 192.168.1.22
-set system name-server 1.1.1.1
+delete service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 192.168.1.23
+set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 1.1.1.1
 commit; save; exit
 ```
-2. Reboot the Pi with `sudo reboot now`
 3. Switch back to the router and run the following:
 ```
 configure 
-delete system name-server 1.1.1.1
-set system name-server 192.168.1.22
+delete service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 1.1.1.1
+set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 192.168.1.23
 commit; save; exit
 ```
 4. Done.
