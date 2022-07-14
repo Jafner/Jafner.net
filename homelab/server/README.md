@@ -92,7 +92,7 @@ services:
       - web
       - <service>
     depends_on:
-      - landing_db
+      - <service>_db
   <service>_db:
     image: 
     container_name: <service>_db
