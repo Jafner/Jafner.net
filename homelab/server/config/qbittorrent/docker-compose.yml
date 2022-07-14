@@ -28,7 +28,7 @@ services:
       - traefik.http.services.qbt.loadbalancer.server.port=8080
       - traefik.http.routers.qbt-auth.rule=Host(`qbt.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
       - traefik.http.routers.qbt-auth.priority=15
-      - traefik.http.routers.qbt-auth.service=http://authentik-server:9000/outpost.goauthentik.io
+      - traefik.http.routers.qbt-auth.service=authentik-auth@file
 
 networks:
   web:
