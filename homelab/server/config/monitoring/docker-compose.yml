@@ -66,7 +66,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - ${DOCKER_DATA}/loki:/etc/loki
+      - ${DOCKER_DATA}/loki-logs:/loki-logs
       - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
     restart: "no"
     command: -config.file=/etc/loki/loki-config.yml
