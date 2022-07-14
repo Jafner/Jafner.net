@@ -88,10 +88,10 @@ services:
     networks:
       -   monitoring
     environment:
-      -   PIHOLE_HOSTNAME=pihole.jafner.net
-      -   PIHOLE_PASSWORD=***REMOVED***
-      -   INTERVAL=15s
-      -   PORT=9617
+      - PIHOLE_HOSTNAME=pihole.jafner.net
+      - PIHOLE_PROTOCOL=https
+      - INTERVAL=15s
+      - PORT=9617 # port on which the metrics should be available to be scraped by prometheus
     labels:
       - traefik.enable=false
 
