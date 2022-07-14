@@ -1,7 +1,7 @@
 version: '3'
 services:
   pihole:
-    image: 
+    image: pihole/pihole
     container_name: pihole_pihole
     logging:
       driver: loki
