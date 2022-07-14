@@ -24,11 +24,11 @@ services:
       - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
       - traefik.http.routers.qbt.middlewares=authentik@file
-      - traefik.http.routers.qbt.priority=10
       - traefik.http.services.qbt.loadbalancer.server.port=8080
-      - traefik.http.routers.qbt-auth.rule=Host(`qbt.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
-      - traefik.http.routers.qbt-auth.priority=15
-      - traefik.http.routers.qbt-auth.service=authentik-auth@file
+      # - traefik.http.routers.qbt.priority=10
+      # - traefik.http.routers.qbt-auth.rule=Host(`qbt.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
+      # - traefik.http.routers.qbt-auth.priority=15
+      # - traefik.http.routers.qbt-auth.service=authentik-auth@file
 
 networks:
   web:
