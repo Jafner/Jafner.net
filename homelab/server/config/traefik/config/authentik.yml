@@ -2,5 +2,5 @@ http:
   services:
     authentik-auth:
       loadBalancer:
-        server:
+        servers:
           - url: "http://authentik-server:9000/outpost.goauthentik.io/auth/traefik"
