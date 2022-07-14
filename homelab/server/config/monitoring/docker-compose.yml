@@ -53,6 +53,7 @@ services:
   loki:
     image: grafana/loki:2.5.0
     container_name: monitoring_loki
+    user: 0:0
     logging:
       driver: loki
       options:
@@ -66,7 +67,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      #- ${DOCKER_DATA}/loki-logs:/loki-logs
+      - ${DOCKER_DATA}/loki-logs:/loki-logs
       - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
     restart: "no"
     command: -config.file=/etc/loki/loki-config.yml
