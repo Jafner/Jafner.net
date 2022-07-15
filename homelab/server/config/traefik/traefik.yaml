@@ -12,8 +12,6 @@ entryPoints:
 metrics:
   prometheus: {}
 
-accessLog: {}
-
 certificatesResolvers:
   lets-encrypt:
     acme:
