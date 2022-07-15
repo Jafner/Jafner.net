@@ -75,9 +75,23 @@ Partition: ID-1: / size: 62.23 GiB used: 26.85 GiB (43.1%) fs: zfs logical: free
 ## Convert a 512B-sector disk to 4096B sectors
 1. Make sure the disk is not currently in use. 
 2. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script.
-3. Run `sg_format --size=4096 --format --fmtpinfo=0 /dev/[disknum]` for the disk.
-4. Wait 12-16 hours (for 8 TB disk).
-5. Remove and re-insert the disk.
+3. Check the current sector size with `smartctl -a /dev/<disknum> | grep block`.
+4. Reformat the disk(s) with the `sg_format` command. Use the following flags: `--size=4096 --format --fmtpinfo=0`. Then finally the disk location (e.g. `/dev/da15`). Use the `nohup` utility and the `&` operator to run the command in the background. An example one-liner for three disks (`da15`, `da16`, `da17`):
+
+```bash
+nohup sg_format --size=4096 --format --fmtpinfo=0 /dev/da15 & \
+nohup sg_format --size=4096 --format --fmtpinfo=0 /dev/da16 & \
+nohup sg_format --size=4096 --format --fmtpinfo=0 /dev/da17 & 
+```
+
+Alternatively, try this for the first time:
+```bash
+for disk in da15 da16 da17; do mkdir -p ~/.formatting/$disk && cd ~/.formatting/$disk && nohup sg_format --size=4096 --format --fmtpinfo=0 /dev/$disk &; done 
+```
+
+5. Close the terminal. Then log back in and run `ps -aux | grep sg_format` to confirm all processes are running. Check SMART status for disks with `for disk in da15 da16 da17; do smartctl -a /dev/$disk; done` (where `da15 da16 da17` is your list of disks).
+6. Wait 12-16 hours (for 8 TB disk).
+7. Remove and re-insert the disk.
 
 ## Perform a large copy operation in the background
 0. `cd ~` for consistent placement of `nohup.out`
