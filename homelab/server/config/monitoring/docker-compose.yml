@@ -50,7 +50,7 @@ services:
     labels:
       - traefik.http.routers.prometheus-monitoring.rule=Host(`prometheus.jafner.net`)
       - traefik.http.routers.prometheus-monitoring.tls.certresolver=lets-encrypt
-      - traefik.http.routers.prometheus-monitoring.middlewares=authentik@file
+      #- traefik.http.routers.prometheus-monitoring.middlewares=
   
   loki:
     image: grafana/loki:2.5.0
