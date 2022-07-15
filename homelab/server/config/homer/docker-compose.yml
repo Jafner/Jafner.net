@@ -2,7 +2,7 @@ version: '3'
 services:
   homer:
     image: b4bz/homer
-    container_name: homepage_homer  
+    container_name: homer_homer  
     logging:
       driver: loki
       options:
