@@ -77,3 +77,8 @@ commit; save; exit
 ```bash
 STACKS_RESTARTED=0 && for app in ~/homelab/server/config/*; do echo "===== RECREATING $app =====" && cd $app && docker-compose up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== RECREATING $service =====" && docker-compose -f $service up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) ====="
 ```
+
+### Recreate based on list of containers
+```bash
+STACKS_RESTARTED=0 && for app in calibre-web uptime-kuma homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/server/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
+```
