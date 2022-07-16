@@ -20,7 +20,7 @@ services:
       - web
       - portfolio
     depends_on:
-      - portfolio_db
+      - megan-portfolio_db
 
   megan-portfolio_db:
     image: mysql:5.7
