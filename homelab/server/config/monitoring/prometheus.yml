@@ -7,12 +7,7 @@ scrape_configs:
     - job_name: 'joey-server'
       scrape_interval: 5s
       static_configs:
-        - targets: ['joey-server.local:9100']
-
-    - job_name: 'pihole'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['pihole.local:9100']
+        - targets: ['127.0.0.1:9100']
 
     - job_name: 'jafner.tools'
       scrape_interval: 5s
@@ -25,22 +20,22 @@ scrape_configs:
         - targets: ['192.168.1.1:9100']
 
     # scrape applications
-    - job_name: 'prometheus'
-      scrape_interval: 60s
-      static_configs:
-        - targets: ['localhost:9090']
-    
     - job_name: 'traefik'
       scrape_interval: 5s
       static_configs:
-        - targets: ['192.168.1.23:28080']
+        - targets: ['localhost:28080']
       metrics_path: "/metrics"
 
-    - job_name: 'pihole.jafner.net'
+    - job_name: 'exporter-pihole'
       scrape_interval: 5s
       static_configs:
-        - targets: ['pihole-jafner-net:9617']
+        - targets: ['exporter-pihole:9617']
       metrics_path: "/metrics"
+
+    - job_name: 'exporter-minecraft'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['exporter-minecraft:8080']
 
     - job_name: 'uptime-kuma'
       scrape_interval: 5s
@@ -49,32 +44,16 @@ scrape_configs:
       basic_auth:
         username: Jafner
         password: ***REMOVED***
-    
-    - job_name: 'mc-monitor'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['mc-monitor:8080']
 
-    - job_name: 'jafner.chat'
+    - job_name: 'exporter-plex'
       scrape_interval: 5s
       static_configs:
-        - targets: ['143.110.157.109:9100']
+        - targets: ['exporter-plex:9594']
 
-    - job_name: '5e.jafner.tools'
+    - job_name: 'exporter-sabnzbd'
       scrape_interval: 5s
       static_configs:
-        - targets: ['5e-jafner-tools:9117']
-      metrics_path: "/metrics"
-
-    - job_name: 'plex'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['plex-exporter:9594']
-
-    - job_name: 'sabnzbd'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['sabnzbd_exporter:9387']
+        - targets: ['exporter-sabnzbd:9387']
 
     # scrape IoT devices
     - job_name: 'tasmota'

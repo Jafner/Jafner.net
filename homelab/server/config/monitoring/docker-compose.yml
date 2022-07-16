@@ -40,7 +40,7 @@ services:
       - monitoring
       - web
     ports:
-      -   9090:9090
+      - 9090:9090
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - ${DOCKER_DATA}/prometheus:/prometheus
