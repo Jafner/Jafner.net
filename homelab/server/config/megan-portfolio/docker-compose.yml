@@ -9,7 +9,12 @@ services:
     labels:
       - traefik.http.routers.nginx.rule=Host(`meganmcdonough.art`)
       - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
-    
+
+networks:
+  web:
+    external: true
+  portfolio:
+ 
   # megan-portfolio:
   #   image: wordpress
   #   container_name: wordpress_megan-portfolio
@@ -47,7 +52,3 @@ services:
   #   labels:
   #     - traefik.enable=false
 
-networks:
-  web:
-    external: true
-  portfolio:
