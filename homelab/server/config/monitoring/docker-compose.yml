@@ -78,9 +78,9 @@ services:
       - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
       - traefik.http.routers.loki.tls.certresolver=lets-encrypt
 
-  pihole-jafner-net:
+  exporter-pihole:
     image: ekofr/pihole-exporter:latest
-    container_name: monitoring_prometheus-pihole-jafner-net
+    container_name: monitoring_exporter-pihole
     logging:
       driver: loki
       options:
@@ -100,9 +100,9 @@ services:
     labels:
       - traefik.enable=false
 
-  mc-monitor:
+  exporter-minecraft:
     image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
-    container_name: monitoring_mc-monitor
+    container_name: monitoring_exporter-minecraft
     logging:
       driver: loki
       options:
@@ -121,9 +121,9 @@ services:
     labels:
       - traefik.enable=false
 
-  plex-exporter:
+  exporter-plex:
     image: granra/plex_exporter
-    container_name: monitoring_plex-exporter
+    container_name: monitoring_exporter-plex
     logging:
       driver: loki
       options:
@@ -142,9 +142,9 @@ services:
     labels:
       - traefik.enable=false
 
-  sabnzbd_exporter:
+  exporter-sabnzbd:
     image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
-    container_name: monitoring_sabnzbd_exporter
+    container_name: monitoring_exporter-sabnzbd
     logging:
       driver: loki
       options:
