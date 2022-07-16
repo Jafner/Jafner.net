@@ -22,9 +22,9 @@ services:
     depends_on:
       - portfolio_db
 
-  portfolio_db:
+  megan-portfolio_db:
     image: mysql:5.7
-    container_name: wordpress_portfolio-db
+    container_name: wordpress_megan-portfolio-db
     restart: "no"
     networks:
       - portfolio
