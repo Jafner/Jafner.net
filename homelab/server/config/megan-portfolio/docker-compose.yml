@@ -16,8 +16,8 @@ services:
     networks:
       - web
     labels:
-      - traefik.http.routers.nginx.rule=Host(`test.jafner.net`)
-      - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nginx2.rule=Host(`test.jafner.net`)
+      - traefik.http.routers.nginx2.tls.certresolver=lets-encrypt
 
 networks:
   web:
