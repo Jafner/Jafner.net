@@ -106,22 +106,10 @@ services:
         logo: assets/icons/bitwarden-512.png
         subtitle: "Sync server for the Bitwarden password manager"
         url: "https://bitwarden.jafner.tools"
-      - name: "Uptime Kuma"
-        logo: assets/icons/uptimekuma-512.png
-        subtitle: "Fancy self-hosted monitoring tool "
-        url: "https://uptime.jafner.tools/dashboard"
       - name: "Xbackbone"
         logo: assets/icons/xbackbone.png
         subtitle: "Lightweight file manager"
         url: "https://xbackbone.jafner.tools"
-
-  - name: "Jafner.pi1"
-    icon: "fas fa-server"
-    items:
-      - name: "Pihole Admin"
-        logo: assets/icons/pihole-1200.png
-        subtitle: "Ad-blocking DNS server"
-        url: "http://jafner.pi1/admin"
     
   - name: "Jafner.nas"
     icon: "fas fa-hdd"
@@ -261,10 +249,10 @@ services:
         subtitle: "Admin UI for Wireguard peer management"
         url: "https://vpn.jafner.net"
 
-      - name: "Uptime Kuma"
-        logo: assets/icons/uptimekuma-512.png
-        subtitle: "Fancy self-hosted monitoring tool "
-        url: "https://uptime.jafner.net"
+      - name: "Pihole"
+        logo: assets/icons/pihole-1200.png
+        subtitle: "Ad-blocking DNS server"
+        url: "http://pihole.jafner.net"
 
       - name: "Stash"
         logo: assets/icons/stash.svg
