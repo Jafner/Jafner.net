@@ -18,7 +18,6 @@ services:
       - SUBDOMAIN=*
     labels:
       - traefik.enable=false
-
   ddclient:
     image: linuxserver/ddclient
     container_name: ddns_ddclient
