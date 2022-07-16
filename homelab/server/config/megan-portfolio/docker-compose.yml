@@ -6,7 +6,7 @@ services:
     container_name: wordpress_megan-portfolio
     restart: "no"
     environment:
-      WORDPRESS_DB_HOST: portfolio_db
+      WORDPRESS_DB_HOST: megan-portfolio_db
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpressdb
@@ -15,7 +15,6 @@ services:
     labels:
       - traefik.http.routers.megan-portfolio.rule=Host(`meganmcdonough.art`)
       - traefik.http.routers.megan-portfolio.tls.certresolver=lets-encrypt
-      - traefik.port=80
     networks:
       - web
       - portfolio
