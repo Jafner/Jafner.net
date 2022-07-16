@@ -37,14 +37,6 @@ scrape_configs:
       static_configs:
         - targets: ['exporter-minecraft:8080']
 
-    - job_name: 'uptime-kuma'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['uptime.jafner.tools']
-      basic_auth:
-        username: Jafner
-        password: ***REMOVED***
-
     - job_name: 'exporter-plex'
       scrape_interval: 5s
       static_configs:
