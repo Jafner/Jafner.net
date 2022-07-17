@@ -31,9 +31,12 @@ services:
       - traefik.http.middlewares.pihole.addprefix.prefix=/admin
     networks:
       - web
+      - monitoring
     ports:
       - "53:53/tcp"
       - "53:53/udp"
 networks:
   web:
+    external: true
+  monitoring:
     external: true
