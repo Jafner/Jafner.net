@@ -80,5 +80,5 @@ STACKS_RESTARTED=0 && for app in ~/homelab/server/config/*; do echo "===== RECRE
 
 ### Recreate based on list of containers
 ```bash
-STACKS_RESTARTED=0 && for app in calibre-web uptime-kuma homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/server/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
+STACKS_RESTARTED=0 && for app in calibre-web homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/server/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
 ```
