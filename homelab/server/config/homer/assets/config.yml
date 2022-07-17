@@ -44,7 +44,7 @@ colors:
 message:
   style: "is-info"
   title: "Welcome to Jafner.net!"
-  content: "This page links to many of the services I host. "
+  content: "My name is Joey Hafner and this page links to some of the services I host. Check out my socials on the top bar. This lab is always changing, and this homepage is too."
 
 links:
   - name: "Gitlab"
