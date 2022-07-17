@@ -90,11 +90,6 @@ services:
         logo: assets/icons/grafana-1200.png
         subtitle: "Metrics visualization tool"
         url: "https://grafana.jafner.net"
-
-      - name: "NVGM"
-        logo: assets/icons/wordpress-1200.png
-        subtitle: "Blog-style repository for D&D 5e musings"
-        url: "https://nvgm.jafner.net"
       
       - name: "Calibre SFF"
         logo: assets/icons/calibre-1024.png
@@ -123,3 +118,7 @@ services:
         logo: assets/icons/bitwarden-512.png
         subtitle: "Sync server for the Bitwarden password manager"
         url: "https://bitwarden.jafner.tools"
+
+  - name: "Jafner.dev"
+    icon: "fa-solid fa-terminal"
+    items:
