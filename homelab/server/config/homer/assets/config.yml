@@ -44,7 +44,7 @@ colors:
 message:
   style: "is-info"
   title: "Welcome to Jafner.net!"
-  content: "My name is Joey Hafner and this page links to some of the services I host. Check out my socials on the top bar. This lab is always changing, and this homepage is too."
+  content: "My name is Joey Hafner and this page links to some of the services I host. Jafner.net is my main server, which uses Docker to run all these things. Jafner.tools is hosted on a Digital Ocean droplet. And Jafner.dev is for experiments. Check out my socials on the top bar. This lab is always changing, and this homepage is too."
 
 links:
   - name: "Gitlab"
