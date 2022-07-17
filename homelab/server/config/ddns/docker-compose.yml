@@ -1,0 +1,40 @@
+version: "3"
+services:
+  cloudflare:
+    image: oznu/cloudflare-ddns
+    container_name: ddns_cloudflare
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    environment:
+      - API_KEY=***REMOVED***
+      - ZONE=jafner.net
+      - SUBDOMAIN=*
+    labels:
+      - traefik.enable=false
+  ddclient:
+    image: linuxserver/ddclient
+    container_name: ddns_ddclient
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - ${PWD}/ddclient:/config
+    labels:
+      - traefik.enable=false
