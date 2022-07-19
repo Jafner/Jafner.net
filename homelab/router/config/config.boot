@@ -69,7 +69,7 @@ interfaces {
             }
             mtu 1492
             name-server auto
-            password 24ydrUYs
+            password ****************
             user-id hafnerjoseph
         }
         speed auto
@@ -155,33 +155,6 @@ port-forward {
     hairpin-nat enable
     lan-interface switch0
     rule 1 {
-        description "Teamspeak (Voice)"
-        forward-to {
-            address 192.168.1.23
-            port 9987
-        }
-        original-port 9987
-        protocol udp
-    }
-    rule 2 {
-        description "Teamspeak (FileTransfer)"
-        forward-to {
-            address 192.168.1.23
-            port 30033
-        }
-        original-port 30033
-        protocol tcp
-    }
-    rule 3 {
-        description "Teamspeak (ServerQuery)"
-        forward-to {
-            address 192.168.1.23
-            port 10011
-        }
-        original-port 10011
-        protocol tcp
-    }
-    rule 4 {
         description Plex
         forward-to {
             address 192.168.1.23
@@ -189,7 +162,7 @@ port-forward {
         original-port 32400
         protocol tcp_udp
     }
-    rule 5 {
+    rule 2 {
         description BitTorrent
         forward-to {
             address 192.168.1.21
@@ -197,15 +170,15 @@ port-forward {
         original-port 51000-51999
         protocol tcp_udp
     }
-    rule 6 {
+    rule 3 {
         description WireGuard
         forward-to {
             address 192.168.1.23
         }
-        original-port 53820
+        original-port 53820-53829
         protocol tcp_udp
     }
-    rule 7 {
+    rule 4 {
         description Minecraft
         forward-to {
             address 192.168.1.23
@@ -214,7 +187,7 @@ port-forward {
         original-port 25565
         protocol tcp_udp
     }
-    rule 8 {
+    rule 5 {
         description Iperf
         forward-to {
             address 192.168.1.23
@@ -222,24 +195,7 @@ port-forward {
         original-port 50201
         protocol tcp_udp
     }
-    rule 9 {
-        description Bittorrent
-        forward-to {
-            address 192.168.1.101
-            port 35050-35100
-        }
-        original-port 35050-35100
-        protocol tcp_udp
-    }
-    rule 10 {
-        description "Joplin Sync"
-        forward-to {
-            address 192.168.1.23
-        }
-        original-port 22300,5432
-        protocol tcp
-    }
-    rule 11 {
+    rule 6 {
         description https,http
         forward-to {
             address 192.168.1.23
@@ -247,7 +203,7 @@ port-forward {
         original-port 443,80
         protocol tcp_udp
     }
-    rule 12 {
+    rule 7 {
         description "Peertube Live"
         forward-to {
             address 192.168.1.23
@@ -256,30 +212,37 @@ port-forward {
         original-port 1935
         protocol tcp_udp
     }
-    rule 13 {
-        description qBittorrent
-        forward-to {
-            address 192.168.1.100
-            port 47691
-        }
-        original-port 47691
-        protocol tcp_udp
-    }
-    rule 14 {
-        description SSH
-        forward-to {
-            address 192.168.1.10
-            port 22
-        }
-        original-port 60022
-        protocol tcp_udp
-    }
-    rule 15 {
+    rule 8 {
         description "Git SSH"
         forward-to {
             address 192.168.1.23
         }
         original-port 2228-2229
+        protocol tcp_udp
+    }
+    rule 9 {
+        description SFTP
+        forward-to {
+            address 192.168.1.23
+        }
+        original-port 23450
+        protocol tcp_udp
+    }
+    rule 10 {
+        description Terraria
+        forward-to {
+            address 192.168.1.100
+            port 7777
+        }
+        original-port 50777
+        protocol tcp_udp
+    }
+    rule 11 {
+        description BitTorrent
+        forward-to {
+            address 192.168.1.23
+        }
+        original-port 50000
         protocol tcp_udp
     }
     wan-interface pppoe0
@@ -292,7 +255,8 @@ service {
             authoritative enable
             subnet 192.168.1.0/24 {
                 default-router 192.168.1.1
-                dns-server 192.168.1.1
+                dns-server 1.1.1.1
+                dns-server 1.0.0.1
                 domain-name local
                 lease 86400
                 start 192.168.1.100 {
@@ -313,6 +277,18 @@ service {
                 static-mapping pihole {
                     ip-address 192.168.1.22
                     mac-address b8:27:eb:3c:8e:bb
+                }
+                static-mapping tasmota-1 {
+                    ip-address 192.168.1.50
+                    mac-address 3C:61:05:F6:44:1E
+                }
+                static-mapping tasmota-2 {
+                    ip-address 192.168.1.51
+                    mac-address 3c:61:05:f6:d7:d3
+                }
+                static-mapping tasmota-3 {
+                    ip-address 192.168.1.52
+                    mac-address 3c:61:05:f6:f0:62
                 }
             }
         }
@@ -353,11 +329,6 @@ service {
             type masquerade
         }
     }
-    snmp {
-        community hafnerhouse {
-            authorization ro
-        }
-    }
     ssh {
         port 22
         protocol-version v2
@@ -372,9 +343,13 @@ system {
     login {
         user admin {
             authentication {
-                encrypted-password $5$j8QJRFCpc2Pc90kV$AA7DbPJldnwMlahDbbFWf0N9WiNnL9faW473jO9z1Z0
-                public-keys joey {
-                    key AAAAB3NzaC1yc2EAAAADAQABAAACAQCsb8bNhkAEq4Rz/7Z/yjqsp2OGtnhIzO7xA7BF+mHafN3vh3pSVBMTZJWY74JkXXE4PQPVJU6v9Qxt9x1+1ULQI2m3NIcaj5+GsXXkv/iCkJDz8XUAbdDObuxbh/sRURoVMhduE/JQpdX2Q4vWeKR3TEIdcVwR9eyhchLWzZpfdh+jJTjoAekglM8OusqyC7+iGriFSf3TFRe0J/AYrMGcWyL3FrxZMhEjDyND8H4wJ0r5AGbTbG7zEVr5lWui1RZkXIO02mYIh5BwrPuyIApemvU/u7mI0s256TvwnlBGjRlJdxvQWyOw07X3owX6vJZZ2tyd+pLTAtQ8i4K8mfpHqVZNVxaG8m1REDOf++RtzCI5S7ynYQjMTMnDUBxnjOyBANhxQTydGwh6ztOwX5XgzoQgA0t6cAD/stB1l7yosWypmk0rZMuHN9p3/5hnV+9FBmMMjoFCKE7wYQ15NPwEjrOzzfyZ5IVfCzmhAMsFDbDfACpIYR4hsRTMy5AOcbqmkX6dg4mK41sxIq2lzhZaNuM+C92802XUKDK7o/brQJ5brkFTWhfjmEJdfi1Tw/q/pdxrUZ87cT7BabzFSCqHIHwHciy6rRbTjEh7uiiQEY75ndakK2i2PbL+QCFSpLQyqWKEJzhpgBqN238dUdL1IkS/ti9I3rlLtc1eVjWd4w==
+                encrypted-password ****************
+                public-keys jafner425@gmail.com {
+                    key ****************
+                    type ssh-rsa
+                }
+                public-keys joey@joey-server {
+                    key ****************
                     type ssh-rsa
                 }
             }
@@ -382,7 +357,8 @@ system {
         }
     }
     name-server 127.0.0.1
-    name-server 192.168.1.22
+    name-server 1.1.1.1
+    name-server 1.0.0.1
     ntp {
         server 0.ubnt.pool.ntp.org {
         }
@@ -400,7 +376,7 @@ system {
         repository stretch {
             components "main contrib non-free"
             distribution stretch
-            password ""
+            password ****************
             url http://http.us.debian.org/debian
             username ""
         }
@@ -417,8 +393,3 @@ system {
     }
     time-zone America/Los_Angeles
 }
-
-
-/* Warning: Do not remove the following line. */
-/* === vyatta-config-version: "config-management@1:conntrack@1:cron@1:dhcp-relay@1:dhcp-server@4:firewall@5:ipsec@5:nat@3:qos@1:quagga@2:suspend@1:system@4:ubnt-pptp@1:ubnt-udapi-server@1:ubnt-unms@1:ubnt-util@1:vrrp@1:vyatta-netflow@1:webgui@1:webproxy@1:zone-policy@1" === */
-/* Release version: v2.0.8.5247496.191120.1124 */
