@@ -11,7 +11,7 @@ services:
       - ${DOCKER_DATA}/logs:/opt/traccar/logs:rw
       - ./traccar.xml:/opt/traccar/conf/traccar.xml:ro
     labels:
-      - traefik.http.routers.traccar.rule=Host(`traccar.jafner.net`)
+      - traefik.http.routers.traccar.rule=Host(`traccar.jafner.tools`)
       - traefik.http.routers.traccar.tls.certresolver=lets-encrypt
       - traefik.port=8082
     networks:
