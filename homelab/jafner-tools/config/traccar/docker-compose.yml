@@ -9,6 +9,7 @@ services:
       - 5000-5150:5000-5150/udp
     volumes:
       - ${DOCKER_DATA}/logs:/opt/traccar/logs:rw
+      - ${DOCKER_DATA}/data:/opt/traccar/data:rw
       - ./traccar.xml:/opt/traccar/conf/traccar.xml:ro
     labels:
       - traefik.http.routers.traccar.rule=Host(`traccar.jafner.tools`)
