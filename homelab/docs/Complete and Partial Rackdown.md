@@ -42,7 +42,8 @@ For each of these, it is assumed that all dependent nodes have already been shut
 1. Uplug the barrel power plug. Wait 15 seconds. 
 2. Plug the power plug back in. Wait for the indicator LED to be solid white.
 
-## Rebooting the Server
+## Server
+### Shutdown
 1. SSH into the router to reconfigure its DNS resolution.
 2. Reconfigure the router's DNS resolution: 
 
@@ -57,7 +58,9 @@ commit; save; exit
 
 3. Shut down most services: `for app in ~/homelab/server/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
 4. Shut down Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
-5. Shut down the host: `sudo shutdown now`. Wait 30 seconds.
+5. Shut down the host: `sudo shutdown now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
+
+### Boot
 6. Press the power button on the front of the chassis to begin booting. Take note of any POST beeps during this time. Wait for the host to be accessible via SSH. 
 7. Check current running docker containers
 8. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
@@ -72,6 +75,14 @@ delete service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-se
 set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-server 192.168.1.23
 commit; save; exit
 ```
+
+### Reboot the NAS
+1. Follow the instructions to shut down the Server.
+2. SSH into the NAS and run `shutdown now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
+3. Unplug the power connections to the disk shelf. 
+4. Plug power and SAS into the disk shelf. Wait for all disks to boot. About 2-3 minutes. Wait about 30 extra seconds to be safe. 
+5. Plug power, ethernet, and SAS into the NAS. Power on the NAS and wait for the WebUI to become responsive.
+6. Follow the instructions to boot the Server.
 
 ### Recreate all Docker containers one-liner
 ```bash
