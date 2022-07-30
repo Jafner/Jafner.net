@@ -262,6 +262,14 @@ service {
                 start 192.168.1.100 {
                     stop 192.168.1.254
                 }
+                static-mapping U6-Lite {
+                    ip-address 192.168.1.3
+                    mac-address 78:45:58:67:87:14
+                }
+                static-mapping UAP-AC-LR {
+                    ip-address 192.168.1.2
+                    mac-address 18:e8:29:50:f7:5b
+                }
                 static-mapping joey-nas {
                     ip-address 192.168.1.10
                     mac-address 40:8d:5c:52:41:89
@@ -273,6 +281,10 @@ service {
                 static-mapping joey-server {
                     ip-address 192.168.1.23
                     mac-address 24:4b:fe:8b:f3:b0
+                }
+                static-mapping joeyPrinter {
+                    ip-address 192.168.1.60
+                    mac-address 9c:32:ce:7c:f8:25
                 }
                 static-mapping pihole {
                     ip-address 192.168.1.22
