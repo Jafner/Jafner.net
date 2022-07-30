@@ -63,9 +63,10 @@ commit; save; exit
 ### Boot
 6. Press the power button on the front of the chassis to begin booting. Take note of any POST beeps during this time. Wait for the host to be accessible via SSH. 
 7. Check current running docker containers
-8. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
-9. Start Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
-10. Reconfigure the router's DNS resolution:
+8. Confirm all SMB shares are mounted with `mount -t cifs`. If not mounted, run `mount -a` for all shares.
+9. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
+10. Start Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
+11. Reconfigure the router's DNS resolution:
 
 ```
 configure
@@ -76,13 +77,15 @@ set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-serve
 commit; save; exit
 ```
 
-### Reboot the NAS
+## NAS
+### Shutdown
 1. Follow the instructions to shut down the Server.
-2. SSH into the NAS and run `shutdown now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
+2. SSH into the NAS and run `shutdown -p now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
 3. Unplug the power connections to the disk shelf. 
+
+### Boot
 4. Plug power and SAS into the disk shelf. Wait for all disks to boot. About 2-3 minutes. Wait about 30 extra seconds to be safe. 
-5. Plug power, ethernet, and SAS into the NAS. Power on the NAS and wait for the WebUI to become responsive.
-6. Follow the instructions to boot the Server.
+5. Plug power, ethernet, and SAS into the NAS. Power on the NAS and wait for the SSH server to become responsive. This can take more than 5 minutes. Note: The WebUI will not be accessible at `https://nas.jafner.net` until the server is also booted. It is accessible at `http://joey-nas/ui/sessions/signin`.
 
 ### Recreate all Docker containers one-liner
 ```bash
