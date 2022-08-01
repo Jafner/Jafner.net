@@ -318,7 +318,6 @@ service {
             name-server 192.168.1.1
             name-server 1.1.1.1
             name-server 1.0.0.1
-            options strict-order
             system
         }
     }
