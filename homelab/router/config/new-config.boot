@@ -60,15 +60,32 @@ interfaces {
         duplex auto
         speed auto
     }
+    bridge br0 {
+        address 192.168.1.1/24
+        member {
+            interface eth1 {
+            }
+            interface eth2 {
+            }
+        }
+    }
     ethernet eth1 {
         description "Primary Switch"
         duplex auto
         speed auto
+        offload {
+            sg
+            tso
+        }
     }
     ethernet eth2 {
         description "PoE Switch for WAPs"
         duplex auto
         speed auto
+        offload {
+            sg
+            tso
+        }
     }
     ethernet eth3 {
         description "Reserved for multi-gig switch"
@@ -76,6 +93,7 @@ interfaces {
     }
     ethernet eth4 {
         description "Internet (PPPoE)"
+        address dhcp
         duplex auto
         pppoe 0 {
             default-route auto
