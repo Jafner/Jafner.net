@@ -45,7 +45,7 @@ firewall {
     }
     options {
         mss-clamp {
-            mss 1456
+            mss 1200
         }
     }
     receive-redirects disable
@@ -256,14 +256,15 @@ nat {
 service {
     dhcp-server {
         shared-network-name LAN1 {
+            domain-name local
+            domain-search local
+            name-server 1.1.1.1
+            name-server 1.0.0.1
+            ping-check enable
             authoritative enable
             subnet 192.168.1.0/24 {
-                default-router 192.168.1.1
-                name-server 1.1.1.1
-                name-server 1.0.0.1
-                ping-check enable
-                domain-name local
                 lease 86400
+                default-router 192.168.1.1
                 range 1 {
                     start 192.168.1.100
                     stop 192.168.1.254
