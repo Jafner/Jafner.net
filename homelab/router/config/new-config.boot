@@ -313,8 +313,8 @@ service {
     }
     dns {
         forwarding {
-            cache-size 150
-            listen-on switch0
+            cache-size 1000000
+            listen-address 192.168.1.1
             name-server 192.168.1.1
             name-server 1.1.1.1
             name-server 1.0.0.1
@@ -322,23 +322,19 @@ service {
             system
         }
     }
-    gui {
-        http-port 8080
-        https-port 4433
-        older-ciphers enable
-    }
-    nat {
-        rule 5010 {
-            description "masquerade for WAN"
-            outbound-interface pppoe0
-            type masquerade
-        }
-    }
     ssh {
         port 22
         protocol-version v2
         disable-password-authentication
     }
+    monitoring {
+        telegraf {
+            prometheus-client {
+            }
+        }
+    }
+
+
 }
 system {
     commit-revision 100
