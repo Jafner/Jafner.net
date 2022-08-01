@@ -95,11 +95,13 @@ interfaces {
         }
     }
     ethernet eth4 {
-        address dhcp
         hw-id 00:15:17:b8:dc:2b
         offload {
             sg
             tso
+        }
+        vif 201 {
+            address dhcp
         }
     }
     loopback lo {
@@ -120,7 +122,7 @@ interfaces {
         mtu 1492
         no-default-route
         no-peer-dns
-        source-interface eth4
+        source-interface eth4.201
     }
 }
 nat {
