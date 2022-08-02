@@ -504,3 +504,7 @@ howstuffworks.com
 scholastic.com
 com.com
 ```
+1. Determine which domains respond to a ping at all. It's possible that some of these randomly drop 4 pings, but that will be a small number. Do accomplish this, we'll ping each host 4 times and we send the output to ping.log.
+`for domain in $(cat domains.txt); do ping -c 4 $domain >> ping.log 2>&1; done`
+
+This gives us [attach/ping.log](attach/ping.log)
