@@ -160,6 +160,24 @@ services:
       - SABNZBD_BASEURLS=https://sabnzbd.jafner.net:443
       - SABNZBD_APIKEYS=***REMOVED***
 
+  exporter-ping:
+    image: czerwonk/ping_exporter
+    container_name: monitoring_exporter-ping
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    networks:
+      - monitoring
+    volumes:
+      - ./exporter-ping:/config
+
+
 
 networks:
   monitoring:
