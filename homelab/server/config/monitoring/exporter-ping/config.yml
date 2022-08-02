@@ -1,10 +1,20 @@
 targets:
-  - 8.8.8.8
-  - 8.8.4.4
-  - 1.1.1.1
-  - 1.0.0.1
-  - 192.168.1.1
-  - jafner.net
+  - 8.8.8.8 # google primary
+  - 8.8.4.4 # google secondary
+  - 1.1.1.1 # cloudflare primary
+  - 1.0.0.1 # cloudflare secondary
+  - 9.9.9.9 # quad9 primary
+  - 149.112.112.112 # quad9 secondary
+  - 192.168.1.1 # local gateway
+  - jafner.net # own public ip
+  - tukw-dsl-gw76.tukw.qwest.net # tracert 1.1.1.1 hop 2
+  - tukw-agw1.inet.qwest.net # tracert 1.1.1.1 hop 3
+  - 4.68.38.173 # tracert 1.1.1.1 hop 4
+  - 4.69.219.210 # tracert 1.1.1.1 hop 5
+  - 4.30.140.62 # tracert 1.1.1.1 hop 6
+  - 172.71.144.3 # tracert 1.1.1.1 hop 7
+
+
 
 dns: 
   refresh: 1m
