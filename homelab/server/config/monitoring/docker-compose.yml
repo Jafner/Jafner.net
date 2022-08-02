@@ -175,7 +175,7 @@ services:
     networks:
       - monitoring
     volumes:
-      - ./exporter-ping:/config
+      - ./exporter-ping/config.yml:/config/config.yml
 
 
 
