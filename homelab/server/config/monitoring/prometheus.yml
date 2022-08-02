@@ -47,6 +47,11 @@ scrape_configs:
       static_configs:
         - targets: ['exporter-sabnzbd:9387']
 
+    - job_name: 'exporter-ping'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['exporter-ping:9427']
+
     # scrape IoT devices
     - job_name: 'tasmota'
       scrape_interval: 5s
