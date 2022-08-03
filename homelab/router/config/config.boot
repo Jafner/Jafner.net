@@ -156,16 +156,6 @@ firewall {
     syn-cookies enable
 }
 interfaces {
-    bridge br0 {
-        address 192.168.1.1/24
-        member {
-            interface eth1 {
-            }
-            interface eth2 {
-            }
-        }
-        stp
-    }
     ethernet eth0 {
         address 192.168.200.1/24
         description "Emergency ad-hoc"
@@ -174,6 +164,7 @@ interfaces {
         speed auto
     }
     ethernet eth1 {
+        address 192.168.1.1/24
         description "Primary Switch"
         duplex auto
         hw-id 00:15:17:b8:dc:28
@@ -225,6 +216,9 @@ interfaces {
             local {
                 name WAN_LOCAL
             }
+        }
+        ip {
+            adjust-mss 1452
         }
         mtu 1492
         no-peer-dns
@@ -327,7 +321,7 @@ nat {
                 address 174.21.53.164
                 port 32400
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -339,7 +333,7 @@ nat {
                 address 174.21.53.164
                 port 50000
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -351,7 +345,7 @@ nat {
                 address 174.21.53.164
                 port 53820-53829
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -363,7 +357,7 @@ nat {
                 address 174.21.53.164
                 port 25565
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -375,7 +369,7 @@ nat {
                 address 174.21.53.164
                 port 50201
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -387,7 +381,7 @@ nat {
                 address 174.21.53.164
                 port 80,443
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -399,7 +393,7 @@ nat {
                 address 174.21.53.164
                 port 2228-2229
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -411,7 +405,7 @@ nat {
                 address 174.21.53.164
                 port 23450
             }
-            inbound-interface br0
+            inbound-interface eth1
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -434,7 +428,7 @@ nat {
             destination {
                 address 192.168.1.0/24
             }
-            outbound-interface br0
+            outbound-interface eth1
             protocol tcp_udp
             source {
                 address 192.168.1.0/24
@@ -448,7 +442,6 @@ nat {
 service {
     dhcp-server {
         shared-network-name LAN {
-            authoritative
             domain-name local
             domain-search local
             name-server 1.1.1.1
@@ -504,8 +497,7 @@ service {
             allow-from 192.168.1.0/24
             cache-size 1000000
             listen-address 192.168.1.1
-            name-server 1.1.1.1
-            name-server 1.0.0.1
+            name-server 192.168.1.23
             system
         }
     }
@@ -520,7 +512,9 @@ service {
         port 22
     }
     upnp {
-        listen br0
+        listen eth1
+        nat-pmp
+        secure-mode
         wan-interface pppoe1
     }
 }
@@ -600,7 +594,7 @@ zone-policy {
                 name WAN_IN
             }
         }
-        interface br0
+        interface eth1
     }
     zone LOCAL {
         default-action drop
