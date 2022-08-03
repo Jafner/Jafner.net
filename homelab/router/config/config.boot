@@ -101,17 +101,6 @@ firewall {
                 new enable
             }
         }
-        rule 1006 {
-            action accept
-            description "Peertube Live"
-            destination {
-                port 1935
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
         rule 1007 {
             action accept
             description "Git SSH"
@@ -128,17 +117,6 @@ firewall {
             description SFTP
             destination {
                 port 23450
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1009 {
-            action accept
-            description Terraria
-            destination {
-                port 50777
             }
             protocol tcp_udp
             state {
@@ -321,17 +299,6 @@ nat {
                 address 192.168.1.23
             }
         }
-        rule 1006 {
-            description "Peertube Live"
-            destination {
-                port 1935
-            }
-            inbound-interface pppoe1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
         rule 1007 {
             description "Git SSH"
             destination {
@@ -347,17 +314,6 @@ nat {
             description SFTP
             destination {
                 port 23450
-            }
-            inbound-interface pppoe1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1009 {
-            description Terraria
-            destination {
-                port 50777
             }
             inbound-interface pppoe1
             protocol tcp_udp
@@ -437,18 +393,6 @@ nat {
                 address 192.168.1.23
             }
         }
-        rule 1106 {
-            description "Peertube Live (Hairpin NAT)"
-            destination {
-                address 174.21.53.164
-                port 1935
-            }
-            inbound-interface br0
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
         rule 1107 {
             description "Git SSH (Hairpin NAT)"
             destination {
@@ -466,18 +410,6 @@ nat {
             destination {
                 address 174.21.53.164
                 port 23450
-            }
-            inbound-interface br0
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1109 {
-            description "Terraria (Hairpin NAT)"
-            destination {
-                address 174.21.53.164
-                port 50777
             }
             inbound-interface br0
             protocol tcp_udp
@@ -530,7 +462,7 @@ service {
                 }
                 static-mapping U6-Lite {
                     ip-address 192.168.1.3
-                    mac-address 18:e8:29:50:f7:5b
+                    mac-address 78:45:58:67:87:14
                 }
                 static-mapping UAP-AC-LR {
                     ip-address 192.168.1.2
