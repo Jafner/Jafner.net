@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - 51820:51820/udp
+      - 53820:51820/udp
     networks:
       - web
     volumes:
