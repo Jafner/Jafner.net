@@ -56,8 +56,8 @@ set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-serve
 commit; save; exit
 ```
 
-3. Shut down most services: `for app in ~/homelab/server/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
-4. Shut down Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
+3. Shut down Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
+4. Shut down remaining services: `for app in ~/homelab/server/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
 5. Shut down the host: `sudo shutdown now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
 
 ### Boot
