@@ -18,7 +18,7 @@ services:
       TZ: ${TZ}
       WEBPASSWORD: ${SECRET_WEBPASSWORD}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
-      PIHOLE_DNS_: 8.8.8.8,8.8.4.4
+      PIHOLE_DNS_: 8.8.8.8;8.8.4.4
       VIRTUAL_HOST: https://pihole.jafner.net
     volumes:
       - ${DOCKER_DATA}/pihole:/etc/pihole
