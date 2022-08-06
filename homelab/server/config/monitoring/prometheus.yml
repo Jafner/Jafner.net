@@ -19,6 +19,11 @@ scrape_configs:
       static_configs:
         - targets: ['192.168.1.1:9273']
 
+    - job_name: 'pihole'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['192.168.1.22:9100']
+
     # scrape applications
     - job_name: 'traefik'
       scrape_interval: 5s
