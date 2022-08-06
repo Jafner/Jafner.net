@@ -1,0 +1,21 @@
+http:
+  routers:
+    pihole:
+      rule: "Host(`pihole.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: "lan-only@file,pihole@file"
+      service: "pihole@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  middlewares:
+    pihole:
+      addprefix:
+        prefix: "/admin"
+
+  services:
+    pihole:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.22/"
+      
