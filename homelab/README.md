@@ -20,6 +20,9 @@ This repo is (mostly) organized into the following structure:
   # each host. At the root of `/$host/` we have non-authoritative 
   # documentation and reference. This includes printouts of hardware 
   # configs (`inxi -b`), host-specific procedure docs, useful scripts, etc.
+    scripts/
+    # if a host has scripts for automating recurring tasks, 
+    # they will be placed here.
     config/ 
     # Anything in the `/$host/config` directory is used as a source of 
     # truth from which hosts pull and apply the defined configuration.
