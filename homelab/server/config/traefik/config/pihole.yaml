@@ -3,7 +3,9 @@ http:
     pihole:
       rule: "Host(`pihole.jafner.net`)" 
       entryPoints: "websecure"
-      middlewares: "lan-only@file,pihole@file"
+      middlewares: 
+        - "lan-only@file"
+        - "pihole@file"
       service: "pihole@file"
       tls:
         certResolver: "lets-encrypt"
