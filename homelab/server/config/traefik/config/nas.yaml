@@ -3,7 +3,8 @@ http:
     nas:
       rule: "Host(`nas.jafner.net`)" 
       entryPoints: "websecure"
-      middlewares: "lan-only@file"
+      middlewares: 
+        - "lan-only@file"
       service: "nas@file"
       tls:
         certResolver: "lets-encrypt"
