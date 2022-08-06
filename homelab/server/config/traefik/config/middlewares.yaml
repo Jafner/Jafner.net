@@ -43,4 +43,6 @@ http:
         stsIncludeSubdomains: true
         stsSeconds: 63072000
         stsPreload: true
-
+    pihole:
+      addprefix:
+        prefix: "/admin"

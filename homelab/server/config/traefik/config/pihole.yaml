@@ -8,11 +8,6 @@ http:
       tls:
         certResolver: "lets-encrypt"
 
-  middlewares:
-    pihole:
-      addprefix:
-        prefix: "/admin"
-
   services:
     pihole:
       loadBalancer:
