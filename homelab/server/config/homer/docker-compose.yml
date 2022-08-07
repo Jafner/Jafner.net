@@ -11,7 +11,7 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
-    restart: "unless-stopped"
+    restart: "no"
     environment:
       - UID=1000
       - GID=1000

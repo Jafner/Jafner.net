@@ -52,7 +52,7 @@ services:
       - peertube
     volumes:
       - ${DOCKER_VOLUME}/redis:/data
-    restart: "unless-stopped"
+    restart: "no"
 
   postfix:
     image: mwader/postfix-relay
