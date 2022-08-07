@@ -57,6 +57,11 @@ scrape_configs:
       static_configs:
         - targets: ['exporter-ping:9427']
 
+    - job_name: 'exporter-docker'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['exporter-docker:9417','jafner.tools:50417']
+
     # scrape IoT devices
     - job_name: 'tasmota'
       scrape_interval: 5s
