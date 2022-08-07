@@ -66,4 +66,4 @@ scrape_configs:
     - job_name: 'tasmota'
       scrape_interval: 5s
       static_configs:
-        - targets: ['tasmota-1','tasmota-2','tasmota-3']
+        - targets: ['192.168.1.50','192.168.1.51','192.168.1.52']
