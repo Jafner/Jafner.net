@@ -62,7 +62,7 @@ scrape_configs:
       static_configs:
         - targets: ['exporter-docker:9417','jafner.tools:50417']
     - job_name: 'exporter-qbittorrent'
-      scrape_interval: 5s
+      scrape_interval: 15s
       static_configs:
         - targets: ['exporter-qbittorrent:8000']
 
