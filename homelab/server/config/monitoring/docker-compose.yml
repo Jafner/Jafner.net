@@ -200,7 +200,7 @@ services:
     image: esanchezm/prometheus-qbittorrent-exporter
     container_name: monitoring_exporter-qbittorrent
     environment:
-      - QBITTORRENT_HOST=qbittorrent.jafner.net
+      - QBITTORRENT_HOST=qbt.jafner.net
       - QBITTORRENT_PORT=443
     logging:
       driver: loki
