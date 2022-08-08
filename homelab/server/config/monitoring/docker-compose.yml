@@ -78,6 +78,24 @@ services:
       - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
       - traefik.http.routers.loki.tls.certresolver=lets-encrypt
 
+  promtail:
+    image: grafana/promtail
+    container_name: monitoring_promtail
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    networks: 
+      - monitoring
+    volumes:
+      - /var/log:/var/log:ro
+      - ${DOCKER_DATA}/etc/promtail
+      - ./promtail-config.yml:/etc/promtail/promtail-config.yml
+
   exporter-pihole:
     image: ekofr/pihole-exporter:latest
     container_name: monitoring_exporter-pihole
