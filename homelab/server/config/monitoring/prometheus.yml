@@ -64,6 +64,7 @@ scrape_configs:
     
     - job_name: 'exporter-qbittorrent'
       scrape_interval: 60s
+      scrape_timeout: 30s
       static_configs:
         - targets: ['exporter-qbittorrent:8000']
 
