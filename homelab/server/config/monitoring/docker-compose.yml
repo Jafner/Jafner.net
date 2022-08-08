@@ -193,6 +193,8 @@ services:
       - monitoring
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.disable
 
 networks:
   monitoring:
