@@ -13,7 +13,6 @@ services:
         keep-file: "true"
     networks:
       - web
-      - qbittorrent
     restart: "no"
     volumes:
       - $DOCKER_DATA:/config
