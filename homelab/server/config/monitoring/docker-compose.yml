@@ -213,6 +213,7 @@ services:
     restart: "no"
     networks:
       - monitoring
+      - qbittorrent
     labels:
       - traefik.disable
 
@@ -222,4 +223,6 @@ networks:
   web:
     external: true
   mc-router:
+    external: true
+  qbittorrent:
     external: true
