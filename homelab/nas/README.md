@@ -99,6 +99,10 @@ for disk in da15 da16 da17; do mkdir -p ~/.formatting/$disk && cd ~/.formatting/
 2. Use `cmdwatch du -h ~/nohup.out` to watch the size of the log file increase (to confirm it is still copying)
 3. Use `tail -f ~/nohup.out` to follow the actual logs. The original command writes to this file in batches when it is in the background, so don't expect it to be as smooth as running the command in the foreground.
 
+## Perform a copy operation in the foreground with progress monitoring
+Use `rsync -ah --progress $SOURCE $DESTINATION`  
+Note that if the source is something like `/first/path/to/folder1/` and you want to copy it to `/second/path/to/folder1/`, make sure to fully specify the destination path (`DESTINATION=/second/path/to/folder1/`). Where something like `cp` or `mv` would create the source folder in the destination folder, Rsync is more literal.
+
 # Services
 ## S.M.A.R.T.
 All values default. 
