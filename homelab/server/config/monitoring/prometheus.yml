@@ -61,6 +61,10 @@ scrape_configs:
       scrape_interval: 5s
       static_configs:
         - targets: ['exporter-docker:9417','jafner.tools:50417']
+    - job_name: 'exporter-qbittorrent'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['exporter-qbittorrent:8000']
 
     # scrape IoT devices
     - job_name: 'tasmota'
