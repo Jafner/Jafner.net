@@ -92,8 +92,6 @@ services:
     networks: 
       - monitoring
     volumes:
-      - /var/log:/var/log:ro
-      - ${DOCKER_DATA}/etc/promtail
       - ./promtail-config.yml:/etc/promtail/promtail-config.yml
 
   exporter-pihole:
