@@ -233,7 +233,7 @@ services:
       - traefik.disable
 
   exporter-nvidia:
-    image: mindprince/nvidia_gpu_prometheus_exporter
+    image: mindprince/nvidia_gpu_prometheus_exporter:0.1
     container_name: monitoring_exporter-nvidia
     logging:
       driver: loki
