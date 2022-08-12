@@ -5,8 +5,8 @@ services:
     container_name: traccar_traccar
     restart: "no"
     ports:
-      - 5000-5170:5000-5170/tcp
-      - 5000-5170:5000-5170/udp
+      - 5170:5170/tcp
+      - 5170:5170/udp
     volumes:
       - ${DOCKER_DATA}/logs:/opt/traccar/logs:rw
       - ${DOCKER_DATA}/data:/opt/traccar/data:rw
