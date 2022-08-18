@@ -7,6 +7,7 @@ do
     echo "======== CHECKING $CONTAINER_NAME ========"
     echo "$CONTAINER_MOUNTS" | grep /mnt/nas
     MATCH=$?
+    echo "$MATCH"
     if $MATCH; then
         echo "NAS DEPENDENT"
     else
