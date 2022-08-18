@@ -8,7 +8,7 @@ do
     echo "$CONTAINER_MOUNTS" | grep /mnt/nas
     MATCH=$?
     echo "$MATCH"
-    if $MATCH; then
+    if [ $MATCH == 0 ]; then
         echo "NAS DEPENDENT"
     else
         echo "NOT NAS DEPENDENT"
