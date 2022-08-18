@@ -10,8 +10,8 @@ do
     MATCH=$?
     if [ $MATCH == 0 ]; then
         echo "$CONTAINER_NAME"
-        NAS_DEPENDENTS+=("$CONTAINER_NAME")
+        NAS_DEPENDENTS+="$CONTAINER_NAME\n"
     fi
 done
 echo "NAS_DEPENDENTS="
-echo "$NAS_DEPENDENTS"
+echo -e "${NAS_DEPENDENTS}"
