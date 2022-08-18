@@ -1,4 +1,5 @@
 #!/bin/bash
+NAS_DEPENDENTS=""
 
 for CONTAINER_ID in $(docker ps -aq) # get list of all loaded containers (running and stopped)
 do 
@@ -8,8 +9,9 @@ do
     echo "$CONTAINER_MOUNTS" | grep -q /mnt/nas
     MATCH=$?
     if [ $MATCH == 0 ]; then
-        echo "$CONTAINER_NAME IS NAS DEPENDENT"
-    else
-        echo "$CONTAINER_NAME IS NOT NAS DEPENDENT"
+        echo "$CONTAINER_NAME"
+        NAS_DEPENDENTS+=$CONTAINER_NAME
     fi
 done
+echo "NAS_DEPENDENTS="
+echo "$NAS_DEPENDENTS"
