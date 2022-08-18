@@ -10,7 +10,7 @@ do
     MATCH=$?
     if [ $MATCH == 0 ]; then
         echo "$CONTAINER_NAME"
-        NAS_DEPENDENTS+=$CONTAINER_NAME
+        NAS_DEPENDENTS+="$CONTAINER_NAME"
     fi
 done
 echo "NAS_DEPENDENTS="
