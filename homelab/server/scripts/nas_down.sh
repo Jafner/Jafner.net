@@ -6,7 +6,7 @@ do
     CONTAINER_MOUNTS=$(docker inspect --format '{{range .Mounts}}{{println .Source}}{{end}}' $CONTAINER_ID) # print the container's volume mounts
     echo "======== CHECKING $CONTAINER_NAME ========"
     echo "$CONTAINER_MOUNTS" | grep /mnt/nas
-    if $?; then
+    if [ $? ]; then
         echo "NAS DEPENDENT"
     else
         echo "NOT NAS DEPENDENT"
