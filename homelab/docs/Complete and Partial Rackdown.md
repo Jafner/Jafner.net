@@ -77,6 +77,16 @@ set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-serve
 commit; save; exit
 ```
 
+### List host-side mounts for container
+Mostly useful during scripting, but potentially also for troubleshooting, this one-liner will print the host side of each volume mounted in a container.
+`docker inspect --format '{{range .Mounts}}{{println .Source}}{{end}}' <container_name>`  
+You can run this for all containers with this loop:  
+`for container in $(docker ps -aq); do docker ps -aq --filter "id=$container" --format '{{.Names}}' && docker inspect --format '{{range .Mounts}}{{println .Source}}{{end}}' $container; done`  
+Note: this is meant to be human-readable, so it prints the container's name before the list of volume mounts. 
+
+### Shut down NAS-dependent services
+1. Run [`homelab/server/scripts/nas_down.sh`](/server/scripts/nas_down.sh)
+
 ## NAS
 ### Shutdown
 1. Follow the instructions to shut down the Server.
