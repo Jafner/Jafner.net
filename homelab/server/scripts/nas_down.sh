@@ -20,7 +20,6 @@ for project in $(find ~/homelab/server/config -maxdepth 1 -mindepth 1 -path ~/ho
 do
     echo "======== CHECKING $project ========"
     cd ~/homelab/server/config/$project
-    docker-compose config
     docker-compose config | grep -q /mnt/nas
     MATCH=$?
     if [ $MATCH == 0 ]; then
