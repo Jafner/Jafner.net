@@ -13,9 +13,10 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     env_file:
-      - ../../../homelab.env
-      - ../../host.env
       - ./project.env
+      #- ../../../homelab.env
+      #- ../../host.env
+      
     ports:
       - 53820:51820/udp
     networks:
