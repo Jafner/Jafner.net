@@ -92,6 +92,16 @@ You can run this for all containers with this loop:
 `for container in $(docker ps -aq); do docker ps -aq --filter "id=$container" --format '{{.Names}}' && docker inspect --format '{{range .Mounts}}{{println .Source}}{{end}}' $container; done`  
 Note: this is meant to be human-readable, so it prints the container's name before the list of volume mounts. 
 
+### Recreate all Docker containers one-liner
+```bash
+STACKS_RESTARTED=0 && for app in ~/homelab/server/config/*; do echo "===== RECREATING $app =====" && cd $app && docker-compose up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== RECREATING $service =====" && docker-compose -f $service up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) ====="
+```
+
+#### Recreate based on list of containers
+```bash
+STACKS_RESTARTED=0 && for app in calibre-web homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/server/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
+```
+
 ## NAS
 ### Shutdown
 1. Follow the instructions to [shut down NAS-dependent projects](#shut-down-nas-dependent-projects) on the server. 
@@ -103,12 +113,3 @@ Note: this is meant to be human-readable, so it prints the container's name befo
 5. Plug power, ethernet, and SAS into the NAS. Power on the NAS and wait for the SSH server to become responsive. This can take more than 5 minutes. Note: The WebUI will not be accessible at `https://nas.jafner.net` until the server is also booted. It is accessible at `http://joey-nas/ui/sessions/signin`.
 6. Follow the instructions to [start up NAS-dependent projects](#start-up-nas-dependent-projects) on the server.
 
-### Recreate all Docker containers one-liner
-```bash
-STACKS_RESTARTED=0 && for app in ~/homelab/server/config/*; do echo "===== RECREATING $app =====" && cd $app && docker-compose up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== RECREATING $service =====" && docker-compose -f $service up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) ====="
-```
-
-### Recreate based on list of containers
-```bash
-STACKS_RESTARTED=0 && for app in calibre-web homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/server/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
-```
