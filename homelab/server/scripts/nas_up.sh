@@ -34,7 +34,7 @@ echo -e "$NAS_DEPENDENTS"
 
 for project in $(echo -e "$NAS_DEPENDENTS")
 do
-    echo "======== SHUTTING DOWN $project ========"
+    echo "======== STARTING UP $project ========"
     cd ~/homelab/server/config/$project
     docker-compose up -d
 done
