@@ -2,12 +2,21 @@
 echo "==========================================="
 echo "========== STARTING MAIN SERVERS =========="
 echo "==========================================="
-for service in /home/joey/homelab/server/config/*; do echo "===== STARTING $service =====" && cd $service && docker-compose up -d; done
+for service in /home/joey/homelab/server/config/*
+do 
+    echo "===== STARTING $service ====="
+    cd $service 
+    docker-compose up -d
+done
 
 echo "==========================================="
 echo "======== STARTING MINECRAFT SERVERS ======="
 echo "==========================================="
-for service in /home/joey/homelab/server/config/minecraft/*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done
+for service in /home/joey/homelab/server/config/minecraft/*.yml 
+do 
+    echo "===== STARTING $service =====" 
+    docker-compose -f $service up -d
+done
 
 echo "==========================================="
 echo "================ ALL DONE ================="
@@ -16,3 +25,8 @@ echo "==========================================="
 
 echo "docker ps -a"
 docker ps -a
+
+# wish I didn't have to do this
+# the exporter boots faster than the plex server, and doesn't seem to retry.
+wait 10
+docker container restart monitoring_exporter-plex
