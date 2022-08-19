@@ -77,25 +77,31 @@ set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-serve
 commit; save; exit
 ```
 
-### List host-side mounts for container
+### Shut down NAS-dependent projects
+Rather than shutting down on a per-container basis, we want to shut down an entire project if any of its containers depends on the NAS.  
+The [nas_down.sh](/server/scripts/nas_down.sh) script uses `docker-compose config` to determine whether a project is NAS-dependent and will shut down all NAS-dependent projects. This script is also weakly-idempotent (due to the nature of `docker-compose down`). 
+
+### Start up NAS-dependent projects
+Rather than starting up on a per-container basis, we want to start up an entire project if any of its containers depends on the NAS.  
+The [nas_up.sh](/server/scripts/nas_up.sh) script uses `docker-compose config` to determine whether a project is NAS-dependent and will start up all NAS-dependent projects. This script is also weakly-idempotent (due to the nature of `docker-compose up -d`). 
+
+### List host-side mounts for loaded containers
 Mostly useful during scripting, but potentially also for troubleshooting, this one-liner will print the host side of each volume mounted in a container.
 `docker inspect --format '{{range .Mounts}}{{println .Source}}{{end}}' <container_name>`  
 You can run this for all containers with this loop:  
 `for container in $(docker ps -aq); do docker ps -aq --filter "id=$container" --format '{{.Names}}' && docker inspect --format '{{range .Mounts}}{{println .Source}}{{end}}' $container; done`  
 Note: this is meant to be human-readable, so it prints the container's name before the list of volume mounts. 
 
-### Shut down NAS-dependent services
-1. Run [`homelab/server/scripts/nas_down.sh`](/server/scripts/nas_down.sh)
-
 ## NAS
 ### Shutdown
-1. Follow the instructions to shut down the Server.
+1. Follow the instructions to [shut down NAS-dependent projects](#shut-down-nas-dependent-projects) on the server. 
 2. SSH into the NAS and run `shutdown -p now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
 3. Unplug the power connections to the disk shelf. 
 
 ### Boot
 4. Plug power and SAS into the disk shelf. Wait for all disks to boot. About 2-3 minutes. Wait about 30 extra seconds to be safe. 
 5. Plug power, ethernet, and SAS into the NAS. Power on the NAS and wait for the SSH server to become responsive. This can take more than 5 minutes. Note: The WebUI will not be accessible at `https://nas.jafner.net` until the server is also booted. It is accessible at `http://joey-nas/ui/sessions/signin`.
+6. Follow the instructions to [start up NAS-dependent projects](#start-up-nas-dependent-projects) on the server.
 
 ### Recreate all Docker containers one-liner
 ```bash
