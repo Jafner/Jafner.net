@@ -37,7 +37,7 @@ services:
       - PGID=1000
       - VERSION=latest
       - ADVERTISE_IP="https://plex.jafner.net:443"
-      - PLEX_CLAIM=claim-DPRoiMnzcby-YxKdFpqJ
+      - PLEX_CLAIM=claim-Vx3_PJywyPWvSd-ubLhe
       - NVIDIA_VISIBLE_DEVICES=all
     env_file:
       - .env
@@ -75,38 +75,8 @@ services:
     labels:
       - traefik.http.routers.ombi.rule=Host(`ombi.jafner.net`)
       - traefik.http.routers.ombi.tls.certresolver=lets-encrypt
-      - traefik.http.services.ombi.loadbalancer.server.port=3579
-  
-  tautulli:
-    image: lscr.io/linuxserver/tautulli
-    container_name: plex_tautulli
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    restart: "no"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angles
-    env_file:
-      - .env
-    volumes:
-      - ${DOCKER_DATA}/tautulli:/config
-    networks:
-      - monitoring
-      - web
-    labels:
-      - traefik.http.routers.tautulli.rule=Host(`tautulli.jafner.net`)
-      - traefik.http.routers.tautulli.tls.certresolver=lets-encrypt
-    
+      - traefik.http.services.ombi.loadbalancer.server.port=3579   
     
 networks:
   web:
-    external: true
-  monitoring:
     external: true
