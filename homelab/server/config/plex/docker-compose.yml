@@ -37,7 +37,7 @@ services:
       - PGID=1000
       - VERSION=latest
       - ADVERTISE_IP="https://plex.jafner.net:443"
-      - PLEX_CLAIM=claim-Vx3_PJywyPWvSd-ubLhe
+      - PLEX_CLAIM=claim-nSxzt4MT2j7mExwhhrnZ
       - NVIDIA_VISIBLE_DEVICES=all
     env_file:
       - .env
