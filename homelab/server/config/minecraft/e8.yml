@@ -22,7 +22,7 @@ services:
       - ENABLE_RCON=true
       - RCON_PASSWORD=${RCON_PASSWORD}
     volumes:
-      - $DOCKER_DATA/e6:/data:rw
+      - $DOCKER_DATA/e8:/data:rw
     networks:
       - mc-router
     restart: "no"
