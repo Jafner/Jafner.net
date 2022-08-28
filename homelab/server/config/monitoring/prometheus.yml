@@ -25,6 +25,11 @@ scrape_configs:
         - targets: ['192.168.1.22:9100']
 
     # scrape applications
+    - job_name: 'prometheus-self'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['localhost:9090']
+
     - job_name: 'traefik'
       scrape_interval: 5s
       static_configs:
