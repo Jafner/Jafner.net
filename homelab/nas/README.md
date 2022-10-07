@@ -86,11 +86,18 @@ Partition: ID-1: / size: 62.2 GiB used: 26.85 GiB (43.2%) fs: zfs logical: freen
 </code></pre>
 </details>
 
+## Replace a failing disk
+1. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script, for the disk that needs to be replaced.
+2. Refer to the [Physical Disk Locations](#physical-disk-locations-ds4243) chart to determine which shelf slot the disk is in. Remove the disk.
+3. Insert the new disk and wait 60 seconds for it to be detected. It may not show up in the web UI. 
+4. Check the sector size of the new disk with `smartctl -a /dev/<disknum> | grep block`. If `Logical block size` is `512 bytes` (or anything other than `4096 bytes`), then the disk needs to be reformatted. 
+5. Reformat the disk as described under [Convert a 512B-sector disk](#convert-a-512b-sector-disk-to-4096b-sectors). This will take several hours.
+6. Begin resilvering the pool with the new disk. Navigate to [Storage -> Pools](https://nas.jafner.net/ui/storage/pools). Click the gear icon in the top-right of the affected pool and click "Status". Find the missing disk. It should look like `/dev/gptid/<some-uuid>...` with the status "REMOVED". Click the triple-dot icon on the right and select "Replace". 
+
 ## Convert a 512B-sector disk to 4096B sectors
-1. Make sure the disk is not currently in use. 
-2. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script.
-3. Check the current sector size with `smartctl -a /dev/<disknum> | grep block`.
-4. Reformat the disk(s) with the `sg_format` command. Use the following flags: `--size=4096 --format --fmtpinfo=0`. Then finally the disk location (e.g. `/dev/da15`). Use the `nohup` utility and the `&` operator to run the command in the background. An example one-liner for three disks (`da15`, `da16`, `da17`):
+1. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script, for the disk that needs to be replaced.
+2. Check the current sector size with `smartctl -a /dev/<disknum> | grep block`. If `Logical block size` is `512 bytes` (or anything other than `4096 bytes`), then the disk needs to be reformatted. 
+3. Reformat the disk(s) with the `sg_format` command. Use the following flags: `--size=4096 --format --fmtpinfo=0`. Then finally the disk location (e.g. `/dev/da15`). Use the `nohup` utility and the `&` operator to run the command in the background. An example one-liner for three disks (`da15`, `da16`, `da17`):
 
 ```bash
 nohup sg_format --size=4096 --format --fmtpinfo=0 /dev/da15 & \
