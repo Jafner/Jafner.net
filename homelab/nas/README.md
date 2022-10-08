@@ -92,7 +92,8 @@ Partition: ID-1: / size: 62.2 GiB used: 26.85 GiB (43.2%) fs: zfs logical: freen
 3. Insert the new disk and wait 60 seconds for it to be detected. It may not show up in the web UI. 
 4. Check the sector size of the new disk with `smartctl -a /dev/<disknum> | grep block`. If `Logical block size` is `512 bytes` (or anything other than `4096 bytes`), then the disk needs to be reformatted. 
 5. Reformat the disk as described under [Convert a 512B-sector disk](#convert-a-512b-sector-disk-to-4096b-sectors). This will take several hours.
-6. Begin resilvering the pool with the new disk. Navigate to [Storage -> Pools](https://nas.jafner.net/ui/storage/pools). Click the gear icon in the top-right of the affected pool and click "Status". Find the missing disk. It should look like `/dev/gptid/<some-uuid>...` with the status "REMOVED". Click the triple-dot icon on the right and select "Replace". 
+6. Begin resilvering the pool with the new disk. Navigate to [Storage -> Pools](https://nas.jafner.net/ui/storage/pools). Click the gear icon in the top-right of the affected pool and click "Status". Find the missing disk. It should look like `/dev/gptid/<some-uuid>...` with the status "REMOVED". Click the triple-dot icon on the right and select "Replace". Select the replacement disk, check the box for "Force", and click `REPLACE DISK` to begin resilvering. 
+7. The scanning and resilvering will take several hours.
 
 ## Convert a 512B-sector disk to 4096B sectors
 1. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script, for the disk that needs to be replaced.
