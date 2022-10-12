@@ -27,7 +27,7 @@ services:
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
-      traefik.http.routers.keycloak.middlewares: securityheaders@file
+      traefik.http.routers.keycloak.middlewares: securityheaders@file,lan-only@file
       traefik.http.services.keycloak.loadbalancer.server.port: 8080
 
 networks:
