@@ -69,6 +69,25 @@ services:
               }
             },
             label: 'authentik'
+          },
+          {
+            name: "openid_connect",
+            label: "Keycloak", # optional label for login button, defaults to "Openid Connect"
+            args: {
+              name: "openid_connect",
+              scope: ["openid","profile","email"],
+              response_type: "code",
+              issuer: "https://keycloak.jafner.net/realms/Jafner.net",
+              discovery: true,
+              client_auth_method: "query",
+              uid_field: "email",
+              send_scope_to_token_endpoint: "false",
+              client_options: {
+                identifier: "gitlab.jafner.net",
+                secret: "***REMOVED***",
+                redirect_uri: "https://gitlab.jafner.net/users/auth/openid_connect/callback"
+              }
+            }
           }
         ]
 
