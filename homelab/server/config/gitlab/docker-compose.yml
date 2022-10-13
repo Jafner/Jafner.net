@@ -49,7 +49,6 @@ services:
         gitlab_rails['omniauth_sync_email_from_provider'] = 'openid_connect'
         gitlab_rails['omniauth_sync_profile_from_provider'] = ['saml','openid_connect']
         gitlab_rails['omniauth_sync_profile_attributes'] = ['email']
-        gitlab_rails['omniauth_auto_sign_in_with_provider'] = 'openid_connect'
         gitlab_rails['omniauth_block_auto_created_users'] = false
         gitlab_rails['omniauth_auto_link_saml_user'] = true
         gitlab_rails['omniauth_providers'] = [
