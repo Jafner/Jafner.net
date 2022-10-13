@@ -57,9 +57,8 @@ services:
             name: 'saml',
             args: {
               assertion_consumer_service_url: 'https://gitlab.jafner.net/users/auth/saml/callback',
-              # Shown when navigating to certificates in authentik
-              idp_cert_fingerprint: 'db:b6:b1:08:e7:de:ea:07:4d:39:a6:19:db:f3:51:e1:7e:8f:69:22',
-              idp_sso_target_url: 'https://authentik.jafner.net/application/saml/gitlab/sso/binding/redirect/',
+              idp_cert_fingerprint: '1e:5f:6d:57:5e:5f:45:8f:dc:b2:87:86:73:c0:92:ca:91:1d:c2:b5',
+              idp_sso_target_url: 'https://keycloak.jafner.net/application/saml/gitlab/sso/binding/redirect/',
               issuer: 'https://gitlab.jafner.net',
               name_identifier_format: 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
               attribute_statements: {
@@ -68,26 +67,7 @@ services:
                 nickname: ['http://schemas.goauthentik.io/2021/02/saml/username']
               }
             },
-            label: 'authentik'
-          },
-          {
-            name: "openid_connect",
-            label: "Keycloak", # optional label for login button, defaults to "Openid Connect"
-            args: {
-              name: "openid_connect",
-              scope: ["openid","profile","email"],
-              response_type: "code",
-              issuer: "https://keycloak.jafner.net/realms/Jafner.net",
-              discovery: true,
-              client_auth_method: "query",
-              uid_field: "email",
-              send_scope_to_token_endpoint: "false",
-              client_options: {
-                identifier: "gitlab.jafner.net",
-                secret: "***REMOVED***",
-                redirect_uri: "https://gitlab.jafner.net/users/auth/openid_connect/callback"
-              }
-            }
+            label: 'keycloak'
           }
         ]
 
