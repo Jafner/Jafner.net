@@ -72,7 +72,7 @@ services:
           },
           {
             name: "openid_connect",
-            label: "Keycloak", # optional label for login button, defaults to "Openid Connect"
+            label: "Keycloak", 
             args: {
               name: "openid_connect",
               scope: ["openid","profile","email"],
