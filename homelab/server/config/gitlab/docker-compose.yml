@@ -54,6 +54,7 @@ services:
         gitlab_rails['omniauth_providers'] = [
           {
             name: 'saml',
+            icon: 'https://authentik.jafner.net/static/dist/assets/icons/icon.png',
             args: {
               assertion_consumer_service_url: 'https://gitlab.jafner.net/users/auth/saml/callback',
               # Shown when navigating to certificates in authentik
@@ -67,11 +68,12 @@ services:
                 nickname: ['http://schemas.goauthentik.io/2021/02/saml/username']
               }
             },
-            label: 'authentik'
+            label: 'Authentik'
           },
           {
             name: "openid_connect",
             label: "Keycloak", 
+            icon: 'https://keycloak.jafner.net/resources/9tuqi/admin/keycloak.v2/logo.svg',
             args: {
               name: "openid_connect",
               scope: ["openid","profile","email"],
