@@ -54,6 +54,23 @@ services:
         gitlab_rails['omniauth_auto_link_saml_user'] = true
         gitlab_rails['omniauth_providers'] = [
           {
+            name: 'saml',
+            args: {
+              assertion_consumer_service_url: 'https://gitlab.jafner.net/users/auth/saml/callback',
+              # Shown when navigating to certificates in authentik
+              idp_cert_fingerprint: 'db:b6:b1:08:e7:de:ea:07:4d:39:a6:19:db:f3:51:e1:7e:8f:69:22',
+              idp_sso_target_url: 'https://authentik.jafner.net/application/saml/gitlab/sso/binding/redirect/',
+              issuer: 'https://gitlab.jafner.net',
+              name_identifier_format: 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
+              attribute_statements: {
+                email: ['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'],
+                first_name: ['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+                nickname: ['http://schemas.goauthentik.io/2021/02/saml/username']
+              }
+            },
+            label: 'authentik'
+          },
+          {
             name: "openid_connect",
             label: "Keycloak", # optional label for login button, defaults to "Openid Connect"
             args: {
