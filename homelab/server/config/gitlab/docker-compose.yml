@@ -73,7 +73,7 @@ services:
           {
             name: "openid_connect",
             label: "Keycloak", 
-            icon: 'https://keycloak.jafner.net/resources/9tuqi/admin/keycloak.v2/logo.svg',
+            icon: 'https://keycloak.jafner.net/resources/9tuqi/admin/keycloak.v2/favicon.svg',
             args: {
               name: "openid_connect",
               scope: ["openid","profile","email"],
