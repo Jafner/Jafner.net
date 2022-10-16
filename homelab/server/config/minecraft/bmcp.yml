@@ -14,7 +14,7 @@ services:
       - ENABLE_RCON=true
       - RCON_PASSWORD=${RCON_PASSWORD}
     volumes:
-      - $DOCKER_DATA/bmcp:/data:rw
+      - $DOCKER_DATA/bmcp2:/data:rw
     networks:
       - mc-router
     restart: always
