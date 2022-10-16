@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  bmcp:
+    image: itzg/minecraft-server:java8
+    container_name: minecraft_bmcp
+    environment:
+      - EULA=TRUE
+      - MAX_MEMORY=12G
+      - TYPE=FORGE
+      - VERSION=1.18.2
+      - FORGEVERSION=40.1.69
+      - OPS=jafner425
+      - ENABLE_RCON=true
+      - RCON_PASSWORD=${RCON_PASSWORD}
+    volumes:
+      - $DOCKER_DATA/bmcp:/data:rw
+    networks:
+      - mc-router
+    restart: always
+networks:
+  mc-router:
+    external: true
