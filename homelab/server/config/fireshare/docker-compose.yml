@@ -1,0 +1,28 @@
+version: '3'
+services:
+  fireshare:
+    container_name: fireshare_fireshare
+    image: shaneisreal/fireshare:latest
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    labels:
+      - traefik.http.routers.fireshare.rule=Host(`clips.jafner.net`)
+      - traefik.http.routers.fireshare.tls.certresolver=lets-encrypt
+    networks:
+      - web
+    volumes:
+      - $DATA_DIR:/data
+      - $PROCESSED_DIR:/processed
+      - $VIDEO_DIR:/videos
+    env_file:
+      - .env
+
+networks:
+  web:
+    external: true
