@@ -2,7 +2,7 @@ version: '3'
 services:
   fireshare:
     container_name: fireshare_fireshare
-    image: shaneisreal/fireshare:latest
+    image: shaneisrael/fireshare:latest
     logging:
       driver: loki
       options:
