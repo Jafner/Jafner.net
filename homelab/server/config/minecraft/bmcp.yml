@@ -2,7 +2,7 @@ version: '3'
 
 services:
   bmcp:
-    image: itzg/minecraft-server:java8
+    image: itzg/minecraft-server:java17
     container_name: minecraft_bmcp
     environment:
       - EULA=TRUE
