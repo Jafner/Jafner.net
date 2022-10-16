@@ -1,7 +1,7 @@
 version: '3'
 services:
   vanilla2:
-    image: itzg/minecraft-server:latest
+    image: itzg/minecraft-server:java8
     container_name: minecraft_vanilla2
     logging:
       driver: loki
@@ -13,7 +13,7 @@ services:
         keep-file: "true"
     environment:
       - EULA=TRUE
-      - VERSION=1.19.2
+      - VERSION=1.8
       - OPS=galaxysqvid
       - MAX_MEMORY=8G
     volumes:
