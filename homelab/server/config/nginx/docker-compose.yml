@@ -2,13 +2,13 @@ version: '3'
 services:
   nginx:
     image: nginx
-    container_name: nginx_test-jafner-dev
+    container_name: nginx_test
     networks:
       - web
     labels:
-      - traefik.http.routers.nginx.rule=Host(`test.jafner.dev`)
+      - traefik.http.routers.nginx.rule=Host(`test.jafner.net`)
       - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
-      - traefik.http.routers.nginx.middlewares=traefik-forward-auth
+      #- traefik.http.routers.nginx.middlewares=traefik-forward-auth
 
 networks:
   web:
