@@ -19,9 +19,6 @@ services:
           - keycloak
     restart: "no"
     command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
-    environment:
-      - KEYCLOAK_ADMIN=jafner
-      - KEYCLOAK_ADMIN_PASSWORD=iEKfrgdTLfbdqtMkH&FMrL3#t8^qfy%eSY5G94tfnUdQB3G!%CUaoFJuhCUN
     env_file:
       - .env
     labels:
@@ -29,6 +26,35 @@ services:
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
       traefik.http.routers.keycloak.middlewares: lan-only@file
       traefik.http.services.keycloak.loadbalancer.server.port: 8080
+  
+  forwardauth:
+    image: mesosphere/traefik-forward-auth
+    container_name: keycloak_forwardauth
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    networks:
+      keycloak:
+      web:
+    restart: "no"
+    env_file:
+      - .env
+    labels:
+      #- "traefik.enable=true"
+      - "traefik.docker.network=web"
+      #- "traefik.http.services.forwardauth.loadbalancer.server.port=4181"
+      #- "traefik.http.routers.forwardauth.entrypoints=websecure"
+      - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
+      - "traefik.http.routers.forwardauth.middlewares=traefik-forward-auth"
+      - "traefik.http.routers.forwardauth.tls.certresolver=lets-encrypt"
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://forwardauth:4181"
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader=true"
 
 networks:
   keycloak:

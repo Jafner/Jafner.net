@@ -8,6 +8,7 @@ services:
     labels:
       - traefik.http.routers.nginx.rule=Host(`test.jafner.dev`)
       - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nginx.middlewares=traefik-forward-auth
 
 networks:
   web:
