@@ -44,6 +44,8 @@ services:
       keycloak:
       web:
     restart: "no"
+    depends_on:
+      - keycloak
     env_file:
       - .env
     labels:
