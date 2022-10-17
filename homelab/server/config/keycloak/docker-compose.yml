@@ -30,7 +30,7 @@ services:
       traefik.http.services.keycloak.loadbalancer.server.port: 8080
   
   forwardauth:
-    image: mesosphere/traefik-forward-auth
+    image: mesosphere/traefik-forward-auth:3.1.0
     container_name: keycloak_forwardauth
     logging:
       driver: loki
