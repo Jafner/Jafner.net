@@ -24,7 +24,7 @@ services:
       - traefik.http.routers.jdl.priority=10
       - traefik.http.routers.jdl-auth.rule=Host(`jdl.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
       - traefik.http.routers.jdl-auth.priority=15
-      - traefik.http.routers.jdl-auth.service=authentik-auth@file
+      - traefik.http.routers.jdl-auth.service=traefik-forward-auth@file
 
 networks:
   web:
