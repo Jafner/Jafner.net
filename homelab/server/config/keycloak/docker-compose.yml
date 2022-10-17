@@ -42,6 +42,8 @@ services:
         keep-file: "true"
     networks:
       web:
+        aliases:
+          - forwardauth
     restart: "no"
     environment:
       - SECRET=$SECRET
