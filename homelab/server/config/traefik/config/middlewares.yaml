@@ -46,3 +46,9 @@ http:
     pihole:
       addprefix:
         prefix: "/admin"
+    traefik-forward-auth:
+      forwardauth:
+        address: http://forwardauth:4181
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-Forwarded-User
