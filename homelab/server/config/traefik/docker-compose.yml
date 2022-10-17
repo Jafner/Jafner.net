@@ -24,8 +24,6 @@ services:
       - ./traefik.yaml:/traefik.yaml
       - ./config:/config
       - $DOCKER_DATA/acme.json:/acme.json
-    labels:
-      - traefik.http.routers.api.middlewares=traefik-forward-auth@file
 
 networks:
   web:
