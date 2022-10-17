@@ -19,12 +19,8 @@ services:
     labels:
       - traefik.http.routers.jdl.rule=Host(`jdl.jafner.net`)
       - traefik.http.routers.jdl.tls.certresolver=lets-encrypt
-      - traefik.http.routers.jdl.middlewares=lan-only@file
+      - traefik.http.routers.jdl.middlewares=traefik-forward-auth@file
       - traefik.http.services.jdl.loadbalancer.server.port=5800
-      - traefik.http.routers.jdl.priority=10
-      - traefik.http.routers.jdl-auth.rule=Host(`jdl.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
-      - traefik.http.routers.jdl-auth.priority=15
-      - traefik.http.routers.jdl-auth.service=traefik-forward-auth@file
 
 networks:
   web:
