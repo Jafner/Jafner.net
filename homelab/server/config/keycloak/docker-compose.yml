@@ -45,10 +45,10 @@ services:
     env_file:
       - .env
     labels:
-      #- "traefik.enable=true"
+      - "traefik.enable=true"
       - "traefik.docker.network=web"
-      #- "traefik.http.services.forwardauth.loadbalancer.server.port=4181"
-      #- "traefik.http.routers.forwardauth.entrypoints=websecure"
+      - "traefik.http.services.forwardauth.loadbalancer.server.port=4181"
+      - "traefik.http.routers.forwardauth.entrypoints=websecure"
       - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
       - "traefik.http.routers.forwardauth.middlewares=traefik-forward-auth"
       - "traefik.http.routers.forwardauth.tls.certresolver=lets-encrypt"
