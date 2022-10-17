@@ -25,7 +25,7 @@ services:
       - ./config:/config
       - $DOCKER_DATA/acme.json:/acme.json
     labels:
-      - traefik.http.routers.traefik-dashboard.middlewares=traefik-forward-auth@file
+      - traefik.http.routers.api.middlewares=traefik-forward-auth@file
 
 networks:
   web:
