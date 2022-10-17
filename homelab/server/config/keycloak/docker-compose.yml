@@ -15,7 +15,6 @@ services:
     volumes:
       - $KEYCLOAK_DATA:/opt/keycloak/data
     networks:
-      keycloak:
       web:
         aliases:
           - keycloak
@@ -41,7 +40,6 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     networks:
-      keycloak:
       web:
     restart: "no"
     env_file:
@@ -59,6 +57,5 @@ services:
       - "traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader=true"
 
 networks:
-  keycloak:
   web:
     external: true
