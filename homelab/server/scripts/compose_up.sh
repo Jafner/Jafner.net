@@ -30,3 +30,4 @@ docker ps -a
 # the exporter boots faster than the plex server, and doesn't seem to retry.
 wait 10
 docker container restart monitoring_exporter-plex
+docker container restart keycloak_forwardauth
