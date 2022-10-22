@@ -1,3 +1,9 @@
+# Shutdown TL;DR
+
+1. Shut down the server: `docker stop $(docker ps -aq) && sudo shutdown now`
+2. Shut down the NAS: `shutdown -p now`
+3. Shut down the router: `sudo shutdown now`susu
+
 # About
 "Rackdown" is AWS slang for turning a rack of hosts off and on again. In this case, the "rack" refers to practically all components of the DC. Server, NAS, disk shelf, switches, router, PiHole, modem, APs, and desktops. This doc will consolidate previous docs and provide an overall shutdown and reboot procedure. 
 
