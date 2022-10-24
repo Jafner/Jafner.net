@@ -33,7 +33,7 @@ services:
       - traefik.http.routers.wg-easy.rule=Host(`vpn.jafner.net`)
       - traefik.http.routers.wg-easy.tls.certresolver=lets-encrypt
       - traefik.http.services.wg-easy.loadbalancer.server.port=51821
-      - traefik.http.routers.wg-easy.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.wg-easy.middlewares=traefik-forward-auth@file
 
 networks:
   web:
