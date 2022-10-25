@@ -216,8 +216,8 @@ services:
     image: esanchezm/prometheus-qbittorrent-exporter
     container_name: monitoring_exporter-qbittorrent
     environment:
-      - QBITTORRENT_HOST=https://qbt.jafner.net
-      - QBITTORRENT_PORT=443
+      - QBITTORRENT_HOST=http://qbittorrent
+      - QBITTORRENT_PORT=8080
     logging:
       driver: loki
       options:
@@ -229,6 +229,7 @@ services:
     restart: "no"
     networks:
       - monitoring
+      - web
     labels:
       - traefik.disable
 
