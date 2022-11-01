@@ -5,11 +5,9 @@ services:
     image: wordpress
     container_name: wordpress_megan-portfolio
     restart: "no"
-    environment:
-      WORDPRESS_DB_HOST: megan-portfolio_db
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpressdb
+    env_file:
+      - project.env
+      - megan-portfolio.env
     volumes:
       - ${DOCKER_DATA}/html:/var/www/html
       - ./upload.ini:/usr/local/etc/php/conf.d/uploads.ini
@@ -28,11 +26,9 @@ services:
     restart: "no"
     networks:
       - portfolio
-    environment:
-      MYSQL_DATABASE: wordpressdb
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    env_file:
+      - project.env
+      - megan-portfolio-db.env
     volumes:
       - ${DOCKER_DATA}/db:/var/lib/mysql
     labels:
