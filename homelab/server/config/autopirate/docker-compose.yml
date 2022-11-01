@@ -13,10 +13,8 @@ services:
         keep-file: "true"
     networks:
       - web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - autopirate.env
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${DOCKER_DATA}/radarr_config:/config"
@@ -40,10 +38,8 @@ services:
         keep-file: "true"
     networks:
       - web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - autopirate.env
     volumes:
       - "${MEDIA_DIR}/Video/Shows:/shows"
       - "${DOCKER_DATA}/sonarr_config:/config"
@@ -67,10 +63,8 @@ services:
         keep-file: "true"
     networks:
       - web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - autopirate.env
     volumes:
       - "${DOCKER_DATA}/lidarr:/config"
       - "${NZB_DIR}:/downloads"
@@ -94,10 +88,8 @@ services:
         keep-file: "true"
     networks:
       - web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - autopirate.env
     volumes:
       - "${DOCKER_DATA}/nzbhydra2_config:/config"
       - "${NZB_DIR}:/downloads"
@@ -121,10 +113,8 @@ services:
     networks:
       - web
       - monitoring
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - autopirate.env
     ports:
       - 8085:8080
     volumes:
@@ -161,14 +151,9 @@ services:
       - traefik.http.routers.tdarr.tls.certresolver=lets-encrypt
       - traefik.http.routers.tdarr.middlewares=lan-only@file,traefik-forward-auth@file
       - traefik.http.services.tdarr.loadbalancer.server.port=8265
-    environment:
-      - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - UMASK_SET=002
-      - serverIP=0.0.0.0
-      - serverPort=8266
-      - webUIPort=8265
+    env_file:
+      - autopirate.env
+      - tdarr.env
     volumes:
       - ${DOCKER_DATA}/tdarr/server:/app/server
       - ${DOCKER_DATA}/tdarr/configs:/app/configs
@@ -200,18 +185,9 @@ services:
     networks:
       tdarr:
         ipv4_address: 172.110.0.20
-    environment:
-      - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - UMASK_SET=002
-      - nodeID=MainNode
-      - nodeIP=172.110.0.20
-      - nodePort=8267
-      - serverIP=172.110.0.10
-      - serverPort=8266
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=all
+    env_file:
+      - autopirate.env
+      - tdarr_node.env
     volumes:
       - ${DOCKER_DATA}/tdarr/configs:/app/configs
       - ${DOCKER_DATA}/tdarr/logs:/app/logs
@@ -232,11 +208,9 @@ services:
         keep-file: "true"
     networks:
       - web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
-      - AUTO_UPDATE=false
+    env_file:
+      - autopirate.env
+      - jackett.env
     volumes:
       - "${DOCKER_DATA}/jackett_config:/config"
       - "${NZB_DIR}:/downloads"
