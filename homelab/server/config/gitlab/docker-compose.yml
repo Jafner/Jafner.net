@@ -15,6 +15,8 @@ services:
     hostname: 'gitlab.jafner.net'
     networks:
       - web
+    env_file:
+      - gitlab.env
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
@@ -103,8 +105,9 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    environment:
-      - GODEBUG="x509ignoreCN=0"
+    env_file:
+      - gitlab.env
+      - runner.env
     volumes:
       - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
@@ -123,8 +126,9 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    environment:
-      - GODEBUG="x509ignoreCN=0"
+    env_file:
+      - gitlab.env
+      - runner.env
     volumes:
       - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
