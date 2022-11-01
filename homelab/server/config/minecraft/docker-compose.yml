@@ -2,7 +2,7 @@ version: '3'
 services:
   router:
     image: itzg/mc-router
-    container_name: minecraft_mc-router
+    container_name: minecraft_router
     logging:
       driver: loki
       options:
