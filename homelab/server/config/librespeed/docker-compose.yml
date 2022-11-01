@@ -12,19 +12,14 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    environment:
-      - TITLE=LibreSpeed@Jafner.net
-      - TELEMETRY=true
-      - ENABLE_ID_OBFUSCATION=true
-      - PASSWORD=***REMOVED***
-      - EMAIL=joey@jafner.net
-      - IPINFO_APIKEY=83d2ff4e618bd7
+    env_file:
+      - librespeed.env
+      - librespeed_secrets.env
     networks:
       - web
     labels:
       - traefik.http.routers.librespeed.rule=Host(`speedtest.jafner.net`)
       - traefik.http.routers.librespeed.tls.certresolver=lets-encrypt
-      #- traefik.http.routers.librespeed.middlewares=
 
 networks:
   web:
