@@ -30,45 +30,6 @@ services:
       - mc-router
     restart: "no"
 
-  e9:
-    image: itzg/minecraft-server:latest
-    container_name: minecraft_e9
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    env_file:
-      - minecraft.env
-      - e9.env
-    volumes:
-      - $DOCKER_DATA/e9:/data:rw
-    networks:
-      - mc-router
-    restart: "no"
-
-  fan:
-    image: itzg/minecraft-server:java8
-    container_name: minecraft_fan
-    env_file:
-      - minecraft.env
-      - fan.env
-    environment:
-      - RCON_CMDS_STARTUP= |-
-        /pregen start gen radius Pregen SQUARE 0 0 500
-      - RCON_CMDS_FIRST_CONNECT= |-
-        /pregen pause
-      - RCON_CMDS_LAST_DISCONNECT= |-
-        /pregen continue
-    volumes:
-      - $DOCKER_DATA/fan:/data:rw
-    networks:
-      - mc-router
-    restart: "no"
-
   vanilla:
     image: itzg/minecraft-server:latest
     container_name: minecraft_vanilla
@@ -85,25 +46,6 @@ services:
       - vanilla.env
     volumes:
       - $DOCKER_DATA/vanilla:/data:rw
-    networks:
-      - mc-router
-
-  vanilla2:
-    image: itzg/minecraft-server:java8
-    container_name: minecraft_vanilla2
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    env_file:
-      - minecraft.env
-      - vanilla2.env
-    volumes:
-      - $DOCKER_DATA/vanilla2:/data:rw
     networks:
       - mc-router
 
