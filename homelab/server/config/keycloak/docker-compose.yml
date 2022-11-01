@@ -20,9 +20,9 @@ services:
           - keycloak
     restart: "no"
     command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
-    environment:
-      - KEYCLOAK_ADMIN=$KEYCLOAK_ADMIN
-      - KEYCLOAK_ADMIN_PASSWORD=$KEYCLOAK_ADMIN_PASSWORD
+    env_file:
+      - keycloak.env
+      - keycloak_secrets.env
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
@@ -45,13 +45,9 @@ services:
         aliases:
           - forwardauth
     restart: "no"
-    environment:
-      - SECRET=$SECRET
-      - ENCRYPTION_KEY=$ENCRYPTION_KEY
-      - PROVIDER_URI=$PROVIDER_URI
-      - CLIENT_ID=$CLIENT_ID
-      - CLIENT_SECRET=$CLIENT_SECRET
-      - LOG_LEVEL=$LOG_LEVEL
+    env_file:
+      - forwardauth.env
+      - forwardauth_secrets.env
     labels:
       #- "traefik.enable=true"
       #- "traefik.docker.network=web"
