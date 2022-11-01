@@ -20,11 +20,8 @@ services:
       - $MEDIA_DIR/Videos:/media/Videos
       - $MEDIA_DIR/Galleries:/media/Galleries
       - $DOCKER_DATA:/root/.stash
-    environment:
-      - STASH_STASH=/media/
-      - STASH_GENERATED=/generated/
-      - STASH_METADATA=/metadata/
-      - STASH_CACHE=/cache/
+    env_file:
+      - stashapp.env
     networks:
       - web
     labels:
