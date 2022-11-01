@@ -13,10 +13,8 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     env_file:
-      - ./project.env
-      #- ../../../homelab.env
-      #- ../../host.env
-      
+      - wireguard.env
+      - wireguard_secrets.env
     ports:
       - 53820:51820/udp
     networks:
