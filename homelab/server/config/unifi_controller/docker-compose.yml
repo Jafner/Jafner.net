@@ -12,11 +12,8 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - MEM_LIMIT=1024M
-      - MEM_STARTUP=1024M
+    env_file:
+      - unifi_controller.env
     volumes:
       - ${DOCKER_DATA}/config:/config
     ports:
