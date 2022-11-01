@@ -10,7 +10,7 @@ Do not prefix commands with `/`.
 ## Updating MC-Router mappings
 MC-Router must be running for all active MC connections. Restarting it kicks everyone off their servers
 
-To update the mappings while running, use `docker exec mc-router /mc-router --mapping <new-mapping string>`
+To update the mappings while running, use `docker exec minecraft_mc-router /mc-router --mapping <new-mapping string>`
 
 ## Before Starting a Server
 Check the following server.properties values:

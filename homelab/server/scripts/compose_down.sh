@@ -1,15 +1,6 @@
 #!/bin/bash
 echo "==========================================="
-echo "===== SHUTTING DOWN MINECRAFT SERVERS ====="
-echo "==========================================="
-for service in /home/joey/homelab/server/config/minecraft/*.yml
-do 
-    echo "===== SHUTTING DOWN $service =====" 
-    docker-compose -f $service down
-done
-
-echo "==========================================="
-echo "======= SHUTTING DOWN OTHER SERVERS ======="
+echo "======= SHUTTING DOWN SERVERS ======="
 echo "==========================================="
 
 for service in /home/joey/homelab/server/config/*
