@@ -13,6 +13,8 @@ services:
         keep-file: "true"
     networks:
       - web
+    env_file:
+      - jdownloader2.env
     volumes:
       - "$DOCKER_DATA:/config:rw"
       - "$DOWNLOAD_DIR:/output:rw"
