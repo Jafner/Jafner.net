@@ -22,7 +22,7 @@ services:
       - $DOCKER_DATA:/config
       - $TORRENT_DATA:/torrenting
     env_file:
-      - .env
+      - qbittorrent.env
     ports:
       - 50000:50000
     labels:
