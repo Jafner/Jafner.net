@@ -13,8 +13,6 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    env_file:
-      - traefik.env
     networks:
       - web
       - monitoring

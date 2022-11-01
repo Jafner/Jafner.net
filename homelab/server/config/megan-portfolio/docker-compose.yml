@@ -6,7 +6,6 @@ services:
     container_name: wordpress_megan-portfolio
     restart: "no"
     env_file:
-      - project.env
       - megan-portfolio.env
     volumes:
       - ${DOCKER_DATA}/html:/var/www/html
@@ -27,7 +26,6 @@ services:
     networks:
       - portfolio
     env_file:
-      - project.env
       - megan-portfolio-db.env
     volumes:
       - ${DOCKER_DATA}/db:/var/lib/mysql

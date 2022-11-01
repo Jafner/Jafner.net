@@ -16,8 +16,6 @@ services:
       - monitoring
       - web
     user: "0"
-    env_file:
-      - monitoring.env
     volumes:  
       - ${DOCKER_DATA}/grafana:/var/lib/grafana
       - ./custom.ini:/etc/grafana/grafana.ini
@@ -43,8 +41,6 @@ services:
       - web
     ports:
       - 9090:9090
-    env_file:
-      - monitoring.env
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - ${DOCKER_DATA}/prometheus:/prometheus
@@ -73,8 +69,6 @@ services:
       - web
     ports:
       - "3100:3100"
-    env_file:
-      - monitoring.env
     volumes:
       - ${DOCKER_DATA}/loki-logs:/loki-logs
       - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
@@ -115,7 +109,7 @@ services:
         keep-file: "true"
     restart: "no"
     networks:
-      -   monitoring
+      - monitoring
     env_file:
       - exporter-pihole.env
     labels:

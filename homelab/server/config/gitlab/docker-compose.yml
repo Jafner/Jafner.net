@@ -15,8 +15,6 @@ services:
     hostname: 'gitlab.jafner.net'
     networks:
       - web
-    env_file:
-      - gitlab.env
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
@@ -106,7 +104,6 @@ services:
         keep-file: "true"
     restart: "no"
     env_file:
-      - gitlab.env
       - runner.env
     volumes:
       - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner
@@ -127,7 +124,6 @@ services:
         keep-file: "true"
     restart: "no"
     env_file:
-      - gitlab.env
       - runner.env
     volumes:
       - ${DOCKER_DATA}/runner-config:/etc/gitlab-runner

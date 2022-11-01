@@ -12,8 +12,6 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    env_file:
-      - sftp.env
     ports:
       - 23450:22/tcp
     volumes:
