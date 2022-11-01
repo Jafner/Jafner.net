@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Apply updated EXPORT_SERVERS
-docker-compose -f /home/joey/homelab/server/config/monitoring up -d --force-recreate exporter-minecraft
+cd /home/joey/homelab/server/config/monitoring && docker-compose up -d --force-recreate exporter-minecraft
 
 # Apply updated router mappings
-docker-compose -f /home/joey/homelab/server/config/minecraft up -d --force-recreate router
+cd /home/joey/homelab/server/config/minecraft && docker-compose up -d --force-recreate router
