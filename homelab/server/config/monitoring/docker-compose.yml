@@ -16,6 +16,8 @@ services:
       - monitoring
       - web
     user: "0"
+    env_file:
+      - monitoring.env
     volumes:  
       - ${DOCKER_DATA}/grafana:/var/lib/grafana
       - ./custom.ini:/etc/grafana/grafana.ini
@@ -41,6 +43,8 @@ services:
       - web
     ports:
       - 9090:9090
+    env_file:
+      - monitoring.env
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - ${DOCKER_DATA}/prometheus:/prometheus
@@ -69,6 +73,8 @@ services:
       - web
     ports:
       - "3100:3100"
+    env_file:
+      - monitoring.env
     volumes:
       - ${DOCKER_DATA}/loki-logs:/loki-logs
       - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
@@ -108,11 +114,8 @@ services:
     restart: "no"
     networks:
       -   monitoring
-    environment:
-      - PIHOLE_HOSTNAME=pihole
-      - PIHOLE_PROTOCOL=http
-      - INTERVAL=15s
-      - PORT=9617 # port on which the metrics should be available to be scraped by prometheus
+    env_file:
+      - exporter-pihole.env
     labels:
       - traefik.enable=false
 
@@ -132,8 +135,8 @@ services:
     networks:
       - monitoring
       - mc-router
-    environment:
-      EXPORT_SERVERS: e6-056,vanilla,bmcp,e6,e6-dev,fan,e8
+    env_file:
+      - exporter-minecraft.env
     labels:
       - traefik.enable=false
 
@@ -172,9 +175,9 @@ services:
     restart: "no"
     networks:
       - monitoring
-    environment:
-      - SABNZBD_BASEURLS=https://sabnzbd.jafner.net:443
-      - SABNZBD_APIKEYS=***REMOVED***
+    env_file:
+      - exporter-sabnzbd.env
+      - exporter-sabnzbd_secrets.env
 
   exporter-ping:
     image: czerwonk/ping_exporter
@@ -215,9 +218,8 @@ services:
   exporter-qbittorrent:
     image: esanchezm/prometheus-qbittorrent-exporter
     container_name: monitoring_exporter-qbittorrent
-    environment:
-      - QBITTORRENT_HOST=http://qbittorrent
-      - QBITTORRENT_PORT=8080
+    env_file:
+      - exporter-qbittorrent.env
     logging:
       driver: loki
       options:
