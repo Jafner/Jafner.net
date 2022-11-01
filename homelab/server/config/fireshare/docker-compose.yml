@@ -21,7 +21,8 @@ services:
       - $PROCESSED_DIR:/processed
       - $VIDEO_DIR:/videos
     env_file:
-      - .env
+      - fireshare.env
+      - fireshare_secrets.env
 
 networks:
   web:
