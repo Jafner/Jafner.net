@@ -11,17 +11,14 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - calibre-web.env
     volumes:
       - calibre-web-rpg_data:/config
       - $LIBRARY_DIR/rpg:/books
     labels:
       - traefik.http.routers.calibre-rpg.rule=Host(`rpg.calibre.jafner.net`)
       - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
-      # - traefik.http.routers.calibre-rpg.middlewares=authentik@file,securityheaders@file
     networks:
       - web
 
@@ -36,17 +33,14 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - calibre-web.env
     volumes:
       - calibre-web-sff_data:/config
       - $LIBRARY_DIR/sff:/books
     labels:
       - traefik.http.routers.calibre-sff.rule=Host(`sff.calibre.jafner.net`)
       - traefik.http.routers.calibre-sff.tls.certresolver=lets-encrypt
-      # - traefik.http.routers.calibre-sff.middlewares=authentik@file,securityheaders@file
     networks:
       - web
 
@@ -61,17 +55,14 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
+    env_file:
+      - calibre-web.env
     volumes:
       - calibre-web-ace_data:/config
       - $LIBRARY_DIR/ace:/books
     labels:
       - traefik.http.routers.calibre-ace.rule=Host(`ace.calibre.jafner.net`)
       - traefik.http.routers.calibre-ace.tls.certresolver=lets-encrypt
-      # - traefik.http.routers.calibre-ace.middlewares=authentik@file,securityheaders@file
     networks:
       - web
 
