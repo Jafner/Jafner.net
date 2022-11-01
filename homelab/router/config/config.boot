@@ -318,20 +318,8 @@ nat {
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 32400
-            }
-            inbound-interface eth1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1101 {
-            description "Bittorrent (Hairpin NAT)"
-            destination {
-                address 174.21.53.164
-                port 50000
             }
             inbound-interface eth1
             protocol tcp_udp
@@ -342,7 +330,7 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 53820-53829
             }
             inbound-interface eth1
@@ -354,7 +342,7 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 25565
             }
             inbound-interface eth1
@@ -366,7 +354,7 @@ nat {
         rule 1104 {
             description "Iperf (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 50201
             }
             inbound-interface eth1
@@ -378,7 +366,7 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 80,443
             }
             inbound-interface eth1
@@ -390,7 +378,7 @@ nat {
         rule 1107 {
             description "Git SSH (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 2228-2229
             }
             inbound-interface eth1
@@ -402,7 +390,7 @@ nat {
         rule 1108 {
             description "SFTP (Hairpin NAT)"
             destination {
-                address 174.21.53.164
+                address 174.21.36.187
                 port 23450
             }
             inbound-interface eth1
@@ -444,8 +432,7 @@ service {
         shared-network-name LAN {
             domain-name local
             domain-search local
-            name-server 1.1.1.1
-            name-server 1.0.0.1
+            name-server 192.168.1.22
             subnet 192.168.1.0/24 {
                 default-router 192.168.1.1
                 lease 86400
@@ -461,21 +448,41 @@ service {
                     ip-address 192.168.1.2
                     mac-address 18:e8:29:50:f7:5b
                 }
+                static-mapping joey-desktop {
+                    ip-address 192.168.1.100
+                    mac-address 04:92:26:DA:BA:C5
+                }
                 static-mapping joey-nas {
                     ip-address 192.168.1.10
                     mac-address 40:8d:5c:52:41:89
                 }
-                static-mapping joey-seedbox {
-                    ip-address 192.168.1.21
-                    mac-address 24:4b:fe:57:bc:85
-                }
                 static-mapping joey-server {
                     ip-address 192.168.1.23
-                    mac-address 24:4b:fe:8b:f3:b0
+                    mac-address 70:85:c2:9c:6a:16
+                }
+                static-mapping joey-server2 {
+                    ip-address 192.168.1.24
+                    mac-address 24:4b:fe:57:bc:85
+                }
+                static-mapping joey-server3 {
+                    ip-address 192.168.1.25
+                    mac-address 78:45:c4:05:4f:21
+                }
+                static-mapping joey-server4 {
+                    ip-address 192.168.1.26
+                    mac-address 90:2b:34:37:ce:e8
                 }
                 static-mapping joeyPrinter {
                     ip-address 192.168.1.60
                     mac-address 9c:32:ce:7c:f8:25
+                }
+                static-mapping pihole {
+                    ip-address 192.168.1.22
+                    mac-address b8:27:eb:3c:8e:bb
+                }
+                static-mapping raspi2 {
+                    ip-address 192.168.1.21
+                    mac-address b8:27:eb:ff:76:6e
                 }
                 static-mapping tasmota-1 {
                     ip-address 192.168.1.50
@@ -497,8 +504,7 @@ service {
             allow-from 192.168.1.0/24
             cache-size 1000000
             listen-address 192.168.1.1
-            name-server 192.168.1.23
-            system
+            name-server 192.168.1.22
         }
     }
     monitoring {
@@ -540,23 +546,24 @@ system {
     }
     host-name vyos
     login {
+        banner {
+        }
         user vyos {
             authentication {
-                encrypted-password $5$j8QJRFCpc2Pc90kV$AA7DbPJldnwMlahDbbFWf0N9WiNnL9faW473jO9z1Z0
+                encrypted-password $SECRET
                 public-keys jafner425@gmail.com {
-                    key AAAAB3NzaC1yc2EAAAADAQABAAAEAQCyolGiQAOvyKZ9GtPx2FbKwdt8twLuKs8l0+o3QVZsS5NCG4pX6GXuH8GspmHSedy4yfgVBN0NlOoVPpwxGslZZ5BLkOyhfcoiayPMbYyEpyiujcmnIUlNLI04otz7Ucqhopy+DC/+UpLTMqgnlevWDJW5YgYNAInPFNP7cIJ//sjimisP/su0n4DTzq/1WDUHN+Pk2LKw9P6NnAyk+RhSAH2v5Z/sq0FjUVxe57oNnCGec8KzVsxvI3PP44ax17n8MIyZlXhDa41+1u/LsE9oHSeidaWz8S8IZaRQbUkdtaViiOL+JS55ZOut11cmEOBTsXgmwEH9d1gLS5NKukwTDruBjznqJDXuFlcoRvHIYOTbBXVBDzI710kX7hucks/XZuUhXuOsO0hqQjqAJFX/LKbeR/XN+7AvuGIy25bslZu3/HUdL9UYhenm/AJL5YtUKRsLIeznRyHJcJ8905qgMIELRVWYxTDlekbsL5rNzrRSJ4+gV9Y5TFe1uxRaqqGiuyJ1T7/R2++z+p+sYoBJOY+vehUul7CtaYeVe7FUGuJzWHylkmkOMSJQb0XvjQWjFgSOstIf4MoFcRSfgztL4C2utDNayvR2XjLjRcaZnIzzAkBweY/g0Y0Jnnjk+dmnKWeoDHUXOT/GHGi/KfL4lwnQFRtS8x6M52sX417Of9K14ljILaHESJibjPN2jWboQdvTw0PFhbr72jr6+rhayuiP3n+5rENtDxwPlfYdSsCdgVyg7HC/2F6ZL5QHXctJFjIswMdJds+3pHnb7l5d4TiRdBQNQGVv7pYYfZdyqMGk5sdKXBzn/uS1a0SRqzJAhgH6nA67HfuBKq2xwu86hlOnc6hsFuehXAweaZ/UvTBiCE+4oYokAyHcpHsjOYqTmK6rSTTfGQ3Yc8zgD5vGb04tGRMVFA0+uQSrcBeIidxFZA1pbrMuDGDQDqtevIyna+rN958IWjCMvs8O+wro4SFYKAHYOkaBW0syQl1m/GKePcDJR6rkLx8eLrr6jaj4rHAS5fVJVYOpPIkrnfI5kTvnuRqJTH9NIaan3q4+6mAQ1prBqrtO2RUWcdmfkuVuUapDcqhgqGQqzsaKNWjsiCr21CPnYuj8pYItyJziF2VGS5oci2feCxWwbqqW8WUXZha7PnhQaIIiv7vyIo/JVWKK12v8UfeFRiRL73JOfFdtRCWldQxF2yRTt5gFxObCPQj5oSj1+Buc/IzQwqkKxeKpjUdtYt1RjsU3rJR1JDjEhrbbN/LZg986wkxrsLVqQmsXxSniai2X4vN+9KZu4kcg8Crk4g29+L0Snj0P7PQ61SXT3HMZxp5T2jLvekwLyn9yIKl75IiQSdgp+DIv
+                    key $SECRET
                     type ssh-rsa
                 }
                 public-keys joey@joey-server {
-                    key AAAAB3NzaC1yc2EAAAADAQABAAACAQDOCCXndD7BbVmUHsYEkVLobZVBbZ8mgHjpKreUSsyZLah9Et2VxzATOh1bnXwapHu137h/cMeBDBPD3AfoCT3njd/mvVZB3INkyS8mPoFuwYViHmlW2L+6Bv5kGiMpjK/G5lPkKLsA79bTMu2kuAM6usslap3hEdwNW0vK3a+feM1RSwxirQmDXq4WRmsY9r4Md9wIfxLaezy0l0oK8k7xqMeiLrqMsrpsDOVV5Cb7iyufDqEx4QbicosrMD+C4Mql8ptdOYVj86jOND9lcpoqujOQWD2k8Cvl/zdoWY3ZG7duZjD9NYFgvM7F62LM5p7t5iNicxcegCqdZmFR5+ueZtoIn6BpCT4cvAWHSipRuvNmAWaQBnfr/NKh4H2QF0wJluDkG+wTrJPjH9FmK4sUHdOx+rqZ4iWhhZ7a2c4wNgm9i+UHoh//MPSvWOC5lQ97FvTUVBmE8BiWh8tZ82SxjSUtWaYPGZEmJvEIVXus70aY8Rwelxn9gXTwLlzRZl+0G7XOQia1EIj8VnUtPtWMxHeI09klOP1BRUVSRXBGOvz1UjbHIAEYvnxkTiW5LG1xxJopUQ3QiyDDERBbelLtM3iBIRFbVlFcqyIG3OsZaR90LwngBFIMtPZrv3vWTg3YdtMDw7uW1SVHHBDfxEc9cSBYQinVGupUmyztTLkM4Q==
+                    key $SECRET
                     type ssh-rsa
                 }
             }
         }
     }
-    name-server 1.1.1.1
-    name-server 1.0.0.1
     name-server 127.0.0.1
+    name-server 192.168.1.22
     ntp {
         server time-a-wwv.nist.gov {
         }
