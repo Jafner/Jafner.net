@@ -32,15 +32,10 @@ services:
       - 32412:32412/udp
       - 32413:32413/udp
       - 32414:32414/udp
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=latest
-      - ADVERTISE_IP="https://plex.jafner.net:443"
-      - PLEX_CLAIM=claim-nSxzt4MT2j7mExwhhrnZ
-      - NVIDIA_VISIBLE_DEVICES=all
     env_file:
-      - .env
+      - plex_stack.env
+      - plex.env
+      - plex_secrets.env
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${MEDIA_DIR}/Video/Shows:/shows"
@@ -64,12 +59,8 @@ services:
     restart: "no"
     networks:
       - web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Los_Angeles
     env_file:
-      - .env
+      - plex_stack.env
     volumes:
       - "${DOCKER_DATA}/ombi:/config"
     labels:
