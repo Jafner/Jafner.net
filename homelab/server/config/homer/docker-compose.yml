@@ -12,9 +12,8 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
-    environment:
-      - UID=1000
-      - GID=1000
+    env_file:
+      - homer.env
     volumes:
       - ./assets:/www/assets
     networks:
