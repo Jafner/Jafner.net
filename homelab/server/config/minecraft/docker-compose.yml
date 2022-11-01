@@ -67,7 +67,7 @@ services:
       - $DOCKER_DATA/fan:/data:rw
     networks:
       - mc-router
-    restart: no
+    restart: "no"
 
   vanilla:
     image: itzg/minecraft-server:latest
