@@ -49,7 +49,7 @@ services:
       - forwardauth.env
       - forwardauth_secrets.env
     labels:
-      #- "traefik.enable=true"
+      - "traefik.enable=false"
       #- "traefik.docker.network=web"
       #- "traefik.http.services.forwardauth.loadbalancer.server.port=4181"
       #- "traefik.http.routers.forwardauth.entrypoints=websecure"

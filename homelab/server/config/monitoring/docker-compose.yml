@@ -99,6 +99,8 @@ services:
       - monitoring
     volumes:
       - ./promtail-config.yml:/etc/promtail/promtail-config.yml
+    labels:
+      - traefik.enable=false
 
   exporter-pihole:
     image: ekofr/pihole-exporter:latest
@@ -213,7 +215,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
-      - traefik.disable
+      - traefik.enable=false
 
   exporter-qbittorrent:
     image: esanchezm/prometheus-qbittorrent-exporter
@@ -233,7 +235,7 @@ services:
       - monitoring
       - web
     labels:
-      - traefik.disable
+      - traefik.enable=false
 
   exporter-nvidia:
     image: mindprince/nvidia_gpu_prometheus_exporter:0.1
@@ -257,7 +259,7 @@ services:
     networks:
       - monitoring
     labels:
-      - traefik.disable
+      - traefik.enable=false
 
 networks:
   monitoring:
