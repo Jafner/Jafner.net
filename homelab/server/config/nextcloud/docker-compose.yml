@@ -1,8 +1,8 @@
 version: '3'
 services:
   nextcloud:
-    image: nextcloud/all-in-one:latest
-    container_name: nextcloud-aio-mastercontainer
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud_nextcloud
     logging:
       driver: loki
       options:
@@ -11,14 +11,17 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
+    env_file:
+      - nextcloud.env
     labels:
       - traefik.http.routers.nextcloud.rule=Host(`nextcloud.jafner.net`)
       - traefik.http.routers.nextcloud.tls.certresolver=lets-encrypt
+      - traefik.http.services.nextcloud.loadbalancer.server.port=443
     networks:
       - web
     volumes:
-      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $DOCKER_DATA/config:/config
+      - $DOCKER_DATA/data:/data
 
 networks:
   web:
