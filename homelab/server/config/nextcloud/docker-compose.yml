@@ -16,8 +16,8 @@ services:
     labels:
       - traefik.http.routers.nextcloud.rule=Host(`nextcloud.jafner.net`)
       - traefik.http.routers.nextcloud.tls.certresolver=lets-encrypt
-      - traefik.http.services.nextcloud.loadbalancer.server.scheme=https
-      - traefik.http.services.nextcloud.loadbalancer.server.port=443
+      #- traefik.http.services.nextcloud.loadbalancer.server.scheme=https
+      #- traefik.http.services.nextcloud.loadbalancer.server.port=443
     networks:
       - web
     volumes:
