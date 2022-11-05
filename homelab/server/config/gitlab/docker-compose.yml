@@ -11,6 +11,10 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
+    deploy:
+      resources:
+        limits:
+          memory: 4G
     restart: "no"
     hostname: 'gitlab.jafner.net'
     networks:

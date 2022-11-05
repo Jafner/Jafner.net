@@ -14,7 +14,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 12G
+          memory: 6G
     networks:
       - web
     restart: "no"
