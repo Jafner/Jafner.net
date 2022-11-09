@@ -9,10 +9,23 @@ http:
       service: "pihole@file"
       tls:
         certResolver: "lets-encrypt"
+    pihole2:
+      rule: "Host(`pihole2.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+        - "pihole@file"
+      service: "pihole2@file"
+      tls:
+        certResolver: "lets-encrypt"
 
   services:
     pihole:
       loadBalancer:
         servers:
           - url: "http://192.168.1.22/"
-      
+    
+    pihole2:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.21/"
