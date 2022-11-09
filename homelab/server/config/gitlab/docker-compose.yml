@@ -29,8 +29,6 @@ services:
           "X-Forwarded-Proto" => "https",
           "X-Forwarded-Ssl" => "on"
         }
-        unicorn['worker_processes'] = 2
-        sidekiq['concurrency'] = 10
         letsencrypt['enable'] = false
         gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '192.168.1.0/24']
         gitlab_rails['smtp_enable'] = true
