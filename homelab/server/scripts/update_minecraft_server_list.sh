@@ -22,7 +22,7 @@ do
     #MAPPING="$server.jafner.net=$server:25565"
     #echo $MAPPING
     if [ $server != "router" ]
-    then MAPPINGS="${MAPPINGS}${MAPPINGS:+,}$server.janfer.net=$server:25565"
+    then MAPPINGS="${MAPPINGS}${MAPPINGS:+,}$server.jafner.net=$server:25565"
     fi
 done
 
