@@ -20,8 +20,8 @@ A client can be manually configured to request DNS resolution from the router, w
 DNS requests to the PiHole will be checked against the [configured adlists](https://pihole.jafner.net/groups-adlists.php). If matched, the request will be blocked. If a user is attempting to access a website that is blocked, the request should quickly resolve to a Domain Not Found error. It will look like this:
 
 
-[Chrome](/docs/img/pihole_domain_blocked_chrome.png)
-[Firefox](/docs/img/pihole_domain_blocked_firefox.png)
+![Chrome](/docs/img/pihole_domain_blocked_chrome.png)
+![Firefox](/docs/img/pihole_domain_blocked_firefox.png)
 
 If the request does not match any adlists, it will be passed upstream to Google `8.8.8.8` (or backup `8.8.4.4`). 
 Presently, the PiHole does not cache any requests. 
