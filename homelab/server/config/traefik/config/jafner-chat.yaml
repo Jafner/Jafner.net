@@ -4,8 +4,6 @@ http:
       rule: "Host(`jafner.chat`) || (Host(`*.jafner.chat`)" 
       entryPoints: "websecure"
       service: "jafner-chat@file"
-      tls:
-        certResolver: "lets-encrypt"
 
   services:
     jafner-chat:
