@@ -1,7 +1,7 @@
 http:
   routers:
     jafner-chat:
-      rule: "Host(`jafner.chat`) || (Host(`*.jafner.chat`)" 
+      rule: "Host(`jafner.chat`) || Host(`*.jafner.chat`)" 
       entryPoints: "websecure"
       service: "jafner-chat@file"
 
