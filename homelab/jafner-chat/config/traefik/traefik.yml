@@ -1,0 +1,32 @@
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: :443
+
+metrics:
+  prometheus: {}
+
+certificatesResolvers:
+  lets-encrypt:
+    acme:
+      email: jafner425@gmail.com
+      storage: acme.json
+      tlsChallenge: {}
+
+api: 
+  insecure: true
+  dashboard: true
+
+providers:
+  docker:
+    watch: true
+    network: web
+  file:
+    directory: /config
+
