@@ -66,6 +66,8 @@ services:
     labels:
       - traefik.http.routers.ombi.rule=Host(`ombi.jafner.net`)
       - traefik.http.routers.ombi.tls.certresolver=lets-encrypt
+      - traefik.http.routers.ombi.tls.options=tls12@file
+      - traefik.http.routers.ombi.middlewares=securityheaders@file
       - traefik.http.services.ombi.loadbalancer.server.port=3579   
     
 networks:

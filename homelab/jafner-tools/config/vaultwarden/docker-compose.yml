@@ -13,6 +13,8 @@ services:
     labels:
       - traefik.http.routers.vaultwarden.rule=Host(`bitwarden.jafner.tools`)
       - traefik.http.routers.vaultwarden.tls.certresolver=lets-encrypt
+      - traefik.http.routers.vaultwarden.tls.options=tls12@file
+      - traefik.http.routers.vaultwarden.middlewares=securityheaders@file
 networks:
   web:
     external: true

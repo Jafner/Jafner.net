@@ -14,7 +14,8 @@ services:
     labels:
       - traefik.http.routers.joplin.rule=Host(`joplin.jafner.tools`)
       - traefik.http.routers.joplin.tls.certresolver=lets-encrypt
-      #- traefik.http.middlewares.joplin.headers.customrequestheaders.X-Forwarded-Proto = http
+      - traefik.http.routers.joplin.tls.options=tls12@file
+      - traefik.http.routers.joplin.middlewares=securityheaders@file
       - traefik.http.services.joplin.loadbalancer.server.port=22300
       - traefik.http.services.joplin.loadbalancer.passhostheader=true
   joplin_db:

@@ -14,6 +14,8 @@ services:
     labels:
       - traefik.http.routers.traccar.rule=Host(`traccar.jafner.tools`)
       - traefik.http.routers.traccar.tls.certresolver=lets-encrypt
+      - traefik.http.routers.traccar.tls.options=tls12@file
+      - traefik.http.routers.traccar.middlewares=securityheaders@file
       - traefik.http.services.traccar.loadbalancer.server.port=8082
     networks:
       - web

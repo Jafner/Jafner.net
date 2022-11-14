@@ -16,6 +16,8 @@ services:
     labels:
       - traefik.http.routers.librespeed.rule=Host(`speedtest.jafner.tools`)
       - traefik.http.routers.librespeed.tls.certresolver=lets-encrypt
+      - traefik.http.routers.librespeed.tls.options=tls12@file
+      - traefik.http.routers.librespeed.middlewares=securityheaders@file
 
 networks:
   web:
