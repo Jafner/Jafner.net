@@ -21,6 +21,7 @@ services:
     labels:
       - traefik.http.routers.homer.rule=Host(`home.jafner.net`) || Host(`jafner.net`) || Host(`www.jafner.net`)
       - traefik.http.routers.homer.tls.certresolver=lets-encrypt
+      - traefik.http.routers.homer.middlewares=securityheaders@file
 
 networks:
   web:
