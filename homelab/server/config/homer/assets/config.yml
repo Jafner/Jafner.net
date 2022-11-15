@@ -86,6 +86,11 @@ services:
         subtitle: "Simple, private file sharing"
         url: "https://send.jafner.net"
 
+      - name: "Fireshare"
+        logo: assets/icons/fireshare.png
+        subtitle: "Simple platform for sharing video clips"
+        url: "https://clips.jafner.net"
+
       - name: "Grafana"
         logo: assets/icons/grafana-1200.png
         subtitle: "Metrics visualization tool"
