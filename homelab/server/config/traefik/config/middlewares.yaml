@@ -52,7 +52,7 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - X-Forwarded-User
-    nextcloud:
+    nextcloud-headers:
       headers:
         accessControlMaxAge: 100
         sslRedirect: true
@@ -71,6 +71,7 @@ http:
         customResponseHeaders:
           X-Robots-Tag: "none"
           server: ""
+    nextcloud-redirect:
       redirectRegex:
         permanent: true
         regex: "https://(.*)/.well-known/(card|cal)dav"
