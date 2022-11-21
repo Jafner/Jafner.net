@@ -52,7 +52,7 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - X-Forwarded-User
-    nextcloud-middlewares-secure-headers:
+    nextcloud:
       headers:
         accessControlMaxAge: 100
         sslRedirect: true
