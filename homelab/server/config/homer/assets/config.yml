@@ -71,6 +71,11 @@ services:
         logo: assets/icons/gitlab.png
         subtitle: "Fully-featured, self-hosted Git server"
         url: "https://gitlab.jafner.net"
+      
+      - name: "Nextcloud"
+        logo: assets/icons/nextcloud.png
+        subtitle: "Cloud collaboration platform"
+        url: "https://nextcloud.jafner.net"
 
       - name: "Plex"
         logo: assets/icons/plex-580.png
