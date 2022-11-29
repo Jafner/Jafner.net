@@ -69,7 +69,9 @@ Creating a slow-mo clip is a two-step process. This assumes your input is encode
 
 Note that these slow-mo files will have no audio.
 
-If you need audio, or just more information, see the [ffmpeg docs](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video)
+If you need audio, or just more information, see the [ffmpeg docs](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video).  
+
+For documentation on interpolation settings, see [ffmpeg.org](http://ffmpeg.org/ffmpeg-filters.html#minterpolate)
 
 # Transcode Profiles
 ## Original [40.3 Mb/s]
