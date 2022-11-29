@@ -65,7 +65,7 @@ Creating a slow-mo clip is a two-step process. This assumes your input is encode
 
 1. Copy the video to a raw h264 bitstream: `ffmpeg -i "$input" -map 0:v -c:v copy -bsf:v h264_mp4toannexb 'raw.h264'`
 2. Generate new timestamps for each frame with `genpts` (generate presentation timestamps): `ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy -movflags faststart "$output"`. The `-r 30` flag sets the new framerate to 30 frames per second.  
-3. Optionally, interpolate motion for the newly slowed video: `ffmpeg -i "$input" -filter:v "minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=60'" "$output"`
+3. Optionally, interpolate motion for the newly slowed video: `ffmpeg -i "$input" -filter:v "minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=60'" "$output"`. This step runs very slowly. Around 2 fps interpolating from 30 to 60 fps on a Ryzen 7 3700X. This performance issues is [well](https://stackoverflow.com/questions/42385502/ffmpeg-motion-interpolation-alternatives-or-speedup) [documented](http://ffmpeg.org/pipermail/ffmpeg-user/2021-January/051603.html). It is trivial to parallelize processing of multiple clips, as they use little CPU for each process.
 
 Note that these slow-mo files will have no audio.
 
