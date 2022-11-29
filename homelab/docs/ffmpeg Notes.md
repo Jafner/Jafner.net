@@ -5,6 +5,7 @@
 - [Get Test Image with ffmpeg](#get-test-image-with-ffmpeg)
 - [Batch-ify ffmpeg Command](#batch-ify-ffmpeg-command)
 - [Add Metadata to File](#add-metadata-to-file)
+- [Create Slow-mo](#create-slow-mo)
 - [Transcode Profiles](#transcode-profiles)
   - [Original \[40.3 Mb/s\]](#original-403-mbs)
     - [Mediainfo](#mediainfo)
@@ -59,6 +60,16 @@ This comment flag is visible in Windows file details.
 
 More information: [corbpie.com](https://write.corbpie.com/adding-metadata-to-a-video-or-audio-file-with-ffmpeg/).
 
+# Create Slow-mo
+Creating a slow-mo clip is a two-step process. This assumes your input is encoded with h264. 
+
+1. Copy the video to a raw h264 bitstream: `ffmpeg -i "$input" -map 0:v -c:v copy -bsf:v h264_mp4toannexb 'raw.h264'`
+2. Generate new timestamps for each frame with `genpts` (generate presentation timestamps): `ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy -movflags faststart "$output"`. The `-r 30` flag sets the new framerate to 30 frames per second.  
+3. Optionally, interpolate motion for the newly slowed video: `ffmpeg -i "$input" -filter:v "minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=60'" "$output"`
+
+Note that these slow-mo files will have no audio.
+
+If you need audio, or just more information, see the [ffmpeg docs](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video)
 
 # Transcode Profiles
 ## Original [40.3 Mb/s]
