@@ -4,26 +4,27 @@
 - [Get Video Info with `mediainfo`](#get-video-info-with-mediainfo)
 - [Get Test Image with ffmpeg](#get-test-image-with-ffmpeg)
 - [Batch-ify ffmpeg Command](#batch-ify-ffmpeg-command)
+- [Add Metadata to File](#add-metadata-to-file)
 - [Transcode Profiles](#transcode-profiles)
-  - [Original [40.3 Mb/s]](#original-403-mbs)
+  - [Original \[40.3 Mb/s\]](#original-403-mbs)
     - [Mediainfo](#mediainfo)
     - [Test Image](#test-image)
-  - [CRF 21 [19.9 Mb/s]](#crf-21-199-mbs)
+  - [CRF 21 \[19.9 Mb/s\]](#crf-21-199-mbs)
     - [Mediainfo](#mediainfo-1)
     - [Test Image](#test-image-1)
-  - [CRF 27 [10.3 Mb/s]](#crf-27-103-mbs)
+  - [CRF 27 \[10.3 Mb/s\]](#crf-27-103-mbs)
     - [Mediainfo](#mediainfo-2)
     - [Test Image](#test-image-2)
-  - [1080p CRF 21 [11.9 Mb/s]](#1080p-crf-21-119-mbs)
+  - [1080p CRF 21 \[11.9 Mb/s\]](#1080p-crf-21-119-mbs)
     - [Mediainfo](#mediainfo-3)
     - [Test Image](#test-image-3)
-  - [1080p CRF 27 [6,232 kb/s]](#1080p-crf-27-6232-kbs)
+  - [1080p CRF 27 \[6,232 kb/s\]](#1080p-crf-27-6232-kbs)
     - [Mediainfo](#mediainfo-4)
     - [Test Image](#test-image-4)
-  - [720p CRF 21 [6,314 kb/s]](#720p-crf-21-6314-kbs)
+  - [720p CRF 21 \[6,314 kb/s\]](#720p-crf-21-6314-kbs)
     - [Mediainfo](#mediainfo-5)
     - [Test Image](#test-image-5)
-  - [720p CRF 27 [3,305 kb/s]](#720p-crf-27-3305-kbs)
+  - [720p CRF 27 \[3,305 kb/s\]](#720p-crf-27-3305-kbs)
     - [Mediainfo](#mediainfo-6)
     - [Test Image](#test-image-6)
 - [Test a New Profile](#test-a-new-profile)
@@ -32,7 +33,7 @@
 FFmpeg is a free and open-source software project consisting of a suite of libraries and programs for handling video, audio, and other multimedia files and streams. At its core is the command-line ffmpeg tool itself, designed for processing of video and audio files. [Wikipedia](https://en.wikipedia.org/wiki/FFmpeg). [ffmpeg.org](https://ffmpeg.org/).
 
 # Get Video Info with `mediainfo`
-MediaInfo is a free, cross-platform and open-source program that displays technical information about media files, as well as tag information for many audio and video files. [Wikipedia](https://en.wikipedia.org/wiki/MediaInfo).
+MediaInfo is a free, cross-platform and open-source program that displays technical information about media files, as well as tag information for many audio and video files. [Wikipedia](https://en.wikipedia.org/wiki/MediaInfo).  
 
 To install on Debian, run `sudo apt install mediainfo`. 
 To get comprehensive media information about a file, simply use `mediainfo <file>`. 
@@ -48,6 +49,16 @@ do
     ffmpeg -i "$video" <do stuff> "Transcodes/${video%.*}.mp4"
 done
 ```
+
+# Add Metadata to File
+ffmpeg can add metadata to files using the `-metadata` flag. In the profiles described below, this is used to add a comment describing the profile used to create the file (e.g. `-metadata comment="x264 720p CRF 27"`).   
+
+This comment flag is visible in Windows file details.  
+
+![File details](img/ffmpeg/File%20Details.png)
+
+More information: [corbpie.com](https://write.corbpie.com/adding-metadata-to-a-video-or-audio-file-with-ffmpeg/).
+
 
 # Transcode Profiles
 ## Original [40.3 Mb/s]
@@ -137,7 +148,7 @@ Alternate group                          : 1
 ![Test Image - Original](img/ffmpeg/original.png)
 
 ## CRF 21 [19.9 Mb/s]
-`ffmpeg -i "$input" -movflags +faststart -c:v libx264 -preset slower -crf 21 "$output"`
+`ffmpeg -i "$input" -metadata comment="x264 CRF 21" -movflags +faststart -c:v libx264 -preset slower -crf 21 "$output"`
 
 ### Mediainfo
 ```
@@ -201,7 +212,7 @@ Alternate group                          : 1
 ![Test Image - CRF 21](img/ffmpeg/CRF%2021.png)
 
 ## CRF 27 [10.3 Mb/s]
-`ffmpeg -i "$input" -movflags +faststart -c:v libx264 -preset slower -crf 27 "$output"`
+`ffmpeg -i "$input" -metadata comment="x264 CRF 27" -movflags +faststart -c:v libx264 -preset slower -crf 27 "$output"`
 
 ### Mediainfo 
 ```
@@ -272,7 +283,7 @@ mdhd_Duration                            : 972629
 ![Test Image - CRF 27](img/ffmpeg/CRF%2027.png)
 
 ## 1080p CRF 21 [11.9 Mb/s]
-`ffmpeg -i "$input" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 21 "$output"`
+`ffmpeg -i "$input" -metadata comment="x264 1080p CRF 21" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 21 "$output"`
 
 ### Mediainfo
 ```
@@ -336,7 +347,7 @@ Alternate group                          : 1
 ![Test Image - 1080p CRF 21](img/ffmpeg/1080p%20CRF%2021.png)
 
 ## 1080p CRF 27 [6,232 kb/s]
-`ffmpeg -i "$input" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 27 "$output"`
+`ffmpeg -i "$input" -metadata comment="x264 1080p CRF 27" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 27 "$output"`
 Our test file described in the [Get Video Info](#get-video-info-with-mediainfo) section was compressed from 40.5 Mbps (over 16m12s) to 
 
 ### Mediainfo
@@ -402,7 +413,7 @@ Alternate group                          : 1
 
 
 ## 720p CRF 21 [6,314 kb/s]
-`ffmpeg -i "$input" -movflags +faststart -vf scale=1280:720 -c:v libx264 -preset slower -crf 21 "$output"`
+`ffmpeg -i "$input" -metadata comment="x264 720p CRF 21" -movflags +faststart -vf scale=1280:720 -c:v libx264 -preset slower -crf 21 "$output"`
 
 ### Mediainfo
 ```
@@ -473,7 +484,7 @@ mdhd_Duration                            : 972629
 ![Test Image - 720p CRF 21](img/ffmpeg/720p%20CRF%2021.png)
 
 ## 720p CRF 27 [3,305 kb/s]
-`ffmpeg -i "$input" -movflags +faststart -vf scale=1280:720 -c:v libx264 -preset slower -crf 27 "$output"`
+`ffmpeg -i "$input" -metadata comment="x264 720p CRF 27" -movflags +faststart -vf scale=1280:720 -c:v libx264 -preset slower -crf 27 "$output"`
 
 ### Mediainfo
 ```
