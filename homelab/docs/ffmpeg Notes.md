@@ -42,6 +42,8 @@ To get comprehensive media information about a file, simply use `mediainfo <file
 # Get Test Image with ffmpeg
 To get the test image, we extract frame of timestamp 15:20.01 from the test video with `ffmpeg -ss 00:15:20.01 -i "$input" -frames:v 1 "$output"`. 
 
+In other situations, we can extract a frame at a specific frame number with `ffmpeg -i "$input" -vf "select=eq(n\,1201)" -vframes 1 "$output"`. Where `1201` indicates we want the 1202nd frame.
+
 # Batch-ify ffmpeg Command
 For a given `ffmpeg -i $video <do stuff>`, apply the command to all `.mp4` videos in a directory and send all outputs to `./Transcodes/` with the following structure:
 ```bash
