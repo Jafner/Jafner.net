@@ -2,6 +2,8 @@
 - [Table of Contents](#table-of-contents)
 - [About ffmpeg](#about-ffmpeg)
 - [Get Video Info with `mediainfo`](#get-video-info-with-mediainfo)
+- [Remux MKV to MP4 with ffmpeg](#remux-mkv-to-mp4-with-ffmpeg)
+  - [Adding ffmpeg Scripts to Windows SendTo Menu](#adding-ffmpeg-scripts-to-windows-sendto-menu)
 - [Get Test Image with ffmpeg](#get-test-image-with-ffmpeg)
 - [Batch-ify ffmpeg Command](#batch-ify-ffmpeg-command)
 - [Add Metadata to File](#add-metadata-to-file)
@@ -39,6 +41,19 @@ MediaInfo is a free, cross-platform and open-source program that displays techni
 To install on Debian, run `sudo apt install mediainfo`. 
 To get comprehensive media information about a file, simply use `mediainfo <file>`. 
 
+# Remux MKV to MP4 with ffmpeg
+To remux an mkv file to mp4 with ffmpeg, use `ffmpeg -i "$input" -codec copy "$output"`. Note that ffmpeg pays attention to the file extensions, so `$input` should have a `.mkv` extension, and `$output` should have a `.mp4` extension.
+
+## Adding ffmpeg Scripts to Windows SendTo Menu
+Inspired by this [Tek Syndicate video](https://www.youtube.com/watch?v=BrbfQqjHE68), we can add arbitrary ffmpeg scripts to Windows' built-in send-to menu. (Note that while it might be prettier to add a new expandable right-click menu, this is [much less trivial](https://superuser.com/questions/444726/windows-how-to-add-batch-script-action-to-right-click-menu/444787#444787)).  
+
+But rather than using Windows Batch Scripting, we're going to use PowerShell, a competent language. This assumes you are using Windows 10.
+
+1. Write the PowerShell script. Example scripts are provided in [scripts/](/docs/attach/scripts/ffmpeg/). 
+2. Place the PowerShell script somewhere safe. I place my scripts next to the ffmpeg binary `C:\Users\$user\Programs\ffmpeg\bin\my_script.ps1`.
+3. Add a shortcut for the script to Windows' SendTo directory: `Windows + R` to open the Run dialog, then enter `shell:SendTo` and hit enter. In this directory, create a new shortcut. For the "location", enter the location of your PowerShell executable (for me: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`) and name as you want it to appear in the right-click menu.
+4. Fix the shortcut. Right-click your new shortcut, then click "Properties". Change the "Target" to call PowerShell with the `-File` flag with the path of your script in quotes (e.g. Target: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File "C:\Users\jafne\Programs\ffmpeg\bin\remux.ps1"`). For the example scripts, "Start in" is set to the location of the ffmpeg binary, but that should not be required if ffmpeg is added to your system path. However, if you fail to supply a proper output file path, the working directory will be used. The working directory defaults to the "Start in" directory.
+
 # Get Test Image with ffmpeg
 To get the test image, we extract frame of timestamp 15:20.01 from the test video with `ffmpeg -ss 00:15:20.01 -i "$input" -frames:v 1 "$output"`. 
 
@@ -66,7 +81,7 @@ More information: [corbpie.com](https://write.corbpie.com/adding-metadata-to-a-v
 Creating a slow-mo clip is a two-step process. This assumes your input is encoded with h264. 
 
 1. Copy the video to a raw h264 bitstream: `ffmpeg -i "$input" -map 0:v -c:v copy -bsf:v h264_mp4toannexb 'raw.h264'`
-2. Generate new timestamps for each frame with `genpts` (generate presentation timestamps): `ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy -movflags faststart "$output"`. The `-r 30` flag sets the new framerate to 30 frames per second.  
+2. Generate new timestamps for each frame with `genpts` (generate presentation timestamps): `ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy -movflags faststart "$output"`. The `-r 30` flag sets the new framerate to 30 frames per second, which results in a 0.2x playback rate for a 150 fps input video. Alternatively, use `-r 60` or omit the `-r` flag to get 60 fps, which results in a 0.4x playback rate for a 150 fps input video.
 3. Optionally, interpolate motion for the newly slowed video: `ffmpeg -i "$input" -filter:v "minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=60'" "$output"`. This step runs very slowly. Around 2 fps interpolating from 30 to 60 fps on a Ryzen 7 3700X. This performance issues is [well](https://stackoverflow.com/questions/42385502/ffmpeg-motion-interpolation-alternatives-or-speedup) [documented](http://ffmpeg.org/pipermail/ffmpeg-user/2021-January/051603.html). It is trivial to parallelize processing of multiple clips, as they use little CPU for each process.
 
 Note that these slow-mo files will have no audio.
