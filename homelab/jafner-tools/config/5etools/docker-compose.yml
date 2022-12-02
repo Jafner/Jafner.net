@@ -7,8 +7,7 @@ services:
     volumes:
       - $DOCKER_DATA/htdocs:/usr/local/apache2/htdocs
     environment:
-      # using defaults
-      - IMG=false
+      - SOURCE=GITHUB
     networks:
       - web
     labels:
