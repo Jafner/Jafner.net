@@ -13,6 +13,7 @@ services:
     labels:
       - traefik.http.routers.vandam.rule=Host(`3d.jafner.net`)
       - traefik.http.routers.vandam.tls.certresolver=lets-encrypt
+      - traefik.http.routers.vandam.middlewares=traefik-forward-auth@file
     depends_on:
       - db
       - redis
