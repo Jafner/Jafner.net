@@ -6,12 +6,13 @@ services:
     container_name: vandam_vandam
     env_file:
         - vandam_secrets.env
-    ports:
-      - 3214:3214
     volumes:
       - ${STL_DIR}:/libraries
-    environment:
-      DATABASE_URL: postgresql://van_dam:password@db/van_dam?pool=5
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.vandam.rule=Host(`3d.jafner.net`)
+      - traefik.http.routers.vandam.tls.certresolver=lets-encrypt
     depends_on:
       - db
       - redis
@@ -30,3 +31,7 @@ services:
 
 volumes:
   db_data:
+
+networks:
+  web:
+    external: true
