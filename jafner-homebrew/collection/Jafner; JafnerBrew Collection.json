@@ -634,6 +634,28 @@
 				"On your turn when you are below half your hit point maximum, you can use an action to expend any number of your hit dice. For each hit die you roll, you regain a number of hit points equal to the roll + your Constitution modifier.",
 				"Once you use this feature, you must finish a short or long rest before you can use it again."
 			]
+		},
+		{
+			"name": "Bolt Slinger",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"level": {
+						"level": 5
+					}
+				}
+			],
+			"entries": [
+				"Thanks to extensive practice with the crossbow, you gain the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"Increase your Dexterity score by 1, to a maximum of 20.",
+						"You ignore the loading quality of crossbows with which you are proficient.",
+						"You can use your action on your turn to make two ranged attacks with a crossbow."
+					]
+				}
+			]
 		}
 	],
 	"variantrule": [
@@ -688,6 +710,63 @@
 								"Mighty villains and special nonplayer characters are common exceptions; the DM might have them fall unconscious and follow the same rules as player characters."
 							]
 						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Revised Inspiration",
+			"source": "JB",
+			"ruleType": "V",
+			"entries": [
+				"The following text replaces the text of the {@book \"Inspiration\"|PHB|4|Inspiration} section of the PHB.",
+				{
+					"type": "entries",
+					"name": "Revised Inspiration",
+					"entries": [
+						"Inspiration is a rule the Dungeon Master can use to reward you for playing your character in a way that's true to his or her personality traits, ideal, bond, and flaw. By using inspiration, you can draw on your personality trait of compassion for the downtrodden to give you an edge in negotiating with the Beggar Prince. Or inspiration can let you call on your bond to the defense of your home village to push past the effect of a spell that has been laid on you.",
+						{
+							"type": "entries",
+							"name": "Gaining Inspiration",
+							"entries": [
+								"You can gain inspiration by doing any of the following things:",
+								{
+									"type": "list",
+									"items": [
+										"Recap the previous session or sessions from your notes.",
+										"Take notes on the events of the session.",
+										"Roleplay your character in a compelling moment."
+									]
+								},
+								"You can only earn inspiration once per game session. You either have inspiration or you don't—you can't stockpile multiple \"inspirations\" for later use."
+
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Using Inspiration",
+							"entries": [
+								"Whenever you make an attack roll, an ability check, or a saving throw, you can expend your inspiration to roll an additional d20. You can choose to expend your inspiration after you roll the die, but before the outcome is determined. You choose which of the d20s is used for the attack roll, ability check, or saving throw.",
+								"You can also expend your inspiration when an attack roll is made agains tyou. Roll a d20, and then choose whether the attack uses the attacker's roll or yours."
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Revised Falling",
+			"source": "JB",
+			"ruleType": "V",
+			"entries": [
+				"The following text replaces the text of the {@book \"Falling\"|PHB|8|Falling} section of the PHB.",
+				{
+					"type": "entries",
+					"name": "Falling",
+					"entries": [
+						"When you fall from a great height, you instantly descend up to 500 feet. Every turn after the first, you descend up to 1,000 feet at the end of your turn. During your turn, any distance you fall up to 500 feet does not count against your total movement that turn.",
+						"At the end of a fall, a creature takes 1d6 bludgeoning damage for every 10 feet it fell, to a maximum of 150d6. The creature lands prone.",
+						"A creature with proficiency in the Acrobatics skill can attempt a Dexterity (Acrobatics) check to halve the damage and not fall prone. The DC is equal to 10 + the number of d6 rolled."
 					]
 				}
 			]
