@@ -53,7 +53,7 @@ http:
         authResponseHeaders:
           - X-Forwarded-User
     traefik-forward-auth-privileged:
-      forwardauth-privileged:
+      forwardauth:
         address: http://forwardauth-privileged:4181
         trustForwardHeader: true
         authResponseHeaders:
