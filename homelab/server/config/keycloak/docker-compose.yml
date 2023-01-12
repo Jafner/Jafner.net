@@ -74,7 +74,7 @@ services:
       - forwardauth-privileged_secrets.env
     labels:
       - "traefik.enable=false"
-      - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauthp`)"
+      - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
 
 networks:
