@@ -52,6 +52,12 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - X-Forwarded-User
+    traefik-forward-auth-privileged:
+      forwardauth-privileged:
+        address: http://forwardauth-privileged:4181
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-Forwarded-User
     nextcloud-headers:
       headers:
         accessControlMaxAge: 100

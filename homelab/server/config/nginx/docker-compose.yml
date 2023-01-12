@@ -8,7 +8,7 @@ services:
     labels:
       - traefik.http.routers.nginx.rule=Host(`test.jafner.chat`)
       - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
-      #- traefik.http.routers.nginx.middlewares=traefik-forward-auth@file
+      - traefik.http.routers.nginx.middlewares=traefik-forward-auth-privileged@file
 
 networks:
   web:

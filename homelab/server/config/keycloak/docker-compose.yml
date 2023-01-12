@@ -50,15 +50,32 @@ services:
       - forwardauth_secrets.env
     labels:
       - "traefik.enable=false"
-      #- "traefik.docker.network=web"
-      #- "traefik.http.services.forwardauth.loadbalancer.server.port=4181"
-      #- "traefik.http.routers.forwardauth.entrypoints=websecure"
       - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
-      #- "traefik.http.routers.forwardauth.middlewares=traefik-forward-auth"
       - "traefik.http.routers.forwardauth.tls.certresolver=lets-encrypt"
-      #- "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://forwardauth:4181"
-      #- "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
-      #- "traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader=true"
+
+  forwardauth-privileged:
+    image: mesosphere/traefik-forward-auth:3.1.0
+    container_name: keycloak_forwardauth-privileged
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    networks:
+      web:
+        aliases:
+          - forwardauth
+    restart: "no"
+    env_file:
+      - forwardauth.env
+      - forwardauth_secrets.env
+    labels:
+      - "traefik.enable=false"
+      - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
+      - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
 
 networks:
   web:
