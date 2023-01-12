@@ -67,11 +67,11 @@ services:
     networks:
       web:
         aliases:
-          - forwardauth
+          - forwardauth-privileged
     restart: "no"
     env_file:
-      - forwardauth.env
-      - forwardauth_secrets.env
+      - forwardauth-privileged.env
+      - forwardauth-privileged_secrets.env
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauthp`)"
