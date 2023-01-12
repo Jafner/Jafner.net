@@ -111,6 +111,10 @@ services:
         subtitle: "My collection of Dungeons & Dragons books"
         url: "https://rpg.calibre.jafner.net"
 
+      - name: "VanDAM"
+        subtitle: "A digital asset manager for 3D models."
+        url: "https://3d.jafner.net"
+
   - name: "Jafner.tools"
     icon: "fas fa-cloud"
     items:
