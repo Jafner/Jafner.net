@@ -27,7 +27,7 @@ services:
     labels:
       - traefik.http.routers.stash.rule=Host(`stash.jafner.net`)
       - traefik.http.routers.stash.tls.certresolver=lets-encrypt
-      - traefik.http.routers.stash.middlewares=traefik-forward-auth@file
+      - traefik.http.routers.stash.middlewares=traefik-forward-auth-privileged@file
 
 networks:
   web:

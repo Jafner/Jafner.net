@@ -21,7 +21,7 @@ services:
     labels:
       - traefik.http.routers.jdl.rule=Host(`jdl.jafner.net`)
       - traefik.http.routers.jdl.tls.certresolver=lets-encrypt
-      - traefik.http.routers.jdl.middlewares=traefik-forward-auth@file
+      - traefik.http.routers.jdl.middlewares=traefik-forward-auth-privileged@file
       - traefik.http.services.jdl.loadbalancer.server.port=5800
 
 networks:

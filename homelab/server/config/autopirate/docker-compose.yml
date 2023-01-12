@@ -23,7 +23,7 @@ services:
       - traefik.http.routers.radarr.rule=Host(`radarr.jafner.net`)
       - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
       - traefik.http.services.radarr.loadbalancer.server.port=7878
-      - traefik.http.routers.radarr.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.radarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   sonarr:
     image: linuxserver/sonarr
@@ -48,7 +48,7 @@ services:
       - traefik.http.routers.sonarr.rule=Host(`sonarr.jafner.net`)
       - traefik.http.routers.sonarr.tls.certresolver=lets-encrypt
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
-      - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   lidarr:
     image: linuxserver/lidarr
@@ -73,7 +73,7 @@ services:
       - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
       - traefik.http.routers.lidarr.tls.certresolver=lets-encrypt
       - trarfik.http.services.lidarr.loadbalancer.server.port=8686
-      - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   nzbhydra2:
     image: linuxserver/nzbhydra2
@@ -97,7 +97,7 @@ services:
       - traefik.http.routers.nzbhydra2.rule=Host(`nzbhydra.jafner.net`)
       - traefik.http.routers.nzbhydra2.tls.certresolver=lets-encrypt
       - traefik.http.services.nzbhydra2.loadbalancer.server.port=5076
-      - traefik.http.routers.nzbhydra2.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.nzbhydra2.middlewares=lan-only@file,traefik-forward-auth-privileged@file
   
   sabnzbd:
     image: linuxserver/sabnzbd
@@ -125,7 +125,7 @@ services:
       - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.jafner.net`)
       - traefik.http.routers.sabnzbd.tls.certresolver=lets-encrypt
       - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
-      - traefik.http.routers.sabnzbd.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.sabnzbd.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   tdarr:
     image: haveagitgat/tdarr:latest
@@ -149,7 +149,7 @@ services:
     labels:
       - traefik.http.routers.tdarr.rule=Host(`tdarr.jafner.net`)
       - traefik.http.routers.tdarr.tls.certresolver=lets-encrypt
-      - traefik.http.routers.tdarr.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.tdarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
       - traefik.http.services.tdarr.loadbalancer.server.port=8265
     env_file:
       - autopirate.env
@@ -218,7 +218,7 @@ services:
       - traefik.http.routers.jackett.rule=Host(`jackett.jafner.net`)
       - traefik.http.routers.jackett.tls.certresolver=lets-encrypt
       - traefik.http.services.jackett.loadbalancer.server.port=9117
-      - traefik.http.routers.jackett.middlewares=lan-only@file,traefik-forward-auth@file
+      - traefik.http.routers.jackett.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
 networks:
   tdarr:
