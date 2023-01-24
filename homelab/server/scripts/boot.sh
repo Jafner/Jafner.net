@@ -39,3 +39,4 @@ echo "======= List all running containers ======="
 wait 10
 docker container restart monitoring_exporter-plex
 docker container restart keycloak_forwardauth
+docker container restart keycloak_forwardauth-privileged
