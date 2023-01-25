@@ -56,6 +56,7 @@ services:
   forwardauth-privileged:
     image: mesosphere/traefik-forward-auth:3.1.0
     container_name: keycloak_forwardauth-privileged
+    command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
     logging:
       driver: loki
       options:
