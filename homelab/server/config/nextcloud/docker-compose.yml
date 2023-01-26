@@ -13,6 +13,8 @@ services:
         keep-file: "true"
     env_file:
       - nextcloud.env
+    depends_on:
+      - mariadb
     labels:
       - traefik.http.routers.nextcloud.rule=Host(`nextcloud.jafner.net`)
       - traefik.http.routers.nextcloud.tls.certresolver=lets-encrypt
@@ -21,10 +23,23 @@ services:
       #- traefik.http.services.nextcloud.loadbalancer.server.port=443
     networks:
       - web
+      - nextcloud
     volumes:
       - $DOCKER_DATA/config:/config
       - $DOCKER_DATA/data:/data
 
+  mariadb:
+    image: lscr.io/linuxserver/mariadb
+    container_name: nextcloud_mariadb
+    networks:
+      - nextcloud
+    env_file:
+      - mariadb.env
+      - mariadb_secrets.env
+    volumes:
+      - $DOCKER_DATA/mariadb:/config
+
 networks:
   web:
     external: true    
+  nextcloud:
