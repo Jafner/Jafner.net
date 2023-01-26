@@ -14,8 +14,9 @@ services:
         keep-file: "true"
     restart: "no"
     networks:
-      - web
-      - monitoring
+      web:
+        ipv4_address: 172.18.0.31
+      monitoring: 
     ports:
       - 80:80
       - 443:443
