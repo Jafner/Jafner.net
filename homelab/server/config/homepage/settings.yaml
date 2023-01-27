@@ -3,13 +3,3 @@
 # https://gethomepage.dev/en/configs/settings
 
 title: Jafner.net
-layout:
-  Social:
-    style: row
-    columns: 5
-  Jafner.net:
-    style: row
-    columns: 4
-  Jafner.tools:
-    style: row
-    columns: 3
