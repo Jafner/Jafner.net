@@ -8,3 +8,5 @@ layout:
     style: row
     columns: 4
   Socials:
+    style: row
+    columns: 5
