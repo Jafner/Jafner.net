@@ -11,12 +11,6 @@
     cpu: true
     memory: true
     disk: /
-- resources:
-    label: Storage1
-    disk: /mnt/md0
-- resources:
-    label: Storage2
-    disk: /mnt/data
 
 - search:
     provider: google
