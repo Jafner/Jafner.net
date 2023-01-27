@@ -7,10 +7,15 @@
     text: My name is Joey Hafner and this page links to some of the services I host. Jafner.net is my main server, which uses Docker to run all these things. Jafner.tools is hosted on a Digital Ocean droplet. Check out my socials at the bottom. This lab is always changing, and this homepage is too.
 
 - resources:
+    label: System
     cpu: true
     memory: true
     disk: /
+- resources:
+    label: Storage1
     disk: /mnt/md0
+- resources:
+    label: Storage2
     disk: /mnt/data
 
 - search:
