@@ -9,6 +9,9 @@
 - resources:
     cpu: true
     memory: true
+    disk: /
+    disk: /mnt/md0
+    disk: /mnt/data
 
 - search:
     provider: google
