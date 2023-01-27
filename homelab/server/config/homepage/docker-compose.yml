@@ -17,7 +17,7 @@ services:
       - web
     volumes:
       - $DOCKER_DATA/logs:/app/config/logs
-      - ./icons/:/icons
+      - ./icons/:/app/public/icons
       - ./bookmarks.yaml:/app/config/bookmarks.yaml
       - ./docker.yaml:/app/config/docker.yaml
       - ./kubernetes.yaml:/app/config/kubernetes.yaml
