@@ -2,9 +2,9 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/services
 
-- greeting:
-    text_size: x1
-    text: My name is Joey Hafner and this page links to some of the services I host. Jafner.net is my main server, which uses Docker to run all these things. Jafner.tools is hosted on a Digital Ocean droplet. And Jafner.dev is for experiments. Check out my socials on the top bar. This lab is always changing, and this homepage is too.
+#- greeting:
+#    text_size: x1
+#    text: My name is Joey Hafner and this page links to some of the services I host. Jafner.net is my main server, which uses Docker to run all these things. Jafner.tools is hosted on a Digital Ocean droplet. And Jafner.dev is for experiments. Check out my socials on the top bar. This lab is always changing, and this homepage is too.
 
 - Jafner.net:
     - Gitlab:
@@ -52,10 +52,6 @@
         href: https://5e.jafner.tools
         description: D&D 5e Complete Reference
         icon: /icons/5et.png
-    - Joplin:
-        href: https://joplin.jafner.tools
-        description: Sync server for the Joplin notes app
-        icon: joplin
     - Bitwarden:
         href: https://bitwarden.jafner.tools
         description: Sync server for the Bitwarden password manager
