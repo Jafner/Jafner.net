@@ -1,0 +1,27 @@
+version: '3'
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage
+    container_name: homepage_homepage
+    logging: 
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    env_file:
+      - homepage.env
+    networks:
+      - web
+    volumes:
+      - $DOCKER_DATA:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.http.routers.homepage.rule=Host(`homepage.jafner.net`)
+      - traefik.http.routers.homepage.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
