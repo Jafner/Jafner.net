@@ -9,10 +9,7 @@
 - resources:
     cpu: true
     memory: true
-    disk: 
-        - /
-        - /mnt/md0
-        - /mnt/data
+    disk: /
 
 - search:
     provider: google
