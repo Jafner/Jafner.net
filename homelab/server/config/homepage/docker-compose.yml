@@ -11,8 +11,6 @@ services:
         loki-retries: "1"
         loki-timeout: "2s"
         keep-file: "true"
-    env_file:
-      - homepage.env
     networks:
       - web
     volumes:
