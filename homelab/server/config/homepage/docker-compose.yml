@@ -3,6 +3,8 @@ services:
   homepage:
     image: ghcr.io/benphelps/homepage
     container_name: homepage_homepage
+    env_file:
+      - homepage_secrets.env
     logging: 
       driver: loki
       options:

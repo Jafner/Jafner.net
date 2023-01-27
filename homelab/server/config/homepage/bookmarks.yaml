@@ -2,17 +2,19 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/bookmarks
 
-- Developer:
+- Socials:
+    - Gitlab:
+      - abbr: GL
+        href: https://gitlab.jafner.net/Jafner
     - Github:
-        - abbr: GH
-          href: https://github.com/
-
-- Social:
+      - abbr: GH
+        href: https://github.com/Jafner
+    - LinkedIn:
+      - abbr: LI
+        href: https://www.linkedin.com/in/joey-hafner-b8977a107/
     - Reddit:
-        - abbr: RE
-          href: https://reddit.com/
-
-- Entertainment:
-    - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
+      - abbr: R
+        href: https://www.reddit.com/user/jafner425/
+    - Email:
+      - abbr: E
+        href: mailto:jafner425@gmail.com

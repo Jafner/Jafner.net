@@ -2,17 +2,45 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/services
 
-- My First Group:
-    - My First Service:
-        href: http://localhost/
-        description: Homepage is awesome
+- Jafner.net:
+    - Gitlab:
+        href: https://gitlab.jafner.net/
+        description: Fully-featured, self-hosted Git server
+    - Nextcloud:
+        href: https://nextcloud.jafner.net
+        description: Cloud collaboration platform
+    - Plex:
+        href: https://plex.jafner.net
+        description: TV show and movie server
+    - Ombi:
+        href: https://ombi.jafner.net
+        description: Web interface for wishlisting movies and shows to be added to Plex
+    - Send:
+        href: https://send.jafner.net
+        description: Simple, private file sharing
+    - Fireshare:
+        href: https://clips.jafner.net
+        description: Simple platform for sharing video clips
+    - Grafana:
+        href: https://grafana.jafner.net
+        description: Metrics visualization tool
+    - Calibre SFF:
+        href: https://sff.calibre.jafner.net
+        description: A large collection of sci-fi and fantasy books
+    - Calibre RPG:
+        href: https://rpg.calibre.jafner.net
+        description: My collection of Dungeons & Dragons books
+    - VanDAM:
+        href: https://3d.jafner.net
+        description: A digital asset manager for 3D models
 
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
-
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+- Jafner.tools:
+    - 5eTools:
+        href: https://5e.jafner.tools
+        description: D&D 5e Complete Reference
+    - Joplin:
+        href: https://joplin.jafner.tools
+        description: Sync server for the Joplin notes app
+    - Bitwarden:
+        href: https://bitwarden.jafner.tools
+        description: Sync server for the Bitwarden password manager

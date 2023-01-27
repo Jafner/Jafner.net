@@ -5,8 +5,7 @@
 - resources:
     cpu: true
     memory: true
-    disk: /
 
 - search:
-    provider: duckduckgo
+    provider: google
     target: _blank
