@@ -9,3 +9,11 @@
 - search:
     provider: google
     target: _blank
+
+- openmeteo:
+    label: Tacoma
+    latitude: 47.2529
+    longitude: 122.4443
+    timezone: America/Los_Angeles
+    units: imperial
+    cache: 15
