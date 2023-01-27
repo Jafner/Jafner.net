@@ -2,6 +2,14 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/settings
 
-providers:
-  openweathermap: $OPENWEATHERMAP_API
-
+title: Jafner.net
+layout:
+  Social:
+    style: row
+    columns: 5
+  Jafner.net:
+    style: row
+    columns: 4
+  Jafner.tools:
+    style: row
+    columns: 3
