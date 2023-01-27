@@ -2,6 +2,10 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/services
 
+- greeting:
+    text_size: x1
+    text: My name is Joey Hafner and this page links to some of the services I host. Jafner.net is my main server, which uses Docker to run all these things. Jafner.tools is hosted on a Digital Ocean droplet. And Jafner.dev is for experiments. Check out my socials on the top bar. This lab is always changing, and this homepage is too.
+
 - Jafner.net:
     - Gitlab:
         href: https://gitlab.jafner.net/
