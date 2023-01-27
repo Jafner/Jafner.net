@@ -19,7 +19,7 @@
     text_size: x1
     format: 
         timeStyle: short
-        hour12: false
+        hour12: true
 
 - greeting:
     text_size: x1
