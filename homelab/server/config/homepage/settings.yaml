@@ -3,3 +3,7 @@
 # https://gethomepage.dev/en/configs/settings
 
 title: Jafner.net
+layout: 
+  Jafner.net:
+    style: row
+    columns: 4
