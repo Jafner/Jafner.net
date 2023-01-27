@@ -2,19 +2,21 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/bookmarks
 
-- Socials:
+- Dev:
     - Gitlab:
-      - abbr: GL
+      - icon: mdi-gitlab
         href: https://gitlab.jafner.net/Jafner
     - Github:
-      - abbr: GH
+      - icon: mdi-github
         href: https://github.com/Jafner
+- Professional:
     - LinkedIn:
-      - abbr: LI
+      - icon: mdi-linkedin
         href: https://www.linkedin.com/in/joey-hafner-b8977a107/
+- Personal:
     - Reddit:
-      - abbr: R
+      - icon: mdi-reddit
         href: https://www.reddit.com/user/jafner425/
     - Email:
-      - abbr: E
+      - icon: mdi-email
         href: mailto:jafner425@gmail.com
