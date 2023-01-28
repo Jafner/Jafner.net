@@ -139,6 +139,7 @@
     - Hologram.io:
         href: https://dashboard.hologram.io/org/58644/
         description: Management portal for Hologram IoT cellular networking provider
+        icon: /icons/hologramio.png
     - Google Domains:
         href: https://domains.google.com/registrar/
         description: Domain management portal for Google
