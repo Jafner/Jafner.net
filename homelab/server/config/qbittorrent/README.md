@@ -17,3 +17,21 @@ Example: `qbt torrent list --category ggn --format json | jq ' .[].hash' | tr -d
 2. Replace the old announce URL with the new announce URL for each hash. 
 Example: `for hash in $(cat hashes.txt); do qbt torrent tracker edit $hash "https://tracker.gazellegames.net/7667910c8a2b5446890cbd0ad459d5c3/announce" "https://tracker.gazellegames.net/d0dd178494dd6ffcd9842934a13086e0/announce"; done`
 This will take a long time.
+
+## Check for "Unregistered" (Trumped/Deleted) Torrents
+Many private trackers will delete or trump (replace with better quality) torrents. These trackers have no way to directly inform your torrent client that the torrent is no longer valid, but can update the way the tracker responds to announce messages from your client. For many Gazelle-based trackers, this is done by responding with "Unregistered torrent" in the message field, and setting the status to "Not working". Qbittorrent does not provide functionality in the WebUI to quickly and easily find all unregistered torrents, but the API does support the idea.  
+
+User `animosity22` posted a quick python script [on Github](https://github.com/qbittorrent/qBittorrent/issues/11469#issuecomment-553459887) to find, print, and delete all torrents with the 'Unregistered torrent' message from the tracker.  
+
+But that script used hardcoded credentials for host, username, and password. We don't want that if it will be entered into version control. So I had ChatGPT rewrite the script for me to make those user-inputted. It can be found [here](../../scripts/remove_trumped_torrents.py).
+
+### Using the Script
+Prerequisites: 
+- a Python3 environment
+- the `qbittorrent-api` package
+
+Steps:
+1. Get the URL of the Qbittorrent webUI. `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' qbittorrent_qbittorrent`. We'll assume the default port of `8080` for the webUI here.
+2. Get the username and password for the webUI. These should be in a password manager.
+3. Run the script `python3 ~/homelab/server/scripts/remove_trumped_torrents.py`. When prompted, input the `host` like `http://172.18.0.28:8080` with the IP found in step 1. Use the credentials from step 2 for username and password.
+4. Done.
