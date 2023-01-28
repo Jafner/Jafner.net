@@ -7,51 +7,41 @@
         href: https://gitlab.jafner.net/
         description: Fully-featured, self-hosted Git server
         icon: gitlab
-        ping: http://gitlab
     - Nextcloud:
         href: https://nextcloud.jafner.net
         description: Cloud collaboration platform
         icon: nextcloud
-        ping: http://nextcloud
     - Plex:
         href: https://plex.jafner.net
         description: TV show and movie server
         icon: plex
-        ping: http://plex
     - Ombi:
         href: https://ombi.jafner.net
         description: Web interface for wishlisting movies and shows to be added to Plex
         icon: ombi
-        ping: http://ombi
     - Send:
         href: https://send.jafner.net
         description: Simple, private file sharing
         icon: firefoxsend
-        ping: http://send
     - Fireshare:
         href: https://clips.jafner.net
         description: Simple platform for sharing video clips
         icon: fireshare
-        ping: http://fireshare
     - Grafana:
         href: https://grafana.jafner.net
         description: Metrics visualization tool
         icon: grafana
-        ping: http://grafana
     - Calibre SFF:
         href: https://sff.calibre.jafner.net
         description: A large collection of sci-fi and fantasy books
         icon: calibre
-        ping: http://calibre-web-sff
     - Calibre RPG:
         href: https://rpg.calibre.jafner.net
         description: My collection of Dungeons & Dragons books
         icon: calibre
-        ping: http://calibre-web-rpg
     - VanDAM:
         href: https://3d.jafner.net
         description: A digital asset manager for 3D models
-        ping: http://vandam
 
 - Jafner.net Admin:
     - TrueNAS:
