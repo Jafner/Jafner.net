@@ -186,19 +186,15 @@
         href: https://cloud.digitalocean.com/
         description: Management portal for Digital Ocean VPS provider
         icon: /icons/digitalocean.png
-        ping: https://cloud.digitalocean.com
     - Hologram.io:
         href: https://dashboard.hologram.io/org/58644/
         description: Management portal for Hologram IoT cellular networking provider
         icon: /icons/hologramio.png
-        ping: https://dashboard.hologram.io
     - Google Domains:
         href: https://domains.google.com/registrar/
         description: Domain management portal for Google
         icon: google-domains
-        ping: https://domains.google.com
     - Cloudflare: 
         href: https://dash.cloudflare.com/
         description: Domain management portal for Cloudflare
         icon: cloudflare
-        ping: https://dash.cloudflare.com
