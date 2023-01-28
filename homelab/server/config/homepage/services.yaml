@@ -68,68 +68,98 @@
         href: https://nas.jafner.net/
         description: Admin portal for TrueNAS
         icon: truenas
+        ping: https://nas.jafner.net
     - Qbittorrent:
         href: https://qbt.jafner.net/
         description: WebUI for torrent client management
         icon: qbittorrent
+        server: jafner-net-docker
+        container: qbittorrent_qbittorrent
     - Keycloak:
         href: https://keycloak.jafner.net/admin/master/console/
         description: Administration console for Keycloak identity provider
         icon: keycloak
+        server: jafner-net-docker
+        container: keycloak_keycloak
     - Portainer:
         href: https://portainer.jafner.net/
         description: WebUI management portal for Docker
         icon: portainer-v2
+        server: jafner-net-docker
+        container: portainer_portainer
     - WGEasy:
         href: https://vpn.jafner.net/
         description: Management interface for Wireguard VPN profiles
         icon: wireguard
+        server: jafner-net-docker
+        container: wireguard_wg-easy
     - Pihole:
         href: https://pihole.jafner.net/
         description: Metrics and management dashboard for PiHole DNS ad-blocker
         icon: pihole
+        ping: https://pihole.jafner.net/
     - Jdownloader:
         href: https://jdl.jafner.net/
         description: WebUI for download management tool
         icon: jdownloader
+        server: jafner-net-docker
+        container: jdownloader2
     - Unifi:
         href: https://192.168.1.23:8443/manage/account/login?redirect=%2Fmanage
         description: Unifi access point management console
         icon: unifi
+        server: jafner-net-docker
+        container: unifi_controller
     - Traefik:
         href: https://traefik.jafner.net/dashboard/#/
         description: Reporting dashboard for reverse proxy
         icon: traefik
+        server: jafner-net-docker
+        container: traefik_traefik
 
 - Jafner.net Autopirate:
     - Radarr:
         href: https://radarr.jafner.net/
         description: Library management server for movies
         icon: radarr
+        server: jafner-net-docker
+        container: autopirate_radarr
     - Sonarr:
         href: https://sonarr.jafner.net/
         description: Library management server for TV shows
         icon: sonarr
+        server: jafner-net-docker
+        container: autopirate_sonarr
     - Lidarr:
         href: https://lidarr.jafner.net/
         description: Library management server for music
         icon: lidarr
+        server: jafner-net-docker
+        container: autopirate_lidarr
     - SabNZBD:
         href: https://sabnzbd.jafner.net/
         description: Download server for Usenet providers
         icon: sabnzbd
+        server: jafner-net-docker
+        container: autopirate_sabnzbd
     - NZBHydra2:
         href: https://nzbhydra.jafner.net/
         description: Search server for Usenet indexers
         icon: nzbhydra
+        server: jafner-net-docker
+        container: autopirate_nzbhydra2
     - Tdarr:
         href: https://tdarr.jafner.net/
         description: Management server for automated transcode management
         icon: tdarr
+        server: jafner-net-docker
+        container: autopirate_tdarr
     - Jackett:
         href: https://jackett.jafner.net/
         description: Aggregated API server for interacting with supported tracker functionality
         icon: jackett
+        server: jafner-net-docker
+        container: autopirate_jackett
 
 - Jafner.tools Admin:
     - Vaultwarden:
