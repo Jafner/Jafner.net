@@ -63,6 +63,34 @@
         server: jafner-net-docker
         container: vandam_vandam
 
+- Jafner.tools:
+    - 5eTools:
+        href: https://5e.jafner.tools
+        description: D&D 5e Complete Reference
+        icon: /icons/5et.png
+    - Bitwarden:
+        href: https://bitwarden.jafner.tools
+        description: Sync server for the Bitwarden password manager
+        icon: bitwarden
+
+- Cloud:
+    - Digital Ocean:
+        href: https://cloud.digitalocean.com/
+        description: Management portal for Digital Ocean VPS provider
+        icon: /icons/digitalocean.png
+    - Hologram.io:
+        href: https://dashboard.hologram.io/org/58644/
+        description: Management portal for Hologram IoT cellular networking provider
+        icon: /icons/hologramio.png
+    - Google Domains:
+        href: https://domains.google.com/registrar/
+        description: Domain management portal for Google
+        icon: google-domains
+    - Cloudflare: 
+        href: https://dash.cloudflare.com/
+        description: Domain management portal for Cloudflare
+        icon: cloudflare
+
 - Jafner.net Admin:
     - TrueNAS:
         href: https://nas.jafner.net/
@@ -170,31 +198,3 @@
         href: https://vpn.jafner.tools/
         description: Management interface for Wireguard VPN profiles
         icon: wireguard
-
-- Jafner.tools:
-    - 5eTools:
-        href: https://5e.jafner.tools
-        description: D&D 5e Complete Reference
-        icon: /icons/5et.png
-    - Bitwarden:
-        href: https://bitwarden.jafner.tools
-        description: Sync server for the Bitwarden password manager
-        icon: bitwarden
-
-- Cloud:
-    - Digital Ocean:
-        href: https://cloud.digitalocean.com/
-        description: Management portal for Digital Ocean VPS provider
-        icon: /icons/digitalocean.png
-    - Hologram.io:
-        href: https://dashboard.hologram.io/org/58644/
-        description: Management portal for Hologram IoT cellular networking provider
-        icon: /icons/hologramio.png
-    - Google Domains:
-        href: https://domains.google.com/registrar/
-        description: Domain management portal for Google
-        icon: google-domains
-    - Cloudflare: 
-        href: https://dash.cloudflare.com/
-        description: Domain management portal for Cloudflare
-        icon: cloudflare
