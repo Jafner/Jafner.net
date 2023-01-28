@@ -10,3 +10,16 @@ layout:
   Jafner.tools:
     style: row
     columns: 2
+  Cloud:
+    style: row
+    columns: 2
+  Jafner.net Admin:
+    style: row
+    columns: 3
+  Jafner.net Autopirate:
+    style: row
+    columns: 2
+  Jafner.tools Admin:
+    style: row
+    columns: 2
+  

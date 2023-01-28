@@ -2,7 +2,7 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/services
 
-- Jafner.net User:
+- Jafner.net:
     - Gitlab:
         href: https://gitlab.jafner.net/
         description: Fully-featured, self-hosted Git server
