@@ -2,11 +2,7 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/services
 
-#- greeting:
-#    text_size: x1
-#    text: My name is Joey Hafner and this page links to some of the services I host. Jafner.net is my main server, which uses Docker to run all these things. Jafner.tools is hosted on a Digital Ocean droplet. And Jafner.dev is for experiments. Check out my socials on the top bar. This lab is always changing, and this homepage is too.
-
-- Jafner.net:
+- Jafner.net User:
     - Gitlab:
         href: https://gitlab.jafner.net/
         description: Fully-featured, self-hosted Git server
@@ -47,6 +43,84 @@
         href: https://3d.jafner.net
         description: A digital asset manager for 3D models
 
+- Jafner.net Admin:
+    - TrueNAS:
+        href: https://nas.jafner.net/
+        description: Admin portal for TrueNAS
+        icon: truenas
+    - Qbittorrent:
+        href: https://qbt.jafner.net/
+        description: WebUI for torrent client management
+        icon: qbittorrent
+    - Keycloak:
+        href: https://keycloak.jafner.net/admin/master/console/
+        description: Administration console for Keycloak identity provider
+        icon: keycloak
+    - Portainer:
+        href: https://portainer.jafner.net/
+        description: WebUI management portal for Docker
+        icon: portainer-v2
+    - WGEasy:
+        href: https://vpn.jafner.net/
+        description: Management interface for Wireguard VPN profiles
+        icon: wireguard
+    - Pihole:
+        href: https://pihole.jafner.net/
+        description: Metrics and management dashboard for PiHole DNS ad-blocker
+        icon: pihole
+    - Jdownloader:
+        href: https://jdl.jafner.net/
+        description: WebUI for download management tool
+        icon: jdownloader
+    - Unifi:
+        href: https://192.168.1.23:8443/manage/account/login?redirect=%2Fmanage
+        description: Unifi access point management console
+        icon: unifi
+    - Traefik:
+        href: https://traefik.jafner.net/dashboard/#/
+        description: Reporting dashboard for reverse proxy
+        icon: traefik
+
+- Jafner.net Autopirate:
+    - Radarr:
+        href: https://radarr.jafner.net/
+        description: Library management server for movies
+        icon: radarr
+    - Sonarr:
+        href: https://sonarr.jafner.net/
+        description: Library management server for TV shows
+        icon: sonarr
+    - Lidarr:
+        href: https://lidarr.jafner.net/
+        description: Library management server for music
+        icon: lidarr
+    - SabNZBD:
+        href: https://sabnzbd.jafner.net/
+        description: Download server for Usenet providers
+        icon: sabnzbd
+    - NZBHydra2:
+        href: https://nzbhydra.jafner.net/
+        description: Search server for Usenet indexers
+        icon: nzbhydra
+    - Tdarr:
+        href: https://tdarr.jafner.net/
+        description: Management server for automated transcode management
+        icon: tdarr
+    - Jackett:
+        href: https://jackett.jafner.net/
+        description: Aggregated API server for interacting with supported tracker functionality
+        icon: jackett
+
+- Jafner.tools Admin:
+    - Vaultwarden:
+        href: https://bitwarden.jafner.tools/admin
+        description: Admin portal for Vaultwarden server
+        icon: vaultwarden
+    - WGEasy:
+        href: https://vpn.jafner.tools/
+        description: Management interface for Wireguard VPN profiles
+        icon: wireguard
+
 - Jafner.tools:
     - 5eTools:
         href: https://5e.jafner.tools
@@ -56,3 +130,20 @@
         href: https://bitwarden.jafner.tools
         description: Sync server for the Bitwarden password manager
         icon: bitwarden
+
+- Cloud:
+    - Digital Ocean:
+        href: https://cloud.digitalocean.com/
+        description: Management portal for Digital Ocean VPS provider
+        icon: /icons/digitalocean.png
+    - Hologram.io:
+        href: https://dashboard.hologram.io/org/58644/
+        description: Management portal for Hologram IoT cellular networking provider
+    - Google Domains:
+        href: https://domains.google.com/registrar/
+        description: Domain management portal for Google
+        icon: google-domains
+    - Cloudflare: 
+        href: https://dash.cloudflare.com/
+        description: Domain management portal for Cloudflare
+        icon: cloudflare
