@@ -7,6 +7,8 @@
         href: https://gitlab.jafner.net/
         description: Fully-featured, self-hosted Git server
         icon: gitlab
+        server: jafner-net-docker
+        container: gitlab_gitlab
     - Nextcloud:
         href: https://nextcloud.jafner.net
         description: Cloud collaboration platform
