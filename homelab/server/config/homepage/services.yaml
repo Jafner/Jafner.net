@@ -95,7 +95,7 @@
     - TrueNAS:
         href: https://nas.jafner.net/
         description: Admin portal for TrueNAS
-        icon: truenas
+        icon: truenas-scale
         ping: https://nas.jafner.net/ui/sessions/signin
     - Qbittorrent:
         href: https://qbt.jafner.net/
