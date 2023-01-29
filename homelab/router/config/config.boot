@@ -163,38 +163,9 @@ interfaces {
         hw-id d4:3d:7e:94:6e:eb
         speed auto
     }
-    ethernet eth1 {
-        address 192.168.1.1/24
-        description "Primary Switch"
-        duplex auto
-        hw-id 00:15:17:b8:dc:28
-        offload {
-            sg
-            tso
-        }
-        speed auto
-    }
-    ethernet eth2 {
-        description "PoE Switch for WAPs"
-        duplex auto
-        hw-id 00:15:17:b8:dc:29
-        offload {
-            sg
-            tso
-        }
-        speed auto
-    }
-    ethernet eth3 {
-        description "Reserved for multi-gig switch"
-        hw-id 00:15:17:b8:dc:2a
-        offload {
-            sg
-            tso
-        }
-    }
-    ethernet eth4 {
+    ethernet eth5 {
         address dhcp
-        hw-id 00:15:17:b8:dc:2b
+        hw-id 6c:b3:11:32:46:24
         offload {
             sg
             tso
@@ -202,11 +173,22 @@ interfaces {
         vif 201 {
         }
     }
+    ethernet eth6 {
+        address 192.168.1.1/24
+        description "Primary Switch"
+        duplex auto
+        hw-id 6c:b3:11:32:46:25
+        offload {
+            sg
+            tso
+        }
+        speed auto
+    }
     loopback lo {
     }
     pppoe pppoe1 {
         authentication {
-            password 24ydrUYs
+            password ****************
             user hafnerjoseph
         }
         firewall {
@@ -222,7 +204,7 @@ interfaces {
         }
         mtu 1492
         no-peer-dns
-        source-interface eth4.201
+        source-interface eth5.201
     }
 }
 nat {
@@ -318,10 +300,10 @@ nat {
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 32400
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -330,10 +312,10 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 53820-53829
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -342,10 +324,10 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 25565
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -354,10 +336,10 @@ nat {
         rule 1104 {
             description "Iperf (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 50201
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -366,10 +348,10 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 80,443
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -378,10 +360,10 @@ nat {
         rule 1107 {
             description "Git SSH (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 2228-2229
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -390,10 +372,10 @@ nat {
         rule 1108 {
             description "SFTP (Hairpin NAT)"
             destination {
-                address 174.21.36.187
+                address 174.21.49.117
                 port 23450
             }
-            inbound-interface eth1
+            inbound-interface eth6
             protocol tcp_udp
             translation {
                 address 192.168.1.23
@@ -416,7 +398,7 @@ nat {
             destination {
                 address 192.168.1.0/24
             }
-            outbound-interface eth1
+            outbound-interface eth6
             protocol tcp_udp
             source {
                 address 192.168.1.0/24
@@ -433,6 +415,7 @@ service {
             domain-name local
             domain-search local
             name-server 192.168.1.22
+            name-server 192.168.1.21
             subnet 192.168.1.0/24 {
                 default-router 192.168.1.1
                 lease 86400
@@ -505,6 +488,7 @@ service {
             cache-size 1000000
             listen-address 192.168.1.1
             name-server 192.168.1.22
+            name-server 192.168.1.21
         }
     }
     monitoring {
@@ -550,13 +534,17 @@ system {
         }
         user vyos {
             authentication {
-                encrypted-password $SECRET
+                encrypted-password ****************
                 public-keys jafner425@gmail.com {
-                    key $SECRET
+                    key ****************
+                    type ssh-rsa
+                }
+                public-keys joey@fedora {
+                    key ****************
                     type ssh-rsa
                 }
                 public-keys joey@joey-server {
-                    key $SECRET
+                    key ****************
                     type ssh-rsa
                 }
             }
@@ -564,6 +552,7 @@ system {
     }
     name-server 127.0.0.1
     name-server 192.168.1.22
+    name-server 192.168.1.21
     ntp {
         server time-a-wwv.nist.gov {
         }
@@ -602,6 +591,7 @@ zone-policy {
             }
         }
         interface eth1
+        interface eth6
     }
     zone LOCAL {
         default-action drop
