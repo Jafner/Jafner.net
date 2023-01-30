@@ -25,6 +25,8 @@ api:
 
 providers:
   docker:
+    exposedByDefault: false
+    endpoint: "tcp://docker-socket-proxy:2375"
     watch: true
     network: web
   file:
