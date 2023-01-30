@@ -3,4 +3,6 @@
 # https://gethomepage.dev/en/configs/docker/
 
 jafner-net-docker:
-  socket: /var/run/docker.sock
+  #socket: /var/run/docker.sock
+  host: 127.0.0.1
+  port: 2375
