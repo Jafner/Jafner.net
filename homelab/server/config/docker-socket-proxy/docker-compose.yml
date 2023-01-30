@@ -11,6 +11,8 @@ services:
     networks:
       - web
     privileged: true
+    env_file:
+      - docker-socket-proxy.yml
 
 networks:
   web:
