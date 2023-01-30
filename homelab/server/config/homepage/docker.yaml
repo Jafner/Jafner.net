@@ -4,5 +4,5 @@
 
 jafner-net-docker:
   #socket: /var/run/docker.sock
-  host: 127.0.0.1
+  host: docker-socket-proxy
   port: 2375
