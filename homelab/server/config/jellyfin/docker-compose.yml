@@ -1,0 +1,42 @@
+version: "3"
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin
+    container_name: jellyfin_jellyfin
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - web
+    ports:
+      - 8096:8096
+      #- 8920:8920
+      #- 7359:7359/udp
+      #- 1900:1900/udp
+    env_file:
+      - jellyfin.env
+    volumes:
+      - "${MEDIA_DIR}/Video/Movies:/movies"
+      - "${MEDIA_DIR}/Video/Shows:/shows"
+      - "${DOCKER_DATA}:/config"
+    labels:
+      - traefik.http.routers.jellyfin.rule=Host(`jellyfin.jafner.net`)
+      - traefik.http.routers.jellyfin.tls.certresolver=lets-encrypt
+      - traefik.http.services.jellyfin.loadbalancer.server.port=8096
+
+networks:
+  web:
+    external: true
