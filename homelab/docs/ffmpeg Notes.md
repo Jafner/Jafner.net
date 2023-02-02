@@ -31,6 +31,7 @@
     - [Mediainfo](#mediainfo-6)
     - [Test Image](#test-image-6)
 - [Test a New Profile](#test-a-new-profile)
+- [Create a Clip from a Video](#create-a-clip-from-a-video)
 
 # About ffmpeg
 FFmpeg is a free and open-source software project consisting of a suite of libraries and programs for handling video, audio, and other multimedia files and streams. At its core is the command-line ffmpeg tool itself, designed for processing of video and audio files. [Wikipedia](https://en.wikipedia.org/wiki/FFmpeg). [ffmpeg.org](https://ffmpeg.org/).
@@ -582,3 +583,9 @@ Alternate group                          : 1
 2. Extract sample frame from transcoded file. `ffmpeg -ss 00:15:20.01 -i "$profile.mp4" -frames:v 1 "$profile.png"`
 3. Print media info for the new file. `mediainfo "$profile.mp4"`
 4. Update this doc!
+
+# Create a Clip from a Video
+You can create a clip from a video file without reencoding given a single time span. 
+`ffmpeg -i "$input" -ss 00:05:20 -to 00:15:30 -c:v copy -c:a copy "$output"`
+
+The time to perform this operation is based on the *size of the input file up to the starting timestamp*, not the length of the clip.
