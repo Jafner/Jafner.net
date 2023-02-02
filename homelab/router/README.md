@@ -74,4 +74,8 @@ set system login user admin authentication public-keys jafner425@gmail.com key $
 ```
 4. `commit; save; exit`
 
-# How to Port-Forward in VyOS
+# Check Traffic by TCP Connection
+To get a monitoring panel of bandwidth usage listed by connection on the internet, use `sudo iftop -i pppoe1`.
+To instead get usage listed by connection on LAN, use `sudo iftop -p -i eth6`
+
+[`iftop` docs](https://linux.die.net/man/8/iftop). Use [`pcap-filter'](https://www.tcpdump.org/manpages/pcap-filter.7.html) syntax for filtering with the `-f` flag.
