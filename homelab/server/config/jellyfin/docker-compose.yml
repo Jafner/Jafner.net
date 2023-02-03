@@ -32,6 +32,7 @@ services:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${MEDIA_DIR}/Video/Shows:/shows"
       - "${DOCKER_DATA}:/config"
+      - "./config.json:/jellyfin/jellyfin-web/config.json"
     labels:
       - traefik.http.routers.jellyfin.rule=Host(`jellyfin.jafner.net`)
       - traefik.http.routers.jellyfin.tls.certresolver=lets-encrypt
