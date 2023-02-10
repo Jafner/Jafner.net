@@ -1,2 +1,3 @@
 *.secret
 *_secrets.env
+server\config\ddns\ddclient\ddclient.conf

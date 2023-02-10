@@ -1,0 +1,26 @@
+# jafner.dev
+use=web
+web=dynamicdns.park-your-domain.com/getip
+protocol=googledomains
+ssl=yes
+login=$USER_Jafner_dev
+password=$PASS_Jafner_dev
+@.jafner.dev, *.jafner.dev
+
+# jafner.chat
+use=web
+web=dynamicdns.park-your-domain.com/getip
+protocol=cloudflare
+login=$USER_Jafner_chat
+password=$PASS_Jafner_chat
+zone=jafner.chat
+jafner.chat,*.jafner.chat
+
+# meganmcdonough.art
+use=web
+web=dynamicdns.park-your-domain.com/getip
+protocol=googledomains
+ssl=yes
+login=$USER_Meganmcdonough_art
+password=$PASS_Meganmcdonough_art
+meganmcdonough.art
