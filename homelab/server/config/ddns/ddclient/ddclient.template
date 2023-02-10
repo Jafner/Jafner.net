@@ -16,6 +16,15 @@ password=$PASS_Jafner_chat
 zone=jafner.chat
 jafner.chat,*.jafner.chat
 
+# jafner.net
+use=web
+web=dynamicdns.park-your-domain.com/getip
+protocol=cloudflare
+login=$USER_Jafner_net
+password=$PASS_Jafner_net
+zone=jafner.net
+jafner.net,*.jafner.net
+
 # meganmcdonough.art
 use=web
 web=dynamicdns.park-your-domain.com/getip
