@@ -2,6 +2,7 @@
 use=web
 web=dynamicdns.park-your-domain.com/getip
 protocol=googledomains
+daemon=1800
 ssl=yes
 login=$USER_Jafner_dev
 password=$PASS_Jafner_dev
@@ -11,6 +12,7 @@ password=$PASS_Jafner_dev
 use=web
 web=dynamicdns.park-your-domain.com/getip
 protocol=cloudflare
+daemon=1800
 login=$USER_Jafner_chat
 password=$PASS_Jafner_chat
 zone=jafner.chat
@@ -20,6 +22,7 @@ jafner.chat,*.jafner.chat
 use=web
 web=dynamicdns.park-your-domain.com/getip
 protocol=cloudflare
+daemon=1800
 login=$USER_Jafner_net
 password=$PASS_Jafner_net
 zone=jafner.net
@@ -29,6 +32,7 @@ jafner.net,*.jafner.net
 use=web
 web=dynamicdns.park-your-domain.com/getip
 protocol=googledomains
+daemon=1800
 ssl=yes
 login=$USER_Meganmcdonough_art
 password=$PASS_Meganmcdonough_art
