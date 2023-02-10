@@ -11,6 +11,7 @@ password=$PASS_Jafner_dev
 # jafner.chat
 use=web
 web=dynamicdns.park-your-domain.com/getip
+web-skip='IP Address'
 protocol=cloudflare
 daemon=1800
 login=$USER_Jafner_chat
@@ -21,6 +22,7 @@ jafner.chat,*.jafner.chat
 # jafner.net
 use=web
 web=dynamicdns.park-your-domain.com/getip
+web-skip='IP Address'
 protocol=cloudflare
 daemon=1800
 login=$USER_Jafner_net
