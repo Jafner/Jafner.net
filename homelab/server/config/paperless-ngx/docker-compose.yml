@@ -1,0 +1,43 @@
+version: "3"
+services:
+  redis: # originally called 'broker'
+    image: docker.io/library/redis:7
+    container_name: paperless_redis
+    volumes:
+      - redis:/data
+
+  mariadb: # originally called 'db'
+    image: docker.io/library/mariadb:10
+    container_name: paperless_mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file: 
+      - mariadb.env
+      - mariadb_secrets.env
+
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless_paperless
+    depends_on:
+      - mariadb
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - $DOCKER_DATA/data:/usr/src/paperless/data
+      - $DOCKER_DATA/media:/usr/src/paperless/media
+      - $DOCKER_DATA/export:/usr/src/paperless/export
+      - $DOCKER_DATA/consume:/usr/src/paperless/consume
+    env_file: 
+      - paperless.env
+      - paperless_secrets.env
+    labels:
+      - traefik.http.routers.paperless.rule=Host(`paperless.jafner.net`)
+      - traefik.http.routers.paperless.tls.certresolver=lets-encrypt
+
+volumes:
+  mariadb:
+  redis:
