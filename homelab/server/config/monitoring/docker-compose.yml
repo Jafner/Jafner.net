@@ -113,6 +113,7 @@ services:
       - monitoring
     env_file:
       - exporter-pihole.env
+      - exporter-pihole_secrets.env
     labels:
       - traefik.enable=false
 
