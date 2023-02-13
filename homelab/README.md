@@ -66,3 +66,20 @@ To disable sparse checkout, simply run `git sparse-checkout disable`.
 With this, it can also be re-eneabled with `git sparse-checkout init`.
 You can use these two commands to toggle sparse checkout.
 Per: https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled
+
+# Debian: Setting FQDN Hostname PS1
+By default, Debian will print the domain part of its hostname (e.g. hostname `jafner.net` will print `jafner` in the terminal prompt). I like to separate my hosts by TLD (e.g. `jafner.net`, `jafner.chat`, `jafner.tools`, etc.), so printing the TLD in the hostname for the PS1 is useful. 
+
+For a standard Debian 11 installation, the PS1 is set in this block of `~/.bashrc`:
+
+```bash
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+```
+
+We can achieve the desired behavior by replacing instances of `\h` with `\H` in both of these prompts (and elsewhere in the bashrc file if necessary).
+
+Reference: [Cyberciti.biz - How to Change / Set up bash custom prompt (PS1) in Linux](https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html)
