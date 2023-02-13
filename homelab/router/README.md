@@ -40,12 +40,66 @@ graph TD;
 | Lease TTL | 86400 seconds |
 
 ## Static DHCP Mappings
-| Host | IP Address |
-|:----:|:----------:|
-| joey-nas | 192.168.1.10 |
-| joey-seedbox | 192.168.1.21 |
-| joey-server | 192.168.1.23 |
-| pihole | 192.168.1.22 |
+On the VyOS router, enter configuration mode with `configure`, then run `show service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping` (assuming you use the network name "LAN" and the subnet "192.168.1.0/24").  
+
+```
+static-mapping U6-Lite {
+    ip-address 192.168.1.3
+    mac-address 78:45:58:67:87:14
+}
+static-mapping UAP-AC-LR {
+    ip-address 192.168.1.2
+    mac-address 18:e8:29:50:f7:5b
+}
+static-mapping joey-desktop {
+    ip-address 192.168.1.100
+    mac-address 04:92:26:DA:BA:C5
+}
+static-mapping joey-nas {
+    ip-address 192.168.1.10
+    mac-address 40:8d:5c:52:41:89
+}
+static-mapping joey-server {
+    ip-address 192.168.1.23
+    mac-address 70:85:c2:9c:6a:16
+}
+static-mapping joey-server2 {
+    ip-address 192.168.1.24
+    mac-address 24:4b:fe:57:bc:85
+}
+static-mapping joey-server3 {
+    ip-address 192.168.1.25
+    mac-address 78:45:c4:05:4f:21
+}
+static-mapping joey-server4 {
+    ip-address 192.168.1.26
+    mac-address 90:2b:34:37:ce:e8
+}
+static-mapping joeyPrinter {
+    ip-address 192.168.1.60
+    mac-address 9c:32:ce:7c:f8:25
+}
+static-mapping pihole {
+    ip-address 192.168.1.22
+    mac-address b8:27:eb:3c:8e:bb
+}
+static-mapping raspi2 {
+    ip-address 192.168.1.21
+    mac-address b8:27:eb:ff:76:6e
+}
+static-mapping tasmota-1 {
+    ip-address 192.168.1.50
+    mac-address 3C:61:05:F6:44:1E
+}
+static-mapping tasmota-2 {
+    ip-address 192.168.1.51
+    mac-address 3c:61:05:f6:d7:d3
+}
+static-mapping tasmota-3 {
+    ip-address 192.168.1.52
+    mac-address 3c:61:05:f6:f0:62
+}
+```
 
 # CLI Reference
 * [EdgeOS User Guide PDF](https://dl.ubnt.com/guides/edgemax/EdgeOS_UG.pdf)
