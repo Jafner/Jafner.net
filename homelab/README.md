@@ -80,6 +80,6 @@ else
 fi
 ```
 
-We can achieve the desired behavior by replacing instances of `\h` with `\H` in both of these prompts (and elsewhere in the bashrc file if necessary).
+We can achieve the desired behavior by replacing instances of `\h` with `\H` in both of these prompts (and elsewhere in the bashrc file if necessary). Note: Don't forget to `source ~/.bashrc` to apply the new configuration!
 
 Reference: [Cyberciti.biz - How to Change / Set up bash custom prompt (PS1) in Linux](https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html)
