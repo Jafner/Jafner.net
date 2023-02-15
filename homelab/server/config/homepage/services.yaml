@@ -121,11 +121,16 @@
         icon: wireguard
         server: jafner-net-docker
         container: wireguard_wg-easy
-    - Pihole:
-        href: https://pihole.jafner.net/
+    - Pihole1:
+        href: https://pihole1.jafner.net/
         description: Metrics and management dashboard for PiHole DNS ad-blocker
         icon: pihole
-        ping: https://pihole.jafner.net/
+        ping: https://pihole1.jafner.net/
+    - Pihole2:
+        href: https://pihole2.jafner.net/
+        description: Metrics and management dashboard for PiHole DNS ad-blocker
+        icon: pihole
+        ping: https://pihole2.jafner.net/
     - Jdownloader:
         href: https://jdl.jafner.net/
         description: WebUI for download management tool
