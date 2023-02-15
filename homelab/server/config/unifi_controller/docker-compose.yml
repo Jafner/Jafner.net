@@ -31,7 +31,7 @@ services:
     labels:
       - traefik.http.routers.unifi.rule=Host(`unifi.jafner.net`)
       - traefik.http.routers.unifi.tls.certresolver=lets-encrypt
-      - traefik.http.routers.unifi.middlewares=lan-only@file
+      - traefik.http.routers.unifi.middlewares=lan-only@file,securityheaders@file
       - traefik.http.services.unifi.loadbalancer.server.port=8443
 
 networks:
