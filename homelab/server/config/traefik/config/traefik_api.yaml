@@ -4,7 +4,8 @@ http:
       rule: "Host(`traefik.jafner.net`)"
       entryPoints: "websecure"
       middlewares: 
-       - "traefik-forward-auth@file"
+       - "lan-only@file"
+       #- "traefik-forward-auth@file"
       service: "api@internal"
       tls:
         certResolver: "lets-encrypt"

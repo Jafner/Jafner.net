@@ -3,7 +3,8 @@
 # https://gethomepage.dev/en/configs/settings
 
 title: Jafner.net
-target: _self
+#target: _self
+
 layout: 
   Jafner.net:
     style: row
