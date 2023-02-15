@@ -101,6 +101,12 @@ static-mapping tasmota-3 {
 }
 ```
 
+# Get Currently Configured Hairpin NAT Address
+```
+configure
+show nat destination rule 1100 destination address
+```
+
 # CLI Reference
 * [EdgeOS User Guide PDF](https://dl.ubnt.com/guides/edgemax/EdgeOS_UG.pdf)
 * EdgeOS is built on [Vyatta](https://en.wikipedia.org/wiki/Vyatta)
