@@ -1,4 +1,17 @@
 #!/bin/bash
+
+echo "==========================================="
+echo "============= STARTING INFRA =============="
+echo "==========================================="
+
+for service in traefik keycloak ddns docker-socket-proxy
+do
+    echo "===== STARTING $service ====="
+    cd /home/joey/homelab/server/config/$service
+    docker-compose up -d
+done
+
+
 echo "==========================================="
 echo "========== STARTING MAIN SERVERS =========="
 echo "==========================================="
