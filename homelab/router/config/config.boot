@@ -300,7 +300,7 @@ nat {
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 32400
             }
             inbound-interface eth6
@@ -312,7 +312,7 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 53820-53829
             }
             inbound-interface eth6
@@ -324,7 +324,7 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 25565
             }
             inbound-interface eth6
@@ -336,7 +336,7 @@ nat {
         rule 1104 {
             description "Iperf (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 50201
             }
             inbound-interface eth6
@@ -348,7 +348,7 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 80,443
             }
             inbound-interface eth6
@@ -360,7 +360,7 @@ nat {
         rule 1107 {
             description "Git SSH (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 2228-2229
             }
             inbound-interface eth6
@@ -372,7 +372,7 @@ nat {
         rule 1108 {
             description "SFTP (Hairpin NAT)"
             destination {
-                address 174.21.49.117
+                address 174.21.113.225
                 port 23450
             }
             inbound-interface eth6
@@ -459,12 +459,12 @@ service {
                     ip-address 192.168.1.60
                     mac-address 9c:32:ce:7c:f8:25
                 }
-                static-mapping pihole {
-                    ip-address 192.168.1.22
+                static-mapping pihole1 {
+                    ip-address 192.168.1.21
                     mac-address b8:27:eb:3c:8e:bb
                 }
-                static-mapping raspi2 {
-                    ip-address 192.168.1.21
+                static-mapping pihole2 {
+                    ip-address 192.168.1.22
                     mac-address b8:27:eb:ff:76:6e
                 }
                 static-mapping tasmota-1 {
