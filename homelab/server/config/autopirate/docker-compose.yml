@@ -75,6 +75,31 @@ services:
       - trarfik.http.services.lidarr.loadbalancer.server.port=8686
       - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
+  bazarr:
+    image:
+    container_name:
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    networks:
+      - web
+    env_file:
+      - autopirate.env
+    volumes:
+      - "${DOCKER_DATA}/bazarr:/config"
+      - "${MEDIA_DIR}/Video/Movies:/movies"
+      - "${MEDIA_DIR}/Video/Shows:/shows"
+    labels:
+      - traefik.http.routers.bazarr.rule=Host(`bazarr.jafner.net`)
+      - traefik.http.routers.bazarr.tls.certresolver=lets-encrypt
+      - trarfik.http.services.bazarr.loadbalancer.server.port=6767
+      - traefik.http.routers.bazarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
   nzbhydra2:
     image: linuxserver/nzbhydra2
     container_name: autopirate_nzbhydra2
