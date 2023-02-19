@@ -76,9 +76,9 @@ services:
       - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   bazarr:
-    image:
-    container_name:
-    logging:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: autopirate_bazarr
+    logging: 
       driver: loki
       options:
         loki-url: http://localhost:3100/loki/api/v1/push
