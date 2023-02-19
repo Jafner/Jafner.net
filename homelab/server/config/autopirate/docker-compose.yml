@@ -93,7 +93,7 @@ services:
     volumes:
       - "${DOCKER_DATA_LOCAL}/bazarr:/config"
       - "${MEDIA_DIR}/Video/Movies:/movies"
-      - "${MEDIA_DIR}/Video/Shows:/shows"
+      - "${MEDIA_DIR}/Video/Shows:/tv"
     labels:
       - traefik.http.routers.bazarr.rule=Host(`bazarr.jafner.net`)
       - traefik.http.routers.bazarr.tls.certresolver=lets-encrypt
