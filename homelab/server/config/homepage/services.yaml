@@ -169,6 +169,12 @@
         icon: lidarr
         server: jafner-net-docker
         container: autopirate_lidarr
+    - Bazarr:
+        href: https://bazarr.jafner.net
+        description: Subtitles sidecar for Radarr and Sonarr
+        icon: bazarr
+        server: jafner-net-docker
+        container: autopirate_bazarr
     - SabNZBD:
         href: https://sabnzbd.jafner.net/
         description: Download server for Usenet providers
