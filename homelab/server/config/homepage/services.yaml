@@ -125,12 +125,12 @@
         href: https://pihole1.jafner.net/
         description: Metrics and management dashboard for PiHole DNS ad-blocker
         icon: pihole
-        ping: https://pihole1.jafner.net/
+        ping: https://pihole1.jafner.net/login.php
     - Pihole2:
         href: https://pihole2.jafner.net/
         description: Metrics and management dashboard for PiHole DNS ad-blocker
         icon: pihole
-        ping: https://pihole2.jafner.net/
+        ping: https://pihole2.jafner.net/login.php
     - Jdownloader:
         href: https://jdl.jafner.net/
         description: WebUI for download management tool
