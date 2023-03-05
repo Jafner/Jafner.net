@@ -140,7 +140,7 @@
         server: jafner-net-docker
         container: jdownloader2
     - Unifi:
-        href: https://192.168.1.23:8443/manage/account/login?redirect=%2Fmanage
+        href: https://unifi.jafner.net/
         description: Unifi access point management console
         icon: unifi
         server: jafner-net-docker
