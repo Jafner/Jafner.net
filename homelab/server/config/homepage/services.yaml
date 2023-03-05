@@ -126,12 +126,12 @@
         href: https://pi.pihole.jafner.net/admin/
         description: Metrics and management dashboard for PiHole DNS ad-blocker
         icon: pihole
-        ping: https://pi.pihole.jafner.net/login.php
+        ping: https://pi.pihole.jafner.net/admin/login.php
     - Wyse Pihole:
         href: https://wyse.pihole.jafner.net/admin/
         description: Metrics and management dashboard for PiHole DNS ad-blocker
         icon: pihole
-        ping: https://wyse.pihole.jafner.net/login.php
+        ping: https://wyse.pihole.jafner.net/admin/login.php
     
     - Jdownloader:
         href: https://jdl.jafner.net/
