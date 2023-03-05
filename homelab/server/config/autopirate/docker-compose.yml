@@ -245,6 +245,24 @@ services:
       - traefik.http.services.jackett.loadbalancer.server.port=9117
       - traefik.http.routers.jackett.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
+  exporter-sabnzbd:
+    image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
+    container_name: autopirate_sabnzbd-exporter
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    networks:
+      - monitoring
+    env_file:
+      - exporter-sabnzbd.env
+      - exporter-sabnzbd_secrets.env
+
 networks:
   tdarr:
     ipam:

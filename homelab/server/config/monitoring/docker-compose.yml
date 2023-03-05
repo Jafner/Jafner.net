@@ -117,66 +117,6 @@ services:
     labels:
       - traefik.enable=false
 
-  exporter-minecraft:
-    image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
-    container_name: monitoring_exporter-minecraft
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    command: export-for-prometheus
-    restart: "no"
-    networks:
-      - monitoring
-      - mc-router
-    env_file:
-      - exporter-minecraft.env
-    labels:
-      - traefik.enable=false
-
-  exporter-plex:
-    image: granra/plex_exporter
-    container_name: monitoring_exporter-plex
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    restart: "no"
-    networks:
-      - monitoring
-    command: 
-      - "--plex-server=https://plex.jafner.net"
-      - "--token=***REMOVED***"
-      - "--auto-discover"
-    labels:
-      - traefik.enable=false
-
-  exporter-sabnzbd:
-    image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
-    container_name: monitoring_exporter-sabnzbd
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    restart: "no"
-    networks:
-      - monitoring
-    env_file:
-      - exporter-sabnzbd.env
-      - exporter-sabnzbd_secrets.env
-
   exporter-ping:
     image: czerwonk/ping_exporter
     container_name: monitoring_exporter-ping
@@ -210,26 +150,6 @@ services:
       - monitoring
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    labels:
-      - traefik.enable=false
-
-  exporter-qbittorrent:
-    image: esanchezm/prometheus-qbittorrent-exporter
-    container_name: monitoring_exporter-qbittorrent
-    env_file:
-      - exporter-qbittorrent.env
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    restart: "no"
-    networks:
-      - monitoring
-      - web
     labels:
       - traefik.enable=false
 

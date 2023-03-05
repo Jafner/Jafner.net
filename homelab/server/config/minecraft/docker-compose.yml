@@ -17,7 +17,28 @@ services:
     ports:
       - 25565:25565
     command: --mapping=bmcp.janfer.net=bmcp:25565,e9.janfer.net=e9:25565,fan.janfer.net=fan:25565,vanilla.janfer.net=vanilla:25565,vanilla2.janfer.net=vanilla2:25565 --api-binding=0.0.0.0:25566
-  
+
+  exporter-minecraft:
+    image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
+    container_name: minecraft_exporter
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    command: export-for-prometheus
+    restart: "no"
+    networks:
+      - monitoring
+      - mc-router
+    env_file:
+      - exporter.env
+    labels:
+      - traefik.enable=false
+
   bmcp:
     image: itzg/minecraft-server:java17
     container_name: minecraft_bmcp

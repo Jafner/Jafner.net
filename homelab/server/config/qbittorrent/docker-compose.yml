@@ -34,6 +34,25 @@ services:
       # - traefik.http.routers.qbt-auth.rule=Host(`qbt.jafner.net`) && PathPrefix(`/outpost.goauthentik.io/`)
       # - traefik.http.routers.qbt-auth.priority=15
       # - traefik.http.routers.qbt-auth.service=authentik-auth@file
+  exporter-qbittorrent:
+    image: esanchezm/prometheus-qbittorrent-exporter
+    container_name: qbittorrent_exporter
+    env_file:
+      - exporter.env
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    networks:
+      - monitoring
+      - web
+    labels:
+      - traefik.enable=false
 
 networks:
   web:

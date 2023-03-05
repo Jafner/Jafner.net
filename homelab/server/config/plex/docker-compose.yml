@@ -69,7 +69,27 @@ services:
       - traefik.http.routers.ombi.tls.options=tls12@file
       - traefik.http.routers.ombi.middlewares=securityheaders@file
       - traefik.http.services.ombi.loadbalancer.server.port=3579   
-    
+  exporter-plex:
+    image: granra/plex_exporter
+    container_name: plex_exporter
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    networks:
+      - monitoring
+    command: 
+      - "--plex-server=https://plex.jafner.net"
+      - "--token=***REMOVED***"
+      - "--auto-discover"
+    labels:
+      - traefik.enable=false
+
 networks:
   web:
     external: true
