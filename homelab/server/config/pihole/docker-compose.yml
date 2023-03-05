@@ -3,6 +3,8 @@ services:
   pihole:
     image: pihole/pihole
     container_name: pihole_pihole
+    networks:
+      - web
     cap_add:
       - NET_ADMIN
     ports:
