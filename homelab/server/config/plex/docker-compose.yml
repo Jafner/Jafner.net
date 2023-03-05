@@ -93,3 +93,5 @@ services:
 networks:
   web:
     external: true
+  monitoring:
+    external: true

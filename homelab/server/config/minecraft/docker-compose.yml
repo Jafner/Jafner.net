@@ -73,5 +73,7 @@ services:
 networks:
   mc-router:
     external: true
+  monitoring: 
+    external: true
 volumes:
   mc-router:
