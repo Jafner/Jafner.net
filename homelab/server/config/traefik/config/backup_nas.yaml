@@ -1,0 +1,17 @@
+http:
+  routers:
+    backup_nas:
+      rule: "Host(`backup.nas.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "backup_nas@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  services:
+    backup_nas:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.11/"
+      
