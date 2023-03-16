@@ -144,6 +144,8 @@ services:
       - 8085:8080
     volumes:
       - "${DOCKER_DATA}/sabnzbd_config:/config"
+      - "${MEDIA_DIR}/Video/Movies:/movies"
+      - "${MEDIA_DIR}/Video/Shows:/shows"
       - "${NZB_DIR}:/downloads"
       - "${INCOMPLETE_NZB_DIR}:/incomplete-downloads"
     labels:
