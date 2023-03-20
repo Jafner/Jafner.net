@@ -589,3 +589,5 @@ You can create a clip from a video file without reencoding given a single time s
 `ffmpeg -i "$input" -ss 00:05:20 -to 00:15:30 -c:v copy -c:a copy "$output"`
 
 The time to perform this operation is based on the *size of the input file up to the starting timestamp*, not the length of the clip.
+
+Reference: [Shortstack.io](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
