@@ -27,7 +27,7 @@ When Plex is restarted you will likely need to give the exporter a new Plex toke
 6. The Plex token is contained in the URL for the XML page. It should be at the very end of the URL, and look like `X-Plex-Token=***REMOVED***`. The token is the part after the `=`. 
 7. Copy that value. Paste it into the configuration for `"--token=<token-goes-here>"` under the `command:` section of the `docker-compose.yml`
 8. Sync the changes via git.
-9. Restart Plex exporter with `docker-compose up -d --force-recreate exporter_plex`
+9. Restart Plex exporter with `docker-compose up -d --force-recreate exporter-plex`
 
 
 https://github.com/arnarg/plex_exporter
