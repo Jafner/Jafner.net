@@ -39,37 +39,6 @@ services:
     labels:
       - traefik.enable=false
 
-  bmcp:
-    image: itzg/minecraft-server:java17
-    container_name: minecraft_bmcp
-    env_file:
-      - minecraft.env
-      - bmcp.env
-    volumes:
-      - $DOCKER_DATA/bmcp2:/data:rw
-    networks:
-      - minecraft
-    restart: "no"
-
-  vanilla:
-    image: itzg/minecraft-server:latest
-    container_name: minecraft_vanilla
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    env_file:
-      - minecraft.env
-      - vanilla.env
-    volumes:
-      - $DOCKER_DATA/vanilla:/data:rw
-    networks:
-      - minecraft
-
 networks:
   minecraft:
   monitoring: 
