@@ -19,6 +19,7 @@ services:
     hostname: 'gitlab.jafner.net'
     networks:
       - web
+      - gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.jafner.net'
@@ -109,6 +110,8 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
+    networks:
+      - gitlab
     env_file:
       - runner.env
     volumes:
@@ -129,6 +132,8 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
+    networks:
+      - gitlab
     env_file:
       - runner.env
     volumes:
@@ -140,3 +145,4 @@ services:
 networks:
   web:
     external: true
+  gitlab:

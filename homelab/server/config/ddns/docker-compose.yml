@@ -12,9 +12,14 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
+    networks:
+      - ddns
     env_file:
       - ddclient.env
     volumes:
       - ./ddclient:/config
     labels:
       - traefik.enable=false
+
+networks:
+  ddns:

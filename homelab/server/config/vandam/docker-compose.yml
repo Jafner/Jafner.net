@@ -10,7 +10,7 @@ services:
       - ${STL_DIR}:/libraries
     networks:
       - web
-      - default
+      - vandam
     labels:
       - traefik.http.routers.vandam.rule=Host(`3d.jafner.net`)
       - traefik.http.routers.vandam.tls.certresolver=lets-encrypt
@@ -23,7 +23,7 @@ services:
     image: postgres:13
     container_name: vandam_postgres
     networks:
-      - default
+      - vandam
     env_file:
       - db_secrets.env
     volumes:
@@ -32,7 +32,7 @@ services:
   redis:
     image: redis:6
     networks:
-      - default
+      - vandam
     container_name: vandam_redis
 
 volumes:
@@ -41,4 +41,4 @@ volumes:
 networks:
   web:
     external: true
-  default:
+  vandam:
