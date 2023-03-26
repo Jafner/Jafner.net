@@ -1,0 +1,12 @@
+tcp:
+  routers:
+    jafner.chat:
+      rule: "HostSNI(`jafner.chat`) || Host(`*.jafner.chat`)"
+      service: jafner.chat
+      tls: 
+        passthrough: true
+  services:
+    jafner.chat:
+      loadBalancer:
+        servers:
+          - address: "192.168.1.24:443"

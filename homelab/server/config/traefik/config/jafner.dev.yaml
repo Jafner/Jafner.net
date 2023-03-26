@@ -1,0 +1,12 @@
+tcp:
+  routers:
+    jafner.dev:
+      rule: "HostSNI(`jafner.dev`) || Host(`*.jafner.dev`)"
+      service: jafner.dev
+      tls: 
+        passthrough: true
+  services:
+    jafner.dev:
+      loadBalancer:
+        servers:
+          - address: "192.168.1.24:443"
