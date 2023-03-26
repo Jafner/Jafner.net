@@ -4,5 +4,5 @@ http:
       rule: "Host(`traefik.jafner.chat`) || Host(`jafner.chat`)"
       entryPoints: "websecure"
       service: "api@internal"
-      tls:
-        certResolver: "lets-encrypt"
+      #tls:
+      #  certResolver: "lets-encrypt"
