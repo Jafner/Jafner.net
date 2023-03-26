@@ -1,7 +1,7 @@
 http:
   routers:
     api:
-      rule: "Host(`traefik.jafner.chat`)"
+      rule: "Host(`traefik.jafner.chat`) || Host(`jafner.chat`)"
       entryPoints: "websecure"
       middlewares: 
        - "lan-only@file"
