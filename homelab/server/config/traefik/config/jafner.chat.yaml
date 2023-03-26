@@ -1,7 +1,7 @@
 tcp:
   routers:
     jafner.chat:
-      rule: "HostSNI(`jafner.chat`) || Host(`*.jafner.chat`)"
+      rule: "HostSNI(`jafner.chat`) || HostSNI(`*.jafner.chat`)"
       service: jafner.chat
       tls: 
         passthrough: true
