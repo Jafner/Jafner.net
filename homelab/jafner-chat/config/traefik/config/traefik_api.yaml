@@ -3,8 +3,6 @@ http:
     api:
       rule: "Host(`traefik.jafner.chat`) || Host(`jafner.chat`)"
       entryPoints: "websecure"
-      middlewares: 
-       - "lan-only@file"
       service: "api@internal"
       tls:
         certResolver: "lets-encrypt"
