@@ -62,16 +62,16 @@ set service dhcp-server shared-network-name LAN1 subnet 192.168.1.0/24 dns-serve
 commit; save; exit
 ```
 
-3. Shut down Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
-4. Shut down remaining services: `for app in ~/homelab/server/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
+3. Shut down Minecraft servers: `cd ~/homelab/jafner-net/config/minecraft && for service in ./*.yml; do echo "===== SHUTTING DOWN $service =====" && docker-compose -f $service down; done`
+4. Shut down remaining services: `for app in ~/homelab/jafner-net/config/*; do echo "===== SHUTTING DOWN $app =====" && cd $app && docker-compose down; done`
 5. Shut down the host: `sudo shutdown now`. Wait 30 seconds. If the green power LED doesn't turn off, hold the power button until it does.
 
 ### Boot
 6. Press the power button on the front of the chassis to begin booting. Take note of any POST beeps during this time. Wait for the host to be accessible via SSH. 
 7. Check current running docker containers
 8. Confirm all SMB shares are mounted with `mount -t cifs`. If not mounted, run `mount -a` for all shares.
-9. Start most services: `for app in ~/homelab/server/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
-10. Start Minecraft servers: `cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
+9. Start most services: `for app in ~/homelab/jafner-net/config/*; do echo "===== STARTING $app =====" && cd $app && docker-compose up -d; done`
+10. Start Minecraft servers: `cd ~/homelab/jafner-net/config/minecraft && for service in ./*.yml; do echo "===== STARTING $service =====" && docker-compose -f $service up -d; done`
 11. Reconfigure the router's DNS resolution:
 
 ```
@@ -100,12 +100,12 @@ Note: this is meant to be human-readable, so it prints the container's name befo
 
 ### Recreate all Docker containers one-liner
 ```bash
-STACKS_RESTARTED=0 && for app in ~/homelab/server/config/*; do echo "===== RECREATING $app =====" && cd $app && docker-compose up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && cd ~/homelab/server/config/minecraft && for service in ./*.yml; do echo "===== RECREATING $service =====" && docker-compose -f $service up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) ====="
+STACKS_RESTARTED=0 && for app in ~/homelab/jafner-net/config/*; do echo "===== RECREATING $app =====" && cd $app && docker-compose up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && cd ~/homelab/jafner-net/config/minecraft && for service in ./*.yml; do echo "===== RECREATING $service =====" && docker-compose -f $service up -d --force-recreate && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) ====="
 ```
 
 #### Recreate based on list of containers
 ```bash
-STACKS_RESTARTED=0 && for app in calibre-web homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/server/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
+STACKS_RESTARTED=0 && for app in calibre-web homer jdownloader2 librespeed monitoring navidrome qbittorrent send stashapp traefik; do echo "===== RECREATING $app =====" && cd ~/homelab/jafner-net/config/$app && docker-compose up -d && STACKS_RESTARTED=$(($STACKS_RESTARTED + 1)); done && echo "===== DONE (restarted $STACKS_RESTARTED stacks) =====" && cd ~
 ```
 
 ## NAS

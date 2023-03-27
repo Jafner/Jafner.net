@@ -41,7 +41,7 @@ ADMIN_EMAIL=joey@jafner.net
 ## Container volume mapping
 DOCKER_DATA=/home/joey/data/<service>
 # DOCKER_DATA=/mnt/md0/<service> # for services whose internal data may be large (e.g. modded minecraft servers with large world files)
-DOCKER_CONFIG=/home/joey/homelab/server/config/<service>/config 
+DOCKER_CONFIG=/home/joey/homelab/jafner-net/config/<service>/config 
 
 ## Additional volume mapping
 MEDIA_DIR=/mnt/nas/media
@@ -87,7 +87,7 @@ services:
     labels:
       - traefik.http.routers.<service>.rule=Host(`<service>.jafner.net`)
       - traefik.http.routers.<service>.tls.certresolver=lets-encrypt
-      - traefik.http.routers.<service>.middlewares=<middlewares> # available middlewares are available in homelab/server/config/traefik/config/middlewares.yaml
+      - traefik.http.routers.<service>.middlewares=<middlewares> # available middlewares are available in homelab/jafner-net/config/traefik/config/middlewares.yaml
       - traefik.http.services.<service>.loadbalancer.server.port=<port>
     networks:
       - web

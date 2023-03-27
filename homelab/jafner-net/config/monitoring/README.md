@@ -89,7 +89,7 @@ Docker-compose adds a few labels to containers it starts. This feature is not co
 | `com.docker.compose.oneoff` | `False` |
 | `com.docker.compose.project` | `wireguard` |
 | `com.docker.compose.project.config_files` | `docker-compose.yml` |
-| `com.docker.compose.project.working_dir` | `/home/joey/homelab/server/config/wireguard` |
+| `com.docker.compose.project.working_dir` | `/home/joey/homelab/jafner-net/config/wireguard` |
 | `com.docker.compose.service` | `wg-easy` |
 | `com.docker.compose.version` | `1.29.2` |
 
