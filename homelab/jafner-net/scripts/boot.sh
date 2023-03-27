@@ -1,6 +1,6 @@
 #!/bin/bash
 # Remove existing containers to ensure clean environment
-for service in /home/joey/homelab/server/config/*
+for service in /home/joey/homelab/jafner-net/config/*
 do 
     echo "CLEANING UP $service" 
     cd $service 
@@ -24,7 +24,7 @@ do
 done
 
 echo "STARTING DOCKER SERVICES"
-for service in /home/joey/homelab/server/config/*
+for service in /home/joey/homelab/jafner-net/config/*
 do 
     echo "===== STARTING $service ====="
     cd $service 

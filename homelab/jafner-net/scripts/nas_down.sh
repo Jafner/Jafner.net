@@ -14,12 +14,12 @@
 # done
 ##
 
-## This block checks all projects within the ~/homelab/server/config directory for NAS-dependence
+## This block checks all projects within the ~/homelab/jafner-net/config directory for NAS-dependence
 NAS_DEPENDENTS=""
-for project in $(find ~/homelab/server/config -maxdepth 1 -mindepth 1 -path ~/homelab/server/config/minecraft -prune -o -print | cut -d "/" -f7)
+for project in $(find ~/homelab/jafner-net/config -maxdepth 1 -mindepth 1 -path ~/homelab/jafner-net/config/minecraft -prune -o -print | cut -d "/" -f7)
 do
     echo "======== CHECKING $project ========"
-    cd ~/homelab/server/config/$project
+    cd ~/homelab/jafner-net/config/$project
     docker-compose config | grep -q /mnt/nas
     MATCH=$?
     if [ $MATCH == 0 ]; then
@@ -35,6 +35,6 @@ echo -e "$NAS_DEPENDENTS"
 for project in $(echo -e "$NAS_DEPENDENTS")
 do
     echo "======== SHUTTING DOWN $project ========"
-    cd ~/homelab/server/config/$project
+    cd ~/homelab/jafner-net/config/$project
     docker-compose down
 done

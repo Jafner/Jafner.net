@@ -3,7 +3,7 @@ echo "==========================================="
 echo "======= SHUTTING DOWN SERVERS ======="
 echo "==========================================="
 
-for service in /home/joey/homelab/server/config/*
+for service in /home/joey/homelab/jafner-net/config/*
 do 
     echo "===== SHUTTING DOWN $service =====" 
     cd $service 

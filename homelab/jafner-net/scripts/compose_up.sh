@@ -7,7 +7,7 @@ echo "==========================================="
 for service in traefik keycloak ddns docker-socket-proxy
 do
     echo "===== STARTING $service ====="
-    cd /home/joey/homelab/server/config/$service
+    cd /home/joey/homelab/jafner-net/config/$service
     docker-compose up -d
 done
 
@@ -15,7 +15,7 @@ done
 echo "==========================================="
 echo "========== STARTING MAIN SERVERS =========="
 echo "==========================================="
-for service in /home/joey/homelab/server/config/*
+for service in /home/joey/homelab/jafner-net/config/*
 do 
     echo "===== STARTING $service ====="
     cd $service 

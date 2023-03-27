@@ -3,11 +3,11 @@ START_DIR=$(pwd)
 echo "=============================================="
 echo "========== STARTING MINIMAL SERVERS =========="
 echo "=============================================="
-cd /home/joey/homelab/server/config/
+cd /home/joey/homelab/jafner-net/config/
 for service in gitlab homer keycloak monitoring traefik wireguard
 do 
     echo "===== STARTING $service ====="
-    cd /home/joey/homelab/server/config/$service 
+    cd /home/joey/homelab/jafner-net/config/$service 
     docker-compose up -d
 done
 

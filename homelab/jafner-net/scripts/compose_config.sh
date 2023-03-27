@@ -6,7 +6,7 @@ PASS=""
 echo "=============================="
 echo "========== STARTING =========="
 echo "=============================="
-for servicedir in /home/joey/homelab/server/config/*
+for servicedir in /home/joey/homelab/jafner-net/config/*
 do 
     service="$(basename $servicedir)"
     echo "===== CHECKING $service"
