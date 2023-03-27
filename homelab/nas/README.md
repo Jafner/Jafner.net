@@ -1,9 +1,11 @@
 # Pools
 I have 2 pools, one for "Media" and one for everything else. All disks are 8 TB HGST/Hitachi drives with a sector size of 4096B. All pools use vdevs of 3 drives in RAIDZ1.
+
 ## Media - High-bandwidth sequential reads/writes
 This pool contains one dataset: Media, which holds all non-text data (3d models, audio, images, video). As of writing, only the `./Media/Video/Movies` and `Media/Video/Shows` are accessed by services. Everything else is manipulated manually.
+
 ## Tank
-THis pool contains all other datasets. 
+This pool contains all other datasets. 
 
 # Physical Disk Locations (DS4243)
 Each cell contains the serial number for the drive in the mapped bay.
@@ -170,23 +172,3 @@ All values default.
 
 # Users, Groups, Permissions
 TODO, not yet designed.
-
-# Share Dependence
-| Share      | Dependent Service(s) |
-|:----------:|:--------------------:|
-| Text       | server/calibre-web   |
-| Torrenting | seedbox/EMP, seedbox/GGN, seedbox/MAM, seedbox/PUB |
-| Media      | server/autopirate, server/plex |
-| Backups    | server/cron          |
-
-## Offlining dependent services
-- Text: `cd ~/homelab/jafner-net/config/calibre-web && docker-compose down ; sudo umount /mnt/nas/calibre`
-- Torrenting: `cd ~/homelab/seedbox/config/deluge/ ; for DIR in emp ggn mam pub; do cd ./$DIR && docker-compose down && cd ../ ; done ; sudo umount /mnt/torrenting`
-- Media: `cd ~/homelab/jafner-net/config/autopirate && docker-compose down ; cd ~/homelab/jafner-net/config/plex && docker-compose down ; sudo umount /mnt/nas/media`
-- Backups: This cron job runs once per day at midnight. If possible, perform maintenance between runs. If not possible, comment out the jobs via `crontab -e`.
-
-## Online dependent services
-- Text: `sudo mount /mnt/nas/calibre && cd ~/homelab/jafner-net/config/calibre-web && docker-compose up -d`
-- Torrenting: `sudo mount /mnt/torrenting && cd ~/homelab/seedbox/config/deluge/ ; for DIR in emp ggn mam pub; do cd ./$DIR && docker-compose up -d && cd ../ ; done`
-- Media: `sudo mount /mnt/nas/media && cd ~/homelab/jafner-net/config/autopirate && docker-compose up -d ; cd ~/homelab/jafner-net/config/plex && docker-compose up -d`
-- Backups: Uncomment the commented lines with `crontab -e`.
