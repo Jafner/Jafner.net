@@ -1,3 +1,27 @@
+container {
+    name pihole {
+        cap-add net-admin
+        environment TZ {
+            value America/Los_Angeles
+        }
+        environment WEBPASSWORD {
+            value Raider8-Payable-Veto-Dictation
+        }
+        image pihole/pihole
+        memory 256
+        network default {
+            address 172.18.0.2
+        }
+        port webui {
+            destination 80
+            protocol tcp
+            source 80
+        }
+    }
+    network default {
+        prefix 172.18.0.0/16
+    }
+}
 firewall {
     all-ping enable
     broadcast-ping disable
@@ -297,10 +321,21 @@ nat {
                 address 192.168.1.23
             }
         }
+        rule 1009 {
+            description RTMP
+            destination {
+                port 1935
+            }
+            inbound-interface pppoe1
+            protocol tcp_udp
+            translation {
+                address 192.168.1.23
+            }
+        }
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 32400
             }
             inbound-interface eth6
@@ -312,7 +347,7 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 53820-53829
             }
             inbound-interface eth6
@@ -324,7 +359,7 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 25565
             }
             inbound-interface eth6
@@ -336,7 +371,7 @@ nat {
         rule 1104 {
             description "Iperf (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 50201
             }
             inbound-interface eth6
@@ -348,7 +383,7 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 80,443
             }
             inbound-interface eth6
@@ -360,7 +395,7 @@ nat {
         rule 1107 {
             description "Git SSH (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 2228-2229
             }
             inbound-interface eth6
@@ -372,8 +407,20 @@ nat {
         rule 1108 {
             description "SFTP (Hairpin NAT)"
             destination {
-                address 174.21.113.225
+                address 174.21.32.168
                 port 23450
+            }
+            inbound-interface eth6
+            protocol tcp_udp
+            translation {
+                address 192.168.1.23
+            }
+        }
+        rule 1109 {
+            description "RTMP (Hairpin NAT)"
+            destination {
+                address 174.21.32.168
+                port 1935
             }
             inbound-interface eth6
             protocol tcp_udp
@@ -414,8 +461,7 @@ service {
         shared-network-name LAN {
             domain-name local
             domain-search local
-            name-server 192.168.1.22
-            name-server 192.168.1.21
+            name-server 192.168.1.32
             subnet 192.168.1.0/24 {
                 default-router 192.168.1.1
                 lease 86400
@@ -438,6 +484,10 @@ service {
                 static-mapping joey-nas {
                     ip-address 192.168.1.10
                     mac-address 40:8d:5c:52:41:89
+                }
+                static-mapping joey-nas2 {
+                    ip-address 192.168.1.11
+                    mac-address 90:2b:34:37:ce:ea
                 }
                 static-mapping joey-server {
                     ip-address 192.168.1.23
@@ -479,6 +529,18 @@ service {
                     ip-address 192.168.1.52
                     mac-address 3c:61:05:f6:f0:62
                 }
+                static-mapping wyse1 {
+                    ip-address 192.168.1.31
+                    mac-address 6c:2b:59:37:89:40
+                }
+                static-mapping wyse2 {
+                    ip-address 192.168.1.32
+                    mac-address 6c:2b:59:37:9e:91
+                }
+                static-mapping wyse3 {
+                    ip-address 192.168.1.33
+                    mac-address 6c:2b:59:37:9e:00
+                }
             }
         }
     }
@@ -487,8 +549,7 @@ service {
             allow-from 192.168.1.0/24
             cache-size 1000000
             listen-address 192.168.1.1
-            name-server 192.168.1.22
-            name-server 192.168.1.21
+            name-server 192.168.1.32
         }
     }
     monitoring {
@@ -550,9 +611,7 @@ system {
             }
         }
     }
-    name-server 127.0.0.1
-    name-server 192.168.1.22
-    name-server 192.168.1.21
+    name-server 192.168.1.32
     ntp {
         server time-a-wwv.nist.gov {
         }
