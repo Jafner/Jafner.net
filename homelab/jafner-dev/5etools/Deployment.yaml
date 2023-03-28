@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: 5etools
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -15,5 +15,8 @@ spec:
       containers:
       - name: 5etools
         image: jafner/5etools-docker
+        env:
+        - name: SOURCE
+          value: "GITHUB-NOIMG"
         ports:
         - containerPort: 80
