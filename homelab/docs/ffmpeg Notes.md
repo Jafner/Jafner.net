@@ -6,6 +6,7 @@
   - [Adding ffmpeg Scripts to Windows SendTo Menu](#adding-ffmpeg-scripts-to-windows-sendto-menu)
 - [Get Test Image with ffmpeg](#get-test-image-with-ffmpeg)
 - [Batch-ify ffmpeg Command](#batch-ify-ffmpeg-command)
+- [Concatenate Compatible Files](#concatenate-compatible-files)
 - [Add Metadata to File](#add-metadata-to-file)
 - [Create Slow-mo](#create-slow-mo)
 - [Transcode Profiles](#transcode-profiles)
@@ -68,6 +69,20 @@ do
     ffmpeg -i "$video" <do stuff> "Transcodes/${video%.*}.mp4"
 done
 ```
+
+# Concatenate Compatible Files
+If two (or more) recordings should be joined, and are compatible (same codec, resolution), you can concatenate them in two steps:
+
+1. Write a `cat.txt` file with the filenames to be concatenated, preceded with the keyword `file`. 
+For example:
+
+```
+file 'part1.mp4'
+file 'part2.mp4'
+file 'part3.mp4'
+```
+
+2. Run ffmpeg with the concat demuxer: `ffmpeg -f concat -safe 0 -i cat.txt -c copy "$output"`
 
 # Add Metadata to File
 ffmpeg can add metadata to files using the `-metadata` flag. In the profiles described below, this is used to add a comment describing the profile used to create the file (e.g. `-metadata comment="x264 720p CRF 27"`).   
