@@ -1,7 +1,7 @@
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "s5etools"
+  name: "dndtools"
   namespace: "default"
 spec:
   ports:
@@ -9,4 +9,4 @@ spec:
     name: web
     port: 80
   selector:
-    app: "5etools"
+    app: "dndtools"

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 5etools
+  name: dndtools
 spec:
   selector:
     matchLabels:
-      app: 5etools
+      app: dndtools
   replicas: 1
   template:
     metadata:
       labels:
-        app: 5etools
+        app: dndtools
     spec:
       containers:
-      - name: 5etools
+      - name: dndtools
         image: jafner/5etools-docker
         env:
         - name: SOURCE
