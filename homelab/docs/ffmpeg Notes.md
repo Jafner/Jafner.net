@@ -9,6 +9,7 @@
 - [Concatenate Compatible Files](#concatenate-compatible-files)
 - [Add Metadata to File](#add-metadata-to-file)
 - [Create Slow-mo](#create-slow-mo)
+- [Resample 120 FPS to 60 FPS](#resample-120-fps-to-60-fps)
 - [Transcode Profiles](#transcode-profiles)
   - [Original \[40.3 Mb/s\]](#original-403-mbs)
     - [Mediainfo](#mediainfo)
@@ -105,6 +106,10 @@ Note that these slow-mo files will have no audio.
 If you need audio, or just more information, see the [ffmpeg docs](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video).  
 
 For documentation on interpolation settings, see [minterpolate docs](http://ffmpeg.org/ffmpeg-filters.html#minterpolate)
+
+# Resample 120 FPS to 60 FPS
+This works, but runs at <1.0x transcode speed. 
+`ffmpeg -i "$input" -filter:v fps=60 "$output"`
 
 # Transcode Profiles
 ## Original [40.3 Mb/s]
