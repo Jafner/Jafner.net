@@ -14,6 +14,7 @@ spec:
         - hello.jafner.dev
         - hello2.jafner.dev
         - 5e.jafner.dev
+        - wordpress.jafner.dev
   rules:
   - host: "hello.jafner.dev"
     http:
@@ -43,5 +44,15 @@ spec:
         backend:
           service:
             name: dndtools
+            port:
+              number: 80
+  - host: "wordpress.jafner.dev"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: wordpress
             port:
               number: 80
