@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.global-static-ip-name: web-ip
+    cert-manager.io/issuer: letsencrypt-production
+spec:
+  tls:
+    - secretName: web-ssl
+      hosts:
+        - hello.jafner.dev
+        - hello2.jafner.dev
+  rules:
+  - host: "hello.jafner.dev"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hello
+            port:
+              number: 8080
+  - host: "hello2.jafner.dev"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hello2
+            port:
+              number: 8080
