@@ -31,6 +31,7 @@ services:
   collabora:
     image: collabora/code:latest
     container_name: nextcloud_collabora
+    privileged: true
     ports:
       - 9980:9980
     networks:
