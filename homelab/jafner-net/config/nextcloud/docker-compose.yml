@@ -27,18 +27,6 @@ services:
     volumes:
       - $DOCKER_DATA/config:/config
       - $DOCKER_DATA/data:/data
-  collabora:
-    image: collabora/code:latest
-    container_name: nextcloud_collabora
-    networks:
-      - web
-    env_file:
-      - collabora.env
-    cap_add:
-      - MKNOD
-    labels: 
-      - traefik.http.routers.collabora.rule=Host(`collabora.jafner.net`)
-      - traefik.http.routers.collabora.tls.certresolver=lets-encrypt
 
   mariadb:
     image: lscr.io/linuxserver/mariadb
