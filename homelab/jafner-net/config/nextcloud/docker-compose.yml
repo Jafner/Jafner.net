@@ -27,6 +27,15 @@ services:
     volumes:
       - $DOCKER_DATA/config:/config
       - $DOCKER_DATA/data:/data
+  collabora:
+    image: collabora/code:latest
+    container_name: nextcloud_collabora
+    networks:
+      - nextcloud
+    env_file:
+      collabora.env
+    cap_add:
+      - MKNOD
 
   mariadb:
     image: lscr.io/linuxserver/mariadb
