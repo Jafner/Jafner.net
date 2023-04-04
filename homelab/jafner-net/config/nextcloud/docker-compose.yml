@@ -38,6 +38,7 @@ services:
       - nextcloud
     env_file:
       - collabora.env
+      - collabora_secrets.env
     cap_add:
       - MKNOD
     labels: 
