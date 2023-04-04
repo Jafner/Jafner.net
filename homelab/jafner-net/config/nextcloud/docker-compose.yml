@@ -31,11 +31,14 @@ services:
     image: collabora/code:latest
     container_name: nextcloud_collabora
     networks:
-      - nextcloud
+      - web
     env_file:
-      collabora.env
+      - collabora.env
     cap_add:
       - MKNOD
+    labels: 
+      - traefik.http.routers.collabora.rule=Host(`collabora.jafner.net`)
+      - traefik.http.routers.collabora.tls.certresolver=lets-encrypt
 
   mariadb:
     image: lscr.io/linuxserver/mariadb
