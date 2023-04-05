@@ -75,7 +75,7 @@ http:
         #contentSecurityPolicy: "frame-ancestors '*.example.com:*';object-src 'none';script-src 'none';"
         featurePolicy: "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';"
         customResponseHeaders:
-          X-Robots-Tag: "noindex, nofollow"
+          X-Robots-Tag: "none, noindex, nofollow"
           server: ""
     nextcloud-redirect:
       redirectRegex:
