@@ -24,8 +24,8 @@ services:
      - "11935:1935" # Livestream RTMP port
     volumes:
       - assets:/app/client/dist
-      - ${DOCKER_VOLUME}/data:/data
-      - ${DOCKER_VOLUME}/config:/config
+      - ${PEERTUBE_DATA_VOLUME}:/data
+      - ${PEERTUBE_CONFIG_VOLUME}:/config
     labels:
       - "traefik.http.routers.peertube.rule=Host(`video.jafner.net`)"
       - "traefik.http.routers.peertube.tls.certresolver=lets-encrypt"
@@ -45,7 +45,7 @@ services:
       - postgres.env
       - postgres_secrets.env
     volumes:
-      - ${DOCKER_VOLUME}/db:/var/lib/postgresql/data
+      - ${POSTGRES_CONFIG_VOLUME}:/var/lib/postgresql/data
     restart: "no"
 
   redis:
@@ -54,7 +54,7 @@ services:
     networks:
       - peertube
     volumes:
-      - ${DOCKER_VOLUME}/redis:/data
+      - ${REDIS_CONFIG_VOLUME}:/data
     restart: "no"
 
   postfix:
@@ -65,7 +65,7 @@ services:
     env_file:
       - postfix.env
     volumes:
-      - ${DOCKER_VOLUME}/opendkim/keys:/etc/opendkim/keys
+      - ${POSTFIX_CONFIG_VOLUME}:/etc/opendkim/keys
     restart: "no"
 
 networks:
