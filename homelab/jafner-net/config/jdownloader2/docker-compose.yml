@@ -2,7 +2,7 @@ version: '3'
 services:
   jdl:
     image: jlesage/jdownloader-2
-    container_name: jdownloader2
+    container_name: jdownloader2_jdownloader2
     logging:
       driver: loki
       options:
