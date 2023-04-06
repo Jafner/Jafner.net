@@ -4,7 +4,6 @@ services:
   peertube:
     image: chocobozzz/peertube:production-buster
     container_name: peertube_peertube
-    user: root
     logging:
       driver: loki
       options:
