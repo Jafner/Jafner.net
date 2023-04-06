@@ -20,7 +20,7 @@ services:
       - peertube.env
       - peertube_secrets.env
     ports:
-     - "1935:1935" # Livestream RTMP port
+     - "11935:1935" # Livestream RTMP port
     volumes:
       - assets:/app/client/dist
       - ${DOCKER_VOLUME}/data:/data
