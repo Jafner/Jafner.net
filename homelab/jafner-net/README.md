@@ -11,6 +11,16 @@ For a living portal listing all user-facing services, go to https://home.jafner.
 
 This repository is automatically pushed to the host when a change is made to a file in this subdirectory.
 
+## Startup Procedure
+1. Make sure all configured network shares are mounted. `sudo mount -a`
+2. Start infrastructure stacks.
+   1. `cd ~/homelab/jafner-net/config/traefik && docker-compose up -d`
+   2. `cd ~/homelab/jafner-net/config/keycloak && docker-compose up -d`
+   3. `cd ~/homelab/jafner-net/config/ddns && docker-compose up -d`
+   4. `cd ~/homelab/jafner-net/config/monitoring && docker-compose up -d`
+3. Check running containers. `docker ps`
+4. Start application stacks. `for service in /home/joey/homelab/jafner-net/config/*; do echo "===== STARTING $service =====" && cd $service && docker-compose up -d; done`
+
 ## Sharing Files
 For files smaller than 2 GB, use [XBackBone](https://xbackbone.jafner.net).  
 For files greater than 2 GB, use one of the following:
