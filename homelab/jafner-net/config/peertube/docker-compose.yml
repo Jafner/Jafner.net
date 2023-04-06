@@ -42,7 +42,8 @@ services:
     networks:
       - peertube
     env_file:
-      - .env
+      - postgres.env
+      - postgres_secrets.env
     volumes:
       - ${DOCKER_VOLUME}/db:/var/lib/postgresql/data
     restart: "no"
@@ -62,7 +63,7 @@ services:
     networks:
       - peertube
     env_file:
-      - .env
+      - postfix.env
     volumes:
       - ${DOCKER_VOLUME}/opendkim/keys:/etc/opendkim/keys
     restart: "no"
