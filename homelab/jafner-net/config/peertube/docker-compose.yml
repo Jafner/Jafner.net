@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   peertube:
-    image: chocobozzz/peertube:production-bullseye
+    image: jafner/peertube:dev
     container_name: peertube_peertube
     logging:
       driver: loki
@@ -23,7 +23,6 @@ services:
      - "11935:1935" # Livestream RTMP port
     volumes:
       - assets:/app/client/dist
-      #- nas:/data
       - ${PEERTUBE_DATA_VOLUME}:/data
       - ${PEERTUBE_CONFIG_VOLUME}:/config
     labels:
@@ -79,9 +78,3 @@ networks:
 
 volumes:
   assets:
-  #nas:
-  #  driver: local
-  #  driver_opts:
-  #    type: cifs
-  #    device: //192.168.50.1/AppData
-  #    o: "user=user,pass=resu,uid=1000,gid=1000,_netdev,vers=3.0"
