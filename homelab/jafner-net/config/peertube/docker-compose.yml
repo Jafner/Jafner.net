@@ -24,10 +24,10 @@ services:
      - "11935:1935" # Livestream RTMP port
     volumes:
       - peertube-assets:/app/client/dist
-      - peertube-data:/data
-      #- ${PEERTUBE_DATA_VOLUME}:/data
-      - peertube-config:/config
-      #- ${PEERTUBE_CONFIG_VOLUME}:/config
+      #- peertube-data:/data
+      - ${PEERTUBE_DATA_VOLUME}:/data
+      #- peertube-config:/config
+      - ${PEERTUBE_CONFIG_VOLUME}:/config
     labels:
       - "traefik.http.routers.peertube.rule=Host(`video.jafner.net`)"
       - "traefik.http.routers.peertube.tls.certresolver=lets-encrypt"
@@ -47,8 +47,8 @@ services:
       - postgres.env
       - postgres_secrets.env
     volumes:
-      - postgres-config:/var/lib/postgresql/data
-      #- ${POSTGRES_CONFIG_VOLUME}:/var/lib/postgresql/data
+      #- postgres-config:/var/lib/postgresql/data
+      - ${POSTGRES_CONFIG_VOLUME}:/var/lib/postgresql/data
     restart: "no"
 
   redis:
@@ -57,8 +57,8 @@ services:
     networks:
       - peertube
     volumes:
-      - redis-config:/data
-      #- ${REDIS_CONFIG_VOLUME}:/data
+      #- redis-config:/data
+      - ${REDIS_CONFIG_VOLUME}:/data
     restart: "no"
 
   postfix:
@@ -69,8 +69,8 @@ services:
     env_file:
       - postfix.env
     volumes:
-      - postfix-config:/etc/opendkim/keys
-      #- ${POSTFIX_CONFIG_VOLUME}:/etc/opendkim/keys
+      #- postfix-config:/etc/opendkim/keys
+      - ${POSTFIX_CONFIG_VOLUME}:/etc/opendkim/keys
     restart: "no"
 
 networks:
@@ -84,8 +84,8 @@ networks:
 
 volumes:
   peertube-assets:
-  peertube-config:
-  peertube-data:
-  postgres-config:
-  redis-config:
-  postfix-config:
+  #peertube-config:
+  #peertube-data:
+  #postgres-config:
+  #redis-config:
+  #postfix-config:
