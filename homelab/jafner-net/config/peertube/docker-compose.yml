@@ -2,7 +2,8 @@ version: "3.3"
 
 services:
   peertube:
-    image: jafner/peertube:dev
+    image: chocobozzz/peertube:production-bullseye
+    #image: jafner/peertube:dev
     container_name: peertube_peertube
     logging:
       driver: loki
