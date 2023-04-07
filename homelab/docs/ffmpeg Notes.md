@@ -606,7 +606,7 @@ Alternate group                          : 1
 
 # Create a Clip from a Video
 You can create a clip from a video file without reencoding given a single time span. 
-`ffmpeg -i "$input" -ss 00:05:20 -to 00:15:30 -c:v copy -c:a copy "$output"`
+`ffmpeg -ss 00:05:20 -i "$input" -to 00:15:30 -c:v copy -c:a copy "$output"`
 
 The time to perform this operation is based on the *size of the input file up to the starting timestamp*, not the length of the clip.
 
