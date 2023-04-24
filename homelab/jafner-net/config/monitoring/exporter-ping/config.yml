@@ -11,8 +11,9 @@ targets:
   - 4.69.219.210 # Owned by LEVEL3 (ASN: 3356) (https://www.findip-address.com/4.69.219.210)
   - 4.30.140.62 # Owned by LEVEL3 (ASN: 3356) (https://www.findip-address.com/4.30.140.62)
   - 172.71.144.3 # Owned by CLOUDFLARENET (ASN: 13335) (https://www.findip-address.com/172.71.144.3)
-
-
+  - 192.168.1.10 # Primary NAS
+  - 192.168.1.11 # Backup NAS
+  - 192.168.1.32 # Local DNS server
 
 dns: 
   refresh: 1m
