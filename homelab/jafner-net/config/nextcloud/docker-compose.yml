@@ -28,24 +28,6 @@ services:
       - $DOCKER_DATA/config:/config
       - $DOCKER_DATA/data:/data
 
-  collabora:
-    image: collabora/code:latest
-    container_name: nextcloud_collabora
-    privileged: true
-    ports:
-      - 9980:9980
-    networks:
-      - web
-      - nextcloud
-    env_file:
-      - collabora.env
-      - collabora_secrets.env
-    cap_add:
-      - MKNOD
-    labels: 
-      - traefik.http.routers.collabora.rule=Host(`nextcloud.jafner.net`) && (PathPrefix(`/lool`) || PathPrefix(`/hosting/discovery`) || PathPrefix(`/hosting/capabilities`) || PathPrefix(`/loleaflet`)) || Host(`collabora.jafner.net`)
-      - traefik.http.routers.collabora.tls.certresolver=lets-encrypt
-
   mariadb:
     image: lscr.io/linuxserver/mariadb
     container_name: nextcloud_mariadb
