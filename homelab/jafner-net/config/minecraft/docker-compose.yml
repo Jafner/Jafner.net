@@ -31,14 +31,13 @@ services:
         keep-file: "true"
     env_file: 
       - minecraft.env
+      - minecraft_secrets.env
       - e8.env
-      - e8_secrets.env
     volumes:
       - $DOCKER_DATA/e8:/data:rw
     networks:
       - minecraft
     restart: "no"
-
 
   exporter-minecraft:
     image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
