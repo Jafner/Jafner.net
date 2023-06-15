@@ -32,6 +32,7 @@ services:
     env_file: 
       - minecraft.env
       - e8.env
+      - e8_secrets.env
     volumes:
       - $DOCKER_DATA/e8:/data:rw
     networks:
