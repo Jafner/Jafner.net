@@ -16,7 +16,7 @@ services:
       - minecraft
     ports:
       - 25565:25565
-    command: --mapping=bmcp.janfer.net=bmcp:25565,e9.janfer.net=e9:25565,fan.janfer.net=fan:25565,vanilla.janfer.net=vanilla:25565,vanilla2.janfer.net=vanilla2:25565 --api-binding=0.0.0.0:25566
+    command: --mapping=bmcp.janfer.net=bmcp:25565,e9.janfer.net=e9:25565,fan.janfer.net=fan:25565,vanilla.janfer.net=vanilla:25565,vanilla2.janfer.net=vanilla2:25565,garfnuts.jafner.net=e8:25565 --api-binding=0.0.0.0:25566
 
   e8:
     image: itzg/minecraft-server:latest
