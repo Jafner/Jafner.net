@@ -36,7 +36,7 @@ services:
     volumes:
       - $DOCKER_DATA/e8:/data:rw
     networks:
-      - mc-router
+      - minecraft
     restart: "no"
 
 
