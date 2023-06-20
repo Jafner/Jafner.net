@@ -9,7 +9,6 @@ done
 
 # Check for good connection to NAS and shares mounted properly.
 SMB_SHARES="/mnt/nas/av
-/mnt/nas/backups
 /mnt/nas/calibre
 /mnt/nas/calibre-web
 /mnt/nas/media
