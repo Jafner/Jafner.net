@@ -50,31 +50,6 @@ services:
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
       - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
-  lidarr:
-    image: linuxserver/lidarr
-    container_name: autopirate_lidarr
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    networks:
-      - web
-    env_file:
-      - autopirate.env
-    volumes:
-      - "${DOCKER_DATA}/lidarr:/config"
-      - "${NZB_DIR}:/downloads"
-      - "${MEDIA_DIR}/Audio/Music:/music"
-    labels:
-      - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
-      - traefik.http.routers.lidarr.tls.certresolver=lets-encrypt
-      - trarfik.http.services.lidarr.loadbalancer.server.port=8686
-      - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
-
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: autopirate_bazarr

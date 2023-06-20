@@ -97,26 +97,6 @@ services:
     labels:
       - traefik.enable=false
 
-  exporter-pihole:
-    image: ekofr/pihole-exporter:latest
-    container_name: monitoring_exporter-pihole
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
-    restart: "no"
-    networks:
-      - monitoring
-    env_file:
-      - exporter-pihole.env
-      - exporter-pihole_secrets.env
-    labels:
-      - traefik.enable=false
-
   exporter-ping:
     image: czerwonk/ping_exporter
     container_name: monitoring_exporter-ping
