@@ -158,5 +158,3 @@ networks:
     external: true
   web:
     external: true
-  mc-router:
-    external: true
