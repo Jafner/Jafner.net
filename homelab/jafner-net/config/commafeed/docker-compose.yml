@@ -12,6 +12,7 @@ services:
         loki-timeout: "2s"
         keep-file: "true"
     restart: "no"
+    depends_on: postgres
     networks:
       - commafeed
       - web
