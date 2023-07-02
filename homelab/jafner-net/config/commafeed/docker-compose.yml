@@ -30,7 +30,7 @@ services:
       - traefik.http.services.commafeed.loadbalancer.server.port=8082
 
   postgres:
-    image: 'redis:alpine'
+    image: postgres:latest
     container_name: commafeed_postgres
     networks:
       - commafeed
