@@ -30,7 +30,7 @@ services:
       - traefik.http.routers.freshrss.tls.certresolver=lets-encrypt
       - traefik.http.routers.freshrss.tls.options=tls12@file
       - traefik.http.routers.freshrss.middlewares=securityheaders@file
-      - traefik.http.services.freshrss.loadbalancer.server.port=8080
+      - traefik.http.services.freshrss.loadbalancer.server.port=80
 
   postgres:
     image: postgres:15
