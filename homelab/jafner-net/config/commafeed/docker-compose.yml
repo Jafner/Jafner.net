@@ -1,0 +1,45 @@
+version: '3'
+services:
+  send:
+    image: athou/commafeed:latest
+    container_name: commafeed_commafeed
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    networks:
+      - commafeed
+      - web
+    volumes:
+      - ${DOCKER_DATA}/commafeed:/commafeed/data
+    env_file:
+      - commafeed.env
+      - commafeed_secrets.env
+    labels:
+      - traefik.http.routers.commafeed.rule=Host(`rss.jafner.net`)
+      - traefik.http.routers.commafeed.tls.certresolver=lets-encrypt
+      - traefik.http.routers.commafeed.tls.options=tls12@file
+      - traefik.http.routers.commafeed.middlewares=securityheaders@file
+      - traefik.http.services.commafeed.loadbalancer.server.port=8082
+
+  postgres:
+    image: 'redis:alpine'
+    container_name: commafeed_postgres
+    networks:
+      - commafeed
+    restart: "no"
+    volumes:
+      - ${DOCKER_DATA}/postgres:/data
+    env_file:
+      - postgres.env
+      - postgres_secrets.env
+
+networks:
+  web:
+    external: true
+  commafeed:
