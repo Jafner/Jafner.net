@@ -1,7 +1,7 @@
 version: '3'
 services:
   changedetection:
-    image: ghcr.io/dgtlmoon/changedetection:latest
+    image: ghcr.io/dgtlmoon/changedetection.io:latest
     container_name: changedetection_changedetection
     logging:
       driver: loki
