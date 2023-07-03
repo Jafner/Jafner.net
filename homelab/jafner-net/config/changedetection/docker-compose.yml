@@ -1,0 +1,31 @@
+version: '3'
+services:
+  changedetection:
+    image: ghcr.io/dgtlmoon/changedetection:latest
+    container_name: changedetection_changedetection
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
+        loki-batch-size: "50"
+        loki-retries: "1"
+        loki-timeout: "2s"
+        keep-file: "true"
+    restart: "no"
+    networks:
+      - web
+    volumes:
+      - ${DOCKER_DATA}/changedetection:/datastore
+    env_file:
+      - changedetection.env
+      - changedetection_secrets.env
+    labels:
+      - traefik.http.routers.changedetection.rule=Host(`changedetection.jafner.net`)
+      - traefik.http.routers.changedetection.tls.certresolver=lets-encrypt
+      - traefik.http.routers.changedetection.tls.options=tls12@file
+      - traefik.http.routers.changedetection.middlewares=securityheaders@file
+      - traefik.http.services.changedetection.loadbalancer.server.port=5000
+
+networks:
+  web:
+    external: true
