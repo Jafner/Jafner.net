@@ -18,7 +18,6 @@ services:
       - ${DOCKER_DATA}/changedetection:/datastore
     env_file:
       - changedetection.env
-      - changedetection_secrets.env
     labels:
       - traefik.http.routers.changedetection.rule=Host(`changedetection.jafner.net`)
       - traefik.http.routers.changedetection.tls.certresolver=lets-encrypt
