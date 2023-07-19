@@ -20,7 +20,9 @@ done
 
 Make sure to update this list *only* when a disk is newly installed. Also note the date of installation for the disk.
 
-
+Or, if you're only updating one drive:
+1. Set the `$dev` variable to the drive letter you want to check (e.g. for `/dev/sdr`, use `dev=r`)
+2. Run the one-liner: `smartctl -a /dev/sd$dev | awk '/Serial number:/{serial=$NF} /hours:minutes/{powerontime=$NF} {FS="\n"}/Manufactured in /{manufacture=$NF}END{print serial; print  powerontime; print manufacture; printf "\n"}'`
 
 ## Disk Info
 
@@ -54,7 +56,7 @@ Serial number:        2EG14YNJ
 Accumulated power on time, hours:minutes 32640:40
 Manufactured in week 49 of year 2014
 
-### /dev/sdh (REPLACED 2023/06/25)
+### /dev/sdh (INSTALLED 2023/06/25)
 Serial number:        VJGJVTZX
 Accumulated power on time, hours:minutes 35808:32
 Manufactured in week 07 of year 2017
@@ -64,7 +66,7 @@ Serial number:        VJG1H9UX
 Accumulated power on time, hours:minutes 47504:12
 Manufactured in week 33 of year 2016
 
-### /dev/sdj (REPLACED 2023/06/24)
+### /dev/sdj (INSTALLED 2023/06/24)
 Serial number:        VJGJUWNX
 Accumulated power on time, hours:minutes 35913:53
 Manufactured in week 07 of year 2017
@@ -74,7 +76,7 @@ Serial number:        2EGXD27V
 Accumulated power on time, hours:minutes 35390:13
 Manufactured in week 44 of year 2015
 
-### /dev/sdl (REPLACED 2023/06/25)
+### /dev/sdl (INSTALLED 2023/06/25)
 Serial number:        VJGJAS1X
 Accumulated power on time, hours:minutes 35811:54
 Manufactured in week 07 of year 2017
@@ -108,6 +110,11 @@ Manufactured in week 10 of year 2017
 Serial number:        VKH40L6X
 Accumulated power on time, hours:minutes 46115:13
 Manufactured in week 10 of year 2016
+
+### /dev/sdr (INSTALLED 2023/07/19)
+Serial number:        VJGK56KX
+Accumulated power on time, hours:minutes 35870:47
+Manufactured in week 07 of year 2017
 
 ### /dev/sds
 Serial number:        001528PNPVWV        2EGNPVWV
