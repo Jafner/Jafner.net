@@ -424,7 +424,7 @@
 	"monster": [
 		{
 			"name": "Ilvara Mizzrym",
-			"source": "Ilvara",
+			"source": "JBC",
 			"size": [
 				"M"
 			],
@@ -818,7 +818,7 @@
 		},
 		{
 			"name": "Ultralisk",
-			"source": "Ultralisk",
+			"source": "JBC",
 			"size": [
 				"G"
 			],
