@@ -421,7 +421,7 @@
 			"type": "Binding"
 		}
 	],
-	"creature": [
+	"monster": [
 		{
 			"name": "Ilvara Mizzrym",
 			"source": "Ilvara",
@@ -814,6 +814,177 @@
 				"constitution",
 				"dexterity",
 				"wisdom"
+			]
+		},
+		{
+			"name": "Ultralisk",
+			"source": "Ultralisk",
+			"size": [
+				"G"
+			],
+			"type": {
+				"type": "monstrosity",
+				"tags": [
+					"zerg"
+				]
+			},
+			"alignment": [
+				"U"
+			],
+			"ac": [
+				{
+					"ac": 25,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "17d20 + 170",
+				"average": 348
+			},
+			"speed": {
+				"walk": 40,
+				"burrow": {
+					"number": 40,
+					"condition": "on creep"
+				}
+			},
+			"str": 26,
+			"dex": 11,
+			"con": 30,
+			"int": 3,
+			"wis": 11,
+			"cha": 11,
+			"senses": [
+				"tremorsense on creep"
+			],
+			"passive": 10,
+			"immune": [
+				{
+					"immune": [
+						"bludgeoning",
+						"piercing",
+						"slashing"
+					],
+					"note": "from nonmagical attacks",
+					"cond": true
+				}
+			],
+			"conditionImmune": [
+				"charmed",
+				"frightened",
+				"paralyzed",
+				"poisoned"
+			],
+			"cr": "17",
+			"trait": [
+				{
+					"name": "Magic Resistance",
+					"entries": [
+						"The ultralisk has advantage on saving throws against spells and other magical effects."
+					]
+				},
+				{
+					"name": "Reflective Carapace",
+					"entries": [
+						"Any time the ultralisk is targeted by a {@spell magic missile} spell, a line spell, or a spell that requires a ranged attack roll, roll a {@dice d6}. On a 1 to 5, the ultralisk is unaffected. On a 6, the ultralisk is unaffected, and the effect is reflected back at the caster as though it originated from the ultralisk, turning the caster into the target."
+					]
+				},
+				{
+					"name": "Siege Monster",
+					"entries": [
+						"The ultralisk deals double damage to objects and structures."
+					]
+				},
+				{
+					"name": "Secrete Creep",
+					"entries": [
+						"The ultralisk covers any ground it walks over in creep."
+					]
+				},
+				{
+					"name": "Creep",
+					"entries": [
+						"Creep is a living purple viscous substance comprising the zerg superorganism. Zerg standing on creep are conferred benefits by their connection to the hivemind. "
+					]
+				}
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"The ultralisk can make four attacks with its kaiser blades. "
+					]
+				},
+				{
+					"name": "Kaiser Blades",
+					"entries": [
+						"{@atk mw} {@hit 14} to hit, reach 10 ft., one target. {@h}14 ({@damage 2d12 + 8}) slashing damage."
+					]
+				},
+				{
+					"name": "Charge",
+					"entries": [
+						"{@atk mw} {@hit 14} to hit, reach 5 ft., one target. {@h}47 ({@damage 8d12 + 8}) bludgeoning damage. Deals double damage to structures."
+					]
+				}
+			],
+			"legendary": [
+				{
+					"name": "Attack",
+					"entries": [
+						"The ultralisk makes one kaiser blade attack."
+					]
+				},
+				{
+					"name": "Move",
+					"entries": [
+						"The ultralisk moves up to half its speed."
+					]
+				},
+				{
+					"name": "Spew Creep",
+					"entries": [
+						"The ultralisk spews creep from its maw, covering the ground in a 60 ft. cone."
+					]
+				}
+			],
+			"traitTags": [
+				"Legendary Resistances",
+				"Magic Resistance",
+				"Siege Monster"
+			],
+			"senseTags": [
+				"T"
+			],
+			"actionTags": [
+				"Frightful Presence",
+				"Multiattack",
+				"Swallow"
+			],
+			"miscTags": [
+				"MW",
+				"RCH"
+			],
+			"hasFluff": true,
+			"hasFluffImages": true,
+			"save": {
+				"con": "+16",
+				"str": "+14"
+			},
+			"skill": {
+				"athletics": "+14"
+			},
+			"legendaryHeader": [
+				"While standing on creep, the ultralisk can take 3 legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature's turn. The ultralisk regains spent legendary actions at the start of its turn."
+			],
+			"languages": [
+				"Zerg"
+			],
+			"damageTags": [
+				"B",
+				"S"
 			]
 		}
 	]
