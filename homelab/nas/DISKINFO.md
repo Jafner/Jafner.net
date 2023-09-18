@@ -36,10 +36,10 @@ Serial number:        VK0ZD6ZY
 Accumulated power on time, hours:minutes 32709:42
 Manufactured in week 03 of year 2017
 
-### /dev/sdd
-Serial number:        VJG2808X
-Accumulated power on time, hours:minutes 47587:18
-Manufactured in week 35 of year 2016
+### /dev/sdd (INSTALLED 2023/07/20)
+Serial number:        VKJWPAEX
+Accumulated power on time, hours:minutes 44760:00
+Manufactured in week 22 of year 2016
 
 ### /dev/sde
 Serial number:        VJG2PVRX
