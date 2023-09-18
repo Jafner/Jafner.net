@@ -12,8 +12,6 @@ provider "digitalocean" {
 }
 
 variable "digitalocean_token" {
-  type = string
-  default = "var.digitalocean_token"
 }
 
 variable "private_key" {

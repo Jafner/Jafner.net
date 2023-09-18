@@ -1,4 +1,6 @@
 # Provision the host as a Digital Ocean droplet, configure SSH access, run docker install script
+
+/*
 resource "digitalocean_droplet" "cedar" {
   image  = "debian-12-x64"
   name   = "cedar"
@@ -23,3 +25,4 @@ resource "digitalocean_droplet" "cedar" {
 output "cedar-address" {
     value = digitalocean_droplet.cedar.ipv4_address
 }
+*/

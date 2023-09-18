@@ -12,7 +12,11 @@ resource "digitalocean_droplet" "birch" {
     private_key = file(var.private_key)
     timeout = "2m"
   }
-  provisioner "remote-exec" { # Using a provisioner is not best practice. See: https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax#provisioners-are-a-last-resort
+  provisioner "file" {
+    source = "digitalocean/setup.sh"
+    destination = "/root/setup.sh"
+  }
+  provisioner "remote-exec" { 
     inline = [
       "curl -fsSL https://get.docker.com -o get-docker.sh",
       "sudo sh ./get-docker.sh"
