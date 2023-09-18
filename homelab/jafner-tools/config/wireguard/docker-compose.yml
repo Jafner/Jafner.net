@@ -5,7 +5,8 @@ services:
     container_name: wireguard_wg-easy
     restart: "no"
     env_file:
-      - .env
+      - wireguard.env
+      - wireguard_secrets.env
     ports:
       - 53820:51820/udp
     networks:

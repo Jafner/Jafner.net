@@ -5,7 +5,7 @@ services:
     container_name: vaultwarden_vaultwarden
     restart: "no"
     env_file:
-      - .env
+      - vaultwarden_secrets.env
     networks:
       - web
     volumes:
