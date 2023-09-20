@@ -656,6 +656,27 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Adept Caregiver",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"level": {
+						"level": 5
+					}
+				}
+			],
+			"entries": [
+				"You have trained extensively to command a companion quickly and effectively. You gain the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"Once on your turn you can command your companion to take an action other than Dash, Disengage, or Dodge with no action required by you. If you do, you cannot use your bonus action to command your companion.",
+						"When you use your bonus action to command your companion to take an action that includes a signature attack, that attack has an additional bonus to hit equal to your Proficiency Bonus."
+					]
+				}
+			]
 		}
 	],
 	"variantrule": [
