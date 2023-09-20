@@ -72,6 +72,51 @@
 			]
 		}
 	],
+	"feat": [
+		{
+			"name": "Bolt Slinger",
+			"source": "JBC",
+			"prerequisite": [
+				{
+					"level": {
+						"level": 5
+					}
+				}
+			],
+			"entries": [
+				"Thanks to extensive practice with the crossbow, you gain the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"Increase your Dexterity score by 1, to a maximum of 20.",
+						"You ignore the loading quality of crossbows with which you are proficient.",
+						"You can use your action on your turn to make two ranged attacks with a crossbow."
+					]
+				}
+			]
+		},
+		{
+			"name": "Adept Caregiver",
+			"source": "JBC",
+			"prerequisite": [
+				{
+					"level": {
+						"level": 5
+					}
+				}
+			],
+			"entries": [
+				"You have trained extensively to command a companion quickly and effectively. You gain the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"Once on your turn you can command your companion to take an action other than Dash, Disengage, or Dodge with no action required by you. If you do, you cannot use your bonus action to command your companion.",
+						"When you use your bonus action to command your companion to take an action that includes a signature attack, that attack has an additional bonus to hit equal to your Proficiency Bonus."
+					]
+				}
+			]
+		}
+	],
 	"item": [
 		{
 			"name": "Fiora's Rose",

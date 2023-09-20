@@ -634,49 +634,6 @@
 				"On your turn when you are below half your hit point maximum, you can use an action to expend any number of your hit dice. For each hit die you roll, you regain a number of hit points equal to the roll + your Constitution modifier.",
 				"Once you use this feature, you must finish a short or long rest before you can use it again."
 			]
-		},
-		{
-			"name": "Bolt Slinger",
-			"source": "JB",
-			"prerequisite": [
-				{
-					"level": {
-						"level": 5
-					}
-				}
-			],
-			"entries": [
-				"Thanks to extensive practice with the crossbow, you gain the following benefits:",
-				{
-					"type": "list",
-					"items": [
-						"Increase your Dexterity score by 1, to a maximum of 20.",
-						"You ignore the loading quality of crossbows with which you are proficient.",
-						"You can use your action on your turn to make two ranged attacks with a crossbow."
-					]
-				}
-			]
-		},
-		{
-			"name": "Adept Caregiver",
-			"source": "JB",
-			"prerequisite": [
-				{
-					"level": {
-						"level": 5
-					}
-				}
-			],
-			"entries": [
-				"You have trained extensively to command a companion quickly and effectively. You gain the following benefits:",
-				{
-					"type": "list",
-					"items": [
-						"Once on your turn you can command your companion to take an action other than Dash, Disengage, or Dodge with no action required by you. If you do, you cannot use your bonus action to command your companion.",
-						"When you use your bonus action to command your companion to take an action that includes a signature attack, that attack has an additional bonus to hit equal to your Proficiency Bonus."
-					]
-				}
-			]
 		}
 	],
 	"variantrule": [
