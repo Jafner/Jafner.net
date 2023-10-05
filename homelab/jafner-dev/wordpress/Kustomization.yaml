@@ -1,9 +1,0 @@
-#secretGenerator: 
-#- name: mysql-pass
-#  literals:
-#  - password=***REMOVED***
-
-#resources:
-#  - Deployment.yaml
-#  - Service.yaml
-#  - PersistentVolumeClaim.yaml
