@@ -1,1 +1,0 @@
-The stats screen can be viewed at the /results/stats.php path
