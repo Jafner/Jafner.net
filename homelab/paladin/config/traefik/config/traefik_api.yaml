@@ -1,0 +1,8 @@
+http:
+  routers:
+    api:
+      rule: "Host(`traefik.druid.jafner.net`)"
+      entryPoints: "websecure"
+      service: "api@internal"
+      tls:
+        certResolver: "lets-encrypt"

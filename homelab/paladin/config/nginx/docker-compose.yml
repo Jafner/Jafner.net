@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx_test
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`nginx.druid.jafner.net`)
+      - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
