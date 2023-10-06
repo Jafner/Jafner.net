@@ -1,0 +1,17 @@
+http:
+  routers:
+    barbarian:
+      rule: "Host(`nas.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "barbarian@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  services:
+    barbarian:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.10/"
+      

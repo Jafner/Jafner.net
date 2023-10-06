@@ -1,0 +1,12 @@
+tcp:
+  routers:
+    warlock:
+      rule: "HostSNIRegexp(`jafner.chat`,`*.jafner.chat`)"
+      service: warlock
+      tls: 
+        passthrough: true
+  services:
+    warlock:
+      loadBalancer:
+        servers:
+          - address: "192.168.1.24:443"

@@ -1,0 +1,17 @@
+http:
+  routers:
+    ranger:
+      rule: "Host(`pihole.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "ranger@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+
+  services:
+    ranger:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.32/"
