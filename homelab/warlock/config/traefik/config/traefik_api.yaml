@@ -1,7 +1,7 @@
 http:
   routers:
     api:
-      rule: "Host(`traefik.jafner.chat`) || Host(`jafner.chat`)"
+      rule: "Host(`traefik.warlock.jafner.net`)"
       entryPoints: "websecure"
       service: "api@internal"
       #tls:
