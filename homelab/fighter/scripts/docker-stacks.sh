@@ -38,6 +38,9 @@ function compose_up_recreate {
 }
 
 function main {
+    NASONLY=false
+    LINT=false
+    FORCE=false
     while [ $# -gt 0 ]; do
         case $1 in
             -n | --nas-only)
@@ -46,12 +49,26 @@ function main {
             -l | --lint)
                 LINT=true
             ;;
+            -f | --force)
+                FORCE=true
+            ;;
             *)
-                OPERATION=$1
+                OPERATION="$OPERATION $1"
             ;;
         esac
         shift
     done
+    case $OPERATION in
+      up)
+        echo "OPERATION is up"
+      ;;
+      down)
+        echo "OPERATION is down"
+      ;;
+      *)
+        echo "OPERATION is not up or down"
+      ;;
+    esac
 
     echo "\$NASONLY is $NASONLY"
     echo "\$LINT is $LINT"
