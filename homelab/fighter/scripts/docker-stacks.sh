@@ -38,9 +38,8 @@ function compose_up_recreate {
 }
 
 function main {
-    NASONLY=false
-    LINT=false
-    FORCE=false
+    echo "\$OPERATION is $OPERATION"
+    echo "Parse global flags"
     while [ $# -gt 0 ]; do
         case $1 in
             -n | --nas-only)
@@ -55,9 +54,10 @@ function main {
         esac
         shift
     done
+    echo "\$OPERATION is $OPERATION"
+    echo "Determine operation"
     case $OPERATION in
       up*)
-        echo "OPERATION is up"
         while [ $# -gt 0 ]; do
             case $1 in
                 -f | --force)
@@ -76,8 +76,6 @@ function main {
         echo "FORCE is $FORCE"
       ;;
       down*)
-        echo "OPERATION is down"
-        # run "down" on all stacks
         while [ $# -gt 0 ]; do
             case $1 in
                 down)
@@ -97,10 +95,6 @@ function main {
         exit
       ;;
     esac
-
-    echo "\$NASONLY is $NASONLY"
-    echo "\$LINT is $LINT"
-    echo "\$OPERATION is $OPERATION"
 }
 
 main "$@"
