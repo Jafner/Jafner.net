@@ -38,7 +38,7 @@ function compose_up_recreate {
 }
 
 function main {
-    echo "\$OPERATION is $OPERATION"
+    echo "\$@ is $@"
     echo "Parse global flags"
     while [ $# -gt 0 ]; do
         case $1 in
@@ -62,9 +62,11 @@ function main {
             case $1 in
                 -f | --force)
                     FORCE=true
+                    echo "Force is true"
                 ;;
                 up)
-                    true
+                    echo "Operation is up"
+                    exit
                 ;;
                 *)
                     echo "Unrecognized operation \'$1\'"
@@ -80,6 +82,8 @@ function main {
             case $1 in
                 down)
                     true
+                    echo "Operation is down"
+                    exit
                 ;;
                 *)
                     echo "Unrecognized operation \'$1\'"
