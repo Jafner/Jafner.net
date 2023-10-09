@@ -43,11 +43,19 @@ function main {
             -n | --nas-only)
                 NASONLY=true
             ;;
+            -l | --lint)
+                LINT=true
+            ;;
+            *)
+                OPERATION=$1
+            ;;
         esac
         shift
     done
-    echo "\$@ is \"$@\""
+
     echo "\$NASONLY is $NASONLY"
+    echo "\$LINT is $LINT"
+    echo "\$OPERATION is $OPERATION"
 }
 
 main "$@"
