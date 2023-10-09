@@ -49,9 +49,6 @@ function main {
             -l | --lint)
                 LINT=true
             ;;
-            -f | --force)
-                FORCE=true
-            ;;
             *)
                 OPERATION="$OPERATION $1"
             ;;
@@ -59,14 +56,45 @@ function main {
         shift
     done
     case $OPERATION in
-      up)
+      up*)
         echo "OPERATION is up"
+        while [ $# -gt 0 ]; do
+            case $1 in
+                -f | --force)
+                    FORCE=true
+                ;;
+                up)
+                    true
+                ;;
+                *)
+                    echo "Unrecognized operation \'$1\'"
+                    exit
+                ;;
+            esac
+            shift
+        done
+        echo "FORCE is $FORCE"
       ;;
-      down)
+      down*)
         echo "OPERATION is down"
+        # run "down" on all stacks
+        while [ $# -gt 0 ]; do
+            case $1 in
+                down)
+                    true
+                ;;
+                *)
+                    echo "Unrecognized operation \'$1\'"
+                    exit
+                ;;
+            esac
+            shift
+        done
+        echo "FORCE is $FORCE"
       ;;
       *)
-        echo "OPERATION is not up or down"
+        echo "Operation not recognized."
+        exit
       ;;
     esac
 
