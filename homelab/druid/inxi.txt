@@ -1,0 +1,13 @@
+System:    Host: druid Kernel: 5.10.0-10-amd64 x86_64 bits: 64 Console: tty 0 Distro: Debian GNU/Linux 11 (bullseye) 
+Machine:   Type: Kvm System: DigitalOcean product: Droplet v: 20171212 serial: 267039112 
+           Mobo: N/A model: N/A serial: N/A BIOS: DigitalOcean v: 20171212 date: 12/12/2017 
+CPU:       Info: Single Core DO-Regular [MCP] speed: 2494 MHz 
+Graphics:  Device-1: Red Hat QXL paravirtual graphic card driver: qxl v: kernel 
+           Display: server: No display server data found. Headless machine? tty: 177x60 
+           Message: Advanced graphics data unavailable in console for root. 
+Network:   Device-1: Intel 82371AB/EB/MB PIIX4 ACPI type: network bridge driver: piix4_smbus 
+           Device-2: Red Hat Virtio network driver: virtio-pci 
+           Device-3: Red Hat Virtio network driver: virtio-pci 
+Drives:    Local Storage: total: 40 GiB used: 31.91 GiB (79.8%) 
+Info:      Processes: 112 Uptime: 635d 17h 01m Memory: 976.5 MiB used: 470.8 MiB (48.2%) Init: systemd runlevel: 5 Shell: Bash 
+           inxi: 3.3.01

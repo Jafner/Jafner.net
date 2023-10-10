@@ -1,0 +1,11 @@
+System:    Host: warlock Kernel: 5.10.0-21-amd64 x86_64 bits: 64 Console: tty 0 Distro: Debian GNU/Linux 11 (bullseye) 
+Machine:   Type: Desktop Mobo: ASUSTeK model: PRIME A320M-K v: Rev X.0x serial: 200569832803322 UEFI: American Megatrends 
+           v: 5409 date: 01/07/2020 
+CPU:       Info: 6-Core AMD Ryzen 5 1600 [MT MCP] speed: 1547 MHz min/max: 1550/3200 MHz 
+Graphics:  Message: No Device data found. 
+           Display: server: No display server data found. Headless machine? tty: 177x60 
+           Message: Advanced graphics data unavailable in console for root. 
+Network:   Device-1: Realtek RTL8111/8168/8411 PCI Express Gigabit Ethernet driver: r8169 
+Drives:    Local Storage: total: 931.51 GiB used: 8.15 GiB (0.9%) 
+Info:      Processes: 194 Uptime: 197d 22h 55m Memory: 15.62 GiB used: 1.26 GiB (8.1%) Init: systemd runlevel: 5 Shell: Bash 
+           inxi: 3.3.01
