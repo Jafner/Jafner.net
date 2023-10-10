@@ -1,10 +1,11 @@
 # takes a docker-compose.yml file path and returns a boolean to represent 
 # whether that stack depends on an smb share under the `/mnt/nas` path
 function check_nas { 
-    docker-compose config | grep -q /mnt/nas
+    if [ docker-compose config | grep -q /mnt/nas ]; then
+    docker-compose config | grep -q /mnt/nas # this returns 0 if `/mnt/nas` is present in the config
     MATCH=$?
-    if [ $MATCH != 0]; then
-        return false
+    if [ $MATCH == 0]; then 
+        return true
     fi
 }
 
@@ -77,8 +78,17 @@ function main {
 
     for stack in "$STACKS_DIRECTORY"/* ; do
         cd $stack
-        if [ $NAS_ONLY ]; then
-            if 
+        if [ $NAS_ONLY ] || [ $LINT ]; then
+            TMP=$(docker-compose config)
+            PASS=$?
+            if [ $NAS_ONLY ]; then
+                echo $TMP | grep -q /mnt/nas
+                NAS_DEPENDENT=$?
+                if [ $NAS_DEPENDENT ]; then
+                    echo "\$NAS_DEPENDENT is $NAS_DEPENDENT for $stack"
+                fi
+            fi
+        fi
         case $COMMAND in
             up) echo "$COMMAND at $PWD" 
             ;;
