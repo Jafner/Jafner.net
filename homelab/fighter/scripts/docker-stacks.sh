@@ -37,6 +37,12 @@ function compose_up_recreate {
     docker-compose up -d --force-recreate -f $STACK_PATH
 }
 
+function get_global_args {
+    for arg in $@; do
+     echo "\$arg is $arg"
+    done
+}
+
 function main {
     echo "\$@ is $@"
     echo "Parse global flags"
@@ -54,6 +60,8 @@ function main {
         esac
         shift
     done
+    echo "\$NASONLY is $NASONLY"
+    echo "\$LINT is $LINT"
     echo "\$OPERATION is $OPERATION"
     echo "Determine operation"
     case $OPERATION in
@@ -101,4 +109,4 @@ function main {
     esac
 }
 
-main "$@"
+get_global_args "$@"
