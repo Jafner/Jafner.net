@@ -28,85 +28,60 @@ function compose_down {
 # takes a docker-compose.yml file path and brings it up
 function compose_up {
     STACK_PATH=$1
-    docker-compose up -f $STACK_PATH -d
+    if [ "$FORCERECREATE" = true ]; then
+        docker-compose up --force-recreate -f $STACK_PATH -d
+    elif [ "$FORCERECREATE" = false ]; then
+        docker-compose up -f $STACK_PATH -d
+    else
+        echo "Bad variable value: \$FORCERECREATE=$FORCERECREATE"
+    fi
 }
 
-# takes a docker-compose.yml file path and force recreates it
-function compose_up_recreate {
-    STACK_PATH=$1
-    docker-compose up -d --force-recreate -f $STACK_PATH
-}
-
-function get_global_args {
-    for arg in $@; do
-     echo "\$arg is $arg"
+function loop_stacks {
+    for $stack in $STACKS_DIRECTORY; do
+        case $COMMAND in
+            up) echo "loop_stacks up";;
+            down) echo "loop_stacks down";;
+            *) echo "Invalid input $COMMAND at loop_stacks"; exit 1;;
+        esac
     done
 }
 
 function main {
-    echo "\$@ is $@"
-    echo "Parse global flags"
-    while [ $# -gt 0 ]; do
+    echo "\$ARGS is $ARGS"
+    STACKS_DIRECTORY="/home/admin/homelab/fighter/config"
+    while [[ $# -gt 0 ]]; do
+        #echo "case is $1"
         case $1 in
-            -n | --nas-only)
-                NASONLY=true
+            # global flags are parsed first
+            -n|--nas-only) NASONLY=true; shift ;;
+            -l|--lint) LINT=true; shift ;;
+            -p|--path) STACKS_DIRECTORY="$2"; shift; shift ;;
+            -v|--verbose) VERBOSE=true; shift ;;
+            # commands are parsed with nested parsing for subcommand flags
+            up*) COMMAND="up"; shift;
+                while [[ $# -gt 0 ]]; do
+                    case $1 in
+                        -f|--force-recreate) FORCERECREATE=true; shift;;
+                    esac
+                done 
             ;;
-            -l | --lint)
-                LINT=true
+            down*) COMMAND="down"; shift; 
+                while [[ $# -gt 0 ]]; do
+                    case $1 in
+                        -f|--force-recreate) FORCERECREATE=true; shift;;
+                    esac
+                done
             ;;
-            *)
-                OPERATION="$OPERATION $1"
-            ;;
+            *) echo "Unrecognized option $1"; exit 1 ;;
         esac
-        shift
     done
-    echo "\$NASONLY is $NASONLY"
-    echo "\$LINT is $LINT"
-    echo "\$OPERATION is $OPERATION"
-    echo "Determine operation"
-    case $OPERATION in
-      up*)
-        while [ $# -gt 0 ]; do
-            case $1 in
-                -f | --force)
-                    FORCE=true
-                    echo "Force is true"
-                ;;
-                up)
-                    echo "Operation is up"
-                    exit
-                ;;
-                *)
-                    echo "Unrecognized operation \'$1\'"
-                    exit
-                ;;
-            esac
-            shift
-        done
-        echo "FORCE is $FORCE"
-      ;;
-      down*)
-        while [ $# -gt 0 ]; do
-            case $1 in
-                down)
-                    true
-                    echo "Operation is down"
-                    exit
-                ;;
-                *)
-                    echo "Unrecognized operation \'$1\'"
-                    exit
-                ;;
-            esac
-            shift
-        done
-        echo "FORCE is $FORCE"
-      ;;
-      *)
-        echo "Operation not recognized."
-        exit
-      ;;
-    esac
+
+    for stack in "$STACKS_DIRECTORY"/* ; do
+        echo "$stack"
+    done
 }
 
-get_global_args "$@"
+ARGS="$@"
+
+main $ARGS
