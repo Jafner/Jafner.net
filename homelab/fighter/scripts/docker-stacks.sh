@@ -36,6 +36,11 @@ function main {
         esac
     done
 
+    if [ ! $COMMAND ]; then
+        echo "Error: no command specified"
+        exit 1
+    fi
+
     for stack in "$STACKS_DIRECTORY"/* ; do
         cd $stack
         if [ $NAS_ONLY ] || [ $LINT ]; then
