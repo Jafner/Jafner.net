@@ -13,10 +13,15 @@ function check_nas {
 
 # takes a docker-compose.yml file path and returns a boolean to represent 
 # whether that stack passes a docker-compose config lint
-function valid_compose {
+function lint {
     STACK_PATH=$1
     docker-compose config -f $STACK_PATH > /dev/null 2>&1 
     return $?
+}
+
+function compose_config {
+    STACK_PATH=$1
+    docker-compose config -f $STACK_PATH
 }
 
 # takes a docker-compose.yml file path and shuts it down
@@ -37,16 +42,6 @@ function compose_up {
     fi
 }
 
-function loop_stacks {
-    for $stack in $STACKS_DIRECTORY; do
-        case $COMMAND in
-            up) echo "loop_stacks up";;
-            down) echo "loop_stacks down";;
-            *) echo "Invalid input $COMMAND at loop_stacks"; exit 1;;
-        esac
-    done
-}
-
 function main {
     #echo "\$ARGS is $ARGS"
     STACKS_DIRECTORY="/home/admin/homelab/fighter/config"
@@ -63,7 +58,7 @@ function main {
                 while [[ $# -gt 0 ]]; do
                     case $1 in
                         -f|--force-recreate) FORCE_RECREATE=true; shift;;
-                        *) echo "Unrecognized option '$1'"; exit 1;;
+                        *) echo "Unrecognized option '$1' for '$COMMAND'"; exit 1;;
                     esac
                 done 
             ;;
@@ -71,7 +66,15 @@ function main {
                 while [[ $# -gt 0 ]]; do
                     case $1 in
                         -o|--remove-orphans) REMOVE_ORPHANS=true; shift;;
-                        *) echo "Unrecognized option '$1'"; exit 1;;
+                        *) echo "Unrecognized option '$1' for '$COMMAND'"; exit 1;;
+                    esac
+                done
+            ;;
+            config*) COMMAND="config"; shift;
+                while [[ $# -gt 0 ]]; do
+                    case $1 in
+                        -n|--no-interpolate) NO_INTERPOLATE=true; shift;;
+                        *) echo "Unrecognized option '$1' for '$COMMAND'"; exit 1;;
                     esac
                 done
             ;;
@@ -80,10 +83,10 @@ function main {
     done
 
     for stack in "$STACKS_DIRECTORY"/* ; do
-        cd $stack/
         case $COMMAND in
-            up) echo "Run compose-up from ${PWD}" ;;
-            down) echo "Run compose-down from ${PWD}" ;;
+            up) echo "$COMMAND on $stack" ;;
+            down) echo "$COMMAND on $stack" ;;
+            config) compose_config $stack ;;
             *) echo "Unrecognized command '$COMMAND'" ;;
         esac
     done
