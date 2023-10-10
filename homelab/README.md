@@ -34,8 +34,8 @@ This repo is (mostly) organized into the following structure:
             # more modular system) use docker-compose.yml to 
             # define their stack configuration. 
             .env 
-            # contains environment variables to be used by multiple 
-            # containers within a stack
+            # contains volume mapping env vars, used automatically by
+            # docker-compose to expand ${...}.
             README.md 
             # if a service stack has documentation specific to itself, 
             # it will be contained within this file. This usually contains 
@@ -44,22 +44,14 @@ This repo is (mostly) organized into the following structure:
             # crontab or /etc/docker/daemon.json)
 ```
 
-# Getting an SSH Key
-1. `TMP=$(echo "$HOME/.ssh/$(echo $HOSTNAME)_id_rsa") && ssh-keygen -b 8192 -t rsa -C "$USER@$HOSTNAME" -f $TMP -N "" && echo "IdentityFile $TMP" > $HOME/.ssh/config && cat $(echo "$TMP").pub`
-2. Go to Jafner -> Preferences -> SSH Keys.
-3. Add the pubkey and save.
-
-# Pulling Only Relevant Subdir
-Per: https://stackoverflow.com/questions/4114887
-
-```bash
-~$ mkdir homelab && cd homelab/
-git init
-git config core.sparseCheckout true
-git remote add -f origin ssh://git@gitlab.jafner.net:2229/Jafner/homelab.git
-echo "<deployment name; e.g. server/>" > .git/info/sparse-checkout
-git checkout main
-```
+# Setting Up the Repository
+1. Create a new Gitlab [Personal Access Token](https://gitlab.jafner.net/-/profile/personal_access_tokens) named after the host on which it will be used. It should have the scopes `read_api`, `read_user`, `read_repository`, and, optionally, `write_repository` if the host will be pushing commits back to the origin. Development hosts should have the `write_repository` permission. Note the *token name* and *token key* for step 6.
+2. `mkdir ~/homelab ~/data && cd ~/homelab` Create the `~/homelab` and `~/data` directories. This should be under the `admin` user's home directory, or equivalent. *It should not be owned by root.*
+3. `git init` Initialize the git repo. It should be empty at this point. We must init the repo empty in order to configure sparse checkout. 
+4. `git config core.sparseCheckout true && git config core.fileMode false && git config pull.ff only && git config init.defaultBranch main` Configure the repo to use sparse checkout and ignore file mode changes. Also configure default branch and pull behavior. 
+5. (Optional) `echo "$HOSTNAME/" > .git/info/sparse-checkout` Configure the repo to checkout only the files relevant to the host (e.g. fighter). Development hosts should not use this. 
+6. `git remote add -f origin https://<token name>:<token key>@gitlab.jafner.net/Jafner/homelab.git` Add the origin with authentication via personal access token and fetch. Remember to replace the placeholder token name and token key with the values from step 1.
+7. `git checkout main` Checkout the main branch to fetch the latest files. 
 
 ## Disabling Sparse Checkout
 To disable sparse checkout, simply run `git sparse-checkout disable`. 
