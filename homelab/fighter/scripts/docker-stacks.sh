@@ -2,7 +2,7 @@
 # whether that stack depends on an smb share under the `/mnt/nas` path
 function check_nas { 
     STACK_PATH=$1
-    docker-compose config -f $STACK_PATH | grep -q /mnt/nas
+    docker-compose config | grep -q /mnt/nas
     MATCH=$?
     if [ $MATCH == 0]; then
         return true
@@ -14,29 +14,25 @@ function check_nas {
 # takes a docker-compose.yml file path and returns a boolean to represent 
 # whether that stack passes a docker-compose config lint
 function lint {
-    STACK_PATH=$1
-    docker-compose config -f $STACK_PATH > /dev/null 2>&1 
+    docker-compose config  > /dev/null 2>&1 
     return $?
 }
 
 function compose_config {
-    STACK_PATH=$1
-    docker-compose config -f $STACK_PATH
+    docker-compose config 
 }
 
 # takes a docker-compose.yml file path and shuts it down
 function compose_down {
-    STACK_PATH=$1
-    docker-compose down -f $STACK_PATH
+    docker-compose down
 }
 
 # takes a docker-compose.yml file path and brings it up
 function compose_up {
-    STACK_PATH=$1
     if [ "$FORCERECREATE" = true ]; then
-        docker-compose up --force-recreate -f $STACK_PATH -d
+        docker-compose up --force-recreate -d
     elif [ "$FORCERECREATE" = false ]; then
-        docker-compose up -f $STACK_PATH -d
+        docker-compose up -d
     else
         echo "Bad variable value: \$FORCERECREATE=$FORCERECREATE"
     fi
@@ -83,10 +79,11 @@ function main {
     done
 
     for stack in "$STACKS_DIRECTORY"/* ; do
+        cd $stack
         case $COMMAND in
-            up) echo "$COMMAND on $stack" ;;
-            down) echo "$COMMAND on $stack" ;;
-            config) compose_config $stack ;;
+            up) echo "$COMMAND at $PWD" ;;
+            down) echo "$COMMAND at $PWD" ;;
+            config) echo "$COMMAND at $PWD" ;;
             *) echo "Unrecognized command '$COMMAND'" ;;
         esac
     done
