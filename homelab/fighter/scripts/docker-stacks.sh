@@ -63,6 +63,7 @@ function main {
                 while [[ $# -gt 0 ]]; do
                     case $1 in
                         -f|--force-recreate) FORCE_RECREATE=true; shift;;
+                        *) echo "Unrecognized option '$1'"; exit 1;;
                     esac
                 done 
             ;;
@@ -70,6 +71,7 @@ function main {
                 while [[ $# -gt 0 ]]; do
                     case $1 in
                         -o|--remove-orphans) REMOVE_ORPHANS=true; shift;;
+                        *) echo "Unrecognized option '$1'"; exit 1;;
                     esac
                 done
             ;;
