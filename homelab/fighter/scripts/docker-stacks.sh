@@ -80,8 +80,8 @@ function main {
     for stack in "$STACKS_DIRECTORY"/* ; do
         cd $stack/
         case $COMMAND in
-            up) echo "Run compose-up on $stack" ;;
-            down) echo "Run compose-down on $stack" ;;
+            up) echo "Run compose-up from ${PWD}" ;;
+            down) echo "Run compose-down from ${PWD}" ;;
             *) echo "Unrecognized command '$COMMAND'" ;;
         esac
     done
