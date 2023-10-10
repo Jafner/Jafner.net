@@ -1,6 +1,6 @@
 # takes a docker-compose.yml file path and returns a boolean to represent 
 # whether that stack depends on an smb share under the `/mnt/nas` path
-function uses_smb_share { 
+function check_nas { 
     STACK_PATH=$1
     docker-compose config -f $STACK_PATH | grep -q /mnt/nas
     MATCH=$?
@@ -48,13 +48,13 @@ function loop_stacks {
 }
 
 function main {
-    echo "\$ARGS is $ARGS"
+    #echo "\$ARGS is $ARGS"
     STACKS_DIRECTORY="/home/admin/homelab/fighter/config"
     while [[ $# -gt 0 ]]; do
         #echo "case is $1"
         case $1 in
             # global flags are parsed first
-            -n|--nas-only) NASONLY=true; shift ;;
+            -n|--nas-only) NAS_ONLY=true; shift ;;
             -l|--lint) LINT=true; shift ;;
             -p|--path) STACKS_DIRECTORY="$2"; shift; shift ;;
             -v|--verbose) VERBOSE=true; shift ;;
@@ -62,14 +62,14 @@ function main {
             up*) COMMAND="up"; shift;
                 while [[ $# -gt 0 ]]; do
                     case $1 in
-                        -f|--force-recreate) FORCERECREATE=true; shift;;
+                        -f|--force-recreate) FORCE_RECREATE=true; shift;;
                     esac
                 done 
             ;;
             down*) COMMAND="down"; shift; 
                 while [[ $# -gt 0 ]]; do
                     case $1 in
-                        -f|--force-recreate) FORCERECREATE=true; shift;;
+                        -o|--remove-orphans) REMOVE_ORPHANS=true; shift;;
                     esac
                 done
             ;;
@@ -78,7 +78,12 @@ function main {
     done
 
     for stack in "$STACKS_DIRECTORY"/* ; do
-        echo "$stack"
+        cd $stack/
+        case $COMMAND in
+            up) echo "Run compose-up on $stack" ;;
+            down) echo "Run compose-down on $stack" ;;
+            *) echo "Unrecognized command '$COMMAND'" ;;
+        esac
     done
 }
 
