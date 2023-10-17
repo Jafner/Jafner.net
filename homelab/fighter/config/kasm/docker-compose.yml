@@ -1,0 +1,29 @@
+version: '3'
+services:
+  nginx:
+    image: linuxserver/kasm:latest
+    container_name: kasm_kasm
+    privileged: true
+    environment:
+      - KASM_PORT=443
+      #- DOCKER_HUB_USERNAME=
+      #- DOCKER_HUB_PASSWORD=
+    volumes:
+      - ${APP_DATA}/opt:/opt
+      - ${APP_DATA}/profiles:/profiles
+      - /dev/input:/dev/input
+      - /run/udev/data:/run/udev/data
+    ports:
+      - 3000:3000
+      - 30443:443
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.kasm.rule=Host(`kasm.jafner.net`)
+      - traefik.http.routers.kasm.tls.certresolver=lets-encrypt
+      - traefik.http.routers.kasm.middlewares=traefik-forward-auth-privileged@file
+      - traefik.http.services.kasm.loadbalancer.serverstransport=insecureskipverify
+
+networks:
+  web:
+    external: true
