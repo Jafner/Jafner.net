@@ -77,14 +77,12 @@ services:
   kasm_redis:
     container_name: kasm_redis
     command: ["sh", "-c", "redis-server --requirepass $${REDIS_PASSWORD}"]
-    user: "${KASM_UID?}:${KASM_GID?}"
+    user: "1000:1000"
     image: redis:5-alpine
     networks:
       - kasm_default_network
     env_file:
       - kasm_secrets.env
-    environment:
-      REDIS_PASSWORD: changeme
     logging:
       driver: "json-file"
       options:
@@ -94,7 +92,7 @@ services:
   
   kasm_api:
     container_name: kasm_api
-    user: "${KASM_UID?}:${KASM_GID?}"
+    user: "1000:1000"
     image: "kasmweb/api:1.14.0"
     read_only: true
     networks:
@@ -113,7 +111,7 @@ services:
   
   kasm_manager:
     container_name: kasm_manager
-    user: "${KASM_UID?}:${KASM_GID?}"
+    user: "1000:1000"
     image: "kasmweb/manager:1.14.0"
     read_only: true
     networks:
@@ -170,7 +168,7 @@ services:
   
   kasm_guac:
     container_name: kasm_guac
-    user: "${KASM_UID?}:${KASM_GID?}"
+    user: "1000:1000"
     image: "kasmweb/kasm-guac:1.14.0"
     read_only: true
     networks:
