@@ -1,9 +1,16 @@
 version: '3'
 services:
-  nginx:
+  kasm:
     image: linuxserver/kasm:latest
     container_name: kasm_kasm
     privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     environment:
       - KASM_PORT=443
       - NVIDIA_VISIBLE_DEVICES=all
