@@ -6,6 +6,7 @@ services:
     restart: "no"
     volumes:
       - $DOCKER_DATA:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - web
     labels:
