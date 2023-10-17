@@ -30,7 +30,7 @@ services:
       - traefik.http.routers.kasm.rule=Host(`kasm.jafner.net`)
       - traefik.http.routers.kasm.tls.certresolver=lets-encrypt
       - traefik.http.routers.kasm.middlewares=traefik-forward-auth-privileged@file
-      - traefik.http.services.kasm.loadbalancer.serverstransport=insecureskipverify
+      - traefik.http.services.kasm.loadbalancer.serverstransport=insecureskipverify@file
 
 networks:
   web:
