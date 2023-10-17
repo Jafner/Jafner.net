@@ -23,7 +23,6 @@ services:
       - /run/udev/data:/run/udev/data
     ports:
       - 3000:3000
-      - 30443:443
     networks:
       - web
     labels:
