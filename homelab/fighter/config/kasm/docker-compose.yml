@@ -24,7 +24,7 @@ services:
     networks:
       - web
     ports:
-      - 83000:3000
+      - 43000:3000
     labels:
       - traefik.http.routers.kasm.rule=Host(`kasm.jafner.net`)
       - traefik.http.routers.kasm.tls.certresolver=lets-encrypt
