@@ -1,5 +1,15 @@
+function initialize {
+    USER="admin"
+    HOSTNAME=$(hostname)
+    STACKS_DIRECTORY="/home/$USER/homelab/$HOSTNAME/config"
+
+    echo "Initialized with:"
+    echo "USER=$USER"
+    echo "HOSTNAME=$HOSTNAME"
+    echo "STACKS_DIRECTORY=$STACKS_DIRECTORY"
+}
+
 function main {
-    STACKS_DIRECTORY="/home/admin/homelab/fighter/config"
     while [[ $# -gt 0 ]]; do
         case $1 in
             # parse global flags
@@ -24,7 +34,7 @@ function main {
                     esac
                 done
             ;;
-            config*) COMMAND="config"; shift;
+            config*) COMMAND="docker-compose config"; shift;
                 while [[ $# -gt 0 ]]; do
                     case $1 in
                         -n|--no-interpolate) COMMAND="$COMMAND --no-interpolate"; shift;;
@@ -36,7 +46,7 @@ function main {
         esac
     done
 
-    if [ ! $COMMAND ]; then
+    if [ -z ${COMMAND+x} ]; then
         echo "Error: no command specified"
         exit 1
     fi
@@ -63,6 +73,5 @@ function main {
     done
 }
 
-ARGS="$@"
-
-main $ARGS
+initialize
+main "$@"
