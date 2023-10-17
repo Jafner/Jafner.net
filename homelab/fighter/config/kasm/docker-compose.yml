@@ -21,15 +21,19 @@ services:
       - ${APP_DATA}/profiles:/profiles
       - /dev/input:/dev/input
       - /run/udev/data:/run/udev/data
-    ports:
-      - 3000:3000
     networks:
       - web
     labels:
       - traefik.http.routers.kasm.rule=Host(`kasm.jafner.net`)
       - traefik.http.routers.kasm.tls.certresolver=lets-encrypt
       - traefik.http.routers.kasm.middlewares=traefik-forward-auth-privileged@file
+      - traefik.http.services.kasm.loadbalancer.server.port=443
       - traefik.http.services.kasm.loadbalancer.serverstransport=insecureskipverify@file
+      - traefik.http.routers.kasm-setup.rule=Host(`setup.kasm.jafner.net`)
+      - traefik.http.routers.kasm-setup.tls.certresolver=lets-encrypt
+      - traefik.http.routers.kasm-setup.middlewares=traefik-forward-auth-privileged@file
+      - traefik.http.services.kasm-setup.loadbalancer.server.port=3000      
+      - traefik.http.services.kasm-setup.loadbalancer.serverstransport=insecureskipverify@file
 
 networks:
   web:
