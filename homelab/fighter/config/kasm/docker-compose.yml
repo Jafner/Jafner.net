@@ -6,6 +6,7 @@ services:
     privileged: true
     environment:
       - KASM_PORT=443
+      - NVIDIA_VISIBLE_DEVICES=all
       #- DOCKER_HUB_USERNAME=
       #- DOCKER_HUB_PASSWORD=
     volumes:
