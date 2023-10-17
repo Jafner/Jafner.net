@@ -12,7 +12,7 @@ services:
               count: all
               capabilities: [gpu]
     environment:
-      - KASM_PORT=443
+      - KASM_PORT=4443
       - NVIDIA_VISIBLE_DEVICES=all
       #- DOCKER_HUB_USERNAME=
       #- DOCKER_HUB_PASSWORD=
@@ -25,14 +25,15 @@ services:
       - web
     ports:
       - 43000:3000
+      - 4443:4443
     labels:
-      - traefik.http.routers.kasm.rule=Host(`kasm.jafner.net`)
-      - traefik.http.routers.kasm.tls.certresolver=lets-encrypt
-      - traefik.http.routers.kasm.middlewares=traefik-forward-auth-privileged@file
-      - traefik.http.routers.kasm.service=kasm@docker
-      - traefik.http.routers.kasm.entrypoints=websecure
-      - traefik.http.services.kasm.loadbalancer.server.port=443
-      - traefik.http.services.kasm.loadbalancer.serverstransport=insecureskipverify@file
+      #- traefik.http.routers.kasm.rule=Host(`kasm.jafner.net`)
+      #- traefik.http.routers.kasm.tls.certresolver=lets-encrypt
+      #- traefik.http.routers.kasm.middlewares=traefik-forward-auth-privileged@file
+      #- traefik.http.routers.kasm.service=kasm@docker
+      #- traefik.http.routers.kasm.entrypoints=websecure
+      #- traefik.http.services.kasm.loadbalancer.server.port=4443
+      #- traefik.http.services.kasm.loadbalancer.serverstransport=insecureskipverify@file
       #- traefik.http.routers.kasm-setup.rule=Host(`setup.kasm.jafner.net`)
       #- traefik.http.routers.kasm-setup.tls.certresolver=lets-encrypt
       #- traefik.http.routers.kasm-setup.middlewares=traefik-forward-auth-privileged@file
