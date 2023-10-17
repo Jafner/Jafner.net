@@ -190,6 +190,7 @@ services:
       - 443
     networks:
       - kasm_default_network
+      - web
     volumes:
       - ${APP_DATA}/conf/nginx:/etc/nginx/conf.d:ro
       - ${APP_DATA}/certs/kasm_nginx.key:/etc/ssl/private/kasm_nginx.key
