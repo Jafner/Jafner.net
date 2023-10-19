@@ -8,20 +8,7 @@ services:
       - minecraft
     ports:
       - 25565:25565
-    command: --mapping=bmcp.janfer.net=bmcp:25565,e9.janfer.net=e9:25565,fan.janfer.net=fan:25565,vanilla.janfer.net=vanilla:25565,vanilla2.janfer.net=vanilla2:25565,garfnuts.jafner.net=e8:25565 --api-binding=0.0.0.0:25566
-
-  e8:
-    image: itzg/minecraft-server:latest
-    container_name: minecraft_e8
-    env_file: 
-      - minecraft.env
-      - minecraft_secrets.env
-      - e8.env
-    volumes:
-      - $DOCKER_DATA/e8:/data:rw
-    networks:
-      - minecraft
-    restart: "no"
+    command: --api-binding=0.0.0.0:25566
 
   exporter-minecraft:
     image: itzg/mc-monitor # https://github.com/itzg/mc-monitor

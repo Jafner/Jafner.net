@@ -1,8 +1,0 @@
----
-# For configuration options and examples, please see:
-# https://gethomepage.dev/en/configs/docker/
-
-jafner-net-docker:
-  #socket: /var/run/docker.sock
-  host: docker-socket-proxy
-  port: 2375

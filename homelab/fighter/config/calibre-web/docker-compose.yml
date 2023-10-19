@@ -28,20 +28,6 @@ services:
     networks:
       - web
 
-  calibre-web-ace:
-    image: linuxserver/calibre-web
-    container_name: calibre-web_ace
-    env_file:
-      - calibre-web.env
-    volumes:
-      - calibre-web-ace_data:/config
-      - $LIBRARY_DIR/ace:/books
-    labels:
-      - traefik.http.routers.calibre-ace.rule=Host(`ace.calibre.jafner.net`)
-      - traefik.http.routers.calibre-ace.tls.certresolver=lets-encrypt
-    networks:
-      - web
-
 networks:
   web:
     external: true
