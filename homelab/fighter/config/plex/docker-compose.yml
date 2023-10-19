@@ -3,14 +3,6 @@ services:
   plex:
     image: linuxserver/plex
     container_name: plex_plex
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     deploy:
       resources:
@@ -48,14 +40,6 @@ services:
   ombi:
     image: ghcr.io/linuxserver/ombi
     container_name: plex_ombi
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - web
@@ -72,14 +56,6 @@ services:
   exporter-plex:
     image: granra/plex_exporter
     container_name: plex_exporter
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - monitoring

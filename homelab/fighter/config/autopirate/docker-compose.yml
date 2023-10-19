@@ -3,14 +3,6 @@ services:
   radarr:
     image: linuxserver/radarr
     container_name: autopirate_radarr
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - web
     env_file:
@@ -28,14 +20,6 @@ services:
   sonarr:
     image: linuxserver/sonarr
     container_name: autopirate_sonarr
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - web
     env_file:
@@ -78,14 +62,6 @@ services:
   nzbhydra2:
     image: linuxserver/nzbhydra2
     container_name: autopirate_nzbhydra2
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - web
     env_file:
@@ -102,14 +78,6 @@ services:
   sabnzbd:
     image: linuxserver/sabnzbd
     container_name: autopirate_sabnzbd
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - web
       - monitoring
@@ -133,14 +101,6 @@ services:
   tdarr:
     image: haveagitgat/tdarr:latest
     container_name: autopirate_tdarr
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       web:
       tdarr: 
@@ -168,14 +128,6 @@ services:
   tdarr-node:
     image: haveagitgat/tdarr_node:latest
     container_name: autopirate_tdarr-node
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     deploy:
       resources:
         reservations:
@@ -201,14 +153,6 @@ services:
   jackett:
     image: linuxserver/jackett
     container_name: autopirate_jackett
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - web
     env_file:
@@ -226,14 +170,6 @@ services:
   exporter-sabnzbd:
     image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
     container_name: autopirate_sabnzbd-exporter
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - monitoring

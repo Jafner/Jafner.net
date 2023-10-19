@@ -3,14 +3,6 @@ services:
   router:
     image: itzg/mc-router
     container_name: minecraft_router
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - minecraft
@@ -21,14 +13,6 @@ services:
   e8:
     image: itzg/minecraft-server:latest
     container_name: minecraft_e8
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     env_file: 
       - minecraft.env
       - minecraft_secrets.env
@@ -42,14 +26,6 @@ services:
   exporter-minecraft:
     image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
     container_name: minecraft_exporter
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     command: export-for-prometheus
     restart: "no"
     networks:

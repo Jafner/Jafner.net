@@ -4,14 +4,6 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:19.0
     container_name: keycloak_keycloak
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     volumes:
       - $KEYCLOAK_DATA:/opt/keycloak/data
     networks:
@@ -32,14 +24,6 @@ services:
   forwardauth:
     image: mesosphere/traefik-forward-auth:3.1.0
     container_name: keycloak_forwardauth
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       web:
         aliases:
@@ -59,14 +43,6 @@ services:
     image: mesosphere/traefik-forward-auth:3.1.0
     container_name: keycloak_forwardauth-privileged
     command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       web:
         aliases:

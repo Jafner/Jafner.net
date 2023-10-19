@@ -3,14 +3,6 @@ services:
   grafana:
     image: grafana/grafana-oss:latest
     container_name: monitoring_grafana
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - monitoring
@@ -29,14 +21,6 @@ services:
     image: prom/prometheus:latest
     container_name: monitoring_prometheus
     user: 1000:1000
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - monitoring
       - web
@@ -57,14 +41,6 @@ services:
     image: grafana/loki:2.5.0
     container_name: monitoring_loki
     user: 1000:1000
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks:
       - monitoring
       - web
@@ -82,14 +58,6 @@ services:
   promtail:
     image: grafana/promtail
     container_name: monitoring_promtail
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     networks: 
       - monitoring
     volumes:
@@ -100,14 +68,6 @@ services:
   exporter-ping:
     image: czerwonk/ping_exporter
     container_name: monitoring_exporter-ping
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - monitoring
@@ -117,14 +77,6 @@ services:
   exporter-docker:
     image: prometheusnet/docker_exporter
     container_name: monitoring_exporter-docker
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - monitoring

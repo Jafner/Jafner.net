@@ -3,14 +3,6 @@ services:
   qbittorrent:
     image: linuxserver/qbittorrent
     container_name: qbittorrent_qbittorrent
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     deploy:
       resources:
         limits:
@@ -39,14 +31,6 @@ services:
     container_name: qbittorrent_exporter
     env_file:
       - exporter.env
-    logging:
-      driver: loki
-      options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-batch-size: "50"
-        loki-retries: "1"
-        loki-timeout: "2s"
-        keep-file: "true"
     restart: "no"
     networks:
       - monitoring
