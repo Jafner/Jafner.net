@@ -36,34 +36,6 @@ services:
       - traefik.http.routers.prometheus-monitoring.rule=Host(`prometheus.jafner.net`)
       - traefik.http.routers.prometheus-monitoring.tls.certresolver=lets-encrypt
       - traefik.http.routers.prometheus-monitoring.middlewares=traefik-forward-auth-privileged@file
-  
-  loki:
-    image: grafana/loki:2.5.0
-    container_name: monitoring_loki
-    user: 1000:1000
-    networks:
-      - monitoring
-      - web
-    ports:
-      - "3100:3100"
-    volumes:
-      - ${DOCKER_DATA}/loki-logs:/loki-logs
-      - ./loki-config.yml:/etc/loki/loki-config.yml # not sure if this works. If not, just edit the config within the data volume
-    restart: "no"
-    command: -config.file=/etc/loki/loki-config.yml
-    labels:
-      - traefik.http.routers.loki.rule=Host(`loki.jafner.net`)
-      - traefik.http.routers.loki.tls.certresolver=lets-encrypt
-
-  promtail:
-    image: grafana/promtail
-    container_name: monitoring_promtail
-    networks: 
-      - monitoring
-    volumes:
-      - ./promtail-config.yml:/etc/promtail/promtail-config.yml
-    labels:
-      - traefik.enable=false
 
   exporter-ping:
     image: czerwonk/ping_exporter
