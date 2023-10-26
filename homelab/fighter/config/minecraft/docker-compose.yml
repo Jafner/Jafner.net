@@ -8,7 +8,7 @@ services:
       - minecraft
     ports:
       - 25565:25565
-    command: --api-binding=0.0.0.0:25566 --mapping=create.jafner.net=create:25565
+    command: --api-binding=0.0.0.0:25566 --mapping=prominence.jafner.net=prominence:25565
 
   exporter-minecraft:
     image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
@@ -23,15 +23,15 @@ services:
     labels:
       - traefik.enable=false
 
-  create:
+  prominence:
     image: itzg/minecraft-server:latest
-    container_name: minecraft_create
+    container_name: minecraft_prominence
     env_file: 
       - minecraft.env
       - minecraft_secrets.env
-      - create.env
+      - prominence.env
     volumes:
-      - $DOCKER_DATA/create:/data:rw
+      - $DOCKER_DATA/prominence:/data:rw
     networks:
       - minecraft
     restart: "no"
