@@ -33,5 +33,5 @@ Prerequisites:
 Steps:
 1. Get the URL of the Qbittorrent webUI. `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' qbittorrent_qbittorrent`. We'll assume the default port of `8080` for the webUI here.
 2. Get the username and password for the webUI. These should be in a password manager.
-3. Run the script `python3 ~/homelab/jafner-net/scripts/remove_trumped_torrents.py`. When prompted, input the `host` like `172.18.0.28:8080` with the IP found in step 1. Use the credentials from step 2 for username and password.
+3. Run the script `python3 ~/homelab/fighter/scripts/remove_trumped_torrents.py`. When prompted, input the `host` like `172.18.0.28:8080` with the IP found in step 1. Use the credentials from step 2 for username and password.
 4. Done.

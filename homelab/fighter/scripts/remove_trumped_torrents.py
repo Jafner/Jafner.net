@@ -2,7 +2,7 @@ host = input("Enter host (e.g. 'localhost:8080'): ")
 username = input("Enter username: ")
 password = input("Enter password: ")
 
-from qbittorrentapi import Client
+from qbittorrent-api import Client
 client = Client(host=host, username=username, password=password)
 
 torrent_list = client.torrents.info()
