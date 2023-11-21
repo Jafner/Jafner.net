@@ -5,6 +5,8 @@ connection_info = dict(
     password = input("Enter password: "),
 )
 
+from hurry.filesize import size, si
+
 import qbittorrentapi
 client = qbittorrentapi.Client(**connection_info)
 
@@ -17,6 +19,6 @@ torrent_list = client.torrents.info()
 
 for torrent in torrent_list:
     for status in torrent.trackers:
-        if 'Unregistered torrent' in status.msg:
-            print(torrent.name)
+        if 'UNREGISTERED TORRENT' in status.msg.upper() or 'TORRENT NOT REGISTERED' in status.msg.upper():
+            print(torrent.name, size(torrent.size, system=si))
             torrent.delete(hash=(torrent.hash),delete_files=True)
