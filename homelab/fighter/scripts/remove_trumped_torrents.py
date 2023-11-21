@@ -1,9 +1,17 @@
-host = input("Enter host (e.g. 'localhost:8080'): ")
-username = input("Enter username: ")
-password = input("Enter password: ")
+connection_info = dict(
+    host = input("Enter host (e.g. 'localhost'): "),
+    port = input("Enter port (e.g. '8080'): "),
+    username = input("Enter username: "),
+    password = input("Enter password: "),
+)
 
 import qbittorrentapi
-client = Client(host=host, username=username, password=password)
+client = qbittorrentapi.Client(**connection_info)
+
+try:
+    client.auth_log_in()
+except qbittorrentapi.LoginFailed as error:
+    print(error)
 
 torrent_list = client.torrents.info()
 
