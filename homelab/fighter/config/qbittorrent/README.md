@@ -18,6 +18,9 @@ Example: `qbt torrent list --category ggn --format json | jq ' .[].hash' | tr -d
 Example: `for hash in $(cat hashes.txt); do qbt torrent tracker edit $hash "https://tracker.gazellegames.net/7667910c8a2b5446890cbd0ad459d5c3/announce" "https://tracker.gazellegames.net/d0dd178494dd6ffcd9842934a13086e0/announce"; done`
 This will take a long time.
 
+## Check Sum Torrent Size by Category
+BEHOLD. MY ONE LINER: `for category in $(qbt category list --format json | jq -r '.[].name'); do qbt torrent list --category $category --format json | jq ' .[].size' > sizes_$category.txt && echo $category && awk '{ sum += $1 } END { print sum }' sizes_$category.txt | numfmt --to=iec-i --suffix=B --format="%9.2f"; done`
+
 ## Check for "Unregistered" (Trumped/Deleted) Torrents
 Many private trackers will delete or trump (replace with better quality) torrents. These trackers have no way to directly inform your torrent client that the torrent is no longer valid, but can update the way the tracker responds to announce messages from your client. For many Gazelle-based trackers, this is done by responding with "Unregistered torrent" in the message field, and setting the status to "Not working". Qbittorrent does not provide functionality in the WebUI to quickly and easily find all unregistered torrents, but the API does support the idea.  
 
