@@ -57,6 +57,19 @@ services:
     labels:
       - traefik.enable=false
 
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: monitoring_uptime-kuma
+    restart: "no"
+    volumes:
+      - $DOCKER_DATA:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.uptime-kuma.rule=Host(`uptime.jafner.net`)
+      - traefik.http.routers.uptime-kuma.tls.certresolver=lets-encrypt
+
 networks:
   monitoring:
     external: true

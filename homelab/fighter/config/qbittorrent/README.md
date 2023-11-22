@@ -32,6 +32,7 @@ But that script used hardcoded credentials for host, username, and password. We 
 Prerequisites: 
 - a Python3 environment
 - the `qbittorrent-api` package
+- the `hurry.filesize` package
 
 Steps:
 1. Get the URL of the Qbittorrent webUI. `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' qbittorrent_qbittorrent`. We'll assume the default port of `8080` for the webUI here.
