@@ -36,8 +36,6 @@ services:
     container_name: nextcloud_redis
     networks:
       - nextcloud
-    env_file:
-      - redis.env
     volumes:
       - $DOCKER_DATA/redis:/data
 
