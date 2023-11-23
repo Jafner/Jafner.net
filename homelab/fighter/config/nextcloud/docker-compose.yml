@@ -31,6 +31,16 @@ services:
     volumes:
       - $DOCKER_DATA/mariadb:/config
 
+  redis:
+    image: redis
+    container_name: nextcloud_redis
+    networks:
+      - nextcloud
+    env_file:
+      - redis.env
+    volumes:
+      - $DOCKER_DATA/redis:/data
+s
 networks:
   web:
     external: true    
