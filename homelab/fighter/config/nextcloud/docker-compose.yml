@@ -40,7 +40,7 @@ services:
       - redis.env
     volumes:
       - $DOCKER_DATA/redis:/data
-s
+
 networks:
   web:
     external: true    
