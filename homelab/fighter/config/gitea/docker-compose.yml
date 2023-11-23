@@ -19,6 +19,8 @@ services:
       - traefik.http.routers.gitea.tls.certresolver=lets-encrypt
       - traefik.http.routers.gitea.tls.options=tls12@file
       - traefik.http.routers.gitea.middlewares=securityheaders@file
+      - traefik.http.routers.gitea.service=gitea
+      - traefik.http.services.gitea.loadbalancer.server.port=3000
 networks:
   web:
     external: true
