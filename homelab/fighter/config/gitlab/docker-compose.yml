@@ -6,7 +6,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 8G
+          memory: 2G
     restart: "no"
     hostname: 'gitlab.jafner.net'
     networks:
