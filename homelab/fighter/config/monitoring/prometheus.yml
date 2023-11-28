@@ -60,7 +60,7 @@ scrape_configs:
     - job_name: 'exporter-ping'
       scrape_interval: 5s
       static_configs:
-        - targets: ['exporter-ping:9427']
+        - targets: ['exporter-ping:9427', 'jafner.tools:50418']
 
     - job_name: 'exporter-docker'
       scrape_interval: 5s
