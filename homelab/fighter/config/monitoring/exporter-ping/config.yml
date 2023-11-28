@@ -20,10 +20,10 @@ dns:
   nameserver: 1.1.1.1
 
 ping:
-  interval: 2s
+  interval: 5s
   timeout: 3s
-  history-size: 5
-  payload-size: 64
+  history-size: 1
+  payload-size: 32
 
 options:
   disableIPv6: true
