@@ -56,6 +56,18 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       - traefik.enable=false
+  
+  exporter-pihole:
+    image: 
+    container_name: monitoring_exporter-pihole
+    env_file:
+      - exporter-pihole_secrets.env
+      - exporter-pihole.env
+    restart: "no"
+    networks:
+      - monitoring
+    labels:
+      - traefik.enable=false
 
   uptime-kuma:
     image: louislam/uptime-kuma:1
