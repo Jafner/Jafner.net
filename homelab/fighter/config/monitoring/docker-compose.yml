@@ -58,7 +58,7 @@ services:
       - traefik.enable=false
   
   exporter-pihole:
-    image: 
+    image: ekofr/pihole-exporter:latest
     container_name: monitoring_exporter-pihole
     env_file:
       - exporter-pihole_secrets.env
