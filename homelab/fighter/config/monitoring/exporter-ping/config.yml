@@ -22,7 +22,7 @@ dns:
 ping:
   interval: 5s
   timeout: 3s
-  history-size: 1
+  history-size: 5
   payload-size: 32
 
 options:
