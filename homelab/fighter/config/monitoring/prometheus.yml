@@ -4,25 +4,20 @@ global:
 scrape_configs:
 
     # scrape hosts
-    - job_name: 'joey-server'
+    - job_name: 'fighter'
       scrape_interval: 5s
       static_configs:
         - targets: ['192.168.1.23:9100']
 
-    - job_name: 'jafner.tools'
+    - job_name: 'druid'
       scrape_interval: 5s
       static_configs:
         - targets: ['143.110.151.123:9100']
     
-    - job_name: 'router'
+    - job_name: 'wizard'
       scrape_interval: 5s
       static_configs:
         - targets: ['192.168.1.1:9273']
-
-    - job_name: 'pihole'
-      scrape_interval: 5s
-      static_configs:
-        - targets: ['192.168.1.22:9100']
 
     # scrape applications
     - job_name: 'prometheus-self'
