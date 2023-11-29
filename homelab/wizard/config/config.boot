@@ -23,161 +23,344 @@ container {
     }
 }
 firewall {
-    all-ping enable
-    broadcast-ping disable
-    ipv6-receive-redirects disable
-    ipv6-src-route disable
-    ip-src-route disable
-    log-martians enable
-    name IN_LOCAL {
-        default-action accept
+    global-options {
+        all-ping enable
+        broadcast-ping disable
+        ipv6-receive-redirects disable
+        ipv6-src-route disable
+        ip-src-route disable
+        log-martians enable
+        receive-redirects disable
+        send-redirects enable
+        source-validation disable
+        syn-cookies enable
     }
-    name IN_WAN {
-        default-action accept
-    }
-    name LOCAL_IN {
-        default-action accept
-    }
-    name LOCAL_WAN {
-        default-action accept
-    }
-    name WAN_IN {
-        default-action drop
-        description "WAN to internal"
-        rule 10 {
-            action accept
-            description "Allow established/related"
-            state {
-                established enable
-                related enable
-            }
+    group {
+        interface-group IG_LAN {
+            interface eth1
+            interface eth6
         }
-        rule 20 {
-            action drop
-            description "Drop invalid state"
-            state {
-                invalid enable
-            }
-        }
-        rule 1000 {
-            action accept
-            description Plex
-            destination {
-                port 32400
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1001 {
-            action accept
-            description BitTorrent
-            destination {
-                port 50000
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1002 {
-            action accept
-            description WireGuard
-            destination {
-                port 53820-53829
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1003 {
-            action accept
-            description Minecraft
-            destination {
-                port 25565
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1004 {
-            action accept
-            description Iperf
-            destination {
-                port 50201
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1005 {
-            action accept
-            description Web
-            destination {
-                port 443,80
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1007 {
-            action accept
-            description "Git SSH"
-            destination {
-                port 2228-2229
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
-        }
-        rule 1008 {
-            action accept
-            description SFTP
-            destination {
-                port 23450
-            }
-            protocol tcp_udp
-            state {
-                new enable
-            }
+        interface-group IG_WAN {
+            interface pppoe1
         }
     }
-    name WAN_LOCAL {
-        default-action drop
-        description "WAN to router"
-        rule 10 {
-            action accept
-            description "Allow established/related"
-            state {
-                established enable
-                related enable
+    ipv4 {
+        forward {
+            filter {
+                default-action accept
+                rule 5 {
+                    action jump
+                    inbound-interface {
+                        interface-name pppoe1
+                    }
+                    jump-target WAN_IN
+                }
+                rule 101 {
+                    action accept
+                    inbound-interface {
+                        interface-group IG_LAN
+                    }
+                    outbound-interface {
+                        interface-group IG_LAN
+                    }
+                }
+                rule 106 {
+                    action jump
+                    inbound-interface {
+                        interface-group IG_WAN
+                    }
+                    jump-target WAN_IN
+                    outbound-interface {
+                        interface-group IG_LAN
+                    }
+                }
+                rule 111 {
+                    action drop
+                    description "zone_LAN default-action"
+                    outbound-interface {
+                        interface-group IG_LAN
+                    }
+                }
+                rule 116 {
+                    action accept
+                    inbound-interface {
+                        interface-group IG_WAN
+                    }
+                    outbound-interface {
+                        interface-group IG_WAN
+                    }
+                }
+                rule 121 {
+                    action jump
+                    inbound-interface {
+                        interface-group IG_LAN
+                    }
+                    jump-target IN_WAN
+                    outbound-interface {
+                        interface-group IG_WAN
+                    }
+                }
+                rule 126 {
+                    action drop
+                    description "zone_WAN default-action"
+                    outbound-interface {
+                        interface-group IG_WAN
+                    }
+                }
             }
         }
-        rule 20 {
-            action accept
-            protocol icmp
-            state {
-                new enable
+        input {
+            filter {
+                default-action accept
+                rule 5 {
+                    action jump
+                    inbound-interface {
+                        interface-name pppoe1
+                    }
+                    jump-target WAN_LOCAL
+                }
+                rule 101 {
+                    action jump
+                    inbound-interface {
+                        interface-group IG_LAN
+                    }
+                    jump-target IN_LOCAL
+                }
+                rule 106 {
+                    action jump
+                    inbound-interface {
+                        interface-group IG_WAN
+                    }
+                    jump-target WAN_LOCAL
+                }
+                rule 111 {
+                    action drop
+                }
             }
         }
-        rule 30 {
-            action drop
-            description "Drop invalid state"
-            state {
-                invalid enable
+        name IN_LOCAL {
+            default-action accept
+        }
+        name IN_WAN {
+            default-action accept
+        }
+        name LOCAL_IN {
+            default-action accept
+        }
+        name LOCAL_WAN {
+            default-action accept
+        }
+        name WAN_IN {
+            default-action drop
+            description "WAN to internal"
+            rule 10 {
+                action accept
+                description "Allow established/related"
+                state {
+                    established enable
+                    related enable
+                }
+            }
+            rule 20 {
+                action drop
+                description "Drop invalid state"
+                state {
+                    invalid enable
+                }
+            }
+            rule 1000 {
+                action accept
+                description Plex
+                destination {
+                    port 32400
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1001 {
+                action accept
+                description BitTorrent
+                destination {
+                    port 50000
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1002 {
+                action accept
+                description WireGuard
+                destination {
+                    port 53820-53829
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1003 {
+                action accept
+                description Minecraft
+                destination {
+                    port 25565
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1004 {
+                action accept
+                description Iperf
+                destination {
+                    port 50201
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1005 {
+                action accept
+                description Web
+                destination {
+                    port 443,80
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1007 {
+                action accept
+                description "Git SSH"
+                destination {
+                    port 2228-2229
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+            rule 1008 {
+                action accept
+                description SFTP
+                destination {
+                    port 23450
+                }
+                protocol tcp_udp
+                state {
+                    new enable
+                }
+            }
+        }
+        name WAN_LOCAL {
+            default-action drop
+            description "WAN to router"
+            rule 10 {
+                action accept
+                description "Allow established/related"
+                state {
+                    established enable
+                    related enable
+                }
+            }
+            rule 20 {
+                action accept
+                protocol icmp
+                state {
+                    new enable
+                }
+            }
+            rule 30 {
+                action drop
+                description "Drop invalid state"
+                state {
+                    invalid enable
+                }
+            }
+        }
+        output {
+            filter {
+                default-action accept
+                rule 101 {
+                    action jump
+                    jump-target LOCAL_IN
+                    outbound-interface {
+                        interface-group IG_LAN
+                    }
+                }
+                rule 106 {
+                    action jump
+                    jump-target LOCAL_WAN
+                    outbound-interface {
+                        interface-group IG_WAN
+                    }
+                }
+                rule 111 {
+                    action drop
+                }
             }
         }
     }
-    receive-redirects disable
-    send-redirects enable
-    source-validation disable
-    syn-cookies enable
+    ipv6 {
+        forward {
+            filter {
+                default-action accept
+                rule 101 {
+                    action accept
+                    inbound-interface {
+                        interface-group IG_LAN
+                    }
+                    outbound-interface {
+                        interface-group IG_LAN
+                    }
+                }
+                rule 106 {
+                    action drop
+                    description "zone_LAN default-action"
+                    outbound-interface {
+                        interface-group IG_LAN
+                    }
+                }
+                rule 111 {
+                    action accept
+                    inbound-interface {
+                        interface-group IG_WAN
+                    }
+                    outbound-interface {
+                        interface-group IG_WAN
+                    }
+                }
+                rule 116 {
+                    action drop
+                    description "zone_WAN default-action"
+                    outbound-interface {
+                        interface-group IG_WAN
+                    }
+                }
+            }
+        }
+        input {
+            filter {
+                default-action accept
+                rule 101 {
+                    action drop
+                }
+            }
+        }
+        output {
+            filter {
+                default-action accept
+                rule 101 {
+                    action drop
+                }
+            }
+        }
+    }
 }
 interfaces {
     ethernet eth0 {
@@ -213,15 +396,7 @@ interfaces {
     pppoe pppoe1 {
         authentication {
             password ****************
-            user hafnerjoseph
-        }
-        firewall {
-            in {
-                name WAN_IN
-            }
-            local {
-                name WAN_LOCAL
-            }
+            username hafnerjoseph
         }
         ip {
             adjust-mss 1452
@@ -335,7 +510,7 @@ nat {
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 32400
             }
             inbound-interface eth6
@@ -347,7 +522,7 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 53820-53829
             }
             inbound-interface eth6
@@ -359,7 +534,7 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 25565
             }
             inbound-interface eth6
@@ -371,7 +546,7 @@ nat {
         rule 1104 {
             description "Iperf (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 50201
             }
             inbound-interface eth6
@@ -383,7 +558,7 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 80,443
             }
             inbound-interface eth6
@@ -395,7 +570,7 @@ nat {
         rule 1107 {
             description "Git SSH (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 2228-2229
             }
             inbound-interface eth6
@@ -407,7 +582,7 @@ nat {
         rule 1108 {
             description "SFTP (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 23450
             }
             inbound-interface eth6
@@ -419,7 +594,7 @@ nat {
         rule 1109 {
             description "RTMP (Hairpin NAT)"
             destination {
-                address 174.21.32.168
+                address 174.21.52.232
                 port 1935
             }
             inbound-interface eth6
@@ -452,6 +627,24 @@ nat {
             }
             translation {
                 address masquerade
+            }
+        }
+    }
+}
+qos {
+    interface eth6 {
+        egress GIGABIT
+    }
+    interface pppoe1 {
+        egress GIGABIT
+    }
+    policy {
+        shaper GIGABIT {
+            bandwidth 900mbit
+            default {
+                bandwidth 100%
+                burst 15k
+                queue-type fq-codel
             }
         }
     }
@@ -549,13 +742,30 @@ service {
             allow-from 192.168.1.0/24
             cache-size 1000000
             listen-address 192.168.1.1
-            name-server 192.168.1.32
+            name-server 192.168.1.32 {
+            }
         }
     }
     monitoring {
         telegraf {
             prometheus-client {
             }
+        }
+    }
+    ntp {
+        allow-client {
+            address 0.0.0.0/0
+            address ::/0
+        }
+        server time-a-wwv.nist.gov {
+        }
+        server time-b-wwv.nist.gov {
+        }
+        server time-c-wwv.nist.gov {
+        }
+        server time-d-wwv.nist.gov {
+        }
+        server time-e-wwv.nist.gov {
         }
     }
     ssh {
@@ -596,6 +806,20 @@ system {
         user vyos {
             authentication {
                 encrypted-password ****************
+                otp {
+                    key ****************
+                    rate-limit 3
+                    rate-time 30
+                    window-size 3
+                }
+                public-keys Joey-phone {
+                    key ****************
+                    type ssh-rsa
+                }
+                public-keys ed25519_jafner425@gmail.com {
+                    key ****************
+                    type ssh-ed25519
+                }
                 public-keys jafner425@gmail.com {
                     key ****************
                     type ssh-rsa
@@ -612,72 +836,23 @@ system {
         }
     }
     name-server 192.168.1.32
-    ntp {
-        server time-a-wwv.nist.gov {
-        }
-        server time-b-wwv.nist.gov {
-        }
-        server time-c-wwv.nist.gov {
-        }
-        server time-d-wwv.nist.gov {
-        }
-        server time-e-wwv.nist.gov {
-        }
-    }
     syslog {
         global {
             facility all {
                 level info
             }
-            facility protocols {
+            facility local7 {
                 level debug
             }
         }
     }
+    task-scheduler {
+        task update-nat-reflection {
+            executable {
+                path /home/vyos/ipupdate.sh
+            }
+            interval 5
+        }
+    }
     time-zone America/Los_Angeles
-}
-zone-policy {
-    zone LAN {
-        default-action drop
-        from LOCAL {
-            firewall {
-                name LOCAL_IN
-            }
-        }
-        from WAN {
-            firewall {
-                name WAN_IN
-            }
-        }
-        interface eth1
-        interface eth6
-    }
-    zone LOCAL {
-        default-action drop
-        from LAN {
-            firewall {
-                name IN_LOCAL
-            }
-        }
-        from WAN {
-            firewall {
-                name WAN_LOCAL
-            }
-        }
-        local-zone
-    }
-    zone WAN {
-        default-action drop
-        from LAN {
-            firewall {
-                name IN_WAN
-            }
-        }
-        from LOCAL {
-            firewall {
-                name LOCAL_WAN
-            }
-        }
-        interface pppoe1
-    }
 }
