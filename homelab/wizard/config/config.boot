@@ -1,27 +1,3 @@
-container {
-    name pihole {
-        cap-add net-admin
-        environment TZ {
-            value America/Los_Angeles
-        }
-        environment WEBPASSWORD {
-            value Raider8-Payable-Veto-Dictation
-        }
-        image pihole/pihole
-        memory 256
-        network default {
-            address 172.18.0.2
-        }
-        port webui {
-            destination 80
-            protocol tcp
-            source 80
-        }
-    }
-    network default {
-        prefix 172.18.0.0/16
-    }
-}
 firewall {
     global-options {
         all-ping enable
@@ -212,44 +188,11 @@ firewall {
                     new enable
                 }
             }
-            rule 1004 {
-                action accept
-                description Iperf
-                destination {
-                    port 50201
-                }
-                protocol tcp_udp
-                state {
-                    new enable
-                }
-            }
             rule 1005 {
                 action accept
                 description Web
                 destination {
                     port 443,80
-                }
-                protocol tcp_udp
-                state {
-                    new enable
-                }
-            }
-            rule 1007 {
-                action accept
-                description "Git SSH"
-                destination {
-                    port 2228-2229
-                }
-                protocol tcp_udp
-                state {
-                    new enable
-                }
-            }
-            rule 1008 {
-                action accept
-                description SFTP
-                destination {
-                    port 23450
                 }
                 protocol tcp_udp
                 state {
@@ -364,11 +307,7 @@ firewall {
 }
 interfaces {
     ethernet eth0 {
-        address 192.168.200.1/24
-        description "Emergency ad-hoc"
-        duplex auto
         hw-id d4:3d:7e:94:6e:eb
-        speed auto
     }
     ethernet eth5 {
         address dhcp
@@ -452,17 +391,6 @@ nat {
                 address 192.168.1.23
             }
         }
-        rule 1004 {
-            description Iperf
-            destination {
-                port 50201
-            }
-            inbound-interface pppoe1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
         rule 1005 {
             description Web
             destination {
@@ -474,43 +402,10 @@ nat {
                 address 192.168.1.23
             }
         }
-        rule 1007 {
-            description "Git SSH"
-            destination {
-                port 2228-2229
-            }
-            inbound-interface pppoe1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1008 {
-            description SFTP
-            destination {
-                port 23450
-            }
-            inbound-interface pppoe1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1009 {
-            description RTMP
-            destination {
-                port 1935
-            }
-            inbound-interface pppoe1
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.52.232
+                address 174.21.120.249
                 port 32400
             }
             inbound-interface eth6
@@ -522,7 +417,7 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.52.232
+                address 174.21.120.249
                 port 53820-53829
             }
             inbound-interface eth6
@@ -534,20 +429,8 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.52.232
+                address 174.21.120.249
                 port 25565
-            }
-            inbound-interface eth6
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1104 {
-            description "Iperf (Hairpin NAT)"
-            destination {
-                address 174.21.52.232
-                port 50201
             }
             inbound-interface eth6
             protocol tcp_udp
@@ -558,44 +441,8 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.52.232
+                address 174.21.120.249
                 port 80,443
-            }
-            inbound-interface eth6
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1107 {
-            description "Git SSH (Hairpin NAT)"
-            destination {
-                address 174.21.52.232
-                port 2228-2229
-            }
-            inbound-interface eth6
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1108 {
-            description "SFTP (Hairpin NAT)"
-            destination {
-                address 174.21.52.232
-                port 23450
-            }
-            inbound-interface eth6
-            protocol tcp_udp
-            translation {
-                address 192.168.1.23
-            }
-        }
-        rule 1109 {
-            description "RTMP (Hairpin NAT)"
-            destination {
-                address 174.21.52.232
-                port 1935
             }
             inbound-interface eth6
             protocol tcp_udp
@@ -633,18 +480,21 @@ nat {
 }
 qos {
     interface eth6 {
-        egress GIGABIT
+        egress GIGABIT-FQCODEL
     }
     interface pppoe1 {
-        egress GIGABIT
+        ingress LIMITER
     }
     policy {
-        shaper GIGABIT {
-            bandwidth 900mbit
+        fq-codel GIGABIT-FQCODEL {
+            codel-quantum 8000
+            flows 1024
+            queue-limit 800
+        }
+        limiter LIMITER {
             default {
-                bandwidth 100%
-                burst 15k
-                queue-type fq-codel
+                bandwidth 700mbit
+                burst 262.5mbit
             }
         }
     }
@@ -697,10 +547,6 @@ service {
                 static-mapping joey-server4 {
                     ip-address 192.168.1.26
                     mac-address 90:2b:34:37:ce:e8
-                }
-                static-mapping joeyPrinter {
-                    ip-address 192.168.1.60
-                    mac-address 9c:32:ce:7c:f8:25
                 }
                 static-mapping pihole1 {
                     ip-address 192.168.1.21
@@ -772,18 +618,14 @@ service {
         disable-password-authentication
         port 22
     }
-    upnp {
-        listen eth1
-        nat-pmp
-        secure-mode
-        wan-interface pppoe1
-    }
 }
 system {
     config-management {
         commit-revisions 200
     }
     conntrack {
+        expect-table-size 2048
+        hash-size 32768
         modules {
             ftp
             h323
@@ -793,6 +635,7 @@ system {
             sqlnet
             tftp
         }
+        table-size 262144
     }
     console {
         device ttyS0 {
@@ -812,25 +655,9 @@ system {
                     rate-time 30
                     window-size 3
                 }
-                public-keys Joey-phone {
-                    key ****************
-                    type ssh-rsa
-                }
                 public-keys ed25519_jafner425@gmail.com {
                     key ****************
                     type ssh-ed25519
-                }
-                public-keys jafner425@gmail.com {
-                    key ****************
-                    type ssh-rsa
-                }
-                public-keys joey@fedora {
-                    key ****************
-                    type ssh-rsa
-                }
-                public-keys joey@joey-server {
-                    key ****************
-                    type ssh-rsa
                 }
             }
         }
