@@ -6,7 +6,7 @@ Our credentials are stored in `ddclient_secrets.env`, which is git-ignored. Addi
 So we generate the config file when it must be updated. To update the file, we can run the following command:  
 
 ```bash
-cd ~/homelab/jafner-net/config/ddns/ && \
+cd ~/homelab/fighter/config/ddns/ && \
 export $(cat ddclient_secrets.env | xargs) && \
 envsubst < ./ddclient/ddclient.template > ./ddclient/ddclient.conf && \
 unset $(grep -v '^#' ddclient_secrets.env | sed -E 's/(.*)=.*/\1/' | xargs) && \
