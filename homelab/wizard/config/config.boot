@@ -159,7 +159,7 @@ firewall {
                 action accept
                 description BitTorrent
                 destination {
-                    port 50000
+                    port 49500
                 }
                 protocol tcp_udp
                 state {
@@ -361,7 +361,7 @@ nat {
         rule 1001 {
             description BitTorrent
             destination {
-                port 50000
+                port 49500
             }
             inbound-interface pppoe1
             protocol tcp_udp
@@ -405,7 +405,7 @@ nat {
         rule 1100 {
             description "Plex (Hairpin NAT)"
             destination {
-                address 174.21.120.249
+                address 174.21.57.251
                 port 32400
             }
             inbound-interface eth6
@@ -417,7 +417,7 @@ nat {
         rule 1102 {
             description "Wireguard (Hairpin NAT)"
             destination {
-                address 174.21.120.249
+                address 174.21.57.251
                 port 53820-53829
             }
             inbound-interface eth6
@@ -429,7 +429,7 @@ nat {
         rule 1103 {
             description "Minecraft (Hairpin NAT)"
             destination {
-                address 174.21.120.249
+                address 174.21.57.251
                 port 25565
             }
             inbound-interface eth6
@@ -441,7 +441,7 @@ nat {
         rule 1105 {
             description "Web (Hairpin NAT)"
             destination {
-                address 174.21.120.249
+                address 174.21.57.251
                 port 80,443
             }
             inbound-interface eth6
