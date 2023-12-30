@@ -21,6 +21,58 @@ This will take a long time.
 ## Check Sum Torrent Size by Category
 BEHOLD. MY ONE LINER: `for category in $(qbt category list --format json | jq -r '.[].name'); do qbt torrent list --category $category --format json | jq ' .[].size' > sizes_$category.txt && echo $category && awk '{ sum += $1 } END { print sum }' sizes_$category.txt | numfmt --to=iec-i --suffix=B --format="%9.2f"; done`
 
+## Export Torrents to CSV
+For a given `$category`, run `qbt torrent list --category $category --format csv > ggn.csv` to export the torrent list to a file.
+
+Columns included are:
+
+- Hash	
+- Name	
+- MagnetUri	
+- Size	
+- Progress	
+- DownloadSpeed	
+- UploadSpeed	
+- Priority	
+- ConnectedSeeds	
+- TotalSeeds	
+- ConnectedLeechers	
+- TotalLeechers	
+- Ratio	
+- EstimatedTime	
+- State	
+- SequentialDownload	
+- FirstLastPiecePrioritized	
+- Category	
+- SuperSeeding	
+- ForceStart	
+- SavePath	
+- AddedOn	
+- CompletionOn	
+- CurrentTracker	
+- DownloadLimit	
+- UploadLimit	
+- Downloaded	
+- Uploaded	
+- DownloadedInSession	
+- UploadedInSession	
+- IncompletedSize	
+- CompletedSize	
+- RatioLimit	
+- LastSeenComplete	
+- LastActivityTime	
+- ActiveTime	
+- AutomaticTorrentManagement	
+- TotalSize	
+- SeedingTime	
+- ContentPath
+
+## Remove Torrents by Hash
+
+Assuming we have a `hashes.txt` file with one line for each hash we want to remove:
+
+`for hash in $(cat hashes.txt); do qbt torrent delete $hash; done`
+
 ## Check for "Unregistered" (Trumped/Deleted) Torrents
 Many private trackers will delete or trump (replace with better quality) torrents. These trackers have no way to directly inform your torrent client that the torrent is no longer valid, but can update the way the tracker responds to announce messages from your client. For many Gazelle-based trackers, this is done by responding with "Unregistered torrent" in the message field, and setting the status to "Not working". Qbittorrent does not provide functionality in the WebUI to quickly and easily find all unregistered torrents, but the API does support the idea.  
 
