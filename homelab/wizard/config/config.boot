@@ -13,7 +13,6 @@ firewall {
     }
     group {
         interface-group IG_LAN {
-            interface eth1
             interface eth6
         }
         interface-group IG_WAN {
@@ -325,6 +324,7 @@ interfaces {
         duplex auto
         hw-id 6c:b3:11:32:46:25
         offload {
+            rps
             sg
             tso
         }
@@ -624,7 +624,7 @@ system {
         commit-revisions 200
     }
     conntrack {
-        expect-table-size 2048
+        expect-table-size 8192
         hash-size 32768
         modules {
             ftp
@@ -636,6 +636,11 @@ system {
             tftp
         }
         table-size 262144
+        timeout {
+            tcp {
+                time-wait 15
+            }
+        }
     }
     console {
         device ttyS0 {
@@ -663,6 +668,9 @@ system {
         }
     }
     name-server 192.168.1.32
+    option {
+        performance latency
+    }
     syslog {
         global {
             facility all {
