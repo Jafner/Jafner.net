@@ -53,6 +53,7 @@ services:
         aliases:
           - forwardauth
     restart: "no"
+    command: sleep 10 && ./traefik_forward_auth
     depends_on:
       - keycloak
     env_file:
