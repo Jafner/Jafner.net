@@ -15,7 +15,7 @@ services:
           - keycloak
       keycloak:
     restart: "no"
-    command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
+    command: start --import-realm #--hostname-url=https://keycloak.jafner.net --proxy=passthrough
     env_file:
       - keycloak.env
       - keycloak_secrets.env
