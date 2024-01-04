@@ -36,6 +36,12 @@ services:
           - keycloak
     restart: "no"
     command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
+    healthcheck: 
+      test: ["CMD", "curl", "-f", "http://keycloak"]
+      interval: 2m
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     env_file:
       - keycloak.env
       - keycloak_secrets.env
