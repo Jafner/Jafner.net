@@ -83,20 +83,20 @@ services:
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
   
-  postgres:
-    image: postgres:13
-    container_name: keycloak_postgres
-    networks:
-      - keycloak
-    env_file:
-      - postgres_secrets.env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+#  postgres:
+#    image: postgres:13
+#    container_name: keycloak_postgres
+#    networks:
+#      - keycloak
+#    env_file:
+#      - postgres_secrets.env
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
 
 networks:
   web:
     external: true
-  keycloak:
+#  keycloak:
 
-volumes:
-  postgres_data:
+#volumes:
+#  postgres_data:
