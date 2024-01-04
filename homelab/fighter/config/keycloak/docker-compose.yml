@@ -15,7 +15,7 @@ services:
           - keycloak
       keycloak:
     restart: "no"
-    command: start --db=postgres --featurs=token-exchange --db-username=$KC_DB_USERNAME --db-password=$KC_DB_PASSWORD #--hostname-url=https://keycloak.jafner.net --proxy=passthrough
+    command: start --db=postgres --features=token-exchange --db-username=${KC_DB_USERNAME} --db-password=${KC_DB_PASSWORD} #--hostname-url=https://keycloak.jafner.net --proxy=passthrough
     env_file:
       - keycloak.env
       - keycloak_secrets.env
