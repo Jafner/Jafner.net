@@ -5,6 +5,7 @@ services:
     #image: quay.io/keycloak/keycloak:19.0
     build:
       dockerfile: Dockerfile
+      context: .
     container_name: keycloak_keycloak
     volumes:
       - $KEYCLOAK_DATA/import:/opt/keycloak/data/import
