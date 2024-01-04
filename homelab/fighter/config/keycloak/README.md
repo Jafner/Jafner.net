@@ -17,3 +17,15 @@ We'll assume the new service is hosted at `https://web.jafner.net`.
 2. Add the `traefik-forward-auth@file` Traefik middleware to the service. 
 3. Start up the new service. Open a new private window and navigate to the new service (`https://web.jafner.net`). It should redirect to Keycloak with a login prompt.
 4. If applicable, disable any local auth. 
+
+# Export and Import Realms
+[Docs on Keycloak.org](https://www.keycloak.org/server/importExport)
+
+## Export Realms
+With the docker container offline, run: `docker-compose run --entrypoint="/opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/export --users realm_file" keycloak`
+
+This will export the contents of each realm to a `json` file in the `export/` directory. `/opt/keycloak/data` should be the directory that is mounted to the host.
+
+## Import Realms
+To import realms at startup, replace the startup command with `start --import-realm`
+Additionally, you'll need to map the directory containing the files to import (e.g. `$KEYCLOAK_DATA/import`) to the `/opt/keycloak/data/import` inside the container.

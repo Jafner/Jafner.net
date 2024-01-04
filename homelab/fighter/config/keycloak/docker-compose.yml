@@ -2,10 +2,12 @@ version: '3'
 
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak:23.0
+    #image: quay.io/keycloak/keycloak:19.0
+    build:
+      dockerfile: Dockerfile
     container_name: keycloak_keycloak
     volumes:
-      - $KEYCLOAK_DATA:/opt/keycloak/data
+      - $KEYCLOAK_DATA/import:/opt/keycloak/data/import
     networks:
       web:
         aliases:
@@ -57,6 +59,16 @@ services:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
+  
+  postgres:
+    image: postgres:13
+    container_name: keycloak_postgres
+    networks:
+      - keycloak
+    env_file:
+      - postgres_secrets.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 networks:
   web:
