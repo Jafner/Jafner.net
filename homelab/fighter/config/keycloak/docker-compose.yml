@@ -74,3 +74,6 @@ services:
 networks:
   web:
     external: true
+
+volumes:
+  postgres_data:
