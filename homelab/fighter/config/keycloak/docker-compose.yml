@@ -59,7 +59,8 @@ services:
           - forwardauth
     restart: "no"
     depends_on:
-      - keycloak
+      keycloak: 
+        condition: service_healthy
     env_file:
       - forwardauth.env
       - forwardauth_secrets.env
@@ -78,7 +79,8 @@ services:
           - forwardauth-privileged
     restart: "no"
     depends_on:
-      - keycloak
+      keycloak: 
+        condition: service_healthy
     env_file:
       - forwardauth-privileged.env
       - forwardauth-privileged_secrets.env
