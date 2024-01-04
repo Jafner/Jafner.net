@@ -1,30 +1,6 @@
 version: '3'
 
 services:
-#  keycloak-wip:
-#    #image: quay.io/keycloak/keycloak:19.0
-#    build:
-#      dockerfile: Dockerfile
-#      context: .
-#    container_name: keycloak_keycloak
-#    volumes:
-#      - $KEYCLOAK_DATA/import:/opt/keycloak/data/import
-#    networks:
-#      web:
-#        aliases:
-#          - keycloak
-#      keycloak:
-#    restart: "no"
-#    command: start --db=postgres --features=token-exchange  #--hostname-url=https://keycloak.jafner.net --proxy=passthrough
-#    env_file:
-#      - keycloak.env
-#      - keycloak_secrets.env
-#    labels:
-#      traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
-#      traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
-#      #traefik.http.routers.keycloak.middlewares: lan-only@file
-#      traefik.http.services.keycloak.loadbalancer.server.port: 8080
-  
   keycloak:
     image: quay.io/keycloak/keycloak:19.0
     container_name: keycloak_keycloak
@@ -89,20 +65,43 @@ services:
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
   
-#  postgres:
-#    image: postgres:13
-#    container_name: keycloak_postgres
-#    networks:
-#      - keycloak
-#    env_file:
-#      - postgres_secrets.env
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
+  keycloak-wip:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: keycloak_keycloak-wip
+    volumes:
+      - $KEYCLOAK_DATA/import:/opt/keycloak/data/import
+    networks:
+      web:
+        aliases:
+          - keycloak
+      keycloak:
+    restart: "no"
+    command: start --help
+    env_file:
+      - keycloak-wip.env
+      - keycloak-wip_secrets.env
+    labels:
+      traefik.http.routers.keycloak.rule: Host(`keycloak-wip.jafner.net`)
+      traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
+      traefik.http.routers.keycloak.middlewares: lan-only@file
+      traefik.http.services.keycloak.loadbalancer.server.port: 8080
+
+  postgres:
+    image: postgres:13
+    container_name: keycloak_postgres
+    networks:
+      - keycloak
+    env_file:
+      - postgres_secrets.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 networks:
   web:
     external: true
-#  keycloak:
+  keycloak:
 
-#volumes:
-#  postgres_data:
+volumes:
+  postgres_data:
