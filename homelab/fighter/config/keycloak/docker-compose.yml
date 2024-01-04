@@ -13,6 +13,7 @@ services:
       web:
         aliases:
           - keycloak
+      keycloak:
     restart: "no"
     command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
     env_file:
@@ -74,6 +75,7 @@ services:
 networks:
   web:
     external: true
+  keycloak:
 
 volumes:
   postgres_data:
