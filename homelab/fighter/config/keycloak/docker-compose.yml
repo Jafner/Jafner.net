@@ -37,7 +37,7 @@ services:
     restart: "no"
     command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
     healthcheck: 
-      test: ["CMD", "curl", "-f", "http://keycloak"]
+      test: ["CMD", "curl", "-f", "http://0.0.0.0:8080"]
       interval: 2m
       timeout: 10s
       retries: 3
