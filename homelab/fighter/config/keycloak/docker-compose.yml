@@ -78,7 +78,7 @@ services:
           - keycloak
       keycloak:
     restart: "no"
-    command: start --db=postgres 
+    command: start
     env_file:
       - keycloak-wip.env
       - keycloak-wip_secrets.env
