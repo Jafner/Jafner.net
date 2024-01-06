@@ -66,34 +66,39 @@ services:
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
   
   keycloak-wip:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    image: quay.io/keycloak/keycloak:23.0
     container_name: keycloak_keycloak-wip
     volumes:
       - $KEYCLOAK_DATA/import:/opt/keycloak/data/import
     networks:
+      keycloak:
+        aliases:
+          - keycloak-wip
       web:
         aliases:
-          - keycloak
-      keycloak:
+          - keycloak-wip
     restart: "no"
+    depends_on:
+      - postgres
     command: start
     env_file:
       - keycloak-wip.env
       - keycloak-wip_secrets.env
     labels:
-      traefik.http.routers.keycloak.rule: Host(`keycloak-wip.jafner.net`)
-      traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
-      traefik.http.routers.keycloak.middlewares: lan-only@file
-      traefik.http.services.keycloak.loadbalancer.server.port: 8080
+      traefik.http.routers.keycloak-wip.rule: Host(`keycloak-wip.jafner.net`)
+      traefik.http.routers.keycloak-wip.tls.certresolver: lets-encrypt
+      traefik.http.routers.keycloak-wip.middlewares: keycloak-redirect
+      traefik.http.services.keycloak-wip.loadbalancer.server.port: 8080
+      traefik.http.middlewares.keycloak-redirect.redirectregex.regex: ^https:\\/\\/([^\\//]+)\\/?$$"
+      traefik.http.middlewares.keycloak-redirect.redirectregex.replacement: https://$$1/admin"
 
   postgres:
-    image: postgres:13
+    image: postgres:15
     container_name: keycloak_postgres
     networks:
       - keycloak
     env_file:
+      - postgres.env
       - postgres_secrets.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
