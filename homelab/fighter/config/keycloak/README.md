@@ -22,10 +22,14 @@ We'll assume the new service is hosted at `https://web.jafner.net`.
 [Docs on Keycloak.org](https://www.keycloak.org/server/importExport)
 
 ## Export Realms
-With the docker container offline, run: `docker-compose run --entrypoint="/opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/export --users realm_file" keycloak`
+With the docker container offline, run: `docker-compose run --rm --entrypoint="/opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/import --users realm_file" keycloak`
 
-This will export the contents of each realm to a `json` file in the `export/` directory. `/opt/keycloak/data` should be the directory that is mounted to the host.
+This will export the contents of each realm to a `json` file in the `import/` directory. `/opt/keycloak/data` should be the directory that is mounted to the host.
 
 ## Import Realms
 To import realms at startup, replace the startup command with `start --import-realm`
 Additionally, you'll need to map the directory containing the files to import (e.g. `$KEYCLOAK_DATA/import`) to the `/opt/keycloak/data/import` inside the container.
+
+For each realm to import, run `docker-compose run --entrypoint="/opt/keycloak/bin/kc.sh import --file /opt/keycloak/data/import/{REALM_NAME}.json" keycloak` (replace `{REALM_NAME}` with the name of the realm.)
+
+https://howtodoinjava.com/devops/keycloak-script-upload-is-disabled/
