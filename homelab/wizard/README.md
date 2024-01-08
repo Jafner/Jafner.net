@@ -139,3 +139,14 @@ To get a monitoring panel of bandwidth usage listed by connection on the interne
 To instead get usage listed by connection on LAN, use `sudo iftop -p -i eth6`
 
 [`iftop` docs](https://linux.die.net/man/8/iftop). Use [`pcap-filter'](https://www.tcpdump.org/manpages/pcap-filter.7.html) syntax for filtering with the `-f` flag.
+
+# Setting up the Aruba S2500-48P
+Followed the instructions given in [this video](https://www.youtube.com/watch?v=HegeBkglsec)
+
+1. Reset to factory settings.
+2. Basic configuration (using static IP 192.168.1.9).
+3. Flashed new firmware image (7.4.0.7, built 2021_07_07) to default boot partition.
+4. Deleted stacking interfaces for 3rd and 4th SFP+ ports.
+5. Flashed new firmware image (7.4.0.7, built 2021_07_07) to backup boot partition.
+
+Additional reference: https://forums.serverbuilds.net/t/official-aruba-s2500-managed-ethernet-switch-poe-10gsfp/5038
