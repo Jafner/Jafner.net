@@ -1,31 +1,6 @@
 version: '3'
 
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:19.0
-    container_name: keycloak_keycloak
-    volumes:
-      - $KEYCLOAK_DATA:/opt/keycloak/data
-    networks:
-      web:
-        aliases:
-          - keycloak
-    restart: "no"
-    command: start-dev --hostname-url=https://keycloak.jafner.net --proxy=passthrough
-    healthcheck: 
-      test: ["CMD", "curl", "-f", "http://0.0.0.0:8080"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    env_file:
-      - keycloak.env
-      - keycloak_secrets.env
-    labels:
-      traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
-      traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
-      #traefik.http.routers.keycloak.middlewares: lan-only@file
-      traefik.http.services.keycloak.loadbalancer.server.port: 8080
-  
   forwardauth:
     image: mesosphere/traefik-forward-auth:3.1.0
     container_name: keycloak_forwardauth
@@ -65,30 +40,33 @@ services:
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
   
-  keycloak-wip:
+  keycloak:
     image: quay.io/keycloak/keycloak:23.0
-    container_name: keycloak_keycloak-wip
-    volumes:
-      - $KEYCLOAK_DATA/import:/opt/keycloak/data/import
+    container_name: keycloak_keycloak
     networks:
       keycloak:
         aliases:
-          - keycloak-wip
+          - keycloak
       web:
         aliases:
-          - keycloak-wip
+          - keycloak
     restart: "no"
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/8080;echo -e \"GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n\" >&3;grep \"HTTP/1.1 200 OK\" <&3"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
     depends_on:
       - postgres
     command: start
     env_file:
-      - keycloak-wip.env
-      - keycloak-wip_secrets.env
+      - keycloak.env
+      - keycloak_secrets.env
     labels:
-      traefik.http.routers.keycloak-wip.rule: Host(`keycloak-wip.jafner.net`)
-      traefik.http.routers.keycloak-wip.tls.certresolver: lets-encrypt
-      traefik.http.routers.keycloak-wip.middlewares: keycloak-redirect
-      traefik.http.services.keycloak-wip.loadbalancer.server.port: 8080
+      traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
+      traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
+      traefik.http.routers.keycloak.middlewares: keycloak-redirect
+      traefik.http.services.keycloak.loadbalancer.server.port: 8080
       traefik.http.middlewares.keycloak-redirect.redirectregex.regex: ^https:\\/\\/([^\\//]+)\\/?$$"
       traefik.http.middlewares.keycloak-redirect.redirectregex.replacement: https://$$1/admin"
 
