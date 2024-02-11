@@ -47,10 +47,9 @@ services:
     labels:
       - traefik.http.routers.nextcloud-test.rule=Host(`test.jafner.net`)
       - traefik.http.routers.nextcloud-test.tls.certresolver=lets-encrypt
-      #- traefik.http.routers.nextcloud-test.middlewares=nextcloud-headers@file,nextcloud-redirect@file
+      - traefik.http.routers.nextcloud-test.middlewares=nextcloud-test-headers@file,nextcloud-redirect@file
     networks:
       - web
-      - nextcloud
     volumes:
       - /mnt/iscsi/appdata/nextcloud/config:/config
       - /mnt/iscsi/appdata/nextcloud/data:/data
