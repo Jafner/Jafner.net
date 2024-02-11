@@ -45,9 +45,9 @@ services:
     env_file:
       - nextcloud.env
     labels:
-      - traefik.http.routers.nextcloud-test.rule=Host(`nextcloud-test.jafner.net`)
+      - traefik.http.routers.nextcloud-test.rule=Host(`test.jafner.net`)
       - traefik.http.routers.nextcloud-test.tls.certresolver=lets-encrypt
-      - traefik.http.routers.nextcloud-test.middlewares=nextcloud-headers@file,nextcloud-redirect@file
+      #- traefik.http.routers.nextcloud-test.middlewares=nextcloud-headers@file,nextcloud-redirect@file
     networks:
       - web
       - nextcloud
