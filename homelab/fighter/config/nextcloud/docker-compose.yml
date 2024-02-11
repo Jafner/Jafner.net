@@ -39,21 +39,6 @@ services:
     volumes:
       - $DOCKER_DATA/redis:/data
 
-  nextcloud-test:
-    image: lscr.io/linuxserver/nextcloud:latest
-    container_name: nextcloud_nextcloud-test
-    env_file:
-      - nextcloud.env
-    labels:
-      - traefik.http.routers.nextcloud-test.rule=Host(`nextcloud.test.jafner.net`)
-      - traefik.http.routers.nextcloud-test.tls.certresolver=lets-encrypt
-      - traefik.http.routers.nextcloud-test.middlewares=nextcloud-test-headers@file,nextcloud-redirect@file
-    networks:
-      - web
-    volumes:
-      - /mnt/iscsi/appdata/nextcloud/config:/config
-      - /mnt/iscsi/appdata/nextcloud/data:/data
-
 networks:
   web:
     external: true    

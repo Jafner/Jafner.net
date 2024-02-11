@@ -61,25 +61,6 @@ http:
         customResponseHeaders:
           X-Robots-Tag: "noindex, nofollow"
           server: ""
-    nextcloud-test-headers:
-      headers:
-        accessControlMaxAge: 100
-        sslRedirect: true
-        stsSeconds: 63072000
-        stsIncludeSubdomains: true
-        stsPreload: true
-        forceSTSHeader: true
-        customFrameOptionsValue: "SAMEORIGIN" #CSP takes care of this but may be needed for organizr.
-        contentTypeNosniff: true
-        browserXssFilter: true
-        sslForceHost: true 
-        sslHost: "nextcloud.test.jafner.net"
-        referrerPolicy: "no-referrer"
-        #contentSecurityPolicy: "frame-ancestors '*.example.com:*';object-src 'none';script-src 'none';"
-        featurePolicy: "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';"
-        customResponseHeaders:
-          X-Robots-Tag: "noindex, nofollow"
-          server: ""
     nextcloud-redirect:
       redirectRegex:
         permanent: true
