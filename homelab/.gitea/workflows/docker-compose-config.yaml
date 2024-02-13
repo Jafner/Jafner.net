@@ -14,7 +14,7 @@ jobs:
             echo $(dirname $compose)/
           done
       - name: Compose Config
-        uses: "actions/docker/cli@master"
+        uses: actions/docker/cli@master
         with:
           args: compose config
       - run: echo "Job status ${{ job.status }}"
