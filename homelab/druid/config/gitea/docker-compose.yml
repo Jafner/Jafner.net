@@ -49,7 +49,7 @@ services:
       - gitea
     volumes: 
       - ./runner_config.yaml:/config.yaml
-      - $DOCKER_DATA/runner:/data
+      - $DOCKER_DATA/runner-dind:/data
       - /var/run/docker.sock:/var/run/docker.sock
   
   runner-ubuntu:
@@ -66,7 +66,7 @@ services:
       - gitea
     volumes: 
       - ./runner_config.yaml:/config.yaml
-      - $DOCKER_DATA/runner:/data
+      - $DOCKER_DATA/runner-ubuntu:/data
       - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
