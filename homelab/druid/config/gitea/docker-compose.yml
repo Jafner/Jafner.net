@@ -38,6 +38,7 @@ services:
   runner-dind:
     image: gitea/act_runner:latest-dind-rootless
     container_name: gitea_runner-dind
+    privileged: true
     depends_on:
       - gitea
     env_file:
