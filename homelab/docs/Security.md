@@ -117,7 +117,8 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-multi-factor-auth
 Some use cases (such as programmatic access) demand 2FA be disabled. 
 Some day we'll figure out how to allow specific keys to bypass the 2FA requirement. But until then,
 
-Edit the file `/etc/ssh/sshd_config` as root. Set `UsePAM` from `yes` to `no`. 
+1. Edit the file `/etc/pam.d/sshd` and comment out the line `auth sufficient pam_google_authenticator.so nullok`
+2. Edit the file `/etc/ssh/sshd_config` and find the `AuthenticationMethods` configuration. Replace the value `publickey,keyboard-interactive` with `publickey`.
 
 ### SSH Key Management
 The process for managing SSH keys should work as follows:
