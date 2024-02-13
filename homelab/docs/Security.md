@@ -113,6 +113,12 @@ Note: SSH root login will be disabled implicitly by requiring pubkey authenticat
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-multi-factor-authentication-for-ssh-on-ubuntu-16-04
 
+### Disabling 2FA
+Some use cases (such as programmatic access) demand 2FA be disabled. 
+Some day we'll figure out how to allow specific keys to bypass the 2FA requirement. But until then,
+
+Edit the file `/etc/ssh/sshd_config` as root. Set `UsePAM` from `yes` to `no`. 
+
 ### SSH Key Management
 The process for managing SSH keys should work as follows:
 
