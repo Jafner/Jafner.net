@@ -17,5 +17,5 @@ jobs:
         uses: actions-hub/docker/cli@master
         env:
           SKIP_LOGIN: true
-        run: docker compose version
+      - run: docker compose version
       - run: echo "Job status ${{ job.status }}"
