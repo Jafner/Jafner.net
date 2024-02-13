@@ -41,7 +41,7 @@ services:
     depends_on:
       - gitea
     env_file:
-      - path: ./runner.env
+      - path: ./runner-dind.env
         required: true
       - path: ./runner_secrets.env
         required: false
@@ -58,7 +58,7 @@ services:
     depends_on:
       - gitea
     env_file:
-      - path: ./runner.env
+      - path: ./runner-ubuntu.env
         required: true
       - path: ./runner_secrets.env
         required: false
