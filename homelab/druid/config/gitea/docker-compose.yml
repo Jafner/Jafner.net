@@ -52,7 +52,7 @@ services:
       - $DOCKER_DATA/runner:/data
       - /var/run/docker.sock:/var/run/docker.sock
   
-  runner:
+  runner-ubuntu:
     image: gitea/act_runner:latest
     container_name: gitea_runner-ubuntu
     depends_on:
