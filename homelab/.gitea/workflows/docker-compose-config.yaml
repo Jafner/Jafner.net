@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   docker-compose-config:
-    runs-on: ubuntu-latest
+    runs-on: dind
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -14,3 +14,4 @@ jobs:
             echo $(dirname $compose)/
           done
       - run: echo "Job status ${{ job.status }}"
+      - run: docker compose version
