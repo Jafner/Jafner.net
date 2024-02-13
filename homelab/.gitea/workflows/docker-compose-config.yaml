@@ -11,6 +11,10 @@ jobs:
       - name: Get location of all docker-compose.yaml files
         run: |
           for compose in $(find "$PWD"/ -name docker-compose.yml); do 
-            echo $(dirname $compose)
+            echo $(dirname $compose)/
           done
+      - name: Compose Config
+        uses: "actions/docker/cli@master"
+        with:
+          args: compose config
       - run: echo "Job status ${{ job.status }}"
