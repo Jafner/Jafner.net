@@ -23,6 +23,8 @@ jobs:
           key: ${{ secrets.SSH_KEY_DEPLOY_TO_FIGHTER }}
           script: |
             for stack in /home/$USER/homelab/fighter/config/*
-              do cd $stack && docker compose config
+              do cd $stack && 
+              echo "===== Validating $(basename $PWD) =====" && 
+              docker compose config > /dev/null
             done
 
