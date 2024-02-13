@@ -13,9 +13,4 @@ jobs:
           for compose in $(find "$PWD"/ -name docker-compose.yml); do 
             echo $(dirname $compose)/
           done
-      - name: Compose Config
-        uses: actions-hub/docker/cli@master
-        env:
-          SKIP_LOGIN: true
-      - run: docker compose version
       - run: echo "Job status ${{ job.status }}"
