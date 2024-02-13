@@ -1,10 +1,11 @@
-version: "3"
+version: "3.9"
 services:
   gitea:
     image: gitea/gitea:1.21.0
     container_name: gitea_gitea
     env_file:
-      - gitea.env
+      - path: ./gitea.env
+        required: true
     restart: always
     networks:
       - web
@@ -29,16 +30,21 @@ services:
     networks:
       - gitea
     env_file:
-      - postgres_secrets.env
+      - path: ./postgres_secrets.env
+        required: false
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   runner:
     image: gitea/act_runner:latest
     container_name: gitea_runner
+    depends_on:
+      - gitea
     env_file:
-      - runner.env
-      - runner_secrets.env
+      - path: ./runner.env
+        required: true
+      - path: ./runner_secrets.env
+        required: false
     networks:
       - gitea
     volumes: 
