@@ -1,0 +1,19 @@
+name: Deploy to Fighter
+run-name: ${{ gitea.actor }} deploying
+on: [push]
+
+jobs:
+  Deploy-to-Fighter:
+    runs-on: internal
+    steps:
+      - name: Pull latest code onto Fighter via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ gitea.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
+          username: ${{ gitea.SSH_USERNAME_FIGHTER }}
+          key: ${{ gitea.SSH_KEY_DEPLOY_TO_FIGHTER }}
+          port: 22
+          script: |
+            cd ~/homelab
+            git pull
+            echo "hello world" > ~/text.txt
