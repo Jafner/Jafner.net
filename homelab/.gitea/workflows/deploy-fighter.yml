@@ -9,10 +9,9 @@ jobs:
       - name: Pull latest code onto Fighter via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ gitea.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
-          username: ${{ gitea.SSH_USERNAME_FIGHTER }}
-          key: ${{ gitea.SSH_KEY_DEPLOY_TO_FIGHTER }}
-          port: 22
+          host: ${{ vars.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_FIGHTER }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_FIGHTER }}
           script: |
             cd ~/homelab
             git pull
