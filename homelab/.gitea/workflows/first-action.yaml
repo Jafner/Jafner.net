@@ -11,4 +11,4 @@ jobs:
       - name: List files and directories
         run: |
           ls ${{ gitea.workspace }}
-        run: echo "Job status: ${{ job.status }}"
+      - run: echo "Job status ${{ job.status }}"
