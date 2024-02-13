@@ -15,4 +15,14 @@ jobs:
           script: |
             cd ~/homelab
             git pull
-            echo "hello world" > ~/text.txt
+      - name: Validate compose configs
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_FIGHTER }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_FIGHTER }}
+          script: |
+            for stack in /home/$USER/homelab/fighter/config/*
+              do cd $stack && docker compose config
+            done
+
