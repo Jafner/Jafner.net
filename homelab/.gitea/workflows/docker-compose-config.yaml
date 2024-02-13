@@ -14,7 +14,8 @@ jobs:
             echo $(dirname $compose)/
           done
       - name: Compose Config
-        uses: actions-hub/docker@master
-        with:
-          args: compose config
+        uses: actions-hub/docker/cli@master
+        env:
+          SKIP_LOGIN: true
+        run: docker compose version
       - run: echo "Job status ${{ job.status }}"
