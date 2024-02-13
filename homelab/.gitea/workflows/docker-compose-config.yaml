@@ -1,9 +1,0 @@
-name: Docker Compose Config
-run-name: ${{ gitea.actor }} is linting docker-compose files
-on: [push]
-
-jobs:
-  docker-compose-config:
-    runs-on: dind
-    steps:
-      - run: docker compose version
