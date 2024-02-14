@@ -6,11 +6,14 @@ fi
 
 source /opt/vyatta/etc/functions/script-template
 
-. firewall.sh
-. interfaces.sh
-. nat.sh
-. qos.sh
-. service.sh
-. system.sh
+configure
+
+. test.sh
+#. firewall.sh
+#. interfaces.sh
+#. nat.sh
+#. qos.sh
+#. service.sh
+#. system.sh
 
 exit
