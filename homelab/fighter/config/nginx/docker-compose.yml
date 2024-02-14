@@ -1,7 +1,7 @@
-version: '3'
+version: '3.9'
 services:
   nginx:
-    image: nginx
+    image: nginx:latest
     container_name: nginx_test
     networks:
       - web
