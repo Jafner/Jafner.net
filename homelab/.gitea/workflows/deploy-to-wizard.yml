@@ -42,5 +42,5 @@ jobs:
           username: ${{ vars.SSH_USERNAME_WIZARD }}
           key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
           script: |
-            declare -p
-            printenv
+            cd ~/homelab/wizard/config
+            /bin/vbash show-config.sh
