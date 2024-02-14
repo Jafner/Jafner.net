@@ -59,7 +59,7 @@ then
     exit
 else
     { # compare, try commit, save, exit
-        compare
+        compare | strip-private
         commit && save && exit
     } || { # catch, exit discard and print a very basic error message
         exit discard
