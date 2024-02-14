@@ -41,5 +41,4 @@ jobs:
           host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP
           username: ${{ vars.SSH_USERNAME_WIZARD }}
           key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
-          script: |
-            echo $SHELL
+          script: show configuration
