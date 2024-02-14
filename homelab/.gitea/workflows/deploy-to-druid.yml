@@ -1,0 +1,33 @@
+name: Deploy to Druid
+run-name: ${{ gitea.actor }} deploying
+on: 
+  push: 
+    paths:
+      - 'druid/**'
+
+jobs:
+  Deploy-to-Druid:
+    runs-on: druid
+    steps:
+      - name: Pull latest code onto Druid via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_DRUID }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_DRUID }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_DRUID }}
+          script: |
+            cd ~/homelab
+            git pull
+      - name: Validate compose configs
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_DRUID }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_DRUID }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_DRUID }}
+          script: |
+            for stack in /home/$USER/homelab/druid/config/*
+              do cd $stack && 
+              echo "===== Validating $(basename $PWD) =====" && 
+              docker compose config > /dev/null
+            done
+
