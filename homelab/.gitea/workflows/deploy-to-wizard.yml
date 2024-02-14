@@ -1,0 +1,20 @@
+name: Deploy to Wizard
+run-name: ${{ gitea.actor }} deploying
+on: 
+  push: 
+    paths:
+      - 'wizard/**'
+
+jobs:
+  Deploy-to-Wizard:
+    runs-on: fighter
+    steps:
+      - name: Pull latest code onto Wizard via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_WIZARD }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
+          script: |
+            cd ~/homelab
+            git pull
