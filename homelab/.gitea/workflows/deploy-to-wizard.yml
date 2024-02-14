@@ -6,10 +6,10 @@ on:
       - 'wizard/**'
 
 jobs:
-  Deploy-to-Wizard:
+  Deploy:
     runs-on: fighter
     steps:
-      - name: Pull latest code onto Wizard via SSH
+      - name: Pull latest code onto host via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP

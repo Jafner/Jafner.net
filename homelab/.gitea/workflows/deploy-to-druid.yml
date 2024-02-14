@@ -6,10 +6,10 @@ on:
       - 'druid/**'
 
 jobs:
-  Deploy-to-Druid:
+  Deploy:
     runs-on: druid
     steps:
-      - name: Pull latest code onto Druid via SSH
+      - name: Pull latest code onto host via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ vars.SSH_HOST_IP_DRUID }} # this is a LAN IP

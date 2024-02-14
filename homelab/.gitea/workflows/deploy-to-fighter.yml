@@ -6,10 +6,10 @@ on:
       - 'fighter/**'
 
 jobs:
-  Deploy-to-Fighter:
+  Deploy:
     runs-on: fighter
     steps:
-      - name: Pull latest code onto Fighter via SSH
+      - name: Pull latest code onto host via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ vars.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
