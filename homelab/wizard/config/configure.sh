@@ -53,11 +53,15 @@ echo "===== Configure system... ====="
     echo "===== Failed to configure system =====" 
 }
 
-compare
-
-{ # try commit, save
-    commit && save && exit
-} || { # catch, exit discard and print a very basic error message
-    exit discard
-    echo "Failed to commit and save the configuration."
-}
+if ! [[ compare | grep -q 'No changes between working and active configurations.' ]]
+then 
+    { # try commit, save
+        compare
+        commit && save && exit
+    } || { # catch, exit discard and print a very basic error message
+        exit discard
+        echo "Failed to commit and save the configuration."
+    }
+else
+    echo "No changes to commit."
+fi
