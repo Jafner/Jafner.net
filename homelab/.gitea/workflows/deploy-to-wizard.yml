@@ -42,4 +42,4 @@ jobs:
           username: ${{ vars.SSH_USERNAME_WIZARD }}
           key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
           script: |
-            /bin/vbash show configuration
+            echo $SHELL
