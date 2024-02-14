@@ -18,9 +18,9 @@ set system login user vyos authentication otp key $SYSTEM_LOGIN_USER_VYOS_AUTHEN
 set system login user vyos authentication otp rate-limit '3'
 set system login user vyos authentication otp rate-time '30'
 set system login user vyos authentication otp window-size '3'
-set system login user vyos authentication public-keys deploy@gitea.jafner.tools key $SYSTEM_LOGIN_USER_VYOS_AUTHENTICATION_PUBLICKEYS_deploygiteajafnertools_KEY
+set system login user vyos authentication public-keys deploy@gitea.jafner.tools key 'AAAAC3NzaC1lZDI1NTE5AAAAIBzQU/ZbpLXgAXUImNKNfkyEkggRfgVDCozOVby/CLMR'
 set system login user vyos authentication public-keys deploy@gitea.jafner.tools type 'ssh-ed25519'
-set system login user vyos authentication public-keys jafner425@gmail.com key $SYSTEM_LOGIN_USER_VYOS_AUTHENTICATION_PUBLICKEYS_jafner425gmailcom_KEY
+set system login user vyos authentication public-keys jafner425@gmail.com key 'AAAAC3NzaC1lZDI1NTE5AAAAIMbzncsWNWxoDSqeva/ZoGHv32A0ggUMWfzx2Gz6Kmkk'
 set system login user vyos authentication public-keys jafner425@gmail.com type 'ssh-ed25519'
 set system name-server '192.168.1.32'
 set system name-server 'eth5'
