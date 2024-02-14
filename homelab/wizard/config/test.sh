@@ -1,3 +1,3 @@
 #!/bin/vbash
 
-set system task-scheduler task update-nat-reflection interval '30'
+set system task-scheduler task update-nat-reflection interval '10'
