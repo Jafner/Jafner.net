@@ -56,10 +56,8 @@ echo "===== Configure system... ====="
 compare
 
 { # try commit, save
-    commit && save
+    commit && save && exit
 } || { # catch, exit discard and print a very basic error message
     exit discard
     echo "Failed to commit and save the configuration."
 }
-
-exit
