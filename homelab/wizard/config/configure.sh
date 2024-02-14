@@ -8,12 +8,15 @@ source /opt/vyatta/etc/functions/script-template
 
 configure
 
-. test.sh
-#. firewall.sh
-#. interfaces.sh
-#. nat.sh
-#. qos.sh
-#. service.sh
-#. system.sh
+source test.sh
+#source firewall.sh
+#source interfaces.sh
+#source nat.sh
+#source qos.sh
+#source service.sh
+#source system.sh
 
+compare
+commit
+save
 exit
