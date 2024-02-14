@@ -7,7 +7,7 @@ on:
 
 jobs:
   Deploy-to-Fighter:
-    runs-on: internal
+    runs-on: fighter
     steps:
       - name: Pull latest code onto Fighter via SSH
         uses: appleboy/ssh-action@master
