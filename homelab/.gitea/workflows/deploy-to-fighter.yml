@@ -1,6 +1,9 @@
 name: Deploy to Fighter
 run-name: ${{ gitea.actor }} deploying
-on: [push]
+on: 
+  push: 
+    paths:
+      - 'fighter/'
 
 jobs:
   Deploy-to-Fighter:
