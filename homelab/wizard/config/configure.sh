@@ -5,33 +5,34 @@ if [ "$(id -g -n)" != 'vyattacfg' ] ; then
 fi
 
 source /opt/vyatta/etc/functions/script-template
+source vyos_secrets.env
 
 configure
 
 echo "===== Configure firewall... ====="
 { 
-    source firewall.sh 
+    source firewall.sh > /dev/null
 } || { 
     echo "===== Failed to configure firewall =====" 
 }
 
 echo "===== Configure interfaces... ====="   
 { 
-    source interfaces.sh 
+    source interfaces.sh > /dev/null
 } || { 
     echo "===== Failed to configure interfaces =====" 
 }
 
 echo "===== Configure NAT... ====="
 { 
-    source nat.sh 
+    source nat.sh > /dev/null
 } || { 
     echo "===== Failed to configure NAT =====" 
 }
 
 echo "===== Configure QoS... ====="
 { 
-    source qos.sh 
+    source qos.sh > /dev/null
 } || { 
     echo "===== Failed to configure QoS =====" 
 }
@@ -39,7 +40,7 @@ echo "===== Configure QoS... ====="
 
 echo "===== Configure services... ====="
 { 
-    source service.sh 
+    source service.sh > /dev/null
 } || { 
     echo "===== Failed to configure services =====" 
 }
@@ -47,11 +48,10 @@ echo "===== Configure services... ====="
 
 echo "===== Configure system... ====="
 { 
-    source system.sh 
+    source system.sh > /dev/null
 } || { 
     echo "===== Failed to configure system =====" 
 }
-
 
 compare
 
