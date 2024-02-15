@@ -30,4 +30,16 @@ jobs:
               echo "===== Validating $(basename $PWD) =====" && 
               docker compose config > /dev/null
             done
+      - name: Deploy new config
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_FIGHTER }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_FIGHTER }}
+          script: |
+            for stack in /home/$USER/homelab/fighter/config/*
+              do cd $stack && 
+              echo "===== Deploying $(basename $PWD) =====" && 
+              docker compose up -d
+            done
 
