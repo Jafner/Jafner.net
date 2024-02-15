@@ -9,7 +9,8 @@ services:
       - send
       - web
     env_file:
-      - send.env
+      - path: ./send.env
+        required: true
     volumes:
       - ${DOCKER_DATA}/uploads:/uploads
     labels:

@@ -61,8 +61,10 @@ services:
     image: ekofr/pihole-exporter:latest
     container_name: monitoring_exporter-pihole
     env_file:
-      - exporter-pihole_secrets.env
-      - exporter-pihole.env
+      - path: ./exporter-pihole.env
+        required: true
+      - path: ./exporter-pihole_secrets.env
+        required: false
     restart: "no"
     networks:
       - monitoring

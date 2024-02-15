@@ -13,7 +13,8 @@ services:
       - $MEDIA_DIR/Galleries:/media/Galleries
       - $DOCKER_DATA:/root/.stash
     env_file:
-      - stashapp.env
+      - path: ./stashapp.env
+        required: true
     networks:
       - web
     labels:

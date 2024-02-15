@@ -19,17 +19,21 @@ services:
       - monitoring
       - minecraft
     env_file:
-      - exporter.env
+      - path: ./exporter.env
+        required: true
     labels:
       - traefik.enable=false
 
   prominence:
     image: itzg/minecraft-server:latest
     container_name: minecraft_prominence
-    env_file: 
-      - minecraft.env
-      - minecraft_secrets.env
-      - prominence.env
+    env_file:
+      - path: ./minecraft.env
+        required: true
+      - path: ./minecraft_secrets.env
+        required: false
+      - path: ./prominence.env
+        required: true
     volumes:
       - $DOCKER_DATA/prominence:/data:rw
     networks:

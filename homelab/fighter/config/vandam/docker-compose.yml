@@ -5,7 +5,8 @@ services:
     image: ghcr.io/floppy/van_dam:latest
     container_name: vandam_vandam
     env_file:
-        - vandam_secrets.env
+      - path: ./vandam_secrets.env
+        required: false
     volumes:
       - ${STL_DIR}:/libraries
     networks:
@@ -25,7 +26,8 @@ services:
     networks:
       - vandam
     env_file:
-      - db_secrets.env
+      - path: ./db_secrets.env
+        required: false
     volumes:
       - db_data:/var/lib/postgresql/data
 

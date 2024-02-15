@@ -14,7 +14,8 @@ services:
       - $DOCKER_DATA:/config
       - $TORRENT_DATA:/torrenting
     env_file:
-      - qbittorrent.env
+      - path: ./qbittorrent.env
+        required: true
     ports:
       - 49510:49510
     labels:
@@ -22,11 +23,13 @@ services:
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
       - traefik.http.routers.qbt.middlewares=traefik-forward-auth-privileged@file
       - traefik.http.services.qbt.loadbalancer.server.port=8080
+
   exporter-qbittorrent:
     image: esanchezm/prometheus-qbittorrent-exporter
     container_name: qbittorrent_exporter
     env_file:
-      - exporter.env
+      - path: ./exporter.env
+        required: true
     restart: "no"
     networks:
       - monitoring

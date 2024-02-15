@@ -4,7 +4,8 @@ services:
     image: linuxserver/calibre-web
     container_name: calibre-web_rpg
     env_file:
-      - calibre-web.env
+      - path: ./calibre-web.env
+        required: true
     volumes:
       - calibre-web-rpg_data:/config
       - $LIBRARY_DIR/rpg:/books
@@ -18,7 +19,8 @@ services:
     image: linuxserver/calibre-web
     container_name: calibre-web_sff
     env_file:
-      - calibre-web.env
+      - path: ./calibre-web.env
+        required: true
     volumes:
       - calibre-web-sff_data:/config
       - $LIBRARY_DIR/sff:/books

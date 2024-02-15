@@ -4,7 +4,8 @@ services:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud_nextcloud
     env_file:
-      - nextcloud.env
+      - path: ./nextcloud.env
+        required: true
     depends_on:
       - mariadb
     labels:
@@ -26,8 +27,10 @@ services:
     networks:
       - nextcloud
     env_file:
-      - mariadb.env
-      - mariadb_secrets.env
+      - path: ./mariadb.env
+        required: true
+      - path: ./mariadb_secrets
+        required: false
     volumes:
       - $DOCKER_DATA/mariadb:/config
 

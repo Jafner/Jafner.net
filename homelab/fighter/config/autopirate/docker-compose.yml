@@ -6,7 +6,8 @@ services:
     networks:
       - web
     env_file:
-      - autopirate.env
+      - path: ./autopirate.env
+        required: true
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${DOCKER_DATA}/radarr_config:/config"
@@ -23,7 +24,8 @@ services:
     networks:
       - web
     env_file:
-      - autopirate.env
+      - path: ./autopirate.env
+        required: true
     volumes:
       - "${MEDIA_DIR}/Video/Shows:/shows"
       - "${DOCKER_DATA}/sonarr_config:/config"
@@ -40,7 +42,8 @@ services:
     networks:
       - web
     env_file:
-      - autopirate.env
+      - path: ./autopirate.env
+        required: true
     volumes:
       - "${DOCKER_DATA_LOCAL}/bazarr:/config"
       - "${MEDIA_DIR}/Video/Movies:/movies"
@@ -57,7 +60,8 @@ services:
     networks:
       - web
     env_file:
-      - autopirate.env
+      - path: ./autopirate.env
+        required: true
     volumes:
       - "${DOCKER_DATA}/nzbhydra2_config:/config"
       - "${NZB_DIR}:/downloads"
@@ -74,7 +78,8 @@ services:
       - web
       - monitoring
     env_file:
-      - autopirate.env
+      - path: ./autopirate.env
+        required: true
     ports:
       - 8085:8080
     volumes:
@@ -107,8 +112,10 @@ services:
       - traefik.http.routers.tdarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
       - traefik.http.services.tdarr.loadbalancer.server.port=8265
     env_file:
-      - autopirate.env
-      - tdarr.env
+      - path: ./autopirate.env
+        required: true
+      - path: ./tdarr.env
+        required: true
     volumes:
       - ${DOCKER_DATA}/tdarr/server:/app/server
       - ${DOCKER_DATA}/tdarr/configs:/app/configs
@@ -124,8 +131,10 @@ services:
       tdarr:
         ipv4_address: 172.110.0.20
     env_file:
-      - autopirate.env
-      - tdarr_node.env
+      - path: ./autopirate.env
+        required: true
+      - path: ./tdarr_node.env
+        required: true
     volumes:
       - ${DOCKER_DATA}/tdarr/configs:/app/configs
       - ${DOCKER_DATA}/tdarr/logs:/app/logs
@@ -139,8 +148,10 @@ services:
     networks:
       - web
     env_file:
-      - autopirate.env
-      - jackett.env
+      - path: ./autopirate.env
+        required: true
+      - path: ./jackett.env
+        required: true
     volumes:
       - "${DOCKER_DATA}/jackett_config:/config"
       - "${NZB_DIR}:/downloads"
@@ -157,8 +168,10 @@ services:
     networks:
       - monitoring
     env_file:
-      - exporter-sabnzbd.env
-      - exporter-sabnzbd_secrets.env
+      - path: ./exporter-sabnzbd.env
+        required: true
+      - path: ./exporter-sabnzbd_secrets.env
+        required: false
 
 networks:
   tdarr:

@@ -18,9 +18,12 @@ services:
       - 32413:32413/udp
       - 32414:32414/udp
     env_file:
-      - plex_stack.env
-      - plex.env
-      - plex_secrets.env
+      - path: ./plex.env
+        required: true
+      - path: ./plex_stack.env
+        required: true
+      - path: ./plex_secrets.env
+        required: false
     volumes:
       - "${MEDIA_DIR}/Video/Movies:/movies"
       - "${MEDIA_DIR}/Video/Shows:/shows"
@@ -30,6 +33,7 @@ services:
       - traefik.http.routers.plex.rule=Host(`plex.jafner.net`)
       - traefik.http.routers.plex.tls.certresolver=lets-encrypt
       - traefik.http.services.plex.loadbalancer.server.port=32400
+
   ombi:
     image: ghcr.io/linuxserver/ombi
     container_name: plex_ombi
@@ -37,7 +41,8 @@ services:
     networks:
       - web
     env_file:
-      - plex_stack.env
+      - path: ./plex_stack.env
+        required: true
     volumes:
       - "${DOCKER_DATA}/ombi:/config"
     labels:
@@ -46,6 +51,7 @@ services:
       - traefik.http.routers.ombi.tls.options=tls12@file
       - traefik.http.routers.ombi.middlewares=securityheaders@file
       - traefik.http.services.ombi.loadbalancer.server.port=3579   
+
   exporter-plex:
     image: granra/plex_exporter
     container_name: plex_exporter

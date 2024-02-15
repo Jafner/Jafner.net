@@ -6,7 +6,8 @@ services:
     container_name: wordpress_megan-portfolio
     restart: "no"
     env_file:
-      - megan-portfolio.env
+      - path: ./megan-portfolio.env
+        required: true
     volumes:
       - ${DOCKER_DATA}/html:/var/www/html
       - ./upload.ini:/usr/local/etc/php/conf.d/uploads.ini
@@ -26,7 +27,8 @@ services:
     networks:
       - portfolio
     env_file:
-      - megan-portfolio-db.env
+      - path: ./megan-portfolio-db.env
+        required: true
     volumes:
       - ${DOCKER_DATA}/db:/var/lib/mysql
     labels:
