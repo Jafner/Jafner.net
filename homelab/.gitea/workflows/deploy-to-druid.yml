@@ -31,3 +31,12 @@ jobs:
               docker compose config > /dev/null
             done
 
+  Notify:
+    runs-on: druid
+    steps:
+      - name: Discord notification
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          args: '<@${{ secrets.DISCORD_ID_JAFNER }}> ${{ github.repository }} deploy to druid: ${{ job.status }}'

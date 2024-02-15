@@ -44,3 +44,13 @@ jobs:
           script: |
             cd ~/homelab/wizard/config
             /bin/vbash show-config.sh
+
+  Notify:
+    runs-on: fighter
+    steps:
+      - name: Discord notification
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          args: '<@${{ secrets.DISCORD_ID_JAFNER }}> ${{ github.repository }} deploy to wizard: ${{ job.status }}'
