@@ -45,9 +45,9 @@ jobs:
   Notify:
     runs-on: fighter
     steps:
-      - name: Discord notifications
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@master
+      - name: Discord notification
+        uses: appleboy/discord-action@master
         with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           args: '${{ github.repository }} deploy to fighter: ${{ job.status }}'
