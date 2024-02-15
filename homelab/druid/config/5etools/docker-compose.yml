@@ -1,4 +1,4 @@
-version: "3"
+version: '3.9'
 services:
   5etools:
     container_name: 5etools

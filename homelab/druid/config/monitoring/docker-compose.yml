@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   exporter-docker:
     image: prometheusnet/docker_exporter
