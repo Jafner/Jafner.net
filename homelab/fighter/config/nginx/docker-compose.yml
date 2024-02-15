@@ -2,7 +2,7 @@ version: '3'
 services:
   nginx:
     image: nginx:latest
-    container_name: nginx_test
+    container_name: nginx_test-1
     networks:
       - web
     labels:
