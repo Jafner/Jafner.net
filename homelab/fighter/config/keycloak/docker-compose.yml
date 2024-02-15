@@ -1,4 +1,4 @@
-version: '3'
+version: '3.0'
 
 services:
   keycloak:
@@ -21,8 +21,10 @@ services:
       - postgres
     command: start
     env_file:
-      - keycloak.env
-      - keycloak_secrets.env
+      - path: ./keycloak.env
+        required: true
+      - path: ./keycloak_secrets.env
+        required: false
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
@@ -43,8 +45,10 @@ services:
       keycloak: 
         condition: service_healthy
     env_file:
-      - forwardauth.env
-      - forwardauth_secrets.env
+      - path: ./forwardauth.env
+        required: true
+      - path: ./forwardauth_secrets.env
+        required: false
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
@@ -63,8 +67,10 @@ services:
       keycloak: 
         condition: service_healthy
     env_file:
-      - forwardauth-privileged.env
-      - forwardauth-privileged_secrets.env
+      - path: ./forwardauth-privileged.env
+        required: true
+      - path: ./forwardauth-privileged_secrets.env
+        required: false
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
@@ -76,6 +82,10 @@ services:
     networks:
       - keycloak
     env_file:
+      - path: ./postgres.env
+        required: true
+      - path: ./postgres_secrets.env
+        required: false
       - postgres.env
       - postgres_secrets.env
     volumes:
