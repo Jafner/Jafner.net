@@ -50,4 +50,4 @@ jobs:
         with:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
-          args: '${{ github.repository }} deploy to fighter: ${{ job.status }}'
+          args: '<@${{ secrets.DISCORD_ID_JAFNER }}> ${{ github.repository }} deploy to fighter: ${{ job.status }}'
