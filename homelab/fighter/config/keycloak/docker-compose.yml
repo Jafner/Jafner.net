@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.9'
 
 services:
   keycloak:
@@ -41,6 +41,7 @@ services:
         aliases:
           - forwardauth
     restart: "no"
+    command: "./traefik-forward-auth"
     depends_on:
       keycloak: 
         condition: service_healthy
@@ -57,12 +58,12 @@ services:
   forwardauth-privileged:
     image: mesosphere/traefik-forward-auth:3.1.0
     container_name: keycloak_forwardauth-privileged
-    command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
     networks:
       web:
         aliases:
           - forwardauth-privileged
     restart: "no"
+    command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
     depends_on:
       keycloak: 
         condition: service_healthy
