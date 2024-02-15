@@ -16,7 +16,7 @@ services:
     env_file:
       - qbittorrent.env
     ports:
-      - 49500-50000:49500-50000
+      - 49510:49510
     labels:
       - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt

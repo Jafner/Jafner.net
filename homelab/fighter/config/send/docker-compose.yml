@@ -2,22 +2,22 @@ version: '3'
 services:
   send:
     image: registry.gitlab.com/timvisee/send:latest
+    user: 1001:1001
     container_name: send_send
     restart: "no"
     networks:
       - send
       - web
-    volumes:
-      - ${DOCKER_DATA}/uploads:/uploads
     env_file:
       - send.env
+    volumes:
+      - ${DOCKER_DATA}/uploads:/uploads
     labels:
       - traefik.http.routers.send.rule=Host(`send.jafner.net`)
       - traefik.http.routers.send.tls.certresolver=lets-encrypt
       - traefik.http.routers.send.tls.options=tls12@file
       - traefik.http.routers.send.middlewares=securityheaders@file
       - traefik.http.services.send.loadbalancer.server.port=1234
-      #- traefik.http.routers.send.middlewares=
 
   redis:
     image: 'redis:alpine'
@@ -25,11 +25,6 @@ services:
     networks:
       - send
     restart: "no"
-    volumes:
-      - send-redis:/data
-
-volumes:
-  send-redis:
 
 networks:
   web:
