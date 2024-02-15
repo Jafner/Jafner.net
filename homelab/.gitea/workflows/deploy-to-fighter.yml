@@ -42,4 +42,12 @@ jobs:
               echo "===== Deploying $(basename $PWD) =====" && 
               docker compose up -d
             done
-
+  Notify:
+    runs-on: fighter
+    steps:
+      - name: Discord notifications
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '{{ EVENT_PAYLOAD.repository.full_name }} deployed to fighter'
