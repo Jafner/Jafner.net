@@ -4,6 +4,13 @@ services:
     image: linuxserver/plex
     container_name: plex_plex
     restart: "no"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     networks:
       - web
     ports:

@@ -120,6 +120,15 @@ services:
   tdarr-node:
     image: haveagitgat/tdarr_node:latest
     container_name: autopirate_tdarr-node
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+        limits:
+          cpus: '12.00'
     networks:
       tdarr:
         ipv4_address: 172.110.0.20
