@@ -35,3 +35,9 @@ To force the runners to re-register (to apply updated labels, for example).
 2. Delete the `.runner` files for each runner. Run `find ~/data/gitea/ -name ".runner" -delete`.
 3. Bring the runners back up. Run `docker compose up -d` from the gitea directory. 
 
+# Delete Registed Runners
+Apparently a misconfigured Docker-in-Docker runner may sometimes retry registering over and over until the heat death of the universe. In that case you will end up with many "ghost" runners. In my case, 27,619. To resolve, you can either step through each one and click "edit", then "delete", then "confirm". Or you can just use the database. 
+
+1. `docker exec -it gitea_postgres psql --username "gitea"` To open a terminal inside the container and open a CLI session to the database.
+2. `\c gitea` To select the 'gitea' database.
+3. `DELETE FROM action_runner WHERE id NOT IN (50, 66);` To delete all entries except those with the IDs I wanted to keep.
