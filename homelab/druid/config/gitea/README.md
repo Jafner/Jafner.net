@@ -41,3 +41,24 @@ Apparently a misconfigured Docker-in-Docker runner may sometimes retry registeri
 1. `docker exec -it gitea_postgres psql --username "gitea"` To open a terminal inside the container and open a CLI session to the database.
 2. `\c gitea` To select the 'gitea' database.
 3. `DELETE FROM action_runner WHERE id NOT IN (50, 66);` To delete all entries except those with the IDs I wanted to keep.
+
+# Disable native auth
+We don't want to use Gitea's native auth. We want Keycloak to handle all our authentication. So we place a template override in the correct directory, which Gitea picks up on startup to generate the signin page. 
+
+The file [`signin_inner.tmpl`](signin_inner.tmpl) must be placed into `/data/gitea/templates/user/auth/` *inside the container*. In our case, that means `~/data/gitea/gitea/gitea/templates/user/auth/` on the host system. 
+
+For this to work properly, we use the following `app.ini` snippets:
+
+```ini
+[service]
+DISABLE_REGISTRATION = true
+ALLOW_ONLY_EXTERNAL_REGISTRATION = true
+
+[openid]
+ENABLE_OPENID_SIGNIN = false
+ENABLE_OPENID_SIGNUP = false
+
+[oauth2_client]
+ENABLE_AUTO_REGISTRATION = true
+ACCOUNT_LINKING = disabled
+```
