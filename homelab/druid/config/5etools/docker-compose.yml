@@ -7,7 +7,9 @@ services:
     volumes:
       - $DOCKER_DATA/htdocs:/usr/local/apache2/htdocs
     environment:
-      - SOURCE=GITHUB
+      - IMG=TRUE
+      - PGID=1003
+      - PUID=1003
     networks:
       - web
     labels:
