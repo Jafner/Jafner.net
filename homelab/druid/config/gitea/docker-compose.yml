@@ -34,24 +34,6 @@ services:
         required: false
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  runner-dind:
-    image: gitea/act_runner:latest-dind-rootless
-    container_name: gitea_runner-dind
-    privileged: true
-    depends_on:
-      - gitea
-    env_file:
-      - path: ./runner-dind.env
-        required: true
-      - path: ./runner_secrets.env
-        required: false
-    networks:
-      - gitea
-    volumes: 
-      - ./runner_dind_config.yaml:/config.yaml
-      - $DOCKER_DATA/runner-dind:/data
-      - /var/run/docker.sock:/var/run/docker.sock
   
   runner-ubuntu:
     image: gitea/act_runner:latest
