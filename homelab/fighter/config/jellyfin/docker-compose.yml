@@ -17,7 +17,7 @@ services:
       - "${MEDIA_DIR}/Video/Shows:/data/tvshows"
       - "${DOCKER_DATA}/jellyfin:/config"
     labels:
-      - traefik.http.routers.jellyfin.rule=Host(`plex.jafner.net`)
+      - traefik.http.routers.jellyfin.rule=Host(`jellyfin.jafner.net`)
       - traefik.http.routers.jellyfin.tls.certresolver=lets-encrypt
 
 networks:
