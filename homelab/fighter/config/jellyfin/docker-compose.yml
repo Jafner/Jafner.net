@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin_jellyfin
+    restart: "no"
+    networks:
+      - web
+    ports:
+      - 8096:8096
+      - 8920:8920
+    env_file:
+      - path: ./jellyfin.env
+        required: true
+    volumes:
+      - "${MEDIA_DIR}/Video/Movies:/data/movies"
+      - "${MEDIA_DIR}/Video/Shows:/data/tvshows"
+      - "${DOCKER_DATA}/jellyfin:/config"
+    labels:
+      - traefik.http.routers.jellyfin.rule=Host(`plex.jafner.net`)
+      - traefik.http.routers.jellyfin.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
