@@ -1,11 +1,21 @@
-System:    Host: fighter Kernel: 5.10.0-21-amd64 x86_64 bits: 64 Console: tty 2 Distro: Debian GNU/Linux 11 (bullseye) 
-Machine:   Type: Desktop Mobo: ASRock model: B550M Pro4 serial: N/A UEFI: American Megatrends LLC. v: P2.20 date: 08/03/2021 
-CPU:       Info: 8-Core AMD Ryzen 7 5800X [MT MCP] speed: 2195 MHz min/max: 2200/5581 MHz 
-Graphics:  Device-1: NVIDIA driver: nvidia v: 470.161.03 
-           Display: server: X.org 1.20.11 driver: loaded: nvidia unloaded: fbdev,modesetting,nouveau,vesa tty: 177x28 
-           Message: Advanced graphics data unavailable in console for root. 
-Network:   Device-1: Realtek RTL8111/8168/8411 PCI Express Gigabit Ethernet driver: r8169 
-           Device-2: Mellanox MT26448 [ConnectX EN 10GigE PCIe 2.0 5GT/s] driver: mlx4_core 
-Drives:    Local Storage: total: raw: 6.37 TiB usable: 6.37 TiB used: 965.17 GiB (14.8%) 
-Info:      Processes: 824 Uptime: 4d 13h 25m Memory: 46.98 GiB used: 26.72 GiB (56.9%) Init: systemd runlevel: 5 Shell: Bash 
-           inxi: 3.3.01
+System:
+  Host: fighter Kernel: 6.1.0-18-amd64 arch: x86_64 bits: 64 Console: pty pts/0 Distro: Debian
+    GNU/Linux 12 (bookworm)
+Machine:
+  Type: Desktop Mobo: ASRock model: B550M Pro4 serial: N/A UEFI: American Megatrends LLC. v: P2.20
+    date: 08/03/2021
+CPU:
+  Info: 8-core AMD Ryzen 7 5800X [MT MCP] speed (MHz): avg: 2300 min/max: 2200/4850
+Graphics:
+  Device-1: NVIDIA TU117GLM [Quadro T400 Mobile] driver: nouveau v: kernel
+  Display: server: X.org v: 1.21.1.7 with: Xwayland v: 22.1.9 driver: X: loaded: nouveau,vesa
+    unloaded: fbdev,modesetting gpu: nouveau tty: 177x61
+  API: OpenGL Message: GL data unavailable in console for root.
+Network:
+  Device-1: Realtek RTL8111/8168/8411 PCI Express Gigabit Ethernet driver: r8169
+  Device-2: Mellanox MT26448 [ConnectX EN 10GigE PCIe 2.0 5GT/s] driver: mlx4_core
+Drives:
+  Local Storage: total: raw: 14.37 TiB usable: 14.37 TiB used: 774.16 GiB (5.3%)
+Info:
+  Processes: 688 Uptime: 8h 14m Memory: 46.97 GiB used: 9.72 GiB (20.7%) Init: systemd
+  target: graphical (5) Shell: Bash inxi: 3.3.26
