@@ -1,0 +1,62 @@
+System:
+  Host: barbarian Kernel: 5.15.107+truenas arch: x86_64 bits: 64 Console: pty pts/1 Distro: Debian
+    GNU/Linux 11 (bullseye)
+Machine:
+  Type: Desktop Mobo: Gigabyte model: X99-SLI-CF v: x.x serial: N/A UEFI: American Megatrends
+    v: F24a date: 01/11/2018
+Memory:
+  System RAM: total: 64 GiB available: 62.64 GiB used: 39.28 GiB (62.7%)
+  Array-1: capacity: 512 GiB note: check slots: 8 modules: 8 EC: None
+  Device-1: DIMM_A1 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-2: DIMM_A2 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-3: DIMM_B1 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-4: DIMM_B2 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-5: DIMM_C1 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-6: DIMM_C2 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-7: DIMM_D1 type: DDR4 size: 8 GiB speed: 2133 MT/s
+  Device-8: DIMM_D2 type: DDR4 size: 8 GiB speed: 2133 MT/s
+CPU:
+  Info: 6-core model: Intel Core i7-5930K bits: 64 type: MT MCP cache: L2: 1.5 MiB
+  Speed (MHz): avg: 1270 min/max: 1200/3700 cores: 1: 2026 2: 1201 3: 1200 4: 1201 5: 1201
+    6: 1200 7: 1206 8: 1201 9: 1202 10: 1201 11: 1202 12: 1202
+Graphics:
+  Device-1: NVIDIA GK208B [GeForce GT 710] driver: N/A
+  Display: server: No display server data found. Headless machine? tty: 177x61
+  API: N/A Message: No API data available in console. Headless machine?
+Network:
+  Device-1: Intel Ethernet I218-V driver: e1000e
+  Device-2: Mellanox MT26448 [ConnectX EN 10GigE PCIe 2.0 5GT/s] driver: mlx4_core
+Drives:
+  Local Storage: total: raw: 174.73 TiB usable: 116.17 TiB used: 55.5 TiB (47.8%)
+  ID-1: /dev/sda vendor: Intel model: SSDSCKGW080A4 size: 74.53 GiB
+  ID-2: /dev/sdb vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-3: /dev/sdc vendor: Hitachi model: HUH728080AL5200 size: 7.28 TiB
+  ID-4: /dev/sdd vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-5: /dev/sde vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-6: /dev/sdf vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-7: /dev/sdg vendor: Hitachi model: HUH728080AL5200 size: 7.28 TiB
+  ID-8: /dev/sdh vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-9: /dev/sdi vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-10: /dev/sdj vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-11: /dev/sdk vendor: Hitachi model: HUH728080AL5200 size: 7.28 TiB
+  ID-12: /dev/sdl vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-13: /dev/sdm vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-14: /dev/sdn vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-15: /dev/sdo vendor: Sun Microsystems model: H7280A520SUN8.0T size: 7.28 TiB
+  ID-16: /dev/sdp vendor: Hitachi model: HUH728080AL4200 size: 7.28 TiB
+  ID-17: /dev/sdq vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-18: /dev/sdr vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-19: /dev/sds vendor: Sun Microsystems model: H7280A520SUN8.0T size: 7.28 TiB
+  ID-20: /dev/sdt vendor: Hitachi model: HUH728080AL4200 size: 7.28 TiB
+  ID-21: /dev/sdu vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+  ID-22: /dev/sdv vendor: Sun Microsystems model: H7280A520SUN8.0T size: 7.28 TiB
+  ID-23: /dev/sdw vendor: Sun Microsystems model: H7280A520SUN8.0T size: 7.28 TiB
+  ID-24: /dev/sdx vendor: Hitachi model: HUH728080AL4200 size: 7.28 TiB
+  ID-25: /dev/sdy vendor: Hitachi model: HUH72808CLAR8000 size: 7.28 TiB
+Partition:
+  ID-1: / size: 43.91 GiB used: 2.45 GiB (5.6%) fs: zfs logical: freenas-boot/ROOT/22.12.3
+  ID-2: swap-1 size: 2 GiB used: 26.5 MiB (1.3%) fs: swap dev: /dev/dm-0
+  ID-3: swap-2 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/dm-1
+  ID-4: swap-3 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/dm-2
+  ID-5: swap-4 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/dm-3
+  ID-6: swap-5 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/dm-4

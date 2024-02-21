@@ -14,7 +14,7 @@ We can get each drive's serial number, power on hours, and manufacture date with
 ```
 for dev in {b..y}; \
   do echo "### /dev/sd$dev" && \
-  smartctl -a /dev/sd$dev | awk '/Serial number:/{serial=$NF} /hours:minutes/{powerontime=$NF} {FS="\n"}/Manufactured in /{manufacture=$NF}END{print serial; print  powerontime; print manufacture; printf "\n"}'; \
+  sudo smartctl -a /dev/sd$dev | awk '/Serial number:/{serial=$NF} /hours:minutes/{powerontime=$NF} {FS="\n"}/Manufactured in /{manufacture=$NF}END{print serial; print  powerontime; print manufacture; printf "\n"}'; \
 done
 ```
 
