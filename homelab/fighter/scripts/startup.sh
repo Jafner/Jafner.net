@@ -18,3 +18,10 @@ for stack in /home/admin/homelab/fighter/config/*; do
     docker compose up -d 
     cd /home/admin/homelab/fighter/config/
 done
+
+# extra thing because my keycloak healthcheck doesn't work properly
+
+echo "Wait 15s, then bring Keycloak forwardauth containers online"
+cd /home/admin/homelab/fighter/config/keycloak
+sleep 15
+docker compose up -d
