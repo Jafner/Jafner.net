@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  home-assistant:
+    image: lscr.io/linuxserver/homeassistant:latest
+    container_name: home-assistant_home-assistant
+    env_file:
+      - home-assistant.env
+    networks:
+      - web
+    volumes:
+      - $DOCKER_DATA:/config
+    labels:
+      - traefik.http.routers.home-assistant.rule=Host(`homeassistant.jafner.net`)
+      - traefik.http.routers.home-assistant.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
