@@ -6,3 +6,4 @@ service-key.json
 .terraform.lock.hcl
 terraform/infrastructure/.tfvars
 ip.tmp
+*.passwd

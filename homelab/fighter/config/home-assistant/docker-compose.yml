@@ -21,6 +21,7 @@ services:
       - home-assistant
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto.passwd:/mosquitto/config/mosquitto.passwd
       - $DOCKER_DATA/mosquitto:/mosquitto/data
     ports:
       - 12883:1883
