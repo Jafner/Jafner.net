@@ -21,7 +21,7 @@ services:
       - $DOCKER_DATA/mosquitto:/mosquitto/data
     ports:
       - 1883:1883
-      - 9001:9001
+      - 19001:9001
 
 networks:
   web:
