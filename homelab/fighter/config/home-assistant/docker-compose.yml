@@ -12,7 +12,6 @@ services:
     labels:
       - traefik.http.routers.home-assistant.rule=Host(`homeassistant.jafner.net`)
       - traefik.http.routers.home-assistant.tls.certresolver=lets-encrypt
-      - traefik.http.services.
 
   mosquitto:
     image: eclipse-mosquitto:latest
