@@ -10,12 +10,7 @@ services:
     volumes:
       - $DOCKER_DATA/logs:/app/config/logs
       - ./icons/:/app/public/icons
-      - ./bookmarks.yaml:/app/config/bookmarks.yaml
-      - ./docker.yaml:/app/config/docker.yaml
-      - ./kubernetes.yaml:/app/config/kubernetes.yaml
-      - ./services.yaml:/app/config/services.yaml
-      - ./settings.yaml:/app/config/settings.yaml
-      - ./widgets.yaml:/app/config/widgets.yaml
+      - ./config:/app/config/
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       - traefik.http.routers.homepage-tasmota.rule=Host(`home.tasmota.jafner.net`)
