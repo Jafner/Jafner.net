@@ -8,10 +8,23 @@ services:
     networks:
       - web
     volumes:
-      - $DOCKER_DATA:/config
+      - $DOCKER_DATA/home-assistant:/config
     labels:
       - traefik.http.routers.home-assistant.rule=Host(`homeassistant.jafner.net`)
       - traefik.http.routers.home-assistant.tls.certresolver=lets-encrypt
+      - traefik.http.services.
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: home-assistant_mosquitto
+    env_file:
+      - mosquitto.env
+    volumes:
+      - mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - $DOCKER_DATA/mosquitto:/mosquitto/data
+    ports:
+      - 1883:1883
+      - 9001:9001
 
 networks:
   web:
