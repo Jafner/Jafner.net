@@ -1,0 +1,20 @@
+
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/bookmarks
+
+- Animals:
+  - Toes Day:
+      href: https://day.toes.tasmota.jafner.net
+  - Toes Night:
+      href: https://night.toes.tasmota.jafner.net
+  - Figment Day:
+      href: https://day.figment.tasmota.jafner.net
+  - Figment Night:
+      href: https://night.figment.tasmota.jafner.net
+  - Sprout Day:
+      href: https://day.sprout.tasmota.jafner.net
+
+- Homelab:
+    - Lab Rack:
+        href: https://rack.tasmota.jafner.net

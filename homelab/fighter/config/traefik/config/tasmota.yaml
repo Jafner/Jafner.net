@@ -1,0 +1,76 @@
+http:
+  routers:
+    toes-day:
+      rule: "Host(`day.toes.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "toes-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    lab-rack:
+      rule: "Host(`rack.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "lab-rack@file"
+      tls:
+        certResolver: "lets-encrypt"
+    sprout-day:
+      rule: "Host(`day.sprout.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "sprout-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    figment-day:
+      rule: "Host(`day.figment.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "figment-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    figment-night:
+      rule: "Host(`night.figment.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "figment-night@file"
+      tls:
+        certResolver: "lets-encrypt"
+    tasmota-55:
+      rule: "Host(`55.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "tasmota-55@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  services:
+    toes-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.50/"
+    lab-rack:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.51/"
+    sprout-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.52/"
+    figment-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.53/"
+    figment-night:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.54/"
+    tasmota-55:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.55/"
