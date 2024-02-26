@@ -7,6 +7,7 @@ services:
       - home-assistant.env
     networks:
       - web
+      - home-assistant
     volumes:
       - $DOCKER_DATA/home-assistant:/config
     labels:
@@ -16,6 +17,8 @@ services:
   mosquitto:
     image: eclipse-mosquitto:latest
     container_name: home-assistant_mosquitto
+    networks:
+      - home-assistant
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
       - $DOCKER_DATA/mosquitto:/mosquitto/data
@@ -26,3 +29,4 @@ services:
 networks:
   web:
     external: true
+  home-assistant:
