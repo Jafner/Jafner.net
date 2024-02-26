@@ -20,7 +20,7 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
       - $DOCKER_DATA/mosquitto:/mosquitto/data
     ports:
-      - 1883:1883
+      - 12883:1883
       - 19001:9001
 
 networks:
