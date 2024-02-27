@@ -7,7 +7,7 @@ services:
     restart: "no"
     networks:
       web:
-        #ipv4_address: 172.18.0.31
+        ipv4_address: 172.18.0.27
       monitoring: 
     ports:
       - 80:80
