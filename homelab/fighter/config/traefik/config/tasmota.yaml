@@ -56,6 +56,14 @@ http:
       service: "tasmota-55@file"
       tls:
         certResolver: "lets-encrypt"
+    cowboy-day:
+      rule: "Host(`day.cowboy.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "cowboy-day@file"
+      tls:
+        certResolver: "lets-encrypt"
 
   services:
     toes-day:
