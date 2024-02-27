@@ -10,6 +10,7 @@ services:
       - home-assistant
     volumes:
       - $DOCKER_DATA/home-assistant:/config
+      - /run/dbus:/run/dbus:ro
     labels:
       - traefik.http.routers.home-assistant.rule=Host(`homeassistant.jafner.net`)
       - traefik.http.routers.home-assistant.tls.certresolver=lets-encrypt
