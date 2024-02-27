@@ -27,6 +27,8 @@ set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-map
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-figment-night mac-address '3C:61:05:F7:34:CD'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-55 ip-address '192.168.1.55'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-55 mac-address '3C:61:05:F7:1F:C4'
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-toes-night ip-address '192.168.1.56'
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-toes-night mac-address '3C:61:05:F7:33:29'
 set service dns forwarding allow-from '192.168.1.0/24'
 set service dns forwarding cache-size '1000000'
 set service dns forwarding listen-address '192.168.1.1'

@@ -8,6 +8,14 @@ http:
       service: "toes-day@file"
       tls:
         certResolver: "lets-encrypt"
+    toes-night:
+      rule: "Host(`night.toes.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "toes-night@file"
+      tls:
+        certResolver: "lets-encrypt"
     lab-rack:
       rule: "Host(`rack.tasmota.jafner.net`)"
       entryPoints: "websecure"
@@ -74,3 +82,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.55/"
+    toes-night:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.56"
