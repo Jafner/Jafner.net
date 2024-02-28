@@ -6,8 +6,6 @@ services:
     env_file:
       - path: ./nut.env
         required: true
-    ports:
-      - "9000:9000"
     volumes:
       - "$DOCKER_DATA/titles:/nut/titles:rw"
       - "$DOCKER_DATA/conf:/nut/conf:rw"
