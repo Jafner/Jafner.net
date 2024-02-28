@@ -4,7 +4,8 @@ services:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: home-assistant_home-assistant
     env_file:
-      - home-assistant.env
+      - path: home-assistant.env
+        required: true
     networks:
       - web
       - home-assistant
@@ -27,6 +28,23 @@ services:
     ports:
       - 12883:1883
       - 19001:9001
+
+  wyze-bridge:
+    image: mrlt8/wyze-bridge
+    container_name: home-assistant_wyze-bridge
+    networks:
+      - web
+    env_file:
+      - path: ./wyze-bridge.env
+        required: true
+      - path: wyze-bridge_secrets.env
+        required: false
+    ports:
+      - 11935:1935 # RTMP
+      - 18554:8554 # RTSP
+      - 19090:8888 # HLS
+      - 19091:8889 # WebRTC
+      - 19092:8189/udp # WebRTC/ICE
 
 networks:
   web:
