@@ -45,6 +45,11 @@ services:
       - 19090:8888 # HLS
       - 19091:8889 # WebRTC
       - 19092:8189/udp # WebRTC/ICE
+    volumes:
+      - type: tmpfs
+        target: /tmp/docker-wyze
+        tmpfs:
+          size: 4000000000
     labels:
       - traefik.http.routers.wyze-bridge.rule=Host(`wyze.homeassistant.jafner.net`)
       - traefik.http.routers.wyze-bridge.tls.certresolver=lets-encrypt
