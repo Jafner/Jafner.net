@@ -1,0 +1,20 @@
+version: "3"
+services:
+  nut:
+    image: shawly/nut
+    container_name: networkupstools_nut
+    env_file:
+      - path: ./nut.env
+        required: true
+    ports:
+      - "9000:9000"
+    volumes:
+      - "$DOCKER_DATA/titles:/nut/titles:rw"
+      - "$DOCKER_DATA/conf:/nut/conf:rw"
+      - "$DOCKER_DATA/_NSPOUT:/nut/_NSPOUT:rw"
+      - "$DOCKER_DATA/titledb:/nut/titledb:rw"
+    labels:
+      - traefik.http.routers.nut.rule=Host(`nut.jafner.net`)
+      - traefik.http.routers.nut.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nut.middlewares=lan-only@file
+      - traefik.http.services.nut.loadbalancer.server.port=9000
