@@ -1,14 +1,3 @@
-Disks in the shelf are listed alphabetically starting from `b`, such that `/dev/sdb` is row 1 column 1 and `/dev/sdh` is row 2 column 3.
-
-|    | X1  | X2  | X3  | X4  |
-|:--:|:---:|:---:|:---:|:---:|
-| Y1 | sdb | sdc | sdd | sde | 
-| Y2 | sdf | sdg | sdh | sdi | 
-| Y3 | sdj | sdk | sdl | sdm | 
-| Y4 | sdn | sdo | sdp | sdq |
-| Y5 | sdr | sds | sdt | sdu |
-| Y6 | sdv | sdw | sdx | sdy |
-
 We can get each drive's serial number, power on hours, and manufacture date with the following one-liner:
 
 ```

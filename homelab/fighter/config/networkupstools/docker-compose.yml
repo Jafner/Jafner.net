@@ -6,6 +6,8 @@ services:
     env_file:
       - path: ./nut.env
         required: true
+    networks:
+      - web
     volumes:
       - "$DOCKER_DATA/titles:/nut/titles:rw"
       - "$DOCKER_DATA/conf:/nut/conf:rw"
@@ -16,3 +18,7 @@ services:
       - traefik.http.routers.nut.tls.certresolver=lets-encrypt
       - traefik.http.routers.nut.middlewares=lan-only@file
       - traefik.http.services.nut.loadbalancer.server.port=9000
+
+networks:
+  web:
+    external: true
