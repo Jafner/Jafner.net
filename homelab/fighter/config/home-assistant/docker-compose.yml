@@ -49,6 +49,7 @@ services:
       - traefik.http.routers.wyze-bridge.rule=Host(`wyze.homeassistant.jafner.net`)
       - traefik.http.routers.wyze-bridge.tls.certresolver=lets-encrypt
       - traefik.http.routers.wyze-bridge.middlewares=lan-only@file
+      - traefik.http.services.wyze-bridge.loadbalancer.server.port=5000
 
 networks:
   web:
