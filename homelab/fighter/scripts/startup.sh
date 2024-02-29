@@ -64,4 +64,4 @@ done
 echo "  ==== Wait 15s, then bring Keycloak forwardauth containers online"
 cd /home/admin/homelab/fighter/config/keycloak
 sleep 15
-docker compose up -d
+docker start keycloak_forwardauth keycloak_forwardauth-privileged
