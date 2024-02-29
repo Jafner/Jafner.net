@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Check for network mounted devices
 # NAS SMB
@@ -36,17 +37,17 @@ for stack in /home/admin/homelab/fighter/config/*; do
     # need the one that must be offline.
     # If all of those fail, we know the stack is dependent on an offline service
     # So we just skip the stack.
-    if (SMB_ONLINE=true && ISCSI_ONLINE=true); then
+    if $SMB_ONLINE && $ISCSI_ONLINE; then
         echo "  ==== Bringing up $stack"
         docker compose up -d 
-    elif (! echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas && ISCSI_ONLINE=true); then
+    elif $ISCSI_ONLINE && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas ); then
         echo "  ==== Bringing up $stack"
         docker compose up -d 
-    elif (! echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi && SMB_ONLINE=true); then
+    elif $SMB_ONLINE && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi ); then
         echo "  ==== Bringing up $stack"
         docker compose up -d 
     else
-       echo "  ==== Skipping stack $stack"
+        echo "  ==== Skipping stack $stack"
     fi
     
     cd /home/admin/homelab/fighter/config/
