@@ -1,8 +1,8 @@
 #!/bin/sh
 FROM_DIR=$1 # trailing slash
-TO_DIR=$2 # no trailing slash
+TO_DIR=$2 # trailing slash
 
-cp -rv $FROM_DIR $TO_DIR > copy.tmp
+rsync -avhW $FROM_DIR $TO_DIR > /tmp/copy.tmp
 
 # If filesize is less than 23 million bytes (21.93 MiB) 
 # Gives generous headroom for Gmail max attachment size
@@ -28,7 +28,7 @@ if [ $(ls -la copy.tmp | awk '{print $5}') -le 23000000 ]; then
       echo "--d29a0c638b540b23e9a29a3a9aebc900aeeb6a82--"
 
     ) | sendmail root
-    rm copy.tmp
+    rm /tmp/copy.tmp
 else
    echo "Filesize too large to attach. See log file for details." | mail -s "Copy $FROM_DIR to $TO_DIR operation complete." root
    mv copy.tmp copy_$(date +"%y-%m-%d").log
