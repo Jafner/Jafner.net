@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x # debugging flag
 
 # Check for network mounted devices
 # NAS SMB
@@ -25,7 +25,7 @@ fi
 
 for stack in /home/admin/homelab/fighter/config/*; do
     cd $stack 
-    if ! docker compose config; then 
+    if ! docker compose config > /dev/null; then 
         echo "  ==== Invalid compose config: $stack"
     fi
     COMPOSE_CONFIG_TEXT=$(docker compose config)
@@ -37,17 +37,21 @@ for stack in /home/admin/homelab/fighter/config/*; do
     # need the one that must be offline.
     # If all of those fail, we know the stack is dependent on an offline service
     # So we just skip the stack.
-    if $SMB_ONLINE && $ISCSI_ONLINE; then
+    if ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi ) && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas); then
+        echo "  ==== Stack not dependent on NAS services"
         echo "  ==== Bringing up $stack"
+        docker compose up -d 
+    elif $SMB_ONLINE && $ISCSI_ONLINE; then
+        echo "  ==== Bringing up $stack (all NAS services online)"
         docker compose up -d 
     elif $ISCSI_ONLINE && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas ); then
-        echo "  ==== Bringing up $stack"
+        echo "  ==== Bringing up $stack (iSCSI online, not dependent on SMB)"
         docker compose up -d 
     elif $SMB_ONLINE && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi ); then
-        echo "  ==== Bringing up $stack"
+        echo "  ==== Bringing up $stack (SMB online, not dependent on iSCSI)"
         docker compose up -d 
     else
-        echo "  ==== Skipping stack $stack"
+        echo "  ==== Skipping stack $stack (Dependent NAS service offline)"
     fi
     
     cd /home/admin/homelab/fighter/config/
