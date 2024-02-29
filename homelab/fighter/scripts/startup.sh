@@ -4,7 +4,10 @@
 # NAS SMB
 if ! mount -t cifs | grep -q '/mnt/nas'; then
     echo "  ==== NAS SMB shares not mounted"
-    exit 1
+    echo "  ==== Won't online stacks which depend on SMB shares"
+    SMB_ONLINE=false
+else
+    SMB_ONLINE=true
 fi
 
 # NAS iSCSI
@@ -12,8 +15,11 @@ if ! sudo iscsiadm -m session | grep -q 'iqn.2020-03.net.jafner:fighter'; then
     echo "  ==== NAS iSCSI session not connected"
     if ! mount -t ext4 | grep -q '/mnt/iscsi'; then
         echo "  ==== /mnt/iscsi not mounted"
-        exit 1
+        echo "  ==== Won't online stacks which depend on iSCSI shares"
     fi
+    ISCSI_ONLINE=false
+else
+    ISCSI_ONLINE=true
 fi
 
 for stack in /home/admin/homelab/fighter/config/*; do
@@ -21,9 +27,31 @@ for stack in /home/admin/homelab/fighter/config/*; do
     if ! docker compose config; then 
         echo "  ==== Invalid compose config: $stack"
     fi
-    echo "  ==== Bringing up $stack"
-    docker compose up -d 
+    COMPOSE_CONFIG_TEXT=$(docker compose config)
+
+    # The logic below is a little obtuse. 
+    # If both SMB and ISCSI are online, we can online the stack no worries. 
+    # If this test fails we know *at least one* of the share services is offline.
+    # So for the next two we check if the other service is online *and* we don't
+    # need the one that must be offline.
+    # If all of those fail, we know the stack is dependent on an offline service
+    # So we just skip the stack.
+    if (SMB_ONLINE=true && ISCSI_ONLINE=true); then
+        echo "  ==== Bringing up $stack"
+        docker compose up -d 
+    elif (! echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas && ISCSI_ONLINE=true); then
+        echo "  ==== Bringing up $stack"
+        docker compose up -d 
+    elif (! echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi && SMB_ONLINE=true); then
+        echo "  ==== Bringing up $stack"
+        docker compose up -d 
+    else
+       echo "  ==== Skipping stack $stack"
+    fi
+    
     cd /home/admin/homelab/fighter/config/
+    # make sure to overwrite the config text to prevent leaking secrets
+    COMPOSE_CONFIG_TEXT="" 
 done
 
 # extra thing because my keycloak healthcheck doesn't work properly
