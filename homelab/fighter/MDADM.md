@@ -1,0 +1,3 @@
+- If you see an error at the beginning of `dmesg` about `mdadm: error opening /dev/md<something>: No such file or directory`, you probably have a zombie array.
+- Mdadm devices are read at boot from `/etc/mdadm/mdadm.conf` and then mounted to the filesystem at `/etc/fstab`. 
+- If you update `/etc/mdadm/mdadm.conf`, also inform the initramfs of the updates with `update-initramfs -u`. 
