@@ -30,34 +30,28 @@ for stack in /home/admin/homelab/fighter/config/*; do
     fi
     COMPOSE_CONFIG_TEXT=$(docker compose config)
 
-    # The logic below is a little obtuse. 
-    # If both SMB and ISCSI are online, we can online the stack no worries. 
-    # If this test fails we know *at least one* of the share services is offline.
-    # So for the next two we check if the other service is online *and* we don't
-    # need the one that must be offline.
-    # If all of those fail, we know the stack is dependent on an offline service
-    # So we just skip the stack.
-    if ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi ) && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas); then
-        echo "  ==== Stack not dependent on NAS services"
-        echo "  ==== Bringing up $stack"
-        docker compose up -d 
-    elif $SMB_ONLINE && $ISCSI_ONLINE; then
-        echo "  ==== Bringing up $stack (all NAS services online)"
-        docker compose up -d 
-    elif $ISCSI_ONLINE && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas ); then
-        echo "  ==== Bringing up $stack (iSCSI online, not dependent on SMB)"
-        docker compose up -d 
-    elif $SMB_ONLINE && ! ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi ); then
-        echo "  ==== Bringing up $stack (SMB online, not dependent on iSCSI)"
-        docker compose up -d 
+    # If the stack needs iSCSI and iSCSI isn't available, skip.
+    if ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/iscsi ) && ! $ISCSI_ONLINE; then
+        echo "  ==== $stack is dependent on iSCSI and iSCSI is offline, skipping..."
+    # Else if the stack needs SMB and SMB isn't available, skip.
+    elif ( echo $COMPOSE_CONFIG_TEXT | grep -q /mnt/nas ) && ! $SMB_ONLINE; then
+        echo "  ==== $stack is dependent on SMB and SMB is offline, skipping..."
+    # Else the stack can be onlined. We also add it to a list of onlined services
     else
-        echo "  ==== Skipping stack $stack (Dependent NAS service offline)"
+        echo  "  ==== Bringing up $stack "
+        STACKS_ONLINE+="$(echo $stack | xargs basename)\n"
+        echo -n "    ==== Time: "
+        ( time docker compose --progress quiet up -d ) 2>&1 | grep real | cut -f 2
+        echo "  ==== Done!"
     fi
     
     cd /home/admin/homelab/fighter/config/
     # make sure to overwrite the config text to prevent leaking secrets
     COMPOSE_CONFIG_TEXT="" 
 done
+
+echo "  ==== List of stacks online:"
+echo -e "$STACKS_ONLINE"
 
 # extra thing because my keycloak healthcheck doesn't work properly
 
