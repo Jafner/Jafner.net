@@ -41,3 +41,7 @@ Changing discoverable on succeeded
 Discovery started
 [CHG] Controller 00:E0:4C:8B:01:03 Discovering: yes
 ```
+
+# A better solution
+Pick up some ESP32 boards to place around the house for coverage. 
+Install onto each a copy of [ESPHome](https://esphome.io/projects/?type=bluetooth). 

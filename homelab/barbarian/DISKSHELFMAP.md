@@ -4,9 +4,9 @@
 Each cell contains the serial number for the drive in the mapped bay.
 |    | X1        | X2       | X3       | X4       |
 |:--:|:---------:|:--------:|:--------:|:--------:|
-| Y1 | VJGPS30X  | VK0ZD6ZY | VJG282NX | VJG2PVRX | 
-| Y2 | VJGR6TNX  | 2EG14YNJ | VJGJVTZX | VJG1H9UX | 
-| Y3 | VJGJUWNX  | 2EGXD27V | VJGJAS1X | VJG2UTUX | 
+| Y1 | VJGPS30X  | VK0ZD6ZY | VJG282NX | VJG2PVRX |
+| Y2 | VJGR6TNX  | 2EG14YNJ | VJGJVTZX | VJG1H9UX |
+| Y3 | VJGJUWNX  | 2EGXD27V | VJGJAS1X | VJG2UTUX |
 | Y4 | VJGRGD2X  | 2EGL8AVV | 2EKA903X | VJGRRG9X |
 | Y5 | VJGK56KX  | 2EGNPVWV | 2EKATR2X | VKH3Y3XX |
 | Y6 | VLKV9N8V  | R5G4W2VV | VLKXPS1V | VKGW5YGX |
