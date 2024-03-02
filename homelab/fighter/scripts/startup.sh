@@ -1,9 +1,11 @@
 #!/bin/bash
 #set -x # debugging flag
 
-# Clean up any remnants from unclean shutdown
-docker stop $(docker ps -q) # shut down running containers
-docker rm $(docker ps -aq) # remove all containers
+if "$1" == "clean"; then
+    # Clean up any remnants from unclean shutdown
+    docker stop $(docker ps -q) # shut down running containers
+    docker rm $(docker ps -aq) # remove all containers
+fi
 
 # Check for network mounted devices
 # NAS SMB
