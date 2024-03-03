@@ -34,7 +34,7 @@ function mount_iscsi {
     sudo mount /mnt/nas/iscsi
 }
 
-if "$1" == "clean"; then
+if [ "$1" = "clean" ]; then
     echo "  ==== Cleaning up old containers"
     # Clean up any remnants from unclean shutdown
     docker stop $(docker ps -q) # shut down running containers
@@ -46,13 +46,21 @@ fi
 echo "  ==== Checking iSCSI..."
 if ! sudo iscsiadm -m session | grep -q 'iqn.2020-03.net.jafner:fighter'; then 
     echo "  ====== Attempting to connect and mount iSCSI"
-    { connect_iscsi && mount_iscsi && echo "  ====== Success!" } || { echo "  ====== Could not connect and mount iSCSI" }
+    { 
+        connect_iscsi && mount_iscsi && echo "  ====== Success!" 
+    } || { 
+        echo "  ====== Could not connect and mount iSCSI" 
+    }
 fi
 
 # Second check if mounted; attempt to mount if not mounted
 if ! mount | grep -q '/mnt/nas/iscsi'; then
     echo "  ====== Attempting to mount /mnt/nas/iscsi"
-    { mount_iscsi && echo "  ====== Success!" } || { echo "  ====== Could not mount /mnt/nas/iscsi" }
+    { 
+        mount_iscsi && echo "  ====== Success!" 
+    } || { 
+        echo "  ====== Could not mount /mnt/nas/iscsi" 
+    }
 fi
 # Regarding the above, we will attempt to re-mount the share if the first step successfully connected and then failed to mount. 
 # This is because I can't be bother to build more elegant logic.
