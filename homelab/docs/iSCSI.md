@@ -31,7 +31,7 @@ To resolve:
 
 # Connecting and mounting the iSCSI share on boot
 
-1. Get the full path of the share's configuration. It should be like `/etc/iscsi/nodes/<share iqn>/<share host address>/default`. In my case it was `/etc/iscsi/nodes/iqn.202-03.net.jafner:fighter/192.168.1.10,3260,1/default`. [Debian.org](https://wiki.debian.org/SAN/iSCSI/open-iscsi). 
+1. Get the full path of the share's configuration. It should be like `/etc/iscsi/nodes/<share iqn>/<share host address>/default`. In my case it was `/etc/iscsi/nodes/iqn.2020-03.net.jafner:fighter/192.168.1.10,3260,1/default`. [Debian.org](https://wiki.debian.org/SAN/iSCSI/open-iscsi). 
 2. Set the `node.startup` parameter to `automatic`. Run `sudo sed -i 's/node.startup = manual/node.startup = automatic/g' /etc/iscsi/nodes/iqn.2020-03.net.jafner:fighter/192.168.1.10,3260,1/default`. 
 3. Add the new mount to `/etc/fstab`. Run `sudo bash -c "echo '/dev/sdb1 /mnt/iscsi ext4 _netdev 0 0' >> /etc/fstab"`. [Adamsdesk.com](https://www.adamsdesk.com/posts/sudo-echo-permission-denied/), [StackExchange](https://unix.stackexchange.com/questions/195116/mount-iscsi-drive-at-boot-system-halts). 
 
