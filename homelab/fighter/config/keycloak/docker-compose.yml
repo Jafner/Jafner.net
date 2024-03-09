@@ -38,8 +38,7 @@ services:
     restart: "no"
     command: "./traefik-forward-auth"
     depends_on:
-      keycloak: 
-        condition: service_healthy
+      - keycloak
     env_file:
       - path: ./forwardauth.env
         required: true
@@ -60,8 +59,7 @@ services:
     restart: "no"
     command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
     depends_on:
-      keycloak: 
-        condition: service_healthy
+      - keycloak
     env_file:
       - path: ./forwardauth-privileged.env
         required: true
