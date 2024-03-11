@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+  zipline:
+    image: ghcr.io/diced/zipline
+    container_name: zipline_zipline
+    restart: unless-stopped
+    networks:
+      - zipline
+      - web
+    env_file:
+      - path: ./zipline.env
+        required: true
+      - path: ./zipline_secrets.env
+        required: false
+    volumes:
+      - $DOCKER_DATA/zipline:/uploads
+    labels:
+      - traefik.http.routers.zipline.rule=Host(`zipline.jafner.net`)
+      - traefik.http.routers.zipline.tls.certresolver=lets-encrypt
+      - traefik.http.routers.zipline.tls.options=tls12@file
+      - traefik.http.routers.zipline.middlewares=securityheaders@file
+      - traefik.http.services.zipline.loadbalancer.server.port=3000
+
+  postgres:
+    image: postgres:15
+    container_name: zipline_postgres
+    restart: unless-stopped
+    networks:
+      zipline:
+        aliases:
+          - postgres
+    env_file:
+      - path: ./postgres.env
+        required: true
+      - path: ./postgres_secrets.env
+        required: false
+    volumes:
+      - $DOCKER_DATA/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  web:
+    external: true
+  zipline:
