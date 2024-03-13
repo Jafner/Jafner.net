@@ -8,7 +8,7 @@ services:
     env_file:
       - autopirate.env
     volumes:
-      - "${MEDIA_DIR}/Video/Movies:/movies"
+      - "${MOVIES_DIR}:/movies"
       - "${DOCKER_DATA}/radarr_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
@@ -25,7 +25,7 @@ services:
     env_file:
       - autopirate.env
     volumes:
-      - "${MEDIA_DIR}/Video/Shows:/shows"
+      - "${SHOWS_DIR}:/shows"
       - "${DOCKER_DATA}/sonarr_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
@@ -43,8 +43,8 @@ services:
       - autopirate.env
     volumes:
       - "${DOCKER_DATA_LOCAL}/bazarr:/config"
-      - "${MEDIA_DIR}/Video/Movies:/movies"
-      - "${MEDIA_DIR}/Video/Shows:/tv"
+      - "${MOVIES_DIR}:/movies"
+      - "${SHOWS_DIR}:/tv"
     labels:
       - traefik.http.routers.bazarr.rule=Host(`bazarr.jafner.net`)
       - traefik.http.routers.bazarr.tls.certresolver=lets-encrypt
@@ -79,9 +79,9 @@ services:
       - 8085:8080
     volumes:
       - "${DOCKER_DATA_LOCAL}/sabnzbd_config:/config"
-      - "${MEDIA_DIR}/Video/Movies:/movies"
-      - "${MEDIA_DIR}/Video/Shows:/shows"
-      - "${MEDIA_DIR}/Audio/Music:/music"
+      - "${MOVIES_DIR}:/movies"
+      - "${SHOWS_DIR}:/shows"
+      - "${MUSIC_DIR}:/music"
       - "${NZB_DIR}:/downloads"
       - "${INCOMPLETE_NZB_DIR}:/incomplete-downloads"
     labels:
@@ -113,8 +113,8 @@ services:
       - ${DOCKER_DATA}/tdarr/server:/app/server
       - ${DOCKER_DATA}/tdarr/configs:/app/configs
       - ${DOCKER_DATA}/tdarr/logs:/app/logs
-      - ${MEDIA_DIR}/Video/Movies:/movies
-      - ${MEDIA_DIR}/Video/Shows:/shows
+      - ${MOVIES_DIR}:/movies
+      - ${SHOWS_DIR}:/shows
       - ${TRANSCODE_DIR}/transcode_cache:/temp
 
   tdarr-node:
@@ -138,8 +138,8 @@ services:
     volumes:
       - ${DOCKER_DATA}/tdarr/configs:/app/configs
       - ${DOCKER_DATA}/tdarr/logs:/app/logs
-      - ${MEDIA_DIR}/Video/Movies:/movies
-      - ${MEDIA_DIR}/Video/Shows:/shows
+      - ${MOVIES_DIR}:/movies
+      - ${SHOWS_DIR}:/shows
       - ${TRANSCODE_DIR}/transcode_cache:/temp
 
   jackett:

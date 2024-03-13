@@ -13,8 +13,8 @@ services:
       - path: ./jellyfin.env
         required: true
     volumes:
-      - "${MEDIA_DIR}/Video/Movies:/data/movies"
-      - "${MEDIA_DIR}/Video/Shows:/data/tvshows"
+      - "${MOVIES_DIR}:/data/movies"
+      - "${SHOWS_DIR}:/data/tvshows"
       - "${DOCKER_DATA}/jellyfin:/config"
     labels:
       - traefik.http.routers.jellyfin.rule=Host(`jellyfin.jafner.net`)
