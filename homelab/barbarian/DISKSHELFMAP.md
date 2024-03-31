@@ -41,8 +41,19 @@ It might be possible to pull the part UUID from the `zpool status` command direc
 # Replace Disk in Pool
 Once the failed disk has been identified and physically replaced, you should know the old drive's UUID (via `zpool status`) and the new drive's device name (via `lsblk` and deduction)
 
+Once the new drive is in place and you know its ID (e.g. `/dev/sdw`), run the following to begin the resilver process:
+
+`zpool replace <pool> <part-uuid to be replace> <device id of new drive>`
+
+E.g. `zpool replace Media d50abb30-81fd-49c6-b22e-43fcee2022fe /dev/sdx`
+
+This will begin a new resilver operation. Good luck!
+
+https://docs.oracle.com/cd/E19253-01/819-5461/gazgd/index.html
+
 # Update Log
 **Most recent first**
 
+- *2024/03/12*: Replaced VLKXPS1V with VKH40L6X at Y6/X3
 - *2024/02/28*: Replaced 2EKA92XX with VLKXPS1V at Y6/X3
 - *2024/02/27*: Replaced VJG2T4YX with VJG282NX at Y2/X3

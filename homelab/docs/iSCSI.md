@@ -41,3 +41,99 @@ To resolve:
 2. Unmount the iSCSI device. Run `sudo umount /mnt/iscsi`. 
 3. Log out of the iSCSI session. Run `sudo iscsiadm --mode node --targetname "iqn.2020-03.net.jafner:fighter" --portal "192.168.1.10:3260" --logout`. 
 4. Shut down the host. Run `sudo shutdown now`.
+
+# Systemd-ifying the process
+Remove the iSCSI mount from `/etc/fstab`, but otherwise most of the steps above should be fine. (Don't forget to install and enable the `iscsid.service` systemd unit).
+
+### Script for connecting to (and disconnecting from) iSCSI session
+This script is one command, but sometimes it's useful to contain it in a script.
+[`connect-iscsi.sh`](../fighter/scripts/connect-iscsi.sh)
+```sh
+#!/bin/bash
+iscsiadm --mode node --targetname iqn.2020-03.net.jafner:fighter --portal 192.168.1.10:3260 --login
+```
+
+[`disconnect-iscsi.sh`](../fighter/scripts/disconnect-iscsi.sh)
+```sh
+#!/bin/bash
+iscsiadm --mode node --targetname iqn.2020-03.net.jafner:fighter --portal 192.168.1.10:3260, 1 -u
+```
+
+### Systemd Unit for connecting iSCSI session
+
+`/etc/systemd/system/connect-iscsi.service` with `root:root 644` permissions
+```ini
+[Unit]
+Description=Connect iSCSI session
+Requires=network-online.target
+#After=
+DefaultDependencies=no
+
+[Service]
+User=root
+Group=root
+Type=oneshot
+RemainAfterExit=true
+ExecStart=iscsiadm --mode node --targetname iqn.2020-03.net.jafner:fighter --portal 192.168.1.10:3260 --login
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Systemd Unit for mounting the share
+
+`/etc/systemd/system/mnt-nas-iscsi.mount` with `root:root 644` permissions
+Note that the file name *must* be `mnt-nas-iscsi` if its `Where=` parameter is `/mnt/nas/iscsi`. 
+[Docs](https://www.freedesktop.org/software/systemd/man/latest/systemd.mount.html)
+```ini
+[Unit]
+Description="Mount iSCSI share /mnt/nas/iscsi"
+After=connect-iscsi.service
+DefaultDependencies=no
+
+[Mount]
+What=/dev/disk/by-uuid/cf3a253c-e792-48b5-89a1-f91deb02b3be
+Where=/mnt/nas/iscsi
+Type=ext4
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Systemd Unit for automounting the share
+
+`/etc/systemd/system/mnt-nas-iscsi.automount` with `root:root 644` permissions
+Note that the file name *must* be `mnt-nas-iscsi` if its `Where=` parameter is `/mnt/nas/iscsi`. 
+[Docs](https://www.freedesktop.org/software/systemd/man/latest/systemd.mount.html)
+```ini
+[Unit]
+Description="Mount iSCSI share /mnt/nas/iscsi"
+Requires=network-online.target
+#After=
+
+[Automount]
+Where=/mnt/nas/iscsi
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Quick interactive one-liner to install these scripts
+This will open each file for editing in nano under the path `/etc/systemd/system/` and apply the correct permissions to the file after it has been written. 
+```sh
+for file in /etc/systemd/system/connect-iscsi.service /etc/systemd/system/mnt-nas-iscsi.mount /etc/systemd/system/mnt-nas-iscsi.automount; do sudo nano $file && sudo chown root:root $file && sudo chmod 644 $file && sudo systemctl enable $(basename $file); done && sudo systemctl daemon-reload
+```
+
+After this, it's probably a good idea to reboot from scratch.
+
+### Check statuses
+
+- `sudo systemctl status connect-iscsi.service`
+- `sudo systemctl status mnt-nas-iscsi.mount`
+- `sudo systemctl status mnt-nas-iscsi.automount`
+
+https://unix.stackexchange.com/questions/195116/mount-iscsi-drive-at-boot-system-halts
+https://github.com/f1linux/iscsi-automount/blob/master/config-iscsi-storage.sh
+https://github.com/f1linux/iscsi-automount/blob/master/config-iscsi-storage-mounts.sh
