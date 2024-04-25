@@ -13,6 +13,7 @@ services:
     volumes:
       - $DOCKER_DATA:/config
       - $TORRENT_DATA:/torrenting
+      - ./discord_notifier.sh:/discord_notifier.sh
     env_file:
       - path: ./qbittorrent.env
         required: true
