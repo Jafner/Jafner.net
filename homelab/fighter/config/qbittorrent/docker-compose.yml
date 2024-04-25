@@ -14,6 +14,7 @@ services:
       - $DOCKER_DATA:/config
       - $TORRENT_DATA:/torrenting
       - ./discord_notifier.sh:/discord_notifier.sh
+      - ./discord_notifier_secrets.env:/discord_notifier_secrets.env
     env_file:
       - path: ./qbittorrent.env
         required: true
