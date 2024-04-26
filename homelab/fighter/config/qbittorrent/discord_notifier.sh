@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Discord webhook details
-discord_webhook_url="$(cat discord_notifier_secrets.env)"
+discord_webhook_url="$(cat /discord_notifier_secrets.env)"
 
 # Get variables from qBitTorrent. Remember to make sure these align with your qBittorrent variables passed in settings.
 torrent_name="$1"
