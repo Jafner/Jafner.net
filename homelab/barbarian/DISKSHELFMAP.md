@@ -4,7 +4,7 @@
 Each cell contains the serial number for the drive in the mapped bay.
 |    | X1        | X2       | X3       | X4       |
 |:--:|:---------:|:--------:|:--------:|:--------:|
-| Y1 | VJGPS30X  | VK0ZD6ZY | VJG282NX | VJG2PVRX |
+| Y1 | VJGPS30X  | VK0ZD6ZY | VKH22XPX | VJG2PVRX |
 | Y2 | VJGR6TNX  | 2EG14YNJ | VJGJVTZX | VJG1H9UX |
 | Y3 | VJGJUWNX  | 2EGXD27V | VJGJAS1X | VJG2UTUX |
 | Y4 | VJGRGD2X  | 2EGL8AVV | 2EKA903X | VJGRRG9X |
@@ -53,7 +53,8 @@ https://docs.oracle.com/cd/E19253-01/819-5461/gazgd/index.html
 
 # Update Log
 **Most recent first**
-
+- *2024/04/16*: Replaced VJG1H9UX with 2EKA92XX at Y2/X4
+- *2024/04/07*: Replaced VJG282NX with VKH22XPX at Y1/X3
 - *2024/03/12*: Replaced VLKXPS1V with VKH40L6X at Y6/X3
 - *2024/02/28*: Replaced 2EKA92XX with VLKXPS1V at Y6/X3
 - *2024/02/27*: Replaced VJG2T4YX with VJG282NX at Y2/X3

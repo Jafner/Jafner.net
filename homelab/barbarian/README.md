@@ -2,13 +2,23 @@
 I have 2 pools, one for "Media" and one for everything else. All disks are 8 TB HGST/Hitachi drives with a sector size of 4096B. All pools use vdevs of 3 drives in RAIDZ1.
 
 ## Replace a failing disk
-1. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script, for the disk that needs to be replaced.
-2. Refer to the [Physical Disk Locations](#physical-disk-locations-ds4243) chart to determine which shelf slot the disk is in. Remove the disk.
-3. Insert the new disk and wait 60 seconds for it to be detected. It may not show up in the web UI. 
-4. Check the sector size of the new disk with `smartctl -a /dev/<disknum> | grep block`. If `Logical block size` is `512 bytes` (or anything other than `4096 bytes`), then the disk needs to be reformatted. 
-5. Reformat the disk as described under [Convert a 512B-sector disk](#convert-a-512b-sector-disk-to-4096b-sectors). This will take several hours.
-6. Begin resilvering the pool with the new disk. Navigate to [Storage -> Pools](https://nas.jafner.net/ui/storage/pools). Click the gear icon in the top-right of the affected pool and click "Status". Find the missing disk. It should look like `/dev/gptid/<some-uuid>...` with the status "REMOVED". Click the triple-dot icon on the right and select "Replace". Select the replacement disk, check the box for "Force", and click `REPLACE DISK` to begin resilvering. 
-7. The scanning and resilvering will take several hours.
+1. Get the serial number of the drive. If you can see the part-uuid in `zpool status` (e.g. `44ae3ae0-e8f9-4dbc-95ba-e64f63ab7460`), you can get the serial number via: 
+
+```
+id=44ae3ae0-e8f9-4dbc-95ba-e64f63ab7460
+label=$(ls -l /dev/disk/by-partuuid | grep $id | cut -d' ' -f 11 | cut -d'/' -f 3 | sed 's/^/\/dev\//')
+serial=$(sudo smartctl -a $label | grep Serial | tr -s ' ' | cut -d' ' -f 3)
+echo "$id -> $label -> $serial"
+```
+
+2. Offline and remove the failing disk. Refer to the [Physical Disk Locations](#physical-disk-locations-ds4243) chart to determine which shelf slot the disk is in. Remove the disk. Run `zpool offline [pool] [disk]`
+3. Insert the new disk and wait 60 seconds for it to be detected. 
+4. Wipe the new disk. Find the new disk on the disks page, expand it, and run a quick wipe. 
+5. Replace the removed disk with the new disk. On the devices page for the affected pool, click the removed drive. Then hit Replace from the Disk Info card, find the new drive in the drop-down, and run begin the replacement operation.
+
+
+- You can check the sector size of the new disk with `smartctl -a /dev/<disknum> | grep block`. If `Logical block size` is `512 bytes` (or anything other than `4096 bytes`), then the disk needs to be reformatted. Reformat the disk as described under [Convert a 512B-sector disk](#convert-a-512b-sector-disk-to-4096b-sectors). This will take several hours.
+
 
 ## Convert a 512B-sector disk to 4096B sectors
 1. Get the disknum (like `da4`), either in the web UI or with the ~/disklist.pl script, for the disk that needs to be replaced.
