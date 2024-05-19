@@ -1,0 +1,29 @@
+http:
+  routers:
+    api:
+      rule: "Host(`api.ollama.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "api@file"
+      tls:
+        certResolver: "lets-encrypt"
+    open-webui:
+      rule: "Host(`ollama.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "open-webui@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  services:
+    open-webui:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.135:8080"
+    api:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.135:11434"
+      
