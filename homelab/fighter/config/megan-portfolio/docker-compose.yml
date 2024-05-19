@@ -11,9 +11,9 @@ services:
     volumes:
       - ${DOCKER_DATA}/html:/var/www/html
       - ./upload.ini:/usr/local/etc/php/conf.d/uploads.ini
-    labels:
-      - traefik.http.routers.megan-portfolio.rule=Host(`meganmcdonough.art`)
-      - traefik.http.routers.megan-portfolio.tls.certresolver=lets-encrypt
+    #labels:
+    #  - traefik.http.routers.megan-portfolio.rule=Host(`meganmcdonough.art`)
+    #  - traefik.http.routers.megan-portfolio.tls.certresolver=lets-encrypt
     networks:
       - web
       - portfolio
