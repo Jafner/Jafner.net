@@ -13,7 +13,8 @@ services:
       - path: ./zipline_secrets.env
         required: false
     volumes:
-      - $DOCKER_DATA/zipline:/uploads
+      - $DOCKER_DATA/zipline/uploads:/uploads
+      - $DOCKER_DATA/zipline/public:/public
     labels:
       - traefik.http.routers.zipline.rule=Host(`zipline.jafner.net`)
       - traefik.http.routers.zipline.tls.certresolver=lets-encrypt
