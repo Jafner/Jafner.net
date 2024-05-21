@@ -20,7 +20,6 @@ services:
       - traefik.http.routers.zipline.tls.certresolver=lets-encrypt
       - traefik.http.routers.zipline.tls.options=tls12@file
       - traefik.http.services.zipline.loadbalancer.server.port=3000
-      #- traefik.http.routers.zipline.middlewares=securityheaders@file
 
   postgres:
     image: postgres:15
