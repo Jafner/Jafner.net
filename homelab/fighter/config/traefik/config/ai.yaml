@@ -1,0 +1,51 @@
+http:
+  routers:
+    api:
+      rule: "Host(`ollama-api.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "ollama-api@file"
+      tls:
+        certResolver: "lets-encrypt"
+    open-webui:
+      rule: "Host(`openwebui.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "open-webui@file"
+      tls:
+        certResolver: "lets-encrypt"
+    sillytavern:
+      rule: "Host(`sillytavern.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      tls:
+        certResolver: "lets-encrypt"
+    oobabooga:
+      rule: "Host(`oobabooga.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      tls:
+        certResolver: "lets-encrypt"
+
+  services:
+    open-webui:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.135:8080"
+    ollama-api:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.135:11434"
+    sillytavern:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.135:8000"
+    oobabooga:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.135:7860"
+      
