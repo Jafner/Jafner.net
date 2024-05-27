@@ -53,6 +53,7 @@ https://docs.oracle.com/cd/E19253-01/819-5461/gazgd/index.html
 
 # Update Log
 **Most recent first**
+- *2024/05/26*: Replaced 2EGL8AVV with VJG2808X at Y4/X2
 - *2024/04/16*: Replaced VJG1H9UX with 2EKA92XX at Y2/X4
 - *2024/04/07*: Replaced VJG282NX with VKH22XPX at Y1/X3
 - *2024/03/12*: Replaced VLKXPS1V with VKH40L6X at Y6/X3
