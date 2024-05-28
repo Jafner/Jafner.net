@@ -1,43 +1,26 @@
-# jafner.dev
+daemon=300
+syslog=yes
+pid=/var/run/ddclient/ddclient.pid
+ssl=no
 use=web
-web=dynamicdns.park-your-domain.com/getip
-protocol=googledomains
-daemon=1800
-ssl=yes
-login=$USER_Jafner_dev
-password=$PASS_Jafner_dev
-@.jafner.dev, *.jafner.dev
 
-# jafner.chat
-use=web
-web=dynamicdns.park-your-domain.com/getip
-web-skip='IP Address'
-protocol=cloudflare
-daemon=1800
-ssl=yes
-login=$USER_Jafner_chat
-password=$PASS_Jafner_chat
-zone=jafner.chat
-jafner.chat,*.jafner.chat
+# jafner.dev
+protocol=cloudflare, \
+zone=jafner.dev,\
+ttl=1,\
+password='$TOKEN_Jafner_dev', \
+jafner.dev
 
 # jafner.net
-use=web
-web=dynamicdns.park-your-domain.com/getip
-web-skip='IP Address'
-protocol=cloudflare
-daemon=1800
-ssl=yes
-login=$USER_Jafner_net
-password=$PASS_Jafner_net
-zone=jafner.net
-jafner.net,*.jafner.net
+protocol=cloudflare,        \
+zone=jafner.net,            \
+ttl=1,                      \
+password='$TOKEN_Jafner_net',  \
+jafner.net, *.jafner.net
 
-# meganmcdonough.art
-use=web
-web=dynamicdns.park-your-domain.com/getip
-protocol=googledomains
-daemon=1800
-ssl=yes
-login=$USER_Meganmcdonough_art
-password=$PASS_Meganmcdonough_art
-meganmcdonough.art
+# jafner.chat
+protocol=cloudflare,\
+zone=jafner.chat,\
+ttl=1,\
+password='$TOKEN_Jafner_chat',\
+jafner.chat, *.jafner.chat
