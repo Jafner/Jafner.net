@@ -16,11 +16,11 @@ protocol=cloudflare,        \
 zone=jafner.net,            \
 ttl=1,                      \
 password='$TOKEN_Jafner_net',  \
-jafner.net, *.jafner.net
+jafner.net
 
 # jafner.chat
 protocol=cloudflare,\
 zone=jafner.chat,\
 ttl=1,\
 password='$TOKEN_Jafner_chat',\
-jafner.chat, *.jafner.chat
+jafner.chat
