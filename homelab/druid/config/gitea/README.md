@@ -33,7 +33,8 @@ To force the runners to re-register (to apply updated labels, for example).
 
 1. Stop and remove the containers. Run `docker ps -aq --filter name="gitea_runner-*" | xargs docker stop | xargs docker rm`. 
 2. Delete the `.runner` files for each runner. Run `find ~/data/gitea/ -name ".runner" -delete`.
-3. Bring the runners back up. Run `docker compose up -d` from the gitea directory. 
+3. (Optional) Update runner config. Modify the `config.yaml` file as needed. [Official example config](https://gitea.com/gitea/act_runner/src/branch/main/internal/pkg/config/config.example.yaml).
+4. Bring the runners back up. Run `docker compose up -d` from the gitea directory. 
 
 # Delete Registed Runners
 Apparently a misconfigured Docker-in-Docker runner may sometimes retry registering over and over until the heat death of the universe. In that case you will end up with many "ghost" runners. In my case, 27,619. To resolve, you can either step through each one and click "edit", then "delete", then "confirm". Or you can just use the database. 

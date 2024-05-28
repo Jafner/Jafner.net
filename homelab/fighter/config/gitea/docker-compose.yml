@@ -9,6 +9,6 @@ services:
       - path: ./runner_secrets.env
         required: false
     volumes: 
-      - ./runner_ubuntu_internal_config.yaml:/config.yaml
+      - ./config.yaml:/config.yaml
       - $DOCKER_DATA/runner-ubuntu-internal:/data
       - /var/run/docker.sock:/var/run/docker.sock
