@@ -1,9 +1,9 @@
 name: Deploy to Fighter
 run-name: ${{ gitea.actor }} deploying
-on: 
-  push: 
-    paths:
-      - 'fighter/**'
+# on: 
+#   push: 
+#     paths:
+#       - 'fighter/**'
 
 jobs:
   Deploy:
@@ -39,18 +39,6 @@ jobs:
           script: |
             chmod +x /home/admin/homelab/fighter/scripts/startup.sh
             /home/admin/homelab/fighter/scripts/startup.sh
-      # - name: Deploy new config (DEPRECATED)
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ vars.SSH_HOST_IP_FIGHTER }} # this is a LAN IP
-      #     username: ${{ vars.SSH_USERNAME_FIGHTER }}
-      #     key: ${{ secrets.SSH_KEY_DEPLOY_TO_FIGHTER }}
-      #     script: |
-      #       for stack in /home/$USER/homelab/fighter/config/*
-      #         do cd $stack && 
-      #         echo "===== Deploying $(basename $PWD) =====" && 
-      #         docker compose up -d
-      #       done
   Notify:
     runs-on: fighter
     steps:
