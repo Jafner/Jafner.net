@@ -4,13 +4,6 @@ pid=/var/run/ddclient/ddclient.pid
 ssl=no
 use=web
 
-# jafner.dev
-protocol=cloudflare, \
-zone=jafner.dev,\
-ttl=1,\
-password='$TOKEN_Jafner_dev', \
-jafner.dev
-
 # jafner.net
 protocol=cloudflare,        \
 zone=jafner.net,            \
