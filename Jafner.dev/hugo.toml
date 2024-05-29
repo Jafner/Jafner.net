@@ -36,7 +36,6 @@ disableHugoGeneratorInject = false
 [taxonomies]
   tag      = "tags"
   category = "categories"
-  series   = "series"
 
 [params]
   dateform        = "Jan 2, 2006"
@@ -66,7 +65,7 @@ disableHugoGeneratorInject = false
     topText = []
     bottomText = [
       "Powered by <a href=\"http://gohugo.io\">Hugo</a>",
-      "Made with &#10084; by <a href=\"https://github.com/rhazdon\">Djordje Atlialp</a>"
+      "Theme made with &#10084; by <a href=\"https://github.com/rhazdon\">Djordje Atlialp</a>"
     ]
 
   [params.favicon.color]
@@ -115,15 +114,19 @@ disableHugoGeneratorInject = false
     identifier = "about"
     name       = "About"
     url        = "about"
+    weight     = 10
   [[menu.main]]
     identifier = "experience"
     name       = "Experience"
     url        = "experience"
+    weight     = 20
   [[menu.main]]
     identifier = "articles"
     name       = "Articles"
     url        = "articles"
+    weight     = 30
   [[menu.main]]
     identifier = "projects"
     name       = "Projects"
     url        = "projects"
+    weight     = 40
