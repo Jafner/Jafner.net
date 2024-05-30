@@ -28,7 +28,6 @@ disableHugoGeneratorInject = false
 
 [permalinks]
   posts = "/:title/"
-  # posts = "/posts/:year/:month/:title/"
 
 [blackfriday]
   hrefTargetBlank = true
