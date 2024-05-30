@@ -24,6 +24,9 @@ services:
       - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
       - traefik.http.routers.qbt.middlewares=traefik-forward-auth-privileged@file
+      - traefik.http.routers.qbt-api.rule=Host(`api.qbt.jafner.net`)
+      - traefik.http.routers.qbt-api.tls.certresolver=lets-encrypt
+      - traefik.http.routers.qbt-api.middlewares=lan-only@file
       - traefik.http.services.qbt.loadbalancer.server.port=8080
 
   exporter-qbittorrent:
