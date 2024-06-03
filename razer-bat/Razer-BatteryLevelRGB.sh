@@ -13,6 +13,9 @@ device_name_alternate="Razer Viper Ultimate (Wired)"
 # the set_color_from_charge function to one which works for your device.
 dock_name="Razer Mouse Dock" 
 
+# Set how often to check the new battery level.
+polling_interval=600
+
 # Set the colors to use for full charge and low charge below. 
 # These are used to create a gradient to represent partial charge levels.
 # E.g. if full charge is green and low charge is red, 50% charge will be yellow
@@ -84,5 +87,5 @@ while true; do
     else
         set_color_from_charge $charge
     fi
-    sleep 600
+    sleep $polling_interval
 done

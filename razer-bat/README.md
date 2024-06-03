@@ -1,5 +1,5 @@
 # Razer Battery Level RGB
-Set the RGB color of your device based on your Razer device's battery level.
+See your mouse or keyboard's battery level on your wireless dock.
 
 # Installation
 Before installing, we need to install some dependencies:
@@ -9,6 +9,9 @@ Before installing, we need to install some dependencies:
    1. Replace the device name with your device's name (you can find it by running `razer-cli -ls`).
    2. Set the low-charge and full-charge color codes to your liking. Defaults to red and green respectively.
 4. Run the script: `./Razer-BatteryLevelRGB.sh`. 
+
+- If you want to run the script in the background, refer to [this StackOverflow post](https://stackoverflow.com/questions/3683910/executing-shell-command-in-background-from-script).
+- If you want to run the script with Systemd (as a background process), refer to [this StackEx post](https://unix.stackexchange.com/questions/47695/how-to-write-startup-script-for-systemd).
 
 # Tested With
 ```
