@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export OLLAMA_HOST=http://localhost:11434
+modelfiles="$(ls modelfiles)"
+models="$(ollama list | tr -s ' ' | cut -f 1 | tail -n +2)"
+for model in $(echo "$models"); do 
+    if ! [[ $modelfiles == *"$model"* ]]; then 
+        echo -n "Running: '"
+        echo "ollama rm \"$model\"'"
+        ollama rm "$model"
+    fi
+done
+
+for modelfile in ./modelfiles/*; do 
+    echo -n "Running: '"
+    echo "ollama create \"$(basename $modelfile)\" -f \"$modelfile\"'"
+    ollama create "$(basename $modelfile)" -f "$modelfile"
+done

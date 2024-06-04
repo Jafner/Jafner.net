@@ -1,0 +1,30 @@
+#!/bin/bash
+initialdir=${PWD}
+cd /home/joey/Projects/LLMs/
+
+wget -q --spider https://ollama-api.jafner.net
+if [ $? -eq 0 ]; then
+    cd ollama
+    HSA_OVERRIDE_GFX_VERSION=11.0.0 
+    OLLAMA_HOST=192.168.1.135:11434 
+    OLLAMA_ORIGINS="app://obsidian.md*"
+    OLLAMA_MAX_LOADED_MODELS=0
+    ollama serve &
+    cd ..
+fi
+# Access ollama (API, not a web UI) at http://192.168.1.135:11434 *or* https://ollama-api.jafner.net
+
+cd open-webui
+docker compose up -d 
+cd ..
+# Access open-webui at http://localhost:8080 *or* https://openwebui.jafner.net
+
+cd SillyTavern
+./start.sh &
+cd ..
+# Access SillyTavern at http://localhost:5000 *or* https://sillytavern.jafner.net
+
+cd text-generation-webui
+./start_linux.sh --api --flash-attn & 
+cd ..
+# Access text-generation-webui at http://localhost:7860 *or* https://oobabooga.jafner.net
