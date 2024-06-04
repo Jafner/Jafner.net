@@ -1,0 +1,633 @@
+21:52:20.278: CPU Name: AMD Ryzen 7 3700X 8-Core Processor             
+21:52:20.278: CPU Speed: 4050MHz
+21:52:20.278: Physical Cores: 8, Logical Cores: 16
+21:52:20.278: Physical Memory: 32681MB Total, 18154MB Free
+21:52:20.278: Windows Version: 10.0 Build 19045 (release: 22H2; revision: 2846; 64-bit)
+21:52:20.278: Running as administrator: false
+21:52:20.278: Windows 10/11 Gaming Features:
+21:52:20.278: 	Game Bar: Off
+21:52:20.278: 	Game DVR: Off
+21:52:20.278: 	Game DVR Background Recording: Off
+21:52:20.278: 	Game Mode: Probably On (no reg key set)
+21:52:20.279: Sec. Software Status:
+21:52:20.280: 	Microsoft Defender Antivirus: enabled (AV)
+21:52:20.281: 	Windows Firewall: enabled (FW)
+21:52:20.281: Current Date/Time: 2023-05-08, 21:52:20
+21:52:20.281: Browser Hardware Acceleration: true
+21:52:20.281: Hide OBS windows from screen capture: false
+21:52:20.281: Qt Version: 6.3.1 (runtime), 6.3.1 (compiled)
+21:52:20.281: Portable mode: false
+21:52:20.621: OBS 29.0.0 (64-bit, windows)
+21:52:20.621: ---------------------------------
+21:52:20.622: ---------------------------------
+21:52:20.622: audio settings reset:
+21:52:20.622: 	samples per sec: 48000
+21:52:20.622: 	speakers:        2
+21:52:20.622: 	max buffering:   960 milliseconds
+21:52:20.622: 	buffering type:  dynamically increasing
+21:52:20.623: ---------------------------------
+21:52:20.623: Initializing D3D11...
+21:52:20.623: Available Video Adapters: 
+21:52:20.624: 	Adapter 0: AMD Radeon RX 7900 XTX
+21:52:20.624: 	  Dedicated VRAM: 4236648448
+21:52:20.624: 	  Shared VRAM:    4249585664
+21:52:20.624: 	  PCI ID:         1002:744c
+21:52:20.624: 	  Driver Version: 31.0.14051.5006
+21:52:20.625: 	  output 0:
+21:52:20.625: 	    name=ROG XG27AQM
+21:52:20.625: 	    pos={0, 0}
+21:52:20.625: 	    size={2560, 1440}
+21:52:20.625: 	    attached=true
+21:52:20.625: 	    refresh=240
+21:52:20.625: 	    space=RGB_FULL_G22_NONE_P709
+21:52:20.625: 	    sdr_white_nits=80
+21:52:20.625: 	    nit_range=[min=0.000000, max=590.000000, max_full_frame=590.000000]
+21:52:20.625: 	  output 1:
+21:52:20.625: 	    name=M2A1R-H
+21:52:20.625: 	    pos={-2560, 0}
+21:52:20.625: 	    size={2560, 1440}
+21:52:20.625: 	    attached=true
+21:52:20.625: 	    refresh=144
+21:52:20.625: 	    space=RGB_FULL_G22_NONE_P709
+21:52:20.625: 	    sdr_white_nits=80
+21:52:20.625: 	    nit_range=[min=0.062900, max=400.000000, max_full_frame=351.000000]
+21:52:20.625: 	  output 2:
+21:52:20.625: 	    name=Dell S2716DG
+21:52:20.625: 	    pos={2560, 0}
+21:52:20.625: 	    size={2560, 1440}
+21:52:20.625: 	    attached=true
+21:52:20.625: 	    refresh=144
+21:52:20.625: 	    space=RGB_FULL_G22_NONE_P709
+21:52:20.625: 	    sdr_white_nits=80
+21:52:20.625: 	    nit_range=[min=0.500000, max=270.000000, max_full_frame=270.000000]
+21:52:20.627: Loading up D3D11 on adapter AMD Radeon RX 7900 XTX (0)
+21:52:20.695: D3D11 loaded successfully, feature level used: b000
+21:52:20.695: DXGI increase maximum frame latency success
+21:52:20.695: D3D11 GPU priority setup failed (not admin?)
+21:52:21.987: ---------------------------------
+21:52:21.987: video settings reset:
+21:52:21.987: 	base resolution:   2560x1440
+21:52:21.987: 	output resolution: 2560x1440
+21:52:21.987: 	downscale filter:  Bicubic
+21:52:21.987: 	fps:               300/5
+21:52:21.987: 	format:            NV12
+21:52:21.987: 	YUV mode:          Rec. 709/Partial
+21:52:21.987: NV12 texture support enabled
+21:52:21.987: P010 texture support not available
+21:52:21.990: Audio monitoring device:
+21:52:21.990: 	name: Default
+21:52:21.990: 	id: default
+21:52:21.990: ---------------------------------
+21:52:22.004: No AJA devices found, skipping loading AJA UI plugin
+21:52:22.004: Failed to initialize module 'aja-output-ui.dll'
+21:52:22.016: No AJA devices found, skipping loading AJA plugin
+21:52:22.016: Failed to initialize module 'aja.dll'
+21:52:22.017: Skipping module '../../obs-plugins/64bit/chrome_elf.dll', not an OBS plugin
+21:52:22.024: [CoreAudio encoder]: CoreAudio AAC encoder not installed on the system or couldn't be loaded
+21:52:22.026: Failed to load 'en-US' text for module: 'decklink-captions.dll'
+21:52:22.028: Failed to load 'en-US' text for module: 'decklink-output-ui.dll'
+21:52:22.037: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+21:52:22.037: Failed to initialize module 'decklink.dll'
+21:52:22.294: [AMF] Version 2.7.0 loaded (Compiled: 1.4.14.0, Runtime: 1.4.29.0, Library: 1;4;29;0;22.40.01.45;202302101848;AMD-Radeon-Driver/drivers:c8815ddec4f1d9904a695cacf2654b02cdf90cbf).
+21:52:22.381: [AMF] <Id: 1> Unable to set converter transfer characteristic, error AMF_NOT_FOUND (code 11)
+21:52:22.475: [AMF] <Id: 2> Unable to set converter transfer characteristic, error AMF_NOT_FOUND (code 11)
+21:52:22.477: [AMF] [Capability Manager] Testing Direct3D 11 Adapter 'AMD Radeon RX 7900 XTX (VEN_1002/DEV_744c/SUB_e3b1002/REV_00c8)':
+21:52:22.477:   H264/AVC: Supported
+21:52:22.477:   H265/HEVC: Supported
+21:52:22.477: 
+21:52:22.764: [input-overlay] [input-overlay] Loading v5.0.0 build time 2022.08.21 10:41
+21:52:22.765: [input-overlay] Using 'XInput' gamepad backend
+21:52:22.769: [input-overlay::libgamepad] Loading Xinput from C:\Windows\system32\xinput1_3.dll
+21:52:22.769: [input-overlay::libgamepad] Xinput 1.3 loaded successfuly
+21:52:22.770: [input-overlay::libgamepad] No Devices detected. Waiting for connection...
+21:52:22.770: [input-overlay] gamepad hook started
+21:52:22.770: [input-overlay::libgamepad] Hook thread started
+21:52:22.855: Skipping module '../../obs-plugins/64bit/libcef.dll', not an OBS plugin
+21:52:22.856: Skipping module '../../obs-plugins/64bit/libEGL.dll', not an OBS plugin
+21:52:22.857: Skipping module '../../obs-plugins/64bit/libGLESv2.dll', not an OBS plugin
+21:52:22.934: [obs-browser]: Version 2.19.0
+21:52:22.934: [obs-browser]: CEF Version 103.0.5060.134 (runtime), 103.0.0-5060-shared-textures.2591+g4204d54+chromium-103.0.5060.134 (compiled)
+21:52:23.084: [noise suppress]: NVIDIA denoiser disabled, redistributable not found or could not be loaded.
+21:52:23.085: Failed to get NVVideoEffects.dll version info size
+21:52:23.087: [NVIDIA VIDEO FX]: FX disabled, redistributable not found or could not be loaded.
+21:52:23.177: [obs-websocket] [obs_module_load] you can haz websockets (Version: 5.1.0 | RPC Version: 1)
+21:52:23.177: [obs-websocket] [obs_module_load] Qt version (compile-time): 6.3.1 | Qt version (run-time): 6.3.1
+21:52:23.177: [obs-websocket] [obs_module_load] Linked ASIO Version: 101201
+21:52:23.192: [obs-websocket] [obs_module_load] Module loaded.
+21:52:23.231: [vlc-video]: Couldn't find VLC installation, VLC video source disabled
+21:52:23.263: ---------------------------------
+21:52:23.263:   Loaded Modules:
+21:52:23.263:     win-wasapi.dll
+21:52:23.263:     win-mf.dll
+21:52:23.263:     win-dshow.dll
+21:52:23.263:     win-capture.dll
+21:52:23.263:     vlc-video.dll
+21:52:23.263:     text-freetype2.dll
+21:52:23.263:     rtmp-services.dll
+21:52:23.263:     obs-x264.dll
+21:52:23.263:     obs-websocket.dll
+21:52:23.263:     obs-vst.dll
+21:52:23.263:     obs-transitions.dll
+21:52:23.263:     obs-text.dll
+21:52:23.263:     obs-qsv11.dll
+21:52:23.263:     obs-outputs.dll
+21:52:23.263:     obs-filters.dll
+21:52:23.263:     obs-ffmpeg.dll
+21:52:23.263:     obs-browser.dll
+21:52:23.263:     input-overlay.dll
+21:52:23.263:     image-source.dll
+21:52:23.263:     frontend-tools.dll
+21:52:23.263:     enc-amf.dll
+21:52:23.263:     decklink-output-ui.dll
+21:52:23.263:     decklink-captions.dll
+21:52:23.263:     coreaudio-encoder.dll
+21:52:23.263: ---------------------------------
+21:52:23.264: ==== Startup complete ===============================================
+21:52:23.265: Encoder ID 'jim_nvenc' not found
+21:52:23.439: All scene data cleared
+21:52:23.439: ------------------------------------------------
+21:52:23.458: [win-wasapi: 'Desktop Audio'] update settings:
+21:52:23.458: 	device id: {0.0.0.00000000}.{eebf4bed-4a41-409f-83a6-2732ec54375c}
+21:52:23.458: 	use device timing: 1
+21:52:23.460: [Loaded global audio device]: 'Desktop Audio'
+21:52:23.461: [win-wasapi: 'Desktop Audio 2'] update settings:
+21:52:23.461: 	device id: {0.0.0.00000000}.{dfb5687e-0e6d-4454-8220-3cbffe0e402f}
+21:52:23.461: 	use device timing: 1
+21:52:23.461: [Loaded global audio device]: 'Desktop Audio 2'
+21:52:23.461: [win-wasapi: 'Mic/Aux'] update settings:
+21:52:23.461: 	device id: {0.0.1.00000000}.{1e068b40-e8b6-4fd1-8842-b8c76c5d403e}
+21:52:23.461: 	use device timing: 0
+21:52:23.462: [noise suppress: 'Noise Suppression'] NVAFX redist is not installed.
+21:52:23.462: [Loaded global audio device]: 'Mic/Aux'
+21:52:23.462:     - filter: 'Noise Suppression' (noise_suppress_filter_v2)
+21:52:23.462: [window-capture: 'VLC'] update settings:
+21:52:23.462: 	executable: vlc.exe
+21:52:23.462: 	method selected: WGC
+21:52:23.462: 	method chosen: WGC
+21:52:23.462: 
+21:52:23.463: [window-capture: 'Firefox (Private Window)'] update settings:
+21:52:23.463: 	executable: firefox.exe
+21:52:23.463: 	method selected: Automatic
+21:52:23.463: 	method chosen: WGC
+21:52:23.463: 
+21:52:23.466: [duplicator-monitor-capture: 'Right Monitor'] update settings:
+21:52:23.466: 	display: Dell S2716DG (2560x1440)
+21:52:23.466: 	cursor: true
+21:52:23.466: 	method: DXGI
+21:52:23.469: [duplicator-monitor-capture: 'Middle Monitor'] update settings:
+21:52:23.469: 	display: ROG XG27AQM (2560x1440)
+21:52:23.469: 	cursor: true
+21:52:23.469: 	method: DXGI
+21:52:23.472: [duplicator-monitor-capture: 'Left Monitor'] update settings:
+21:52:23.472: 	display: M2A1R-H (2560x1440)
+21:52:23.472: 	cursor: true
+21:52:23.472: 	method: DXGI
+21:52:23.472: [window-capture: 'HWInfo'] update settings:
+21:52:23.472: 	executable: HWiNFO64.exe
+21:52:23.472: 	method selected: Automatic
+21:52:23.472: 	method chosen: BitBlt
+21:52:23.472: 
+21:52:23.486: WASAPI: Device 'Chat Mic (2- TC-Helicon GoXLR Mini)' [48000 Hz] initialized
+21:52:23.492: WASAPI: Device 'Chat (2- TC-Helicon GoXLR Mini)' [48000 Hz] initialized
+21:52:23.492: WASAPI: Device 'System (2- TC-Helicon GoXLR Mini)' [48000 Hz] initialized
+21:52:23.525: adding 42 milliseconds of audio buffering, total audio buffering is now 42 milliseconds (source: Mic/Aux)
+21:52:23.525: 
+21:52:24.002: [window-capture: 'Jackbox Player'] update settings:
+21:52:24.002: 	executable: firefox.exe
+21:52:24.002: 	method selected: Automatic
+21:52:24.002: 	method chosen: WGC
+21:52:24.002: 
+21:52:24.002: [window-capture: 'MSPaint'] update settings:
+21:52:24.002: 	executable: mspaint.exe
+21:52:24.002: 	method selected: Automatic
+21:52:24.002: 	method chosen: BitBlt
+21:52:24.002: 
+21:52:24.003: [window-capture: 'Discord'] update settings:
+21:52:24.003: 	executable: Discord.exe
+21:52:24.003: 	method selected: Automatic
+21:52:24.003: 	method chosen: WGC
+21:52:24.003: 
+21:52:24.050: Video Capture Device: data.GetDevice failed
+21:52:24.050: Video Capture Device: Video configuration failed
+21:52:24.789: [window-capture: 'NohBoard'] update settings:
+21:52:24.789: 	executable: NohBoard.exe
+21:52:24.789: 	method selected: Automatic
+21:52:24.789: 	method chosen: BitBlt
+21:52:24.789: 
+21:52:24.790: [window-capture: 'Generic Window Capture'] update settings:
+21:52:24.790: 	executable: Tabby.exe
+21:52:24.790: 	method selected: Automatic
+21:52:24.790: 	method chosen: WGC
+21:52:24.790: 
+21:52:24.792: [duplicator-monitor-capture: 'Generic Display Capture'] update settings:
+21:52:24.792: 	display:  (0x0)
+21:52:24.792: 	cursor: true
+21:52:24.792: 	method: WGC
+21:52:24.794: [window-capture: 'Wireshark'] update settings:
+21:52:24.794: 	executable: Wireshark.exe
+21:52:24.794: 	method selected: Automatic
+21:52:24.794: 	method chosen: BitBlt
+21:52:24.794: 
+21:52:24.794: [window-capture: 'MouseViz'] update settings:
+21:52:24.794: 	executable: MouseVelViz.exe
+21:52:24.794: 	method selected: Automatic
+21:52:24.794: 	method chosen: BitBlt
+21:52:24.794: 
+21:52:24.794: [window-capture: 'Obsidian'] update settings:
+21:52:24.794: 	executable: Obsidian.exe
+21:52:24.794: 	method selected: Automatic
+21:52:24.794: 	method chosen: WGC
+21:52:24.794: 
+21:52:24.795: [window-capture: 'Browser'] update settings:
+21:52:24.795: 	executable: firefox.exe
+21:52:24.795: 	method selected: Automatic
+21:52:24.795: 	method chosen: WGC
+21:52:24.795: 
+21:52:24.797: [game-capture: 'Overwatch'] attempting to hook process: Overwatch.exe
+21:52:24.797: Switched to scene 'Gaming'
+21:52:24.799: [game-capture: 'Overwatch'] using helper (compatibility hook)
+21:52:24.802: [game-capture: 'Overwatch'] hook not loaded yet, retrying..
+21:52:24.803: ------------------------------------------------
+21:52:24.803: Loaded scenes:
+21:52:24.803: - scene 'Gaming':
+21:52:24.803:     - source: 'Overwatch' (game_capture)
+21:52:24.803:     - source: 'NohBoard' (window_capture)
+21:52:24.803:         - filter: 'Chroma Key' (chroma_key_filter_v2)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:     - source: 'PUBG' (game_capture)
+21:52:24.803:     - source: 'Apex' (game_capture)
+21:52:24.803:     - source: 'Teraria' (game_capture)
+21:52:24.803:     - source: 'Minecraft' (game_capture)
+21:52:24.803:     - source: 'Wireshark' (window_capture)
+21:52:24.803:     - source: 'Discord' (window_capture)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:         - filter: 'Chroma Key' (chroma_key_filter_v2)
+21:52:24.803:     - source: 'Splitgate' (game_capture)
+21:52:24.803:     - source: 'CSGO' (game_capture)
+21:52:24.803:     - source: 'Mouse' (input-overlay)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:     - source: 'HWInfo' (window_capture)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:     - source: 'Webcam' (dshow_input)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:         - filter: 'Dog Crop' (crop_filter)
+21:52:24.803:     - source: 'MouseViz' (window_capture)
+21:52:24.803:         - filter: 'Chroma Key' (chroma_key_filter_v2)
+21:52:24.803:     - source: 'Obsidian' (window_capture)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:     - source: 'Browser' (window_capture)
+21:52:24.803:     - source: 'VLC' (window_capture)
+21:52:24.803: - scene 'VirtCam':
+21:52:24.803:     - source: 'Generic Window Capture' (window_capture)
+21:52:24.803:     - source: 'Generic Display Capture' (monitor_capture)
+21:52:24.803:     - source: 'Webcam' (dshow_input)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:         - filter: 'Dog Crop' (crop_filter)
+21:52:24.803: - scene 'Screen Share':
+21:52:24.803:     - source: 'Generic Window Capture' (window_capture)
+21:52:24.803:     - source: 'Generic Display Capture' (monitor_capture)
+21:52:24.803:     - source: 'Webcam' (dshow_input)
+21:52:24.803:         - filter: 'Crop' (crop_filter)
+21:52:24.803:         - filter: 'Dog Crop' (crop_filter)
+21:52:24.803: - scene 'Temp':
+21:52:24.803:     - source: 'Video Capture Device' (dshow_input)
+21:52:24.803: - scene 'OW VOD Review':
+21:52:24.803:     - source: 'Middle Monitor' (monitor_capture)
+21:52:24.803:     - source: 'MSPaint' (window_capture)
+21:52:24.803:     - source: 'Overwatch' (game_capture)
+21:52:24.803: - scene 'Jackbox Scene':
+21:52:24.803:     - source: 'Jackbox' (game_capture)
+21:52:24.803:     - source: 'Jackbox Player' (window_capture)
+21:52:24.803:         - filter: 'Crop/Pad' (crop_filter)
+21:52:24.803: - scene 'Desktop':
+21:52:24.803:     - source: 'Left Monitor' (monitor_capture)
+21:52:24.803:     - source: 'Middle Monitor' (monitor_capture)
+21:52:24.803:     - source: 'Right Monitor' (monitor_capture)
+21:52:24.803:     - source: 'Firefox (Private Window)' (window_capture)
+21:52:24.803: ------------------------------------------------
+21:52:26.809: [game-capture: 'Overwatch'] attempting to hook process: Overwatch.exe
+21:52:26.961: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+21:52:26.961:     BufferDesc.Width: 2560
+21:52:26.961:     BufferDesc.Height: 1440
+21:52:26.961:     BufferDesc.RefreshRate.Numerator: 0
+21:52:26.961:     BufferDesc.RefreshRate.Denominator: 0
+21:52:26.961:     BufferDesc.Format: 28
+21:52:26.961:     BufferDesc.ScanlineOrdering: 0
+21:52:26.961:     BufferDesc.Scaling: 0
+21:52:26.961:     SampleDesc.Count: 1
+21:52:26.961:     SampleDesc.Quality: 0
+21:52:26.961:     BufferUsage: 1072
+21:52:26.961:     BufferCount: 2
+21:52:26.961:     Windowed: 0
+21:52:26.961:     SwapEffect: 0
+21:52:26.961:     Flags: 0
+21:52:26.966: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+21:52:26.976: [game-capture: 'Overwatch'] shared texture capture successful
+21:53:10.360: Starting recording due to hotkey
+21:53:10.413: [texture-amf-h264: 'advanced_video_recording'] settings:
+21:53:10.413: 	rate_control: CBR
+21:53:10.413: 	bitrate:      30000
+21:53:10.413: 	cqp:          20
+21:53:10.413: 	keyint:       60
+21:53:10.413: 	preset:       quality
+21:53:10.413: 	profile:      high
+21:53:10.413: 	b-frames:     2
+21:53:10.413: 	width:        2560
+21:53:10.413: 	height:       1440
+21:53:10.413: 	params:       (none)
+21:53:10.415: ---------------------------------
+21:53:10.416: [FFmpeg aac encoder: 'Track1'] bitrate: 320, channels: 2, channel_layout: stereo
+21:53:10.416: 
+21:53:10.434: ==== Recording Start ===============================================
+21:53:10.434: [ffmpeg muxer: 'adv_file_output'] Writing file 'C:/Users/jafne/Videos/Overwatch/[2023-05-08] 21-53-10.mkv'...
+21:53:22.436: Stopping recording due to hotkey
+21:53:22.608: [ffmpeg muxer: 'adv_file_output'] Output of file 'C:/Users/jafne/Videos/Overwatch/[2023-05-08] 21-53-10.mkv' stopped
+21:53:22.608: Output 'adv_file_output': stopping
+21:53:22.608: Output 'adv_file_output': Total frames output: 721
+21:53:22.608: Output 'adv_file_output': Total drawn frames: 730
+21:53:22.608: ==== Recording Stop ================================================
+21:53:22.630: warning: 2 frames left in the queue on closing
+21:59:42.382: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+21:59:42.385: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+21:59:42.385: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+21:59:42.385:     BufferDesc.Width: 2560
+21:59:42.385:     BufferDesc.Height: 1440
+21:59:42.385:     BufferDesc.RefreshRate.Numerator: 0
+21:59:42.385:     BufferDesc.RefreshRate.Denominator: 0
+21:59:42.385:     BufferDesc.Format: 28
+21:59:42.385:     BufferDesc.ScanlineOrdering: 0
+21:59:42.385:     BufferDesc.Scaling: 0
+21:59:42.385:     SampleDesc.Count: 1
+21:59:42.385:     SampleDesc.Quality: 0
+21:59:42.385:     BufferUsage: 1072
+21:59:42.385:     BufferCount: 2
+21:59:42.385:     Windowed: 0
+21:59:42.385:     SwapEffect: 0
+21:59:42.385:     Flags: 0
+21:59:42.385: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+21:59:42.393: [game-capture: 'Overwatch'] shared texture capture successful
+22:31:30.219: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+22:32:49.542: [game-capture: 'Overwatch'] capture window no longer exists, terminating capture
+22:32:49.543: [game-capture: 'Overwatch'] capture stopped
+12:33:39.490: [game-capture: 'Overwatch'] attempting to hook process: Overwatch.exe
+12:33:39.495: [game-capture: 'Overwatch'] using helper (compatibility hook)
+12:33:39.499: [game-capture: 'Overwatch'] hook not loaded yet, retrying..
+12:33:42.507: [game-capture: 'Overwatch'] attempting to hook process: Overwatch.exe
+12:33:42.624: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:33:42.624:     BufferDesc.Width: 2560
+12:33:42.624:     BufferDesc.Height: 1440
+12:33:42.624:     BufferDesc.RefreshRate.Numerator: 0
+12:33:42.624:     BufferDesc.RefreshRate.Denominator: 0
+12:33:42.624:     BufferDesc.Format: 28
+12:33:42.624:     BufferDesc.ScanlineOrdering: 0
+12:33:42.624:     BufferDesc.Scaling: 0
+12:33:42.624:     SampleDesc.Count: 1
+12:33:42.624:     SampleDesc.Quality: 0
+12:33:42.624:     BufferUsage: 1072
+12:33:42.624:     BufferCount: 2
+12:33:42.624:     Windowed: 1
+12:33:42.624:     SwapEffect: 0
+12:33:42.624:     Flags: 0
+12:33:42.625: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:33:42.641: [game-capture: 'Overwatch'] shared texture capture successful
+12:35:37.434: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:35:37.442: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:35:37.442: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:35:37.442:     BufferDesc.Width: 2560
+12:35:37.442:     BufferDesc.Height: 1440
+12:35:37.442:     BufferDesc.RefreshRate.Numerator: 0
+12:35:37.442:     BufferDesc.RefreshRate.Denominator: 0
+12:35:37.442:     BufferDesc.Format: 28
+12:35:37.442:     BufferDesc.ScanlineOrdering: 0
+12:35:37.442:     BufferDesc.Scaling: 0
+12:35:37.442:     SampleDesc.Count: 1
+12:35:37.442:     SampleDesc.Quality: 0
+12:35:37.442:     BufferUsage: 1072
+12:35:37.442:     BufferCount: 2
+12:35:37.442:     Windowed: 0
+12:35:37.442:     SwapEffect: 0
+12:35:37.442:     Flags: 0
+12:35:37.442: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:35:37.458: [game-capture: 'Overwatch'] shared texture capture successful
+12:35:40.286: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:35:40.369: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:35:40.369: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:35:40.369:     BufferDesc.Width: 2560
+12:35:40.369:     BufferDesc.Height: 1440
+12:35:40.369:     BufferDesc.RefreshRate.Numerator: 0
+12:35:40.369:     BufferDesc.RefreshRate.Denominator: 0
+12:35:40.369:     BufferDesc.Format: 28
+12:35:40.369:     BufferDesc.ScanlineOrdering: 0
+12:35:40.369:     BufferDesc.Scaling: 0
+12:35:40.369:     SampleDesc.Count: 1
+12:35:40.369:     SampleDesc.Quality: 0
+12:35:40.369:     BufferUsage: 1072
+12:35:40.369:     BufferCount: 2
+12:35:40.369:     Windowed: 1
+12:35:40.369:     SwapEffect: 0
+12:35:40.369:     Flags: 0
+12:35:40.371: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:35:40.374: [game-capture: 'Overwatch'] shared texture capture successful
+12:35:40.393: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:35:40.401: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:35:40.401: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:35:40.401:     BufferDesc.Width: 2560
+12:35:40.401:     BufferDesc.Height: 1401
+12:35:40.401:     BufferDesc.RefreshRate.Numerator: 0
+12:35:40.401:     BufferDesc.RefreshRate.Denominator: 0
+12:35:40.401:     BufferDesc.Format: 28
+12:35:40.401:     BufferDesc.ScanlineOrdering: 0
+12:35:40.401:     BufferDesc.Scaling: 0
+12:35:40.401:     SampleDesc.Count: 1
+12:35:40.401:     SampleDesc.Quality: 0
+12:35:40.401:     BufferUsage: 1072
+12:35:40.401:     BufferCount: 2
+12:35:40.401:     Windowed: 1
+12:35:40.401:     SwapEffect: 0
+12:35:40.401:     Flags: 0
+12:35:40.401: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:35:40.410: [game-capture: 'Overwatch'] shared texture capture successful
+12:35:41.778: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:35:41.788: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:35:41.788: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:35:41.788:     BufferDesc.Width: 2560
+12:35:41.788:     BufferDesc.Height: 1440
+12:35:41.788:     BufferDesc.RefreshRate.Numerator: 0
+12:35:41.788:     BufferDesc.RefreshRate.Denominator: 0
+12:35:41.788:     BufferDesc.Format: 28
+12:35:41.788:     BufferDesc.ScanlineOrdering: 0
+12:35:41.788:     BufferDesc.Scaling: 0
+12:35:41.788:     SampleDesc.Count: 1
+12:35:41.788:     SampleDesc.Quality: 0
+12:35:41.788:     BufferUsage: 1072
+12:35:41.788:     BufferCount: 2
+12:35:41.788:     Windowed: 0
+12:35:41.788:     SwapEffect: 0
+12:35:41.788:     Flags: 0
+12:35:41.788: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:35:41.792: [game-capture: 'Overwatch'] shared texture capture successful
+12:36:52.700: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:36:52.703: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:36:52.703: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:36:52.703:     BufferDesc.Width: 2560
+12:36:52.703:     BufferDesc.Height: 1440
+12:36:52.703:     BufferDesc.RefreshRate.Numerator: 0
+12:36:52.703:     BufferDesc.RefreshRate.Denominator: 0
+12:36:52.703:     BufferDesc.Format: 28
+12:36:52.703:     BufferDesc.ScanlineOrdering: 0
+12:36:52.703:     BufferDesc.Scaling: 0
+12:36:52.703:     SampleDesc.Count: 1
+12:36:52.703:     SampleDesc.Quality: 0
+12:36:52.703:     BufferUsage: 1072
+12:36:52.703:     BufferCount: 2
+12:36:52.703:     Windowed: 0
+12:36:52.703:     SwapEffect: 0
+12:36:52.703:     Flags: 0
+12:36:52.703: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:36:52.708: [game-capture: 'Overwatch'] shared texture capture successful
+12:42:06.051: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:42:06.055: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:42:06.055: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:42:06.055:     BufferDesc.Width: 2560
+12:42:06.055:     BufferDesc.Height: 1440
+12:42:06.055:     BufferDesc.RefreshRate.Numerator: 0
+12:42:06.055:     BufferDesc.RefreshRate.Denominator: 0
+12:42:06.055:     BufferDesc.Format: 28
+12:42:06.055:     BufferDesc.ScanlineOrdering: 0
+12:42:06.055:     BufferDesc.Scaling: 0
+12:42:06.055:     SampleDesc.Count: 1
+12:42:06.055:     SampleDesc.Quality: 0
+12:42:06.055:     BufferUsage: 1072
+12:42:06.055:     BufferCount: 2
+12:42:06.055:     Windowed: 0
+12:42:06.055:     SwapEffect: 0
+12:42:06.055:     Flags: 0
+12:42:06.055: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:42:06.059: [game-capture: 'Overwatch'] shared texture capture successful
+12:43:28.046: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+12:43:28.050: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+12:43:28.050: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+12:43:28.050:     BufferDesc.Width: 2560
+12:43:28.050:     BufferDesc.Height: 1440
+12:43:28.050:     BufferDesc.RefreshRate.Numerator: 0
+12:43:28.050:     BufferDesc.RefreshRate.Denominator: 0
+12:43:28.050:     BufferDesc.Format: 28
+12:43:28.050:     BufferDesc.ScanlineOrdering: 0
+12:43:28.050:     BufferDesc.Scaling: 0
+12:43:28.050:     SampleDesc.Count: 1
+12:43:28.050:     SampleDesc.Quality: 0
+12:43:28.050:     BufferUsage: 1072
+12:43:28.050:     BufferCount: 2
+12:43:28.050:     Windowed: 0
+12:43:28.050:     SwapEffect: 0
+12:43:28.050:     Flags: 0
+12:43:28.052: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+12:43:28.057: [game-capture: 'Overwatch'] shared texture capture successful
+12:43:49.135: Max audio buffering reached!
+12:43:49.135: adding 917 milliseconds of audio buffering, total audio buffering is now 960 milliseconds (source: Desktop Audio 2)
+12:43:49.135: 
+12:43:49.156: Source Desktop Audio 2 audio is lagging (over by 764827.53 ms) at max audio buffering. Restarting source audio.
+13:27:23.500: [game-capture: 'Overwatch'] ----------------- d3d11 capture freed ----------------
+13:27:23.503: [game-capture: 'Overwatch'] Found D3D11 11.0 device on swap chain
+13:27:23.503: [game-capture: 'Overwatch'] DXGI_SWAP_CHAIN_DESC:
+13:27:23.503:     BufferDesc.Width: 2560
+13:27:23.503:     BufferDesc.Height: 1440
+13:27:23.503:     BufferDesc.RefreshRate.Numerator: 0
+13:27:23.503:     BufferDesc.RefreshRate.Denominator: 0
+13:27:23.503:     BufferDesc.Format: 28
+13:27:23.503:     BufferDesc.ScanlineOrdering: 0
+13:27:23.503:     BufferDesc.Scaling: 0
+13:27:23.503:     SampleDesc.Count: 1
+13:27:23.503:     SampleDesc.Quality: 0
+13:27:23.503:     BufferUsage: 1072
+13:27:23.503:     BufferCount: 2
+13:27:23.503:     Windowed: 0
+13:27:23.503:     SwapEffect: 0
+13:27:23.503:     Flags: 0
+13:27:23.504: [game-capture: 'Overwatch'] d3d11 shared texture capture successful
+13:27:23.509: [game-capture: 'Overwatch'] shared texture capture successful
+13:56:05.973: [game-capture: 'Overwatch'] capture window no longer exists, terminating capture
+13:56:05.974: [game-capture: 'Overwatch'] capture stopped
+15:26:44.846: ==== Shutting down ==================================================
+15:26:44.868: WASAPI: Device 'System (2- TC-Helicon GoXLR Mini)' Terminated
+15:26:44.871: WASAPI: Device 'Chat (2- TC-Helicon GoXLR Mini)' Terminated
+15:26:44.874: WASAPI: Device 'Chat Mic (2- TC-Helicon GoXLR Mini)' Terminated
+15:26:44.900: All scene data cleared
+15:26:44.900: ------------------------------------------------
+15:26:45.031: [obs-websocket] [obs_module_unload] Shutting down...
+15:26:45.033: [obs-websocket] [obs_module_unload] Finished shutting down.
+15:26:45.038: [input-overlay::libgamepad] Hook thread ended
+15:26:45.048: [Scripting] Total detached callbacks: 0
+15:26:45.049: Freeing OBS context data
+15:26:45.049: 1 views remain at shutdown
+15:26:45.079: == Profiler Results =============================
+15:26:45.079: run_program_init: 4808.55 ms
+15:26:45.079:  ┣OBSApp::AppInit: 45.05 ms
+15:26:45.079:  ┃ ┗OBSApp::InitLocale: 12.703 ms
+15:26:45.079:  ┗OBSApp::OBSInit: 4744.6 ms
+15:26:45.079:    ┣obs_startup: 3.25 ms
+15:26:45.079:    ┗OBSBasic::OBSInit: 4401.11 ms
+15:26:45.079:      ┣OBSBasic::InitBasicConfig: 0.333 ms
+15:26:45.079:      ┣OBSBasic::ResetAudio: 0.129 ms
+15:26:45.079:      ┣OBSBasic::ResetVideo: 1367.72 ms
+15:26:45.079:      ┣OBSBasic::InitOBSCallbacks: 0.009 ms
+15:26:45.079:      ┣OBSBasic::InitHotkeys: 0.299 ms
+15:26:45.079:      ┣obs_load_all_modules2: 1272.61 ms
+15:26:45.079:      ┃ ┣obs_init_module(aja-output-ui.dll): 1.96 ms
+15:26:45.079:      ┃ ┣obs_init_module(aja.dll): 1.445 ms
+15:26:45.079:      ┃ ┣obs_init_module(coreaudio-encoder.dll): 2.248 ms
+15:26:45.079:      ┃ ┣obs_init_module(decklink-captions.dll): 0 ms
+15:26:45.079:      ┃ ┣obs_init_module(decklink-output-ui.dll): 0 ms
+15:26:45.079:      ┃ ┣obs_init_module(decklink.dll): 2.432 ms
+15:26:45.079:      ┃ ┣obs_init_module(enc-amf.dll): 432.32 ms
+15:26:45.079:      ┃ ┣obs_init_module(frontend-tools.dll): 240.484 ms
+15:26:45.079:      ┃ ┣obs_init_module(image-source.dll): 0.007 ms
+15:26:45.079:      ┃ ┣obs_init_module(input-overlay.dll): 54.245 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-browser.dll): 5.418 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-ffmpeg.dll): 119.808 ms
+15:26:45.079:      ┃ ┃ ┗nvenc_check: 0.28 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-filters.dll): 3.108 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-outputs.dll): 0.009 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-qsv11.dll): 36.851 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-text.dll): 0.267 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-transitions.dll): 0.011 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-vst.dll): 0.004 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-websocket.dll): 15.279 ms
+15:26:45.079:      ┃ ┣obs_init_module(obs-x264.dll): 0.002 ms
+15:26:45.079:      ┃ ┣obs_init_module(rtmp-services.dll): 7.456 ms
+15:26:45.079:      ┃ ┣obs_init_module(text-freetype2.dll): 0.247 ms
+15:26:45.079:      ┃ ┣obs_init_module(vlc-video.dll): 0.039 ms
+15:26:45.079:      ┃ ┣obs_init_module(win-capture.dll): 4.052 ms
+15:26:45.079:      ┃ ┣obs_init_module(win-dshow.dll): 2.123 ms
+15:26:45.079:      ┃ ┣obs_init_module(win-mf.dll): 0 ms
+15:26:45.079:      ┃ ┣obs_init_module(win-wasapi.dll): 0.018 ms
+15:26:45.079:      ┃ ┗reset_win32_symbol_paths: 0.255 ms
+15:26:45.079:      ┣OBSBasic::ResetOutputs: 2.013 ms
+15:26:45.079:      ┣OBSBasic::CreateHotkeys: 0.338 ms
+15:26:45.079:      ┣OBSBasic::InitService: 4.875 ms
+15:26:45.079:      ┣OBSBasic::InitPrimitives: 0.539 ms
+15:26:45.079:      ┗OBSBasic::Load: 1555.82 ms
+15:26:45.079: obs_hotkey_thread(25 ms): min=0.003 ms, median=0.009 ms, max=87.028 ms, 99th percentile=0.164 ms, 99.9993% below 25 ms
+15:26:45.079: audio_thread(Audio): min=0.009 ms, median=0.059 ms, max=13.632 ms, 99th percentile=0.13 ms
+15:26:45.079:  ┗receive_audio: min=0.008 ms, median=0.46 ms, max=10.475 ms, 99th percentile=2.735 ms, 0.000192884 calls per parent call
+15:26:45.079:    ┣buffer_audio: min=0.001 ms, median=0.001 ms, max=0.013 ms, 99th percentile=0.003 ms
+15:26:45.079:    ┗do_encode: min=0.033 ms, median=0.457 ms, max=10.47 ms, 99th percentile=2.731 ms
+15:26:45.079:      ┣encode(Track1): min=0.028 ms, median=0.424 ms, max=4.227 ms, 99th percentile=2.538 ms
+15:26:45.079:      ┗send_packet: min=0.002 ms, median=0.03 ms, max=10.087 ms, 99th percentile=0.166 ms
+15:26:45.079: obs_graphics_thread(16.6667 ms): min=0.055 ms, median=0.205 ms, max=1320.12 ms, 99th percentile=0.907 ms, 99.9981% below 16.667 ms
+15:26:45.079:  ┣tick_sources: min=0.001 ms, median=0.063 ms, max=1286.9 ms, 99th percentile=0.244 ms
+15:26:45.079:  ┣output_frame: min=0.039 ms, median=0.126 ms, max=92.866 ms, 99th percentile=0.556 ms
+15:26:45.079:  ┃ ┗gs_context(video->graphics): min=0.039 ms, median=0.126 ms, max=92.865 ms, 99th percentile=0.555 ms
+15:26:45.079:  ┃   ┣render_video: min=0.004 ms, median=0.021 ms, max=23.416 ms, 99th percentile=0.065 ms
+15:26:45.079:  ┃   ┃ ┣render_main_texture: min=0.003 ms, median=0.017 ms, max=22.6 ms, 99th percentile=0.054 ms
+15:26:45.079:  ┃   ┃ ┣render_convert_texture: min=0.01 ms, median=0.013 ms, max=0.123 ms, 99th percentile=0.034 ms, 0.000192324 calls per parent call
+15:26:45.079:  ┃   ┃ ┗output_gpu_encoders: min=0 ms, median=0.055 ms, max=0.237 ms, 99th percentile=0.185 ms, 0.000192324 calls per parent call
+15:26:45.079:  ┃   ┗gs_flush: min=0.001 ms, median=0.102 ms, max=92.848 ms, 99th percentile=0.519 ms
+15:26:45.079:  ┗render_displays: min=0 ms, median=0.001 ms, max=0.409 ms, 99th percentile=0.002 ms
+15:26:45.079: send_packet: min=0.004 ms, median=0.043 ms, max=3.821 ms, 99th percentile=0.227 ms
+15:26:45.079: =================================================
+15:26:45.079: == Profiler Time Between Calls ==================
+15:26:45.079: obs_hotkey_thread(25 ms): min=24.045 ms, median=25.645 ms, max=112.281 ms, 45.7714% within ±2% of 25 ms (0.10689% lower, 54.1217% higher)
+15:26:45.079: obs_graphics_thread(16.6667 ms): min=0.166 ms, median=16.667 ms, max=1320.12 ms, 99.8733% within ±2% of 16.667 ms (0.0639413% lower, 0.0628084% higher)
+15:26:45.079: =================================================
+15:26:45.324: Number of memory leaks: 0

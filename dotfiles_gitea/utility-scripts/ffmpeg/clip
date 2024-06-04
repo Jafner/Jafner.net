@@ -1,0 +1,58 @@
+#!/bin/bash
+
+DEBUG=false
+
+usage() { echo "Usage: $0 [--start <timestamp>] [--duration <seconds>] [--file <input file>]" 1>&2; exit 1; }
+
+args=$(getopt -o s:d:hf: --long start:,duration:,help,file: -n 'clip' -- "$@")
+
+if [ "$DEBUG" == true ]; then
+    echo "args=$args"
+fi
+
+if [ $? != 0 ] ; then echo "Exiting..." >&2 ; exit 1 ; fi
+
+eval set -- "$args"
+
+while true; do
+    case "$1" in 
+        -s | --start ) start="$2"; shift 2 ;;
+        -d | --duration ) duration="$2"; shift 2 ;;
+        -f | --file ) file="$2"; shift 2 ;;
+        -h | --help ) usage; shift ;;
+        -- ) shift; break ;;
+        *) usage ; break ;;
+    esac
+done
+
+if [ -z "${start}" ]; then
+    echo "No start time set. Set the start time with the --start flag"
+fi
+if [ -z "${duration}" ]; then
+    echo "No duration set. Set the duration with the --duration flag"
+fi
+if [ -z "${file}" ]; then
+    echo "No input file set. Set the input file with the --file flag"
+fi
+
+file=$(realpath "$file")
+
+FILE_PATH=$(dirname "$file")
+FILE_NAME=$(basename "$file")
+FILE_EXT="${FILE_NAME##*.}"
+FILE_NAME="${FILE_NAME%.*}"
+OUTFILE=$(echo "$FILE_PATH/$FILE_NAME-clip.$FILE_EXT")
+
+if [ "$DEBUG" == true ]; then
+    echo "start=$start"
+    echo "duration=$duration"
+    echo "file=$file"
+    echo "command to run:"
+    echo "ffmpeg -i \"$file\" -ss \"$start\" -t \"$duration\" -c:v copy -c:a copy \"$OUTFILE\""
+fi
+
+ffmpeg -i "$file" -ss "$start" -t "$duration" -map 0 -c:v copy -c:a copy "$OUTFILE"
+
+echo "======== "
+echo "File created at: $OUTFILE"
+echo "======== "

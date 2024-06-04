@@ -1,0 +1,47 @@
+require ["fileinto", "include", "environment", "variables", "relational", "comparator-i;ascii-numeric", "spamtest", "regex", "imap4flags"];
+
+# Generated: Do not run this script on spam messages
+if allof (environment :matches "vnd.proton.spam-threshold" "*",
+spamtest :value "ge" :comparator "i;ascii-numeric" "${1}")
+{
+    return;
+}
+
+if allof (address :all :comparator "i;unicode-casemap" :contains "From" [important_domains]) {
+    fileinto "Important";
+    addflag "\\Flagged";
+    keep;
+    stop;
+}
+
+# Common subjects relevant to security events
+elsif header :contains "subject" ["security alert", "security notification", "login", "sign-on", 
+"sign-in", "sign in", "sign on", "email address", "email change", "password", "terms of service"] 
+{
+    fileinto "Important";
+    addflag "\\Flagged";
+    stop;
+}
+
+# Commonly used security services
+elsif address :matches :domain "from" ["*lastpass.com", "*logme.in", "*okta.com", "*accounts.google.com", 
+"*1password.com", "*haveibeenpwned.com", "*nextdns.io"]
+{
+    fileinto "Important";
+    addflag "\\Flagged";
+    stop;
+}
+
+elsif header :list "from" ":addrbook:personal?label=Family"
+{
+    fileinto "Important";
+    addflag "\\Flagged";
+    stop;
+}
+
+elsif address :matches "from" ["*@*.us", "@*.gov"]
+{
+    fileinto "Important";
+    addflag "\\Flagged";
+    stop;
+}
