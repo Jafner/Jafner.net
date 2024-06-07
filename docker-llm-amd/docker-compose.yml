@@ -51,9 +51,7 @@ services:
     ports:
       - 8000:8000/tcp
     volumes:
-      - ./SillyTavern/plugins:/home/node/app/plugins
-      - ./SillyTavern/config:/home/node/app/config
-      - ./SillyTavern/data:/home/node/app/data
+      - ./sillytavern/config/config.yaml:/home/node/app/config/config.yaml
     environment:
       - TZ=America/Los_Angeles
 
@@ -138,3 +136,4 @@ volumes:
 networks:
   ai:
     name: "ai"
+    subnet: "172.20.0.0/16" 
