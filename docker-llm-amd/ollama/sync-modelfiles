@@ -1,7 +1,10 @@
 #!/bin/bash
+# THIS SCRIPT DOES NOT WORK RIGHT NOW
+# The script is fine, it just needs the modelfiles to be written with reference
+# to the models folder relative to the host system, rather than inside the 
+# container. We're using ./modelfiles/.loadmodels.sh instead right now.
 
-export OLLAMA_HOST=http://localhost:11434
-modelfiles="$(ls modelfiles)"
+modelfiles="$(ls ./modelfiles/)"
 models="$(ollama list | tr -s ' ' | cut -f 1 | tail -n +2)"
 for model in $(echo "$models"); do 
     if ! [[ $modelfiles == *"$model"* ]]; then 
@@ -11,7 +14,8 @@ for model in $(echo "$models"); do
     fi
 done
 
-for modelfile in ./modelfiles/*; do 
+cd ./modelfiles
+for modelfile in ./*; do 
     echo -n "Running: '"
     echo "ollama create \"$(basename $modelfile)\" -f \"$modelfile\"'"
     ollama create "$(basename $modelfile)" -f "$modelfile"

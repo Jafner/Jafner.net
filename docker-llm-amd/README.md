@@ -38,6 +38,13 @@ HF_TOKEN="<my-huggingface-token>"
 
 That's where we're at. 
 
+### Set Up Models Directory
+1. Navigate to the source directory with all models: `cd "~/Nextcloud/Large Language Models/GGUF/"`
+2. Symlink each file into the docker project's models directory: `for model in ./*; do ln $(realpath $model) $(realpath ~/Git/docker-llm-amd/models/$model); done`
+   - Note that the symlinks must be hardlinks or they will not be passed properly into containers.
+3. Launch ollama: `docker compose up -d ollama`
+4. Create models defined by the modelfiles: `docker compose exec -dit ollama /modelfiles/.loadmodels.sh`
+
 ### Roadmap
 - Set up StableDiffusion-web-UI.
 - Get characters in SillyTavern behaving as expected.
