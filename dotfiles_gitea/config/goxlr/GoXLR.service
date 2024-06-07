@@ -1,0 +1,9 @@
+[Unit]
+Description=GoXLR Utility Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/goxlr-daemon
+
+[Install]
+WantedBy=default.target

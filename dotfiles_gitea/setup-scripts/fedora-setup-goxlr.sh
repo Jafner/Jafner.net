@@ -8,4 +8,9 @@ rm /tmp/goxlr.rpm
 rm -rf ~/.local/share/goxlr-utility/profiles 
 ln -s $(realpath ../config/goxlr) $(realpath ~/.local/share/goxlr-utility/profiles)
 
-/usr/bin/goxlr-launcher
+mkdir -p ~/.config/systemd/user/
+cp ../config/goxlr/GoXLR.service ~/.config/systemd/user/
+
+systemctl --user daemon-reload
+systemctl --user enable GoXLR.service
+systemctl --user start GoXLR.service
