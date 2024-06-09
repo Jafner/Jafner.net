@@ -1,4 +1,5 @@
 #!/bin/bash
+# Takes an input file, a start timestamp, and a duration in seconds
 
 DEBUG=false
 

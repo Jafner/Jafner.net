@@ -61,5 +61,5 @@
     },
     "terminal.external.linuxExec": "konsole",
     "terminal.explorerKind": "both",
-    "window.confirmSaveUntitledWorkspace": false,
+    "window.confirmSaveUntitledWorkspace": false
 }
