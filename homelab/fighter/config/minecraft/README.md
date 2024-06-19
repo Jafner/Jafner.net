@@ -11,6 +11,9 @@ We'll use Enigmatica10 for example here.
    3. Extract and then delete the zip. `ssh admin@192.168.1.23 "cd $DIR && mkdir e10 && unzip Enigmatica10Server-1.0.1.zip -d e10 && rm Enigmatica10Server-1.0.1.zip"
 3. 
 
+## Workaround for running server on desktop if I can't figure out how to make the container work.
+1. Run the server on desktop.
+2. Update [router mapping](docker-compose.yml#11) to point at the desktop. E.g. `--mapping=e10.jafner.net=192.168.1.135:25565`
 
 # Post-Setup
 
