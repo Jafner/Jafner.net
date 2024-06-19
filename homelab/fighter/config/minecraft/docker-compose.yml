@@ -25,7 +25,7 @@ services:
       - traefik.enable=false
 
   e10:
-    image: itzg/minecraft-server:latest
+    image: itzg/minecraft-server:java21
     user: 1001:1001
     container_name: minecraft_e10
     env_file:
