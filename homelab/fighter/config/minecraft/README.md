@@ -1,3 +1,19 @@
+# Setting up a new modded server
+We'll use Enigmatica10 for example here.
+1. Download the server pack. The specific way to do this varies by pack. 
+   1. For E10, this means navigating to the [curseforge page](https://www.curseforge.com/minecraft/modpacks/enigmatica10).
+   2. Then scrolling down the right side to find the section for "Server Packs".
+   3. Select the most recent (`Enigmatica 10 Server 1.0.1`) pack.
+   4. Click the Download button. I assume we're downloading the file to `~/Downloads/`
+2. Copy the zip over to Fighter's configured storage location for Minecraft and extract it. 
+   1. Find Fighter's configured storage location for Minecraft. `DIR=$(ssh admin@192.168.1.23 cat /home/admin/homelab/fighter/config/minecraft/.env | head -n 1 | cut -d'=' -f2) && echo $DIR`
+   2. Copy the zip over. `scp ~/Downloads/Enigmatica10Server-1.0.1.zip admin@192.168.1.23:$DIR`
+   3. Extract and then delete the zip. `ssh admin@192.168.1.23 "cd $DIR && mkdir e10 && unzip Enigmatica10Server-1.0.1.zip -d e10 && rm Enigmatica10Server-1.0.1.zip"
+3. 
+
+
+# Post-Setup
+
 ## Connecting to a server's CLI
 To connect to a server's RCON Minecraft console, run
 `docker exec -it minecraft_e6 rcon-cli --password thanksitzg`

@@ -24,18 +24,18 @@ services:
     labels:
       - traefik.enable=false
 
-  prominence:
+  e10:
     image: itzg/minecraft-server:latest
-    container_name: minecraft_prominence
+    container_name: minecraft_e10
     env_file:
       - path: ./minecraft.env
         required: true
       - path: ./minecraft_secrets.env
         required: false
-      - path: ./prominence.env
+      - path: ./e10.env
         required: true
     volumes:
-      - $DOCKER_DATA/prominence:/data:rw
+      - $DOCKER_DATA/e10:/data:rw
     networks:
       - minecraft
     restart: "no"
