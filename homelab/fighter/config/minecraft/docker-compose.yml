@@ -26,6 +26,7 @@ services:
 
   e10:
     image: itzg/minecraft-server:latest
+    user: 1001:1001
     container_name: minecraft_e10
     env_file:
       - path: ./minecraft.env
