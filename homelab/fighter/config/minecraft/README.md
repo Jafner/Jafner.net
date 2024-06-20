@@ -14,6 +14,8 @@ We'll use Enigmatica10 for example here.
 ## Workaround for running server on desktop if I can't figure out how to make the container work.
 1. Run the server on desktop.
 2. Update [router mapping](docker-compose.yml#11) to point at the desktop. E.g. `--mapping=e10.jafner.net=192.168.1.135:25565`
+3. Be sad that you couldn't make it work "right".
+4. Be glad that you got it working.
 
 # Post-Setup
 
