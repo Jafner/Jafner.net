@@ -1,3 +1,52 @@
+# Grafana
+
+## Updating Configuration File
+The Grafana config is edited by providing overrides in `$DOCKER_DATA/custom.ini`, which maps to `/etc/grafana/grafana.ini` inside the container. 
+
+The `custom.ini` file stores secrets in plain text, so we can't keep it in version control. But I've included snippets for reference below:
+
+### Basic Server Config
+```ini
+[server]
+domain = grafana.jafner.net
+root_url = %(protocol)s://%(domain)s/
+force_migration = true
+```
+
+### Configure Auth to Sign In via Keycloak
+```ini
+[auth]
+oauth_auto_login = true
+
+[auth.anonymous]
+enabled = true
+
+[auth.generic_oauth]
+name = OAuth
+icon = signin
+enabled = true
+client_id = grafana.jafner.net
+client_secret = **************************
+scopes = email openid profile
+empty_scopes = false
+auth_url = https://keycloak.jafner.net/realms/Jafner.net/protocol/openid-connect/auth
+token_url = https://keycloak.jafner.net/realms/Jafner.net/protocol/openid-connect/token
+api_url = https://keycloak.jafner.net/realms/Jafner.net/protocol/
+signout_redirect_url = https://grafana.jafner.net
+```
+
+### Configure Email Sending via SMTP (Protonmail)
+```ini
+[smtp]
+enabled = true
+host = smtp.protonmail.ch:587
+user = noreply@jafner.net
+password = ****************
+from_address = noreply@jafner.net
+from_name = Grafana
+startTLS_policy = OpportunisticStartTLS
+```
+
 # Monitoring Specification
 Monitors are split into three types: Host, Application, and IoT
 All monitors use a Prometheus exporter.
