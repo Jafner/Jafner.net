@@ -5,7 +5,7 @@ Machine:
   Type: Desktop Mobo: Gigabyte model: Z77X-UD5H serial: N/A UEFI: American Megatrends v: F16j
     date: 11/14/2017
 Memory:
-  System RAM: total: 16 GiB available: 15.51 GiB used: 10.96 GiB (70.7%) igpu: 64 MiB
+  System RAM: total: 16 GiB available: 15.51 GiB used: 9.39 GiB (60.5%) igpu: 64 MiB
   Array-1: capacity: 32 GiB slots: 4 modules: 2 EC: None
   Device-1: ChannelB-DIMM1 type: no module installed
   Device-2: ChannelA-DIMM1 type: no module installed
@@ -16,19 +16,19 @@ CPU:
   Speed (MHz): avg: 1602 min/max: 1600/3800 cores: 1: 1602 2: 1602 3: 1602 4: 1602
 Graphics:
   Device-1: Intel Xeon E3-1200 v2/3rd Gen Core processor Graphics driver: i915 v: kernel
-  Display: server: No display server data found. Headless machine? tty: 177x61
+  Display: server: No display server data found. Headless machine? tty: 169x58
   API: N/A Message: No API data available in console. Headless machine?
 Network:
   Device-1: Intel 82579V Gigabit Network driver: e1000e
   Device-2: Qualcomm Atheros AR8151 v2.0 Gigabit Ethernet driver: atl1c
 Drives:
-  Local Storage: total: raw: 29.55 TiB usable: 15.27 TiB used: 8.74 TiB (57.2%)
+  Local Storage: total: raw: 29.55 TiB usable: 15.27 TiB used: 9.39 TiB (61.5%)
   ID-1: /dev/sda vendor: SanDisk model: SDSSDX480GG25 size: 447.13 GiB
   ID-2: /dev/sdb vendor: HGST (Hitachi) model: HUH728080ALE604 size: 7.28 TiB
   ID-3: /dev/sdc vendor: HGST (Hitachi) model: HUH728080ALE604 size: 7.28 TiB
   ID-4: /dev/sdd vendor: HGST (Hitachi) model: HUH728080ALE604 size: 7.28 TiB
   ID-5: /dev/sde vendor: HGST (Hitachi) model: HUH728080ALE604 size: 7.28 TiB
 Partition:
-  ID-1: / size: 428.76 GiB used: 2.65 GiB (0.6%) fs: zfs logical: boot-pool/ROOT/22.12.3
-  ID-2: swap-1 size: 2 GiB used: 268 KiB (0.0%) fs: swap dev: /dev/dm-0
+  ID-1: / size: 428.75 GiB used: 2.65 GiB (0.6%) fs: zfs logical: boot-pool/ROOT/22.12.3
+  ID-2: swap-1 size: 2 GiB used: 66.3 MiB (3.2%) fs: swap dev: /dev/dm-0
   ID-3: swap-2 size: 2 GiB used: 0 KiB (0.0%) fs: swap dev: /dev/dm-1
