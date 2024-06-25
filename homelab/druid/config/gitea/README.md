@@ -28,6 +28,23 @@ Allow migrating from specific domains.
 ALLOWED_DOMAINS = gitlab.jafner.net, *.github.com, github.com
 ```
 
+Configure SMTP email.
+```
+[mailer]
+ENABLED = true
+FROM = Gitea
+PROTOCOL = smtp+starttls
+SMTP_ADDR = smtp.protonmail.ch
+SMTP_PORT = 587
+USER = noreply@jafner.net
+PASSWD = `****************`
+```
+
+## Apply changes
+Just restart the container.
+`cd ~/homelab/druid/config/gitea && docker compose up -d --force-recreate`
+
+
 # Re-register Gitea Runners
 To force the runners to re-register (to apply updated labels, for example).
 
