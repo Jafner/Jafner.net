@@ -1,5 +1,5 @@
 +++
-title = 'Pamidi'
+title = 'Pamidi - Control PulseAudio with a MIDI device'
 date = 2024-05-28T17:58:19-07:00
 draft = false
 featured_image = "../pamidi.jpg"
