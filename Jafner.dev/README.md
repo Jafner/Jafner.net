@@ -5,11 +5,11 @@
 ## Including Images in Content
 *Good old-fashioned `![](image.png)` markdown image embedding works just fine.*
 
-1. Place the image file beside the content in the folder.
-2. For a Featured Image, use the line `featured_image = "../pamidi.jpg"` in the frontmatter.
-3. For an inline image, use `{{< image src="../pamidi.jpg" >}}`
+1. Place the image file beside the content in the folder (called a ["page bundle"](https://gohugo.io/content-management/page-bundles/)).
+2. For a Featured Image, use the line `featured_image = "image.jpg"` in the frontmatter.
+3. For an inline image, use `{{< image src="image.jpg" >}}`
 
-> Note: The working directory for relative resource locations uses the name of the content file as the current location. E.g. referencing the image `./myimage.jpg` or `./myimage.jpg` from inside the `/content/projects/pamidi.md` content file, would look for those images at `/content/projects/pamidi/myimage.jpg`. 
+> Note: The working directory for relative resource locations uses the name of the content file as the current location. E.g. referencing the image `./myimage.jpg` or `./myimage.jpg` from inside the `/content/projects/myproject.md` content file, would look for those images at `/content/projects/myproject/myimage.jpg`. 
 
 ## Add a Table of Contents
 - To include a table of contents at the beginning of a page, add the flag `toc = true` to the frontmatter. 
