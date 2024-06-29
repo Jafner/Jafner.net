@@ -30,7 +30,9 @@ disableHugoGeneratorInject = false
   [permalinks.section]
     homelab = "/homelab/"
     projects = "/projects/"
-    pages = "/"
+  [permalinks.page]
+    about-me = "/about-me"
+    experience = "/experience"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -65,7 +67,9 @@ disableHugoGeneratorInject = false
     copyright = true
     author = true
 
-    topText = []
+    topText = [
+      "Source on <a href=\"https://github.com/Jafner/jafner.dev\">GitHub</a>"
+    ]
     bottomText = [
       "Powered by <a href=\"http://gohugo.io\">Hugo</a>",
       "Theme made with &#10084; by <a href=\"https://github.com/rhazdon\">Djordje Atlialp</a>"
