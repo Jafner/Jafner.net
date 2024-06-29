@@ -2,10 +2,10 @@
 title = 'Pamidi - Control PulseAudio with a MIDI device'
 date = 2024-05-28T17:58:19-07:00
 draft = false
-featured_image = "../pamidi.jpg"
+featured_image = "cover.png"
 +++
 
-{{< image src="../pamidi.jpg" >}}
+{{< image src="pamidi.jpg" >}}
 
 My first project posted publicly. Initially I didn't expect to post it, but I didn't see any other solutions to the problem I was having, so I figured my solution could inspire someone else to do it better.
 
