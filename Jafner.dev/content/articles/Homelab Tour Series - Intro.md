@@ -100,7 +100,7 @@ And of course, it runs an SMB server and iSCSI target to facilitate clients and 
 In addition to the important services above, I run a handful of services just for off time. 
 
 ## Plex: I wish Jellyfin supported SSO
-The superior media server, Plex provides a free (as in beer) solution with a beautiful frontend and comprehensive metadata scraping. Plex has set a standard for serving movies and TV that no alternative service has been able to match. It is the unwelcome incumbent no one has mustered the resources to dethrone. Over the last dthe usernames-emails-passwords) in 2022.
+The superior media server, Plex provides a free (as in beer) solution with a beautiful frontend and comprehensive metadata scraping. Plex has set a standard for serving movies and TV that no alternative service has been able to match. It is the unwelcome incumbent no one has mustered the resources to dethrone. Over the last decade Plex has crept away from its [XBMC](https://en.wikipedia.org/wiki/Kodi_(software)) roots, and leaned into building services that make the business boys happy. They've been investing engineering hours into integrating more and more with external service providers, rather than [updating some of the core functionality](https://www.plexopedia.com/plex-media-server/general/metadata-stored/). And in [2022](https://www.theverge.com/2022/8/24/23319570/plex-security-breach-exposes-usernames-emails-passwords) they leaked my username, email, and (encrypted) password just to be rude to me personally. 
 
 But I digress...
 
