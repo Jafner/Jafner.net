@@ -118,6 +118,7 @@ But I digress...
 Sometimes, rarely, I read a book. Much more freqeuently, I want to check a section from a book. Calibre(-web) affords me access to my entire library of books and ebooks from a web browser. Frustratingly, the owner of the project has decided not to implement generic OAuth2/OIDC support. [But open-source, uh, finds a way.](https://github.com/janeczku/calibre-web/pull/2211#issuecomment-1182460156)
 
 ### Minecraft: Geoff \"itzg\" Bourne is a blessing
+[`itzg/docker-minecraft-server`](https://github.com/itzg/docker-minecraft-server) | [`itzg/mc-router`](https://github.com/itzg/mc-router) | [`itzg/mc-monitor`](https://github.com/itzg/mc-monitor) | [Configuration](https://gitea.jafner.tools/Jafner/homelab/src/branch/main/fighter/config/minecraft/docker-compose.yml)
 Hosting game servers for my friends got me into this stuff, and has been a throughline of my life for over 15 years.
 And Minecraft has been a consistent presence in that domain. Today that task is easier and more polished than ever. 
 
