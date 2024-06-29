@@ -4,7 +4,7 @@ description = "In this article I walk through the services I run, what problems 
 date = 2024-06-27T09:15:13-07:00
 draft = false
 toc = false
-alias = "/articles/homelab-tour-series-intro"
+aliases = ["/articles/homelab-tour-series-intro", "/homelab-tour"]
 author = "Joey Hafner"
 +++
 
