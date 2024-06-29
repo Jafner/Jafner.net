@@ -22,13 +22,13 @@ enableGitInfo   = false
 enableEmoji     = true
 enableMissingTranslationPlaceholders = false
 disableRSS     = true
-disableSitemap = true
+disableSitemap = false
 disable404     = false
 disableHugoGeneratorInject = false
 
 [permalinks]
   [permalinks.section]
-    articles = "/articles/"
+    homelab = "/homelab/"
     projects = "/projects/"
     pages = "/"
 
@@ -116,7 +116,7 @@ disableHugoGeneratorInject = false
   [[menu.main]]
     identifier = "about"
     name       = "About"
-    url        = "about"
+    url        = "about-me"
     weight     = 10
   [[menu.main]]
     identifier = "experience"
@@ -124,9 +124,9 @@ disableHugoGeneratorInject = false
     url        = "experience"
     weight     = 20
   [[menu.main]]
-    identifier = "articles"
-    name       = "Articles"
-    url        = "articles"
+    identifier = "homelab"
+    name       = "Homelab"
+    url        = "homelab"
     weight     = 30
   [[menu.main]]
     identifier = "projects"
@@ -138,4 +138,4 @@ disableHugoGeneratorInject = false
   [markup.tableOfContents]
     endLevel = 3
     ordered = false
-    startLevel = 1
+    startLevel = 2
