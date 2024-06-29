@@ -2,7 +2,6 @@
 title = 'Experience'
 date = 2024-05-28T17:56:47-07:00
 draft = false
-url = '/experience'
 +++
 
 Below is a reverse chronological listing of my employment history.

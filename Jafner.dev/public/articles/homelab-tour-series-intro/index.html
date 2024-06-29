@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="There are many like it&amp;hellip; But this lab is built by me and for me. Just as I am the sole (or primary) beneficiary of its value, I am also the sole owner. I&amp;rsquo;ve gotta pay for all the hard drives, the network switches, the API keys, the power supplies, the rack rails. I&amp;rsquo;ve gotta configure the SMTP notifications, the DNS, the firewalls and the subnets. I open, update, and close issues, remediate leaked secrets, and write documentation." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://jafner.dev/articles/homelab-tour-series-intro/" />
+
+
+    <title>
+        
+            Homelab Tour Series - Intro :: Jafner.dev  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+
+
+<link rel="stylesheet" href="/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/toc-no-underline.css">
+    
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Homelab Tour Series - Intro">
+<meta itemprop="description" content="There are many like it&hellip; But this lab is built by me and for me. Just as I am the sole (or primary) beneficiary of its value, I am also the sole owner. I&rsquo;ve gotta pay for all the hard drives, the network switches, the API keys, the power supplies, the rack rails. I&rsquo;ve gotta configure the SMTP notifications, the DNS, the firewalls and the subnets. I open, update, and close issues, remediate leaked secrets, and write documentation."><meta itemprop="datePublished" content="2024-06-27T09:15:13-07:00" />
+<meta itemprop="dateModified" content="2024-06-27T09:15:13-07:00" />
+<meta itemprop="wordCount" content="2990"><meta itemprop="image" content="https://jafner.dev" />
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jafner.dev" /><meta name="twitter:title" content="Homelab Tour Series - Intro"/>
+<meta name="twitter:description" content="There are many like it&hellip; But this lab is built by me and for me. Just as I am the sole (or primary) beneficiary of its value, I am also the sole owner. I&rsquo;ve gotta pay for all the hard drives, the network switches, the API keys, the power supplies, the rack rails. I&rsquo;ve gotta configure the SMTP notifications, the DNS, the firewalls and the subnets. I open, update, and close issues, remediate leaked secrets, and write documentation."/>
+
+
+
+    <meta property="og:title" content="Homelab Tour Series - Intro" />
+<meta property="og:description" content="There are many like it&hellip; But this lab is built by me and for me. Just as I am the sole (or primary) beneficiary of its value, I am also the sole owner. I&rsquo;ve gotta pay for all the hard drives, the network switches, the API keys, the power supplies, the rack rails. I&rsquo;ve gotta configure the SMTP notifications, the DNS, the firewalls and the subnets. I open, update, and close issues, remediate leaked secrets, and write documentation." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jafner.dev/articles/homelab-tour-series-intro/" /><meta property="og:image" content="https://jafner.dev" /><meta property="article:section" content="articles" />
+<meta property="article:published_time" content="2024-06-27T09:15:13-07:00" />
+<meta property="article:modified_time" content="2024-06-27T09:15:13-07:00" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2024-06-27 09:15:13 -0700 PDT" />
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                $ ~/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/experience">Experience</a></li><li><a href="/articles">Articles</a></li><li><a href="/projects">Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://jafner.dev/articles/homelab-tour-series-intro/">Homelab Tour Series - Intro</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h1 id="there-are-many-like-it">There are many like it&hellip;</h1>
+<p>But this lab is built <em>by me and for me</em>. Just as I am the sole (or primary) beneficiary of its value, I am also the sole owner. I&rsquo;ve gotta pay for all the hard drives, the network switches, the API keys, the power supplies, the rack rails. I&rsquo;ve gotta configure the SMTP notifications, the <a href="https://xkcd.com/2259/">DNS</a>, the firewalls and the subnets. I open, update, and close <a href="https://gitea.jafner.tools/Jafner/homelab/issues">issues</a>, <a href="https://gitea.jafner.tools/Jafner/homelab/issues/128">remediate leaked secrets</a>, and write documentation.</p>
+<p>It&rsquo;s exhausting and exhilarating, frustrating and fulfilling, thankless and thankful. And I&rsquo;ve never written about it before, so here&rsquo;s me finally getting to do that.</p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#there-are-many-like-it">There are many like it&hellip;</a></li>
+    <li><a href="#core-services-its-about-data">Core Services: It&rsquo;s about data.</a>
+      <ul>
+        <li><a href="#bitwarden-the-best-password-manager">Bitwarden: The best password manager</a></li>
+        <li><a href="#gitea-control-the-source">Gitea: Control the source</a></li>
+        <li><a href="#nextcloud-corner-office-with-a-view">Nextcloud: Corner office with a view</a></li>
+        <li><a href="#manyfold-library-management-for-3d-models">Manyfold: Library management for 3D models</a></li>
+        <li><a href="#send-the-service-formerly-known-as-firefox-send">Send: The service formerly known as Firefox Send</a></li>
+        <li><a href="#zipline-clip-that">Zipline: Clip that</a></li>
+        <li><a href="#home-assistant-climate-control-for-the-critter-cove">Home Assistant: Climate control for the Critter Cove</a></li>
+        <li><a href="#vyos-my-router-is-a-text-file">VyOS: My router is a text file</a></li>
+        <li><a href="#truenas-how-i-sleep-at-night">TrueNAS: How I sleep at night</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-services-just-for-fun">Additional Services: Just for fun</a>
+      <ul>
+        <li><a href="#plex-i-wish-jellyfin-supported-sso">Plex: I wish Jellyfin supported SSO</a></li>
+        <li><a href="#5etools-if-dd-beyond-was-designed-by-software-engineers-instead-of-business-boys">5eTools: If D&amp;D Beyond was designed by software engineers instead of business boys</a></li>
+        <li><a href="#calibre-web-frontend-for-the-premiere-ebook-library-manager">Calibre-web: Frontend for the premiere ebook library manager</a></li>
+        <li><a href="#minecraft-geoff-itzg-bourne-is-a-blessing">Minecraft: Geoff &quot;itzg&quot; Bourne is a blessing</a></li>
+      </ul>
+    </li>
+    <li><a href="#admin-services-help-me-handle-all-this">Admin Services: Help me handle all this</a>
+      <ul>
+        <li><a href="#traefik-one-liner-tls-certified-subdomains">Traefik: One-liner* TLS-certified subdomains</a></li>
+        <li><a href="#keycloak-sign-in-to-jafnernet">Keycloak: Sign in to Jafner.net</a></li>
+        <li><a href="#wireguard-road-warrior-who-needs-to-reboot-the-minecraft-server">Wireguard: Road warrior who needs to reboot the Minecraft server</a></li>
+        <li><a href="#grafana-prometheus-and-uptime-kuma-observability-before-i-knew-what-that-meant">Grafana, Prometheus, and Uptime-kuma: Observability before I knew what that meant</a></li>
+      </ul>
+    </li>
+    <li><a href="#closing-thoughts-and-looking-forward">Closing thoughts, and looking forward</a></li>
+  </ul>
+</nav>
+<h1 id="core-services-its-about-data">Core Services: It&rsquo;s about data.</h1>
+<p><a href="https://www.npr.org/2021/04/09/986005820/after-data-breach-exposes-530-million-facebook-says-it-will-not-notify-users">For</a> <a href="https://www.forbes.com/sites/quickerbettertech/2021/07/05/a-linkedin-breach-exposes-92-of-usersand-other-small-business-tech-news/">myriad</a> <a href="https://www.theverge.com/2018/5/3/17316684/twitter-password-bug-security-flaw-exposed-change-now">reasons</a>, <a href="https://www.techtarget.com/whatis/feature/SolarWinds-hack-explained-Everything-you-need-to-know">I want</a> to <a href="https://www.bbc.com/news/technology-37232635">maintain</a> as much <a href="https://www.theverge.com/2022/12/22/23523322/lastpass-data-breach-cloud-encrypted-password-vault-hackers">control</a> of <a href="https://www.bbc.com/news/technology-58817658">my data</a> <a href="https://cloudsecurityalliance.org/blog/2022/03/13/an-analysis-of-the-2020-zoom-breach">as possible</a>. So I bought hard drives to store my data, and built computers around those hard drives to move my data to and fro. Lastly, I selected a few of the awesome projects others have built to tell the computers how to move my data.</p>
+<p><img src="../Apps.png" alt="Apps.png|App icons left-to-right: Bitwarden, Gitea, Nextcloud, Zipline, Send, Home Assistant, TrueNAS Scale, VyOS"></p>
+<p>Veteran self-hosters are familiar with many of these, but I want to talk about how each of these projects helps me claw back a little bit of control over my data.</p>
+<h2 id="bitwarden-the-best-password-manager">Bitwarden: The best password manager</h2>
+<p><em>Password management server.</em> | <a href="https://bitwarden.com/">Bitwarden</a> (<a href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a>) | <a href="https://bitwarden.jafner.tools"><code>bitwarden.jafner.tools</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/druid/config/vaultwarden/docker-compose.yml">Configuration</a></p>
+<p>I used to use LastPass.</p>
+<ul>
+<li><em>June 15, 2015</em> <a href="https://arstechnica.com/information-technology/2015/06/hack-of-cloud-based-lastpass-exposes-encrypted-master-passwords/">ArsTechnica: Hack of cloud-based LastPass exposes hashed master passwords</a></li>
+<li><em>December 28, 2021</em> <a href="https://www.bleepingcomputer.com/news/security/lastpass-users-warned-their-master-passwords-are-compromised/">BleepingComputer: LastPass users warned their master passwords are compromised</a></li>
+<li><em>November 30, 2022</em> <a href="https://www.bleepingcomputer.com/news/security/lastpass-says-hackers-accessed-customer-data-in-new-breach/">BleepingComputer: Lastpass says hackers accessed customer data in new breach</a></li>
+</ul>
+<p>Bitwarden has an <a href="https://bitwarden.com/blog/third-party-security-audit/">excellent security track record <em>so far</em></a>. But two factors (ha!) led to my choosing to self-host the community-built server instead of using Bitwarden&rsquo;s first-party cloud service:</p>
+<ol>
+<li>Subscription-gated features. 2FA/OTP authenticator, file attachments, security reports, and more are gated behind a subscription. I wholeheartedly endorse Bitwarden&rsquo;s decision, but that&rsquo;s just enough encouragement for me to host it myself.</li>
+<li>Bigger means more attractive target. The more people put their trust in Bitwarden, the more attractive a target it becomes. My personal server is unlikely to attract the attention of any individuals or organizations with the capability to penetrate <em>Bitwarden&rsquo;s</em> security. Of course, that only matters if I maintain good security posture everywhere else in the homelab. More on that another day.</li>
+</ol>
+<p>I&rsquo;ve had an excellent experience with Bitwarden so far. The user experience is fluid enough that I was able to onboard my family without issue.</p>
+<h2 id="gitea-control-the-source">Gitea: Control the source</h2>
+<p><em>Source control and basic CI/CD.</em> | <a href="https://about.gitea.com/">Gitea</a> | <a href="https://gitea.jafner.tools/"><code>gitea.jafner.tools</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/druid/config/gitea">Configuration</a></p>
+<p>GitHub is great. And I often question my decision to host my own Git and CI/CD server. I&rsquo;m not foolish enough to worry that any of my code would be included in any high-quality AI training datasets. Really, In</p>
+<p>I started out using a self-hosted GitLab instance, but its power and flexibility entail weight. And I got tired of the administrative toil caused by frequent and substantial updates to the entire platform.</p>
+<p>So I spun up Gitea, set up some <a href="https://docs.gitea.com/next/usage/actions/act-runner/">runners</a>, and got back to work.</p>
+<h2 id="nextcloud-corner-office-with-a-view">Nextcloud: Corner office with a view</h2>
+<p><em>Office services (files, photos, calendar, contacts).</em> | <a href="https://nextcloud.com/">Nextcloud</a> | <a href="https://nextcloud.jafner.net"><code>nextcloud.jafner.net</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/fighter/config/nextcloud">Configuration</a></p>
+<p>Google Drive is pretty cool and useful. I didn&rsquo;t care much for Docs and the other office products, but the storage, sharing, and sync functionality Drive provided was useful at school, at home, at work, and even for gaming. But it&rsquo;s hard-limited to 15 GB on the free version. And expanding that costs ~$5/TB mo., which is only $0.63 cheaper than buying an 8TB SAS HDD <em>every month</em>. So I decided <code>drives &gt; Drive</code>.</p>
+<p>And it feels luxurious. Knowing that all my phone&rsquo;s photos and videos are stored on my hardware and won&rsquo;t every touch Google&rsquo;s servers. I can take a full-fat video without worrying that 600 MB will eat up a bunch of my quota. Nextcloud also offers a wide swathe of plugins for other functionalities via their <a href="https://apps.nextcloud.com/">App store</a>.</p>
+<h2 id="manyfold-library-management-for-3d-models">Manyfold: Library management for 3D models</h2>
+<p><em>3D Model library manager.</em> | <a href="https://github.com/manyfold3d/manyfold">Manyfold</a> | <a href="https://3d.jafner.net/"><code>3d.jafner.net</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/fighter/config/vandam">Configuration</a></p>
+<p>Over the years I&rsquo;ve spent a <em>lot</em> of money on 3D models for fantasy RPG miniatures. My collection of models is measured in <em>terrabytes</em>. And I have a deep appreciation for the creative work of the artists who make these models. But artists, I think, are not naturally inclined toward robust file organization practices. So my &ldquo;collection&rdquo; is really more like a pile.</p>
+<p>But Manyfold (formerly &ldquo;VanDAM&rdquo;) has helped enormously with the process of making that collection usable. Search and preview are the two biggest features. Automated tagging and other organizational features also help a lot.</p>
+<p>I still have a lot of manual work to do though&hellip;</p>
+<h2 id="send-the-service-formerly-known-as-firefox-send">Send: The service formerly known as Firefox Send</h2>
+<p><em>Quick and secure file share. <a href="https://xkcd.com/949/">XKCD#949</a>.</em> | <a href="https://github.com/timvisee/send">Send</a> | <a href="https://send.jafner.net/"><code>send.jafner.net</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/fighter/config/send">Configuration</a></p>
+<p>The XKCD comic above articulates and experience I&rsquo;ve had enough times. Nextcloud helps a lot when I want to share a file with someone else. But Send covers the cases where a friend wants to send me a file, or a friend is asking me how to send a file to another friend. I can just send them the link. I don&rsquo;t even need to explain how it works, it&rsquo;s built intuitively enough. And I get some peace of mind knowing that the files are encrypted end-to-end.</p>
+<h2 id="zipline-clip-that">Zipline: Clip that</h2>
+<p><em>Media sharing server (upload screenshots, recordings).</em> | <a href="https://github.com/diced/zipline">Zipline</a> | <a href="https://zipline.jafner.net"><code>zipline.jafner.net</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/fighter/config/zipline">Configuration</a></p>
+<p>This service exists exclusively to let me right click the video file of a gaming highlight, hit &ldquo;Share&rdquo;, and send the link to my friends as seamlessly as possible <em>while supporting high-fidelity content</em>. I record my gameplay at 1440p 120 FPS. Check it out:</p>
+<ul>
+<li><a href="https://zipline.jafner.net/u/%5B2024-06-19%5D%20Neato.mp4">Venture 5k</a>.</li>
+<li><a href="https://zipline.jafner.net/u/%5B2024-06-19%5D%20Scrim%20(1:55:22-1:56:02).mp4">Venture scrim highlight</a></li>
+<li><a href="https://zipline.jafner.net/u/ImYtUX.mp4">My greatest widowmaker highlight</a></li>
+</ul>
+<p>That last one&rsquo;s not even 120 fps, I just love to show it. To be honest though, if Youtube supported scripted/automated uploads I would just use that. But it&rsquo;s probably for the best that they don&rsquo;t.</p>
+<h2 id="home-assistant-climate-control-for-the-critter-cove">Home Assistant: Climate control for the Critter Cove</h2>
+<p><em>Home automation and monitoring.</em> | <a href="https://www.home-assistant.io/">Home Assistant</a> | <a href="https://homeassistant.jafner.net"><code>homeassistant.jafner.net</code></a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/fighter/config/home-assistant">Configuration</a></p>
+<p>I think a lot of folks start their self-hosting journey with Home Assistant. It&rsquo;s a fantastic tool, and it keeps some of your most important data from being reliant on <a href="https://gizmodo.com/the-never-ending-death-of-smart-home-gadgets-1842456125">often-flakey vendors</a> who have little interest in supporting their product unless you&rsquo;re giving them money for it.</p>
+<p>My partner and I have four reptiles, several insects, and a hamster whose climates I simply cannot be bothered to adjust manually every hour of the waking day. So I installed Home Assistant, hooked up warm-side and cool-side <a href="https://us.govee.com/products/govee-bluetooth-hygrometer-thermometer-h5075?Style=1*H5075">Govee hygrometer/thermometers</a>, put the heating lamps on <a href="https://www.kasasmart.com/us/products/smart-plugs/product-kp405">TP Link smart dimming plugs</a>, and wrote some automation to keep everybody in their happy temperature range.</p>
+<h2 id="vyos-my-router-is-a-text-file">VyOS: My router is a text file</h2>
+<p><em>Configuration-as-code router OS.</em> | <a href="https://vyos.io/">VyOS</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/wizard/config">Configuration</a></p>
+<p>One day I thought to myself, &ldquo;do I know how a router works?&rdquo; The answer was no, so I built one (hardware and configuration) from scratch between the hours of 10 PM and 4 AM to ensure none of my housemates would be disturbed by the requisite internet outage. I deployed the seat-of-my-pants router configuration to &ldquo;production&rdquo; overnight and handled about one day&rsquo;s worth of post-deployment support before everything was seamlessly stable.</p>
+<p>The hardest part was crimping and terminating every single ethernet cable. At least 20 connections. Woof.</p>
+<h2 id="truenas-how-i-sleep-at-night">TrueNAS: How I sleep at night</h2>
+<p><em>Data safety provider.</em> | <a href="https://www.truenas.com/truenas-scale/">TrueNAS</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/barbarian">Configuration: Main</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/monk">Configuration: Backup</a></p>
+<p>Underpinning every single one of the above services in one way or another is my TrueNAS deployment. It is composed of two hosts: a primary and a backup. Every day, each system takes a <a href="https://www.truenas.com/docs/scale/24.04/scaleuireference/dataprotection/periodicsnapshottasksscreensscale/">differential snapshot</a> of each dataset, and runs a short <a href="https://www.truenas.com/docs/scale/24.04/scaleuireference/dataprotection/smarttestsscreensscale/">S.M.A.R.T. test</a> on each disk. Nightly, the most important datasets on the primary are backed up to the backup as an <a href="https://www.truenas.com/docs/scale/24.04/scaleuireference/dataprotection/rsynctasksscreensscale/">Rsync task</a>. And every week it runs a <a href="https://www.truenas.com/docs/scale/24.04/scaleuireference/dataprotection/scrubtasksscreensscale/">scrub task</a> to ensure the stored data still checksums correctly.</p>
+<p>And of course, it runs an SMB server and iSCSI target to facilitate clients and applications interacting with their own little data puddle.</p>
+<h1 id="additional-services-just-for-fun">Additional Services: Just for fun</h1>
+<p>In addition to the important services above, I run a handful of services just for off time.</p>
+<h2 id="plex-i-wish-jellyfin-supported-sso">Plex: I wish Jellyfin supported SSO</h2>
+<p>The superior media server, Plex provides a free (as in beer) solution with a beautiful frontend and comprehensive metadata scraping. Plex has set a standard for serving movies and TV that no alternative service has been able to match. It is the unwelcome incumbent no one has mustered the resources to dethrone. Over the last dthe usernames-emails-passwords) in 2022.</p>
+<p>But I digress&hellip;</p>
+<p><a href="https://jellyfin.org/">Jellyfin</a> is the leading opposition. But Jellyfin&rsquo;s <a href="https://features.jellyfin.org/?view=most-wanted">most wanted feature requests</a> paints a sorry picture of the state of things. Features I consider critical, such as <a href="https://features.jellyfin.org/posts/26/add-support-for-two-factor-authentication-2fa">2FA</a>, <a href="https://features.jellyfin.org/posts/284/convert-option-similar-to-plexs-optimise">transcoding</a>, <a href="https://features.jellyfin.org/posts/218/support-offline-mode-on-android-mobile">offline access for mobile clients</a>, <a href="https://features.jellyfin.org/posts/576/watchlist-like-netflix">to-watch lists</a>, <a href="https://features.jellyfin.org/posts/633/watched-history">watch history</a>, <a href="https://features.jellyfin.org/posts/230/support-for-oidc">OIDC support</a> / <a href="https://features.jellyfin.org/posts/271/oauth-support">OAuth support</a>, <a href="https://features.jellyfin.org/posts/540/list-all-collections-that-a-movie-belong-to-in-movie-details">list collections to which a movie belongs</a>, and more I&rsquo;m sure if I just keep scrolling. Maybe a few more years.</p>
+<h2 id="5etools-if-dd-beyond-was-designed-by-software-engineers-instead-of-business-boys">5eTools: If D&amp;D Beyond was designed by software engineers instead of business boys</h2>
+<p>5eTools is an insanely high quality, data-driven repository for each and every piece of content ever made for D&amp;D 5th edition. Fortunately, they have a <em>blocklist</em> feature to restrict the visible content to only the stuff I&rsquo;ve bought the books for.</p>
+<h2 id="calibre-web-frontend-for-the-premiere-ebook-library-manager">Calibre-web: Frontend for the premiere ebook library manager</h2>
+<p><a href="https://github.com/janeczku/calibre-web">Calibre-web</a> | <a href="https://calibre-ebook.com/">Calibre</a> | <a href="https://rpg.calibre.jafner.net/"><code>rpg.calibre.jafner.net</code></a> | <a href="https://sff.calibre.jafner.net/"><code>sff.calibre.jafner.net</code></a></p>
+<p>Sometimes, rarely, I read a book. Much more freqeuently, I want to check a section from a book. Calibre(-web) affords me access to my entire library of books and ebooks from a web browser. Frustratingly, the owner of the project has decided not to implement generic OAuth2/OIDC support. <a href="https://github.com/janeczku/calibre-web/pull/2211#issuecomment-1182460156">But open-source, uh, finds a way.</a></p>
+<h2 id="minecraft-geoff-itzg-bourne-is-a-blessing">Minecraft: Geoff &quot;itzg&quot; Bourne is a blessing</h2>
+<p>Hosting game servers for my friends got me into this stuff, and has been a throughline of my life for over 15 years.
+And Minecraft has been a consistent presence in that domain. Today that task is easier and more polished than ever.</p>
+<p>Two Docker images, <a href="https://github.com/itzg/mc-router">itzg/mc-router</a> and <a href="https://github.com/itzg/docker-minecraft-server">itzg/docker-minecraft-server</a> have handled every Minecraft server I&rsquo;ve hosted since late 2020. The configuration is simple and declarative. The best part is the reverse proxying. In 2015 I would head to <a href="https://www.whatsmyip.org/">WhatsMyIP.org</a>, copy the number at the top, and send it to my friends. Then they would manually type it into the connect dialog (copy-paste can be challenging), type something wrong, get a connection error, and call me on Google Hangouts. We&rsquo;d, eventually get it figured out, but now I can just say &ldquo;It&rsquo;s <code>e9.jafner.net</code>&rdquo; and that seems to stick a lot better.</p>
+<h1 id="admin-services-help-me-handle-all-this">Admin Services: Help me handle all this</h1>
+<p>Nothing since has given me the same high as seeing the green padlock next to <code>jafner.net</code> for the first time. After years of typing IPs, memorizing ports, skipping &ldquo;Your connection is not private&rdquo; pages, and answering &ldquo;What&rsquo;s the IP again?&rdquo;, that green padlock was more gratifying than the $60k piece of paper framed on my wall.</p>
+<p>Below are the tools and services I use to make everything else work <em>properly</em>.</p>
+<h2 id="traefik-one-liner-tls-certified-subdomains">Traefik: One-liner* TLS-certified subdomains</h2>
+<p><em>Docker-integrated reverse proxy.</em> | <a href="https://github.com/traefik/traefik">Traefik</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/traefik/docker-compose.yml">Configuration: Fighter</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/druid/config/traefik/docker-compose.yml">Configuration: Druid</a></p>
+<p>*Okay, it&rsquo;s not literally one line. It&rsquo;s five.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">web</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">traefik.http.routers.myservice.rule=Host(`myservice.jafner.net`)</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">traefik.http.routers.myservice.tls.certresolver=lets-encrypt</span>
+</span></span></code></pre></div><p>Lines #1-2 configure a service to attach to the Docker network Traefik is monitoring.
+Lines #3-5 tell Traefik what (sub)domain(s) that service should serve, and tell it to provision a fresh LetsEncrypt certificate.</p>
+<ul>
+<li>No wildcard certs.</li>
+<li>No manual cert requests.</li>
+<li>No services are exposed by default.</li>
+</ul>
+<p>In addition to handling that core functionality, it also offers &ldquo;middlewares&rdquo; to handle additional functionality, like <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/traefik/config/config_addons.yaml#L49">forwardauth</a>, which helps me protect services that don&rsquo;t support <a href="https://oauth.net/2/">OAuth2</a>/<a href="https://www.microsoft.com/en-us/security/business/security-101/what-is-openid-connect-oidc">OIDC</a>, such as <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/wireguard/docker-compose.yml#L26">WG-Easy</a>.</p>
+<p>I have never been tempted to look for alternatives. I struggle to imagine how a reverse proxy could be better for my use-case without overstepping its role.</p>
+<p>Oh, it would be nice if it handled <a href="https://gitea.jafner.tools/Jafner/homelab/issues/71">dispatching to other Traefik instances</a> in a more intuitive/simple way. I haven&rsquo;t been able to get that working.</p>
+<h2 id="keycloak-sign-in-to-jafnernet">Keycloak: Sign in to Jafner.net</h2>
+<p><em>IAM provider</em> | <a href="https://www.keycloak.org/">Keycloak</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/keycloak">Configuration</a></p>
+<p>It&rsquo;s easy to allow your password manager&rsquo;s &ldquo;local accounts&rdquo; folder slowly grow to dozens or hundreds of credentials as services are trialed, decomissioned, reinstalled, and troubleshooted (troubleshot?). Further, supporting basic account information updates for <em>users that aren&rsquo;t me</em> is non-trivial. How many SMTP submission API keys would I need to support each of my services sending their own &ldquo;Recover your account password&rdquo; emails?</p>
+<p>Keycloak provides much-needed consolidation of account management. Just like a <em>real website</em>, anyone who wants to <em>do something</em> with one of my services (e.g. open a <a href="https://gitea.jafner.tools/issues">Gitea issue</a>) can walk through the familiar account creation process. Give a first and last name, email, username, and password. You&rsquo;ll get a verification email in your inbox from <code>&quot;Keycloak Admin&quot; &lt;noreply@jafner.net&gt;</code>. Click the link, go back to the page you were trying to access, and <em>boom</em>, you can do stuff. Stuff I don&rsquo;t want you to be able to do is still gated behind manual account approval. For example, you can&rsquo;t just create an account and start uploading files to Nextcloud. Oh, and it supports 2FA.</p>
+<p>One day I&rsquo;ll be able to manage <em>every single Jafner.net application&rsquo;s</em> ID and access via Keycloak, but a few have held out. But that&rsquo;s an entire article itself.
+Until then I&rsquo;ll be happy that <em>most</em> applications and services either support native OAuth2 or OIDC, or are single-user and can be simply gated behind Traefik forwardauth.</p>
+<h2 id="wireguard-road-warrior-who-needs-to-reboot-the-minecraft-server">Wireguard: Road warrior who needs to reboot the Minecraft server</h2>
+<p><em>Quick, easy, fast VPN plus quick, easy, fast web UI</em> | <a href="https://www.wireguard.com/">Wireguard</a> | <a href="https://github.com/wg-easy/wg-easy">WG-Easy</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/wireguard/docker-compose.yml">Configuration: Fighter</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/druid/config/wireguard/docker-compose.yml">Configuration: Druid</a></p>
+<p>Every homelabber is faced with the question of how to administrate their server when they aren&rsquo;t sitting (or standing) at their desk at home. It&rsquo;s a great question; you&rsquo;re dipping your toes into <a href="https://csrc.nist.gov/glossary/term/security_posture">security posture</a>, and the constant tension between security and ease-of-access. Using SSH keys instead of passwords is a no-brainer, but do you also configure <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-multi-factor-authentication-for-ssh-on-ubuntu-20-04">SSH 2FA</a>? Most folks don&rsquo;t allow SSH traffic directly through the router, but <em>how</em> do you build and configure your VPN for SSHing into your server?</p>
+<p>The steps I take to secure my SSH hosts are detailed <a href="https://gitea.jafner.tools/Jafner/homelab/src/branch/main/docs/Security.md#securing-ssh">here</a>, but I&rsquo;ll be digging into that more in another article. In brief:</p>
+<ul>
+<li>SSH keys are matched to a user and host. E.g. <code>Joey_Desktop</code>, or <code>Joey_Phone</code>.</li>
+<li>Authorized keys are added only as needed. There is no template. Nothing is included by default.</li>
+<li>Each SSH server is configured to require pubkey authentication and disable password authentication.</li>
+<li>Each SSH server is configured to require 2FA via the <code>google-authenticator</code> PAM module.</li>
+<li>The router is not configured to port-forward any SSH traffic. Accessing SSH requires VPNing.</li>
+</ul>
+<p>Lots of iteration led to this configuration. I&rsquo;m sure I&rsquo;ll write it out at some point.</p>
+<h2 id="grafana-prometheus-and-uptime-kuma-observability-before-i-knew-what-that-meant">Grafana, Prometheus, and Uptime-kuma: Observability before I knew what that meant</h2>
+<p><a href="https://grafana.com/">Grafana</a> | <a href="https://prometheus.io/">Prometheus</a> | <a href="https://github.com/louislam/uptime-kuma">Uptime-kuma</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/monitoring">Configuration: Monitoring Fighter</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/fighter/config/uptime-kuma/docker-compose.yml">Configuration: Uptime-kuma Fighter</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/druid/config/monitoring/docker-compose.yml">Configuration: Monitoring Druid</a> | <a href="https://gitea.jafner.tools/Jafner/homelab/src/commit/94e0aed892812adcfd94bd84e588eb474dd7abda/druid/config/uptime-kuma/docker-compose.yml">Configuration: Uptime-kuma Druid</a></p>
+<p>Before I knew what &ldquo;Site Reliability Engineering&rdquo; was, I had a Grafana instance (using ye olde Telegraf and InfluxDB) showing me pretty graphs. I was exposed to the timeseries database paradigm, and how to query it in a useful way. And later down the line I integrated <a href="https://grafana.com/docs/loki/latest/">Loki</a> to pull all my Docker container logs into my one pretty visualization platform. I built dashboards for monitoring host health, troubleshooting specific issues, statuspages; I built alert policies to send notifications via Discord and email; and I exported data from practically every service. And then things settled down, and that data-analytics muscle began to atrophy. My environment was stable. So I changed tact.</p>
+<p>Uptime-kuma is simple, beautiful, and does all the things I need. HTTP and ping-based uptime monitoring, outage notifications (via email and Discord), and <a href="https://uptime.jafner.tools/status/net">status pages</a>.</p>
+<p>All this lets me sleep easy knowing that if any of my services go down, I&rsquo;ll get a Discord notification. When someone asks me &ldquo;Hey, is &lt;service&gt; down?&rdquo; I can answer confidently, &ldquo;Nope, works on my system.&rdquo;</p>
+<h1 id="closing-thoughts-and-looking-forward">Closing thoughts, and looking forward</h1>
+<p>I&rsquo;ve not written much about my lab before. It&rsquo;s been a challenge to resist rambling about all the challenges and iterations I walked through to get the lab to the state it&rsquo;s in today. And even just in the process of writing this the last couple days I&rsquo;ve come to realize a few low-hanging fruit improvements I could make.</p>
+<p>While I&rsquo;m proud of all the things I&rsquo;ve tought myself in this process, I could not have done it without hundreds of thousands of hours of freely-contributed projects, Q&amp;As, documentation, tutorials, and every other kind of support.</p>
+<p>In addition to the hundreds of individual project founders, maintainers, and contributers, I am deeply appreciative of the creators from whom inspiration flowed freely. I&rsquo;m sure there&rsquo;s room here somewhere for an <a href="https://dungeonsdragons.fandom.com/wiki/Appendix_N"><code>Appendix N: Inspirational Reading</code></a> article.</p>
+<hr>
+<p>Thanks for reading. If you want to contact me to chat about homelabbing, D&amp;D, tech writing, gaming, A/V streaming tech, or because you think I can help you solve a problem, email me at <a href="mailto:joey@jafner.net"><code>joey@jafner.net</code></a> or use any of <a href="https://jafner.dev/" title="Homepage">my other socials</a>.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2023</span>
+            <span><a href="https://jafner.dev"></a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span><a href="https://jafner.dev/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span><span>Theme made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.205d491810c28f95aa953fae884e1c27abe13fdf93ec63b882d0036b248d4a6282eb2d134e4e7225c6ad6e86db87b08488a361ca4a7383d01fcff43f3d57b9c3.js" integrity="sha512-IF1JGBDCj5WqlT&#43;uiE4cJ6vhP9&#43;T7GO4gtADaySNSmKC6y0TTk5yJcatbobbh7CEiKNhykpzg9Afz/Q/PVe5ww=="></script>
+
+
+
+
+    </body>
+</html>

@@ -21,20 +21,23 @@ enableRobotsTXT = true
 enableGitInfo   = false
 enableEmoji     = true
 enableMissingTranslationPlaceholders = false
-disableRSS     = false
-disableSitemap = false
+disableRSS     = true
+disableSitemap = true
 disable404     = false
 disableHugoGeneratorInject = false
 
 [permalinks]
-  posts = "/:title/"
+  [permalinks.section]
+    articles = "/articles/"
+    projects = "/projects/"
+    pages = "/"
 
 [blackfriday]
   hrefTargetBlank = true
 
 [taxonomies]
-  tag      = "tags"
-  category = "categories"
+  tag        = "tags"
+  category   = "categories"
   series     = "series"
 
 [params]
@@ -50,7 +53,7 @@ disableHugoGeneratorInject = false
   enableThemeToggle = false
   enableSharingButtons = true
   enableGlobalLanguageMenu = false
-  customCSS = []
+  customCSS = ["/css/toc-no-underline.css"]
   customJS  = []
   justifyContent = false  # Set "text-align: justify" to .post-content.
   [params.author]
@@ -130,3 +133,9 @@ disableHugoGeneratorInject = false
     name       = "Projects"
     url        = "projects"
     weight     = 40
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 1
