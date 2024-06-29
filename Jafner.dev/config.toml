@@ -21,6 +21,7 @@ enableRobotsTXT = true
 enableGitInfo   = false
 enableEmoji     = true
 enableMissingTranslationPlaceholders = false
+enableThemeToggle = true
 disableRSS     = true
 disableSitemap = false
 disable404     = false
