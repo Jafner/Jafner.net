@@ -37,14 +37,10 @@ Assign the text to use for the article image to the `LOGOTEXT` variable. E.g. `L
 
 ```bash
 LOGOTEXT="Jafner.dev"
-wget -qO- "http://fonts.googleapis.com/css?family=Inter" |\
-grep -o "http://.*.ttf" |\
-xargs curl -o Inter.ttf &&\
-convert -size 1200x627 xc:#1b1c1d -pointsize 128 \
-    -font @Inter.ttf -fill #A9A9B3 -draw "text 50,360 '>$ ~/$LOGOTEXT'"\
-    -font "Noto-Sans-Mono-Regular" -fill #FE5186 -gravity East -draw "text 50,0 '█'"\
-    $LOGOTEXT.logo.png &&\
-rm Inter.ttf
+convert -size 1200x627 xc:#1b1c1d -pointsize 110 -font "Noto-Sans-Mono-Regular" \
+   -fill #A9A9B3 -draw "text 50,360 '>$ ~/$LOGOTEXT'"\
+   -fill #FE5186 -gravity East -draw "text 50,0 '█'"\
+   $LOGOTEXT.logo.png
 ```
 
 And that will generate an image like:
