@@ -141,3 +141,7 @@ disableHugoGeneratorInject = false
     endLevel = 3
     ordered = false
     startLevel = 2
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
