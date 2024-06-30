@@ -1,2 +1,3 @@
 <meta property="article:author" content="{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ range .Site.Author }}{{ . }} {{ end }}{{ end }}">
+<meta property="og:image" content="{{ if .Page.Params.ogimage }}{{ .Page.Params.ogimage }}{{ else }}img/logo.png{{ end }}">
 <meta name="og:site_name" content="Jafner.dev"/>
