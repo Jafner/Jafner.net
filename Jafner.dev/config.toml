@@ -32,8 +32,7 @@ disableHugoGeneratorInject = false
     homelab = "/homelab/"
     projects = "/projects/"
   [permalinks.page]
-    about-me = "/about-me"
-    experience = "/experience"
+    pages = "/:slug"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -49,7 +48,7 @@ disableHugoGeneratorInject = false
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04"
   description = "Personal site for Joey Hafner"
-  keywords = ""
+  keywords = "docker homelab self-hosted bitwarden nextcloud developer git github hugo"
   images = [""]
   homeSubtitle = "Personal portfolio website for Joey Hafner"
   disableReadOtherPosts = false
@@ -64,16 +63,14 @@ disableHugoGeneratorInject = false
 
   [params.footer]
     trademark = 2023
-    rss = true
+    rss = false
     copyright = true
-    author = true
+    author = false
 
     topText = [
       "Source on <a href=\"https://github.com/Jafner/jafner.dev\">GitHub</a>"
     ]
     bottomText = [
-      "Powered by <a href=\"http://gohugo.io\">Hugo</a>",
-      "Theme made with &#10084; by <a href=\"https://github.com/rhazdon\">Djordje Atlialp</a>"
     ]
 
   [params.favicon.color]
@@ -82,8 +79,8 @@ disableHugoGeneratorInject = false
     theme = "#1b1c1d"
 
   [params.logo]
-    logoMark     = ">"
-    logoText     = "$ ~/"
+    logoMark     = ">$ ~"
+    logoText     = ""
     logoHomeLink = "/"
 
   [[params.social]]
@@ -115,7 +112,7 @@ disableHugoGeneratorInject = false
     weight    = 1
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
   [languages.en.params]
-    subtitle  = "Hello Friend NG Theme"
+    subtitle  = ""
 
 [menu]
   [[menu.main]]
