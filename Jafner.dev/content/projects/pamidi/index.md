@@ -1,9 +1,10 @@
 +++
-title = 'Pamidi - Control PulseAudio with a MIDI device'
+title = 'Pamidi: Control PulseAudio with a MIDI device'
 description = 'In this article I review the script I wrote in 2021 to manipulate PulseAudio with a MIDI controller.'
 date = 2024-05-28T17:58:19-07:00
 draft = false
 featured_image = "cover.png"
+slug = 'pamidi'
 +++
 
 {{< image src="pamidi.jpg" >}}
@@ -28,7 +29,7 @@ Two utilities are critical to the function of the script: [`xdotool`](https://gi
 Let's take a look at [the code](https://github.com/Jafner/pamidi/blob/main/pamidi.sh). The source is annotated with comments, but we'll just look at the code here.
 
 ### Initialize the Service
-```sh
+```bash
 initialize(){
 	echo "Initializing"
 	echo "Checking for xdotool"
@@ -74,7 +75,7 @@ initialize(){
 Cool. Now how does it actually work?
 
 ### Change Volume: Mackie vs. Standard
-```sh
+```bash
 change_volume_mackie() {
 	if (( $2 >= 64 )); then
 		vol_change="-$(expr $2 - 64)"
@@ -120,7 +121,7 @@ We follow the same process as in change volume to get the stream ID from the PID
 - Mute off: `pactl set-sink-input-mute $stream_id off`
 
 ### Get Stream Index from PID
-```sh
+```bash
 get_stream_index_from_pid(){
 	all_sink_inputs="$(pacmd list-sink-inputs)"
 	all_sink_inputs="$(paste \
@@ -139,7 +140,7 @@ get_stream_index_from_pid(){
 This function does all the gymnastics we repeat in every other function. We just don't use this function anywhere in the code.
 
 ### Get Binary from PID
-```sh
+```bash
 get_binary_from_pid(){
 	output="$(paste -d"\t" \
 		<(printf '%s' "$output" | grep 'application.process.id' | cut -d'"' -f 2) \
@@ -156,7 +157,7 @@ get_binary_from_pid(){
 This function is not used anywhere. It requires that `$output` contain the raw response from `pactl list-sink-inputs`. It creates an array of tuples in the form `<pid> <application binary>`, and then prints the name of the application binary matching the PID passed to the function as the first positional argument. 
 
 ### Bind Application
-```sh
+```bash
 bind_application() {
 	window_pid="$(xdotool getactivewindow getwindowpid)"
 	window_name="$(xdotool getactivewindow getwindowname)"
@@ -180,7 +181,7 @@ This function is called when we press down on one of the knobs. It binds the cur
 2. Assign the window PID to that knob, and send an OS notification to let the user know what happened.
 
 ### Main: Mackie and Standard
-```sh
+```bash
 main_mackie(){
 	aseqdump -p "X-TOUCH MINI" | \
 	while IFS=" ," read src ev1 ev2 ch label1 data1 label2 data2 rest; do
