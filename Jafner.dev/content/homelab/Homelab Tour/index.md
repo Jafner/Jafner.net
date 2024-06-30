@@ -2,13 +2,15 @@
 title = 'Homelab Tour'
 description = "In this article I walk through the services I run, what problems they solve for me, and the lessons I've learned."
 date = 2024-06-27T09:15:13-07:00
-draft = false
-toc = false
 aliases = ["/articles/homelab-tour-series-intro", "/homelab-tour"]
 author = "Joey Hafner"
+ogimage = 'Homelab.tour.logo.png'
+slug = 'tour'
+draft = false
 +++
 
 ## There are many like it...
+
 But this lab is built *by me and for me*. Just as I am the sole (or primary) beneficiary of its value, I am also the sole owner. I've gotta pay for all the hard drives, the network switches, the API keys, the power supplies, the rack rails. I've gotta configure the SMTP notifications, the [DNS](https://xkcd.com/2259/), the firewalls and the subnets. I open, update, and close [issues](https://gitea.jafner.tools/Jafner/homelab/issues), [remediate leaked secrets](https://gitea.jafner.tools/Jafner/homelab/issues/128), and write documentation. 
 
 It's exhausting and exhilarating, frustrating and fulfilling, thankless and thankful. And I've never written about it before, so here's me finally getting to do that.
