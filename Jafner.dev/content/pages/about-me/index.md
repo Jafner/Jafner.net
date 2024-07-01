@@ -4,6 +4,7 @@ description = ' '
 date = 2024-05-28T17:56:25-07:00
 draft = false
 slug = "about-me"
+ogimage = "about-me.logo.png"
 +++
 
 My name is Joey Hafner. I’m a computing engineer located in Tacoma, WA.

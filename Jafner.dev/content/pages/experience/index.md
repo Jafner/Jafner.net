@@ -3,6 +3,7 @@ title = 'Experience'
 description = ' '
 date = 2024-05-28T17:56:47-07:00
 draft = false
+ogimage = "experience.logo.png"
 slug = "experience"
 +++
 

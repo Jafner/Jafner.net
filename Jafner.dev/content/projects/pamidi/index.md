@@ -3,7 +3,7 @@ title = 'Pamidi: Control PulseAudio with a MIDI device'
 description = 'In this article I review the script I wrote in 2021 to manipulate PulseAudio with a MIDI controller.'
 date = 2024-05-28T17:58:19-07:00
 draft = false
-featured_image = "cover.png"
+ogimage = "pamidi.logo.png"
 slug = 'pamidi'
 +++
 
