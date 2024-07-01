@@ -1,6 +1,6 @@
 +++
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
-description = ""
+description = " "
 date = {{ .Date }}
 aliases = []
 author = "Joey Hafner"
