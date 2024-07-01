@@ -31,5 +31,5 @@
 
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="article:author" content="Joey Hafner">
-<meta property="og:image" content="{{ if .Page.Params.ogimage }}{{ .Page.Params.ogimage }}{{ else }}/img/Jafner.dev.logo.png{{ end }}">
+<meta property="og:image" content="{{ if .Page.Params.ogimage }}{{ .Permalink }}{{ .Page.Params.ogimage }}{{ else }}{{ .Site.BaseURL }}img/Jafner.dev.logo.png{{ end }}">
 <meta name="og:site_name" content="Jafner.dev"/>
