@@ -137,3 +137,19 @@ After this, it's probably a good idea to reboot from scratch.
 https://unix.stackexchange.com/questions/195116/mount-iscsi-drive-at-boot-system-halts
 https://github.com/f1linux/iscsi-automount/blob/master/config-iscsi-storage.sh
 https://github.com/f1linux/iscsi-automount/blob/master/config-iscsi-storage-mounts.sh
+
+# Disabling all iSCSI units for debugging
+During an extended outage of barbarian, we learned that, as configured, fighter will not boot while its iSCSI target is inaccessible. To resolve, we disabled the following systemd units:
+
+```
+iscsi.service
+mnt-nas-iscsi.automount
+mnt-nas-iscsi.mount
+connect-iscsi.service
+barbarian-wait-online.service
+iscsid.service
+```
+
+Oneliners below:
+- Disable: `for unit in iscsi.service mnt-nas-iscsi.automount mnt-nas-iscsi.mount connect-iscsi.service barbarian-wait-online.service iscsid.service; do systemctl disable $unit; done`
+- Enable: `for unit in iscsi.service mnt-nas-iscsi.automount mnt-nas-iscsi.mount connect-iscsi.service barbarian-wait-online.service iscsid.service; do systemctl enable $unit; done`
