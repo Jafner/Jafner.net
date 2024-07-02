@@ -48,12 +48,12 @@ http:
       service: "figment-night@file"
       tls:
         certResolver: "lets-encrypt"
-    tasmota-55:
-      rule: "Host(`55.tasmota.jafner.net`)"
+    president-day:
+      rule: "Host(`day.president.tasmota.jafner.net`)"
       entryPoints: "websecure"
       middlewares:
         - "lan-only@file"
-      service: "tasmota-55@file"
+      service: "president-day@file"
       tls:
         certResolver: "lets-encrypt"
     cowboy-day:
@@ -86,7 +86,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.54/"
-    tasmota-55:
+    president-day:
       loadBalancer:
         servers:
           - url: "http://192.168.1.55/"
