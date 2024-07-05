@@ -37,7 +37,7 @@ Assign the text to use for the article image to the `LOGOTEXT` variable. E.g. `L
 
 ```bash
 LOGOTEXT="Jafner.dev"
-convert -size 1200x627 xc:#1b1c1d -pointsize 110 -font "Noto-Sans-Mono-Regular" \
+convert -size 1200x630 xc:#1b1c1d -pointsize 110 -font "Noto-Sans-Mono-Regular" \
    -fill #A9A9B3 -draw "text 50,360 '>$ ~/$LOGOTEXT'"\
    -fill #FE5186 -gravity East -draw "text 50,0 '█'"\
    $LOGOTEXT.logo.png
