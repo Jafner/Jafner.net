@@ -1,3 +1,4 @@
+3dcoat.com
 airsoftgi.com
 amazon.com
 assurant.com
@@ -12,9 +13,11 @@ darkmatterx.com
 diodedynamics.com
 dirtfish.com
 dispeldice.com
+dndbeyond.com
 drop.com
 dscryb.com
 e.affirm.com
+ebay.com
 e.blizzard.com
 ecom1.logitech.com
 em2.mint.intuit.com
@@ -22,13 +25,18 @@ email.barenecessities.com
 email.bestbuy.com
 email.health.amazon.com
 email.meta.com
+emails.cobbtuning.com
+emails.macys.com
 emails.snapfish.com
 email.tidal.com
 email.tp-link.com
 email.venmo.com
 em.bevmo.com
+eml.nordstrom.com
+eml.nordstromrack.com
 eml.walgreens.com
 em.officedepot.com
+e.savvymoney.com
 escapefromtarkov.com
 e.sonesta.com
 e.taxact.com
@@ -42,12 +50,15 @@ gretchenrubin.com
 groupon.com
 hackerrankmail.com
 heroforge.com
+iconscout.com
 indiegala.com
 info.drop.com
 intruder.io
 itch.io
+launchbox-app.com
 list.rockauto.com
 loversstores.com
+mail1.creditkarma.com
 mail9.creditkarma.com
 mail.adobe.com
 mail.clickup.com
@@ -90,6 +101,7 @@ ssdnodes.com
 synergisticit.com
 talent.icims.com
 tapcocu.org
+tenga.co.jp
 terracruxgames.com
 themeltingpotclubfondue-email.com
 traccar.org
@@ -98,6 +110,7 @@ uber.com
 usenet.farm
 uw.edu
 vr-wave.store
+webull.com
 woot.com
 wooting.io
 yotpo.com
