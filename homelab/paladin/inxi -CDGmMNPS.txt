@@ -1,0 +1,46 @@
+System:
+  Host: paladin Kernel: 6.6.32-production+truenas arch: x86_64 bits: 64
+  Console: pty pts/0 Distro: Debian GNU/Linux 12 (bookworm)
+Machine:
+  Type: Server Mobo: ASUSTeK model: Z10PA-U8 Series v: Rev 1.xx serial: <superuser required>
+    UEFI-[Legacy]: American Megatrends v: 0601 date: 06/02/2015
+Memory:
+  System RAM: total: 128 GiB available: 125.7 GiB used: 3.1 GiB (2.5%)
+  Message: For most reliable report, use superuser + dmidecode.
+  Report: arrays: 2 capacity: N/A installed: N/A slots: 8 active: N/A type: N/A
+    eec: Multi-bit ECC
+  Array-1: capacity: N/A installed: N/A slots: 4 modules: 0 EC: Multi-bit ECC
+  Device-1: DIMM_A1 type: no module installed
+  Device-2: DIMM_A2 type: no module installed
+  Device-3: DIMM_B1 type: no module installed
+  Device-4: DIMM_B2 type: no module installed
+  Array-2: capacity: N/A installed: N/A slots: 4 modules: 0 EC: Multi-bit ECC
+  Device-1: DIMM_C1 type: no module installed
+  Device-2: DIMM_C2 type: no module installed
+  Device-3: DIMM_D1 type: no module installed
+  Device-4: DIMM_D2 type: no module installed
+CPU:
+  Info: 12-core model: Intel Xeon E5-2680 v3 bits: 64 type: MT MCP cache: L2: 3 MiB
+  Speed (MHz): avg: 1645 min/max: 1200/3300 cores: 1: 2400 2: 2100 3: 1200 4: 1200 5: 2100
+    6: 1200 7: 1200 8: 1200 9: 1900 10: 3300 11: 1200 12: 2200 13: 2100 14: 1200 15: 1200 16: 1200
+    17: 2100 18: 1200 19: 1200 20: 1200 21: 1200 22: 1200 23: 1200 24: 3300
+Graphics:
+  Device-1: ASPEED Graphics Family driver: ast v: kernel
+  Display: server: No display server data found. Headless machine? tty: 154x70
+    resolution: 1600x900
+  API: N/A Message: No API data available in console. Headless machine?
+Network:
+  Device-1: Intel I210 Gigabit Network driver: igb
+  Device-2: Intel I210 Gigabit Network driver: igb
+Drives:
+  Local Storage: total: raw: 149.06 GiB usable: 73.19 GiB used: 2.41 GiB (3.3%)
+  ID-1: /dev/sda vendor: Intel model: SSDSC2CT080A4 size: 74.53 GiB
+  ID-2: /dev/sdb vendor: Intel model: SSDSC2CT080A4 size: 74.53 GiB
+Partition:
+  ID-1: / size: 53.95 GiB used: 164.1 MiB (0.3%) fs: zfs logical: boot-pool/ROOT/24.04.2
+  ID-2: /home size: 53.79 GiB used: 768 KiB (0.0%) fs: zfs logical: boot-pool/ROOT/24.04.2/home
+  ID-3: /opt size: 53.87 GiB used: 74.2 MiB (0.1%) fs: zfs logical: boot-pool/ROOT/24.04.2/opt
+  ID-4: /usr size: 55.92 GiB used: 2.12 GiB (3.8%) fs: zfs logical: boot-pool/ROOT/24.04.2/usr
+  ID-5: /var size: 53.82 GiB used: 31 MiB (0.1%) fs: zfs logical: boot-pool/ROOT/24.04.2/var
+  ID-6: /var/log size: 53.79 GiB used: 1.6 MiB (0.0%) fs: zfs
+    logical: boot-pool/ROOT/24.04.2/var/log

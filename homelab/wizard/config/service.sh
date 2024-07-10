@@ -15,6 +15,8 @@ set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-map
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping joey-nas mac-address '40:8d:5c:52:41:89'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping joey-nas2 ip-address '192.168.1.11'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping joey-nas2 mac-address '90:2b:34:37:ce:ea'
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping paladin ip-address '192.168.1.12'
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping paladin mac-address '30:5a:3a:76:80:8f'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-toes-day ip-address '192.168.1.50'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-toes-day mac-address '3C:61:05:F6:44:1E'
 set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping tasmota-lab-rack ip-address '192.168.1.51'
