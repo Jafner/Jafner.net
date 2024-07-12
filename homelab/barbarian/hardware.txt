@@ -1,0 +1,30 @@
+# ./inxi -CDGmMNPS --dmidecode
+System:    Host: barbarian Kernel: 6.6.32-production+truenas x86_64 bits: 64 Console: tty pts/0 
+           Distro: Debian GNU/Linux 12 (bookworm) 
+Machine:   Type: Desktop Mobo: Gigabyte model: X99-SLI-CF v: x.x serial: N/A UEFI: American Megatrends v: F24a rev: 5.6 
+           date: 01/11/2018 
+Memory:    RAM: total: 62.65 GiB used: 2.48 GiB (4.0%) 
+           Array-1: capacity: 512 GiB note: check slots: 8 EC: None 
+           Device-1: DIMM_A1 size: 8 GiB speed: 2133 MT/s 
+           Device-2: DIMM_A2 size: 8 GiB speed: 2133 MT/s 
+           Device-3: DIMM_B1 size: 8 GiB speed: 2133 MT/s 
+           Device-4: DIMM_B2 size: 8 GiB speed: 2133 MT/s 
+           Device-5: DIMM_C1 size: 8 GiB speed: 2133 MT/s 
+           Device-6: DIMM_C2 size: 8 GiB speed: 2133 MT/s 
+           Device-7: DIMM_D1 size: 8 GiB speed: 2133 MT/s 
+           Device-8: DIMM_D2 size: 8 GiB speed: 2133 MT/s 
+CPU:       Info: 6-Core model: Intel Core i7-5930K bits: 64 type: MT MCP cache: L2: 15 MiB 
+           Speed: 1200 MHz min/max: 1200/3700 MHz Core speeds (MHz): 1: 1200 2: 1200 3: 1200 4: 1200 5: 1200 6: 1200 7: 2191 
+           8: 1200 9: 1200 10: 1200 11: 1200 12: 1200 
+Graphics:  Device-1: NVIDIA GK208B [GeForce GT 710] driver: N/A 
+           Display: server: No display server data found. Headless machine? tty: 154x70 
+           Message: Unable to show advanced data. Required tool glxinfo missing. 
+Network:   Device-1: Intel Ethernet I218-V driver: e1000e 
+Drives:    Local Storage: total: raw: 74.53 GiB usable: 146.26 GiB used: 3.95 GiB (2.7%) 
+           ID-1: /dev/sda vendor: Intel model: SSDSCKGW080A4 size: 74.53 GiB 
+Partition: ID-1: / size: 30.12 GiB used: 163.8 MiB (0.5%) fs: zfs logical: freenas-boot/ROOT/24.04.2 
+           ID-2: /home size: 29.96 GiB used: 128 KiB (0.0%) fs: zfs logical: freenas-boot/ROOT/24.04.2/home 
+           ID-3: /opt size: 30.03 GiB used: 72.1 MiB (0.2%) fs: zfs logical: freenas-boot/ROOT/24.04.2/opt 
+           ID-4: /usr size: 31.85 GiB used: 1.89 GiB (5.9%) fs: zfs logical: freenas-boot/ROOT/24.04.2/usr 
+           ID-5: /var size: 29.98 GiB used: 19.9 MiB (0.1%) fs: zfs logical: freenas-boot/ROOT/24.04.2/var 
+           ID-6: /var/log size: 30.04 GiB used: 85.9 MiB (0.3%) fs: zfs logical: freenas-boot/ROOT/24.04.2/var/log
