@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+    calibre:
+        image: linuxserver/calibre:version-v5.6.0
+        container_name: calibre
+        environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=Americas/Los_Angeles
+        volumes:
+          - /mnt/nas/Ebooks:/data
+
+        ports:
+          - 8080:8080
+          - 8081:8081
+        restart: unless-stopped

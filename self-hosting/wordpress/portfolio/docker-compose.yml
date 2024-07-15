@@ -1,0 +1,42 @@
+version: '3.1'
+
+services:
+        portfolio:
+                image: wordpress
+                container_name: wordpress-portfolio
+                restart: always
+                environment:
+                        WORDPRESS_DB_HOST: portfolio-db
+                        WORDPRESS_DB_USER: wordpress
+                        WORDPRESS_DB_PASSWORD: wordpress
+                        WORDPRESS_DB_NAME: wordpressdb
+                volumes:
+                        - /home/joey/docker/wordpress/portfolio/html:/var/www/html
+                networks:
+                        - web
+                        - wordpress
+                labels:
+                        - "traefik.enable=true"
+                        - "traefik.frontend.rule=Host:portfolio.jafner.net"
+                        - "traefik.port=80"
+                        - "traefik.docker.network=web"
+
+        portfolio-db:
+                image: mysql:5.7
+                container_name: wordpress-portfolio-db
+                restart: always
+                networks:
+                        - web
+                        - wordpress
+                environment:
+                        MYSQL_DATABASE: wordpressdb
+                        MYSQL_USER: wordpress
+                        MYSQL_PASSWORD: wordpress
+                        MYSQL_RANDOM_ROOT_PASSWORD: '1'
+                volumes:
+                        - /home/joey/docker/wordpress/portfolio/db:/var/lib/mysql
+
+networks:
+        web:
+                external: true
+        wordpress:

@@ -1,0 +1,38 @@
+logLevel = "DEBUG"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+  [entryPoints.https.tls]
+  [entryPoints.api]
+    address = ":8080"
+    [entryPoints.api.auth]
+      [entryPoints.api.auth.basic]
+        users = [
+          "jafner:$apr1$Sujrsw7k$mb9VpbkhFkw9RYCa15PDh."
+        ]
+
+[api]
+entryPoint = "api"
+dashboard = true
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "jafner.net"
+watch = true
+exposedbydefault = false
+
+[acme]
+email = "jafner425@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+OnHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
