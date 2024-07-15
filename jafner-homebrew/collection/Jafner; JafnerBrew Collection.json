@@ -1,0 +1,2284 @@
+{
+	"_meta": {
+		"sources": [
+			{
+				"json": "JB",
+				"abbreviation": "JBrew",
+				"full": "JafnerBrew",
+				"authors": [
+					"Joey"
+				],
+				"convertedBy": [
+					"Jafner"
+				],
+				"version": "1.0",
+				"targetSchema": "1.0.0"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Banker's Coinpurse",
+			"wondrous": true,
+			"weight": 1,
+			"tier": "Minor",
+			"rarity": "Uncommon",
+			"source": "JB",
+			"entries": [
+				"This small leather bag is enchanted with a special extradimensional space. The bag can hold up to 25,000 gp worth of coins. It weighs 1 pound.",
+				"When a coin is placed into the bag, it is converted to its gold piece value. As an action, you can speak the number and type of coins you would like to withdraw and the bag will convert the requested coins from the value stored within it."
+			]
+		},
+		{
+			"name": "Pouch of the High Mage",
+			"wondrous": true,
+			"weight": 2,
+			"tier": "Minor",
+			"rarity": "Very rare",
+			"source": "JB",
+			"entries": [
+				"This small, watertight leather belt pouch functions as a component pouch, and is enchanted with a special extradimensional space. The bag can hold up to 25,000 gp worth of gems. It weighs 2 pounds.",
+				"When a coin or gem is placed into the bag, it is converted to its gold piece value. As an action, you can speak the number and type of gems you would like to withdraw and the bag will convert the requested gems from the value stored within it."
+			]
+		},
+		{
+			"name": "Ring of Prestidigitation",
+			"type": "RG",
+			"weight": 1,
+			"tier": "minor",
+			"rarity": "Common",
+			"source": "JB",
+			"entries": [
+				"While wearing this ring, you can cast the {@spell prestidigitation} spell at will."
+			]
+		},
+		{
+			"name": "Orb of Ill Portent",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Very rare",
+			"reqAttune": "by a wizard",
+			"source": "JB",
+			"entries": [
+				"The swirling purple and green mists within this glass orb reveal hints of future misfortune.",
+				"When you finish a long rest, roll two {@dice d10}s and record the numbers rolled. You can replace any attack roll, saving throw, or ability check made by a creature that you can see with one of these foretelling rolls. You must choose to do so before the roll, and you can replace a roll in this way only once per turn.",
+				"Each foretelling roll can be used only once. When you finish a long rest, you lose any unused foretelling roles."
+			]
+		},
+		{
+			"name": "Blinkstone Amulet",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Rare",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"A polished onyx sits in a simple silver frame on this amulet.",
+				"This amulet has 3 charges. When a creature would hit you with a weapon attack while you are wearing this amulet, you can expend a charge use your reaction to cause the attack to miss. When you do, you can also teleport to a point you can see within 10 feet of you.",
+				"The amulet regains 1d3 charges daily at dawn."
+			]
+		},
+		{
+			"name": "Ethereal Gemstone",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Uncommon",
+			"reqAttune": true,
+			"source": "JB",
+			"entries": [
+				"This pale blue gemstone seems to fade in and out of existance in your hand, oscilating between material and the ethereal.",
+				"While you are holding the *Ethereal Gemstone*, you can use a bonus action and crush the stone with your fists. When you do, your unarmed strikes become magical and you gain a +1 bonus to attack and damage rolls for your unarmed strikes.",
+				"After 1 minute, the effect ends and the stone reforms in your hand, its power exhausted until the next dawn."
+			]
+		},
+		{
+			"name": "Potion of Undeath",
+			"type": "P",
+			"rarity": "Rare",
+			"source": "JB",
+			"entries": [
+				"When you drink this potion, make a DC 15 Constitution saving throw. On a success, you take {@dice 4d8} necrotic damage and gain 1 point of exhaustion. If the damage dealt on a success reduces you to zero hit points, you instead suffer the effects of a failure. On a failure, you fall to zero hit points and cannot receive any magical healing for 8 hours. If you die within 8 hours of drinking this potion, you become a zombie."
+			]
+		},
+		{
+			"name": "Scepter of Elemental Affinity",
+			"type": "RD",
+			"weight": 2,
+			"tier": "Major",
+			"rarity": "Uncommon",
+			"source": "JB",
+			"reqAttune": true,
+			"entries": [
+				"This scepter is enchanted with unstable elemental energy. As an action, you may choose a point or creature within 60 feet of you and speak the activation word. When you activate the rod, make a DC 13 Arcana (Intelligence) ability check. On a success, choose an element and effect from the tables below. On a failure, roll 1d4 and a 1d6 to randomly determine the elemental type and effect.",
+				{
+					"type": "table",
+					"caption": "Element Type",
+					"colLabels": [
+						"{@dice d4}",
+						"Damage Type"
+					],
+					"colStyles": [
+						"col-1",
+						"col-11"
+					],
+					"rows": [
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 1
+								}
+							},
+							"Fire"
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 2
+								}
+							},
+							"Cold"
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 3
+								}
+							},
+							"Lightning"
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 4
+								}
+							},
+							"Thunder"
+						]
+					]
+				},
+				{
+					"type": "table",
+					"caption": "Effect Type",
+					"colLabels": [
+						"{@dice d6}",
+						"Effect"
+					],
+					"colStyles": [
+						"col-1",
+						"col-11"
+					],
+					"rows": [
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 1
+								}
+							},
+							"The elemental energy implodes. You take {@dice 1d10} force damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 2
+								}
+							},
+							"A bolt of elemental energy flies towards the target. Make a ranged spell attack. If the attack hits, deal {@dice 1d10} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 3
+								}
+							},
+							"Three rays of elemental energy fly toward the target. Make three ranged spell attacks. Each attack that hits deals {@dice 1d4+1} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 4
+								}
+							},
+							"A 30 ft. line of elemental energy flies out from the scepter. Each creature in the area of effect must succeed a DC 13 Dexterity save or take {@dice 1d8} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 5
+								}
+							},
+							"A 15 ft. cone of elemental energy erupts from the scepter. Each creature in the area of effect must succeed a DC 13 Dexterity save or take {@dice 1d8} elemental damage."
+						],
+						[
+							{
+								"type": "cell",
+								"roll": {
+									"exact": 6
+								}
+							},
+							"A burst of elemental energy explodes out from you. Each creature within a 10 ft. radius of you must succeed a DC 13 Dexterity saving throw or take {@dice 1d8} elemental damage."
+						]
+					]
+				}
+			]
+		},
+		{
+			"name": "Ring of Heat",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Uncommon",
+			"reqAttune": false,
+			"source": "JB",
+			"entries": [
+				"This golden ring glows red hot at all times, and emanates as much heat as a lit torch. It cannot be put out or turned off. If placed in water, it can boil one gallon of water per 5 minutes.",
+				"A creature who touches the ring takes 1 fire damage per round, which is reduced to 0 if the creature has resistance to fire damage."
+			]
+		},
+		{
+			"name": "Jar of Brain Brine",
+			"wondrous": true,
+			"tier": "Major",
+			"rarity": "Rare",
+			"reqAttune": false,
+			"source": "JB",
+			"entries": [
+				"This large jar contains the eye of a mindwitness and some of the sickly green fluid from an ilithid elder brain pool.",
+				"You can place up to 1 lb. of food into the jar. If you allow the food to pickle for 1 day, it will be imbued with some psionic power. Counterintuitively, pickling with this jar causes the food to become rotten and inedible 1 day after it is removed from the brine. When you eat food that has been pickled in this way, you gain the following benefits, which last for 8 hours:",
+				{
+					"type": "list",
+					"items": [
+						"You can speak telepathically to any creature you can see within 60 feet of you. Your telepathic utterances are in a language you know, and the creature understands you only if it knows that language. Your communication doesn't give the creature the ability to respond to you telepathically.",
+						"You have darkvision out to a range of 60 feet. If you already have darkvision, you become able to distinguish color instead of shades of gray.",
+						"You can cast the {@spell command} spell with a DC of 15. Once you use this feature, you cannot use it again."
+					]
+				}
+
+			]
+		},
+		{
+			"name": "Mercurial Greatsword",
+			"source": "JB",
+			"type": "M",
+			"rarity": "none",
+			"weight": 8,
+			"value": 25000,
+			"weaponCategory": "martial",
+			"property": [
+				"H",
+				"2H"
+			],
+			"dmg1": "2d6",
+			"dmgType": "S",
+			"sword": true,
+			"weapon": true,
+			"entries": [
+				"This black steel greatsword has a channel inside the blade which is filled with liquid mercury. This shifting weight inside the blade makes it unwieldy, but can amplify the force of its strikes.",
+				"When you make a melee weapon attack with this sword, you automatically miss on a d20 roll of 9 or lower. If you score a critical hit with a melee weapon attack with this sword, roll the weapon's damage dice four times instead of twice."
+			]
+		}
+	],
+	"feat": [
+		{
+			"name": "Overwhelming Presence",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"cha": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the presence of the most affluent of leaders, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Charisma saving throws. If you are already proficient in them, you add double your proficiency bonus to Charisma saving throws you make.",
+						"While you are conscious, up to five friendly creatures within 30 feet of you who can see or hear you and who can understand you can gain a bonus to one Intelligence, Wisdom, or Charisma saving throw they make equal to your Charisma modifier. Once they’ve done so, they can’t do so again until they finish a short or long rest.",
+						"As an action, you can attempt to distract up to five creatures you can see within 30 feet of you. Each creature must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Charisma modifier). Any creature immune to being charmed is unaffected. If you or your companions are fighting a creature, it has advantage on the saving throw. On a failed save, for the next minute, a creature has disadvantage on Wisdom (Perception) checks made to perceive any creature other than you until the effect ends or until the target can no longer see or hear you. The feature ends early if you are incapacitated."
+					]
+				}
+			]
+		},
+		{
+			"name": "Exalted Awareness",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"wis": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the wisdom associated with the most renowned masters of the Force, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Wisdom saving throws. If you are already proficient in them, you add double your proficiency bonus to Wisdom saving throws you make.",
+						"Creatures within 60 feet of you have disadvantage on Dexterity (Stealth) checks made to hide from you.",
+						"As an action, you can sense the presence of illusions and other effects designed to deceive the senses within 30 feet of you, provided that you aren’t blinded or deafened. You sense that an effect is trying to trick you, but you gain no insight into what is hidden or its true nature. Once you’ve used this feature, you must complete a short or long rest before you can use it again."
+					]
+				}
+			]
+		},
+		{
+			"name": "Cunning Intellect",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"int": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the cunning of the most prolific scholars, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Intelligence saving throws. If you are already proficient in them, you add double your proficiency bonus to Intelligence saving throws you make.",
+						"Choose a tool and a skill with which you are proficient. You gain a bonus to ability checks you make with that tool and skill equal to your proficiency bonus. This bonus stacks with any proficiency bonuses you already have for that tool and skill.",
+						"Whenever you make an ability check that uses your Intelligence, you can add half your proficiency bonus (rounded down) if it doesn’t already include your proficiency bonus. Additionally, if you roll lower than half your level (rounded down) on an Intelligence check, you can instead use your level for the d20 roll."
+					]
+				}
+			]
+		},
+		{
+			"name": "Unnatural Resilience",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"con": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the fortitude often attributed to gods, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Constitution saving throws. If you are already proficient in them, you add double your proficiency bonus to saving throws you make.",
+						"Healing effects that would restore hit points to you can’t restore an amount less than half your level + your Constitution modifier. If this amount would exceed that maximum amount of hit points that effect could restore, you instead take that effect’s maximum.",
+						"You can add your Constitution modifier to death saving throws you make."
+					]
+				}
+			]
+		},
+		{
+			"name": "Blinding Agility",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"dex": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the reflexes one who can see things before they happen, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Dexterity saving throws. If you are already proficient in them, you add double your proficiency bonus to Dexterity saving throws you make.",
+						"Weapons that lack the two-handed, heavy, or special properties are considered to have the finesse property for you.",
+						"Opportunity attacks made against you have disadvantage."
+					]
+				}
+			]
+		},
+		{
+			"name": "Titan's Power",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"str": 20
+						}
+					],
+					"level": {
+						"level": 12
+					}
+				}
+			],
+			"entries": [
+				"You have the strength that legends tell of, granting the following benefits:",
+				{
+					"type": "list",
+					"items": [
+						"You gain proficiency in Strength saving throws. If you are already proficient in them, you add double your proficiency bonus to Strength saving throws you make.",
+						"You ignore the two-handed property of weapons with which you are proficient.",
+						"When you miss with a melee weapon attack, the creature takes damage equal to your Strength modifier. This damage is of the same type as the weapon’s damage."
+					]
+				}
+			]
+		},
+		{
+			"name": "Leadership",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"cha": 15
+						}
+					],
+					"level": {
+						"level": 6
+					}
+				}
+			],
+			"entries": [
+				"You've put your heroic gravity to use, attracting followers of varying commitment and ability, but all regarding you as a hero. When you take this feat, you gain a leadership score and recruit a sidekick and a number of followers as described in the leadership score section below.",
+				{
+					"type": "entries",
+					"name": "Leadership Score",
+					"entries": [
+						"When you take this feat, you gain a Leadership Score, which is calculated as follows:",
+						{
+							"type": "abilityGeneric",
+							"name": "Leadership Score",
+							"text": "Your character level + your Charisma modifier",
+							"attributes": [
+								"cha"
+							]
+						}
+					]
+				},
+				"See the Leadership table for what sort of sidekick and how many followers you can recruit.",
+				{
+					"type": "table",
+					"caption": "Leadership table",
+					"colLabels": [
+						"Leadership Score",
+						"Common Followers",
+						"Expert Followers"
+					],
+					"colStyles": [
+						"col-4",
+						"col-4",
+						"col-4"
+					],
+					"rows": [
+						[
+							"8",
+							"8",
+							"1"
+						],
+						[
+							"9",
+							"9",
+							"1"
+						],
+						[
+							"10",
+							"10",
+							"2"
+						],
+						[
+							"11",
+							"11",
+							"2"
+						],
+						[
+							"12",
+							"12",
+							"2"
+						],
+						[
+							"13",
+							"13",
+							"2"
+						],
+						[
+							"14",
+							"14",
+							"2"
+						],
+						[
+							"15",
+							"15",
+							"3"
+						],
+						[
+							"16",
+							"16",
+							"3"
+						],
+						[
+							"17",
+							"17",
+							"3"
+						],
+						[
+							"18",
+							"18",
+							"3"
+						],
+						[
+							"19",
+							"19",
+							"3"
+						],
+						[
+							"20",
+							"20",
+							"4"
+						],
+						[
+							"21",
+							"21",
+							"4"
+						],
+						[
+							"22",
+							"22",
+							"4"
+						],
+						[
+							"23",
+							"23",
+							"4"
+						],
+						[
+							"24",
+							"24",
+							"4"
+						],
+						[
+							"25",
+							"25",
+							"5"
+						]
+					]
+				},
+				"Your leadership score applies when you first take this feat to recruit your starting followers. For information about recruiting more followers, refer to the recruitment section below.",
+				{
+					"type": "entries",
+					"name": "Sidekick",
+					"entries": [
+						"When you take this feat, you can designate a loyal follower as your sidekick. Refer to the Sidekicks rules on page 142 of Tasha's Cauldron of Everything. Your sidekick is a loyal ally who joins the party and will fight with you in battle. The DM will either control your sidekick as an NPC or allow you to control your sidekick. Your sidekick acts on their own initiative. The DM will either tell you which type of sidekick you recruit, or let you choose one."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Common Followers",
+					"entries": [
+						"Common followers are villagers, townsfolk, and other citizens who've witnessed your heroism and decided to spread news of your deeds, as well as assist you with things within their purview. Common followers all use the {@creature commoner} stat block. They will not follow you into battle, but they will regard you as a friend and assist you as they can within town."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Expert Followers",
+					"entries": [
+						"Expert followers are special followers who possess particular skills which may be of use to you. They are willing to fight with you, but will not sacrifice their lives for you. Expert followers are chosen by your DM from the following list: {@creature Acolyte}, {@creature Guard}, {@creature Noble}, {@creature Scout}, or {@creature Spy}, each detailed in the Monster Manual. The DM can allow you to choose your own expert followers."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Recruitment",
+					"entries": [
+						"You can have a maximum number of common and expert followers equal to double your leadership score. To recruit more followers, you must first complete a heroic deed. The details of the heroic deed are determined by your DM, but it should take place as part of an adventure. Upon completion of the heroic deed, you can recruit one expert follower of your choice and a number of common followers equal to your Charisma modifier."
+					]
+				}
+			]
+		},
+		{
+			"name": "Take a Breather",
+			"source": "JB",
+			"prerequisite": [
+				{
+					"ability": [
+						{
+							"con": 13
+						}
+					]
+				}
+			],
+			"entries": [
+				"On your turn when you are below half your hit point maximum, you can use an action to expend any number of your hit dice. For each hit die you roll, you regain a number of hit points equal to the roll + your Constitution modifier.",
+				"Once you use this feature, you must finish a short or long rest before you can use it again."
+			]
+		}
+	],
+	"variantrule": [
+		{
+			"name": "Revised Death and Dying",
+			"source": "JB",
+			"ruleType": "V",
+			"entries": [
+				"The following text replaces the text of the {@book \"Dropping to 0 Hit Points\"|PHB|9|Damage and Healing|5} section of the PHB.",
+				{
+					"type": "entries",
+					"name": "Revised Death and Dying",
+					"entries": [
+						"When you are reduced to 0 or fewer hit points, you either die outright or fall unconscious, as explained in the following sections.",
+						{
+							"type": "entries",
+							"name": "Instant Death",
+							"entries": [
+								"If you are reduced to a number of negative hit points greater than half your hit point maximum, you die.",
+								"Additionally, massive damage can kill you instantly When you take damage equal to or greater than your hit point maximum, roll a Constitution saving throw with a DC equal to half the damage taken or 20, whichever is lower. On a failed save, you die. On a success, you take the damage as normal.",
+								"For example, a cleric with a maximum of 12 hit points currently has 4 hit points. If she takes 10 damage, she would fall unconscious at -6 hit points, but she would still be alive. If she instead takes 11 damage, she would immediately die, as her hit points would be reduced to -7, a negative number greater than half her hit point maximum."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Falling Unconscious",
+							"entries": [
+								"If damage reduces you to 0 or fewer hit points and fails to kill you, you fall unconscious (see the appendix). This unconsciousness ends if your hit points are restored to 1 or more."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Bleeding Out and Death Saving Throws",
+							"entries": [
+								"When you start your turn with 0 or fewer hit points, you must succeed a special DC 10 Constitution saving throw, called a death saving throw, or take 1 damage. If your saving throw result is less than 5, you instead take 2 damage. If your result is greater than 20, you become stabilized and no longer need to make death saving throws."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Stabilizing a Creature",
+							"entries": [
+								"The best way to save a creature with 0 or fewer hit points is to heal it. If healing is unavailable, the creature can at least be stabilized so that it isn't killed by bleeding out.",
+								"You can use your action to administer first aid to an unconscious creature and attempt to stabilize it, which requires a successful DC 10 Wisdom (Medicine) check.",
+								"A stable creature doesn't make death saving throws, even though it has 0 or fewer hit points, but it does remain unconscious. If the creature takes any damage it stops being stable and must start making death saving throws again. A stable creature that isn't healed regains 1 hit point per hour until it becomes conscious."
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Monsters and Death",
+							"entries": [
+								"Most DMs have a monster die the instant it drops to 0 hit points, rather than having it fall unconscious and make death saving throws.",
+								"Mighty villains and special nonplayer characters are common exceptions; the DM might have them fall unconscious and follow the same rules as player characters."
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Revised Inspiration",
+			"source": "JB",
+			"ruleType": "V",
+			"entries": [
+				"The following text replaces the text of the {@book \"Inspiration\"|PHB|4|Inspiration} section of the PHB.",
+				{
+					"type": "entries",
+					"name": "Revised Inspiration",
+					"entries": [
+						"Inspiration is a rule the Dungeon Master can use to reward you for playing your character in a way that's true to his or her personality traits, ideal, bond, and flaw. By using inspiration, you can draw on your personality trait of compassion for the downtrodden to give you an edge in negotiating with the Beggar Prince. Or inspiration can let you call on your bond to the defense of your home village to push past the effect of a spell that has been laid on you.",
+						{
+							"type": "entries",
+							"name": "Gaining Inspiration",
+							"entries": [
+								"You can gain inspiration by doing any of the following things:",
+								{
+									"type": "list",
+									"items": [
+										"Recap the previous session or sessions from your notes.",
+										"Take notes on the events of the session.",
+										"Roleplay your character in a compelling moment."
+									]
+								},
+								"You can only earn inspiration once per game session. You either have inspiration or you don't—you can't stockpile multiple \"inspirations\" for later use."
+
+							]
+						},
+						{
+							"type": "entries",
+							"name": "Using Inspiration",
+							"entries": [
+								"Whenever you make an attack roll, an ability check, or a saving throw, you can expend your inspiration to roll an additional d20. You can choose to expend your inspiration after you roll the die, but before the outcome is determined. You choose which of the d20s is used for the attack roll, ability check, or saving throw."
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Revised Falling",
+			"source": "JB",
+			"ruleType": "V",
+			"entries": [
+				"The following text replaces the text of the {@book \"Falling\"|PHB|8|Falling} section of the PHB.",
+				{
+					"type": "entries",
+					"name": "Falling",
+					"entries": [
+						"When you fall from a great height, you instantly descend up to 500 feet. Every turn after the first, you descend up to 1,000 feet at the end of your turn. During your turn, any distance you fall up to 500 feet does not count against your total movement that turn.",
+						"At the end of a fall, a creature takes 1d6 bludgeoning damage for every 10 feet it fell, to a maximum of 150d6. The creature lands prone.",
+						"A creature with proficiency in the Acrobatics skill can attempt a Dexterity (Acrobatics) check to halve the damage and not fall prone. The DC is equal to 10 + the number of d6 rolled."
+					]
+				}
+			]
+		},
+		{
+			"name": "Exhausted Spellcasting",
+			"source": "JB",
+			"ruleType": "O",
+			"entries": [
+				"Sometimes a spellcaster needs desperately to cast a spell to save themselves, their party, or even the world, but they're out of spell slots. In such situations, a character can attempt to cast a spell that they have prepared or memorized without any spell slots.",
+				"To cast a spell without expending a spell slot, a character's maximum hit points are reduced by a number equal to double the level of the spell until they finish a long rest.",
+				"Additionally, the character must make a Constitution saving throw. The DC equals 10 + the spell's level. On a failure, the character suffers a number of points of exhaustion equal to the spell's level. On a success, the character suffers half as many levels of exhaustion.",
+				"The character's hit point maximum is reduced and the points of exhaustion are suffered after the spell is cast."
+			]
+		},
+		{
+			"name": "Spellcasting as a Service",
+			"source": "JB",
+			"ruleType": "O",
+			"entries": [
+				"Spellcasting is not a common service, and there are no standardized rates within the world. However, for the sake of easing the DM's burden of invention, this equation has been pre-determined based on the rules in the Tyranny of Dragons DM's Guide and the Storm King's Thunder DM's Guide.",
+				{
+					"type": "abilityGeneric",
+					"name": "Cost (in gp)",
+					"text": "spellcaster's level * spell level squared + (consumed materials cost * 2) + non-consumed materials cost"
+				},
+				"At the DM's discretion, this service fee can include expenditure of multiple spell slots for the desired spell.",
+				"For example, an 18th-level druid would charge 288 gp to cast {@spell Polymorph}, but may be willing to cast it three times for that cost, which could save the party money if they had access to so high level a caster."
+			]
+		},
+		{
+			"name": "Last Stand",
+			"source": "JB",
+			"ruleType": "O",
+			"entries": [
+				"When you are at death's doorstep and the world needs saving, you can sacrifice yourself to make one final action before death.",
+				"When an attack would reduce you to 0 hit points, you can take a turn. After your turn ends, you suffer 4 points of exhaustion and take the damage from the original attack."
+			]
+		},
+		{
+			"name": "Downtime Activity: Making A Spell Permanent",
+			"source": "JB",
+			"ruleType": "O",
+			"entries": [
+				"With time and patience, a spellcaster can imbue a creature with a permanent magical effect.",
+				{
+					"type": "entries",
+					"name": "Resources",
+					"entries": [
+						"Making a spell permanent takes an amount of time and money related to the level of the spell the character wants to make permenent, as shown in the Spell Permanency Costs table. In addition, the character must have proficiency with the Arcana skill and must provide any material components required for the casting of the spell. Moreover, the character must have the spell prepared, or it must be among the character's known spells, in order to make imbue a creature with that spell.",
+						"For a spell to be eligible for permanency, it must meet the following requirements.",
+						{
+							"type": "list",
+							"items": [
+								"Spell level no lower than 1st and no higher than 5th.",
+								"Spell duration of 1 hour or more.",
+								"Spell target of a single object, a willing creature, or an unwilling creature who fails the required saving throw on a roll of 20."
+							]
+						},
+						"An object or creature cannot be imbued with more than one permanent spell at a time.",
+						"A spell made permanent is considered to have a duration of permanent until dispelled.",
+						{
+							"type": "table",
+							"caption": "Spell Permanency Costs",
+							"colLabels": [
+								"Spell Level",
+								"Time",
+								"Cost"
+							],
+							"colStyles": [
+								"col-4 text-center",
+								"col-4",
+								"col-4 text-right"
+							],
+							"rows": [
+								[
+									"1st",
+									"4 days",
+									"100 gp"
+								],
+								[
+									"2nd",
+									"12 days",
+									"1,000 gp"
+								],
+								[
+									"3rd",
+									"4 workweeks",
+									"2,000 gp"
+								],
+								[
+									"4th",
+									"8 workweeks",
+									"10,000 gp"
+								],
+								[
+									"5th",
+									"16 workweeks",
+									"20,000 gp"
+								]
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"monster": [
+		{
+			"name": "Rockwyrm",
+			"size": "L",
+			"type": "dragon",
+			"source": "JB",
+			"alignment": [
+				"N"
+			],
+			"ac": [
+				{
+					"ac": 16,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "8d12 + 24",
+				"average": 76
+			},
+			"speed": {
+				"walk": 30,
+				"fly": 50,
+				"canHover": false
+			},
+			"str": 20,
+			"dex": 14,
+			"con": 17,
+			"int": 12,
+			"wis": 14,
+			"cha": 11,
+			"passive": 15,
+			"cr": "8",
+			"senses": [
+				"darkvision 120 ft."
+			],
+			"senseTags": [
+				"SD"
+			],
+			"languages": [
+				"Common",
+				"Draconic"
+			],
+			"languageTags": [
+				"C",
+				"DR"
+			],
+			"save": {
+				"str": "+8",
+				"wis": "+5"
+			},
+			"skill": {
+				"deception": "+3",
+				"survival": "+5",
+				"perception": "+5"
+			},
+			"resist": [
+				{
+					"resist": [
+						"bludgeoning",
+						"piercing",
+						"slashing"
+					],
+					"note": "from non-magical weapons"
+				}
+			],
+			"conditionImmune": [
+				"paralyzed",
+				"petrified",
+				"prone"
+			],
+			"trait": [
+				{
+					"name": "Ambusher",
+					"entries": [
+						"The rockwyrm has advantage on attack rolls against any creature it has surprised."
+					]
+				}
+			],
+			"traitTags": [
+				"Ambusher"
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"The rockwyrm makes three attacks: one with its bite and two with its claws. It can replace its bite with a paralyzing ray."
+					]
+				},
+				{
+					"name": "Bite",
+					"entries": [
+						"{@atk mw} {@hit 8} to hit, reach 5 ft., one target. {@h}14 ({@damage 2d10 + 5}) piercing damage."
+					]
+				},
+				{
+					"name": "Claw",
+					"entries": [
+						"{@atk mw} {@hit 8} to hit, reach 5 ft., one target. {@h}12 ({@damage 2d6 + 5}) slashing damage."
+					]
+				},
+				{
+					"name": "Paralyzing Ray {@recharge 5}",
+					"entries": [
+						"The rockwyrm opens its third eye, emitting a magical ray at a creature it can see within 75 feet of it. The targeted creature must succeed on a {@dc 16} Constitution saving throw or be {@condition paralyzed} for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+					]
+				}
+			],
+			"damageTags": [
+				"P",
+				"S"
+			],
+			"miscTags": [
+				"MW"
+			],
+			"actionTags": [
+				"Multiattack"
+			],
+			"environment": [
+				"arctic",
+				"hill",
+				"mountain"
+			],
+			"fluff": {
+				"entries": [
+					"Rockwyrms are often mistaken for dragons. These reptiles resemble dragons and wyverns, but they tend to be sly and cunning ambushers rather than wide-ranging hunters. Since rockwyrms are careful to slay and devour isolated victims while avoiding groups of creatures, their kills are often blamed on other predators or brigands. Sometimes called \"false dragons,\" rockwyrms have rough hides of mottled gray and brown scales, smallish wings that are more suited for fighting than flying, and blunt faces with powerful jaws and a large third eye in the middle of their foreheads. Rockwyrm foreclaws are nimble enough to serve as hands for most purposes, and their tails are long and powerful.",
+					"Rockwyrms are found in cold, mountainous areas across Faerûn. As settlers in the Silver Marches push into the wilderness, and steadings rise in many long-uninhabited places, rockwyrms are becoming an increasing problem. There are even rumors that these hunters work together, shulking and spying, so as to better avoid armed bands and guards and strike at unprotected and isolated targets.",
+					"Rockwyrms stash treasure (coins, gems, tools, and other items taken from prey they deem useful for later trade or personal ransom) in rock clefts or hollows that they can conceal and guard with clever traps, but have no single, true lair. They sleep in the same fashion that they hunt-- lying motionless covered by their wings, with their scaly hides matching their surroundings (usually gray rocks or white snow) in hue.",
+					"Rockwyrms speak common and draconic, and also master small working vocabularies in many other languages-- depending on what prey they come into contact with."
+				]
+			},
+			"conditionInflict": [
+				"paralyzed"
+			]
+		},
+		{
+			"name": "Duergar Acolyte of Orcus",
+			"size": "M",
+			"type": {
+				"type": "humanoid",
+				"tags": [
+					"dwarf"
+				]
+			},
+			"source": "JB",
+			"alignment": [
+				"L",
+				"E"
+			],
+			"ac": [
+				{
+					"ac": 14,
+					"from": [
+						"{@item scale mail|phb}"
+					]
+				}
+			],
+			"hp": {
+				"formula": "5d8 + 10",
+				"average": 32
+			},
+			"speed": {
+				"walk": 25
+			},
+			"str": 14,
+			"dex": 11,
+			"con": 14,
+			"int": 11,
+			"wis": 16,
+			"cha": 9,
+			"passive": 10,
+			"cr": "5",
+			"senses": [
+				"darkvision 120 ft."
+			],
+			"senseTags": [
+				"SD"
+			],
+			"languages": [
+				"Dwarvish",
+				"Undercommon"
+			],
+			"languageTags": [
+				"D",
+				"U"
+			],
+			"save": {
+				"wis": "+6"
+			},
+			"resist": [
+				"poison"
+			],
+			"trait": [
+				{
+					"name": "Duergar Resilience",
+					"entries": [
+						"The duergar acolyte of orcus has advantage on saving throws against poison, spells, and illusions, as well as to resist being {@condition charmed} or {@condition paralyzed}."
+					]
+				},
+				{
+					"name": "Sunlight Sensitivity",
+					"entries": [
+						"While in sunlight, the duergar acolyte of orcus has disadvantage on attack rolls, as well as on Wisdom ({@skill Perception}) checks that rely on sight."
+					]
+				}
+			],
+			"traitTags": [
+				"Sunlight Sensitivity"
+			],
+			"action": [
+				{
+					"name": "Enlarge (Recharges after a Short or Long Rest)",
+					"entries": [
+						"For 1 minute, the duergar acolyte of orcus magically increases in size, along with anything it is wearing or carrying. While enlarged, the duergar acolyte of orcus is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the duergar acolyte of orcus lacks the room to become Large, it attains the maximum size possible in the space available."
+					]
+				},
+				{
+					"name": "Invisibility (Recharges after a Short or Long Rest)",
+					"entries": [
+						"The duergar acolyte of orcus magically turns {@condition invisible} until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the duergar acolyte of orcus wears or carries is {@condition invisible} with it."
+					]
+				},
+				{
+					"name": "Morningstar",
+					"entries": [
+						"{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d8 + 2}) piercing damage, plus 9 ({@damage 2d8}) necrotic damage."
+					]
+				}
+			],
+			"spellcasting": [
+				{
+					"name": "Spellcasting",
+					"headerEntries": [
+						"The duergar acolyte of orcus is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save {@dc 14}, +6 to hit with spell attacks). The duergar acolyte of orcus has the following spells prepared:"
+					],
+					"spells": {
+						"0": {
+							"spells": [
+								"{@spell guidance}",
+								"{@spell mending}",
+								"{@spell sacred flame}"
+							]
+						},
+						"1": {
+							"spells": [
+								"{@spell bane}",
+								"{@spell command}",
+								"{@spell ray of sickness}"
+							],
+							"slots": 4
+						},
+						"2": {
+							"spells": [
+								"{@spell gentle repose}",
+								"{@spell hold person}",
+								"{@spell spiritual weapon}"
+							],
+							"slots": 3
+						},
+						"3": {
+							"spells": [
+								"{@spell animate dead}",
+								"{@spell bestow curse}"
+							],
+							"slots": 2
+						}
+					},
+					"ability": "wis",
+					"type": "spellcasting"
+				}
+			],
+			"damageTags": [
+				"P",
+				"N"
+			],
+			"miscTags": [
+				"MW"
+			],
+			"environment": [
+				"underdark"
+			]
+		},
+		{
+			"name": "Huge Iron Golem",
+			"size": "H",
+			"type": "construct",
+			"source": "JB",
+			"alignment": [
+				"U"
+			],
+			"ac": [
+				{
+					"ac": 20,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "20d12 + 100",
+				"average": 230
+			},
+			"speed": {
+				"walk": 30
+			},
+			"str": 24,
+			"dex": 9,
+			"con": 20,
+			"int": 3,
+			"wis": 11,
+			"cha": 1,
+			"passive": 10,
+			"cr": "16",
+			"shortName": "golem",
+			"senses": [
+				"darkvision 120 ft."
+			],
+			"senseTags": [
+				"SD"
+			],
+			"languages": [
+				"understands the languages of its creator but can't speak"
+			],
+			"languageTags": [
+				"CS"
+			],
+			"immune": [
+				{
+					"immune": [
+						"fire"
+					]
+				},
+				{
+					"immune": [
+						"poison"
+					]
+				},
+				{
+					"immune": [
+						"psychic"
+					]
+				},
+				{
+					"immune": [
+						"bludgeoning",
+						"piercing",
+						"slashing"
+					],
+					"note": "from nonmagical attacks that aren't adamantine"
+				}
+			],
+			"conditionImmune": [
+				{
+					"conditionImmune": [
+						"charmed"
+					]
+				},
+				{
+					"conditionImmune": [
+						"exhaustion"
+					]
+				},
+				{
+					"conditionImmune": [
+						"frightened"
+					]
+				},
+				{
+					"conditionImmune": [
+						"paralyzed"
+					]
+				},
+				{
+					"conditionImmune": [
+						"petrified"
+					]
+				},
+				{
+					"conditionImmune": [
+						"poisoned"
+					]
+				}
+			],
+			"trait": [
+				{
+					"name": "Fire Absorption",
+					"entries": [
+						"Whenever the golem is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt."
+					]
+				},
+				{
+					"name": "Immutable Form",
+					"entries": [
+						"The golem is immune to any spell or effect that would alter its form."
+					]
+				},
+				{
+					"name": "Magic Resistance",
+					"entries": [
+						"The golem has advantage on saving throws against spells and other magical effects."
+					]
+				},
+				{
+					"name": "Magic Weapons",
+					"entries": [
+						"The golem's weapon attacks are magical."
+					]
+				},
+				{
+					"name": "Siege Monster",
+					"entries": [
+						"The golem deals double damage to objects and structures."
+					]
+				}
+			],
+			"traitTags": [
+				"Damage Absorption",
+				"Immutable Form",
+				"Magic Resistance",
+				"Magic Weapons",
+				"Siege Monster"
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"The golem makes two melee attacks."
+					]
+				},
+				{
+					"name": "Slam",
+					"entries": [
+						"{@atk mw} {@hit 13} to hit, reach 5 ft., one target. {@h}20 ({@damage 3d8 + 7}) bludgeoning damage."
+					]
+				},
+				{
+					"name": "Sword",
+					"entries": [
+						"{@atk mw} {@hit 13} to hit, reach 5 ft., one target. {@h}23 ({@damage 3d10 + 7}) slashing damage."
+					]
+				},
+				{
+					"name": "Poison Breath {@recharge 5}",
+					"entries": [
+						"The golem exhales poisonous gas in a 15-foot cone. Each creature in that area must make a {@dc 19} Constitution saving throw, taking 45 ({@damage 10d8}) poison damage on a failed save, or half as much damage on a successful one."
+					]
+				}
+			],
+			"damageTags": [
+				"B",
+				"S",
+				"I"
+			],
+			"miscTags": [
+				"MW",
+				"AOE"
+			],
+			"actionTags": [
+				"Multiattack"
+			],
+			"fluff": {
+				"entries": [
+					"The mightiest of the golems, the iron golem is a massive, towering giant wrought of heavy metal. An iron golem's shape can be worked into any form, though most are fashioned to look like giant suits of armor. Its fist can destroy creatures with a single blow, and its clanging steps shake the earth beneath its feet. Iron golems wield enormous blades to extend their reach, and all can belch clouds of deadly poison.",
+					"An iron golem's body is smelted with rare tinctures and admixtures. Though other golems bear weaknesses inherent in their materials or the power of the elemental spirit bound within them, iron golems were designed to be nearly invulnerable. Their iron bodies imprison the spirits that drive them, and are susceptible only to weapons imbued with magic or the strength of adamantine.",
+					"Golems. Golems are made from humble materials-clay, flesh and bones, iron, or stone-but they possess astonishing power and durability. A golem has no ambitions, needs no sustenance, feels no pain, and knows no remorse. An unstoppable juggernaut, it exists to follow its creator's orders, and it protects or attacks as that creator demands.",
+					"To create a golem, one requires a manual of golems (see the Dungeon Master's Guide). The comprehensive illustrations and instructions in a manual detail the process for creating a golem of a particular type.",
+					"Elemental Spirit in Material Form. The construction of a golem begins with the building of its body, requiring great command of the craft of sculpting, stonecutting, ironworking, or surgery. Sometimes a golem's creator is the master of the art, but often the individual who desires a golem must enlist master artisans to do the work.",
+					"After constructing the body from clay, flesh, iron, or stone, the golem's creator infuses it with a spirit from the Elemental Plane of Earth. This tiny spark of life has no memory, personality, or history. It is simply the impetus to move and obey. This process binds the spirit to the artificial body and subjects it to the will of the golem's creator.",
+					"A golem can be created with a special amulet or other item that allows the possessor of the item to control the golem. Golems whose creators are long dead can thus be harnessed to serve a new master.",
+					"A golem can't think or act for itself. Though it understands its commands perfectly, it has no grasp of language beyond that understanding, and can't be reasoned with or tricked with words.",
+					"Ageless Guardians. Golems can guard sacred sites, tombs, and treasure vaults long after the deaths of their creators, carrying out their appointed tasks for all eternity while brushing off physical damage and ignoring all but the most potent spells.",
+					"Blind Obedience. When its creator or possessor is on hand to command it, a golem performs flawlessly. If the golem is left without instructions or is {@condition incapacitated}, it continues to follow its last orders to the best of its ability. When it can't fulfill its orders, a golem might react violently-or stand and do nothing. A golem that has been given conflicting orders sometimes alternates between them.",
+					"Constructed Nature. A golem doesn't require air, food, drink, or sleep."
+				],
+				"images": [
+					{
+						"type": "image",
+						"href": {
+							"type": "external",
+							"url": "https://5e.jafner.net/img/MM/Iron%20Golem.png"
+						}
+					}
+				]
+			},
+			"soundClip": {
+				"type": "external",
+				"url": "https://5e.jafner.net/audio/bestiary/iron-golem.mp3"
+			}
+		},
+		{
+			"name": "Lolth",
+			"size": "G",
+			"type": {
+				"type": "fiend",
+				"tags": [
+					"demon"
+				]
+			},
+			"source": "JB",
+			"alignment": [
+				"C",
+				"E"
+			],
+			"ac": [
+				{
+					"ac": 23,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "30d20 + 90",
+				"average": 405
+			},
+			"speed": {
+				"walk": 60,
+				"climb": 60
+			},
+			"str": 16,
+			"dex": 26,
+			"con": 17,
+			"int": 30,
+			"wis": 26,
+			"cha": 30,
+			"passive": 34,
+			"cr": {
+				"cr": "26",
+				"lair": "30"
+			},
+			"senses": [
+				"truesight 120 ft."
+			],
+			"senseTags": [
+				"U"
+			],
+			"save": {
+				"dex": "+16",
+				"wis": "+16",
+				"cha": "+18",
+				"int": "+18"
+			},
+			"skill": {
+				"arcana": "+18",
+				"deception": "+18",
+				"insight": "+16",
+				"perception": "+24"
+			},
+			"resist": [
+				{
+					"resist": [
+						"cold"
+					]
+				},
+				{
+					"resist": [
+						"fire"
+					]
+				},
+				{
+					"resist": [
+						"lightning"
+					]
+				}
+			],
+			"immune": [
+				"bludgeoning",
+				"piercing",
+				"slashing"
+			],
+			"conditionImmune": [
+				"charmed",
+				"exhaustion",
+				"frightened",
+				"poisoned"
+			],
+			"legendaryActions": 5,
+			"isNamedCreature": true,
+			"trait": [
+				{
+					"name": "Legendary Resistance (5/Day)",
+					"entries": [
+						"If Lolth fails a saving throw, she can choose to succeed instead."
+					]
+				},
+				{
+					"name": "Magic Weapons",
+					"entries": [
+						"Lolth's weapon attacks are magical."
+					]
+				},
+				{
+					"name": "Limited Magic Immunity",
+					"entries": [
+						"Lolth can't be affected or detected by spells of 6th level or lower unless she wishes to be. She has advantage on saving throws against all other spells and magical effects."
+					]
+				},
+				{
+					"name": "Sneak Attack (1/Turn)",
+					"entries": [
+						"Once per turn, Lolth deals an extra 52 ({@damage 15d6}) damage when she hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of Lolth that isn't {@condition incapacitated} and Lolth doesn't have disadvantage on the attack roll."
+					]
+				},
+				{
+					"name": "Discorporation",
+					"entries": [
+						"When Lolth drops to 0 hit points or dies, her body is destroyed but her essence travels back to her domain in the Demonweb, and she is unable to take physical form for a time. "
+					]
+				},
+				{
+					"name": "Shapechanger",
+					"entries": [
+						"Lolth can use her action to polymorph into a form that resembles any Medium humanoid, or back into her true form. Other than her size and speed, her statistics are the same in each form. Any equipment she is wearing or carrying isn't transformed. "
+					]
+				}
+			],
+			"traitTags": [
+				"Legendary Resistances",
+				"Magic Weapons",
+				"Shapechanger",
+				"Sneak Attack"
+			],
+			"languages": [
+				"Undercommon"
+			],
+			"languageTags": [
+				"U"
+			],
+			"shortName": "Lolth",
+			"spellcasting": [
+				{
+					"name": "Innate Spellcasting",
+					"headerEntries": [
+						"Lolth's spellcasting ability is Charisma (spell save {@dc 26}). Lolth can innately cast the following spells, requiring no material components:"
+					],
+					"will": [
+						"{@spell charm person}",
+						"{@spell crown of madness}",
+						"{@spell detect magic}",
+						"{@spell dispel magic}",
+						"{@spell dissonant whispers}"
+					],
+					"daily": {
+						"1e": [
+							"{@spell dominate monster}",
+							"{@spell greater invisibility}"
+						],
+						"3e": [
+							"{@spell counterspell}",
+							"{@spell darkness}",
+							"{@spell divine word}",
+							"{@spell dominate person}",
+							"{@spell sanctuary}",
+							"{@spell telekinesis}",
+							"{@spell teleport}"
+						]
+					},
+					"ability": "cha",
+					"type": "spellcasting"
+				}
+			],
+			"spellcastingTags": [
+				"I"
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"Lolth can cast a spell. She then makes two dagger attacks and one bite attack. "
+					]
+				},
+				{
+					"name": "Dagger",
+					"entries": [
+						"{@atk mw,rw} {@hit 16} to hit, reach 5 ft. or range 20/60 ft., one target. {@h}18 ({@damage 4d4 + 8}) piercing damage in melee, or 18 ({@damage 4d4 + 8}) piercing damage at range. Her dagger immediately returns to her hand after the thrown attack."
+					]
+				},
+				{
+					"name": "Bite",
+					"entries": [
+						"{@atk mw} {@hit 16} to hit, reach 5 ft., one target. {@h}34 ({@damage 4d12 + 8}) piercing damage, and the target must succeed a {@dc 23} Constitution saving throw or become {@condition poisoned} for 1 hour."
+					]
+				}
+			],
+			"actionTags": [
+				"Multiattack"
+			],
+			"damageTags": [
+				"P"
+			],
+			"miscTags": [
+				"RW",
+				"MW",
+				"THW"
+			],
+			"conditionInflict": [
+				"poisoned"
+			],
+			"legendary": [
+				{
+					"name": "Attack",
+					"entries": [
+						"Lolth can attack once with a dagger or her bite."
+					]
+				},
+				{
+					"name": "Command Thrall",
+					"entries": [
+						"One creature {@condition charmed} by Lolth that Lolth can see must use its reaction to move up to its speed as Lolth directs."
+					]
+				},
+				{
+					"name": "Teleport",
+					"entries": [
+						"Lolth casts {@spell teleport}."
+					]
+				}
+			],
+			"legendaryHeader": [
+				"Lolth can take 5 legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature's turn. Lolth regains spent legendary actions at the start of her turn."
+			],
+			"fluff": {
+				"entries": [
+					"Lolth appears as either a tall, beautiful female drow or as a massive black widow spider with a female drow's head. She maintains a ruthless, tyrannical reign over the drow, ruling through a combination of fear and the promise of power.",
+					"It was Lolth who first spread evil among the elves, and it was she who led the drow to break away from the rest of elven society and to dwell underground. Drow scoff at any attempt to suggest that they were banished from the surface. Nevertheless, Lolth has sworn vengeance against Corellon Larethian and his people."
+				],
+				"images": [
+					{
+						"type": "image",
+						"href": {
+							"type": "external",
+							"url": "https://5e.jafner.net/img/JBrew/Lolth.png"
+						}
+					}
+				]
+			},
+			"legendaryGroup": {
+				"name": "Lolth",
+				"source": "JB"
+			}
+		},
+		{
+			"name": "Demogorgon, Prince of Demons",
+			"isNamedCreature": true,
+			"source": "JB",
+			"size": "G",
+			"type": {
+				"type": "fiend",
+				"tags": [
+					"demon"
+				]
+			},
+			"alignment": [
+				"C",
+				"E"
+			],
+			"ac": [
+				{
+					"ac": 22,
+					"from": [
+						"natural armor"
+					]
+				}
+			],
+			"hp": {
+				"formula": "30d12 + 300",
+				"average": 495
+			},
+			"speed": {
+				"walk": 60,
+				"swim": 60
+			},
+			"str": 30,
+			"dex": 14,
+			"con": 30,
+			"int": 20,
+			"wis": 17,
+			"cha": 26,
+			"save": {
+				"dex": "+12",
+				"con": "+20",
+				"wis": "+13",
+				"cha": "+18"
+			},
+			"skill": {
+				"insight": "+13",
+				"perception": "+23"
+			},
+			"senses": [
+				"truesight 120 ft."
+			],
+			"passive": 33,
+			"resist": [
+				"cold",
+				"fire",
+				"lightning"
+			],
+			"immune": [
+				"poison",
+				{
+					"immune": [
+						"bludgeoning",
+						"piercing",
+						"slashing"
+					],
+					"note": "from nonmagical attacks",
+					"cond": true
+				}
+			],
+			"conditionImmune": [
+				"charmed",
+				"exhaustion",
+				"frightened",
+				"poisoned"
+			],
+			"languages": [
+				"all",
+				"telepathy 120 ft."
+			],
+			"cr": "28",
+			"spellcasting": [
+				{
+					"name": "Innate Spellcasting",
+					"headerEntries": [
+						"Demogorgon's spellcasting ability is Charisma (spell save {@dc 23}). Demogorgon can innately cast the following spells, requiring no material components:"
+					],
+					"will": [
+						"{@spell command}",
+						"{@spell detect magic}",
+						"{@spell major image}"
+					],
+					"daily": {
+						"3e": [
+							"{@spell dispel magic}",
+							"{@spell fear}",
+							"{@spell telekinesis}"
+						],
+						"1e": [
+							"{@spell feeblemind}",
+							"{@spell project image}"
+						]
+					},
+					"ability": "cha",
+					"type": "spellcasting"
+				}
+			],
+			"trait": [
+				{
+					"name": "Legendary Resistance (5/Day)",
+					"entries": [
+						"If Demogorgon fails a saving throw, he can choose to succeed instead."
+					]
+				},
+				{
+					"name": "Magic Weapons",
+					"entries": [
+						"Demogorgon's weapon attacks are magical."
+					]
+				},
+				{
+					"name": "Two Heads",
+					"entries": [
+						"Demogorgon has advantage on saving throws against being {@condition blinded}, {@condition deafened}, {@condition stunned}, or knocked {@condition unconscious}."
+					]
+				},
+				{
+					"name": "Prince of Demons",
+					"entries": [
+						"Any demon with a CR of 20 or lower within 120 feet of Demogorgon becomes automatically {@condition charmed} by Demogorgon and cannot take any action which would harm Demogorgon. "
+					]
+				},
+				{
+					"name": "Limited Magic Immunity",
+					"entries": [
+						"Demogorgon can't be affected or detected by spells of 6th level or lower unless he wishes to be. He has advantage on saving throws against all other spells and magical effects."
+					]
+				}
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"Demogorgon makes four tentacle attacks."
+					]
+				},
+				{
+					"name": "Tentacle",
+					"entries": [
+						"{@atk mw} {@hit 17} to hit, reach 10 ft., one target. {@h}28 ({@damage 3d12 + 9}) bludgeoning damage. If the target is a creature, it must succeed on a {@dc 23} Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if its hit point maximum is reduced to 0."
+					]
+				},
+				{
+					"name": "Gaze",
+					"entries": [
+						"Demogorgon turns his magical gaze toward one creature that he can see within 120 feet of him. That target must make a {@dc 23} Wisdom saving throw or suffer one of the following effects of Demogorgon's choice or at random:",
+						"1. Beguiling Gaze. The target is {@condition stunned} until the start of Demogorgon's next turn or until Demogorgon is no longer within line of sight.",
+						"2. Hypnotic Gaze. The target is {@condition charmed} by Demogorgon until the start of Demogorgon's next turn. Demogorgon chooses how the {@condition charmed} target uses its actions, reactions, and movement. Because this gaze requires Demogorgon to focus both heads on the target, he can't use his Maddening Gaze legendary action until the start of his next turn.",
+						"3. Insanity Gaze. The target suffers the effect of the {@spell confusion} spell without making a saving throw. The effect lasts until the start of Demogorgon's next turn. Demogorgon doesn't need to concentrate on the spell."
+					]
+				}
+			],
+			"legendaryActions": 4,
+			"legendary": [
+				{
+					"name": "Tail",
+					"entries": [
+						"{@atk mw} {@hit 17} to hit, reach 15 ft., one target. {@h}20 ({@damage 2d10 + 9}) bludgeoning damage plus 11 ({@damage 2d10}) necrotic damage."
+					]
+				},
+				{
+					"name": "Maddening Gaze",
+					"entries": [
+						"Demogorgon uses his Gaze action, and must choose either the Beguiling Gaze or the Insanity Gaze effect."
+					]
+				},
+				{
+					"name": "Demonic Command (0 actions)",
+					"entries": [
+						"Demogorgon casts {@spell command} on the creature whose turn just ended. He can only use this action on a demon."
+					]
+				}
+			],
+			"legendaryGroup": {
+				"name": "Demogorgon",
+				"source": "MTF"
+			},
+			"traitTags": [
+				"Legendary Resistances",
+				"Magic Weapons"
+			],
+			"senseTags": [
+				"U"
+			],
+			"actionTags": [
+				"Multiattack",
+				"Tentacles"
+			],
+			"languageTags": [
+				"XX",
+				"TP"
+			],
+			"damageTags": [
+				"B",
+				"N"
+			],
+			"spellcastingTags": [
+				"I"
+			],
+			"miscTags": [
+				"MW",
+				"RCH"
+			],
+			"conditionInflict": [
+				"stunned",
+				"charmed"
+			],
+			"conditionInflictSpell": [
+				"blinded",
+				"deafened",
+				"frightened",
+				"restrained"
+			],
+			"hasFluff": true,
+			"hasFluffImages": true,
+			"tokenUrl": "https://5e.jafner.net/img/MTF/Demogorgon.png",
+			"fluff": {
+				"name": "Demogorgon",
+				"source": "MTF",
+				"entries": [
+					{
+						"type": "entries",
+						"entries": [
+							{
+								"type": "entries",
+								"entries": [
+									{
+										"type": "entries",
+										"name": "Demogorgon",
+										"entries": [
+											"Prince of Demons, the Sibilant Beast, and Master of the Spiraling Depths, Demogorgon is the embodiment of chaos, madness, and destruction, seeking to corrupt all that is good and undermine order in the multiverse, to see everything dragged howling into the infinite depths of the Abyss.",
+											"The demon lord is a meld of different forms, with a saurian lower body and clawed, webbed feet, as well as suckered tentacles sprouting from the shoulders of a great apelike torso, surmounted by two hideous simian heads, named Aameul and Hathradiah, both equally mad. Their gaze brings madness and confusion to any who confront it.",
+											"Similarly, the spiraling Y sign of Demogorgon's cult can inspire madness in those who contemplate it for too long. All the followers of the Prince of Demons go mad, sooner or later."
+										]
+									}
+								]
+							},
+							{
+								"type": "entries",
+								"name": "Demogorgon's Lair",
+								"entries": [
+									"Demogorgon makes his lair in a palace called Abysm, found on a layer of the Abyss known as the Gaping Maw. Demogorgon's lair is a place of madness and duality; the portion of the palace that lies above water takes the form of two serpentine towers, each crowned by a skull-shaped minaret. There, Demogorgon's heads contemplate the mysteries of the arcane while arguing about how best to obliterate their rivals. The bulk of this palace extends deep underwater, in chill and darkened caverns."
+								]
+							}
+						]
+					},
+					{
+						"type": "entries",
+						"entries": [
+							{
+								"type": "entries",
+								"name": "Lair Actions",
+								"entries": [
+									"On Initiative count 20 (losing initiative ties), Demogorgon can take a lair action to cause one of the following effects: Demogorgon can't use the same effect two rounds in a row:",
+									{
+										"type": "list",
+										"items": [
+											"Demogorgon creates an illusory duplicate of himself, which appears in his own space and lasts until initiative count 20 of the next round. On his turn, Demogorgon can move the illusory duplicate a distance equal to his walking speed (no action required). The first time a creature or object interacts physically with Demogorgon (for example, hitting him with an attack), there is a 50 percent chance that it is the illusory duplicate that is being affected, not Demogorgon himself, in which case the illusion disappears.",
+											"Demogorgon casts the {@spell darkness} spell four times at its lowest level, targeting different areas with the spell. Demogorgon doesn't need to concentrate on the spells, which end on initiative count 20 of the next round."
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "entries",
+						"entries": [
+							{
+								"type": "entries",
+								"name": "Regional Effects",
+								"entries": [
+									"The region containing Demogorgon's lair is warped by his magic, creating one or more of the following effects:",
+									{
+										"type": "list",
+										"items": [
+											"The area within 6 miles of the lair becomes overpopulated with lizards, poisonous snakes, and other venomous beasts.",
+											"Beasts within 1 mile of the lair become violent and crazed-even creatures that are normally docile.",
+											"If a humanoid spends at least 1 hour within 1 mile of the lair, that creature must succeed on a {@dc 23} Wisdom saving throw or descend into a madness determined by the Madness of Demogorgon table. A creature that succeeds on this saving throw can't be affected by this regional effect again for 24 hours."
+										]
+									},
+									"If Demogorgon dies, these effects fade over the course of {@dice 1d10} days.",
+									{
+										"type": "entries",
+										"name": "Madness of Demogorgon",
+										"entries": [
+											"If a creature goes mad in Demogorgon's lair or within line of sight of the demon lord, roll on the Madness of Demogorgon table to determine the nature of the madness, which is a character flaw that lasts until cured. See the {@book Dungeon Master's Guide|dmg|8|madness} for more on madness.",
+											{
+												"type": "table",
+												"caption": "Madness of Demogorgon",
+												"colLabels": [
+													"d100",
+													"Flaw (lasts until cured)"
+												],
+												"colStyles": [
+													"col-1",
+													"col-11"
+												],
+												"rows": [
+													[
+														"01–20",
+														"\"Someone is plotting to kill me. I need to strike first to stop them!\""
+													],
+													[
+														"21–40",
+														"\"There is only one solution to my problems: kill them all!\""
+													],
+													[
+														"41–60",
+														"\"There is more than one mind inside my head.\""
+													],
+													[
+														"61–80",
+														"\"If you don't agree with me, I'll beat you into submission to get my way.\""
+													],
+													[
+														"81–00",
+														"\"I can't allow anyone to touch anything that belongs to me. They might try to take it away from me!\""
+													]
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				],
+				"images": [
+					{
+						"type": "image",
+						"href": {
+							"type": "internal",
+							"path": "bestiary/MTF/Demogorgon.jpg"
+						}
+					}
+				]
+			}
+		}
+	],
+	"variant": [
+		{
+			"name": "Blink Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The head of this ammunition is imbued with powerful teleportation magic.",
+				"When you fire this piece of ammunition and it hits a creature, you can use your reaction to swap places with that creature. If you instead hit a wall or floor, you can use your reaction to teleport to an unoccupied space within 5 feet of where it hit."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Blink ",
+				"source": "JB",
+				"rarity": "rare",
+				"entries": [
+					"The head of this ammunition is imbued with powerful teleportation magic.",
+					"When you fire this piece of ammunition and it hits a creature, you can use your reaction to swap places with that creature. If you instead hit a wall or floor, you can use your reaction to teleport to an unoccupied space within 5 feet of where it hit."
+				]
+			}
+		},
+		{
+			"name": "Explosive Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The head of this piece of ammunition contains a small amount of a potent explosive. Upon striking a target, it detonates.",
+				"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 2d8 fire damage and is pushed 10 feet away from the origin. On a successful save, the creature takes half as much damage and isn't pushed."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Explosive ",
+				"source": "JB",
+				"rarity": "rare",
+				"entries": [
+					"The head of this piece of ammunition contains a small amount of a potent explosive. Upon striking a target, it detonates.",
+					"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 2d8 fire damage and is pushed 10 feet away from the origin. On a successful save, the creature takes half as much damage and isn't pushed."
+				]
+			}
+		},
+		{
+			"name": "Seeker Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"This piece of ammunition is enchanted with minor sentience, allowing it to make small adjustments mid-flight to hit its target.",
+				"When you make a ranged weapon attack using this ammunition and you miss by 5 or less, the ammunition adjusts its trajectory and you hit instead. If your attack roll exceeds the target's Armor Class by 5 or more, the attack is automatically a critical hit.",
+				"If either of these effects are triggered, the ammunition is no longer magical."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Seeker ",
+				"source": "JB",
+				"rarity": "legendary",
+				"entries": [
+					"This piece of ammunition is enchanted with minor sentience, allowing it to make small adjustments mid-flight to hit its target.",
+					"When you make a ranged weapon attack using this ammunition and you miss by 5 or less, the ammunition adjusts its trajectory and you hit instead. If your attack roll exceeds the target's Armor Class by 5 or more, the attack is automatically a critical hit.",
+					"If either of these effects are triggered, the ammunition is no longer magical."
+				]
+			}
+		},
+		{
+			"name": "Stunning Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The head of this piece of ammunition is imbued with thunder magic. Upon striking a target, it detonates.",
+				"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 1d8 thunder damage and is deafened and blinded for one minute. On a successful save, the creature takes half as much damage and isn't pushed.",
+				"Once it hits a target, the ammunition is no longer magical."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Stunning ",
+				"source": "JB",
+				"rarity": "rare",
+				"entries": [
+					"The head of this piece of ammunition is imbued with thunder magic. Upon striking a target, it detonates.",
+					"In addition to the normal weapon damage, any creature within 15 feet of the explosion must make a DC 15 Constitution saving throw. On a failed save, a creature takes 1d8 thunder damage and is deafened and blinded for one minute. On a successful save, the creature takes half as much damage and isn't pushed.",
+					"Once it hits a target, the ammunition is no longer magical."
+				]
+			}
+		},
+		{
+			"name": "Heavy Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The shaft of this ammunition is crafted from a heavier material than wood, increasing its damage, but decreasing its range.",
+				"You have a +2 to damage rolls for attacks made with this piece of ammunition. When using this ammunition, your weapon's short and long range is reduced by half."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Heavy ",
+				"source": "JB",
+				"rarity": "none",
+				"value": 10,
+				"entries": [
+					"The shaft of this ammunition is crafted from a heavier material than wood, increasing its damage, but decreasing its range.",
+					"You have a +2 to damage rolls for attacks made with this piece of ammunition. When using this ammunition, your weapon's short and long range is reduced by half."
+				]
+			}
+		},
+		{
+			"name": "Light Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"The shaft of this ammunition is crafted from a lighter material than wood, decreasing its damage, but increasing its range.",
+				"You have a -2 penalty to damage rolls for attacks made with this piece of ammunition (minimum 1). When using this ammunition, your weapon's short and long range is increased by half."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Light ",
+				"source": "JB",
+				"rarity": "none",
+				"value": 10,
+				"entries": [
+					"The shaft of this ammunition is crafted from a lighter material than wood, decreasing its damage, but increasing its range.",
+					"You have a -2 penalty to damage rolls for attacks made with this piece of ammunition (minimum 1). When using this ammunition, your weapon's short and long range is increased by half."
+				]
+			}
+		},
+		{
+			"name": "Masterwork Ammunition",
+			"source": "JB",
+			"type": "GV",
+			"entries": [
+				"Ranged weapon attacks with this ammunition score a critical hit on an attack roll of 19 or 20.",
+				"If you use this ammunition with a masterwork ranged weapon, you also score a critical hit on a roll of 18."
+			],
+			"requires": [
+				{
+					"name": "Arrow"
+				},
+				{
+					"name": "Crossbow Bolt"
+				}
+			],
+			"inherits": {
+				"namePrefix": "Masterwork ",
+				"source": "JB",
+				"rarity": "none",
+				"value": 10,
+				"entries": [
+					"Ranged weapon attacks with this ammunition score a critical hit on an attack roll of 19 or 20.",
+					"If you use this ammunition with a masterwork ranged weapon, you also score a critical hit on a roll of 18."
+				]
+			}
+		},
+		{
+			"name": "Masterwork Weapon",
+			"type": "GV",
+			"requires": [
+				{
+					"weapon": true
+				}
+			],
+			"excludes": {
+				"net": true
+			},
+			"inherits": {
+				"namePrefix": "Masterwork ",
+				"source": "JB",
+				"tier": "major",
+				"rarity": "none",
+				"entries": [
+					"Attacks you make with this weapon score a critical hit on a roll of 19 or 20."
+				]
+			}
+		},
+		{
+			"name": "Fiendsbane Weapon",
+			"type": "GV",
+			"requires": [
+				{
+					"weapon": true
+				}
+			],
+			"excludes": {
+				"net": true
+			},
+			"inherits": {
+				"namePrefix": "Fiendsbane ",
+				"source": "JB",
+				"tier": "major",
+				"rarity": "Very rare",
+				"entries": [
+					"This weapon is inscribed with ancient runes of protection against evil. Damage dealt by this weapon is radiant damage. When you score a critical hit against a fiend with this weapon, you deal an additional 2d8 radiant damage."
+				]
+			}
+		},
+		{
+			"name": "+1 Spellcasting Focus",
+			"type": "GV",
+			"requires": [
+				{
+					"type": "SCF"
+				}
+			],
+			"inherits": {
+				"namePrefix": "+1 ",
+				"source": "JB",
+				"tier": "major",
+				"rarity": "Uncommon",
+				"entries": [
+					"This spellcasting focus is crafted from highly magical materials. When you cast a spell with a material component with this focus, you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your spells."
+				]
+			}
+		}
+	],
+	"background": [
+		{
+			"name": "Tavernkeep",
+			"source": "JB",
+			"entries": [
+				{
+					"type": "list",
+					"style": "list-hang-notitle",
+					"items": [
+						{
+							"type": "item",
+							"name": "Skill Proficiencies",
+							"entry": "{@skill Persuasion}, {@skill History}"
+						},
+						{
+							"type": "item",
+							"name": "Tool Proficiencies",
+							"entry": "{@item Brewer's supplies|phb}"
+						},
+						{
+							"type": "item",
+							"name": "Languages",
+							"entry": "Two of your choice"
+						},
+						{
+							"type": "item",
+							"name": "Equipment",
+							"entry": "{@item Brewer's supplies|phb}, a set of {@item common clothes|phb}, and a belt {@item pouch|phb} containing 10 gp."
+						}
+					]
+				},
+				{
+					"name": "Feature: One of those people",
+					"type": "entries",
+					"entries": [
+						"Over the years of tending bar, celebrating and commiserating with the common folk, you have developed a knack for active listening. Conversing with people in a comfortable setting, such as a bar or inn, people will happily share with you rumors or stories they know."
+					],
+					"data": {
+						"isFeature": true
+					}
+				}
+			],
+			"skillProficiencies": [
+				{
+					"persuasion": true,
+					"history": true
+				}
+			],
+			"languageProficiencies": [
+				{
+					"anyStandard": 2
+				}
+			],
+			"toolProficiencies": [
+				{
+					"brewer's supplies": true
+				}
+			],
+			"startingEquipment": [
+				{
+					"_": [
+						"brewer's supplies|phb",
+						"common clothes|phb",
+						{
+							"item": "pouch|phb",
+							"containsValue": 1000
+						}
+					]
+				}
+			]
+		}
+	],
+	"legendaryGroup": [
+		{
+			"name": "Lolth",
+			"source": "JB",
+			"lairActions": [
+				"On Initiative count 20 (losing initiative ties), Lolth can take a lair action to cause one of the following effects; she can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"Lolth cries out to her arachnid children. Her calls are answered by six {@creature giant spider||giant spiders}, which appear anywhere she can see within her lair and act on her initiative.",
+						"Lolth summons webbing to impede her enemies in an area on the ground in a 20-foot square that she can see. They last until the next initiative count 20. Each creature in that area when the webs are summoned must succeed a DC 26 Strength saving throw or be restrained until the webs disappear. ",
+						"Lolth transforms one drow within her lair into a drider. The painful transformation causes the new drider to be stunned until the end of its next turn. All of the drow's game statistics are replaced by this new form, and Lolth chooses whether its personality is left intact."
+					]
+				}
+			]
+		}
+	]
+}
