@@ -1,0 +1,6 @@
+av==12.0.0
+ffmpeg-python==0.2.0
+ffpyplayer==4.5.1
+numpy==1.26.4
+pillow==10.3.0
+RangeSlider==2023.7.2
