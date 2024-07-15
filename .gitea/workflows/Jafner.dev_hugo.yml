@@ -1,0 +1,10 @@
+# name: Hugo
+# on: [push]
+# jobs:
+#   runs-on: 
+#   build:
+#     steps:
+#     - uses: actions/checkout@v1
+    
+#     - name: hugo
+#       uses: klakegg/actions-hugo@1.0.0

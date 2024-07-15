@@ -1,0 +1,56 @@
+name: Deploy to Wizard
+run-name: ${{ gitea.actor }} deploying
+on: 
+  push: 
+    paths:
+      - '**/homelab/wizard/**'
+
+jobs:
+  Deploy:
+    runs-on: fighter
+    steps:
+      - name: Pull latest code onto host via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_WIZARD }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
+          script: |
+            cd ~/homelab
+            git pull
+      - name: Fix script permissions
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_WIZARD }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
+          script: |
+            chmod +x ~/homelab/wizard/config/*.sh
+      - name: Apply configuration
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_WIZARD }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
+          script: |
+            cd ~/homelab/wizard/config
+            /bin/vbash configure.sh
+      - name: Show configuration
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SSH_HOST_IP_WIZARD }} # this is a LAN IP
+          username: ${{ vars.SSH_USERNAME_WIZARD }}
+          key: ${{ secrets.SSH_KEY_DEPLOY_TO_WIZARD }}
+          script: |
+            cd ~/homelab/wizard/config
+            /bin/vbash show-config.sh
+
+  Notify:
+    runs-on: fighter
+    steps:
+      - name: Discord notification
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          args: '<@${{ secrets.DISCORD_ID_JAFNER }}> ${{ github.repository }} deploy to wizard: ${{ job.status }}'
