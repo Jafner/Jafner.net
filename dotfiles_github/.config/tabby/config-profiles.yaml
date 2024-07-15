@@ -1,0 +1,329 @@
+profiles:
+  - icon: fas fa-desktop
+    name: xtouch
+    group: local
+    options:
+      name: pi
+      group: local
+      host: xtouch.local
+      user: pi
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\id_rsa
+    id: ssh:custom:pi-copy:80434af9-a66b-4529-b099-95b796f05161
+    type: ssh
+  - icon: fas fa-desktop
+    name: jafner.chat
+    group: cloud
+    options:
+      name: digital ocean
+      group: cloud
+      host: jafner.chat
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\digital_ocean
+      forwardedPorts: []
+      scripts: []
+    id: ssh:custom:digital-ocean-copy:890ce4d4-bca6-4bb8-b4fe-d90f73e915d0
+    type: ssh
+  - id: ssh:046860a7-21ec-41b1-a23f-5011c812a240
+    icon: fas fa-desktop
+    name: jafner.net
+    group: local
+    options:
+      name: joey-server
+      group: local
+      host: joey-server.local
+      user: joey
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\id_rsa
+      x11: true
+    type: ssh
+  - id: ssh:356091a3-aae0-4627-9e3e-2a52a6692086
+    icon: fas fa-desktop
+    name: jafner.nas
+    group: local
+    options:
+      name: joey-nas
+      group: local
+      host: jafner.nas
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\id_rsa
+      forwardedPorts: []
+      scripts: []
+    type: ssh
+  - id: ssh:f610b2cb-eea8-4fcb-bb44-2ea481285d44
+    icon: fas fa-desktop
+    name: jafner.seedbox
+    group: local
+    options:
+      name: joey-seedbox
+      group: local
+      host: jafner.seedbox
+      user: joey
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\id_rsa
+    type: ssh
+  - id: ssh:0cf17a52-6895-499a-a524-2e70ee2f01c9
+    icon: fas fa-desktop
+    name: router
+    group: local
+    options:
+      name: router
+      group: local
+      host: router.jafner.net
+      user: admin
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - diffie-hellman-group-exchange-sha256
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\id_rsa
+      forwardedPorts: []
+      scripts: []
+    type: ssh
+  - id: ssh:36015f10-1a8e-4506-ba40-4c9cd4a35d9a
+    icon: fas fa-desktop
+    name: jafner.pi1
+    group: local
+    options:
+      name: pi
+      group: local
+      host: jafner.pi1
+      user: pi
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\id_rsa
+    type: ssh
+  - id: ssh:8fd323b3-45e3-499a-b4a3-d438c1c1ab90
+    icon: fas fa-desktop
+    name: jafner.tools
+    group: cloud
+    options:
+      name: digital ocean
+      group: cloud
+      host: jafner.tools
+      algorithms:
+        hmac:
+          - hmac-sha1
+          - hmac-sha2-256
+          - hmac-sha2-512
+        kex:
+          - curve25519-sha256
+          - curve25519-sha256@libssh.org
+          - diffie-hellman-group14-sha1
+          - diffie-hellman-group14-sha256
+          - diffie-hellman-group16-sha512
+          - diffie-hellman-group18-sha512
+          - ecdh-sha2-nistp256
+          - ecdh-sha2-nistp384
+          - ecdh-sha2-nistp521
+        cipher:
+          - aes128-ctr
+          - aes128-gcm
+          - aes128-gcm@openssh.com
+          - aes192-ctr
+          - aes256-ctr
+          - aes256-gcm
+          - aes256-gcm@openssh.com
+        serverHostKey:
+          - ecdsa-sha2-nistp256
+          - ecdsa-sha2-nistp384
+          - ecdsa-sha2-nistp521
+          - ssh-ed25519
+          - ssh-rsa
+      privateKeys:
+        - file://C:\Users\jafne\.ssh\digital_ocean
+    type: ssh

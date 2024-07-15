@@ -1,0 +1,10 @@
+lutris
+tabby
+multimc
+spotify
+ferdi
+joplin
+github-desktop
+xdotool
+pamidi
+vscodium
