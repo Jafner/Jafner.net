@@ -239,7 +239,7 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
     echo "# 4. Add the remote repo as origin with:                   #"
     echo "#      git remote add origin <ssh URL of repo>             #"
     echo "# 5. Push the code to the Git server with:                 #"
-    echo "#      git remote add origin <ssh URL of repo>             #"
+    echo "#      git push --set-upstream origin main                 #"
     echo "#                                                          #"
     echo "############################################################"
 }
