@@ -1,0 +1,70 @@
+version: "3.3"
+
+services:
+  peertube:
+    image: chocobozzz/peertube:production-buster
+    container_name: peertube_peertube
+    networks:
+      web:
+      peertube:
+        ipv4_address: 172.80.0.42
+    env_file:
+      - .env
+    ports:
+     - "1935:1935" # If you don't want to use the live feature, you can comment this line
+    volumes:
+      - assets:/app/client/dist
+      - ${DOCKER_VOLUME}/data:/data
+      - ${DOCKER_VOLUME}/config:/config
+    labels:
+      - "traefik.http.routers.peertube.rule=Host(`peertube.jafner.net`)"
+      - "traefik.http.routers.peertube.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.peertube.loadbalancer.server.port=9000"
+    depends_on:
+      - postgres
+      - redis
+      - postfix
+    restart: "unless-stopped"
+
+  postgres:
+    image: postgres:13-alpine
+    container_name: peertube_postgres
+    networks:
+      - peertube
+    env_file:
+      - .env
+    volumes:
+      - ${DOCKER_VOLUME}/db:/var/lib/postgresql/data
+    restart: "unless-stopped"
+
+  redis:
+    image: redis:6-alpine
+    container_name: peertube_redis
+    networks:
+      - peertube
+    volumes:
+      - ${DOCKER_VOLUME}/redis:/data
+    restart: "unless-stopped"
+
+  postfix:
+    image: mwader/postfix-relay
+    container_name: peertube_postfix
+    networks:
+      - peertube
+    env_file:
+      - .env
+    volumes:
+      - ${DOCKER_VOLUME}/opendkim/keys:/etc/opendkim/keys
+    restart: "unless-stopped"
+
+networks:
+  peertube:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.80.0.0/16
+  web:
+    external: true
+
+volumes:
+  assets:

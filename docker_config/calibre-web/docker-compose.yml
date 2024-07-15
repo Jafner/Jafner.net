@@ -1,0 +1,40 @@
+version: '3'
+services:
+  calibre-web-rpg:
+    image: linuxserver/calibre-web
+    container_name: calibre-web-rpg
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - calibre-web-rpg_data:/config
+      - /mnt/calibre/rpg:/books
+    labels:
+      - traefik.http.routers.calibre-rpg.rule=Host(`rpg.jafner.net`)
+      - traefik.http.routers.calibre-rpg.tls.certresolver=lets-encrypt
+    networks:
+      - web
+
+  calibre-web-sff:
+    image: linuxserver/calibre-web
+    container_name: calibre-web-sff
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - calibre-web-sff_data:/config
+      - /mnt/calibre/sff:/books
+    labels:
+      - traefik.http.routers.calibre.rule=Host(`calibre.jafner.net`)
+      - traefik.http.routers.calibre.tls.certresolver=lets-encrypt
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+volumes:
+  calibre-web-rpg_data:
+  calibre-web-sff_data:

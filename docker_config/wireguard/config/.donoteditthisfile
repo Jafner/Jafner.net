@@ -1,0 +1,6 @@
+ORIG_SERVERURL="www.jafner.net"
+ORIG_SERVERPORT="53820"
+ORIG_PEERDNS="10.13.13.1"
+ORIG_PEERS="joey-phone,joey-xps13,maddie-phone"
+ORIG_INTERFACE="10.13.13"
+ORIG_ALLOWEDIPS="0.0.0.0/0, ::/0"

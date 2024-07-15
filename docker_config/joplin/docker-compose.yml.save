@@ -1,0 +1,31 @@
+version: '3'
+services:
+  joplin:
+    image: joplin/server:2.6-beta
+    container_name: joplin
+    restart: unless-stopped
+    env
+    depends_on:
+      - joplin_db
+    networks:
+      - web
+      - joplin
+    labels:
+      - traefik.http.routers.joplin.rule=Host(`joplin.jafner.net`)
+      - traefik.http.routers.joplin.tls.certresolver=lets-encrypt
+      - traefik.http.middlewares.joplin.headers.customrequestheaders.X-Forwarded-Proto = http
+      - traefik.http.services.joplin.loadbalancer.server.port=22300
+      - traefik.http.services.joplin.loadbalancer.passhostheader=true
+  joplin_db:
+    image: postgres:13.1
+    container_name: joplin_db
+    restart: unless-stopped
+    volumes:
+      - ${DOCKER_DATA}/db:/var/lib/postresql/data
+    networks:
+      - joplin
+
+networks:
+  joplin:
+  web: 
+    external: true
