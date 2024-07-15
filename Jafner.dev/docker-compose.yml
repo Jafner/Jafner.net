@@ -1,0 +1,12 @@
+name: 'jafner-dev'
+version: "3.9"
+services:
+  hugo:
+    image: klakegg/hugo:latest
+    container_name: "Jafner-dev"
+    command: server -D
+    volumes: 
+      - ./:/src
+    ports:
+      - 10808:1313
+

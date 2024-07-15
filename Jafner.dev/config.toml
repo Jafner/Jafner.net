@@ -1,0 +1,143 @@
+baseURL = "https://jafner.dev"
+title   = "Jafner.dev"
+languageCode = "en-us"
+theme = "hello-friend-ng"
+
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"
+
+archetypeDir = "archetypes"
+contentDir   = "content"
+dataDir      = "data"
+layoutDir    = "layouts"
+publishDir   = "public"
+
+buildDrafts  = false
+buildFuture  = false
+buildExpired = false
+canonifyURLs = false
+
+enableRobotsTXT = true
+enableGitInfo   = false
+enableEmoji     = true
+enableMissingTranslationPlaceholders = false
+enableThemeToggle = true
+disableRSS     = true
+disableSitemap = false
+disable404     = false
+disableHugoGeneratorInject = false
+
+[permalinks]
+  [permalinks.section]
+    homelab = "/homelab/"
+    projects = "/projects/"
+  [permalinks.page]
+    pages = "/:slug"
+
+[blackfriday]
+  hrefTargetBlank = true
+
+[taxonomies]
+  tag        = "tags"
+  category   = "categories"
+  series     = "series"
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04"
+  description = "Personal site for Joey Hafner"
+  keywords = "docker homelab self-hosted bitwarden nextcloud developer git github hugo"
+  images = [""]
+  homeSubtitle = "Personal portfolio website for Joey Hafner"
+  disableReadOtherPosts = false
+  enableThemeToggle = false
+  enableSharingButtons = true
+  enableGlobalLanguageMenu = false
+  customCSS = ["/css/toc-no-underline.css"]
+  customJS  = []
+  justifyContent = false  # Set "text-align: justify" to .post-content.
+  [params.author]
+    name = "Joey Hafner"
+
+  [params.footer]
+    trademark = 2023
+    rss = false
+    copyright = true
+    author = false
+
+    topText = [
+      "Source on <a href=\"https://github.com/Jafner/jafner.dev\">GitHub</a>"
+    ]
+    bottomText = [
+    ]
+
+  [params.favicon.color]
+    mask = "#1b1c1d"
+    msapplication = "#1b1c1d"
+    theme = "#1b1c1d"
+
+  [params.logo]
+    logoMark     = ">$ ~"
+    logoText     = ""
+    logoHomeLink = "/"
+
+  [[params.social]]
+    name = "discord"
+    url  = "https://discordapp.com/users/124394980725751808"
+
+  [[params.social]]
+    name = "email"
+    url  = "mailto:joey@jafner.net"
+
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/Jafner"
+
+  [[params.social]]
+    name = "gitea"
+    url   = "https://gitea.jafner.tools/Jafner"
+
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/in/joey-hafner-b8977a107/"
+
+  [[params.social]]
+    name = "reddit"
+    url  = "https://www.reddit.com/user/jafner425"
+
+[languages]
+  [languages.en]
+    weight    = 1
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+  [languages.en.params]
+    subtitle  = ""
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "about-me"
+    weight     = 10
+  [[menu.main]]
+    identifier = "experience"
+    name       = "Experience"
+    url        = "experience"
+    weight     = 20
+  [[menu.main]]
+    identifier = "homelab"
+    name       = "Homelab"
+    url        = "homelab"
+    weight     = 30
+  [[menu.main]]
+    identifier = "projects"
+    name       = "Projects"
+    url        = "projects"
+    weight     = 40
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
