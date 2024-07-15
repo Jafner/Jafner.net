@@ -1,0 +1,142 @@
+# Addresses:
+# ollama :11434
+# open-webui :3000
+# sillytavern :8000
+# sdwebui :7868
+# oobabooga :7860 :5010
+# exui :5030
+
+version: '3'
+name: 'ai'
+services:
+  ollama:
+    container_name: ai_ollama
+    image: ollama/ollama:rocm
+    networks:
+      - ai
+    privileged: false
+    group_add:
+      - video
+    ports:
+      - 11434:11434
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - ./ollama/modelfiles:/modelfiles 
+      - $MODELS_DIR:/models
+      - ollama-model-storage:/root/.ollama/models/blobs
+    environment:
+      - OLLAMA_ORIGINS="app://obsidian.md*"
+      - OLLAMA_MAX_LOADED_MODELS=0
+
+  open-webui:
+    container_name: ai_open-webui
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - 3000:8080
+    networks:
+      - ai
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+
+  sillytavern:
+    container_name: ai_sillytavern
+    image: ghcr.io/sillytavern/sillytavern:staging
+    networks:
+      - ai
+    privileged: false
+    ports:
+      - 8000:8000/tcp
+    volumes:
+      - ./sillytavern/config/config.yaml:/home/node/app/config/config.yaml
+    environment:
+      - TZ=America/Los_Angeles
+
+  sdwebui:
+    container_name: ai_sdwebui
+    build: 
+      context: ./sdwebui
+    networks:
+      - ai
+    privileged: false
+    group_add:
+      - video
+    ports:
+      - 7868:7860
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - ./models_t2i:/dockerx/stable-diffusion-webui-amdgpu/models
+      - ./sdwebui/images:/images
+      - sdwebui_cache:/dockerx/stable-diffusion-webui-amdgpu/models/ONNX
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+
+  oobabooga:
+    container_name: ai_oobabooga
+    image: atinoda/text-generation-webui:base-rocm
+    environment:
+      - EXTRA_LAUNCH_ARGS="--listen --verbose --chat-buttons --use_flash_attention_2 --flash-attn --api --extensions openai"
+    stdin_open: true
+    tty: true
+    networks:
+      - ai
+    ipc: host
+    group_add:
+      - video
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp=unconfined
+    ports:
+      - 7860:7860
+      - 5010:5000
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - $MODELS_DIR:/app/models
+      - oobabooga_cache:/root/.cache
+      - ./oobabooga/characters:/app/characters
+      - ./oobabooga/instruction-templates:/app/instruction-templates
+      - ./oobabooga/loras:/app/loras
+      - ./oobabooga/presets:/app/presets
+      - ./oobabooga/prompts:/app/prompts
+      - ./oobabooga/training:/app/training
+  
+  exui:
+    container_name: ai_exui
+    build: 
+      context: ./exl2
+    networks:
+      - ai
+    privileged: false
+    group_add:
+      - video
+    ports:
+      - 5030:5000
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - $MODELS_DIR:/models
+
+volumes:
+  ollama-model-storage:
+  open-webui:
+  sdwebui_cache:
+  oobabooga:
+  oobabooga_cache:
+networks:
+  ai:
+    name: "ai"
+    ipam:
+      driver: default
+      config: 
+       - subnet: 172.20.0.0/16

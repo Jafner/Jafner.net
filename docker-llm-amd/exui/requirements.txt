@@ -1,0 +1,45 @@
+blinker==1.8.2
+certifi==2024.2.2
+charset-normalizer==3.3.2
+click==8.1.7
+cramjam==2.8.3
+exllamav2 @ https://github.com/turboderp/exllamav2/releases/download/v0.0.21/exllamav2-0.0.21+rocm6.0-cp310-cp310-linux_x86_64.whl
+fastparquet==2024.5.0
+filelock==3.13.1
+Flask==3.0.3
+fsspec==2024.2.0
+huggingface-hub==0.23.1
+idna==3.7
+itsdangerous==2.2.0
+Jinja2==3.1.3
+MarkupSafe==2.1.5
+mpmath==1.3.0
+networkx==3.2.1
+ninja==1.11.1.1
+numpy==1.26.3
+packaging==24.0
+pandas==2.2.2
+pillow==10.2.0
+Pygments==2.18.0
+pynvml==11.5.0
+python-dateutil==2.9.0.post0
+pytorch-triton-rocm @ https://download.pytorch.org/whl/pytorch_triton_rocm-2.3.0-cp310-cp310-linux_x86_64.whl
+pytz==2024.1
+PyYAML==6.0.1
+regex==2024.5.15
+requests==2.32.2
+safetensors==0.4.3
+sentencepiece==0.2.0
+six==1.16.0
+sympy==1.12
+tokenizers==0.19.1
+torch @ https://download.pytorch.org/whl/rocm6.0/torch-2.3.0%2Brocm6.0-cp310-cp310-linux_x86_64.whl
+torchaudio @ https://download.pytorch.org/whl/rocm6.0/torchaudio-2.3.0%2Brocm6.0-cp310-cp310-linux_x86_64.whl
+torchvision @ https://download.pytorch.org/whl/rocm6.0/torchvision-0.18.0%2Brocm6.0-cp310-cp310-linux_x86_64.whl
+tqdm==4.66.4
+typing_extensions==4.9.0
+tzdata==2024.1
+urllib3==2.2.1
+waitress==3.0.0
+websockets==12.0
+Werkzeug==3.0.3

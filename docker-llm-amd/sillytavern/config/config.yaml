@@ -1,0 +1,46 @@
+dataRoot: ./data
+listen: false
+port: 8000
+whitelistMode: false
+enableForwardedWhitelist: false
+whitelist:
+  - 127.0.0.1
+  - 172.19.0.1
+basicAuthMode: true
+basicAuthUser:
+  username: joey
+  password: ***REMOVED***
+enableCorsProxy: false
+enableUserAccounts: false
+enableDiscreetLogin: false
+cookieSecret: Viwb315DDUewxmznF1cX1tJiLu/TW1AK8envDePAbovByvpKdJHPI5Nrcd6mpSGOkvDYy72OqhV8NnYubFA3KQ==
+disableCsrfProtection: false
+securityOverride: false
+autorun: true
+disableThumbnails: false
+thumbnailsQuality: 95
+avatarThumbnailsPng: false
+allowKeysExposure: false
+skipContentCheck: false
+disableChatBackup: false
+whitelistImportDomains:
+  - localhost
+  - cdn.discordapp.com
+  - files.catbox.moe
+  - raw.githubusercontent.com
+requestOverrides: []
+enableExtensions: true
+extras:
+  disableAutoDownload: false
+  classificationModel: Cohee/distilbert-base-uncased-go-emotions-onnx
+  captioningModel: Xenova/vit-gpt2-image-captioning
+  embeddingModel: Cohee/jina-embeddings-v2-base-en
+  promptExpansionModel: Cohee/fooocus_expansion-onnx
+  speechToTextModel: Xenova/whisper-small
+  textToSpeechModel: Xenova/speecht5_tts
+openai:
+  randomizeUserId: false
+  captionSystemPrompt: ""
+deepl:
+  formality: default
+enableServerPlugins: false
