@@ -1,0 +1,41 @@
+#!/bin/bash
+# Transcodes a file to x264 with VA API acceleration.
+
+# Set the $FILE variable to act on. Varies with file manager, but Dolphin's servicemenus and CLI both use $1
+if ! [ -z $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS ]; then
+    echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" > ~/.nautilus_script_selected_file_paths
+    if (( $(grep -c . <<<"$(cat ~/.nautilus_script_selected_file_paths)") > 1 )); then notify-send -u critical "Script error" "Selecting more than 1 file is not supported."; exit 1; fi
+    rm ~/.nautilus_script_selected_file_paths
+    INPUT_FILE="$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"
+elif ! [ -z "$1" ]; then 
+    INPUT_FILE="$1"
+else
+    echo "No file selected."
+    exit 1
+fi
+
+RATE_FACTOR=""
+while [ -z "$RATE_FACTOR" ]; do
+    RATE_FACTOR=$(kdialog --title "Transcode: x264 Rate factor" --inputbox "Rate factor (15-28, lower is higher fidelity, higher bitrate.")
+    if ! (($RATE_FACTOR >= 15 && $RATE_FACTOR <= 28)); then
+        RATE_FACTOR=""
+    fi
+done
+
+# Break up the input file's parts so we know the:
+# - absolute path (e.g. /home/user/Videos/MyVideo.mkv)
+# - file name (with extension) (e.g. MyVideo.mkv)
+# - file extension (e.g. mkv)
+# - file name (without extension) (e.g. MyVideo)
+# - composed output file absolute path (e.g. /home/user/Videos/MyVideo-clip.mp4)
+INPUT_FILE=$(realpath "$INPUT_FILE")
+FILE_PATH=$(dirname "$INPUT_FILE")
+FILE_NAME=$(basename "$INPUT_FILE")
+FILE_EXT="${FILE_NAME##*.}"
+FILE_NAME="${FILE_NAME%.*}"
+OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.x264.$FILE_EXT")
+
+# Actual transcoding happens here:
+notify-send -t 2000 "Transcode starting" "$FILE_NAME"
+ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,hwupload' -c:v h264_vaapi -qp $RATE_FACTOR -c:a copy "$OUTFILE"
+notify-send -t 4000 "Transcode complete" "$FILE_NAME"

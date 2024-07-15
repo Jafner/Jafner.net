@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# The purpose of this script is to provide a quick graphical interface
+# for post-processing video recordings with sensibly-constrained options
+
+# Is is built initially to be called by a Dolphin Servicemenu onto a specific
+# file. Not intended for batch processing.
+
+# 1. Parse input filename into parts.
+#   - Presumes: '[YYYY-MM-DD] HH-mm-ss.ext' format
+#   - Presumes the user wants to name the file without losing the date information
+# 2. Figure out what the user wants to do with the file.
+#   2.1. Rename the video? If so, how?
+#     2.1.1. Set name? (Leave blank for HH-mm-ss).
+#     2.1.2. Keep date? 
+#   2.2. Transcode the video? If so, how?
+#     2.2.1. AV1
+#       2.2.1.1. CRF [15-28]
+#       2.2.1.2. ABR [2-100 Mbps]
+#     2.2.2. x264
+#       2.2.2.1. CQP [15-28]
+#       2.2.2.2. CBR [2-100 Mbps]
+#     2.2.3. x265 
+#       2.2.3.1. CQP [15-28]
+#       2.2.3.2. CBR [2-100 Mbps]
+#   2.3. Remux the video? If so, how?
+#     2.3.1. To mp4 (default)
+#   2.4. Upload the video? If so, how to format resulting share link? 
+#     2.4.1 Markdown (default): [$FILE_NAME]($LINK_TO_FILE)
+#     2.4.2 Plain link: $LINK_TO_FILE
+
+INPUT_FILE="$1"
+
+INPUT_FILE=$(realpath "$INPUT_FILE")
+FILE_PATH=$(dirname "$INPUT_FILE")
+FILE_NAME=$(basename "$INPUT_FILE")
+FILE_EXT="${FILE_NAME##*.}"
+FILE_NAME="${FILE_NAME%.*}"
+OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.av1.$FILE_EXT")
+
+notify-send -t 2000 "Transcode starting" "$FILE_NAME"
+ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,hwupload' -c:v av1_vaapi -crf 18 -b:v 6000k "$OUTFILE" > /dev/null
+notify-send -t 4000 "Transcode complete" "$FILE_NAME"

@@ -1,0 +1,98 @@
+#!/bin/bash
+
+if ! [ -z "$1" ]; then 
+    INPUT_FILE="$1"
+else
+    echo "No file selected."
+    exit 1
+fi
+
+START_TIMESTAMP=""
+while [ -z "$START_TIMESTAMP" ]; do
+    START_TIMESTAMP=$(kdialog --title "Clip: Start timestamp" --inputbox "Timestamp for start of clip \nE.g. 1:23:04 \n(Remember to align to video keyframe)")
+    # Should validate the value of START_TIMESTAMP here. 
+    # Very insecure.
+done
+
+END_TIMESTAMP=""
+while [ -z "$END_TIMESTAMP" ]; do
+    END_TIMESTAMP=$(kdialog --title "Clip: End timestamp" --inputbox "Timestamp for end of clip \nE.g. 1:24:44")
+    # Should validate the value of END_TIMESTAMP here. 
+    # Very insecure.
+done
+
+CLIP_NAME=""
+while [ -z "$CLIP_NAME" ]; do
+    CLIP_NAME=$(kdialog --title "Clip: Name" --inputbox "Name of the clip \nE.g. \"Forecast calls for rain\" will end up like:\n\"[2024-02-09] Forecast calls for rain.mp4\"")
+    # Should validate the value of CLIP_NAME here. 
+    # Very insecure.
+done
+
+# We know our raw recordings are named like "[YYYY-MM-DD] HH:mm:ss.mkv"
+# We want to turn "[YYYY-MM-DD] HH:mm:ss.mkv" into 
+# "[YYYY-MM-DD] Clip Name.mp4"
+# We want to preserve the date, but we don't need the timestamp.
+# Break up the input file's parts so we know the:
+# - absolute path (e.g. /home/user/Videos/[2024-02-09] 13:45:22.mkv)
+# - file name (with extension) (e.g. [2024-02-09] 13:45:22.mkv)
+# - file extension (e.g. mkv)
+# - file name (without extension) (e.g. [2024-02-09] 13:45:22)
+# - composed output file absolute path (e.g. /home/user/Videos/MyVideo-clip.mp4)
+INPUT_FILE=$(realpath "$INPUT_FILE")
+FILE_PATH=$(dirname "$INPUT_FILE")
+FILE_NAME=$(basename "$INPUT_FILE")
+FILE_EXT="${FILE_NAME##*.}"
+FILE_NAME="${FILE_NAME%.*}"
+FILE_DATESTAMP=$(echo $FILE_NAME | cut -d' ' -f1)
+FILE_TIMESTAMP=$(echo $FILE_NAME | cut -d' ' -f2)
+FILE_NAME="$FILE_DATESTAMP $CLIP_NAME"
+
+# Create the CLIPPED_FILE from the INPUT_FILE
+CLIPPED_FILE=$(echo "/tmp/Clipped-$FILE_NAME.$FILE_EXT")
+# CLIPPED_FILE should be like "/tmp/[2024-02-09] Forecast calls for rain (1:23:04-1:24:44).mkv"
+# Or "/tmp/[2024-02-09] 13:45:22 (1:23:04-1:24:44).mkv"
+notify-send -t 4000 "Extracting clip" "$CLIPPED_FILE"
+ffmpeg -hide_banner -y -i "$INPUT_FILE" -ss "$START_TIMESTAMP" -to "$END_TIMESTAMP" -map 0 -c:v copy -c:a copy "$CLIPPED_FILE"
+
+# Create the REMUXED_FILE from the CLIPPED_FILE
+# Then delete the CLIPPED_FILE
+FILE_EXT="mp4"
+REMUXED_FILE=$(echo "/tmp/Remuxed-$FILE_NAME.$FILE_EXT")
+# REMUXED_FILE should be like "/tmp/[2024-02-09] Forecast calls for rain.mp4"
+# Or "/tmp/[2024-02-09] 13:45:22.mp4"
+notify-send -t 4000 "Remuxing clip" "$REMUXED_FILE"
+ffmpeg -hide_banner -y -i "$CLIPPED_FILE" -map 0 -c:v copy -c:a copy "$REMUXED_FILE"
+rm "$CLIPPED_FILE"
+
+# Create the TRANSCODED_FILE from the REMUXED_FILE
+# Then delete the REMUXED_FILE
+TRANSCODED_FILE=$(echo "/tmp/Transcoded-$FILE_NAME.$FILE_EXT")
+# TRANSCODED_FILE should be like "/tmp/[2024-02-09] Forecast calls for rain (1:23:04-1:24:44).mp4"
+# Or "/tmp/[2024-02-09] 13:45:22 (1:23:04-1:24:44).mp4"
+notify-send -t 4000 "Transcoding clip" "$TRANSCODED_FILE"
+ffmpeg -hide_banner -y -vaapi_device /dev/dri/renderD128 -i "$REMUXED_FILE" -map 0 -vf 'format=nv12,hwupload' -c:v h264_vaapi -qp 18 -c:a copy "$TRANSCODED_FILE"
+rm "$REMUXED_FILE"
+
+# Upload the TRANSCODED_FILE with the filename of UPLOADED_FILE
+# Then delete it.
+UPLOADED_FILE=$(echo "/tmp/$FILE_NAME.$FILE_EXT")
+
+mv "$TRANSCODED_FILE" "$UPLOADED_FILE"
+echo "UPLOADED_FILE=$UPLOADED_FILE"
+
+notify-send -t 4000 "Uploading clip" "$UPLOADED_FILE"
+ZIPLINE_HOST_ROOT=https://zipline.jafner.net
+TOKEN=$(cat ~/.zipline-auth)
+LINK=$(curl \
+    --header "authorization: $TOKEN" \
+    $ZIPLINE_HOST_ROOT/api/upload -F "file=@$UPLOADED_FILE" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Format: name" \
+    --header "Embed: true" \
+    --header "Original-Name: true") 
+LINK=$(echo "$LINK" | jq -r .'files[0]')
+echo "[$FILE_NAME]($LINK)" | wl-copy
+notify-send -t 4000 "Zipline - Upload complete." "Link copied to clipboard: $LINK"
+rm "$UPLOADED_FILE"
+
+read -p "Press any key to close."

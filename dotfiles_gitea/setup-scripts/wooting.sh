@@ -1,0 +1,1 @@
+mv ./wooting-udev.rules /etc/udev/rules.d/70-wooting.rules
