@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  ddclient:
+    image: linuxserver/ddclient
+    container_name: ddns_ddclient
+    restart: "no"
+    networks:
+      - ddns
+    env_file:
+      - path: ./ddclient.env
+        required: true
+    volumes:
+      - ./ddclient:/config
+    labels:
+      - traefik.enable=false
+
+networks:
+  ddns:

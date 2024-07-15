@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  stash:
+    container_name: stash
+    image: stashapp/stash:latest
+    restart: "no"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - $METADATA_DIR/generated:/generated
+      - $METADATA_DIR/metadata:/metadata
+      - $METADATA_DIR/cache:/cache
+      - $MEDIA_DIR/Videos:/media/Videos
+      - $MEDIA_DIR/Galleries:/media/Galleries
+      - $DOCKER_DATA:/root/.stash
+    env_file:
+      - path: ./stashapp.env
+        required: true
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.stash.rule=Host(`stash.jafner.net`)
+      - traefik.http.routers.stash.tls.certresolver=lets-encrypt
+      - traefik.http.routers.stash.middlewares=traefik-forward-auth-privileged@file
+
+networks:
+  web:
+    external: true

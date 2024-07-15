@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_test
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`test.jafner.net`)
+      - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nginx.middlewares=traefik-forward-auth-privileged@file
+
+networks:
+  web:
+    external: true

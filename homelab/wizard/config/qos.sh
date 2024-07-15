@@ -1,0 +1,7 @@
+set qos interface eth6 egress 'GIGABIT-FQCODEL'
+set qos interface pppoe1 ingress 'LIMITER'
+set qos policy fq-codel GIGABIT-FQCODEL codel-quantum '8000'
+set qos policy fq-codel GIGABIT-FQCODEL flows '1024'
+set qos policy fq-codel GIGABIT-FQCODEL queue-limit '800'
+set qos policy limiter LIMITER default bandwidth '700mbit'
+set qos policy limiter LIMITER default burst '262.5mbit'

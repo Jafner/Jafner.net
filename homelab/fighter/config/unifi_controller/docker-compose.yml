@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  unifi-controller:
+    image: lscr.io/linuxserver/unifi-controller
+    container_name: unifi_controller
+    restart: "no"
+    networks:
+      - web
+    env_file:
+      - path: ./unifi_controller.env
+        required: true
+    volumes:
+      - ${DOCKER_DATA}/config:/config
+    ports:
+      - 3478:3478/udp # unifi STUN port
+      - 10001:10001/udp # AP discovery port
+      - 8080:8080 # communicate with devices
+      #- 8443:8443 # web admin port
+      #- 1900:1900/udp # discoverability on layer 2
+      - 8843:8843 # guest portal http
+      - 8880:8880 # guest portal https
+      - 6789:6789 # mobile throughput test port
+      - 5514:5514/udp # remote syslog
+    labels:
+      - traefik.http.routers.unifi.rule=Host(`unifi.jafner.net`)
+      - traefik.http.routers.unifi.tls.certresolver=lets-encrypt
+      - traefik.http.routers.unifi.tls=true
+      - traefik.http.routers.unifi.middlewares=lan-only@file
+      - traefik.http.services.unifi.loadbalancer.server.port=8443
+      - traefik.http.services.unifi.loadbalancer.server.scheme=https
+
+networks:
+  web:
+    external: true

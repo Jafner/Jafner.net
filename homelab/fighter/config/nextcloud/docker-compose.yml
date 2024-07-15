@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud_nextcloud
+    env_file:
+      - path: ./nextcloud.env
+        required: true
+    depends_on:
+      - mariadb
+    labels:
+      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.jafner.net`)
+      - traefik.http.routers.nextcloud.tls.certresolver=lets-encrypt
+      - traefik.http.routers.nextcloud.middlewares=nextcloud-headers@file,nextcloud-redirect@file
+      #- traefik.http.services.nextcloud.loadbalancer.server.scheme=https
+      #- traefik.http.services.nextcloud.loadbalancer.server.port=443
+    networks:
+      - web
+      - nextcloud
+    volumes:
+      - $DOCKER_DATA/config:/config
+      - $DOCKER_DATA/data:/data
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb
+    container_name: nextcloud_mariadb
+    networks:
+      - nextcloud
+    env_file:
+      - path: ./mariadb.env
+        required: true
+      - path: ./mariadb_secrets
+        required: false
+    volumes:
+      - $DOCKER_DATA/mariadb:/config
+
+  redis:
+    image: redis
+    container_name: nextcloud_redis
+    networks:
+      - nextcloud
+    volumes:
+      - $DOCKER_DATA/redis:/data
+
+networks:
+  web:
+    external: true    
+  nextcloud:

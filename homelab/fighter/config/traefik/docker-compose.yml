@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik_traefik
+    restart: "no"
+    networks:
+      web:
+        ipv4_address: 172.20.0.10
+      monitoring: 
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yaml:/traefik.yaml
+      - ./config:/config
+      - $DOCKER_DATA/acme.json:/acme.json
+
+networks:
+  web:
+    external: true
+  monitoring:
+    external: true

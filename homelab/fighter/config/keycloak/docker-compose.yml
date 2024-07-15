@@ -1,0 +1,94 @@
+version: '3.9'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    container_name: keycloak_keycloak
+    networks:
+      keycloak:
+        aliases:
+          - keycloak
+      web:
+        aliases:
+          - keycloak
+    restart: "no"
+    depends_on:
+      - postgres
+    command: start
+    env_file:
+      - path: ./keycloak.env
+        required: true
+      - path: ./keycloak_secrets.env
+        required: false
+    labels:
+      traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
+      traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
+      traefik.http.routers.keycloak.middlewares: keycloak-redirect
+      traefik.http.services.keycloak.loadbalancer.server.port: 8080
+      traefik.http.middlewares.keycloak-redirect.redirectregex.regex: ^https:\\/\\/([^\\//]+)\\/?$$"
+      traefik.http.middlewares.keycloak-redirect.redirectregex.replacement: https://$$1/admin"
+
+  forwardauth:
+    image: mesosphere/traefik-forward-auth:3.1.0
+    container_name: keycloak_forwardauth
+    networks:
+      web:
+        aliases:
+          - forwardauth
+    restart: "no"
+    command: "./traefik-forward-auth"
+    depends_on:
+      - keycloak
+    env_file:
+      - path: ./forwardauth.env
+        required: true
+      - path: ./forwardauth_secrets.env
+        required: false
+    labels:
+      - "traefik.enable=false"
+      - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
+      - "traefik.http.routers.forwardauth.tls.certresolver=lets-encrypt"
+
+  forwardauth-privileged:
+    image: mesosphere/traefik-forward-auth:3.1.0
+    container_name: keycloak_forwardauth-privileged
+    networks:
+      web:
+        aliases:
+          - forwardauth-privileged
+    restart: "no"
+    command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
+    depends_on:
+      - keycloak
+    env_file:
+      - path: ./forwardauth-privileged.env
+        required: true
+      - path: ./forwardauth-privileged_secrets.env
+        required: false
+    labels:
+      - "traefik.enable=false"
+      - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
+      - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
+
+  postgres:
+    image: postgres:15
+    container_name: keycloak_postgres
+    networks:
+      - keycloak
+    env_file:
+      - path: ./postgres.env
+        required: true
+      - path: ./postgres_secrets.env
+        required: false
+      - postgres.env
+      - postgres_secrets.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  web:
+    external: true
+  keycloak:
+
+volumes:
+  postgres_data:

@@ -1,0 +1,49 @@
+version: '3.9'
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_qbittorrent
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+    networks:
+      - web
+    restart: "no"
+    volumes:
+      - $DOCKER_DATA:/config
+      - $TORRENT_DATA:/torrenting
+      - ./discord_notifier.sh:/discord_notifier.sh
+      - ./discord_notifier_secrets.env:/discord_notifier_secrets.env
+    env_file:
+      - path: ./qbittorrent.env
+        required: true
+    ports:
+      - 49510:49510
+    labels:
+      - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
+      - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
+      - traefik.http.routers.qbt.middlewares=traefik-forward-auth-privileged@file
+      - traefik.http.routers.qbt-api.rule=Host(`api.qbt.jafner.net`)
+      - traefik.http.routers.qbt-api.tls.certresolver=lets-encrypt
+      - traefik.http.routers.qbt-api.middlewares=lan-only@file
+      - traefik.http.services.qbt.loadbalancer.server.port=8080
+
+  exporter-qbittorrent:
+    image: esanchezm/prometheus-qbittorrent-exporter
+    container_name: qbittorrent_exporter
+    env_file:
+      - path: ./exporter.env
+        required: true
+    restart: "no"
+    networks:
+      - monitoring
+      - web
+    labels:
+      - traefik.enable=false
+
+networks:
+  web:
+    external: true
+  monitoring:
+    external: true

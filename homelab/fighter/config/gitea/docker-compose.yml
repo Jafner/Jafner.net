@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  runner-ubuntu:
+    image: gitea/act_runner:latest
+    container_name: gitea_runner-ubuntu-internal
+    env_file:
+      - path: ./runner-ubuntu-internal.env
+        required: true
+      - path: ./runner_secrets.env
+        required: false
+    volumes: 
+      - ./config.yaml:/config.yaml
+      - $DOCKER_DATA/runner-ubuntu-internal:/data
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -1,0 +1,91 @@
+version: '3.9'
+services:
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: monitoring_grafana
+    restart: "no"
+    networks:
+      - monitoring
+      - web
+    user: "0"
+    volumes:  
+      - ${DOCKER_DATA}/grafana:/var/lib/grafana
+      - ${DOCKER_DATA}/custom.ini:/etc/grafana/grafana.ini
+    labels:
+      - traefik.http.routers.grafana.rule=Host(`grafana.jafner.net`)
+      - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
+      - traefik.http.routers.grafana.tls.options=tls12@file
+      - traefik.http.routers.grafana.middlewares=securityheaders@file
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: monitoring_prometheus
+    user: 1001:1001
+    networks:
+      - monitoring
+      - web
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ${DOCKER_DATA}/prometheus:/prometheus
+    restart: "no"
+    command:
+      -   "--config.file=/etc/prometheus/prometheus.yml"
+    labels:
+      - traefik.http.routers.prometheus-monitoring.rule=Host(`prometheus.jafner.net`)
+      - traefik.http.routers.prometheus-monitoring.tls.certresolver=lets-encrypt
+      - traefik.http.routers.prometheus-monitoring.middlewares=traefik-forward-auth-privileged@file
+
+  exporter-ping:
+    image: czerwonk/ping_exporter
+    container_name: monitoring_exporter-ping
+    restart: "no"
+    networks:
+      - monitoring
+    volumes:
+      - ./exporter-ping/config.yml:/config/config.yml
+  
+  exporter-docker:
+    image: prometheusnet/docker_exporter
+    container_name: monitoring_exporter-docker
+    restart: "no"
+    networks:
+      - monitoring
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.enable=false
+  
+  exporter-pihole:
+    image: ekofr/pihole-exporter:latest
+    container_name: monitoring_exporter-pihole
+    env_file:
+      - path: ./exporter-pihole.env
+        required: true
+      - path: ./exporter-pihole_secrets.env
+        required: false
+    restart: "no"
+    networks:
+      - monitoring
+    labels:
+      - traefik.enable=false
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: monitoring_uptime-kuma
+    restart: "no"
+    volumes:
+      - $DOCKER_DATA/uptime-kuma:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.uptime-kuma.rule=Host(`uptime.jafner.net`)
+      - traefik.http.routers.uptime-kuma.tls.certresolver=lets-encrypt
+
+networks:
+  monitoring:
+    external: true
+  web:
+    external: true

@@ -1,0 +1,10 @@
+*.secret
+*_secrets.env
+jafner-net/config/ddns/ddclient/ddclient.conf
+service-key.json
+.terraform/
+.terraform.lock.hcl
+terraform/infrastructure/.tfvars
+ip.tmp
+*.passwd
+/.directory

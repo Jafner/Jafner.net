@@ -1,0 +1,21 @@
+System:
+  Host: vyos Kernel: 6.1.64-amd64-vyos arch: x86_64 bits: 64 Console: pty pts/1 Distro: VyOS
+    1.5-rolling-202311300023 (current) bookworm
+Machine:
+  Type: Desktop Mobo: MSI model: Z77A-G41 (MS-7758) v: 3.0 serial: N/A BIOS: American Megatrends
+    v: 2.8 date: 12/28/2012
+CPU:
+  Info: quad core Intel Core i7-2600 [MT MCP] speed (MHz): avg: 3687 min/max: 1600/3800
+Graphics:
+  Device-1: Intel 2nd Generation Core Processor Family Integrated Graphics driver: N/A
+  Display: server: No display server data found. Headless machine? tty: 177x61
+  API: N/A Message: No API data available in console. Headless machine?
+Network:
+  Device-1: Realtek RTL8111/8168/8411 PCI Express Gigabit Ethernet driver: r8169
+  Device-2: Intel 82575EB Gigabit Network driver: igb
+  Device-3: Intel 82575EB Gigabit Network driver: igb
+Drives:
+  Local Storage: total: 119.24 GiB used: 3.62 GiB (3.0%)
+Info:
+  Processes: 160 Uptime: 33d 20h 34m Memory: total: 16 GiB available: 15.52 GiB
+  used: 586 MiB (3.7%) Init: systemd target: graphical (5) Shell: Sudo inxi: 3.3.31

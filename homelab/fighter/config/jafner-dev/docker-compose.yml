@@ -1,0 +1,43 @@
+name: "jafner-dev"
+version: '3.7'
+services:
+  jafner-dev:
+    image: wordpress
+    container_name: jafner-dev
+    env_file:
+      - path: ./jafner-dev.env
+        required: true
+      - path: ./jafner-dev_secrets.env
+        required: false
+    restart: "no"
+    volumes:
+      - ${DOCKER_DATA}/html:/var/www/html
+      - ./upload.ini:/usr/local/etc/php/conf.d/uploads.ini
+    networks:
+      - web
+      - jafner-dev
+    depends_on:
+      - db
+    labels:
+       - traefik.http.routers.jafner-dev.rule=Host(`jafner.dev`)
+       - traefik.http.routers.jafner-dev.tls.certresolver=lets-encrypt
+  db:
+    image: mysql:5.7
+    container_name: jafner-dev_db
+    restart: "no"
+    networks:
+      - jafner-dev
+    env_file:
+      - path: ./db.env
+        required: true
+      - path: ./db_secrets.env
+        required: false
+    volumes:
+      - ${DOCKER_DATA}/db:/var/lib/mysql
+    labels:
+      - traefik.enable=false
+
+networks:
+  web:
+    external: true
+  jafner-dev:

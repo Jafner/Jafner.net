@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage
+    container_name: homepage_tasmota
+    env_file:
+      - homepage.env
+    networks:
+      - web
+    volumes:
+      - $DOCKER_DATA/logs:/app/config/logs
+      - ./icons/:/app/public/icons
+      - ./config:/app/config/
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.http.routers.homepage-tasmota.rule=Host(`home.tasmota.jafner.net`)
+      - traefik.http.routers.homepage-tasmota.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
