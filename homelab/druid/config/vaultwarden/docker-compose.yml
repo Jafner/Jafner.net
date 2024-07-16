@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   vaultwarden:
-    image: vaultwarden/server:latest
+    image: vaultwarden/server@sha256:2ed1d43b7cd49e2b86b27111ae204c15d6f55c4523a220e3542bf0527fd44bf5
     container_name: vaultwarden_vaultwarden
     restart: "no"
     env_file:

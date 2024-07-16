@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   gitea:
-    image: gitea/gitea:1.21.0
+    image: gitea/gitea@sha256:59c71717df8b56ed633d50de9d8d2c1671dae2afc08ae142fb04cc2ec4b0ba85
     container_name: gitea_gitea
     env_file:
       - path: ./gitea.env
@@ -25,7 +25,7 @@ services:
       - traefik.http.services.gitea.loadbalancer.server.port=3000
 
   postgres:
-    image: postgres:13
+    image: postgres@sha256:19975f71ce75557051d89ac75af011ba2d370160937dba3d61259e6bf6b9804f
     container_name: gitea_postgres
     networks:
       - gitea
@@ -36,7 +36,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
   
   runner-ubuntu:
-    image: gitea/act_runner:latest
+    image: gitea/act_runner@sha256:48f96921f1163720cfa6a9d362d9154fbe1f7572e616294d78ef12b9ec797f98
     container_name: gitea_runner-ubuntu
     depends_on:
       - gitea

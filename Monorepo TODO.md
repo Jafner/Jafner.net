@@ -21,6 +21,7 @@ This page describes steps to take to move toward initial valid commit.
     6.  `.pre-commit-config.yaml`
 12. Cutover hosts from `homelab` to `Jafner.net` with sparse checkout.
     1.  `fighter` - Migrate secrets from `~/homelab/**/*_secrets.env` to `~/Jafner.net/active projects/homelab/**/*_secrets.env`. 
+        - `cd /home/admin/homelab/ && SECRETFILES=$(find . -name '*_secrets.env' | cut -d'/' -f2-) && for file in $(echo $SECRETFILES); do FROM_FILE=$(echo "/home/admin/homelab/$file"); TO_FILE=$(echo "/home/admin/Jafner.net/homelab/$file"); echo "$FROM_FILE -> $TO_FILE"; cp -p "$FROM_FILE" "$TO_FILE"; done`
     2.  `druid`
 13. Pin docker image versions to current.
 14. Configure deployment systems

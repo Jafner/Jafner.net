@@ -2,7 +2,7 @@ version: '3.9'
 services:
   5etools:
     container_name: 5etools
-    image: jafner/5etools-docker
+    image: jafner/5etools-docker@sha256:18df6bc9ad236c24d012c878c3db153736fdcae943f0bf817ade4c0fda991cb2
     restart: "no"
     volumes:
       - $DOCKER_DATA/htdocs:/usr/local/apache2/htdocs
