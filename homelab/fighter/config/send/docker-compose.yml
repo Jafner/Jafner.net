@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   send:
-    image: registry.gitlab.com/timvisee/send:latest
+    image: registry.gitlab.com/timvisee/send@sha256:04872f87497008a66536af430cb2be80bd15622a868c894588c04841f6c9659f
     user: 1001:1001
     container_name: send_send
     restart: "no"

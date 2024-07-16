@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   grafana:
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana-oss@sha256:b6ea013786be887c06d9664ad133f5300480f5c6b2f4586554d7c3b0756d9849
     container_name: monitoring_grafana
     restart: "no"
     networks:
@@ -18,7 +18,7 @@ services:
       - traefik.http.routers.grafana.middlewares=securityheaders@file
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus@sha256:8c01021bb2f4a685759ae4525aa2ea8460671a0412fd1bd58c205424c290a27e
     container_name: monitoring_prometheus
     user: 1001:1001
     networks:
@@ -38,7 +38,7 @@ services:
       - traefik.http.routers.prometheus-monitoring.middlewares=traefik-forward-auth-privileged@file
 
   exporter-ping:
-    image: czerwonk/ping_exporter
+    image: czerwonk/ping_exporter@sha256:fe65bcfdc16243f6c6eb08edc3bfbc6a80d4fbb60a7e2814138b7014b9cafcf4
     container_name: monitoring_exporter-ping
     restart: "no"
     networks:
@@ -47,7 +47,7 @@ services:
       - ./exporter-ping/config.yml:/config/config.yml
   
   exporter-docker:
-    image: prometheusnet/docker_exporter
+    image: prometheusnet/docker_exporter@sha256:f48aa98298fcde47edbd97f1c33534318a1f3e28ed9581f56fc2dcb4c3b21455
     container_name: monitoring_exporter-docker
     restart: "no"
     networks:
@@ -58,7 +58,7 @@ services:
       - traefik.enable=false
   
   exporter-pihole:
-    image: ekofr/pihole-exporter:latest
+    image: ekofr/pihole-exporter@sha256:f3ee4b32da43cdd10f12e57a95aab2bd43b9754d73c7394d5f6871a48668d96d
     container_name: monitoring_exporter-pihole
     env_file:
       - path: ./exporter-pihole.env
@@ -72,7 +72,7 @@ services:
       - traefik.enable=false
 
   uptime-kuma:
-    image: louislam/uptime-kuma:1
+    image: louislam/uptime-kuma@sha256:e10376878b88fdeaa554b581695b99b5552fbbbb5344806046a859dcd3a2daf0
     container_name: monitoring_uptime-kuma
     restart: "no"
     volumes:

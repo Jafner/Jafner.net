@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak:23.0
+    image: quay.io/keycloak/keycloak@sha256:33825b7d2d9e317215939851e10b1e184b4f876de1b5b25cf448e425c47802bd
     container_name: keycloak_keycloak
     networks:
       keycloak:
@@ -29,7 +29,7 @@ services:
       traefik.http.middlewares.keycloak-redirect.redirectregex.replacement: https://$$1/admin"
 
   forwardauth:
-    image: mesosphere/traefik-forward-auth:3.1.0
+    image: mesosphere/traefik-forward-auth@sha256:116b3d1ffd4c7a8c4e26f20789e3dd84d9b5555afecab14063d48bdce8a7e468
     container_name: keycloak_forwardauth
     networks:
       web:
@@ -50,7 +50,7 @@ services:
       - "traefik.http.routers.forwardauth.tls.certresolver=lets-encrypt"
 
   forwardauth-privileged:
-    image: mesosphere/traefik-forward-auth:3.1.0
+    image: mesosphere/traefik-forward-auth@sha256:116b3d1ffd4c7a8c4e26f20789e3dd84d9b5555afecab14063d48bdce8a7e468
     container_name: keycloak_forwardauth-privileged
     networks:
       web:
@@ -71,7 +71,7 @@ services:
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
 
   postgres:
-    image: postgres:15
+    image: postgres@sha256:93c8b6f9c1a297790b1e18efd8fc2964bf5f346425a245c662b042ae371b929a
     container_name: keycloak_postgres
     networks:
       - keycloak

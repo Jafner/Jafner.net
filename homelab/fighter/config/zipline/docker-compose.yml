@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   zipline:
-    image: ghcr.io/diced/zipline
+    image: ghcr.io/diced/zipline@sha256:d2e9571a991c1d3715d58483a587a7fe0cfec8f9fb19a167eb3d2b44ae0f3818
     container_name: zipline_zipline
     restart: unless-stopped
     networks:
@@ -22,7 +22,7 @@ services:
       - traefik.http.services.zipline.loadbalancer.server.port=3000
 
   postgres:
-    image: postgres:15
+    image: postgres@sha256:93c8b6f9c1a297790b1e18efd8fc2964bf5f346425a245c662b042ae371b929a
     container_name: zipline_postgres
     restart: unless-stopped
     networks:

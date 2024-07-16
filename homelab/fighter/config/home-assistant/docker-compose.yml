@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   home-assistant:
-    image: lscr.io/linuxserver/homeassistant:latest
+    image: lscr.io/linuxserver/homeassistant@sha256:2a9ed0dcb812e97a5e31c15a98e0da6c15f32156bf814de0bf34d272b1f56673
     container_name: home-assistant_home-assistant
     env_file:
       - path: home-assistant.env
@@ -17,7 +17,7 @@ services:
       - traefik.http.routers.home-assistant.tls.certresolver=lets-encrypt
 
   mosquitto:
-    image: eclipse-mosquitto:latest
+    image: eclipse-mosquitto@sha256:0e66ea4ebe769eb313e66383f02fb09c41a10a1bd3d1e3baaf84e66d4c24e632
     container_name: home-assistant_mosquitto
     networks:
       - home-assistant
@@ -30,7 +30,7 @@ services:
       - 19001:9001
 
   wyze-bridge:
-    image: mrlt8/wyze-bridge
+    image: mrlt8/wyze-bridge@sha256:a99193b01c04ea765fdaaecf575d2883860ac26ec36cb945b139440c47314f3e
     container_name: home-assistant_wyze-bridge
     networks:
       - web

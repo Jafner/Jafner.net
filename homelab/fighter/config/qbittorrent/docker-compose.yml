@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   qbittorrent:
-    image: linuxserver/qbittorrent
+    image: linuxserver/qbittorrent@sha256:9a1e2c2925b85230bde4a0b450ef132e9c97ede934fb5a13d33eddf8599090e2
     container_name: qbittorrent_qbittorrent
     deploy:
       resources:
@@ -30,7 +30,7 @@ services:
       - traefik.http.services.qbt.loadbalancer.server.port=8080
 
   exporter-qbittorrent:
-    image: esanchezm/prometheus-qbittorrent-exporter
+    image: esanchezm/prometheus-qbittorrent-exporter@sha256:f2e7212df02988d4cbe3415bc489739238dd0c6073050b5eb3052e9c87e5e30e
     container_name: qbittorrent_exporter
     env_file:
       - path: ./exporter.env

@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
+    image: lscr.io/linuxserver/jellyfin@sha256:087ed104a35adea82c15ee5c4ad07d684313ee0eead234f4262dba5ab56157c2
     container_name: jellyfin_jellyfin
     restart: "no"
     networks:

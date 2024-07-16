@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   ddclient:
-    image: linuxserver/ddclient
+    image: linuxserver/ddclient@sha256:c60234683ac098d708cd7ddd599847ed0663dce3aa2f9c906da4c13d716df959
     container_name: ddns_ddclient
     restart: "no"
     networks:

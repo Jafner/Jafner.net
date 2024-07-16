@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   radarr:
-    image: linuxserver/radarr
+    image: linuxserver/radarr@sha256:0f78e9253e39d479633e74cff5f711475b23cf5a4645aba858720de841a4e8fb
     container_name: autopirate_radarr
     networks:
       - web
@@ -19,7 +19,7 @@ services:
       - traefik.http.routers.radarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   sonarr:
-    image: linuxserver/sonarr
+    image: linuxserver/sonarr@sha256:9b04c13e305bf48178e4a5255168839e53aee372d1474131cd88534ca836bf62
     container_name: autopirate_sonarr
     networks:
       - web
@@ -37,7 +37,7 @@ services:
       - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
+    image: lscr.io/linuxserver/bazarr@sha256:afe662888dd2c37eba49b71f3f8ce133f28ae64552c0cd6bbfde065f019864d8
     container_name: autopirate_bazarr
     networks:
       - web
@@ -55,7 +55,7 @@ services:
       - traefik.http.routers.bazarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   nzbhydra2:
-    image: linuxserver/nzbhydra2
+    image: linuxserver/nzbhydra2@sha256:645dfb481df3d52b8e700741962f9c2a21beefdfe82af8cebd67567250929bd2
     container_name: autopirate_nzbhydra2
     networks:
       - web
@@ -72,7 +72,7 @@ services:
       - traefik.http.routers.nzbhydra2.middlewares=lan-only@file,traefik-forward-auth-privileged@file
   
   sabnzbd:
-    image: linuxserver/sabnzbd
+    image: linuxserver/sabnzbd@sha256:f61256fc10967d58ed93c166713c7d408dd4a88cb603586bca134a3718247f86
     container_name: autopirate_sabnzbd
     networks:
       - web
@@ -96,7 +96,7 @@ services:
       - traefik.http.routers.sabnzbd.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   tdarr:
-    image: haveagitgat/tdarr:latest
+    image: haveagitgat/tdarr@sha256:eaaa962e54de4f95b15fff796e010954562e6ed7a4466d14ef79ffda1ca1f0da
     container_name: autopirate_tdarr
     networks:
       web:
@@ -125,7 +125,7 @@ services:
       - ${TRANSCODE_DIR}/transcode_cache:/temp
 
   tdarr-node:
-    image: haveagitgat/tdarr_node:latest
+    image: haveagitgat/tdarr_node@sha256:cf501cd9d020dd86219d162b5ffa155f0c7960e71363b5594c318256a9d3e01f
     container_name: autopirate_tdarr-node
     networks:
       tdarr:
@@ -143,7 +143,7 @@ services:
       - ${TRANSCODE_DIR}/transcode_cache:/temp
 
   jackett:
-    image: linuxserver/jackett
+    image: linuxserver/jackett@sha256:1be05100450bbb13a08dbeb2a2d28427ed10739f2055e3b08aa324c9d2cfe758
     container_name: autopirate_jackett
     networks:
       - web
@@ -162,7 +162,7 @@ services:
       - traefik.http.routers.jackett.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   exporter-sabnzbd:
-    image: msroest/sabnzbd_exporter # https://github.com/msroest/sabnzbd_exporter
+    image: msroest/sabnzbd_exporter@sha256:0ac4ec45902136c4dba1e0cb20e024c77ff57eddc144c77aac6b3cd95459fc12
     container_name: autopirate_sabnzbd-exporter
     restart: "no"
     networks:

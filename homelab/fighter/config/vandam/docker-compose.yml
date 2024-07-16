@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   vandam:
-    image: ghcr.io/floppy/van_dam:latest
+    image: ghcr.io/floppy/van_dam@sha256:c076f85cc1360dbdb33bbcfc8d4d1747779b04dee8734cff827bbe858ab01f58
     container_name: vandam_vandam
     env_file:
       - path: ./vandam_secrets.env
@@ -21,7 +21,7 @@ services:
       - redis
 
   db:
-    image: postgres:13
+    image: postgres@sha256:4b4da96c37fefd6f28c3f58e7470bbc6d2cb34ac5641b9df7221d962eb4bc55d # should be :13
     container_name: vandam_postgres
     networks:
       - vandam
@@ -32,7 +32,7 @@ services:
       - db_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:6
+    image: redis@sha256:1b503bb77079ba644371969e06e1a6a1670bb34c2251107c0fc3a21ef9fdaeca # should be :6
     networks:
       - vandam
     container_name: vandam_redis

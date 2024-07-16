@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   plex:
-    image: linuxserver/plex
+    image: linuxserver/plex@sha256:268b91665c89864c9a90766e2341bd69fed960dfff15c5a9a919a7068a944fcf
     container_name: plex_plex
     restart: "no"
     networks:
@@ -35,7 +35,7 @@ services:
       - traefik.http.services.plex.loadbalancer.server.port=32400
 
   ombi:
-    image: ghcr.io/linuxserver/ombi
+    image: ghcr.io/linuxserver/ombi@sha256:a2a10ead5a2880a7cb4307c259c9ca40d03fb5fe5905881234c640eee3c22f3d
     container_name: plex_ombi
     restart: "no"
     networks:
@@ -53,7 +53,7 @@ services:
       - traefik.http.services.ombi.loadbalancer.server.port=3579   
 
   exporter-plex:
-    image: granra/plex_exporter
+    image: granra/plex_exporter@sha256:174d63802ed85c168652ccc9bf75aafc1a57abd0e273936934fab13dfb00cc64
     container_name: plex_exporter
     restart: "no"
     networks:

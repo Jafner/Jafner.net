@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   calibre-web-rpg:
-    image: linuxserver/calibre-web
+    image: linuxserver/calibre-web@sha256:ca8c438ec0d12dedfd633a9aa4ee4e0be81641df5ad73b913f68197e047e4306
     container_name: calibre-web_rpg
     env_file:
       - path: ./calibre-web.env
@@ -16,7 +16,7 @@ services:
       - web
 
   calibre-web-sff:
-    image: linuxserver/calibre-web
+    image: linuxserver/calibre-web@sha256:ca8c438ec0d12dedfd633a9aa4ee4e0be81641df5ad73b913f68197e047e4306
     container_name: calibre-web_sff
     env_file:
       - path: ./calibre-web.env

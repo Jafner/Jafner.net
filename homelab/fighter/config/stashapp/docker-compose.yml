@@ -2,7 +2,7 @@ version: '3.9'
 services:
   stash:
     container_name: stash
-    image: stashapp/stash:latest
+    image: stashapp/stash@sha256:a65fb540f576f5db87451e4693fa1726478f2b62642e5d16befe9a0c237ccac4
     restart: "no"
     volumes:
       - /etc/localtime:/etc/localtime:ro

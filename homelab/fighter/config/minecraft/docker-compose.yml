@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   router:
-    image: itzg/mc-router
+    image: itzg/mc-router@sha256:e229e25352e360d5b92bee27ff36d419b4f0823f29d48050ab3ee926d26169d6
     container_name: minecraft_router
     restart: "no"
     networks:
@@ -11,7 +11,7 @@ services:
     command: --api-binding=0.0.0.0:25566 --mapping=e9.jafner.net=192.168.1.135:25566
 
   exporter-minecraft:
-    image: itzg/mc-monitor # https://github.com/itzg/mc-monitor
+    image: itzg/mc-monitor@sha256:374df9a9b95e7cf2f558e6c34a2c6c647919a36578e09760368b121547560791 # https://github.com/itzg/mc-monitor
     container_name: minecraft_exporter
     command: export-for-prometheus
     restart: "no"
@@ -25,7 +25,7 @@ services:
       - traefik.enable=false
 
   e10:
-    image: itzg/minecraft-server:java21
+    image: itzg/minecraft-server@sha256:59cab528e80b4ac86ab6d5e0dd1046b96f3a608f0fc396c4dc095e85cb95f709 # should be :java21
     user: 1001:1001
     container_name: minecraft_e10
     env_file:
