@@ -8,7 +8,27 @@ This page describes steps to take to move toward initial valid commit.
 5. [X] Reorganize repositories.
 6. [X] Document organization.
 7. [X] Scan for secrets.
-8. [X] Commit.
+8. [X] Initial commit.
+9. [X] Consolidate duplicated repos.
+10. [X] Differentiate active and inactive projects
+    1.  `homelab`, `projects`, `blog`, `archive`
+11. [X] Configure repo-level tools:
+    1.  `.gitignore`
+    2.  `.gitmodules`
+    3.  `LICENSE`
+    4.  `.github/workflows`
+    5.  `.gitea/workflows`
+    6.  `.pre-commit-config.yaml`
+12. Cutover hosts from `homelab` to `Jafner.net` with sparse checkout.
+    1.  `fighter` - Migrate secrets from `~/homelab/**/*_secrets.env` to `~/Jafner.net/active projects/homelab/**/*_secrets.env`. 
+    2.  `druid`
+13. Pin docker image versions to current.
+14. Configure deployment systems
+    1.  Github Pages for Jafner.dev
+    2.  Push repo updates to `fighter` and `druid`
+15. Write README.md that maps constituent projects.
+16. Publish the repo.
+17. Archive/annotate all constituent repos to point to subpath of new repo.
 
 ---
 
@@ -279,7 +299,4 @@ Reference: [GitHub docs - Removing sensitive data from a repository](https://doc
 
 
 ---
-
-## Reorganize Repositories
-
 
