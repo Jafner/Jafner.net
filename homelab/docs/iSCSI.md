@@ -18,16 +18,29 @@ To resolve:
   d. Confirm. Review and Save.
 5. Enable iSCSI service at startup. Navigate to System Settings -> Services. If it's not already running, enable the iSCSI service and check the box to "Start Automatically". 
 
-# Connecting to the iSCSI Share in Debian 12
+# Connecting to the iSCSI target
 
-1. Install the `open-iscsi` package with `sudo apt-get install open-iscsi`.
-2. Get the list of available shares from the NAS with `sudo iscsiadm --mode discovery --type sendtargets --portal 192.168.1.10` where the IP for `--portal` is the IP of the NAS hosting the iSCSI share. In my case, this returns `192.168.1.10:3260,1 iqn.2020-03.net.jafner:fighter`. 
-3. Open the iSCSI session. Run `sudo iscsiadm --mode node --targetname "iqn.2020-03.net.jafner:fighter" --portal "192.168.1.10:3260" --login`. Where the name for `--targetname` is the iqn string including the share name. And where the address for `--portal` has both the IP and port used by the NAS hosting the iSCSI share. Verify the session connected with `sudo iscsiadm --mode session --print=1`, which should return the description of any active sessions. [Debian.org](https://wiki.debian.org/SAN/iSCSI/open-iscsi).
-4. Format the newly-added block device. 
-  a. Identify the device name of the new device with `sudo iscsiadm -m session -P 3 | grep "Attached scsi disk"`. In my case, `sdb`. [ServerFault](https://serverfault.com/questions/828401/how-can-i-determine-if-an-iscsi-device-is-a-mounted-linux-filesystem).
-  b. Partition and format the device. Run `sudo parted --script /dev/sdb "mklabel gpt" && sudo parted --script /dev/sdb "mkpart primary 0% 100%" && sudo mkfs.ext4 /dev/sdb1` [Server-world.info](https://www.server-world.info/en/note?os=Debian_11&p=iscsi&f=3). 
-  c. Mount the new partition to a directory. Run `sudo mkdir /mnt/iscsi && sudo mount /dev/sdb1 /mnt/iscsi`. Where the path `/dev/sdb1` is the newly-created partition and the path `/mnt/iscsi` is the path to which you want it mounted.
-  d. Test the disk write speed of the new partition. Run `sudo dd if=/dev/zero of=/mnt/iscsi/temp.tmp bs=1M count=32768` to run a 32GB test write. [Cloudzy.com](https://cloudzy.com/blog/test-disk-speed-in-linux/).
+1. Install the `open-iscsi` package.
+  - `sudo apt-get install open-iscsi`
+2. Get the list of available shares.
+   - `sudo iscsiadm --mode discovery --type sendtargets --portal 192.168.1.10`
+   - The IP for `--portal` is the IP of the NAS hosting the iSCSI share. 
+   - In my case, this command returns `192.168.1.10:3260,1 iqn.2020-03.net.jafner:fighter`. 
+3. Open the iSCSI session. 
+   - `sudo iscsiadm --mode node --targetname "iqn.2020-03.net.jafner:fighter" --portal "192.168.1.10:3260" --login`
+   - The name for `--targetname` is the iqn string including the share name. 
+   - The address for `--portal` has both the IP and port used by the NAS hosting the iSCSI share. 
+4. Verify the session connected.
+   - `sudo iscsiadm --mode session --print=1`
+   - This should return the description of any active sessions. 
+
+[Debian.org](https://wiki.debian.org/SAN/iSCSI/open-iscsi).
+
+# Initializing the iSCSI disk
+1. Identify the device name of the new device with `sudo iscsiadm -m session -P 3 | grep "Attached scsi disk"`. In my case, `sdb`. [ServerFault](https://serverfault.com/questions/828401/how-can-i-determine-if-an-iscsi-device-is-a-mounted-linux-filesystem).
+2. Partition and format the device. Run `sudo parted --script /dev/sdb "mklabel gpt" && sudo parted --script /dev/sdb "mkpart primary 0% 100%" && sudo mkfs.ext4 /dev/sdb1` [Server-world.info](https://www.server-world.info/en/note?os=Debian_11&p=iscsi&f=3). 
+3. Mount the new partition to a directory. Run `sudo mkdir /mnt/iscsi && sudo mount /dev/sdb1 /mnt/iscsi`. Where the path `/dev/sdb1` is the newly-created partition and the path `/mnt/iscsi` is the path to which you want it mounted.
+4. Test the disk write speed of the new partition. Run `sudo dd if=/dev/zero of=/mnt/iscsi/temp.tmp bs=1M count=32768` to run a 32GB test write. [Cloudzy.com](https://cloudzy.com/blog/test-disk-speed-in-linux/).
 
 # Connecting and mounting the iSCSI share on boot
 
