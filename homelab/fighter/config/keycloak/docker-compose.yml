@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak@sha256:33825b7d2d9e317215939851e10b1e184b4f876de1b5b25cf448e425c47802bd
+    image: quay.io/keycloak/keycloak@sha256:a3d10e729b140f5a044f6d04f324aa53ae58ed11398e0e6e432cb98042b41b1f
     container_name: keycloak_keycloak
     networks:
       keycloak:
@@ -71,7 +71,7 @@ services:
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
 
   postgres:
-    image: postgres@sha256:93c8b6f9c1a297790b1e18efd8fc2964bf5f346425a245c662b042ae371b929a
+    image: postgres@sha256:0aafd2ae7e6c391f39fb6b7621632d79f54068faebc726caf469e87bd1d301c0
     container_name: keycloak_postgres
     networks:
       - keycloak
