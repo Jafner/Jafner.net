@@ -1,5 +1,6 @@
 .directory
 .htpasswd
+.secret.md
 
 dotfiles/.zsh_history
 dotfiles/.bash_history
@@ -53,3 +54,4 @@ dotfiles/.bash_logout
 
 **/Jafner.dev/public/
 **/Jafner.dev/resources/_gen
+**/Jafner.dev/.hugo_build.lock
