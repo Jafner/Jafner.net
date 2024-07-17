@@ -71,7 +71,7 @@ services:
       - "traefik.http.routers.forwardauth-privileged.tls.certresolver=lets-encrypt"
 
   postgres:
-    image: postgres@sha256:0aafd2ae7e6c391f39fb6b7621632d79f54068faebc726caf469e87bd1d301c0
+    image: postgres@sha256:261400cf1399540d2dfa62c4420916d419bf9cd835d118674535a3830444be6e # should be :15
     container_name: keycloak_postgres
     networks:
       - keycloak
