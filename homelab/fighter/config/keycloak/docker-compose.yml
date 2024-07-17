@@ -14,7 +14,7 @@ services:
     restart: "no"
     depends_on:
       - postgres
-    command: start
+    command: start --hostname=keycloak.jafner.net
     env_file:
       - path: ./keycloak.env
         required: true
