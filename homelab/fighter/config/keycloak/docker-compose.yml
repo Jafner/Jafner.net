@@ -29,7 +29,7 @@ services:
       traefik.http.middlewares.keycloak-redirect.redirectregex.replacement: https://$$1/admin"
 
   forwardauth:
-    image: thomseddon/traefik-forward-auth@sha256:69a2c985d2c518b6f0e77161a98628a148a5d964e4e84fc52cc62e19bb4da634
+    image: mesosphere/traefik-forward-auth@sha256:f9408a00c5a17add3f745810fd81020c38c4500b0429370a809c88f4ba5bd1ce
     container_name: keycloak_forwardauth
     networks:
       web:
@@ -50,7 +50,7 @@ services:
       - "traefik.http.routers.forwardauth.tls.certresolver=lets-encrypt"
 
   forwardauth-privileged:
-    image: thomseddon/traefik-forward-auth@sha256:69a2c985d2c518b6f0e77161a98628a148a5d964e4e84fc52cc62e19bb4da634
+    image: mesosphere/traefik-forward-auth@sha256:f9408a00c5a17add3f745810fd81020c38c4500b0429370a809c88f4ba5bd1ce
     container_name: keycloak_forwardauth-privileged
     networks:
       web:
