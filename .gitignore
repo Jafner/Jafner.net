@@ -1,6 +1,7 @@
 .directory
 .htpasswd
-.secret.md
+*.secret.md
+TODO.md
 
 dotfiles/.zsh_history
 dotfiles/.bash_history
