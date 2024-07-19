@@ -1,5 +1,23 @@
 version: '3.9'
 services:
+  lidarr: 
+    image: linuxserver/lidarr
+    container_name: autopirate_lidarr
+    networks:
+      - web
+    env_file:
+      - path: ./autopirate.env
+        required: true
+    volumes:
+      - "${MUSIC_DIR}:/music"
+      - "${DOCKER_DATA}/lidarr_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
+      - traefik.http.routers.lidarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.lidarr.loadbalancer.server.port=8686
+      - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
   radarr:
     image: linuxserver/radarr@sha256:1eaf9e83fca2b9170d4f49f6c0e55ba38693718e7815743a9ec297d199ab1e73
     container_name: autopirate_radarr
