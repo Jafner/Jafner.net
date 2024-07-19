@@ -68,7 +68,7 @@ disableHugoGeneratorInject = false
     author = false
 
     topText = [
-      "Source on <a href=\"https://github.com/Jafner/jafner.dev\">GitHub</a>"
+      "Source on <a href=\"https://github.com/Jafner/jafner.net/sites/Jafner.dev\">GitHub</a>"
     ]
     bottomText = [
     ]

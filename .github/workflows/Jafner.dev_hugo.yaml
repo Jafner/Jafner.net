@@ -1,4 +1,4 @@
-name: Hugo
+name: Build and Deploy Jafner.dev with Hugo
 on: 
   push:
     branches: [ main ]
@@ -39,12 +39,12 @@ jobs:
         with:
           submodules: 'true'
           fetch-depth: 0
-          path: 'active projects/Jafner.dev'
+          path: 'sites/Jafner.dev'
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
         with:
-          path: 'active projects/Jafner.dev'
+          path: 'sites/Jafner.dev'
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build with Hugo
@@ -61,7 +61,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'active projects/Jafner.dev/.public'
+          path: 'sites/Jafner.dev/.public'
 
   deploy:
     environment:
