@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run: 
-        working-directory: "sites/Jafner.dev"
+        working-directory: sites/Jafner.dev
     env:
       HUGO_VERSION: 0.121.2
     steps:
@@ -33,7 +33,7 @@ jobs:
         with:
           submodules: 'true'
           fetch-depth: 0
-          path: 'sites/Jafner.dev'
+          sparse-checkout: 'sites/Jafner.dev'
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
@@ -51,6 +51,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
           TZ: America/Los_Angeles
+        working-directory: sites/Jafner.dev
         run: |
           hugo \
             --gc \
