@@ -6,7 +6,7 @@ aliases = []
 author = "Joey Hafner"
 ogimage = '/img/Jafner.dev.logo.png'
 slug = "monorepo"
-draft = true
+draft = false
 +++
 
 ## How to: Pull all your Git repositories into one big monorepo
