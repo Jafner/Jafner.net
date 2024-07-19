@@ -51,7 +51,7 @@ services:
     ports:
       - 8000:8000/tcp
     volumes:
-      - ./sillytavern/config/config.yaml:/home/node/app/config/config.yaml
+      - sillytavern:/home/node/app/config/config.yaml
     environment:
       - TZ=America/Los_Angeles
 
@@ -133,6 +133,7 @@ volumes:
   sdwebui_cache:
   oobabooga:
   oobabooga_cache:
+  sillytavern:
 networks:
   ai:
     name: "ai"
