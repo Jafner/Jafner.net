@@ -68,30 +68,24 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
 #!/bin/bash
 
 {
-    echo "# 1. Quick reset: started"
+    echo "# 0. Quick reset: started"
     rm -rf $HOME/Git/Jafner.net
     rm -rf $HOME/Git/monorepo-temp  
     rm -rf /tmp/gitleaks 
     cd $HOME/Git
-    echo "# 1. Quick reset: completed"
+    echo "# 0. Quick reset: completed"
 }
 
 {
-    echo "# 2. Configure paths: started"
-    echo "  # 2.1 Configure local path for Git repos. Should not contain any of the git directories involved, as all will be cloned fresh. Consider using a temporary project directory."
+    echo "# 1. Configure paths and variables: started"
+    echo "  # Configure local paths for Git repos. Should not contain any of the git directories involved, as all will be cloned fresh. Consider using a temporary project directory."
     MONOREPO_DIR=$HOME/Git/Jafner.net
     TEMP_CLONE_DIR=$HOME/Git/monorepo-temp
     mkdir -p "$TEMP_CLONE_DIR" 
     mkdir -p "$MONOREPO_DIR"
-    cd $TEMP_CLONE_DIR
-    echo "# 2. Configure paths: completed"
-}
-
-{
-    echo "# 3. List repositories: started"
-    echo "  # 3.1 First repository in list is parent monorepo."
-    echo "  # 3.2 Note: While we don't need write access to any of the constituent repositories, we do need authenticated access for any private repositories. Use ssh URLs when possible."
-    echo "  # 3.3 Note: The URL of the monorepo repository does not need to exist already. This is asserted idempotently."
+    echo "  # Configure array of repositories to compose into monorepo."
+    echo "    # Note: First repository in list is parent monorepo."
+    echo "    # Note: While we don't need write access to any of the constituent repositories, we do need authenticated access for any private repositories. Use ssh URLs when possible."
     REPOSITORIES=(
       "Jafner.net ssh://git@gitea.jafner.tools:2225/Jafner/Jafner.net.git"
       "homelab ssh://git@gitea.jafner.tools:2225/Jafner/homelab.git"
@@ -112,28 +106,48 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
       "razer-bat git@github.com:Jafner/Razer-BatteryLevelRGB.git"
       "5etools-docker git@github.com:Jafner/5etools-docker.git"
       "jafner-homebrew git@github.com:Jafner/jafner-homebrew.git"
-   )
-   cd $TEMP_CLONE_DIR
-   echo "# 3. List repositories: completed"
+    )
+    cd $TEMP_CLONE_DIR
+    echo "# 1. Configure paths and variables: completed"
 }
 
 { 
-    echo "# 4. Assert dependencies are installed: started"
-    echo "  # git-filter-repo"
-    FILTER_REPO_OUTPUT=$(git filter-repo -h)
+    echo "# 2. Assert dependencies are installed: started"
+    echo -n "  # gitleaks: "
+    gitleaks version > /dev/null 2>&1
+    GITLEAKS_MISSING=$?
+    if [[ $GITLEAKS_MISSING != "0" ]]; then
+        echo "missing"
+        echo "    # Attempting to install from https://github.com/gitleaks/gitleaks"
+        echo "    # Installing at ~/.local/bin/gitleaks"
+        echo "    # Note: Building gitleaks will fail if go is not installed."
+        mkdir -p ~/.local/bin
+        git clone https://github.com/gitleaks/gitleaks.git /tmp/gitleaks-git
+        cd /tmp/gitleaks-git
+        make build
+        cp gitleaks ~/.local/bin/gitleaks
+    else
+        echo "found at $(which gitleaks)"
+    fi
+    echo -n "  # git-filter-repo: "
+    git filter-repo -h > /dev/null 2>&1
     FILTER_REPO_MISSING=$?
-    if [[ $FILTER_REPO_MISSING == "1" ]]; then
+    if [[ $FILTER_REPO_MISSING != "0" ]]; then
+        echo "missing"
         echo "    # git-filter repo not installed. Attempting to install from https://github.com/newren/git-filter-repo" 
+        echo "    # Installing at ~/.local/bin/git-filter-repo"
+        mkdir -p ~/.local/bin/git-filter-repo
         curl -o ~/.local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo 
         chmod +x ~/.local/bin/git-filter-repo
     else
-        echo "    # git-filter repo found"
+        echo "found at $(which git-filter-repo)"
     fi
-    echo "  # BFG Repo-Cleaner"
-    BFG_OUTPUT=$(bfg --version)
+    echo -n "  # BFG Repo-Cleaner: "
+    bfg --version > /dev/null 2>&1
     BFG_MISSING=$?
-    if [[ $BFG_MISSING == "1" ]]; then
-        echo "    # BGF Repo-Cleaner not installed. Automated installation not yet implemented."
+    if [[ $BFG_MISSING != "0" ]]; then
+        echo "missing"
+        echo "    # Automated installation not yet implemented."
         echo "    # Install BFG Repo-Cleaner by downloading the latest jar from:"
         echo "    # https://rtyley.github.io/bfg-repo-cleaner/ "
         echo "    # Then run:"
@@ -141,15 +155,13 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
         echo "    # Exiting..."
         exit 1
     else
-        echo -n "    # BGF Repo-Cleaner found at:"
-        which bfg
+        echo "found at: $(which bfg)"
     fi
-    cd $TEMP_CLONE_DIR
-    echo "# 4. Assert dependencies are installed: completed"
+    echo "# 2. Assert dependencies are installed: completed"
 }
 
 {
-    echo "# 5. Clone all constituent repositories, assert default branch is main: started"
+    echo "# 3. Clone all constituent repositories, assert default branch is main: started"
     cd "$TEMP_CLONE_DIR"
     for repo in "${REPOSITORIES[@]:1}"; do 
         REPO_NAME=$(echo $repo | cut -d' ' -f1)
@@ -163,11 +175,11 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
         cd "$TEMP_CLONE_DIR"
     done
     cd $TEMP_CLONE_DIR
-    echo "# 5. Clone all constituent repositories, assert default branch is main: completed"
+    echo "# 3. Clone all constituent repositories, assert default branch is main: completed"
 }
 
 {
-    echo "# 6. Rewrite history (to subdirectory) for each constituent repository: started"
+    echo "# 4. Rewrite history (to subdirectory) for each constituent repository: started"
     for repo in $(echo "$TEMP_CLONE_DIR"/*); do
         REPO_NAME=$(basename $repo)
         cd "$repo"
@@ -176,11 +188,11 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
         cd "$TEMP_CLONE_DIR"
     done
     cd $TEMP_CLONE_DIR
-    echo "# 6. Rewrite history (to subdirectory) for each constituent repository: completed"
+    echo "# 4. Rewrite history (to subdirectory) for each constituent repository: completed"
 }
 
 {
-    echo "# 7. Scan each constituent repository for leaked secrets: started"
+    echo "# 5. Scan each constituent repository for leaked secrets: started"
     for repo in $(echo "$TEMP_CLONE_DIR"/*); do
         REPO_NAME=$(basename $repo)
         cd "$repo"
@@ -190,11 +202,11 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
         gitleaks detect -l warn --no-banner -r /tmp/gitleaks/$REPO_NAME/gitleaks-report.json && echo "No secrets detected" || COMPROMISED_REPOS+="$REPO_NAME\n" 
     done
     cd $TEMP_CLONE_DIR
-    echo "# 7. Scan each constituent repository for leaked secrets: completed"
+    echo "# 5. Scan each constituent repository for leaked secrets: completed"
 }
 
 {
-    echo "# 8. Nuke secrets from git history: started"
+    echo "# 6. Nuke secrets from git history: started"
     for repo in $(echo "$TEMP_CLONE_DIR"/*); do
         cd $repo
         REPO_NAME=$(basename $repo)
@@ -211,11 +223,11 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
         rm /tmp/gitleaks/secret.txt
     done
     cd $TEMP_CLONE_DIR
-    echo "# 8. Nuke secrets from git history: completed"
+    echo "# 6. Nuke secrets from git history: completed"
 }
 
 {
-    echo "# 9. Verify repository histories are clean of secrets: started"
+    echo "# 7. Verify repository histories are clean of secrets: started"
     for repo in $(echo "$TEMP_CLONE_DIR"/*); do
         REPO_NAME=$(basename $repo)
         cd "$repo"
@@ -225,11 +237,11 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
         gitleaks detect -l warn --no-banner -r /tmp/gitleaks/$REPO_NAME/gitleaks-report.json && echo "No secrets detected" || echo "    # Something didn't work right; clean $REPO_NAME manually"
     done
     cd $TEMP_CLONE_DIR
-    echo "# 9. Verify repository histories are clean of secrets: completed"
+    echo "# 7. Verify repository histories are clean of secrets: completed"
 }
 
 {
-    echo "# 10. Init monorepo and add constituent repos: started"
+    echo "# 8. Init monorepo and add constituent repos: started"
     cd "$MONOREPO_DIR"
     git init
     for repo in $(echo "$TEMP_CLONE_DIR"/*); do 
@@ -243,7 +255,7 @@ That's obviously a lot of steps to handle each repo manually, so let's script it
     echo "  # Running one more gitleaks scan for sanity."
     gitleaks detect -v --no-banner
     cd $TEMP_CLONE_DIR
-    echo "# 10. Init monorepo and add constituent repos: completed"
+    echo "# 8. Init monorepo and add constituent repos: completed"
 }
 
 {

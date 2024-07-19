@@ -1,0 +1,3 @@
+[submodule "sites/Jafner.dev/themes/hello-friend-ng"]
+	path = sites/Jafner.dev/themes/hello-friend-ng
+	url = https://github.com/rhazdon/hugo-theme-hello-friend-ng.git

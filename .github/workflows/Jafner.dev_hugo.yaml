@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - '**/Jafner.dev/**'
+      - 'sites/Jafner.dev/**'
   workflow_dispatch:
 
 permissions:
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run: 
-        working-directory: "active projects/Jafner.dev"
+        working-directory: "sites/Jafner.dev"
     env:
       HUGO_VERSION: 0.121.2
     steps:

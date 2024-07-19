@@ -55,7 +55,7 @@ disableHugoGeneratorInject = false
   enableThemeToggle = false
   enableSharingButtons = true
   enableGlobalLanguageMenu = false
-  customCSS = ["/css/toc-no-underline.css"]
+  customCSS = ["/css/toc-no-underline.css","/css/code-blocks-no-shadow.css"]
   customJS  = []
   justifyContent = false  # Set "text-align: justify" to .post-content.
   [params.author]
