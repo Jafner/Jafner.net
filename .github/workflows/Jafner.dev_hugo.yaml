@@ -60,7 +60,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'sites/Jafner.dev/.public'
+          path: 'sites/Jafner.dev/public'
 
   deploy:
     environment:
