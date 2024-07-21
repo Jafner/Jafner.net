@@ -13,7 +13,7 @@ services:
       - "${MUSIC_DIR}:/music:ro"
       - "${DOCKER_DATA}:/data"
     labels:
-      - traefik.http.routers.navidrome.rule=Host(`https://music.jafner.net`)
+      - traefik.http.routers.navidrome.rule=Host(`music.jafner.net`)
       - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
       - traefik.http.services.navidrome.loadbalancer.server.port=4533
 
