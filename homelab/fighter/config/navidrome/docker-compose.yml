@@ -1,0 +1,18 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome_navidrome
+    restart: "no"
+    user: 1001:1001
+    networks:
+      - web
+    env_file:
+      - path: ./navidrome.env
+        required: true
+    volumes:
+      - "${MUSIC_DIR}:/music:ro"
+      - "${DOCKER_DATA}:/data"
+    labels:
+      - traefik.http.routers.navidrome.rule=Host(`music.jafner.net`)
+      - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
+      - traefik.http.services.navidrome.loadbalancer.server.port=4533
