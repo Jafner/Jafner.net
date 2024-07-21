@@ -4,7 +4,7 @@
 #   user.settings.json => ~/.config/VSCodium/User/settings.json
 #   continue.config.json => ~/.continue/config.json
 
-wget -o /tmp/codium.rpm $(curl -s https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep "browser_download_url.*.x86_64.rpm" | cut -d : -f 2,3 | tr -d \" | head -n 1)
+wget -O /tmp/codium.rpm $(curl -s https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep "browser_download_url.*.x86_64.rpm" | cut -d : -f 2,3 | tr -d \" | head -n 1)
 sudo dnf install /tmp/codium.rpm
 rm /tmp/codium.rpm
 
