@@ -16,3 +16,7 @@ services:
       - traefik.http.routers.navidrome.rule=Host(`music.jafner.net`)
       - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
       - traefik.http.services.navidrome.loadbalancer.server.port=4533
+
+networks:
+  web:
+    external: true
