@@ -1,3 +1,8 @@
+# Quick Help
+
+- Fighter connecting to Barbarian: `sudo iscsiadm --mode node --targetname "iqn.2020-03.net.jafner:fighter" --portal "192.168.1.10:3260" --login && sudo mount /dev/sdb1 /mnt/iscsi/barbarian`
+- Fighter connecting to Paladin: `sudo iscsiadm --mode node --targetname "iqn.2020-03.net.jafner:fighter" --portal "192.168.1.12:3260" --login && sudo mount /dev/sdb1 /mnt/iscsi/paladin`
+
 # NOTE: Adding or removing drives
 > The drive letter of the iSCSI device will change (e.g. from `/dev/sde` to `/dev/sdb`) if drives are added or removed. This will cause the mount to fail.  
 
