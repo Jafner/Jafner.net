@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   homepage:
-    image: ghcr.io/benphelps/homepage@sha256:fefed65387194a99ea9e27d2ed95463be6812e9cb024d9846701a4d019598e45
+    image: ghcr.io/benphelps/homepage:latest
     container_name: homepage_tasmota
     env_file:
       - homepage.env

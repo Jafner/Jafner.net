@@ -1,8 +1,7 @@
-version: '3.9'
 
 services:
   megan-portfolio:
-    image: wordpress@sha256:f468bab53528df6f87dfe11a80de26eff57e0f515e243d9dec73a02c80c273a7
+    image: wordpress:latest
     container_name: wordpress_megan-portfolio
     restart: "no"
     env_file:
@@ -21,7 +20,7 @@ services:
       - megan-portfolio_db
 
   megan-portfolio_db:
-    image: mysql@sha256:4bc6bc963e6d8443453676cae56536f4b8156d78bae03c0145cbe47c2aad73bb
+    image: mysql:latest
     container_name: wordpress_megan-portfolio-db
     restart: "no"
     networks:

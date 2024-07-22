@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   unifi-controller:
-    image: lscr.io/linuxserver/unifi-controller@sha256:16da35e088020563764e8d46db4918dddacd75ce38151a1086c38e7512fa0f29
+    image: lscr.io/linuxserver/unifi-controller:latest
     container_name: unifi_controller
     restart: "no"
     networks:

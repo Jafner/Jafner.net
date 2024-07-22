@@ -74,7 +74,6 @@ SMTP_TLS=false
 
 ## Web App `docker-compose.yml `
 ```yml
-version: '3'
 services:
   <service>:
     image: 

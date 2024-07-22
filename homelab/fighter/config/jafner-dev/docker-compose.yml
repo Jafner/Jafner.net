@@ -1,8 +1,7 @@
 name: "jafner-dev"
-version: '3.7'
 services:
   jafner-dev:
-    image: wordpress@sha256:c4d738408447e12b4ef6fa0a6413ed68eeec4af6a18edadfffac2bb998261e13
+    image: wordpress:latest
     container_name: jafner-dev
     env_file:
       - path: ./jafner-dev.env
@@ -22,7 +21,7 @@ services:
        - traefik.http.routers.jafner-dev.rule=Host(`jafner.dev`)
        - traefik.http.routers.jafner-dev.tls.certresolver=lets-encrypt
   db:
-    image: mysql@sha256:5107333e08a87b836d48ff7528b1e84b9c86781cc9f1748bbc1b8c42a870d933
+    image: mysql:latest
     container_name: jafner-dev_db
     restart: "no"
     networks:

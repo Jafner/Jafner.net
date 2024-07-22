@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   nginx:
-    image: nginx@sha256:41b0e86104ba681811bf60b4d6970ed24dd59e282b36c352b8a55823bbb5e14a
+    image: nginx:latest
     container_name: nginx_test
     networks:
       - web

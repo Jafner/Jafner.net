@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   nextcloud:
-    image: lscr.io/linuxserver/nextcloud@sha256:1b8f189afeb86e016cb43ea9e0a5e1d11f18b114479573e6098eae426b5807ca
+    image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud_nextcloud
     env_file:
       - path: ./nextcloud.env
@@ -22,7 +21,7 @@ services:
       - $DOCKER_DATA/data:/data
 
   mariadb:
-    image: lscr.io/linuxserver/mariadb@sha256:4d13ae7319beff48f927cdf580b302aac6bff93127e094c24573bb9d42bf0638
+    image: lscr.io/linuxserver/mariadb:latest
     container_name: nextcloud_mariadb
     networks:
       - nextcloud
@@ -35,7 +34,7 @@ services:
       - $DOCKER_DATA/mariadb:/config
 
   redis:
-    image: redis@sha256:961dda256baa7a35297d34cca06bc2bce8397b0ef8b68d8064c30e338afc5a7d
+    image: redis:latest
     container_name: nextcloud_redis
     networks:
       - nextcloud
