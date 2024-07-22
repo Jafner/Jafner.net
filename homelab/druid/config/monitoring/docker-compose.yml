@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   exporter-docker:
-    image: prometheusnet/docker_exporter@sha256:f48aa98298fcde47edbd97f1c33534318a1f3e28ed9581f56fc2dcb4c3b21455
+    image: prometheusnet/docker_exporter:latest
     container_name: monitoring_exporter-docker
     restart: "no"
     ports:
@@ -10,7 +9,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   exporter-ping:
-    image: czerwonk/ping_exporter@sha256:6c7b05282358300cbb3335390b84a22ff564e3701cd193621c81300cb758ec00
+    image: czerwonk/ping_exporter:latest
     container_name: monitoring_exporter-ping
     restart: "no"
     ports:

@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   wg-easy:
-    image: weejewel/wg-easy@sha256:c90b263d8a383ac55905e4edbe1513ba87b1a479bcaa8bb471412137b9541751
+    image: weejewel/wg-easy:latest
     container_name: wireguard_wg-easy
     restart: "no"
     env_file:

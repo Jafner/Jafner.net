@@ -1,8 +1,7 @@
-version: '3.9'
 services:
   traefik:
     container_name: traefik_traefik
-    image: traefik@sha256:7fcfa08bac2048d7bf0b42ed7437e36642c3b5c69d50c066c8878f033888918e
+    image: traefik:latest
     restart: "no"
     networks:
       - web
