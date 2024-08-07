@@ -1,3 +1,15 @@
+# Update VyOS
+1. Navigate to [VyOS nightly builds](https://vyos.net/get/nightly-builds/) and copy the link for the most recent build.
+2. SSH into the VyOS host and run `add system image <link to build image>`
+3. When prompted, answer yes (default) to:
+	1. Would you like to save current configuration directory and config file? (Yes/No) [Yes]
+	2. Would you like to save the SSH host keys from your current configuration? (Yes/No) [Yes]
+4. Reboot into the new image. 
+
+Note: If you do not want the most recent image to be used by default, you can use the command `set system image default-boot <image>`
+You can view available system images with `show system image`, which will include telling you which is currently the default boot image.
+You can delete old system images with `delete system image <image>`
+
 # Port Forwarding Rules
 | Rule | Incoming Port | Protocol | Docs |
 |:----:|:-------------:|:--------:|:----:|
@@ -150,3 +162,4 @@ Followed the instructions given in [this video](https://www.youtube.com/watch?v=
 5. Flashed new firmware image (7.4.0.7, built 2021_07_07) to backup boot partition.
 
 Additional reference: https://forums.serverbuilds.net/t/official-aruba-s2500-managed-ethernet-switch-poe-10gsfp/5038
+
