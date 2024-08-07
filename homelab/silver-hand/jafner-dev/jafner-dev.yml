@@ -1,0 +1,62 @@
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jafner-dev
+
+---
+
+apiVersion: datashim.io/v1alpha1
+kind: Dataset
+metadata:
+  namespace: jafner-dev
+  name: jafner-dev
+spec:
+  local:
+    type: "COS"
+    secret-name: jafner-dev-aws-credentials
+    endpoint: "https://s3.us-west-2.amazonaws.com"
+    bucket: "jafner-dev"
+    region: "us-west-2"
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: jafner-dev
+  name: nginx
+  labels:
+    app: jafner-dev
+    dataset.0.id: "jafner-dev"
+    dataset.0.useas: "mount"
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: "jafner-dev"
+  volumes:
+  - name: "jafner-dev"
+    persistentVolumeClaim:
+      claimName: "jafner-dev"
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  namespace: jafner-dev
+  name: nginx-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: jafner-dev
+  ports:
+  - port: 8080
+    targetPort: 80
+
+# Access at: 
+#   - http://192.168.1.31:8080
+#   - http://192.168.1.32:8080
+#   - http://192.168.1.33:8080

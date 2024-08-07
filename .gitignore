@@ -2,6 +2,9 @@
 .htpasswd
 *.secret.md
 TODO.md
+*.tfstate
+*.tfstate.backup
+*.secret.yml
 
 dotfiles/.zsh_history
 dotfiles/.bash_history
