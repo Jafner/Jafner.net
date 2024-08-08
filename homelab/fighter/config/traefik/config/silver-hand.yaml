@@ -10,6 +10,6 @@ tcp:
     silver-hand:
       loadBalancer:
         servers:
-          - address: "http://192.168.1.31:80"
-          - address: "http://192.168.1.32:80"
-          - address: "http://192.168.1.33:80"
+          - address: "192.168.1.31:80"
+          - address: "192.168.1.32:80"
+          - address: "192.168.1.33:80"
