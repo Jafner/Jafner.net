@@ -1,0 +1,15 @@
+tcp:
+  routers:
+    silver-hand:
+      rule: "HostSNI(`k3s.jafner.net`) || HostSNIRegexp(`*.k3s.jafner.net`)"
+      service: "silver-hand@file"
+      tls: 
+        passthrough: true
+
+  services:
+    silver-hand:
+      loadBalancer:
+        servers:
+          - address: "http://192.168.1.31:80"
+          - address: "http://192.168.1.32:80"
+          - address: "http://192.168.1.33:80"
