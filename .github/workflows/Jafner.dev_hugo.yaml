@@ -89,6 +89,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: jafner-dev-generated
+          path: sites/Jafner.dev/public
       - name: Authenticate AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -97,4 +98,5 @@ jobs:
           aws-region: us-west-2
       - name: Push generated files to jafner-dev bucket
         run: |
+          ls -R
           aws s3 sync sites/Jafner.dev/public s3://jafner-dev --delete
