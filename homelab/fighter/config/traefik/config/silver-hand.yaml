@@ -1,7 +1,9 @@
 tcp:
   routers:
     silver-hand:
-      rule: "HostSNI(`k3s.jafner.net`) || HostSNIRegexp(`*.k3s.jafner.net`)"
+      entrypoints: 
+        - "websecure"
+      rule: HostSNIRegexp(`*.jafner.dev`)
       service: "silver-hand@file"
       tls: 
         passthrough: true
