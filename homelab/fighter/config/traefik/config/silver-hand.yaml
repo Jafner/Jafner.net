@@ -4,7 +4,7 @@ tcp:
       entrypoints: 
         - "websecure"
         - "web"
-      rule: HostSNIRegexp(`*.jafner.dev`)
+      rule: HostSNIRegexp(`^.+\.jafner\.dev$`)
       service: "silver-hand@file"
       tls: 
         passthrough: true
@@ -23,9 +23,9 @@ http:
       entrypoints:
         - "websecure"
         - "web"
-      rule: "HostRegexp(`*.jafner.dev`)"
+      rule: "HostRegexp(`^.+\.jafner\.dev$`)"
       service: "silver-hand@file"
-  
+      
   services:
     silver-hand:
       loadBalancer:
