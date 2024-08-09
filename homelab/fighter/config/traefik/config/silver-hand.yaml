@@ -3,6 +3,7 @@ tcp:
     silver-hand:
       entrypoints: 
         - "websecure"
+        - "web"
       rule: HostSNIRegexp(`*.jafner.dev`)
       service: "silver-hand@file"
       tls: 
@@ -15,3 +16,21 @@ tcp:
           - address: "192.168.1.31:443"
           - address: "192.168.1.32:443"
           - address: "192.168.1.33:443"
+
+http:
+  routers:
+    silver-hand:
+      entrypoints:
+        - "websecure"
+        - "web"
+      rule: "HostRegexp(`*.jafner.dev`)"
+      service: "silver-hand@file"
+  
+  services:
+    silver-hand:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "https://192.168.1.31"
+          - url: "https://192.168.1.32"
+          - url: "https://192.168.1.33"
