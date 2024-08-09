@@ -23,7 +23,7 @@ http:
       entrypoints:
         - "websecure"
         - "web"
-      rule: "HostRegexp(`^.+\.jafner\.dev$`)"
+      rule: HostRegexp(`^.+\.jafner\.dev$`)
       service: "silver-hand@file"
       
   services:
