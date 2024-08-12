@@ -18,6 +18,17 @@ certificatesResolvers:
       email: jafner425@gmail.com
       storage: acme.json
       tlsChallenge: {}
+  lets-encrypt-dns01:
+    acme:
+      email: jafner425@gmail.com
+      storage: acme.json
+      caserver: https://acme-staging-v02.api.letsencrypt.org/directory
+      dnsChallenge: 
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+        # CF_DNS_API_TOKEN 
 
 api: 
   insecure: true

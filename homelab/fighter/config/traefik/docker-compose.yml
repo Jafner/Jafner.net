@@ -16,9 +16,17 @@ services:
       - ./traefik.yaml:/traefik.yaml
       - ./config:/config
       - $DOCKER_DATA/acme.json:/acme.json
+    secrets:
+      - cloudflare_token
+    environment:
+      - CF_DNS_API_TOKEN=/run/secrets/cloudflare_token
 
 networks:
   web:
     external: true
   monitoring:
     external: true
+
+secrets:
+  cloudflare_token:
+    file: ./cloudflare_secret.txt
