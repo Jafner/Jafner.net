@@ -37,5 +37,5 @@ OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.x264.$FILE_EXT")
 
 # Actual transcoding happens here:
 notify-send -t 2000 "Transcode starting" "$FILE_NAME"
-ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,hwupload' -c:v h264_vaapi -qp $RATE_FACTOR -c:a copy "$OUTFILE"
+ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -c:v h264_vaapi -qp $RATE_FACTOR -c:a copy "$OUTFILE"
 notify-send -t 4000 "Transcode complete" "$FILE_NAME"
