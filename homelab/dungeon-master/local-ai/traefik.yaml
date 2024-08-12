@@ -1,0 +1,29 @@
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: :443
+
+certificatesResolvers:
+  lets-encrypt:
+    acme:
+      email: jafner425@gmail.com
+      storage: acme.json
+      caserver: https://acme-staging-v02.api.letsencrypt.org/directory
+      dnsChallenge: 
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+        # CF_DNS_API_TOKEN 
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true
+    network: web

@@ -1,0 +1,36 @@
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: "no"
+    networks:
+      web:
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yaml:/traefik.yaml
+      - ./acme.json:/acme.json
+    secrets:
+      - cloudflare_token
+    environment:
+      - CF_DNS_API_TOKEN=/run/secrets/cloudflare_token
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: "no"
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`nginx.ai.jafner.net`)
+      - traefik.http.routers.nginx.tls.certresolver=lets-encrypt
+
+networks:
+  web:
+    external: true
+
+secrets:
+  cloudflare_token:
+    file: ./cloudflare_secret.txt
