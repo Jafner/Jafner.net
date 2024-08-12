@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  namespace: jafner-dev
+  name: jafner-dev-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: jafner-dev
+  ports:
+  - port: 80
+    targetPort: 80
