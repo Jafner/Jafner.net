@@ -100,7 +100,7 @@ services:
       - '-c'
       - 'export POSTGRES_USER=$$(cat /run/secrets/postgres_POSTGRES_USER)'
       - 'export POSTGRES_PASSWORD=$$(cat /run/secrets/postgres_POSTGRES_PASSWORD)'
-      - 'source /entrypoint.sh'
+      - 'source docker-entrypoint.sh'
     networks:
       - keycloak
     secrets:
