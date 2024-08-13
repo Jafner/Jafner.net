@@ -49,11 +49,6 @@ services:
     command: "./traefik-forward-auth"
     depends_on:
       - keycloak
-    env_file:
-      - path: ./forwardauth.env
-        required: true
-      - path: ./forwardauth_secrets.env
-        required: false
     secrets:
       - forwardauth_CLIENT_SECRET
       - forwardauth_SECRET
