@@ -22,7 +22,6 @@ services:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres/keycloak
       KC_DB_USERNAME: keycloak
-      KC_HOSTNAME_URL: https://keycloak.jafner.net
       KC_PROXY_HEADERS: xforwarded
       KC_HTTP_ENABLED: true
       KC_HEALTH_ENABLED: true
