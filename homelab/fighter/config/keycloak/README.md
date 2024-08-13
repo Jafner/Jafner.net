@@ -33,3 +33,8 @@ Additionally, you'll need to map the directory containing the files to import (e
 For each realm to import, run `docker-compose run --entrypoint="/opt/keycloak/bin/kc.sh import --file /opt/keycloak/data/import/{REALM_NAME}.json" keycloak` (replace `{REALM_NAME}` with the name of the realm.)
 
 https://howtodoinjava.com/devops/keycloak-script-upload-is-disabled/
+
+# Troubleshooting the Postgres DB
+
+## Connect to the database with `psql`
+- `psql -d keycloak -U keycloak` Connect to the Keycloak database with the keycloak user. 
