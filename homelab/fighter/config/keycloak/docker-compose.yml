@@ -95,16 +95,14 @@ services:
   postgres:
     image: postgres:latest
     container_name: keycloak_postgres
-    entrypoint: [ '/bin/sh', '-c', 'export POSTGRES_PASSWORD=$$(cat /run/secrets/postgres_POSTGRES_PASSWORD) ; docker-entrypoint.sh' ]
     networks:
       - keycloak
     secrets:
-      - postgres_POSTGRES_USER
       - postgres_POSTGRES_PASSWORD
     environment:
       POSTGRES_DB: keycloak
-      POSTGRES_USER: /run/secrets/postgres_POSTGRES_USER
-      POSTGRES_PASSWORD: /run/secrets/postgres_POSTGRES_PASSWORD
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_POSTGRES_PASSWORD
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -135,7 +133,5 @@ secrets:
     file: ./secrets/keycloak_DB_PASS.txt
   keycloak_KEYCLOAK_ADMIN_PASSWORD: 
     file: ./secrets/keycloak_KEYCLOAK_ADMIN_PASSWORD.txt
-  postgres_POSTGRES_USER: 
-    file: ./secrets/postgres_POSTGRES_USER.txt
   postgres_POSTGRES_PASSWORD: 
     file: ./secrets/postgres_POSTGRES_PASSWORD.txt
