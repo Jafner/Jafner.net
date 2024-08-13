@@ -117,11 +117,11 @@ volumes:
 
 secrets:
   forwardauth_privileged_CLIENT_SECRET:
-    file: ./secrets/forwardauth_privileged_CLIENT_SECRET.txt
+    file: ./secrets/forwardauth-privileged_CLIENT_SECRET.txt
   forwardauth_privileged_SECRET: 
-    file: ./secrets/forwardauth_privileged_SECRET.txt
+    file: ./secrets/forwardauth-privileged_SECRET.txt
   forwardauth_privileged_ENCRYPTION_KEY: 
-    file: ./secrets/forwardauth_privileged_ENCRYPTION_KEY.txt
+    file: ./secrets/forwardauth-privileged_ENCRYPTION_KEY.txt
   forwardauth_CLIENT_SECRET:
     file: ./secrets/forwardauth_CLIENT_SECRET.txt
   forwardauth_SECRET:
