@@ -95,12 +95,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: keycloak_postgres
-    entrypoint: 
-      - '/bin/sh'
-      - '-c'
-      - 'export POSTGRES_USER=$$(cat /run/secrets/postgres_POSTGRES_USER)'
-      - 'export POSTGRES_PASSWORD=$$(cat /run/secrets/postgres_POSTGRES_PASSWORD)'
-      - 'source docker-entrypoint.sh'
+    entrypoint: [ '/bin/sh', '-c', 'export POSTGRES_PASSWORD=$$(cat /run/secrets/postgres_POSTGRES_PASSWORD) ; source docker-entrypoint.sh' ]
     networks:
       - keycloak
     secrets:
