@@ -14,7 +14,7 @@ services:
       - ${DOCKER_DATA}/uploads:/uploads
     labels:
       - traefik.http.routers.send.rule=Host(`send.jafner.net`)
-      - traefik.http.routers.send.tls.certresolver=lets-encrypt
+      - traefik.http.routers.send.tls.certresolver=lets-encrypt-dns01
       - traefik.http.routers.send.tls.options=tls12@file
       - traefik.http.routers.send.middlewares=securityheaders@file
       - traefik.http.services.send.loadbalancer.server.port=1234
