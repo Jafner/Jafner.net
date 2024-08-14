@@ -14,10 +14,6 @@ services:
     depends_on:
       - postgres
     command: start --hostname=keycloak.jafner.net
-    secrets:
-      - keycloak_KC_DB_PASSWORD
-      - keycloak_DB_PASS
-      - keycloak_KEYCLOAK_ADMIN_PASSWORD
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres/keycloak
@@ -27,9 +23,9 @@ services:
       KC_HEALTH_ENABLED: true
       KC_METRICS_ENABLED: true
       KEYCLOAK_ADMIN: Jafner
-      KC_DB_PASSWORD: /run/secrets/keycloak_KC_DB_PASSWORD
-      DB_PASS: /run/secrets/keycloak_DB_PASS
-      KEYCLOAK_ADMIN_PASSWORD: /run/secrets/keycloak_KEYCLOAK_ADMIN_PASSWORD
+      KC_DB_PASSWORD: ${keycloak_KC_DB_PASSWORD}
+      DB_PASS: ${keycloak_DB_PASS}
+      KEYCLOAK_ADMIN_PASSWORD: ${keycloak_KEYCLOAK_ADMIN_PASSWORD}
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
@@ -49,17 +45,13 @@ services:
     command: "./traefik-forward-auth"
     depends_on:
       - keycloak
-    secrets:
-      - forwardauth_CLIENT_SECRET
-      - forwardauth_SECRET
-      - forwardauth_ENCRYPTION_KEY
     environment:
       PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
       CLIENT_ID: "traefik-forward-auth"
       LOG_LEVEL: "debug"
-      CLIENT_SECRET: /run/secrets/forwardauth_CLIENT_SECRET
-      SECRET: /run/secrets/forwardauth_SECRET
-      ENCRYPTION_KEY: /run/secrets/forwardauth_ENCRYPTION_KEY
+      CLIENT_SECRET: ${forwardauth_CLIENT_SECRET}
+      SECRET: ${forwardauth_SECRET}
+      ENCRYPTION_KEY: ${forwardauth_ENCRYPTION_KEY}
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
@@ -76,17 +68,13 @@ services:
     command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
     depends_on:
       - keycloak
-    secrets:
-      - forwardauth_privileged_CLIENT_SECRET
-      - forwardauth_privileged_SECRET
-      - forwardauth_privileged_ENCRYPTION_KEY
     environment:
       PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
       CLIENT_ID: "traefik-forward-auth-privileged"
       LOG_LEVEL: "debug"
-      CLIENT_SECRET: /run/secrets/forwardauth_privileged_CLIENT_SECRET
-      SECRET: /run/secrets/forwardauth_privileged_SECRET
-      ENCRYPTION_KEY: /run/secrets/forwardauth_privileged_ENCRYPTION_KEY
+      CLIENT_SECRET: ${forwardauth_privileged_CLIENT_SECRET}
+      SECRET: ${forwardauth_privileged_SECRET}
+      ENCRYPTION_KEY: ${forwardauth_privileged_ENCRYPTION_KEY}
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
@@ -97,12 +85,10 @@ services:
     container_name: keycloak_postgres
     networks:
       - keycloak
-    secrets:
-      - postgres_POSTGRES_PASSWORD
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_POSTGRES_PASSWORD
+      POSTGRES_PASSWORD_FILE: ${postgres_POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -113,25 +99,3 @@ networks:
 
 volumes:
   postgres_data:
-
-secrets:
-  forwardauth_privileged_CLIENT_SECRET:
-    file: ./secrets/forwardauth-privileged_CLIENT_SECRET.txt
-  forwardauth_privileged_SECRET: 
-    file: ./secrets/forwardauth-privileged_SECRET.txt
-  forwardauth_privileged_ENCRYPTION_KEY: 
-    file: ./secrets/forwardauth-privileged_ENCRYPTION_KEY.txt
-  forwardauth_CLIENT_SECRET:
-    file: ./secrets/forwardauth_CLIENT_SECRET.txt
-  forwardauth_SECRET:
-    file: ./secrets/forwardauth_SECRET.txt
-  forwardauth_ENCRYPTION_KEY:
-    file: ./secrets/forwardauth_ENCRYPTION_KEY.txt
-  keycloak_KC_DB_PASSWORD: 
-    file: ./secrets/keycloak_KC_DB_PASSWORD.txt
-  keycloak_DB_PASS: 
-    file: ./secrets/keycloak_DB_PASS.txt
-  keycloak_KEYCLOAK_ADMIN_PASSWORD: 
-    file: ./secrets/keycloak_KEYCLOAK_ADMIN_PASSWORD.txt
-  postgres_POSTGRES_PASSWORD: 
-    file: ./secrets/postgres_POSTGRES_PASSWORD.txt
