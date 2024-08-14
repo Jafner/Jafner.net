@@ -8,4 +8,3 @@ file_name=${input_file%%.*}
 output_file="$file_name.enc.$file_extension"
 
 sops --decrypt --age ${SOPS_AGE_RECIPIENTS} $input_file 
-
