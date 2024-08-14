@@ -72,9 +72,9 @@ services:
       PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
       CLIENT_ID: "traefik-forward-auth-privileged"
       LOG_LEVEL: "debug"
-      CLIENT_SECRET: ${forwardauth_privileged_CLIENT_SECRET}
-      SECRET: ${forwardauth_privileged_SECRET}
-      ENCRYPTION_KEY: ${forwardauth_privileged_ENCRYPTION_KEY}
+      CLIENT_SECRET: ${forwardauthprivileged_CLIENT_SECRET}
+      SECRET: ${forwardauthprivileged_SECRET}
+      ENCRYPTION_KEY: ${forwardauthprivileged_ENCRYPTION_KEY}
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
