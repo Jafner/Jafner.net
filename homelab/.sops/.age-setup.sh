@@ -20,8 +20,3 @@ alias dec="$AGE_DIR/.age-decrypt.sh"
 # git config --local filter.sops.smudge $AGE_DIR/.age-decrypt.sh
 # git config --local filter.sops.clean $AGE_DIR/.age-encrypt.sh
 # git config --local filter.sops.required true
-
-AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-
-HOST_AGE_PUBKEY="$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey"
-SOPS_AGE_RECIPIENTS="$(echo $HOST_AGE_PUBKEY)"
