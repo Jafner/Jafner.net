@@ -16,6 +16,7 @@ services:
       - ./traefik.yaml:/traefik.yaml
       - ./config:/config
       - $DOCKER_DATA/acme.json:/acme.json
+      - $DOCKER_DATA/acme-dns01.json:/acme-dns01.json
     secrets:
       - cloudflare_token
     environment:

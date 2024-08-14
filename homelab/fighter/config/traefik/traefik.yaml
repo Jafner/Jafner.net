@@ -21,7 +21,7 @@ certificatesResolvers:
   lets-encrypt-dns01:
     acme:
       email: jafner425@gmail.com
-      storage: acme.json
+      storage: acme-dns01.json
       caserver: https://acme-staging-v02.api.letsencrypt.org/directory
       dnsChallenge: 
         provider: cloudflare
