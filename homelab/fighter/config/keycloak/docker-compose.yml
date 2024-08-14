@@ -88,7 +88,7 @@ services:
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD_FILE: ${postgres_POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${postgres_POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
