@@ -15,18 +15,13 @@ export SOPS_AGE_KEY_FILE=$HOME/.age/key
 # Set age directory and default recipients
 AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
+FILE_PATH=$(realpath $1)
 
-# Get host to which input file belongs
-FILE_PATH=$1
-HOST_AGE_PUBKEY="$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey"
-
-if [[ -f $HOST_AGE_PUBKEY ]]; then
+# Check for host pubkey, add as recipient if present
+if [[ -f "$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey" ]]; then
+    HOST_AGE_PUBKEY=$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey
+    HOST_AGE_PUBKEY=$(realpath $HOST_AGE_PUBKEY)
     SOPS_AGE_RECIPIENTS="$SOPS_AGE_RECIPIENTS,$(<$HOST_AGE_PUBKEY)"
 fi
 
-input_file=$1
-file_extension=${input_file##*.}
-file_name=${input_file%%.*}
-output_file="$file_name.enc.$file_extension"
-
-sops --decrypt --age ${SOPS_AGE_RECIPIENTS} -i $input_file 
+sops --decrypt --age ${SOPS_AGE_RECIPIENTS} $FILE_PATH 

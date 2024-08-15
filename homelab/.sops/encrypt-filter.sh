@@ -14,4 +14,4 @@ if [[ -f "$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/
     SOPS_AGE_RECIPIENTS="$SOPS_AGE_RECIPIENTS,$(<$HOST_AGE_PUBKEY)"
 fi
 
-sops --encrypt --age ${SOPS_AGE_RECIPIENTS} $1
+sops --encrypt --age ${SOPS_AGE_RECIPIENTS} $FILE_PATH
