@@ -17,6 +17,7 @@ alias enc="$AGE_DIR/.age-encrypt.sh"
 alias dec="$AGE_DIR/.age-decrypt.sh"
 
 # Configure the git filters
-# git config --local filter.sops.smudge $AGE_DIR/.age-decrypt.sh
-# git config --local filter.sops.clean $AGE_DIR/.age-encrypt.sh
-# git config --local filter.sops.required true
+git config --local filter.sops.smudge $AGE_DIR/.age-decrypt.sh
+git config --local filter.sops.clean $AGE_DIR/.age-encrypt.sh
+git config --local filter.sops.required true
+
