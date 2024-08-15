@@ -1,15 +1,14 @@
 #!/bin/bash
-# Takes one file path as input
-# Outputs to a new file with `.enc` stripped from the end
+# Takes file path from stdin
+# Outputs to stdout
 
-# if [ "$#" -ne 1 ]; then
-#     echo "Usage: $0 <file_path>"
-#     exit 1
-# fi
-
+# Set age key file path
+# If no private key exists at the expected location,
+#   Create the key file at the expected location
 SOPS_AGE_KEY_FILE=$HOME/.age/key
 if [[ -f $SOPS_AGE_KEY_FILE ]]; then
     export SOPS_AGE_KEY_FILE=$HOME/.age/key
+    age-keygen -o $SOPS_AGE_KEY_FILE
 fi
 
 # Set age directory and default recipients
