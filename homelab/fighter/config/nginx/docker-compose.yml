@@ -1,0 +1,14 @@
+services:
+  nginx:
+    image: nginx
+    container_name: nginx_nginx
+    restart: "no"
+    networks:
+      - web
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`test.nginx.jafner.net`)
+      - traefik.http.routers.nginx.tls.certresolver=lets-encrypt-dns01
+
+networks:
+  web:
+    external: true
