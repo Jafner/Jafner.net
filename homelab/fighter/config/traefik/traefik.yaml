@@ -12,6 +12,9 @@ entryPoints:
 metrics:
   prometheus: {}
 
+log:
+  level: DEBUG
+
 certificatesResolvers:
   lets-encrypt:
     acme:
@@ -28,7 +31,6 @@ certificatesResolvers:
         resolvers:
           - "1.1.1.1:53"
           - "8.8.8.8:53"
-        # CF_DNS_API_TOKEN 
 
 api: 
   insecure: true

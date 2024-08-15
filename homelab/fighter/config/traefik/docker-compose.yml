@@ -18,8 +18,7 @@ services:
       - $DOCKER_DATA/acme.json:/acme.json
       - $DOCKER_DATA/acme-dns01.json:/acme-dns01.json
     environment:
-      - CLOUDFLARE_DNS_API_TOKEN=${traefik_CF_DNS_API_TOKEN}
-      - CLOUDFLARE_ZONE_API_TOKEN=${traefik_CF_ZONE_API_TOKEN}
+      - CLOUDFLARE_DNS_API_TOKEN=${traefik_CLOUDFLARE_DNS_API_TOKEN}
 
 networks:
   web:
