@@ -2,10 +2,10 @@
 # Takes one file path as input
 # Outputs to a new file with `.enc` stripped from the end
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <file_path>"
-    exit 1
-fi
+# if [ "$#" -ne 1 ]; then
+#     echo "Usage: $0 <file_path>"
+#     exit 1
+# fi
 
 SOPS_AGE_KEY_FILE=$HOME/.age/key
 if [[ -f $SOPS_AGE_KEY_FILE ]]; then

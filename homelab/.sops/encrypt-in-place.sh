@@ -2,10 +2,10 @@
 # Takes one file path as input
 # Outputs to a new file named `$1.enc`
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <file_path>"
-    exit 1
-fi
+# if [ "$#" -ne 1 ]; then
+#     echo "Usage: $0 <file_path>"
+#     exit 1
+# fi
 
 # Set age directory and default recipients
 AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
