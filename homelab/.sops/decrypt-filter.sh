@@ -6,10 +6,11 @@
 # If no private key exists at the expected location,
 #   Create the key file at the expected location
 SOPS_AGE_KEY_FILE=$HOME/.age/key
-if [[ -f $SOPS_AGE_KEY_FILE ]]; then
-    export SOPS_AGE_KEY_FILE=$HOME/.age/key
+if [[ ! -f $SOPS_AGE_KEY_FILE ]]; then
     age-keygen -o $SOPS_AGE_KEY_FILE
 fi
+
+export SOPS_AGE_KEY_FILE=$HOME/.age/key
 
 # Set age directory and default recipients
 AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
