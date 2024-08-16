@@ -1,1 +1,2 @@
 secrets.env filter=sops diff=sops
+secrets.env filter=git-crypt diff=git-crypt
