@@ -1,5 +1,6 @@
 #!/bin/bash
-# Takes file path from stdin
+# Takes file path as $1
+# Takes file contents from stdin
 # Outputs to stdout
 
 # Set up directory variables and default age recipients
@@ -18,16 +19,16 @@ else
 fi
 
 # Set input/output type
-FILE_EXT=${1##*.}
+FILE_EXT="${1##*.}"
 
 case $FILE_EXT in
-    env)
+    "env")
         FILE_TYPE=dotenv ;;
-    json)
+    "json")
         FILE_TYPE=json ;;
-    yaml)
+    "yaml")
         FILE_TYPE=yaml ;;
-    ini)
+    "ini")
         FILE_TYPE=ini ;;
 esac
 

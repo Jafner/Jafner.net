@@ -14,16 +14,16 @@ else
 fi
 
 # Set input/output type
-FILE_EXT=${1##*.}
+FILE_EXT="${1##*.}"
 
 case $FILE_EXT in
-    env)
+    "env")
         FILE_TYPE=dotenv ;;
-    json)
+    "json")
         FILE_TYPE=json ;;
-    yaml)
+    "yaml")
         FILE_TYPE=yaml ;;
-    ini)
+    "ini")
         FILE_TYPE=ini ;;
 esac
 
