@@ -2,14 +2,6 @@
 # Takes file path from stdin
 # Outputs to stdout
 
-{ 
-    if ! [[ -f $1 ]]; then
-        echo "\$1 is not a file"
-        echo "\$1: $1"
-        exit 1
-    fi 
-} > ~/decrypt-filter.stdout.log 2> ~/decrypt-filter.stderr.log
-
 # Set age key file path
 # If no private key exists at the expected location,
 #   Create the key file at the expected location
@@ -22,11 +14,12 @@
 
 export SOPS_AGE_KEY_FILE=$HOME/.age/key
 
-# Set age directory and default recipients
+# Set up directory variables and default age recipients
 {
     AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+    REPO_ROOT=$(realpath "$AGE_DIR/../../")
     SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
-    FILE_PATH=$(realpath $1) 
+    FILE_PATH=$(realpath "${REPO_ROOT}/$1") 
 } >> ~/decrypt-filter.stdout.log 2>> ~/decrypt-filter.stderr.log
 
 # Check for host pubkey, add as recipient if present

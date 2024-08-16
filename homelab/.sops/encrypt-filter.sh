@@ -2,16 +2,13 @@
 # Takes file path from stdin
 # Outputs to stdout
 
-if ! [[ -f $1 ]]; then
-    echo "\$1 is not a file"
-    echo "\$1: $1"
-    exit 1
-fi
-
-# Set age directory and default recipients
-AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
-FILE_PATH=$(realpath $1)
+# Set up directory variables and default age recipients
+{
+    AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+    REPO_ROOT=$(realpath "$AGE_DIR/../../")
+    SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
+    FILE_PATH=$(realpath "${REPO_ROOT}/$1") 
+} >> ~/encrypt-filter.stdout.log 2>> ~/encrypt-filter.stderr.log
 
 # Check for host pubkey, add as recipient if present
 if [[ -f "$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey" ]]; then
