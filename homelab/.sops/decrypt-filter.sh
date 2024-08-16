@@ -26,5 +26,6 @@ export SOPS_AGE_KEY_FILE=$HOME/.age/key
 } >> ~/decrypt-filter.stdout.log 2>> ~/decrypt-filter.stderr.log
 
 { 
-    sops --decrypt $FILE_PATH 
+    exec 3<<< "$(cat $1)"
+    sops --decrypt /dev/fd/3
 } 2>> ~/decrypt-filter.stderr.log
