@@ -5,13 +5,10 @@
 # Set age key file path
 # If no private key exists at the expected location,
 #   Create the key file at the expected location
-{ 
-    SOPS_AGE_KEY_FILE=$HOME/.age/key
-    if [[ ! -f $SOPS_AGE_KEY_FILE ]]; then
-        age-keygen -o $SOPS_AGE_KEY_FILE
-    fi 
-} >> ~/decrypt-filter.stdout.log 2>> ~/decrypt-filter.stderr.log
-
+SOPS_AGE_KEY_FILE=$HOME/.age/key
+if [[ ! -f $SOPS_AGE_KEY_FILE ]]; then
+    age-keygen -o $SOPS_AGE_KEY_FILE
+fi 
 export SOPS_AGE_KEY_FILE=$HOME/.age/key
 
 # Set up directory variables and default age recipients
@@ -20,7 +17,8 @@ export SOPS_AGE_KEY_FILE=$HOME/.age/key
     REPO_ROOT=$(realpath "$AGE_DIR/../../")
     SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
     FILE_PATH=$(realpath "${REPO_ROOT}/$1") 
-} >> ~/decrypt-filter.stdout.log 2>> ~/decrypt-filter.stderr.log
+    echo "FILE_PATH: $FILE_PATH"
+} > ~/decrypt-filter.stdout.log 2> ~/decrypt-filter.stderr.log
 
 # Check for host pubkey, add as recipient if present
 {
