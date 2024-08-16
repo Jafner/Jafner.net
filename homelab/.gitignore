@@ -1,1 +1,4 @@
-secrets.env
+fighter/config/keycloak/secrets.env
+fighter/config/traefik/secrets.env
+fighter/config/zipline/secrets.env
+sellswords/cloudflare/secrets.env
