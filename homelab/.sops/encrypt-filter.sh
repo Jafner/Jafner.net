@@ -3,19 +3,37 @@
 # Outputs to stdout
 
 # Set up directory variables and default age recipients
-{
-    AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-    REPO_ROOT=$(realpath "$AGE_DIR/../../")
-    cd $REPO_ROOT
-    SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
-    FILE_PATH=$(realpath "${REPO_ROOT}/$1") 
-} >> ~/encrypt-filter.stdout.log 2>> ~/encrypt-filter.stderr.log
-
-# Check for host pubkey, add as recipient if present
-if [[ -f "$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey" ]]; then
-    HOST_AGE_PUBKEY=$AGE_DIR/../$(realpath -m --relative-to=$AGE_DIR $FILE_PATH | cut -d'/' -f2)/.age-pubkey
-    HOST_AGE_PUBKEY=$(realpath $HOST_AGE_PUBKEY)
-    SOPS_AGE_RECIPIENTS="$SOPS_AGE_RECIPIENTS,$(<$HOST_AGE_PUBKEY)"
+AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
+HOST_AGE_PUBKEY_PATH="$(echo $1 | cut -d'/' -f 3)/.age-pubkey"
+if [[ -f "$HOST_AGE_PUBKEY_PATH" ]]; then
+    SOPS_AGE_RECIPIENTS="$SOPS_AGE_RECIPIENTS,$(<$HOST_AGE_PUBKEY_PATH)"
 fi
 
-sops --encrypt --age ${SOPS_AGE_RECIPIENTS} $FILE_PATH
+if [[ -f $HOME/.age/key ]]; then
+    export SOPS_AGE_KEY_FILE=$HOME/.age/key
+else
+    echo "SOPS_AGE_KEY_FILE not found at $HOME/.age/key"
+    echo "Cannot encrypt secrets."
+fi
+
+# Set input/output type
+FILE_EXT=${1##*.}
+
+case $FILE_EXT in
+    env)
+        FILE_TYPE=dotenv ;;
+    json)
+        FILE_TYPE=json ;;
+    yaml)
+        FILE_TYPE=yaml ;;
+    ini)
+        FILE_TYPE=ini ;;
+esac
+
+if [[ -z ${FILE_TYPE+x} ]]; then
+    sops --encrypt --age ${SOPS_AGE_RECIPIENTS} /dev/stdin
+else
+    sops --encrypt --input-type $FILE_TYPE --output-type $FILE_TYPE --age ${SOPS_AGE_RECIPIENTS} /dev/stdin
+fi
+
