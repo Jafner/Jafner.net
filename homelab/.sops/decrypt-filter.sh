@@ -2,6 +2,12 @@
 # Takes file path from stdin
 # Outputs to stdout
 
+if ! [[ -f $1 ]]; then
+    echo "\$1 is not a file"
+    echo "\$1: $1"
+    exit 1
+fi
+
 # Set age key file path
 # If no private key exists at the expected location,
 #   Create the key file at the expected location

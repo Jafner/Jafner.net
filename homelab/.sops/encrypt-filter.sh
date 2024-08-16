@@ -2,6 +2,12 @@
 # Takes file path from stdin
 # Outputs to stdout
 
+if ! [[ -f $1 ]]; then
+    echo "\$1 is not a file"
+    echo "\$1: $1"
+    exit 1
+fi
+
 # Set age directory and default recipients
 AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
