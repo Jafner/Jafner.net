@@ -30,9 +30,6 @@ fi
 # Move to the working directory for working with files.
 cd /usr/local/apache2/htdocs
 
-echo " === Checking directory permissions for /usr/local/apache2/htdocs"
-ls -ld /usr/local/apache2/htdocs
-
 DL_LINK=${DL_LINK:-https://github.com/5etools-mirror-2/5etools-mirror-2.github.io.git}
 IMG_LINK=${IMG_LINK:-https://github.com/5etools-mirror-2/5etools-img}
 
