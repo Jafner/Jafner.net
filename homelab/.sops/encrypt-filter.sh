@@ -6,6 +6,7 @@
 {
     AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
     REPO_ROOT=$(realpath "$AGE_DIR/../../")
+    cd $REPO_ROOT
     SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
     FILE_PATH=$(realpath "${REPO_ROOT}/$1") 
 } >> ~/encrypt-filter.stdout.log 2>> ~/encrypt-filter.stderr.log
