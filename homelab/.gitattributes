@@ -1,2 +1,1 @@
-testsecret.env filter=sops
-testsecret2.env filter=sops
+secrets.env filter=sops
