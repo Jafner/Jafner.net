@@ -6,7 +6,7 @@
 # Set up directory variables and default age recipients
 AGE_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 SOPS_AGE_RECIPIENTS="$(<$AGE_DIR/.age-author-pubkeys)"
-HOST_AGE_PUBKEY_PATH="$(echo $1 | cut -d'/' -f 3)/.age-pubkey"
+HOST_AGE_PUBKEY_PATH="$(echo $1 | cut -d'/' -f -2)/.age-pubkey"
 if [[ -f "$HOST_AGE_PUBKEY_PATH" ]]; then
     SOPS_AGE_RECIPIENTS="$SOPS_AGE_RECIPIENTS,$(<$HOST_AGE_PUBKEY_PATH)"
 fi
