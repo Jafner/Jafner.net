@@ -6,11 +6,21 @@ services:
     networks:
       - zipline
       - web
-    env_file:
-      - path: ./zipline.env
-        required: true
-      - path: ./zipline_secrets.env
-        required: false
+    environment:
+      MFA_TOTP_ENABLED: true
+      WEBSITE_SHOW_FILES_PER_USER: true
+      WEBSITE_TITLE: Jafner.net
+      CORE_RETURN_HTTPS: true
+      CORE_HOST: 0.0.0.0
+      CORE_PORT: 3000
+      CORE_LOGGER: true
+      UPLOADER_ASSUME_MIMETYPES: true
+      DATASOURCE_TYPE: local
+      DATASOURCE_LOCAL_DIRECTORY: /uploads
+      UPLOADER_ADMIN_LIMIT: 25gb
+      UPLOADER_USER_LIMIT: 100mb
+      CORE_DATABASE_URL: ${zipline_CORE_DATABASE_URL}
+      CORE_SECRET: ${zipline_CORE_SECRET}
     volumes:
       - $DOCKER_DATA/zipline/uploads:/uploads
       - $DOCKER_DATA/zipline/public:/public
@@ -28,11 +38,10 @@ services:
       zipline:
         aliases:
           - postgres
-    env_file:
-      - path: ./postgres.env
-        required: true
-      - path: ./postgres_secrets.env
-        required: false
+    environment:
+      POSTGRES_USER: zipline
+      POSTGRES_DATABASE: zipline
+      POSTGRES_PASSWORD: ${postgres_POSTGRES_PASSWORD}
     volumes:
       - $DOCKER_DATA/postgres:/var/lib/postgresql/data
     healthcheck:
