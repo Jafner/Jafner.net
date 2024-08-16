@@ -1,6 +1,11 @@
 #!/bin/bash
 # Takes file path from stdin
 # Outputs to stdout
+rm -f ~/decrypt-filter.stdout.log ~/decrypt-filter.stderr.log
+
+{
+    echo "pwd: $(pwd)"
+} >> ~/decrypt-filter.stdout.log 2>> ~/decrypt-filter.stderr.log
 
 # Set age key file path
 # If no private key exists at the expected location,
@@ -18,7 +23,7 @@ export SOPS_AGE_KEY_FILE=$HOME/.age/key
     cd $REPO_ROOT
     FILE_PATH=$(realpath "${REPO_ROOT}/$1") 
     echo "FILE_PATH: $FILE_PATH"
-} > ~/decrypt-filter.stdout.log 2> ~/decrypt-filter.stderr.log
+} >> ~/decrypt-filter.stdout.log 2>> ~/decrypt-filter.stderr.log
 
 { 
     sops --decrypt $FILE_PATH 
