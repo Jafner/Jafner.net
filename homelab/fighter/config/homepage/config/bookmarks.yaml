@@ -2,7 +2,7 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/bookmarks
 
-- Animals:
+- Tasmota Smart Plugs:
     - Toes Day:
         - href: https://day.toes.tasmota.jafner.net
     - Toes Night:
@@ -17,7 +17,7 @@
         - href: https://day.sprout.tasmota.jafner.net
     - Cowboy Day:
         - href: https://day.cowboy.tasmota.jafner.net
-
-- Homelab:
     - Lab Rack:
         - href: https://rack.tasmota.jafner.net
+
+    
