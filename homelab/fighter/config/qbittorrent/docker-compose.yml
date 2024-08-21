@@ -8,15 +8,18 @@ services:
           memory: 6G
     networks:
       - web
+    network_mode: "service:gluetun"
     restart: "no"
     volumes:
       - $DOCKER_DATA:/config
       - $TORRENT_DATA:/torrenting
       - ./discord_notifier.sh:/discord_notifier.sh
       - ./discord_notifier_secrets.env:/discord_notifier_secrets.env
-    env_file:
-      - path: ./qbittorrent.env
-        required: true
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/Los_Angeles
+      WEBUI_PORT: 8080
     ports:
       - 49510:49510
     labels:
@@ -31,15 +34,34 @@ services:
   exporter-qbittorrent:
     image: esanchezm/prometheus-qbittorrent-exporter:latest
     container_name: qbittorrent_exporter
-    env_file:
-      - path: ./exporter.env
-        required: true
+    environment:
+      QBITTORRENT_HOST: http://qbittorrent
+      QBITTORRENT_PORT: 8080
     restart: "no"
     networks:
       - monitoring
       - web
     labels:
       - traefik.enable=false
+
+  gluetun:
+    container_name: gluetun_gluetun
+    image: qmcgaw/gluetun
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8080:8080
+    environment:
+      VPN_SERVICE_PROVIDER: custom
+      VPN_TYPE: wireguard
+      WIREGUARD_ENDPOINT_IP: vpn.jafner.tools
+      WIREGUARD_ENDPOINT_PORT: 53820
+      WIREGUARD_PUBLIC_KEY: ${gluetun_WIREGUARD_PUBLIC_KEY}
+      WIREGUARD_PRIVATE_KEY: ${gluetun_WIREGUARD_PRIVATE_KEY}
+      WIREGUARD_PRESHARED_KEY: ${gluetun_WIREGUARD_PRESHARED_KEY}
+      WIREGUARD_ADDRESSES: 10.8.0.9/24
 
 networks:
   web:
