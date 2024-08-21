@@ -6,8 +6,6 @@ services:
       resources:
         limits:
           memory: 6G
-    networks:
-      - web
     network_mode: "service:gluetun"
     restart: "no"
     volumes:
