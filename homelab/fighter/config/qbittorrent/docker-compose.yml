@@ -6,7 +6,8 @@ services:
       resources:
         limits:
           memory: 6G
-    network_mode: "service:gluetun"
+    networks:
+      - web
     restart: "no"
     volumes:
       - $DOCKER_DATA:/config
@@ -18,6 +19,8 @@ services:
       PGID: 1001
       TZ: America/Los_Angeles
       WEBUI_PORT: 8080
+    ports:
+      - 49510:49510
     labels:
       - traefik.http.routers.qbt.rule=Host(`qbt.jafner.net`)
       - traefik.http.routers.qbt.tls.certresolver=lets-encrypt
@@ -39,25 +42,6 @@ services:
       - web
     labels:
       - traefik.enable=false
-
-  gluetun:
-    container_name: gluetun_gluetun
-    image: qmcgaw/gluetun
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - NET_ADMIN
-    ports:
-      - 8580:8080
-    environment:
-      VPN_SERVICE_PROVIDER: custom
-      VPN_TYPE: wireguard
-      WIREGUARD_ENDPOINT_IP: vpn.jafner.tools
-      WIREGUARD_ENDPOINT_PORT: 53820
-      WIREGUARD_PUBLIC_KEY: ${gluetun_WIREGUARD_PUBLIC_KEY}
-      WIREGUARD_PRIVATE_KEY: ${gluetun_WIREGUARD_PRIVATE_KEY}
-      WIREGUARD_PRESHARED_KEY: ${gluetun_WIREGUARD_PRESHARED_KEY}
-      WIREGUARD_ADDRESSES: 10.8.0.9/24
 
 networks:
   web:
