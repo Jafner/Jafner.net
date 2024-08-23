@@ -196,17 +196,17 @@ services:
       - traefik.http.services.jackett.loadbalancer.server.port=9117
       - traefik.http.routers.jackett.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
-  exporter-sabnzbd:
-    image: msroest/sabnzbd_exporter:latest
-    container_name: autopirate_sabnzbd-exporter
-    restart: "no"
-    networks:
-      - monitoring
-    env_file:
-      - path: ./exporter-sabnzbd.env
-        required: true
-      - path: ./exporter-sabnzbd_secrets.env
-        required: false
+  # exporter-sabnzbd:
+  #   image: msroest/sabnzbd_exporter:latest
+  #   container_name: autopirate_sabnzbd-exporter
+  #   restart: "no"
+  #   networks:
+  #     - monitoring
+  #   env_file:
+  #     - path: ./exporter-sabnzbd.env
+  #       required: true
+  #     - path: ./exporter-sabnzbd_secrets.env
+  #       required: false
 
 networks:
   tdarr:
