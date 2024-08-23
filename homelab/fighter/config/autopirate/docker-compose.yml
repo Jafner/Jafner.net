@@ -54,7 +54,7 @@ services:
       - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   readarr:
-    image: lscr.io/linuxserver/readarr:latest
+    image: lscr.io/linuxserver/readarr:0.4.0-nightly
     container_name: autopirate_readarr
     networks:
       - web
