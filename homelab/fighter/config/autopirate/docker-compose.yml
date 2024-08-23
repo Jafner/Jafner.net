@@ -53,6 +53,24 @@ services:
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
       - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
+  readarr:
+    image: linuxserver/readarr:latest
+    container_name: autopirate_readarr
+    networks:
+      - web
+    env_file:
+      - path: ./autopirate.env
+        required: true
+    volumes:
+      - "${BOOKS_DIR}:/books"
+      - "${DOCKER_DATA}/readarr_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.readarr.rule=Host(`readarr.jafner.net`)
+      - traefik.http.routers.readarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.readarr.loadbalancer.server.port=8787
+      - traefik.http.routers.readarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: autopirate_bazarr
