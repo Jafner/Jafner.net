@@ -1,0 +1,52 @@
+name: Stacks CICD 
+run-name: ${{ gitea.actor }} Building
+on: 
+  push: 
+    paths:
+      - 'homelab/stacks/**'
+  workflow_dispatch:
+
+jobs:
+  Setup:
+    runs-on: fighter
+    outputs:
+      stacks: ${{ steps.stackslist.outputs.value }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with: 
+          submodules: 'true'
+          fetch-depth: 2
+          sparse-checkout: 'homelab/stacks/'
+      - name: Get changed stacks
+        run: git diff --name-only ${{ gitea.event.before }} ${{ gitea.event.after }}
+        
+  # Build:
+  #   runs-on: fighter
+  #   outputs:
+  #     matrix: ${{ steps.stackslist.outputs.value }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         submodules: 'true'
+  #         fetch-depth: 2
+  #         sparse-checkout: 'homelab/stacks/'
+  #     - name: Get changed Stacks
+  #       run: git diff --name-only ${{ gitea.event.before }} ${{ gitea.event.after }}
+  #     - id: stackslist
+  #       run: |
+          
+  
+  # Deploy:
+  #   runs-on: fighter
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         submodules: 'true'
+  #         fetch-depth: 2
+  #         sparse-checkout: 'homelab/stacks/'
+  #     - name: Get changed Stacks
+  #       run: git diff --name-only ${{ gitea.event.before }} ${{ gitea.event.after }}
+        
