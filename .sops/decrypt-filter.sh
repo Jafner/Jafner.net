@@ -3,9 +3,6 @@
 # Takes encrypted file contents from /dev/stdin
 # Outputs to stdout
 
-SOPS_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-REPO_ROOT=$(realpath "$SOPS_DIR/../../")
-
 if [[ -f $HOME/.age/key ]]; then
     export SOPS_AGE_KEY_FILE=$HOME/.age/key
 else

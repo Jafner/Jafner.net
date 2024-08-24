@@ -1,5 +1,5 @@
 creation_rules:
-  - path_regex: secrets.env
+  - path_regex: .*
     shamir_threshold: 2
     key_groups:
       - age: # Author keys
