@@ -8,7 +8,7 @@ on:
 
 jobs:
   Setup:
-    runs-on: fighter
+    runs-on: ubuntu-latest
     outputs:
       stacks: ${{ steps.stackslist.outputs.value }}
     steps:
@@ -22,7 +22,7 @@ jobs:
         run: git diff --name-only ${{ gitea.event.before }} ${{ gitea.event.after }}
         
   # Build:
-  #   runs-on: fighter
+  #   runs-on: ubuntu-latest
   #   outputs:
   #     matrix: ${{ steps.stackslist.outputs.value }}
   #   steps:
@@ -39,7 +39,7 @@ jobs:
           
   
   # Deploy:
-  #   runs-on: fighter
+  #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v4
