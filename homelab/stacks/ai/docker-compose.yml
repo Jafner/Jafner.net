@@ -1,0 +1,44 @@
+name: 'ai'
+services:
+  ollama:
+    container_name: ai_ollama
+    image: ollama/ollama:0.2.5-rocm
+    networks:
+      - ai
+    privileged: false
+    group_add:
+      - video
+    ports:
+      - 11434:11434
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - $HOME/docker-data/models:/models
+      - $HOME/docker-data/ollama:/root/.ollama
+    environment:
+      OLLAMA_MAX_LOADED_MODELS: 0
+
+  sillytavern:
+    container_name: ai_sillytavern
+    image: ghcr.io/sillytavern/sillytavern:1.12.2
+    networks:
+      - ai
+    privileged: false
+    ports:
+      - 8000:8000/tcp
+    volumes:
+      - $HOME/docker-data/sillytavern:/home/node/app/config
+    environment:
+      TZ: America/Los_Angeles
+
+volumes:
+  ollama:
+  sillytavern:
+networks:
+  ai:
+    name: "ai"
+    ipam:
+      driver: default
+      config: 
+       - subnet: 172.22.0.0/16
