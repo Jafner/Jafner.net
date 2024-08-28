@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set CLOUDFLARE_API_TOKEN
-source secrets.env 
+export CLOUDFLARE_API_TOKEN=$(cat secrets.env | cut -d'=' -f2)
 
 ZONES_LIST="jafner.net jafner.dev jafner.tools jafner.chat"
 function get_zone_id () {
