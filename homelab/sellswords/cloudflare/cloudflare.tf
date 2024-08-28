@@ -20,24 +20,9 @@ provider "cloudflare" {
 }
 
 # Below allows us to reference public IP of TF execution environment 
-# with `data.http.myip.body`
+# with `data.http.myip.response_body`
 data "http" "myip" {
   url = "https://ipv4.icanhazip.com"
-}
-
-# Below allows us to reference DNS A-records for the listed domains 
-# with `data.dns_a_record_set.<data-object-name>.addrs`
-data "dns_a_record_set" "jafner_net" {
-  host = "jafner.net"
-}
-data "dns_a_record_set" "jafner_dev" {
-  host = "jafner.dev"
-}
-data "dns_a_record_set" "jafner_chat" {
-  host = "jafner.chat"
-}
-data "dns_a_record_set" "jafner_tools" {
-    host = "jafner.tools"
 }
 
 # Zone IDs
