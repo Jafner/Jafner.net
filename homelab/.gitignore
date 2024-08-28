@@ -1,3 +1,0 @@
-fighter/config/keycloak/secrets.env
-fighter/config/traefik/secrets.env
-sellswords/cloudflare/secrets.env
