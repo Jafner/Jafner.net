@@ -8,8 +8,10 @@ if [[ -f $HOME/.age/key ]]; then
 else
     echo "SOPS_AGE_KEY_FILE not found at $HOME/.age/key"
     echo "Cannot decrypt secrets."
+    exit 1
 fi
 
+REPO_ROOT="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/.."
 # Set input/output type
 FILE_EXT="${1##*.}"
 

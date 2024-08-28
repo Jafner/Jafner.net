@@ -11,6 +11,7 @@ else
     exit 1
 fi
 
+REPO_ROOT="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/.."
 # Set input/output type
 FILE_EXT="${1##*.}"
 
@@ -26,7 +27,7 @@ case $FILE_EXT in
 esac
 
 if [[ -z ${FILE_TYPE+x} ]]; then
-    sops --encrypt --config ../.sops.yaml /dev/stdin
+    sops --encrypt --config $REPO_ROOT/.sops.yaml /dev/stdin
 else
-    sops --encrypt --config ../.sops.yaml --input-type $FILE_TYPE --output-type json /dev/stdin
+    sops --encrypt --config $REPO_ROOT/.sops.yaml --input-type $FILE_TYPE --output-type json /dev/stdin
 fi
