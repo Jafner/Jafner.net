@@ -71,7 +71,7 @@ resource "cloudflare_record" "ipv6_4_githubpages_jafner_dev" {
 }
 
 resource "cloudflare_record" "nginx1_jafner_dev" {
-  content = data.http.myip.response_body
+  content = chomp(data.http.myip.response_body)
   name    = "nginx1"
   proxied = false
   ttl     = 1

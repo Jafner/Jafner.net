@@ -8,7 +8,7 @@ resource "cloudflare_record" "a5e_jafner_net" {
 }
 
 resource "cloudflare_record" "root_jafner_net" {
-  content = data.http.myip.response_body
+  content = chomp(data.http.myip.response_body)
   name    = "jafner.net"
   proxied = false
   ttl     = 1
