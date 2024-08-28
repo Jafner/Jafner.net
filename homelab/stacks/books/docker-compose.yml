@@ -1,0 +1,120 @@
+services:
+
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: books_sabnzbd
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PGID: 1001
+      PUID: 1001
+    ports:
+      - 8085:8080
+    volumes:
+      - "${DOCKER_DATA}/sabnzbd:/config"
+      - "${NZB_COMPLETED}:/downloads"
+      - "${NZB_INCOMPLETE}:/incomplete-downloads"
+    labels:
+      - traefik.http.routers.books-sabnzbd.rule=Host(`sabnzbd.books.jafner.net`)
+      - traefik.http.routers.books-sabnzbd.tls.certresolver=lets-encrypt-dns01
+      - traefik.http.services.books-sabnzbd.loadbalancer.server.port=8080
+      - traefik.http.routers.books-sabnzbd.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+#######################################################################################
+
+  readarr-ebooks:
+    image: lscr.io/linuxserver/readarr:0.4.0-nightly
+    container_name: books_readarr-ebooks
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001
+    volumes:
+      - "${EBOOKS_LIBRARY}:/books"
+      - "${DOCKER_DATA}/readarr-ebooks:/config"
+      - "${NZB_COMPLETED}:/downloads"
+    labels:
+      - traefik.http.routers.books-readarr-ebooks.rule=Host(`ebooks.readarr.books.jafner.net`)
+      - traefik.http.routers.books-readarr-ebooks.tls.certresolver=lets-encrypt-dns01
+      - traefik.http.services.books-readarr-ebooks.loadbalancer.server.port=8787
+      - traefik.http.routers.books-readarr-ebooks.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+  
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: books_calibre
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - web
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/Los_Angeles
+      CUSTOM_USER: admin
+      PASSWORD: ${calibre_PASSWORD}
+    volumes:
+      - "${EBOOKS_LIBRARY}:/ebooks"
+      - "${DOCKER_DATA}/calibre:/config"
+    ports:
+      - 18081:8081
+    restart: unless-stopped
+    labels:
+      - traefik.http.routers.books-calibre.rule=Host(`calibre.books.jafner.net`)
+      - traefik.http.routers.books-calibre.tls.certresolver=lets-encrypt-dns01
+
+  calibre-web:
+    image: linuxserver/calibre-web:latest
+    container_name: books_calibre-web
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/Los_Angeles
+    volumes:
+      - "${EBOOKS_LIBRARY}:/ebooks"
+      - "${DOCKER_DATA}/calibre-web:/config"
+    labels:
+      - traefik.http.routers.books-calibre-web.rule=Host(`calibreweb.books.jafner.net`)
+      - traefik.http.routers.books-calibre-web.tls.certresolver=lets-encrypt-dns01
+    networks:
+      - web
+
+#######################################################################################
+
+  readarr-audiobooks:
+    image: lscr.io/linuxserver/readarr:0.4.0-nightly
+    container_name: books_readarr-audiobooks
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001
+    volumes:
+      - "${AUDIOBOOKS_LIBRARY}:/books"
+      - "${DOCKER_DATA}/readarr-audiobooks:/config"
+      - "${NZB_COMPLETED}:/downloads"
+    labels:
+      - traefik.http.routers.books-readarr-audiobooks.rule=Host(`audio.readarr.books.jafner.net`)
+      - traefik.http.routers.books-readarr-audiobooks.tls.certresolver=lets-encrypt-dns01
+      - traefik.http.services.books-readarr-audiobooks.loadbalancer.server.port=8787
+      - traefik.http.routers.books-readarr-audiobooks.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+  
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: books_audiobookshelf
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+    volumes:
+      - "${AUDIOBOOKS_LIBRARY}:/books"
+      - "${DOCKER_DATA}/audiobookshelf:/config"
+      - "${DOCKER_DATA}/audiobookshelf-metadata:/metadata"
+    labels:
+      - traefik.http.routers.books-audiobookshelf.rule=Host(`audiobookshelf.books.jafner.net`)
+      - traefik.http.routers.books-audiobookshelf.tls.certresolver=lets-encrypt-dns01
+      - traefik.http.services.books-audiobookshelf.loadbalancer.server.port=8787
+      - traefik.http.routers.books-audiobookshelf.middlewares=lan-only@file,traefik-forward-auth-privileged@file
