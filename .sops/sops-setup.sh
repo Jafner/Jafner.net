@@ -18,7 +18,7 @@ else
 fi
 
 # Configure the git filters
-git config --local filter.sops.smudge $SOPS_DIR/decrypt-filter.sh %f
-git config --local filter.sops.clean $SOPS_DIR/encrypt-filter.sh %f
+git config --local filter.sops.smudge "$SOPS_DIR/decrypt-filter.sh %f"
+git config --local filter.sops.clean "$SOPS_DIR/encrypt-filter.sh %f"
 git config --local filter.sops.required true
 git config --local diff.sops.textconv "sops decrypt"
