@@ -4,6 +4,8 @@ creation_rules:
     key_groups:
       - age: # Author keys
         - 'age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00' # joey@dungeon-master
+      - age: # Author keys (again)
+        - 'age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00' # joey@dungeon-master
       - age: # CICD runner keys
         - 'age12xgfd2w8acy5c2mrg3xv7ndzx3zw2j4kxv2a6ull385vxe8lcq2qpkhnv5'
       - age: # Deploy host key
