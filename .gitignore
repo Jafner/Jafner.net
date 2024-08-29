@@ -6,6 +6,7 @@ TODO.md
 *.tfstate.backup
 *.secret.yml
 .git-crypt.key
+.sops/*.key
 
 dotfiles/.zsh_history
 dotfiles/.bash_history

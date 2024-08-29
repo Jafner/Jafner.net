@@ -3,15 +3,10 @@
 # Takes file contents from stdin
 # Outputs to stdout
 
-if [[ -f $HOME/.age/key ]]; then
-    export SOPS_AGE_KEY_FILE=$HOME/.age/key
-else
-    echo "SOPS_AGE_KEY_FILE not found at $HOME/.age/key"
-    echo "Cannot encrypt secrets."
-    exit 1
-fi
-
 REPO_ROOT="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/.."
+
+export SOPS_AGE_KEY_FILE="$REPO_ROOT/.sops/$USER.author.key"
+
 # Set input/output type
 FILE_EXT="${1##*.}"
 
