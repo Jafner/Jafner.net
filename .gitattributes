@@ -1,2 +1,3 @@
 secrets.env filter=sops diff=sops
 *.secrets filter=sops diff=sops
+*.token filter=sops diff=sops
