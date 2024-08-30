@@ -9,4 +9,5 @@ services:
     environment:
       CONFIG_FILE: /config.yaml
       GITEA_INSTANCE_URL: https://gitea.jafner.tools
-      GITEA_RUNNER_REGISTRATION_TOKEN_FILE: registration.token
+    env_file:
+      - ./secrets.env # Defines GITEA_RUNNER_REGISTRATION_TOKEN
