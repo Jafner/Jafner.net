@@ -20,8 +20,24 @@ services:
       - traefik.http.routers.books-sabnzbd.tls.certresolver=lets-encrypt-dns01
       - traefik.http.services.books-sabnzbd.loadbalancer.server.port=8080
       - traefik.http.routers.books-sabnzbd.middlewares=lan-only@file,traefik-forward-auth-privileged@file
-
-#######################################################################################
+  
+  nzbhydra2:
+    image: linuxserver/nzbhydra2:latest
+    container_name: books_nzbhydra2
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001
+    volumes:
+      - "${DOCKER_DATA}/nzbhydra2_config:/config"
+      - "${NZB_COMPLETED}:/downloads"
+    labels:
+      - traefik.http.routers.books-nzbhydra2.rule=Host(`nzbhydra.books.jafner.net`)
+      - traefik.http.routers.books-nzbhydra2.tls.certresolver=lets-encrypt
+      - traefik.http.services.books-nzbhydra2.loadbalancer.server.port=5076
+      - traefik.http.routers.books-nzbhydra2.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   readarr-ebooks:
     image: lscr.io/linuxserver/readarr:0.4.0-nightly
@@ -64,6 +80,7 @@ services:
     labels:
       - traefik.http.routers.books-calibre.rule=Host(`calibre.books.jafner.net`)
       - traefik.http.routers.books-calibre.tls.certresolver=lets-encrypt-dns01
+      - traefik.http.routers.books-calibre.middlewares=lan-only@file,traefik-forward-auth-privileged@file
 
   calibre-web:
     image: linuxserver/calibre-web:latest
@@ -78,10 +95,9 @@ services:
     labels:
       - traefik.http.routers.books-calibre-web.rule=Host(`calibreweb.books.jafner.net`)
       - traefik.http.routers.books-calibre-web.tls.certresolver=lets-encrypt-dns01
+      - traefik.http.routers.books-calibre.middlewares=lan-only@file,traefik-forward-auth-privileged@file
     networks:
       - web
-
-#######################################################################################
 
   readarr-audiobooks:
     image: lscr.io/linuxserver/readarr:0.4.0-nightly
@@ -109,6 +125,8 @@ services:
       - web
     environment:
       TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001
     volumes:
       - "${AUDIOBOOKS_LIBRARY}:/books"
       - "${DOCKER_DATA}/audiobookshelf:/config"
@@ -118,3 +136,7 @@ services:
       - traefik.http.routers.books-audiobookshelf.tls.certresolver=lets-encrypt-dns01
       - traefik.http.services.books-audiobookshelf.loadbalancer.server.port=8787
       - traefik.http.routers.books-audiobookshelf.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+networks:
+  web:
+    external: true
