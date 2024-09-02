@@ -3,7 +3,7 @@
 # curl https://gitea.jafner.tools/Jafner/Jafner.net/raw/branch/main/homelab/stacks/deploy.sh | bash -s <stack to pass>
 
 STACK=$1
-mkdir -p /tmp/stack/$STACK
+mkdir -p /tmp/stack/$STACK $HOME/stacks/$STACK
 git clone -n --depth=1 --filter=tree:0 https://gitea.jafner.tools/Jafner/Jafner.net.git /tmp/stack/$STACK && cd /tmp/stack/$STACK
 git sparse-checkout set --no-cone homelab/stacks/$STACK && git checkout
 mv -f homelab/stacks/$STACK/* $HOME/stacks/$STACK/
