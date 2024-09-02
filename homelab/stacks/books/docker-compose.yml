@@ -18,46 +18,6 @@ services:
       traefik.http.routers.books-sabnzbd.rule: Host(`sabnzbd.books.jafner.net`)
       traefik.http.routers.books-sabnzbd.tls.certresolver: lets-encrypt-dns01
       traefik.http.services.books-sabnzbd.loadbalancer.server.port: 8080
-
-  readarr-ebooks:
-    image: lscr.io/linuxserver/readarr:0.4.0-nightly
-    container_name: books_readarr-ebooks
-    networks:
-      - web
-    environment:
-      TZ: America/Los_Angeles
-      PUID: "1001"
-      PGID: "1001"
-    volumes:
-      - "${EBOOKS_LIBRARY}:/books"
-      - "${DOCKER_DATA}/readarr-ebooks:/config"
-      - "${NZB_COMPLETED}:/downloads"
-    labels:
-      traefik.http.routers.books-readarr-ebooks.middlewares: lan-only@file,traefik-forward-auth-privileged@file
-      traefik.http.routers.books-readarr-ebooks.rule: Host(`ebooks.readarr.books.jafner.net`)
-      traefik.http.routers.books-readarr-ebooks.tls.certresolver: lets-encrypt-dns01
-      traefik.http.services.books-readarr-ebooks.loadbalancer.server.port: "8787"
-
-  lazylibrarian:
-    image: lscr.io/linuxserver/lazylibrarian:latest
-    container_name: books_lazylibrarian
-    networks:
-      - web
-    environment:
-      PUID: "1001"
-      PGID: "1001"
-      TZ: America/Los_Angeles
-      DOCKER_MODS: linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg
-    volumes:
-      - "${EBOOKS_LIBRARY}:/books"
-      - "${DOCKER_DATA}/lazylibrarian:/config"
-      - "${NZB_COMPLETED}:/downloads"
-    labels:
-      traefik.http.routers.books-lazylibrarian.middlewares: lan-only@file,traefik-forward-auth-privileged@file
-      traefik.http.routers.books-lazylibrarian.rule: Host(`lazylibrarian.books.jafner.net`)
-      traefik.http.routers.books-lazylibrarian.tls.certresolver: lets-encrypt-dns01
-      traefik.http.services.books-lazylibrarian.loadbalancer.server.port: "5299"
-
       
   calibre:
     image: lscr.io/linuxserver/calibre:latest
@@ -106,25 +66,6 @@ services:
       traefik.http.routers.books-calibre-web.tls.certresolver: lets-encrypt-dns01
     networks:
       - web
-
-  readarr-audiobooks:
-    image: lscr.io/linuxserver/readarr:0.4.0-nightly
-    container_name: books_readarr-audiobooks
-    networks:
-      - web
-    environment:
-      TZ: America/Los_Angeles
-      PUID: "1001"
-      PGID: "1001"
-    volumes:
-      - "${AUDIOBOOKS_LIBRARY}:/books"
-      - "${DOCKER_DATA}/readarr-audiobooks:/config"
-      - "${NZB_COMPLETED}:/downloads"
-    labels:
-      traefik.http.routers.books-readarr-audiobooks.middlewares: lan-only@file,traefik-forward-auth-privileged@file
-      traefik.http.routers.books-readarr-audiobooks.rule: Host(`audio.readarr.books.jafner.net`)
-      traefik.http.routers.books-readarr-audiobooks.tls.certresolver: lets-encrypt-dns01
-      traefik.http.services.books-readarr-audiobooks.loadbalancer.server.port: "8787"
   
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
