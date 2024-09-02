@@ -97,7 +97,7 @@ services:
     volumes:
       - "${EBOOKS_LIBRARY}:/ebooks"
       - "${DOCKER_DATA}/calibre-web:/config"
-      - "${DOCKER_DATA}/calibre/metadata.db:/metadata.db"
+      - "${DOCKER_DATA}/calibre/metadata.db:/ebooks/metadata.db"
     labels:
       traefik.http.routers.books-calibre-web.middlewares: lan-only@file,traefik-forward-auth-privileged@file
       traefik.http.routers.books-calibre-web.rule: Host(`calibreweb.books.jafner.net`)
