@@ -6,7 +6,8 @@ STACK=$1
 mkdir -p /tmp/stack/$STACK
 git clone -n --depth=1 --filter=tree:0 https://gitea.jafner.tools/Jafner/Jafner.net.git /tmp/stack/$STACK && cd /tmp/stack/$STACK
 git sparse-checkout set --no-cone homelab/stacks/$STACK && git checkout
-mv -f homelab/stacks/$STACK $HOME/stacks/ 
+mv -f homelab/stacks/$STACK/* $HOME/stacks/$STACK/
+mv -f homelab/stacks/$STACK/.* $HOME/stacks/$STACK/
 cd $HOME/stacks/$STACK && rm -rf /tmp/stack/$STACK
 
 echo -e "$(cat $HOME/.age/$HOSTNAME.host.key)\n$AGE_DEPLOY_KEY" > $HOME/.age/combined.key
