@@ -41,6 +41,8 @@ services:
   lazylibrarian:
     image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: books_lazylibrarian
+    networks:
+      - web
     environment:
       PUID: "1001"
       PGID: "1001"
@@ -54,7 +56,7 @@ services:
       traefik.http.routers.books-lazylibrarian.middlewares: lan-only@file,traefik-forward-auth-privileged@file
       traefik.http.routers.books-lazylibrarian.rule: Host(`lazylibrarian.books.jafner.net`)
       traefik.http.routers.books-lazylibrarian.tls.certresolver: lets-encrypt-dns01
-      traefik.http.services.books-lazylibrarian.loadbalancer.server.port: "8787"
+      traefik.http.services.books-lazylibrarian.loadbalancer.server.port: "5299"
 
       
   calibre:
