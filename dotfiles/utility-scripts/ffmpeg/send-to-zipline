@@ -22,7 +22,7 @@ FILE_NAME=$(basename "$INPUT_FILE")
 FILE_NAME="${FILE_NAME%.*}"
 
 ZIPLINE_HOST_ROOT=https://zipline.jafner.net
-TOKEN=$(cat ~/.zipline-auth)
+TOKEN=$(cat ~/.zipline-auth.token)
 LINK=$(curl \
     --header "authorization: $TOKEN" \
     $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \

@@ -39,3 +39,5 @@ OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.x264.$FILE_EXT")
 notify-send -t 2000 "Transcode starting" "$FILE_NAME"
 ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -c:v h264_vaapi -qp $RATE_FACTOR -c:a copy "$OUTFILE"
 notify-send -t 4000 "Transcode complete" "$FILE_NAME"
+
+ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi -i input.mp4 -c:v h264_vaapi -b:v 2M -maxrate 2M output.mp4

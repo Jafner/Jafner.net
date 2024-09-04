@@ -1,0 +1,80 @@
+# Aliases
+alias ls='ls --color'
+
+# Get the size of a remote git repository as quickly as possible.
+function git-getsize() {
+    echo "Cloning with --no-checkout ... "
+    git clone --no-checkout "$1" && cd "$(basename "$_" .git)"
+    echo "Size of LFS objects:"
+    git lfs ls-files -s | cut -d' ' -f4-5
+    if ! [ -z ${cleanup+x} ]; then
+        unset cleanup
+    fi
+    while [ -z ${cleanup+x} ]; do
+        read -p "Clean up the git repo? [y/n]: " yn
+        case $yn in
+            [Yy]*) cleanup=0 ;;
+            [Nn]*) cleanup=1 ;;
+            *) echo "Enter y or n" ;;
+        esac
+    done
+}
+
+# Run some ffmpeg commands with only one subcommand and the file as input.
+function ffconvert() {
+    COMMAND=$1
+    FILE=$2
+
+    INPUT_FILE=$(realpath "$FILE")
+    FILE_PATH=$(dirname "$INPUT_FILE")
+    FILE_NAME=$(basename "$INPUT_FILE")
+    FILE_EXT="${FILE_NAME##*.}"
+    FILE_NAME="${FILE_NAME%.*}"
+
+    case $COMMAND in
+        x264 ) OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.x264.$FILE_EXT") &&\
+                ffmpeg -hide_banner -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi -i "$INPUT_FILE" -c:v h264_vaapi -b:v 6M -maxrate 6M -c:a copy "$OUTFILE" ;;
+        x265 ) OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.x265.$FILE_EXT") &&\
+                ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -vf 'format=hwupload' -c:v hevc_vaapi -b:v 6M -c:a copy "$OUTFILE" ;;
+        av1  ) OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.av1.$FILE_EXT") &&\
+                ffmpeg -hide_banner -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi -i "$INPUT_FILE" -map 0 -vf 'format=nv12,hwupload' -c:v av1_vaapi -crf 18 -b:v 6000k "$OUTFILE" > /dev/null ;;
+        mp4  ) OUTFILE=$(echo "$FILE_PATH/$FILE_NAME.mp4") &&\
+                ffmpeg -hide_banner -i "$INPUT_FILE" -map 0 -c:v copy -c:a copy "$OUTFILE" ;;
+        * ) echo "Usage: $0 (x264|x265|av1|mp4) (file)" ;;
+    esac
+}
+
+# Upload a file to Zipline
+# Requires:
+# Zipline server located at $ZIPLINE_HOST_ROOT
+# Zipline upload auth token at $HOME/.zipline-auth.token
+function zipline() {
+    FILE=$1
+
+    INPUT_FILE=$(realpath "$FILE")
+    FILE_NAME=$(basename "$INPUT_FILE")
+    FILE_NAME="${FILE_NAME%.*}"
+
+    ZIPLINE_HOST_ROOT=https://zipline.jafner.net
+    TOKEN=$(cat ~/.zipline-auth.token)
+    LINK=$(curl \
+        --header "authorization: $TOKEN" \
+        $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
+        --header "Content-Type: multipart/form-data" \
+        --header "Format: name" \
+        --header "Embed: true" \
+        --header "Original-Name: true") 
+    LINK=$(echo "$LINK" | jq -r .'files[0]')
+    echo "[$FILE_NAME]($LINK)" | wl-copy
+}
+
+# The jot command works like:
+# jot 'Some note I would quickly take'
+function jot () { 
+    if [ -z "$@" ]; then
+        echo -e "Usage: jot 'Some note to take'\nRemember to use single quotes"
+    else 
+        echo "$@" |\
+        sed -e 's/^/- /' >> ~/Documents/Notes/Daily/$(date +%Y_%m_%d).md
+    fi
+}

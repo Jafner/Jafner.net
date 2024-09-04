@@ -1,3 +1,8 @@
+# .zshrc
+
+source ${0:a:h}/.shellrc
+source ${0:a:h}/.aliases
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -25,16 +30,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light jirutka/zsh-shift-select
-#zinit light Aloxaf/fzf-tab
-
-# Add in snippets
-#zinit snippet OMZP::git
-#zinit snippet OMZP::sudo
-#zinit snippet OMZP::archlinux
-#zinit snippet OMZP::aws
-#zinit snippet OMZP::kubectl
-#zinit snippet OMZP::kubectx
-#zinit snippet OMZP::command-not-found
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -55,9 +50,7 @@ bindkey '^[[F' end-of-line # End
 bindkey '^[w' kill-region
 bindkey '^I^I' autosuggest-accept
 bindkey '^[' autosuggest-clear
-
-#bindkey '[1;6C' shift-select-word-right
-#bindkey '[1;6D' shift-select-word-left 
+bindkey '[3~' delete-char # Delete
 
 # History
 HISTSIZE=5000
@@ -76,8 +69,6 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-#zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
