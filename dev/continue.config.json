@@ -1,0 +1,101 @@
+{
+  "models": [
+    {
+      "title": "Ollama",
+      "provider": "ollama",
+      "model": "AUTODETECT"
+    },
+    {
+      "title": "OpenRouter LLaMA 70 8B",
+      "provider": "openai",
+      "model": "meta-llama/llama-3-70b-instruct",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "<redacted>"
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "edit",
+      "description": "Edit selected code"
+    },
+    {
+      "name": "comment",
+      "description": "Write comments for the selected code"
+    },
+    {
+      "name": "share",
+      "description": "Export this session as markdown"
+    },
+    {
+      "name": "cmd",
+      "description": "Generate a shell command"
+    }
+  ],
+  "customCommands": [
+    {
+      "name": "test",
+      "prompt": "Write a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file.",
+      "description": "Write unit tests for highlighted code"
+    }
+  ],
+  "contextProviders": [
+    {
+      "name": "code",
+      "params": {}
+    },
+    {
+      "name": "docs",
+      "params": {}
+    },
+    {
+      "name": "diff",
+      "params": {}
+    },
+    {
+      "name": "open",
+      "params": {}
+    },
+    {
+      "name": "terminal",
+      "params": {}
+    },
+    {
+      "name": "problems",
+      "params": {}
+    },
+    {
+      "name": "folder",
+      "params": {}
+    },
+    {
+      "name": "codebase",
+      "params": {}
+    }
+  ],
+  "tabAutocompleteModel": {
+      "title": "starcoder2:3b",
+      "provider": "ollama",
+      "model": "starcoder2:3b",
+      "apiBase": "http://localhost:11434"
+    },
+  "tabAutocompleteOptions": {
+    "disable": false,
+    "useCopyBuffer": false,
+    "useFileSuffix": true,
+    "maxPromptTokens": 1024,
+    "prefixPercentage": 0.85,
+    "maxSuffixPercentage": 0.25,
+    "debounceDelay": 800,
+    "multilineCompletions": "auto",
+    "useCache": false,
+    "useOtherFiles": true,
+    "disableInFiles": []
+  },
+  "allowAnonymousTelemetry": true,
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "apiBase": "http://localhost:11434"
+  },
+  "docs": []
+}
