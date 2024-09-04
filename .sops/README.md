@@ -18,3 +18,13 @@
    1. Our CI/CD environment is configured with an age keypair. Additional CI/CD environments will each be configured with their own keypairs.
    2. Our deploy environments (hosts) are each configured with an age keypair. 
    3. Our [CI/CD script](/.gitea/workflows/homelab_deploy-compose-stack.yml) is configured to decrypt secrets and export the variables before bringing up the Stack. 
+
+
+### List Files Managed by sops
+
+```sh
+git ls-files |\
+  git check-attr -a --stdin |\
+  grep 'filter: sops' |\
+  cut -d':' -f1
+```
