@@ -1,6 +1,6 @@
 services:
   homepage-tasmota:
-    image: ghcr.io/benphelps/homepage:latest
+    image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage_homepage
     environment:
       PUID: 1001
