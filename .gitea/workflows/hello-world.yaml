@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      host:
-        description: 'Domain name of host to connect (e.g. jafner.net)'
-        required: true
 
 jobs:
   ssh:
