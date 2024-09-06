@@ -1,7 +1,7 @@
+name: "gitea-runner"
 services:
-  runner-1:
+  runner:
     image: gitea/act_runner:latest
-    container_name: gitea-runner_1
     volumes:
       - ./config.yaml:/config.yaml
       - ./registration.token:/registration.token

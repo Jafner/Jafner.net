@@ -2,10 +2,9 @@ name: "books"
 services:
   calibre-web-rpg:
     image: linuxserver/calibre-web:latest
-    container_name: calibre-web_rpg
     environment:
-      PUID: 1000
-      PGID: 1000
+      PUID: "1000"
+      PGID: "1000"
       TZ: America/Los_Angeles
     volumes:
       - calibre-web-rpg_data:/config
@@ -23,10 +22,9 @@ services:
 
   calibre-web-sff:
     image: linuxserver/calibre-web:latest
-    container_name: calibre-web_sff
     environment:
-      PUID: 1000
-      PGID: 1000
+      PUID: "1000"
+      PGID: "1000"
       TZ: America/Los_Angeles
     volumes:
       - calibre-web-sff_data:/config
@@ -44,7 +42,6 @@ services:
   
   sabnzbd:
     image: linuxserver/sabnzbd:latest
-    container_name: books_sabnzbd
     networks:
       - web
     environment:
@@ -63,7 +60,6 @@ services:
       
   calibre:
     image: lscr.io/linuxserver/calibre:latest
-    container_name: books_calibre
     security_opt:
       - seccomp:unconfined
     networks:
@@ -93,7 +89,6 @@ services:
 
   calibre-web:
     image: linuxserver/calibre-web:latest
-    container_name: books_calibre-web
     environment:
       PGID: "1001"
       PUID: "1001"
@@ -111,7 +106,6 @@ services:
   
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
-    container_name: books_audiobookshelf
     networks:
       - web
     environment:
