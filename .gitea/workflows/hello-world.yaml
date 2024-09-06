@@ -5,6 +5,10 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      host:
+        description: 'Domain name of host to connect (e.g. jafner.net)'
+        required: true
 
 jobs:
   ssh:
@@ -13,8 +17,8 @@ jobs:
       - name: SSH into host
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.HOST_DOMAIN }}
+          host: ${{ inputs.host }}
           username: ${{ secrets.HOST_USERNAME }}
-          password: ${{ secrets.HOST_PASSWORD }}
+          key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
           script: |
             echo "Hello, world!" >> ~/hello.txt
