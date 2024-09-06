@@ -1,24 +1,21 @@
 services:
-  homepage-tasmota:
+  homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage_homepage
-    environment:
-      PUID: 1001
-      PGID: 1001
     networks:
       - web
     volumes:
       - $DOCKER_DATA/logs:/app/config/logs
       - ./icons/:/app/public/icons
       - ./config:/app/config/
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     labels:
-      - traefik.http.routers.homepage.rule=Host(`home.tasmota.jafner.net`) || Host(`home.jafner.net`)
+      - traefik.http.routers.homepage.rule=Host(`homepage.jafner.net`)
       - traefik.http.routers.homepage.tls.certresolver=lets-encrypt
       - homepage.group=Public
       - homepage.name=Homepage
       - homepage.icon=Homepage.png
-      - homepage.href=https://home.jafner.net
+      - homepage.href=https://homepage.jafner.net
       - homepage.description=This page!
 
 networks:

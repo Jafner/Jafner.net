@@ -1,6 +1,5 @@
 ---
-# For configuration options and examples, please see:
-# https://gethomepage.dev/en/configs/docker/
+# docs: https://gethomepage.dev/latest/configs/docker/
 
 fighter:
   socket: /var/run/docker.sock

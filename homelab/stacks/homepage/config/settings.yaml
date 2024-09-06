@@ -1,14 +1,5 @@
 ---
-# For configuration options and examples, please see:
-# https://gethomepage.dev/en/configs/settings
+# docs: https://gethomepage.dev/latest/configs/settings/
 
 title: Jafner.net
 target: _self
-
-layout: 
-  Animals:
-    style: row
-    columns: 5
-  Homelab:
-    style: row
-    columns: 3
