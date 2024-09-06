@@ -1,0 +1,20 @@
+name: SSH and echo to file
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into host
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST_DOMAIN }}
+          username: ${{ secrets.HOST_USERNAME }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          script: |
+            echo "Hello, world!" >> ~/hello.txt
