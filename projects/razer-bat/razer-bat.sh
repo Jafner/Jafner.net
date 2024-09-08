@@ -75,6 +75,9 @@ function get_charge_percentage() {
         tr -s ' ' |\
         cut -d' ' -f3
     )
+    if [[ $CHARGE == '0' ]]; then
+        exit 0
+    fi
     echo "CHARGE: $CHARGE" >&2
     echo "$CHARGE"
 }
