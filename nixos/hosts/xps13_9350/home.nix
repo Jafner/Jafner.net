@@ -16,7 +16,7 @@
     plugins = [
       {
         name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGithub {
+        src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
           rev = "v0.7.0";
@@ -25,7 +25,7 @@
       }
       {
         name = "zsh-completions";
-        src = pkgs.fetchFromGithub {
+        src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-completions";
           rev = "v0.35.0";
@@ -34,7 +34,7 @@
       }
       {
         name = "zsh-syntax-highlighting";
-        src = pkgs.fetchFromGithub {
+        src = pkgs.fetchFromGitHub {
           owner  = "zsh-users";
           repo  = "zsh-syntax-highlighting";
           rev   = "v0.8.0";
@@ -43,7 +43,7 @@
       }
       {
         name = "zsh-shift-select";
-        src = pkgs.fetchFromGithub {
+        src = pkgs.fetchFromGitHub {
           owner = "jirutka";
           repo = "zsh-shift-select";
           rev = "v0.1.1";
