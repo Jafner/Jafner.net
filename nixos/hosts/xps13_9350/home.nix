@@ -8,7 +8,7 @@
   home.file = {};
   home.sessionVariables = {};
   programs.home-manager.enable = true;
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = false;
 
   programs.zsh = {
     enable = true;
