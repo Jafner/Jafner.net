@@ -5,7 +5,7 @@
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05";
   home.packages = [
-    "fastfetch"
+    pkgs.fastfetch
   ];
   home.file = {};
   home.sessionVariables = {};
