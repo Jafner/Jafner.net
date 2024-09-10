@@ -4,7 +4,9 @@
   home.username = "joey";
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05";
-  home.packages = [];
+  home.packages = [
+    fastfetch
+  ];
   home.file = {};
   home.sessionVariables = {};
   programs.home-manager.enable = true;
@@ -15,7 +17,11 @@
     dotDir = ".config/zsh";
     enableCompletion = true;
     enableHistory = true;
-    initExtra = "bindkey -e\nbindkey '^[[1;5D' backward-word\nbindkey '^[[1;5C' forward-word";
+    initExtra = [ 
+      "bindkey -e"
+      "bindkey '^[[1;5D' backward-word"
+      "bindkey '^[[1;5C' forward-word"
+    ];
     plugins = [
       {
         name = "zsh-autosuggestions";
