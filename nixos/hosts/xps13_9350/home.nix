@@ -13,6 +13,9 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    enableCompletion = true;
+    enableHistory = true;
+    initExtra = "bindkey -e\nbindkey '^[[1;5D' backward-word\nbindkey '^[[1;5C' forward-word";
     plugins = [
       {
         name = "zsh-autosuggestions";
