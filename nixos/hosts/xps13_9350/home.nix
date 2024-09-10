@@ -5,7 +5,7 @@
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05";
   home.packages = [
-    fastfetch
+    "fastfetch"
   ];
   home.file = {};
   home.sessionVariables = {};
@@ -16,7 +16,6 @@
     enable = true;
     dotDir = ".config/zsh";
     enableCompletion = true;
-    enableHistory = true;
     initExtra = [ 
       "bindkey -e"
       "bindkey '^[[1;5D' backward-word"
