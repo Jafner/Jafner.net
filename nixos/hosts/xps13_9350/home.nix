@@ -12,15 +12,21 @@
   programs.home-manager.enable = true;
   wayland.windowManager.hyprland.enable = false;
 
+  programs.git = {
+    enable = true;
+    userName = "Joey Hafner";
+    userEmail = "joey@jafner.net";
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
     enableCompletion = true;
-    initExtra = [ 
-      "bindkey -e"
-      "bindkey '^[[1;5D' backward-word"
-      "bindkey '^[[1;5C' forward-word"
-    ];
+    initExtra = '' 
+      bindkey -e
+      bindkey '^[[1;5D' backward-word
+      bindkey '^[[1;5C' forward-word
+    '';
     plugins = [
       {
         name = "zsh-autosuggestions";
@@ -28,7 +34,7 @@
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
           rev = "v0.7.0";
-          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+          sha256 = lib.fakeSha256;
         };
       }
       {
@@ -37,7 +43,7 @@
           owner = "zsh-users";
           repo = "zsh-completions";
           rev = "v0.35.0";
-          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+          sha256 = lib.fakeSha256;
         };
       }
       {
@@ -46,7 +52,7 @@
           owner  = "zsh-users";
           repo  = "zsh-syntax-highlighting";
           rev   = "v0.8.0";
-          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+          sha256 = lib.fakeSha256;
         };
       }
       {
@@ -55,7 +61,7 @@
           owner = "jirutka";
           repo = "zsh-shift-select";
           rev = "v0.1.1";
-          sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+          sha256 = lib.fakeSha256;
         };
       }
     ];
