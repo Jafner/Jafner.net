@@ -9,8 +9,24 @@
   ];
   home.file = {};
   home.sessionVariables = {};
-  programs.home-manager.enable = true;
-  wayland.windowManager.hyprland.enable = false;
+  
+  # Programs
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      decoration = {
+        shadow_offset = "0 5";
+        "col.shadow" = "rgba(00000099)";
+      };
+      "$mod" = "SUPER";
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+        "$mod, ALT, mouse:272, resizewindow"
+      ];
+    };
+  };
 
   programs.git = {
     enable = true;
@@ -22,6 +38,8 @@
     enable = true;
     dotDir = ".config/zsh";
     enableCompletion = true;
+    autosuggestion.enable = true;
+    autosuggestion.strategy = [ "history" ];
     initExtra = '' 
       bindkey -e
       bindkey '^[[1;5D' backward-word
@@ -65,6 +83,10 @@
         };
       }
     ];
+  };
+  
+  programs.home-manager = {
+    enable = true;
   };
 
 }

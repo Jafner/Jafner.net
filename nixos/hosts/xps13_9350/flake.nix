@@ -2,6 +2,7 @@
   description = "joey@joey-laptop";
   inputs = {  
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    hyprland.url = "github:hyprwm/Hyprland";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
