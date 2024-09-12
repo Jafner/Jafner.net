@@ -23,6 +23,7 @@ ecom1.logitech.com
 em2.mint.intuit.com
 email.barenecessities.com
 email.bestbuy.com
+email.gog.com
 email.health.amazon.com
 email.meta.com
 emails.cobbtuning.com
@@ -46,6 +47,7 @@ fundrise.com
 ghostfiregaming.com
 gitguardian.com
 glassdoor.com
+gloriousgaming.com
 gretchenrubin.com
 groupon.com
 hackerrankmail.com
@@ -56,6 +58,7 @@ info.drop.com
 intruder.io
 itch.io
 launchbox-app.com
+listen.iheart.com
 list.rockauto.com
 loversstores.com
 mail1.creditkarma.com
@@ -70,6 +73,7 @@ marketing.webull.com
 members.wayfair.com
 message.fedex.com
 metafy.gg
+mktg.torrid.com
 myminifactory.com
 mywisely.com
 neopets.com

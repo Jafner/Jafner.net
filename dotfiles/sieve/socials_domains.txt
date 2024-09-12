@@ -5,3 +5,5 @@ priority.facebookmail.com
 tumblr.com
 twitch.tv
 twitter.com
+medium.com
+today.getpocket.com
