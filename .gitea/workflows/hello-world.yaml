@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: SSH into host
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ inputs.host }}
+          host: ${{ secrets.HOST_DOMAIN }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
           script: |
