@@ -73,6 +73,9 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
+  users.users.joey.shell = pkgs.zsh;
+
   users.users.joey = {
     isNormalUser = true;
     description = "joey";
@@ -87,18 +90,8 @@
   environment.systemPackages = with pkgs; [
     vim
     git
-    fastfetch
-    waybar mako libnotify swww kitty rofi-wayland polkit-kde-agent wl-clipboard 
   ];
   
-  #programs.kitty.enable = true; # This line is present in hyprland's install docs, but seems to be invalid
-  programs.hyprland.enable = true;
-  #programs.hyprland.xwayland.enable = true;
-  #programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-  xdg.portal.config.common.default = "*";
-
   system.stateVersion = "24.05"; 
 
 }
