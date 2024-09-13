@@ -87,10 +87,12 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    fastfetch
     waybar mako libnotify swww kitty rofi-wayland polkit-kde-agent wl-clipboard 
   ];
   
-  #programs.hyprland.enable = true;
+  #programs.kitty.enable = true; # This line is present in hyprland's install docs, but seems to be invalid
+  programs.hyprland.enable = true;
   #programs.hyprland.xwayland.enable = true;
   #programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   xdg.portal.enable = true;
@@ -100,3 +102,4 @@
   system.stateVersion = "24.05"; 
 
 }
+
