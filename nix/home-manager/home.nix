@@ -16,6 +16,11 @@
   home.file = {};
   
   # Programs
+  ## KDE Connect
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
   ## Hyprland
   programs.kitty.enable = true;
   #wayland.windowManager.hyprland = {
