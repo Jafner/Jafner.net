@@ -8,6 +8,7 @@
     hyprland.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
   outputs = { 
     self, 
@@ -16,6 +17,7 @@
     nixpkgs-unstable, 
     home-manager, 
     hyprland, 
+    nix-flatpak,
     ... 
   }@inputs: 
     let 
@@ -31,6 +33,7 @@
           ./nixos/configuration.nix 
           inputs.home-manager.nixosModules.default
           inputs.hyprland.nixosModules.default
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       };
     };
