@@ -13,8 +13,10 @@
     flatpak
     fzf-git-sh
     tmux
+    discord
   ];
-  home.file = {};
+  home.file = {
+  };
 
     
 
@@ -51,6 +53,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    initExtraFirst = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
     shellAliases = {
       cat = "bat";
       nos = "sudo nixos-rebuild switch --flake .";
