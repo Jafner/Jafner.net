@@ -71,6 +71,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   programs.zsh.enable = true;
@@ -90,6 +91,17 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    waybar
+    mako
+    libnotify
+    swww
+    kitty
+    rofi-wayland
+  ];
+  
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-gtk
   ];
   
   system.stateVersion = "24.05"; 
