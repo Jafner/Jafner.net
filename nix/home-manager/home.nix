@@ -11,16 +11,10 @@
     fzf
     fd
     flatpak
-    kdeconnect
   ];
   home.file = {};
   
   # Programs
-  ## KDE Connect
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
   ## Hyprland
   programs.kitty.enable = true;
   #wayland.windowManager.hyprland = {
@@ -47,6 +41,7 @@
     shellAliases = {
       nos = "sudo nixos-rebuild switch --flake .";
       hms = "home-manager switch --flake .";
+      nu = "nos && hms";
     };
     history = {
       share = true;
