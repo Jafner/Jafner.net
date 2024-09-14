@@ -24,6 +24,8 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
     nixosConfigurations = {
       joey-laptop = lib.nixosSystem {
@@ -40,6 +42,9 @@
     homeConfigurations = {
       joey = home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs;
+        extraSpecialArgs = {
+          pkgs-unstable = pkgs-unstable;
+        };
         modules = [ ./home-manager/home.nix ];
       };
     };

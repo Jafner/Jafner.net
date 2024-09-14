@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   home.username = "joey";
@@ -7,14 +7,27 @@
   home.packages = with pkgs; [
     fastfetch
     tree 
+    bat
     wl-clipboard
-    fzf
     fd
     flatpak
+    fzf-git-sh
+    tmux
   ];
   home.file = {};
-  
+
+    
+
   # Programs
+  ## fzf
+  programs.fzf = {
+    enable = true;
+    package = pkgs-unstable.fzf;
+    defaultCommand = "fd --hidden --strip-cwd-prefix --exclude .git";
+    fileWidgetCommand = "$FZF_DEFAULT_COMMAND";
+    changeDirWidgetCommand = "fd --type=d --hidden --strip-cwd-prefix --exclude .git .";
+    enableZshIntegration = true;
+  };
   ## Hyprland
   programs.kitty.enable = true;
   #wayland.windowManager.hyprland = {
@@ -39,6 +52,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
+      cat = "bat";
       nos = "sudo nixos-rebuild switch --flake .";
       hms = "home-manager switch --flake .";
       nu = "nos && hms";
@@ -63,10 +77,6 @@
       bindkey '^[w' kill-region # Delete
       bindkey '^I^I' autosuggest-accept # Tab, Tab
       bindkey '^[' autosuggest-clear # Esc
-      eval "$(fzf --zsh)"
-      export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-      export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-      export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
       _fzf_compgen_path() {
         fd --hidden --exclude .git . "$1"
       }
