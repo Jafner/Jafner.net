@@ -70,9 +70,11 @@
     initExtraFirst = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
     shellAliases = {
       cat = "bat";
-      nos = "sudo nixos-rebuild switch --flake .";
-      hms = "home-manager switch --flake .";
-      nu = "nos && hms";
+      fd = "fd -Lu";
+      fetch = "fastfetch";
+      neofetch = "fetch";
+      hmu = "home-manager switch --flake ~/Jafner.net/nix";
+      nu = "sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
     };
     history = {
       share = true;
