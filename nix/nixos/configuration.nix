@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./flatpak.nix
       ./kde.nix
+      ./steam.nix
     ];
   
   environment.etc."current-system-packages".text = 

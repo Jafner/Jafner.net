@@ -32,9 +32,13 @@
   };
   ## Hyprland
   programs.kitty.enable = true;
-  #wayland.windowManager.hyprland = {
-  #  enable = true;
-  #};
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    plugins = [];
+    settings = {};
+  };
+
   
   ## Git
   programs.git = {
