@@ -18,9 +18,11 @@
       formatted;     
 
   # Configure mouse and touchpad
-  services.libinput.enable = true;
-  services.libinput.mouse.naturalScrolling = true;
-  services.libinput.touchpad.naturalScrolling = true;
+  services.libinput = {
+    enable = true;
+    mouse.naturalScrolling = true;
+    touchpad.naturalScrolling = true;
+  };
   
   # Enable passwordless sudo
   security.sudo = {
@@ -70,20 +72,22 @@
   };
 
   # Configure displayManager
-  services.displayManager.autoLogin = {
+  services.displayManager = {
     enable = true;
-    user = "joey";
-  };
-  services.displayManager.sddm = {
-    enable = true;
-    autoNumlock = true;
-    wayland.enable = true;
-    wayland.compositor = "kwin";
-    settings.Autologin.Session = "plasma.desktop";
-    settings.Autologin.User = "joey";
+    autoLogin.enable = true;
+    autoLogin.user = "joey";
+    defaultSession = "plasma";
+    sddm = {
+      enable = true;
+      autoNumlock = true;
+    };
   }; 
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+
+  # Disable systemd's getty and autovt on tty1
+  systemd.services = {
+    "getty@tty1".enable = false;
+    "autovt@tty1".enable = false;
+  };  
 
   # Configure X11 server 
   services.xserver.enable = true;

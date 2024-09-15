@@ -10,6 +10,7 @@
     bat
     wl-clipboard
     fd
+    eza
     flatpak
     fzf-git-sh
     tmux
@@ -21,6 +22,41 @@
     
 
   # Programs
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    git = true;
+    extraOptions = [
+      "--color=always"
+      "--long"
+      "--icons=always"
+      "--no-time"
+      "--no-user"
+    ];
+  };
+  
+  ## vim
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+    settings = {
+      copyindent = true;
+      relativenumber = true;
+      expandtab = true;
+      tabstop = 2;
+    };
+    extraConfig = ''
+      set nocompatible
+      filetype on
+      filetype plugin on
+      filetype indent on
+      syntax on
+      set cursorline
+      set wildmenu
+      set wildmode=list:longest
+    '';
+  };
+  
   ## OBS-Studio
   programs.obs-studio = {
     enable = true;
@@ -58,6 +94,10 @@
     extraConfig = { 
       core.sshCommand = "ssh -i /home/joey/.ssh/joey@joey-laptop"; 
     };
+    delta.enable = true;
+    delta.options = {
+      side-by-side = true;
+    };
   };
   
   ## Zsh
@@ -71,6 +111,7 @@
     shellAliases = {
       cat = "bat";
       fd = "fd -Lu";
+      ls = "eza";
       fetch = "fastfetch";
       neofetch = "fetch";
       hmu = "home-manager switch --flake ~/Jafner.net/nix";
