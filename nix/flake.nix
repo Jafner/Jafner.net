@@ -39,12 +39,17 @@
           inputs.nix-flatpak.nixosModules.nix-flatpak
         ];
       };
+    };
     homeConfigurations = {
       joey = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs, pkgs-unstable;
-        modules = [ ./home-manager/joey.nix ];
+        inherit pkgs; 
+        extraSpecialArgs = { inherit pkgs-unstable; inherit inputs; };
+        modules = [ 
+          ./home-manager/joey.nix 
+          inputs.stylix.homeManagerModules.stylix 
+        ];
       };
-    };
     };
   };
 }
+

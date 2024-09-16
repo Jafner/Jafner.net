@@ -14,6 +14,10 @@
     inputs.nixos-conf-editor.packages.${system}.nixos-conf-editor
   ];
 
+  fonts.packages = with pkgs; [
+    nerdfonts
+  ];
+
   # Configure mouse and touchpad
   services.libinput = {
     enable = true;

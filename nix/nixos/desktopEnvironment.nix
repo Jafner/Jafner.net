@@ -1,11 +1,12 @@
-{ ... }:
+{ pkgs, lib, ... }:
+
 {
   # Configure displayManager
+  services.displayManager.defaultSession = "plasma";
   services.displayManager = {
     enable = true;
     autoLogin.enable = true;
     autoLogin.user = "joey";
-    defaultSession = "plasma";
     sddm = {
       enable = true;
       autoNumlock = true;
@@ -18,4 +19,10 @@
     layout = "us";
     variant = "";
   };
+
+  # Configure KDE Plasma 6
+  services.desktopManager.plasma6.enable = true;
+  programs.kdeconnect.enable = true;
+  programs.kdeconnect.package = lib.mkForce pkgs.kdePackages.kdeconnect-kde;
+  
 }

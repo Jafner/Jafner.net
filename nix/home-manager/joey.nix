@@ -1,26 +1,67 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 {
   home.username = "joey";
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05";
   home.packages = with pkgs; [
-      fastfetch
-      tree
-      bat
-      btop
-      wl-clipboard
-      fd
-      eza
-      flatpak
-      fzf-git-sh
-      tmux
-      vesktop
-      base16-schemes
-      nixd
+    fastfetch
+    tree btop
+    bat fd eza fzf-git-sh tmux
+    wl-clipboard
+    flatpak
+    vesktop
+    base16-schemes
+    nixd
+    vlc
   ];
 
   # Programs
+  ## Stylix 
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    polarity = "dark";
+    fonts = {
+      monospace = {
+        name = "DejaVu Sans Mono";
+        package = pkgs.dejavu_fonts;
+      };
+      serif = {
+        name = "DejaVu Serif";
+        package = pkgs.dejavu_fonts;
+      };
+      sansSerif = {
+        name = "DejaVu Sans";
+        package = pkgs.dejavu_fonts;
+      };
+      emoji = {
+        name = "Noto Color Emoji";
+        package = pkgs.noto-fonts-color-emoji;
+      };
+      sizes = {
+        terminal = 14;
+        applications = 12;
+        popups = 12;
+        desktop = 12;
+      };
+    };
+  };
+  ### Stylix theme: gruvbox
+  #stylix = {
+  #  image = pkgs.fetchurl { url = "https://wallpaperaccess.com/full/7731826.png"; sha256 = "07cq8vvi25h8wp21jgmj1yw3w4674khxcjb6c8vgybi94ikjqcyv"; }; 
+  #  base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  #};
+  stylix = {
+    image = pkgs.fetchurl { url = "https://wallpaperaccess.com/full/7731794.png"; sha256 = "1n0l1v0hfna5378zdfazvhq1np8x1wgjcmfnphxj4vjb48gkzmjk"; }; 
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  };
+  ### Stylix theme: stevo
+  #stylix = {
+  #  image = pkgs.fetchurl { url = "https://wallpaperaccess.com/full/7731794.png"; sha265 = "070vysl5ws4470pswnnw3jghwbcs1s5b5sm0cz37vmxwrff7ixdz"; };
+  #  override = { base01 = "332330"; };
+  #};
+
   ## Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
@@ -135,6 +176,7 @@
       fetch = "fastfetch";
       neofetch = "fetch";
       nu = "sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
+      hmu = "home-manager switch -b bak --flake ~/Jafner.net/nix";
       ngls = "nix-env --profile /nix/var/nix/profiles/system --list-generations";
       ngclean = "nix-collect-garbage --delete-old";
       ngcleanboot = "/run/current-system/bin/switch-to-configuration boot";
