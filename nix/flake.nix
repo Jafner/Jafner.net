@@ -37,16 +37,14 @@
           inputs.hyprland.nixosModules.default
           inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
-          inputs.home-manager.nixosModules.home-manager
-        {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "bak";
-            home-manager.users.joey = import ./nixos/home.nix;
-            home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
-          }
         ];
       };
+    homeConfigurations = {
+      joey = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs, pkgs-unstable;
+        modules = [ ./home-manager/joey.nix ];
+      };
+    };
     };
   };
 }

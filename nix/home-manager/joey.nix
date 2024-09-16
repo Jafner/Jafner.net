@@ -5,19 +5,19 @@
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05";
   home.packages = with pkgs; [
-    fastfetch
-    tree 
-    bat
-    btop
-    wl-clipboard
-    fd
-    eza
-    flatpak
-    fzf-git-sh
-    tmux
-    vesktop
-    base16-schemes
-    nixd
+      fastfetch
+      tree
+      bat
+      btop
+      wl-clipboard
+      fd
+      eza
+      flatpak
+      fzf-git-sh
+      tmux
+      vesktop
+      base16-schemes
+      nixd
   ];
 
   # Programs
@@ -63,7 +63,7 @@
       "--no-user"
     ];
   };
-  
+
   ## vim
   programs.vim = {
     enable = true;
@@ -85,7 +85,7 @@
       set wildmode=list:longest
     '';
   };
-  
+
   ## OBS-Studio
   programs.obs-studio = {
     enable = true;
@@ -105,7 +105,7 @@
     changeDirWidgetCommand = "fd --type=d --hidden --strip-cwd-prefix --exclude .git .";
     enableZshIntegration = true;
   };
-  
+
   ## Git
   programs.git = {
     enable = true;
@@ -119,7 +119,7 @@
       side-by-side = true;
     };
   };
-  
+
   ## Zsh
   programs.zsh = {
     enable = true;
@@ -134,8 +134,10 @@
       ls = "eza";
       fetch = "fastfetch";
       neofetch = "fetch";
-      hmu = "home-manager switch --flake ~/Jafner.net/nix";
       nu = "sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
+      ngls = "nix-env --profile /nix/var/nix/profiles/system --list-generations";
+      ngclean = "nix-collect-garbage --delete-old";
+      ngcleanboot = "/run/current-system/bin/switch-to-configuration boot";
     };
     history = {
       share = true;
@@ -158,13 +160,12 @@
       bindkey '^I^I' autosuggest-accept # Tab, Tab
       bindkey '^[' autosuggest-clear # Esc
       _fzf_compgen_path() {
-        fd --hidden --exclude .git . "$1"
+          fd --hidden --exclude .git . "$1"
       }
       _fzf_compgen_dir() {
-        fd --hidden --exclude .git . "$1"
+          fd --hidden --exclude .git . "$1"
       }
-    '';
-    
+    '';    
   };
 
   ## Home-manager
@@ -172,3 +173,4 @@
     enable = true;
   };
 }
+
