@@ -2,53 +2,47 @@
   description = "Joey's Flake";
   inputs = {  
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { 
-    self, 
+  outputs = inputs@{ 
     nixpkgs, 
-    nixpkgs-stable, 
     nixpkgs-unstable, 
+    hyprland,
     home-manager, 
-    hyprland, 
     nix-flatpak,
+    stylix,
     ... 
-  }@inputs: 
-    let 
-      lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs {
-        system = system;
-        config = { allowUnfree = true; };
-      };
-      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
-      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-    in {
+  }:
+  let
+    system = "x86_64-linux";
+    lib = nixpkgs.lib;
+    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+  in {
     nixosConfigurations = {
       joey-laptop = lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = system;
+        inherit system;
+        specialArgs = { inherit pkgs-unstable; };
         modules = [ 
           ./nixos/configuration.nix 
-          inputs.home-manager.nixosModules.default
           inputs.hyprland.nixosModules.default
-          nix-flatpak.nixosModules.nix-flatpak
+          inputs.stylix.nixosModules.stylix
+          inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.joey = import ./nixos/home.nix;
+            home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
+          }
         ];
-      };
-    };
-    homeConfigurations = {
-      joey = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
-        extraSpecialArgs = {
-          pkgs-unstable = pkgs-unstable;
-        };
-        modules = [ ./home-manager/home.nix ];
       };
     };
   };

@@ -1,50 +1,22 @@
-{ config, pkgs, inputs, ... }:
-
+{ inputs, config, lib, pkgs, pkgs-unstable, ... }:
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
+      ./security.nix
       ./flatpak.nix
       ./kde.nix
       ./steam.nix
+      ./theming.nix
     ];
   
-  environment.etc."current-system-packages".text = 
-    let 
-      packages = builtins.map (p: "${ p.name }") config.environment.systemPackages; 
-      sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages); 
-      formatted = builtins.concatStringsSep "\n" sortedUnique; 
-    in 
-      formatted;     
-
   # Configure mouse and touchpad
   services.libinput = {
     enable = true;
     mouse.naturalScrolling = true;
     touchpad.naturalScrolling = true;
   };
-  
-  # Enable passwordless sudo
-  security.sudo = {
-    enable = true;
-    extraRules = [{
-      commands = [
-        {
-          command = "ALL";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-      groups = [ "wheel" ];
-    }];
-  };
-
-  # Enable SSH server with exclusively key-based auth
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-  };
-  
+   
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -118,8 +90,13 @@
     description = "joey";
     extraGroups = [ "networkmanager" "wheel" ];
   };
+
+  home-manager.users.joey = { pkgs, pkgs-unstable, ... }: {
+    home.stateVersion = "24.05";
+
+  };
+  
   # Configure system packages
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim
     git
@@ -141,6 +118,5 @@
   
   # DO NOT CHANGE
   system.stateVersion = "24.05"; 
-
 }
 

@@ -1,10 +1,10 @@
-{ config, pkgs-stable, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   home.username = "joey";
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05";
-  home.packages = with pkgs-stable; [
+  home.packages = with pkgs; [
     fastfetch
     tree 
     bat
@@ -28,7 +28,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    base16Scheme = "${pkgs-stable.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     image = ./wallpaper.png;
     cursor.size = 32;
   };
@@ -78,7 +78,7 @@
   ## OBS-Studio
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs-stable.obs-studio-plugins; [
+    plugins = with pkgs.obs-studio-plugins; [
       obs-vaapi
       obs-vkcapture
       input-overlay
@@ -98,7 +98,7 @@
   ## Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs-stable.hyprland;
+    package = pkgs.hyprland;
     plugins = [];
     settings = {};
   };
@@ -125,7 +125,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    initExtraFirst = "source ${pkgs-stable.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
+    initExtraFirst = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
     shellAliases = {
       cat = "bat";
       fd = "fd -Lu";
