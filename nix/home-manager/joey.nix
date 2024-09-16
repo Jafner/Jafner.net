@@ -17,6 +17,9 @@
   ];
 
   # Programs
+  ## Plasma-manager
+  imports = [ ./plasma-manager.nix ];
+
   ## Stylix 
   stylix = {
     enable = true;
