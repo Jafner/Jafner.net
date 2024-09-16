@@ -15,22 +15,33 @@
     flatpak
     fzf-git-sh
     tmux
-    webcord-vencord discord vencord
+    vesktop
     base16-schemes
+    nixd
   ];
-  home.file = {
-  };
-
-    
 
   # Programs
-  ## Stylix
-  stylix = {
+  ## Hyprland
+  wayland.windowManager.hyprland = {
     enable = true;
-    autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-    image = ./wallpaper.png;
-    cursor.size = 32;
+    package = pkgs.hyprland;
+    plugins = [];
+    settings = {
+    };
+  };
+
+  ## VSCodium
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      jnoortheen.nix-ide
+      continue.continue
+    ];
+    userSettings = {
+      "nix.serverPath" = "nixd";
+      "nix.enableLanguageServer" = true;
+    };
   };
 
   ## Kitty 
@@ -94,15 +105,6 @@
     changeDirWidgetCommand = "fd --type=d --hidden --strip-cwd-prefix --exclude .git .";
     enableZshIntegration = true;
   };
-
-  ## Hyprland
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    plugins = [];
-    settings = {};
-  };
-
   
   ## Git
   programs.git = {

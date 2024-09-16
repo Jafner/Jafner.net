@@ -10,6 +10,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-conf-editor.url = "github:snowfallorg/nixos-conf-editor";
+    nixos-conf-editor.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ 
     nixpkgs, 
@@ -29,16 +31,17 @@
     nixosConfigurations = {
       joey-laptop = lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit pkgs-unstable; };
+        specialArgs = { inherit pkgs-unstable; inherit inputs; };
         modules = [ 
           ./nixos/configuration.nix 
           inputs.hyprland.nixosModules.default
           inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
-          {
+        {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bak";
             home-manager.users.joey = import ./nixos/home.nix;
             home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
           }
