@@ -37,32 +37,58 @@
     ... 
   }:
   let
-    system = "x86_64-linux";
+    systemSettings = {
+      system = "x86_64-linux";
+      hostname = "joey-laptop";
+    };
+    userSettings = {
+      user = "joey";
+      theme = "gruvbox-warm";
+      wm = "plasma";
+    };
     lib = nixpkgs.lib;
-    pkgs = nixpkgs.legacyPackages.${system};
-    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+    pkgs = import inputs.nixpkgs {
+        system = systemSettings.system;
+        config = { allowUnfreePredicate = (_: true); };
+    };
+    pkgs-unstable = nixpkgs-unstable.legacyPackages.${systemSettings.system};
+    
+
   in {
     nixosConfigurations = {
-      joey-laptop = lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit pkgs-unstable; inherit inputs; };
+      ${systemSettings.hostname} = lib.nixosSystem {        
         modules = [ 
           ./nixos/configuration.nix 
           inputs.hyprland.nixosModules.default
           inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
         ];
+        system = systemSettings.system;
+        specialArgs = { 
+          inherit pkgs;
+          inherit pkgs-unstable; 
+          inherit systemSettings;
+          inherit userSettings;
+          inherit inputs; 
+        };
       };
     };
     homeConfigurations = {
-      joey = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs; 
-        extraSpecialArgs = { inherit pkgs-unstable; inherit inputs; };
+      ${userSettings.user} = home-manager.lib.homeManagerConfiguration {
         modules = [ 
-          ./home-manager/joey.nix 
+          ./home-manager/home.nix 
           inputs.stylix.homeManagerModules.stylix 
           inputs.plasma-manager.homeManagerModules.plasma-manager
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
         ];
+        inherit pkgs; 
+        extraSpecialArgs = { 
+          inherit pkgs;
+          inherit pkgs-unstable; 
+          inherit systemSettings;
+          inherit userSettings;
+          inherit inputs; 
+        };
       };
     };
   };

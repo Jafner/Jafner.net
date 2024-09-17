@@ -1,8 +1,8 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ pkgs, userSettings, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    ./desktopEnvironment.nix
+    ./wm/${userSettings.wm}/desktopEnvironment.nix
     ./system.nix
     ./security.nix
     ./flatpak.nix
@@ -10,12 +10,12 @@
     ./locale.nix
   ];
   
-  # Configure user joey
+  # Configure user
   programs.zsh.enable = true;
-  users.users.joey.shell = pkgs.zsh;
-  users.users.joey = {
+  users.users.${userSettings.user} = {
     isNormalUser = true;
-    description = "joey";
+    shell = pkgs.zsh;
+    description = "${userSettings.user}";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 

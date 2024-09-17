@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, systemSettings, ... }:
 {
   # Configure system packages
   environment.systemPackages = with pkgs; [
@@ -11,7 +11,7 @@
     kitty
     rofi-wayland
     kdePackages.kdeconnect-kde 
-    inputs.nixos-conf-editor.packages.${system}.nixos-conf-editor
+    inputs.nixos-conf-editor.packages.${systemSettings.system}.nixos-conf-editor
   ];
 
   fonts.packages = with pkgs; [
@@ -33,7 +33,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Configure networking
-  networking.hostName = "joey-laptop";
+  networking.hostName = "${systemSettings.hostname}";
   networking.networkmanager.enable = true;
 
   # Disable systemd's getty and autovt on tty1
