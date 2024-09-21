@@ -20,7 +20,6 @@
   
   # Desktop apps
   home.packages = with pkgs; [
-    jq
     git
     kdePackages.kdeconnect-kde
   ];

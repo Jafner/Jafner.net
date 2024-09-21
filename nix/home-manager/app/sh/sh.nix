@@ -22,7 +22,7 @@
       ls = "eza";
       fetch = "fastfetch";
       neofetch = "fetch";
-      fzf = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
+      find = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
       nu = "sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
       hmu = "home-manager switch -b bak --flake ~/Jafner.net/nix";
       ngls = "nix-env --profile /nix/var/nix/profiles/system --list-generations";
