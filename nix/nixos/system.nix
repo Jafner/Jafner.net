@@ -2,15 +2,7 @@
 {
   # Configure system packages
   environment.systemPackages = with pkgs; [
-    vim
     git
-    waybar
-    mako
-    libnotify
-    swww
-    kitty
-    rofi-wayland
-    kdePackages.kdeconnect-kde 
     inputs.nixos-conf-editor.packages.${systemSettings.system}.nixos-conf-editor
   ];
 

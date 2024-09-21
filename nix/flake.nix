@@ -43,7 +43,7 @@
     };
     userSettings = {
       user = "joey";
-      theme = "gruvbox-warm";
+      theme = "gruvbox-cool";
       wm = "plasma";
     };
     lib = nixpkgs.lib;

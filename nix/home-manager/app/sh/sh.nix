@@ -15,16 +15,14 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    initExtraFirst = ''
-      if [[ $options[zle] = on ]]; then eval "$(~/.nix-profile/bin/fzf --zsh)"; fi
-      source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
-    '';
     shellAliases = {
+      bat = "bat --paging=never --color=always";
       cat = "bat";
       fd = "fd -Lu";
       ls = "eza";
       fetch = "fastfetch";
       neofetch = "fetch";
+      fzf = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
       nu = "sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
       hmu = "home-manager switch -b bak --flake ~/Jafner.net/nix";
       ngls = "nix-env --profile /nix/var/nix/profiles/system --list-generations";
@@ -56,6 +54,8 @@
       _fzf_compgen_dir() {
           fd --hidden --exclude .git . "$1"
       }
+      eval "$(~/.nix-profile/bin/fzf --zsh)"
+      source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
     '';    
   };
 
@@ -106,10 +106,12 @@
   ## fzf
   programs.fzf = {
     enable = true;
-    package = pkgs.fzf;
-    defaultCommand = "fd --hidden --strip-cwd-prefix --exclude .git";
-    fileWidgetCommand = "$FZF_DEFAULT_COMMAND";
-    changeDirWidgetCommand = "fd --type=d --hidden --strip-cwd-prefix --exclude .git .";
-    enableZshIntegration = true;
-  };  
+    package = pkgs-unstable.fzf;
+  }; 
+  
+  ## tmux
+  programs.tmux = {
+    enable = true;
+  };
+
 }
