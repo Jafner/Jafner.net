@@ -65,6 +65,7 @@
     tree btop
     bat fd eza fzf-git-sh tmux
     wl-clipboard
+    pkgs-unstable.fzf
   ];
   
   ## eza

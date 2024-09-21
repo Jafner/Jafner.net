@@ -29,11 +29,7 @@
   outputs = inputs@{ 
     nixpkgs, 
     nixpkgs-unstable, 
-    hyprland,
     home-manager, 
-    nix-flatpak,
-    stylix,
-    plasma-manager,
     ... 
   }:
   let

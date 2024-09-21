@@ -26,7 +26,7 @@
         ( writeShellApplication {
           name = "fzf-bw-selector"; # { bwJson }: { itemUuid }
           runtimeInputs = [ jq fzf ];
-          text = ''export json="$1"; echo "$json" | jq -r '.[].id' | fzf --height 30% --preview='fzf-bw-getItem {} "$json" | jq -C' --preview-window right --disabled --border --padding=1'';
+          text = ''export json="$1"; echo "$json" | jq -r '.[].id' | fzf --height 33% --preview='fzf-bw-getItem {} "$json" | jq -C' --preview-window right,60% --disabled --border --padding=1'';
           excludeShellChecks = [ "SC2016" ];
         } )
       ] ;
