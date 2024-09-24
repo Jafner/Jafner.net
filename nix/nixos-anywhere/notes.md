@@ -304,3 +304,71 @@ There are a few tools on the market for deploying configuration updates to a Nix
 We'll go with Colmena, and use NixOps and Morph as references for how things have been done before.
 
 Further notes will be located at [`nix/nix-lab/notes.md`](../nix-lab/notes.md).
+
+# Ranger
+1. Boot from NixOS minimal installer ISO.
+2. Configure SSH authorized_keys for the installer. 
+```sh
+mkdir ~/.ssh && curl https://github.com/Jafner.keys > ~/.ssh/authorized_keys
+```
+3. Format and partition our boot disk.
+
+```sh
+sudo parted /dev/sda -- mklabel gpt
+sudo parted /dev/sda -- mkpart primary 512MB -8GB
+sudo parted /dev/sda -- mkpart primary linux-swap -8GB 100%
+sudo parted /dev/sda -- mkpart ESP fat32 1MB 512MB
+sudo parted /dev/sda -- set 3 esp on
+sudo mkfs.ext4 -L nixos /dev/sda1
+sudo mkswap -L swap /dev/sda2
+sudo swapon /dev/sda2
+sudo mkfs.fat -F 32 -n boot /dev/sda3
+sudo mount /dev/disk/by-label/nixos /mnt
+sudo mkdir -p /mnt/boot
+sudo mount /dev/disk/by-label/boot /mnt/boot
+```
+4. Generate our `hardware-configuration.nix`.
+```sh
+sudo nixos-generate-config --root /mnt
+```
+5. Configuration the host's `/mnt/etc/nixos/configuration.nix`.
+   1. Generate root password, then hash it with `mkpasswd -m sha-512`.
+   2. Generate admin password, then hash it with `mkpasswd -m sha-512`.
+   3. Get network config (hostname, MAC, ipv4).
+```nix
+{ config, lib, pkgs, ... }:
+{   
+  imports = [ ./hardware-configuration.nix ];
+  users.users.root.hashedPassword = "$6$QkcEnf/kzljg./Ux$XvNFdS9o9Psxi.xoFrat7EA7w.WJq/B/7kCf5WQSQkVWRrlfzm.wjKabTpz8LMquu5iWGldS9OjhFJxpryc4s0";
+  users.users.admin = {
+    hashedPassword = "$6$z1aBZwdnsJJCjATF$wxAgBjf.36miVtDBP/L6jT8kGtAfvIH7EcdT8/VpYT4y9x1fO10VPOPpecH6UPJ9qbmw1UkOD3G29UfpZEiS70";
+    isNormalUser = true;
+    description = "admin";
+    extraGroups = [ "networkmanager" "wheel" ];
+    openssh.authorizedKeys.keys = let
+      authorizedKeys = pkgs.fetchurl {
+        url = "https://github.com/Jafner.keys";
+        sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
+      };
+    in pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
+  };
+  networking = {
+    hostName = "bard"; 
+    interfaces."enp1s0" = {
+      useDHCP = true;
+      macAddress = "6c:2b:59:37:9e:91";
+      ipv4.addresses = [ { address = "192.168.1.32"; prefixLength = 24; } ];
+    };
+  };  
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  system.stateVersion = "24.05"; 
+}
+```
+6. Install the config. `sudo nixos-install`
+7. Reboot. `sudo reboot now`.

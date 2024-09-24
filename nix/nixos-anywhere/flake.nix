@@ -25,6 +25,24 @@
         ./configuration.nix
       ];
     };
+    nixosConfigurations.ranger = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        disko.nixosModules.disko
+        { disko.devices.disk.disk1.device = "/dev/sda"; }
+        { 
+          networking = {
+            hostName = "ranger"; 
+            interfaces."enp1s0" = {
+              useDHCP = true;
+              macAddress = "6c:2b:59:37:9e:91";
+              ipv4.addresses = [ { address = "192.168.1.32"; prefixLength = 24; } ];
+            };
+          };
+        }
+        ./configuration.nix
+      ];
+    };
     nixosConfigurations.cleric = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
