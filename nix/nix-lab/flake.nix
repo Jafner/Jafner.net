@@ -9,7 +9,14 @@
       }; 
       defaults = { pkgs, ... }: { 
         environment.systemPackages = with pkgs; [
-          vim fastfetch
+          vim 
+          fastfetch
+          tree 
+          btop
+          bat 
+          fd 
+          eza
+          fzf
         ];
         security.sudo = {
           enable = true;
