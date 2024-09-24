@@ -44,7 +44,6 @@
         networking = {
           interfaces."enp1s0" = {
             useDHCP = true;
-            ipv4.addresses = [ { prefixLength = 24; } ];
           };
         };
         time.timeZone = "America/Los_Angeles";
@@ -60,7 +59,7 @@
         };
         networking.hostName = "bard";
         networking.interfaces."enp1s0".macAddress = "6c:2b:59:37:89:40";
-        networking.interfaces."enp1s0".ipv4.addresses.address = "192.168.1.31";
+        networking.interfaces."enp1s0".ipv4.addresses = [ { address = "192.168.1.31"; prefixLength = 24; } ];
       };
       ranger = { name, nodes, ... }: {
         imports = [ ./hosts/ranger/hardware-configuration.nix ];
@@ -70,7 +69,7 @@
         };
         networking.hostName = "ranger";
         networking.interfaces."enp1s0".macAddress = "6c:2b:59:37:9e:91";
-        networking.interfaces."enp1s0".ipv4.addresses.address = "192.168.1.32";
+        networking.interfaces."enp1s0".ipv4.addresses = [ { address = "192.168.1.32"; prefixLength = 24; } ];
       };
       cleric = { name, nodes, ... }: {
         imports = [ ./hosts/cleric/hardware-configuration.nix ];
@@ -80,7 +79,7 @@
         };
         networking.hostName = "cleric";
         networking.interfaces."enp1s0".macAddress = "6c:2b:59:37:9e:00";
-        networking.interfaces."enp1s0".ipv4.addresses.address = "192.168.1.33";
+        networking.interfaces."enp1s0".ipv4.addresses = [ { address = "192.168.1.33"; prefixLength = 24; } ];
       };
     };
   };
