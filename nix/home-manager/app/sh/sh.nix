@@ -7,6 +7,13 @@
     enable = true;
   };
 
+  ## Tmux
+  programs.tmux = {
+    enable = true;
+    newSession = true;
+    shell = "$HOME/.nix-profile/bin/zsh";
+  };
+
   # Shell
   ## Zsh
   programs.zsh = {
@@ -17,7 +24,6 @@
     syntaxHighlighting.enable = true;
     shellAliases = {
       bat = "bat --paging=never --color=always";
-      cat = "bat";
       fd = "fd -Lu";
       ls = "eza";
       fetch = "fastfetch";
@@ -63,7 +69,7 @@
   home.packages = with pkgs; [
     fastfetch
     tree btop
-    bat fd eza fzf-git-sh tmux
+    bat fd eza fzf-git-sh
     wl-clipboard
     pkgs-unstable.fzf
   ];
@@ -108,11 +114,5 @@
   programs.fzf = {
     enable = true;
     package = pkgs-unstable.fzf;
-  }; 
-  
-  ## tmux
-  programs.tmux = {
-    enable = true;
-  };
-
+  };   
 }
