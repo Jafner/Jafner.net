@@ -42,11 +42,9 @@
           };
         };
         networking = {
-          hostName = ""; 
           interfaces."enp1s0" = {
             useDHCP = true;
-            macAddress = "";
-            ipv4.addresses = [ { address = ""; prefixLength = 24; } ];
+            ipv4.addresses = [ { prefixLength = 24; } ];
           };
         };
         time.timeZone = "America/Los_Angeles";
