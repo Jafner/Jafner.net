@@ -48,8 +48,12 @@
           };
         };
         time.timeZone = "America/Los_Angeles";
+        boot.loader.systemd-boot.enable = true;
+        boot.loader.efi.canTouchEfiVariables = true;
+        system.stateVersion = "24.05";
       };
       bard = { name, nodes, ... }: {
+        imports = [ ./hosts/bard/hardware-configuration.nix ];
         deployment = {
           targetUser = "admin";
           targetHost = "192.168.1.31";
@@ -59,6 +63,7 @@
         networking.interfaces."enp1s0".ipv4.addresses.address = "192.168.1.31";
       };
       ranger = { name, nodes, ... }: {
+        imports = [ ./hosts/ranger/hardware-configuration.nix ];
         deployment = {
           targetUser = "admin";
           targetHost = "192.168.1.32";
@@ -68,6 +73,7 @@
         networking.interfaces."enp1s0".ipv4.addresses.address = "192.168.1.32";
       };
       cleric = { name, nodes, ... }: {
+        imports = [ ./hosts/cleric/hardware-configuration.nix ];
         deployment = {
           targetUser = "admin";
           targetHost = "192.168.1.33";
