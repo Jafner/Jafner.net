@@ -26,6 +26,7 @@
       bat = "bat --paging=never --color=always";
       fd = "fd -Lu";
       ls = "eza";
+      lt = "eza --tree";
       fetch = "fastfetch";
       neofetch = "fetch";
       find = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
