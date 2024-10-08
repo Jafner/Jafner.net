@@ -19,8 +19,8 @@ services:
       DATASOURCE_LOCAL_DIRECTORY: /uploads
       UPLOADER_ADMIN_LIMIT: 25gb
       UPLOADER_USER_LIMIT: 100mb
-      CORE_DATABASE_URL: ${zipline_CORE_DATABASE_URL}
-      CORE_SECRET: ${zipline_CORE_SECRET}
+    env_file:
+      - zipline.secrets
     volumes:
       - $DOCKER_DATA/zipline/uploads:/uploads
       - $DOCKER_DATA/zipline/public:/public
@@ -41,7 +41,8 @@ services:
     environment:
       POSTGRES_USER: zipline
       POSTGRES_DATABASE: zipline
-      POSTGRES_PASSWORD: ${postgres_POSTGRES_PASSWORD}
+    env_file:
+      postgres.secrets
     volumes:
       - $DOCKER_DATA/postgres:/var/lib/postgresql/data
     healthcheck:
