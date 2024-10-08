@@ -2,9 +2,10 @@ services:
   home-assistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: home-assistant_home-assistant
-    env_file:
-      - path: home-assistant.env
-        required: true
+    environment:
+      PUID: "1001"
+      PGID: "1001"
+      TZ: "America/Los_Angeles"
     networks:
       - web
       - home-assistant
@@ -33,11 +34,16 @@ services:
     container_name: home-assistant_wyze-bridge
     networks:
       - web
+    environment:
+      WB_IP: "192.168.1.23"
+      WB_RTSP_URL: "rtsp://192.168.1.23:18554/"
+      WB_RTMP_URL: "rtmp://192.168.1.23:11935/"
+      WB_HLS_URL: "http://192.168.1.23:19090/"
+      WB_WEBRTC_URL: "http://192.168.1.23:19091/"
     env_file:
-      - path: ./wyze-bridge.env
+      - path: ./wyze-bridge.secrets
         required: true
-      - path: wyze-bridge_secrets.env
-        required: false
+      
     ports:
       - 11935:1935 # RTMP
       - 18554:8554 # RTSP

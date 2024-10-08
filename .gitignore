@@ -55,7 +55,6 @@ dotfiles/.bash_logout
 **/homelab/**/.terraform.lock.hcl
 **/homelab/**/terraform/infrastructure/.tfvars
 **/homelab/**/ip.tmp
-**/homelab/**/*.passwd
 **/homelab/fighter/config/ddns/ddclient/ddclient.conf
 
 **/Jafner.dev/public/
