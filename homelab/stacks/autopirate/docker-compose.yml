@@ -1,0 +1,225 @@
+services:
+  lidarr: 
+    image: linuxserver/lidarr
+    container_name: autopirate_lidarr
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001
+    volumes:
+      - "${MUSIC_DIR}:/music"
+      - "${DOCKER_DATA}/lidarr_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
+      - traefik.http.routers.lidarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.lidarr.loadbalancer.server.port=8686
+      - traefik.http.routers.lidarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: autopirate_radarr
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+    volumes:
+      - "${MOVIES_DIR}:/movies"
+      - "${DOCKER_DATA}/radarr_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.radarr.rule=Host(`radarr.jafner.net`)
+      - traefik.http.routers.radarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.radarr.loadbalancer.server.port=7878
+      - traefik.http.routers.radarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: autopirate_sonarr
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+    volumes:
+      - "${SHOWS_DIR}:/shows"
+      - "${DOCKER_DATA}/sonarr_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.sonarr.rule=Host(`sonarr.jafner.net`)
+      - traefik.http.routers.sonarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+      - traefik.http.routers.sonarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:0.4.0-nightly
+    container_name: autopirate_readarr
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+    volumes:
+      - "${BOOKS_DIR}:/books"
+      - "${DOCKER_DATA}/readarr_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.readarr.rule=Host(`readarr.jafner.net`)
+      - traefik.http.routers.readarr.tls.certresolver=lets-encrypt
+      - traefik.http.services.readarr.loadbalancer.server.port=8787
+      - traefik.http.routers.readarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: autopirate_bazarr
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+    volumes:
+      - "${DOCKER_DATA_LOCAL}/bazarr:/config"
+      - "${MOVIES_DIR}:/movies"
+      - "${SHOWS_DIR}:/tv"
+    labels:
+      - traefik.http.routers.bazarr.rule=Host(`bazarr.jafner.net`)
+      - traefik.http.routers.bazarr.tls.certresolver=lets-encrypt
+      - trarfik.http.services.bazarr.loadbalancer.server.port=6767
+      - traefik.http.routers.bazarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+  nzbhydra2:
+    image: linuxserver/nzbhydra2:latest
+    container_name: autopirate_nzbhydra2
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+    volumes:
+      - "${DOCKER_DATA}/nzbhydra2_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.nzbhydra2.rule=Host(`nzbhydra.jafner.net`)
+      - traefik.http.routers.nzbhydra2.tls.certresolver=lets-encrypt
+      - traefik.http.services.nzbhydra2.loadbalancer.server.port=5076
+      - traefik.http.routers.nzbhydra2.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+  
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: autopirate_sabnzbd
+    networks:
+      - web
+      - monitoring
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+    ports:
+      - 8085:8080
+    volumes:
+      - "${DOCKER_DATA_LOCAL}/sabnzbd_config:/config"
+      - "${MOVIES_DIR}:/movies"
+      - "${SHOWS_DIR}:/shows"
+      - "${MUSIC_DIR}:/music"
+      - "${NZB_DIR}:/downloads"
+      - "${INCOMPLETE_NZB_DIR}:/incomplete-downloads"
+    labels:
+      - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.jafner.net`)
+      - traefik.http.routers.sabnzbd.tls.certresolver=lets-encrypt
+      - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
+      - traefik.http.routers.sabnzbd.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+  tdarr:
+    image: haveagitgat/tdarr:latest
+    container_name: autopirate_tdarr
+    networks:
+      web:
+      tdarr: 
+        ipv4_address: 172.110.0.10
+    ports:
+      - 8265:8265 # webUI port
+      - 8266:8266 # server port
+      - 8267:8267 # node port
+    labels:
+      - traefik.http.routers.tdarr.rule=Host(`tdarr.jafner.net`)
+      - traefik.http.routers.tdarr.tls.certresolver=lets-encrypt
+      - traefik.http.routers.tdarr.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+      - traefik.http.services.tdarr.loadbalancer.server.port=8265
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+      UMASK_SET: 002
+      serverIP: 0.0.0.0
+      serverPort: 8266
+      webUIPort: 8265
+    volumes:
+      - ${DOCKER_DATA}/tdarr/server:/app/server
+      - ${DOCKER_DATA}/tdarr/configs:/app/configs
+      - ${DOCKER_DATA}/tdarr/logs:/app/logs
+      - ${MOVIES_DIR}:/movies
+      - ${SHOWS_DIR}:/shows
+      - ${TRANSCODE_DIR}/transcode_cache:/temp
+
+  tdarr-node:
+    image: haveagitgat/tdarr_node:latest
+    container_name: autopirate_tdarr-node
+    networks:
+      tdarr:
+        ipv4_address: 172.110.0.20
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+      UMASK_SET: 002
+      nodeID: MainNode
+      nodeIP: 172.110.0.20
+      nodePort: 8267
+      serverIP: 172.110.0.10
+      serverPort: 8266
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+    volumes:
+      - ${DOCKER_DATA}/tdarr/configs:/app/configs
+      - ${DOCKER_DATA}/tdarr/logs:/app/logs
+      - ${MOVIES_DIR}:/movies
+      - ${SHOWS_DIR}:/shows
+      - ${TRANSCODE_DIR}/transcode_cache:/temp
+
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: autopirate_jackett
+    networks:
+      - web
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 1001
+      PGID: 1001        
+      AUTO_UPDATE: false
+    volumes:
+      - "${DOCKER_DATA}/jackett_config:/config"
+      - "${NZB_DIR}:/downloads"
+    labels:
+      - traefik.http.routers.jackett.rule=Host(`jackett.jafner.net`)
+      - traefik.http.routers.jackett.tls.certresolver=lets-encrypt
+      - traefik.http.services.jackett.loadbalancer.server.port=9117
+      - traefik.http.routers.jackett.middlewares=lan-only@file,traefik-forward-auth-privileged@file
+
+networks:
+  tdarr:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.110.0.0/24"
+  web:
+    external: true
+  monitoring:
+    external: true
