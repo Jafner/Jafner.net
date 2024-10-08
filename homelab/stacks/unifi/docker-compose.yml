@@ -5,9 +5,11 @@ services:
     restart: "no"
     networks:
       - web
-    env_file:
-      - path: ./unifi_controller.env
-        required: true
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      MEM_LIMIT: "1024M"
+      MEM_STARTUP: "1024M"
     volumes:
       - ${DOCKER_DATA}/config:/config
     ports:
