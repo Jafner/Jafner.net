@@ -1,4 +1,3 @@
-
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest
@@ -23,9 +22,9 @@ services:
       KC_HEALTH_ENABLED: true
       KC_METRICS_ENABLED: true
       KEYCLOAK_ADMIN: Jafner
-      KC_DB_PASSWORD: ${keycloak_KC_DB_PASSWORD}
-      DB_PASS: ${keycloak_DB_PASS}
-      KEYCLOAK_ADMIN_PASSWORD: ${keycloak_KEYCLOAK_ADMIN_PASSWORD}
+    env_file:
+      - path: ./keycloak.secrets
+        required: true
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
@@ -41,7 +40,7 @@ services:
       web:
         aliases:
           - forwardauth
-    restart: "no"
+    restart: "always"
     command: "./traefik-forward-auth"
     depends_on:
       - keycloak
@@ -49,9 +48,9 @@ services:
       PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
       CLIENT_ID: "traefik-forward-auth"
       LOG_LEVEL: "debug"
-      CLIENT_SECRET: ${forwardauth_CLIENT_SECRET}
-      SECRET: ${forwardauth_SECRET}
-      ENCRYPTION_KEY: ${forwardauth_ENCRYPTION_KEY}
+    env_file:
+      - path: ./forwardauth.secrets
+        required: true
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth.rule=Path(`/_oauth`)"
@@ -64,7 +63,7 @@ services:
       web:
         aliases:
           - forwardauth-privileged
-    restart: "no"
+    restart: "always"
     command: "./traefik-forward-auth --whitelist=jafner425@gmail.com"
     depends_on:
       - keycloak
@@ -72,9 +71,9 @@ services:
       PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
       CLIENT_ID: "traefik-forward-auth-privileged"
       LOG_LEVEL: "debug"
-      CLIENT_SECRET: ${forwardauthprivileged_CLIENT_SECRET}
-      SECRET: ${forwardauthprivileged_SECRET}
-      ENCRYPTION_KEY: ${forwardauthprivileged_ENCRYPTION_KEY}
+    env_file:
+      - path: ./forwardauth-privileged.secrets
+        required: true
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.forwardauth-privileged.rule=Path(`/_oauth`)"
@@ -88,7 +87,9 @@ services:
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: ${postgres_POSTGRES_PASSWORD}
+    env_file:
+     - path: ./postgres.secrets
+       required: true
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
