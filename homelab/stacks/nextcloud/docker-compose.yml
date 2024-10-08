@@ -2,9 +2,10 @@ services:
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud_nextcloud
-    env_file:
-      - path: ./nextcloud.env
-        required: true
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "America/Los_Angeles"
     depends_on:
       - mariadb
     labels:
@@ -25,11 +26,15 @@ services:
     container_name: nextcloud_mariadb
     networks:
       - nextcloud
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "America/Los_Angeles"
+      MYSQL_DATABASE: "nextcloud"
+      MYSQL_USER: "ncuser"
     env_file:
-      - path: ./mariadb.env
+      - path: ./mariadb.secrets
         required: true
-      - path: ./mariadb_secrets
-        required: false
     volumes:
       - $DOCKER_DATA/mariadb:/config
 
