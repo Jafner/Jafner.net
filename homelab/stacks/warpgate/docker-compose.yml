@@ -1,11 +1,21 @@
 services:
   warpgate:
     image: ghcr.io/warp-tech/warpgate
+    container_name: warpgate_warpgate
     ports:
       - 2222:2222
-      - 8888:8888
       - 33306:33306
     volumes:
       - $DOCKER_DATA:/data
+    labels:
+      - traefik.http.routers.warpgate.rule=Host(`warpgate.jafner.net`)
+      - traefik.http.routers.warpgate.tls.certresolver=lets-encrypt
+      - traefik.http.services.warpgate.loadbalancer.server.port=8888
+      - traefik.http.services.warpgate.loadbalancer.server.scheme=https
     stdin_open: true
     tty: true
+    networks:
+      web:
+networks:
+  web:
+    external: true
