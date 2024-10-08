@@ -11,9 +11,11 @@ services:
       - $MEDIA_DIR/Videos:/media/Videos
       - $MEDIA_DIR/Galleries:/media/Galleries
       - $DOCKER_DATA:/root/.stash
-    env_file:
-      - path: ./stashapp.env
-        required: true
+    environment:
+      STASH_STASH: "/media/"
+      STASH_GENERATED: "/generated/"
+      STASH_METADATA: "/metadata/"
+      STASH_CACHE: "/cache/"
     networks:
       - web
     labels:
