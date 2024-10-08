@@ -9,9 +9,6 @@ entryPoints:
   websecure:
     address: :443
 
-metrics:
-  prometheus: {}
-
 certificatesResolvers:
   lets-encrypt:
     acme:
