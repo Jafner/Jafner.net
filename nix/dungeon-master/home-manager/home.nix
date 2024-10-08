@@ -236,6 +236,7 @@
       bindkey '^[w' kill-region # Delete
       bindkey '^I^I' autosuggest-accept # Tab, Tab
       bindkey '^[' autosuggest-clear # Esc
+      bindkey -s '^E' 'fzf-ssh\n'
       _fzf_compgen_path() {
           fd --hidden --exclude .git . "$1"
       }
@@ -287,6 +288,7 @@
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05"; 
   home.packages = with pkgs; [
+    deploy-rs
     flatpak
     fastfetch
     nixd
@@ -303,6 +305,10 @@
     "continue-config.json" = {
       source = ./continue-config.json;
       target = ".continue/config.json";
+    };
+    "ssh-profiles" = {
+      source = ./profiles;
+      target = ".ssh/profiles";
     };
 
   };
