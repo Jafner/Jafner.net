@@ -6,6 +6,34 @@
   #   age.keyFile = "../../../.sops/nix.key";
   #   secrets."k3s.token" = { };
   # };
+  networking.firewall = {
+    allowedTCPPorts = [
+      6443 # k3s API
+      2379 # k3s etcd clients
+      2380 # k3s etcd peers
+    ];
+    allowedUDPPorts = [
+      8472 # k3s flannel
+    ];
+  };
+  networking.hosts = {
+    "192.168.1.31" = [ "bard" ];
+    "192.168.1.32" = [ "ranger" ];
+    "192.168.1.33" = [ "cleric" ];
+  };
+  services.k3s = {
+    enable = true;
+    role = "server";
+    tokenFile = "/var/lib/rancher/k3s/server/token";
+    extraFlags = toString [
+      "--write-kubeconfig-mode \"0644\""
+      "--disable servicelb"
+      "--disable traefik"
+      "--disable local-storage"
+    ];
+    clusterInit = (hostConf.name == "bard");
+    serverAddr = (if hostConf.name == "bard" then "" else "https://192.168.1.31:6443");
+  };
   environment.systemPackages = with pkgs; [
     vim 
     fastfetch
@@ -15,6 +43,10 @@
     fd 
     eza
     fzf
+    k3s
+    cifs-utils
+    nfs-utils
+    git
   ];
   security.sudo = {
     enable = true;
@@ -48,12 +80,14 @@
   };
   networking = {
     hostName = "${hostConf.name}";
+    defaultGateway = { address = "192.168.1.1"; interface = "enp1s0"; };
     interfaces."${hostConf.nic.name}" = {
-      useDHCP = true;
+      useDHCP = false;
       macAddress = "${hostConf.nic.mac}";
       ipv4.addresses = [ { address = "${hostConf.nic.ip}"; prefixLength = 24; } ];
     };
   };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   time.timeZone = "America/Los_Angeles";
   nix.settings.trusted-users = [ "root" "admin" ];
   boot.loader.systemd-boot.enable = true;
