@@ -45,48 +45,31 @@
   };
   services.flatpak = {
     enable = true;
+    uninstallUnmanaged = true;
+    remotes = [
+      { name = "flathub"; location = "https://flathub.org/repo/flathub.flatpakrepo"; }
+      { name = "fedora"; location = "oci+https://registry.fedoraproject.org"; }
+    ];
     packages = [
       "com.discordapp.Discord/x86_64/stable"
       "com.github.IsmaelMartinez.teams_for_linux/x86_64/stable"
       "com.obsproject.Studio/x86_64/stable"
-      "com.obsproject.Studio/x86_64/stable"
       "com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable"
-      "com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable"
-      "com.spotify.Client/x86_64/stable"
-      "com.spotify.Client/x86_64/stable"
       "com.usebottles.bottles/x86_64/stable"
-      "com.usebottles.bottles/x86_64/stable"
-      "dev.alextren.Spot/x86_64/stable"
       "dev.vencord.Vesktop/x86_64/stable"
-      "dev.vencord.Vesktop/x86_64/stable"
-      "io.github.f3d_app.f3d/x86_64/stable"
-      "io.github.zen_browser.zen/x86_64/stable"
       "io.github.zen_browser.zen/x86_64/stable"
       "io.missioncenter.MissionCenter/x86_64/stable"
-      "io.missioncenter.MissionCenter/x86_64/stable"
-      "md.obsidian.Obsidian/x86_64/stable"
       "md.obsidian.Obsidian/x86_64/stable"
       "no.mifi.losslesscut/x86_64/stable"
-      "no.mifi.losslesscut/x86_64/stable"
-      "org.chromium.Chromium/x86_64/stable"
       "org.chromium.Chromium/x86_64/stable"
       "org.chromium.Chromium.Codecs/x86_64/stable"
-      "org.chromium.Chromium.Codecs/x86_64/stable"
-      "org.fedoraproject.KDE6Platform/x86_64/f40"
-      "org.fedoraproject.Platform/x86_64/f40"
       "org.freedesktop.Platform/x86_64/22.08"
       "org.freedesktop.Platform/x86_64/23.08"
       "org.freedesktop.Platform/x86_64/24.08"
-      "org.freedesktop.Platform/x86_64/24.08"
-      "org.freedesktop.Platform.GL.default/x86_64/23.08"
       "org.freedesktop.Platform.GL.default/x86_64/23.08"
       "org.freedesktop.Platform.GL.default/x86_64/23.08-extra"
-      "org.freedesktop.Platform.GL.default/x86_64/23.08-extra"
-      "org.freedesktop.Platform.GL.default/x86_64/24.08"
       "org.freedesktop.Platform.GL.default/x86_64/24.08"
       "org.freedesktop.Platform.GL.default/x86_64/24.08extra"
-      "org.freedesktop.Platform.GL.default/x86_64/24.08extra"
-      "org.freedesktop.Platform.GL32.default/x86_64/23.08"
       "org.freedesktop.Platform.GL32.default/x86_64/23.08"
       "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
       "org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/23.08"
@@ -94,26 +77,18 @@
       "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
       "org.freedesktop.Platform.VulkanLayer.vkBasalt/x86_64/23.08"
       "org.freedesktop.Platform.ffmpeg-full/x86_64/23.08"
-      "org.freedesktop.Platform.ffmpeg-full/x86_64/23.08"
       "org.freedesktop.Platform.ffmpeg-full/x86_64/24.08"
       "org.freedesktop.Platform.ffmpeg_full.i386/x86_64/23.08"
-      "org.freedesktop.Platform.ffmpeg_full.i386/x86_64/23.08"
       "org.freedesktop.Platform.openh264/x86_64/2.2.0"
-      "org.freedesktop.Platform.openh264/x86_64/2.2.0"
-      "org.freedesktop.Platform.openh264/x86_64/2.4.1"
       "org.freedesktop.Platform.openh264/x86_64/2.4.1"
       "org.freedesktop.Sdk/x86_64/23.08"
-      "org.gimp.GIMP/x86_64/stable"
       "org.gnome.Boxes/x86_64/stable"
       "org.gnome.Boxes.Extension.OsinfoDb/x86_64/stable"
       "org.gnome.Platform/x86_64/45"
       "org.gnome.Platform/x86_64/46"
       "org.gnome.Platform/x86_64/47"
-      "org.gnome.Platform/x86_64/47"
-      "org.gnome.Platform.Compat.i386/x86_64/46"
       "org.gnome.Platform.Compat.i386/x86_64/46"
       "org.gtk.Gtk3theme.Breeze/x86_64/3.22"
-      "org.gtk.Gtk3theme.adw-gtk3/x86_64/3.22"
       "org.gtk.Gtk3theme.adw-gtk3/x86_64/3.22"
       "org.kde.KStyle.Adwaita/x86_64/5.15-23.08"
       "org.kde.KStyle.Adwaita/x86_64/6.6"
@@ -121,28 +96,26 @@
       "org.kde.Platform/x86_64/5.15-23.08"
       "org.kde.Platform/x86_64/6.6"
       "org.kde.Platform/x86_64/6.7"
-      "org.kde.Platform/x86_64/6.7"
       "org.kde.PlatformTheme.QGnomePlatform/x86_64/5.15-23.08"
       "org.kde.PlatformTheme.QGnomePlatform/x86_64/6.6"
       "org.kde.WaylandDecoration.QAdwaitaDecorations/x86_64/5.15-23.08"
       "org.kde.WaylandDecoration.QAdwaitaDecorations/x86_64/6.6"
       "org.kde.WaylandDecoration.QGnomePlatform-decoration/x86_64/5.15-23.08"
-      "org.kde.kontact/x86_64/stable"
-      "org.kde.neochat/x86_64/stable"
-      "org.mozilla.Thunderbird/x86_64/stable"
-      "org.prismlauncher.PrismLauncher/x86_64/stable"
       "org.prismlauncher.PrismLauncher/x86_64/stable"
       "org.videolan.VLC/x86_64/stable"
-      "org.videolan.VLC/x86_64/stable"
-      "org.winehq.Wine.DLLs.dxvk/x86_64/stable-23.08"
       "org.winehq.Wine.DLLs.dxvk/x86_64/stable-23.08"
       "org.winehq.Wine.gecko/x86_64/stable-23.08"
-      "org.winehq.Wine.gecko/x86_64/stable-23.08"
-      "org.winehq.Wine.mono/x86_64/stable-23.08"
       "org.winehq.Wine.mono/x86_64/stable-23.08"
       "re.sonny.Tangram/x86_64/stable"
       "us.zoom.Zoom/x86_64/stable"
       "xyz.z3ntu.razergenie/x86_64/stable"
+      { appId = "org.fedoraproject.Platform/x86_64/f40"; origin = "fedora"; }
+      { appId = "org.gimp.GIMP/x86_64/stable"; origin = "fedora"; }
+      { appId = "org.kde.kontact/x86_64/stable"; origin = "fedora"; }
+      { appId = "org.kde.neochat/x86_64/stable"; origin = "fedora"; }
+      { appId = "org.mozilla.Thunderbird/x86_64/stable"; origin = "fedora"; }
+      { appId = "org.fedoraproject.KDE6Platform/x86_64/f40"; origin = "fedora"; }
+      { appId = "org.fedoraproject.Platform/x86_64/f40"; origin = "fedora"; }
     ];
   };
   programs.vscode = {
@@ -299,6 +272,9 @@
     bat fd eza fzf-git-sh
     wl-clipboard
     base16-schemes
+    k3s 
+    kubernetes-helm 
+    helmfile-wrapped
     pkgs-unstable.fzf
   ];
   home.file = {
