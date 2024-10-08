@@ -1,5 +1,19 @@
 name: 'ai'
 services:
+  traefik:
+    container_name: ai_traefik
+    image: traefik:latest
+    networks:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yaml:/traefik.yaml
+      - ./config:/config
+      - ./acme.json:/acme.json
+
   ollama:
     container_name: ai_ollama
     image: ollama/ollama:0.2.5-rocm
@@ -28,14 +42,30 @@ services:
     ports:
       - 8000:8000/tcp
     volumes:
-      - $HOME/docker-data/sillytavern:/home/node/app/config
+      - $HOME/docker-data/sillytavern/config:/home/node/app/config
+      - $HOME/docker-data/sillytavern/data:/home/node/app/data
+      - $HOME/docker-data/sillytavern/plugins:/home/node/app/plugins
     environment:
       TZ: America/Los_Angeles
+
+  n8n:
+    container_name: ai_n8n
+    image: docker.n8n.io/n8nio/n8n:latest
+    networks:
+      - web
+    volumes:
+      - n8n:/home/node/.n8n
+    labels:
+      - traefik.http.routers.n8n.rule=Host(`n8n.jafner.net`)
+      - traefik.http.routers.n8n.tls.certresolver=lets-encrypt
 
 volumes:
   ollama:
   sillytavern:
+  n8n:
 networks:
+  web:
+    external: true
   ai:
     name: "ai"
     ipam:
