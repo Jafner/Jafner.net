@@ -1,0 +1,54 @@
+services:
+  manyfold:
+    image: ghcr.io/manyfold3d/manyfold:latest
+    container_name: manyfold_manyfold
+    environment:
+      PUID: "1001"
+      PGID: "1001"
+      REDIS_URL: "redis://redis:6379/1"
+      DATABASE_ADAPTER: "postgresql"
+      DATABASE_HOST: "postgres"
+      DATABASE_USER: "manyfold"
+      DATABASE_NAME: "manyfold"
+    env_file:
+      - path: ./manyfold.secrets
+        required: true
+    volumes:
+      - ${STL_DIR}:/libraries
+    networks:
+      - web
+      - manyfold
+    labels:
+      - traefik.http.routers.manyfold.rule=Host(`manyfold.jafner.net`)
+      - traefik.http.routers.manyfold.tls.certresolver=lets-encrypt
+      - traefik.http.routers.manyfold.middlewares=traefik-forward-auth@file
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15
+    container_name: manyfold_postgres
+    networks:
+      - manyfold
+    environment:
+      POSTGRES_USER: manyfold
+    env_file:
+      - path: ./postgres.secrets
+        required: true
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    networks:
+      - manyfold
+    container_name: manyfold_redis
+
+volumes:
+  postgres_data:
+
+networks:
+  web:
+    external: true
+  manyfold:
