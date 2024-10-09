@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 {
   sops = {
@@ -189,6 +189,7 @@
       kitty = "nixGL kitty";
       fzf-ssh = "ssh $(cat ~/.ssh/profiles | fzf --height 20%)";
       fsh = "fzf-ssh";
+      k = "kubectl";
     };
     history = {
       share = true;
@@ -261,7 +262,6 @@
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05"; 
   home.packages = with pkgs; [
-    deploy-rs
     flatpak
     fastfetch
     nixd
@@ -273,9 +273,17 @@
     wl-clipboard
     base16-schemes
     k3s 
-    kubernetes-helm 
+    (wrapHelm kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-diff
+        helm-secrets
+        helm-s3
+        helm-git
+      ];
+    })
     helmfile-wrapped
     pkgs-unstable.fzf
+    inputs.deploy-rs.defaultPackage.x86_64-linux
   ];
   home.file = {
     "continue-config.json" = {
