@@ -2,30 +2,44 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+# Change this to the user, host, (and optionally port) of your VyOS target.
+VYOS_TARGET="vyos@192.168.1.1"
+
 # Returns saved config file
 function get_config_saved () {
-  ssh vyos@192.168.1.1 'cat /config/config.boot'
+  ssh $VYOS_TARGET 'cat /config/config.boot'
 }
 
 # Returns active config file
 function get_config_active () {
-  scp -q ./get_config.sh vyos@192.168.1.1:/home/vyos/get_config.sh
-  ssh vyos@192.168.1.1 'chmod +x /home/vyos/get_config.sh; /home/vyos/get_config.sh; rm /home/vyos/get_config.sh'
+  scp -q ./get_config.sh $VYOS_TARGET:/home/vyos/get_config.sh
+  ssh $VYOS_TARGET 'chmod +x /home/vyos/get_config.sh; /home/vyos/get_config.sh; rm /home/vyos/get_config.sh'
 }
 
 # Push local ./config.boot to remote /home/vyos/config.boot
 function post_config () {
-  scp -q ./config.boot vyos@192.168.1.1:/home/vyos/config.boot
+  scp -q ./config.boot    :/home/vyos/config.boot
 }
 
 function load_config () {
-  scp -q ./load_config.sh vyos@192.168.1.1:/home/vyos/load_config.sh
-  ssh vyos@192.168.1.1 'chmod +x /home/vyos/load_config.sh; /home/vyos/load_config.sh; rm /home/vyos/load_config.sh'
+  scp -q ./load_config.sh $VYOS_TARGET:/home/vyos/load_config.sh
+  ssh $VYOS_TARGET 'chmod +x /home/vyos/load_config.sh; /home/vyos/load_config.sh; rm /home/vyos/load_config.sh'
 }
 
 function save_config () {
-  scp -q ./save_config.sh vyos@192.168.1.1:/home/vyos/save_config.sh
-  ssh vyos@192.168.1.1 'chmod +x /home/vyos/save_config.sh; /home/vyos/save_config.sh; rm /home/vyos/save_config.sh'
+  scp -q ./save_config.sh $VYOS_TARGET:/home/vyos/save_config.sh
+  ssh $VYOS_TARGET 'chmod +x /home/vyos/save_config.sh; /home/vyos/save_config.sh; rm /home/vyos/save_config.sh'
+}
+
+function get_dhcp_leases () {
+  scp -q ./op.sh $VYOS_TARGET:/home/vyos/op.sh
+  ssh $VYOS_TARGET 'chmod +x /home/vyos/op.sh; /home/vyos/op.sh "show dhcp server leases"; rm /home/vyos/op.sh'
+}
+
+function op () {
+  command="$@"
+  scp -q ./op.sh $VYOS_TARGET:/home/vyos/op.sh
+  ssh $VYOS_TARGET "chmod +x /home/vyos/op.sh; /home/vyos/op.sh $command; rm /home/vyos/op.sh"
 }
 
 function pull () {
@@ -44,4 +58,6 @@ function edit () {
   push
 }
 
-"$1"
+"$@"
+
+# Fair warning, this script is trash.
