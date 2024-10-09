@@ -31,6 +31,8 @@
         inherit system;
         specialArgs = { 
           inherit pkgs; 
+          inherit pkgs-unstable; 
+          inherit inputs;
           hostConf = {
             name = "bard";
             nic.mac = "6c:2b:59:37:89:40";
@@ -44,6 +46,8 @@
         inherit system;
         specialArgs = { 
           inherit pkgs; 
+          inherit pkgs-unstable; 
+          inherit inputs;
           hostConf = {
             name = "ranger";
             nic.mac = "6c:2b:59:37:9e:91";
@@ -57,6 +61,8 @@
         inherit system;
         specialArgs = { 
           inherit pkgs; 
+          inherit pkgs-unstable; 
+          inherit inputs;
           hostConf = {
             name = "cleric";
             nic.mac = "6c:2b:59:37:9e:00";

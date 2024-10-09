@@ -1,11 +1,10 @@
 { pkgs, hostConf, inputs, ... }: {
-  #imports = [ inputs.sops-nix.nixosModules.sops ];
-  # sops = {
-  #   defaultSopsFile = ./secrets/secrets.yaml;
-  #   defaultSopsFormat = "yaml";
-  #   age.keyFile = "../../../.sops/nix.key";
-  #   secrets."k3s.token" = { };
-  # };
+  imports = [
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/cluster/k3s/default.nix"
+  ];
+  disabledModules = [
+    "services/cluster/k3s/default.nix"
+  ];
   networking.firewall = {
     allowedTCPPorts = [
       6443 # k3s API
@@ -33,7 +32,16 @@
     ];
     clusterInit = (hostConf.name == "bard");
     serverAddr = (if hostConf.name == "bard" then "" else "https://192.168.1.31:6443");
+    manifests = { longhorn-nixos-path.source = ./manifests/longhorn-nixos-path.yaml; };
   };
+  services.openiscsi = {
+    enable = false;
+    name = "iqn.2020-03.net.jafner:${hostConf.name}-initiatorhost";
+  };
+  systemd.tmpfiles.rules = [
+    "L+ /usr/local/bin - - - - /run/current-system-sw/bin/"
+  ];
+  virtualisation.docker.logDriver = "json-file";
   environment.systemPackages = with pkgs; [
     vim 
     fastfetch
@@ -47,6 +55,8 @@
     cifs-utils
     nfs-utils
     git
+    dig
+    openiscsi
   ];
   security.sudo = {
     enable = true;
@@ -65,6 +75,7 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
+  services.rpcbind.enable = true;
   users.users = {
     admin = {
       isNormalUser = true;
@@ -86,11 +97,15 @@
       macAddress = "${hostConf.nic.mac}";
       ipv4.addresses = [ { address = "${hostConf.nic.ip}"; prefixLength = 24; } ];
     };
+    nameservers = [
+      "10.0.0.1"
+    ];
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   time.timeZone = "America/Los_Angeles";
   nix.settings.trusted-users = [ "root" "admin" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "nfs" ];
   system.stateVersion = "24.05";
 }

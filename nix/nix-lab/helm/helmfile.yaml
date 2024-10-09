@@ -1,0 +1,17 @@
+repositories:
+  - name: longhorn
+    url: https://charts.longhorn.io
+  - name: kyverno
+    url: https://kyverno.github.io/kyverno
+---
+releases:
+  # Distributed storage
+  - name: longhorn
+    namespace: longhorn-system
+    chart: longhorn/longhorn
+    version: 1.6.2
+  # Policy management; required fix for longhorn on nixos
+  - name: kyverno
+    namespace: kyverno
+    chart: kyverno/kyverno
+    version: 3.2.7
