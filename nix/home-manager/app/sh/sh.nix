@@ -72,6 +72,7 @@
     tree btop
     bat fd eza fzf-git-sh
     wl-clipboard
+    killall
     pkgs-unstable.fzf
   ];
   
