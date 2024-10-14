@@ -8,6 +8,7 @@
     ./flatpak.nix
     ./steam.nix
     ./locale.nix
+    ./fonts.nix
   ];
   
   # Configure user
@@ -22,8 +23,7 @@
         url = "https://github.com/Jafner.keys";
         sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
       };
-    in pkgs.lib.splitString "\n" (builtins.readFile
-    authorizedKeys);
+    in pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
   };
 
   # DO NOT CHANGE
