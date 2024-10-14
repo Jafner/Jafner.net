@@ -7,6 +7,14 @@
     enable = true;
     autoEnable = true;
     polarity = "dark";
+    targets = {
+      wofi.enable = true;
+      waybar = {
+        enableLeftBackColors = true;
+        enableCenterBackColors = true;
+        enableRightBackColors = true;
+      };
+    };
     fonts = {
       monospace = {
         name = "DejaVu Sans Mono";
