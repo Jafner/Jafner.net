@@ -39,8 +39,8 @@
     };
     userSettings = {
       user = "joey";
-      theme = "gruvbox-cool";
-      wm = "plasma";
+      theme = "nature-blue";
+      wm = "hyprland";
     };
     lib = nixpkgs.lib;
     pkgs = import inputs.nixpkgs {
