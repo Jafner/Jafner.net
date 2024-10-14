@@ -3,11 +3,6 @@
   # Configure system packages
   environment.systemPackages = with pkgs; [
     git
-    inputs.nixos-conf-editor.packages.${systemSettings.system}.nixos-conf-editor
-  ];
-
-  fonts.packages = with pkgs; [
-    nerdfonts
   ];
 
   # Configure mouse and touchpad
