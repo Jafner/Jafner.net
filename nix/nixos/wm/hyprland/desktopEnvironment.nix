@@ -1,15 +1,28 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-   waybar
-   mako
-   libnotify
+   mako libnotify
    swww
-   rofi-wayland
+   wofi
+   polkit-kde-agent
+   dolphin
   ];
   programs.hyprland = {
     enable = true;
     package = pkgs.hyprland;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
+  };
+  services.power-profiles-daemon = {
+    enable = true;
+  };
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = "joey";
+    };
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
   };
 }
