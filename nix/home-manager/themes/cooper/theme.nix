@@ -1,7 +1,7 @@
 { ... }:
 {
   stylix = {
-    image = ./cooper.png;
+    image = ./wallpaper.png;
     override = { base01 = "332330"; };
   };
 }
