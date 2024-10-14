@@ -2,3 +2,4 @@ secrets.env filter=sops diff=sops
 *.secrets filter=sops diff=sops
 *.token filter=sops diff=sops
 *.passwd filter=sops diff=sops
+config.boot filter=sops diff=sops
