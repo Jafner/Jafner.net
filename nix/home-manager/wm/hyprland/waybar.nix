@@ -8,8 +8,8 @@
         position = "top";
         height = 30;
         spacing = 30;
-        margin-left = 40;
-        margin-right = 40;
+        margin-left = 0;
+        margin-right = 0;
         modules-left = [ "custom/appmenu" "wlr/taskbar" "hyprland/window" "tray" ];
         modules-center = [ "hyprland/workspaces" ];
         modules-right = [
@@ -49,11 +49,11 @@
           separate-outputs = true;
         };
         "custom/appmenu" = {
-          format = " ";
+          format = "     "; # Manual padding to move it further from left edge
           on-click = "wofi --show drun";
         };
         "custom/exit" = {
-          format = " ";
+          format = "     "; # Manual padding to move it further from right edge
           on-click = "wlogout";
           tooltip-format = "Power Menu";
         };
@@ -109,7 +109,7 @@
           format = ''{volume}% {icon} {format_source}'';
           format-bluetooth = ''{volume}% {icon} {format_source}'';
           format-bluetooth-muted = ''{icon} {format_source}'';
-          format-muted = '' {format_source}'';
+          format-muted = ''{format_source}'';
           format-source = ''{volume}% '';
           format-source-muted = '' '';
           format-icons = {
@@ -143,8 +143,8 @@
   #   with '-c ~/.config/waybar/waybar.css', which will add our snippets
   #   and then source the original, default '~/.config/waybar/style.css' 
   #   created by Stylix.
-  home.file."waybar.css" = {
-    target = ".config/waybar/waybar.css";
-    source = ./waybar.css;
-  };
+  # home.file."waybar.css" = {
+  #   target = ".config/waybar/waybar.css";
+  #   source = ./waybar.css;
+  # };
 }

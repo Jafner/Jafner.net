@@ -6,13 +6,19 @@
     plugins = [];
     settings = {
       monitor = ",1920x1080@60,0x0,1";
-
+      # Declare default applications
       "$terminal" = "kitty";
       "$fileManager" = "dolphin";
-      "$bar" = "killall .waybar-wrapped; waybar --style ~/.config/waybar/waybar.css";
+      "$browser" = "flatpak run io.github.zen_browser.zen";
+      "$bar" = "killall .waybar-wrapped; waybar"; #"$bar" = "killall .waybar-wrapped; waybar --style ~/.config/waybar/waybar.css";
       "$menu" = "wofi --show drun";
       "$notifd" = "mako";
       "$wallpaperd" = "swww-daemon";
+      "$screenshot" = "grimblast copy area";
+
+      # Scripted actions
+      "$commandRebuildNix" = "$terminal sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
+      "$commandRebuildHomeManager" = "$terminal home-manager switch -b bak --flake ~/Jafner.net/nix";
 
       exec-once = [
         "$terminal"
@@ -38,7 +44,7 @@
       decoration = {
         rounding = "10";
         active_opacity = "1.0";
-        inactive_opacity = "0.9";
+        inactive_opacity = "0.99";
         drop_shadow = true;
         shadow_range = "4";
         shadow_render_power = "3";
@@ -105,6 +111,10 @@
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
+        "$mainMod CTRL, S, exec, $screenshot"
+        "$mainMod CTRL, Z, exec, $browser"
+        "$mainMod CTRL ALT, N, exec, $commandRebuildNix"
+        "$mainMod CTRL ALT, H, exec, $commandRebuildHomeManager"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"

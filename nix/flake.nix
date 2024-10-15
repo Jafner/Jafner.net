@@ -39,7 +39,7 @@
     };
     userSettings = {
       user = "joey";
-      theme = "nature-blue";
+      theme = "gruvbox-warm";
       wm = "hyprland";
     };
     lib = nixpkgs.lib;

@@ -12,7 +12,7 @@
     dolphin
     power-profiles-daemon
     pavucontrol
-    grim slurp
+    grimblast
   ];
  
 }
