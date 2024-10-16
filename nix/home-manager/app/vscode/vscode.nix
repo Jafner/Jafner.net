@@ -17,6 +17,7 @@
       "explorer.confirmDragAndDrop" = false;
       "workbench.colorTheme" = "Stylix";
       "git.autofetch" = true;
+      "git.confirmSync" = false;
       "editor.fontFamily" = lib.mkForce "'Symbols Nerd Font Mono', 'PowerlineSymbols', 'DejaVu Sans Mono'";
     };
     userTasks = {
