@@ -5,7 +5,7 @@
    swww
    wofi
    polkit-kde-agent
-   dolphin
+   xfce.thunar
   ];
   programs.hyprland = {
     enable = true;
