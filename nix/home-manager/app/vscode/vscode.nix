@@ -19,6 +19,7 @@
       "git.autofetch" = true;
       "git.confirmSync" = false;
       "editor.fontFamily" = lib.mkForce "'Symbols Nerd Font Mono', 'PowerlineSymbols', 'DejaVu Sans Mono'";
+      "git.enableSmartCommit" = true;
     };
     userTasks = {
       version = "2.0.0";
