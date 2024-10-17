@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
- 
   wayland.windowManager.hyprland = {
     enable = true;
     plugins = [];
@@ -17,8 +16,8 @@
       "$screenshot" = "grimblast copy area";
 
       # Scripted actions
-      "$commandRebuildNix" = "$terminal sudo nixos-rebuild switch --flake ~/Jafner.net/nix";
-      "$commandRebuildHomeManager" = "$terminal home-manager switch -b bak --flake ~/Jafner.net/nix";
+      "$commandRebuildNix" = "$terminal sudo nixos-rebuild switch --flake ~/Jafner.net/nix && read";
+      "$commandRebuildHomeManager" = "$terminal home-manager switch -b bak --flake ~/Jafner.net/nix && read";
 
       exec-once = [
         "$terminal"
@@ -115,6 +114,7 @@
         "$mainMod CTRL, Z, exec, $browser"
         "$mainMod CTRL ALT, N, exec, $commandRebuildNix"
         "$mainMod CTRL ALT, H, exec, $commandRebuildHomeManager"
+        "$mainMod CTRL, P, exec, rofi-rbw"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
