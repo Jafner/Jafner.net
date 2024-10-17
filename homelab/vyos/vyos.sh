@@ -36,6 +36,23 @@ function get_dhcp_leases () {
   ssh $VYOS_TARGET 'chmod +x /home/vyos/op.sh; /home/vyos/op.sh "show dhcp server leases"; rm /home/vyos/op.sh'
 }
 
+function update_public_ip () {
+  scp -q ./update_public_ip.sh $VYOS_TARGET:/home/vyos/update_public_ip.sh
+  ssh $VYOS_TARGET 'chmod +x /home/vyos/update_public_ip.sh; /home/vyos/update_public_ip.sh; rm /home/vyos/update_public_ip.sh'
+}
+
+function cfddns () {
+  scp -q ./cfddns.sh $VYOS_TARGET:/home/vyos/cfddns.sh
+  scp -q ./cloudflare.token $VYOS_TARGET:/home/vyos/cloudflare.token
+  ssh $VYOS_TARGET 'chmod +x /home/vyos/cfddns.sh; /home/vyos/cfddns.sh "jafner.net" "$(cat /home/vyos/cloudflare.token)"; rm /home/vyos/cfddns.sh /home/vyos/cloudflare.token'
+}
+
+function run_script () {
+  SCRIPT="$1"
+  scp -q $SCRIPT $VYOS_TARGET:/home/vyos/$SCRIPT
+  ssh $VYOS_TARGET "chmod +x /home/vyos/$SCRIPT; /home/vyos/$SCRIPT; rm /home/vyos/$SCRIPT"
+}
+
 function op () {
   command="$@"
   scp -q ./op.sh $VYOS_TARGET:/home/vyos/op.sh
