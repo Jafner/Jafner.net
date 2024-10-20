@@ -104,6 +104,8 @@
           format-linked = ''{ifname} (No IP)  '';
           format-disconnected = ''Disconnected ⚠ '';
           format-alt = ''{ifname}: {ipaddr}/{cidr}'';
+          on-click = "kitty --class floating --override initial_window_width=400 --override initial_window_height=400 --override remember_window_size=false nmtui";
+          on-click-right = "nm-connection-editor";
         };
         pulseaudio = {
           format = ''{volume}% {icon} {format_source}'';

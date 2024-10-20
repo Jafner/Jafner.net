@@ -7,12 +7,14 @@
       monitor = ",1920x1080@60,0x0,1";
       # Declare default applications
       "$terminal" = "kitty";
+      "$terminalFloating" = "kitty --class floating --override remember_window_size=false --override initial_window_height=720 --override initial_window_width=1280";
       "$fileManager" = "dolphin";
       "$browser" = "flatpak run io.github.zen_browser.zen";
       "$bar" = "killall .waybar-wrapped; waybar"; #"$bar" = "killall .waybar-wrapped; waybar --style ~/.config/waybar/waybar.css";
       "$menu" = "wofi --show drun";
       "$notifd" = "mako";
       "$wallpaperd" = "swww-daemon";
+      "$network" = "nm-applet --indicator";
       "$screenshot" = "grimblast copy area";
 
       # Scripted actions
@@ -24,6 +26,7 @@
         "$bar"
         "$notifd"
         "$wallpaperd"
+        "$network"
       ];
 
       env = [
@@ -102,7 +105,7 @@
 
       "$mainMod" = "SUPER";
       bind = [
-        "$mainMod, T, exec, $terminal"
+        "$mainMod, T, exec, $terminalFloating"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
@@ -126,7 +129,11 @@
         "$mainMod CTRL, B, exec, $bar" 
       ];
 
-      windowrulev2 = "suppressevent maximize, class:.*";
+      windowrulev2 = [ 
+        "suppressevent maximize, class:.*"
+        "float, class:floating"
+        "float, title:Network Connections"
+      ];
     };
   };
 }

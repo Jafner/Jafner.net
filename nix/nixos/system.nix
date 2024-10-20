@@ -3,6 +3,7 @@
   # Configure system packages
   environment.systemPackages = with pkgs; [
     git
+    networkmanagerapplet
   ];
 
   # Configure mouse and touchpad
