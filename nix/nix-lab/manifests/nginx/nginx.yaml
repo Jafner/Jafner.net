@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+    app.kubernetes.io/instance: nginx
+    app.kubernetes.io/name: nginx
+  name: nginx
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+        app.kubernetes.io/name: nginx
+    spec:
+      containers:
+      - image: mcr.microsoft.com/oss/nginx/nginx:1.19.5
+        name: nginx
+        ports:
+        - containerPort: 8096
+          name: web
+          protocol: TCP
+        env:
+        - name: TZ
+          value: America/Los_Angeles
+        volumeMounts:
+        - mountPath: "/Videos"
+          readOnly: false
+          name: pv-smb-av-videos
+          subPath: Videos
+      volumes:
+        - name: pv-smb-av-videos
+          persistentVolumeClaim:
+            claimName: pvc-smb-av-videos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+  namespace: default 
+spec:
+  ports:
+  - name: web-tcp
+    port: 8096
+    protocol: TCP
+    targetPort: 8096
+  - name: web-udp
+    port: 8096
+    protocol: UDP
+    targetPort: 8096
+  selector:
+    app: nginx

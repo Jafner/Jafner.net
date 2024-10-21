@@ -5,6 +5,12 @@ repositories:
     url: https://kyverno.github.io/kyverno
   - name: metallb
     url: https://metallb.github.io/metallb
+  - name: csi-driver-smb
+    url: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: traefik
+    url: https://helm.traefik.io/traefik
 ---
 releases:
   # Distributed storage
@@ -21,4 +27,19 @@ releases:
     namespace: metallb-system
     chart: metallb/metallb
     version: 0.14.5
-  
+    values: ./values/metallb.yaml
+  # SMB Storage Driver
+  - name: csi-driver-smb
+    namespace: kube-system
+    chart: csi-driver-smb/csi-driver-smb
+    version: 1.16.0
+  # Cert-manager
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: 1.16.1
+  - name: traefik
+    namespace: traefik
+    chart: traefik/traefik
+    version: 32.1.1
+    values: ./values/traefik.yaml

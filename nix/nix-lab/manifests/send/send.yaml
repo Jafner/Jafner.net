@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.32.0 (HEAD)
+    traefik.http.routers.send.middlewares: securityheaders@file
+    traefik.http.routers.send.rule: Host(`send.jafner.net`)
+    traefik.http.routers.send.tls.certresolver: lets-encrypt-dns01
+    traefik.http.routers.send.tls.options: tls12@file
+    traefik.http.services.send.loadbalancer.server.port: "1234"
+  labels:
+    io.kompose.network/send-send: "true"
+    io.kompose.network/web: "true"
+    io.kompose.service: send
+  name: send
+spec:
+  containers:
+    - env:
+        - name: BASE_URL
+          value: https://send.jafner.net
+        - name: DHPARAM_GENERATION
+          value: "false"
+        - name: FILE_DIR
+          value: /uploads
+        - name: MAX_FILE_SIZE
+          value: "42949672960"
+        - name: NODE_ENV
+          value: production
+        - name: PORT
+          value: "1234"
+        - name: REDIS_HOST
+          value: redis
+        - name: VIRTUAL_HOST
+          value: 0.0.0.0
+        - name: VIRTUAL_PORT
+          value: "1234"
+      image: registry.gitlab.com/timvisee/send:latest
+      name: send-send
+      volumeMounts:
+        - mountPath: /uploads
+          name: send-claim0
+  restartPolicy: Never
+  volumes:
+    - name: send-claim0
+      persistentVolumeClaim:
+        claimName: send-claim0
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: send-claim0
+  name: send-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.network/send-send: "true"
+    io.kompose.service: redis
+  name: redis
+spec:
+  containers:
+    - image: redis:alpine
+      name: send-redis
+  restartPolicy: Never
