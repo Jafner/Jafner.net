@@ -1,0 +1,18 @@
+services:
+  exporter-docker:
+    image: prometheusnet/docker_exporter:latest
+    container_name: monitoring_exporter-docker
+    restart: "no"
+    ports:
+      - 50417:9417
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  exporter-ping:
+    image: czerwonk/ping_exporter:latest
+    container_name: monitoring_exporter-ping
+    restart: "no"
+    ports:
+      - 50418:9427
+    volumes:
+      - ./exporter-ping.yml:/config/config.yml
