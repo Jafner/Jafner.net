@@ -1,0 +1,20 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden_vaultwarden
+    restart: "no"
+    env_file:
+      - path: ./vaultwarden_secrets.env
+        required: false
+    networks:
+      - web
+    volumes:
+      - $DOCKER_DATA/data:/data
+    labels:
+      - traefik.http.routers.vaultwarden.rule=Host(`bitwarden.jafner.tools`)
+      - traefik.http.routers.vaultwarden.tls.certresolver=lets-encrypt
+      - traefik.http.routers.vaultwarden.tls.options=tls12@file
+      - traefik.http.routers.vaultwarden.middlewares=securityheaders@file
+networks:
+  web:
+    external: true
