@@ -8,7 +8,7 @@ Each cell contains the serial number for the drive in the mapped bay.
 | Y2 | VJGR6TNX  | 2EG14YNJ | VJGJVTZX | VJG1H9UX |
 | Y3 | VJGJUWNX  | 2EGXD27V | VJGJAS1X | VJG2UTUX |
 | Y4 | VJGRGD2X  | 2EGL8AVV | 2EKA903X | VJGRRG9X |
-| Y5 | VJGK56KX  | 2EGNPVWV | 2EKATR2X | VKH3Y3XX |
+| Y5 | VJGK56KX  | 2EGNPVWV | VJG1NP9X | VKH3Y3XX |
 | Y6 | VLKV9N8V  | R5G4W2VV | VLKXPS1V | VKGW5YGX |
 
 # Identify a Failing Disk
@@ -53,6 +53,7 @@ https://docs.oracle.com/cd/E19253-01/819-5461/gazgd/index.html
 
 # Update Log
 **Most recent first**
+- *2024/10/21*: Replaced 2EKATR2X with VJG1NP9X at Y5/X3
 - *2024/09/09*: Replaced VLKV9N8V with VKH3XR2X at Y6/X1
 - *2024/05/26*: Replaced 2EGL8AVV with VJG2808X at Y4/X2
 - *2024/04/16*: Replaced VJG1H9UX with 2EKA92XX at Y2/X4

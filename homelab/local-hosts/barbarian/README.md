@@ -1,3 +1,15 @@
+# Summary
+Barbarian is a TrueNAS host built from old gaming PC hand-me-downs. 
+
+# Hardware
+
+| Part | Make & Model | Notes | Link |
+|:----:|:------------:|:-----:|:----:|
+| Case | RSV-L4500U   |       | [Rosewill.com](https://www.rosewill.com/rosewill-rsv-l4500u-black/p/9SIA072GJ92805)
+| PSU  | 
+| 
+
+
 # Pools
 I have 2 pools, one for "Media" and one for everything else. All disks are 8 TB HGST/Hitachi drives with a sector size of 4096B. All pools use vdevs of 3 drives in RAIDZ1.
 
