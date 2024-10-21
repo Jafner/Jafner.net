@@ -52,6 +52,15 @@
 
   in {
     nixosConfigurations = {
+      iso = lib.nixosSystem {
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+          ./iso/server-configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+        ];
+        specialArgs = {inherit pkgs; };
+      };
       ${systemSettings.hostname} = lib.nixosSystem {        
         modules = [ 
           ./nixos/configuration.nix 
