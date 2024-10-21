@@ -26,10 +26,3 @@
     };
   };
 } 
-
-# function        { inputs }:           { outputs }
-# fzf-bw          { bwJson }:           { none } # copies user, pass to clipboard
-# fzf-bw-getItem  { itemUuid, bwJson }: { itemJson }
-# fzf-bw-selector { bwJson }:           { itemUuid }
-# fzf-bw-getUser  { itemJson }:  { itemUsername }
-# fzf-bw-getPass  { itemJson }:  { itemPassword }

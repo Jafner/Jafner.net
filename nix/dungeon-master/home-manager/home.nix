@@ -51,8 +51,6 @@
       { name = "fedora"; location = "oci+https://registry.fedoraproject.org"; }
     ];
     packages = [
-      "com.discordapp.Discord/x86_64/stable"
-      "com.github.IsmaelMartinez.teams_for_linux/x86_64/stable"
       "com.obsproject.Studio/x86_64/stable"
       "com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable"
       "com.usebottles.bottles/x86_64/stable"
@@ -106,7 +104,6 @@
       "org.winehq.Wine.DLLs.dxvk/x86_64/stable-23.08"
       "org.winehq.Wine.gecko/x86_64/stable-23.08"
       "org.winehq.Wine.mono/x86_64/stable-23.08"
-      "re.sonny.Tangram/x86_64/stable"
       "us.zoom.Zoom/x86_64/stable"
       "xyz.z3ntu.razergenie/x86_64/stable"
       { appId = "org.fedoraproject.Platform/x86_64/f40"; origin = "fedora"; }
@@ -256,12 +253,17 @@
     enable = true;
     package = pkgs-unstable.fzf;
   };
+  programs.rofi = {
+    enable = true;
+  };
+  systemd.user.services = {};
   home.enableNixpkgsReleaseCheck = false;
   home.preferXdgDirectories = true;
   home.username = "joey";
   home.homeDirectory = "/home/joey";
   home.stateVersion = "24.05"; 
   home.packages = with pkgs; [
+    rofi rofi-rbw-wayland rbw pinentry-rofi pinentry-all
     flatpak
     fastfetch
     nixd
@@ -272,16 +274,7 @@
     bat fd eza fzf-git-sh
     wl-clipboard
     base16-schemes
-    k3s 
-    (wrapHelm kubernetes-helm {
-      plugins = with pkgs.kubernetes-helmPlugins; [
-        helm-diff
-        helm-secrets
-        helm-s3
-        helm-git
-      ];
-    })
-    helmfile-wrapped
+    ollama
     pkgs-unstable.fzf
     inputs.deploy-rs.defaultPackage.x86_64-linux
   ];
@@ -293,6 +286,23 @@
     "ssh-profiles" = {
       source = ./profiles;
       target = ".ssh/profiles";
+    };
+    "rbw-config" = {
+      target = ".config/rbw/config.json";
+      text = ''
+      {
+        "email": "jafner425@gmail.com",
+        "sso_id": null,
+        "base_url": "https://bitwarden.jafner.tools",
+        "identity_url": null,
+        "ui_url": null,
+        "notifications_url": null,
+        "lock_timeout": 3600,
+        "sync_interval": 3600,
+        "pinentry": "pinentry-curses",
+        "client_cert_path": null
+      }
+      '';
     };
 
   };
