@@ -20,6 +20,7 @@
       "git.confirmSync" = false;
       "editor.fontFamily" = lib.mkForce "'Symbols Nerd Font Mono', 'PowerlineSymbols', 'DejaVu Sans Mono'";
       "git.enableSmartCommit" = true;
+      "security.workspace.trust.untrustedFiles" = "open";
     };
     userTasks = {
       version = "2.0.0";

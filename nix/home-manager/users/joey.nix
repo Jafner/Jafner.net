@@ -9,6 +9,7 @@
     ../app/browser/zen.nix
     ../app/flatpak/flatpak.nix
     ../app/git/git.nix
+    ../app/games/games.nix
     ../app/media/media.nix
     ../app/messaging/discord.nix 
     ../app/obs-studio/obs-studio.nix
