@@ -1,0 +1,12 @@
+version: '3'
+services:
+  socks5:
+    container_name: socks5-proxy_socks5-proxy
+    restart: always
+    image: serjs/go-socks5-proxy
+    environment:
+      PROXY_USER: 'fighter'
+      PROXY_PASSWORD: ${socks5_PROXY_PASSWORD}
+      PROXY_PORT: 1080
+    ports:
+      - "1080:1080"

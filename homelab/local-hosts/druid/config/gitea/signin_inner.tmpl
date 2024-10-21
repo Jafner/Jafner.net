@@ -1,0 +1,20 @@
+{{if or (not .LinkAccountMode) (and .LinkAccountMode .LinkAccountModeSignIn)}}
+{{template "base/alert" .}}
+{{end}}
+<div class="ui attached segment">
+        {{if .OAuth2Providers}}
+        <div id="oauth2-login-navigator" class="gt-py-2">
+                <div class="gt-df gt-fc gt-jc">
+                        <div id="oauth2-login-navigator-inner" class="gt-df gt-fc gt-fw gt-ac gt-gap-3">
+                                {{range $provider := .OAuth2Providers}}
+                                        <a class="{{$provider.Name}} ui button gt-df gt-ac gt-jc gt-py-3 gt-w-full oauth-login-link" href="{{AppSubUrl}}/user/oauth2/{{$provider.DisplayName}}">
+                                                {{$provider.IconHTML 28}}
+                                                {{ctx.Locale.Tr "sign_in_with_provider" $provider.DisplayName}}
+                                        </a>
+                                {{end}}
+                        </div>
+                </div>
+        </div>
+        {{end}}
+        </form>
+</div>
