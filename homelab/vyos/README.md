@@ -1,3 +1,23 @@
+# Working With VyOS
+We have a helper script, [`vyos.sh`](./vyos.sh) that provides useful utilities for interacting with our VyOS host. 
+
+Run `alias vy="$(realpath ./vyos.sh)"` for faster usage. 
+
+- The host to interact with is configured via the `VYOS_TARGET` near the top of the script.
+- `get_config_saved` Prints the contents of `/config/config.boot` to stdout.
+- `get_config_active` Prints the active config (like `show` in config mode) to stdout.
+- `post_config` Copies the local `config.boot` to the remote `/home/vyos/config.boot`. 
+- `load_config` Enters config mode and runs `load /home/vyos/config.boot`, then attempts to `commit; exit` (note: does not save config).
+- `save_config` Enters config mode and runs `save; exit`.
+- `op` Runs the proceding commands in op mode on the target.
+
+## Workflow Examples
+1. Pull the latest config with `vy get_config_saved > config.boot`
+2. Edit the config file with the desired changes. 
+3. Push the changes to the remote with `vy post_config && vy load_config && vy save_config`
+
+This workflow is provided with a compound function from the helper script; `vy edit`.
+
 # Update VyOS
 1. Navigate to [VyOS nightly builds](https://vyos.net/get/nightly-builds/) and copy the link for the most recent build.
 2. SSH into the VyOS host and run `add system image <link to build image>`

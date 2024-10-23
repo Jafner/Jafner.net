@@ -18,7 +18,7 @@ function get_config_active () {
 
 # Push local ./config.boot to remote /home/vyos/config.boot
 function post_config () {
-  scp -q ./config.boot    :/home/vyos/config.boot
+  scp -q ./config.boot $VYOS_TARGET:/home/vyos/config.boot
 }
 
 function load_config () {
