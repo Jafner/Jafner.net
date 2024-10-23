@@ -1,6 +1,10 @@
 { config, pkgs, pkgs-unstable, inputs, ... }:
-
 {
+  imports = [
+    ./unstable.nix
+    ./python.nix
+    ./scripts.nix
+  ];
   sops = {
     age.sshKeyPaths = [ "/home/joey/.ssh/main_id_ed25519" ];
     defaultSopsFile = ./secrets.yaml;
@@ -51,14 +55,11 @@
       { name = "fedora"; location = "oci+https://registry.fedoraproject.org"; }
     ];
     packages = [
-      "com.usebottles.bottles/x86_64/stable"
       "dev.vencord.Vesktop/x86_64/stable"
       "io.github.zen_browser.zen/x86_64/stable"
       "io.missioncenter.MissionCenter/x86_64/stable"
       "md.obsidian.Obsidian/x86_64/stable"
       "no.mifi.losslesscut/x86_64/stable"
-      "org.chromium.Chromium/x86_64/stable"
-      "org.chromium.Chromium.Codecs/x86_64/stable"
       "org.freedesktop.Platform/x86_64/22.08"
       "org.freedesktop.Platform/x86_64/23.08"
       "org.freedesktop.Platform/x86_64/24.08"
@@ -75,8 +76,6 @@
       "org.freedesktop.Platform.openh264/x86_64/2.2.0"
       "org.freedesktop.Platform.openh264/x86_64/2.4.1"
       "org.freedesktop.Sdk/x86_64/23.08"
-      "org.gnome.Platform/x86_64/45"
-      "org.gnome.Platform/x86_64/46"
       "org.gnome.Platform/x86_64/47"
       "org.gnome.Platform.Compat.i386/x86_64/46"
       "org.gtk.Gtk3theme.Breeze/x86_64/3.22"
@@ -97,12 +96,9 @@
       "org.winehq.Wine.DLLs.dxvk/x86_64/stable-23.08"
       "org.winehq.Wine.gecko/x86_64/stable-23.08"
       "org.winehq.Wine.mono/x86_64/stable-23.08"
-      "us.zoom.Zoom/x86_64/stable"
       "xyz.z3ntu.razergenie/x86_64/stable"
       { appId = "org.fedoraproject.Platform/x86_64/f40"; origin = "fedora"; }
       { appId = "org.gimp.GIMP/x86_64/stable"; origin = "fedora"; }
-      { appId = "org.kde.kontact/x86_64/stable"; origin = "fedora"; }
-      { appId = "org.kde.neochat/x86_64/stable"; origin = "fedora"; }
       { appId = "org.fedoraproject.KDE6Platform/x86_64/f40"; origin = "fedora"; }
       { appId = "org.fedoraproject.Platform/x86_64/f40"; origin = "fedora"; }
     ];
@@ -112,9 +108,10 @@
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      continue.continue
+      #continue.continue
     ];
     userSettings = {
+      "editor.fontFamily" = "'DejaVu Sans Mono'";
       "nix.serverPath" = "nixd";
       "nix.enableLanguageServer" = true;
       "explorer.confirmDragAndDrop" = false;
@@ -133,7 +130,12 @@
       obs-vaapi
       obs-vkcapture
       input-overlay
+      wlrobs
     ];
+    package = pkgs.writeShellScriptBin "obs" ''
+        #!/bin/sh
+        ${pkgs-unstable.nixgl.nixVulkanIntel}/bin/nixVulkanIntel ${pkgs-unstable.obs-studio}/bin/obs "$@"
+    '';
   };
   programs.git = {
     enable = true;
@@ -174,7 +176,7 @@
       fetch = "fastfetch";
       neofetch = "fetch";
       find = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
-      hmu = "home-manager switch ~/.config/home-manager";
+      hmu = "home-manager switch -b backup --flake ~/Git/Jafner.net/nix/dungeon-master/home-manager/ --impure";
       kitty = "nixGL kitty";
       fzf-ssh = "ssh $(cat ~/.ssh/profiles | fzf --height 20%)";
       fsh = "fzf-ssh";
@@ -248,7 +250,23 @@
   programs.rofi = {
     enable = true;
   };
-  systemd.user.services = {};
+  programs.spotify-player = {
+    enable = true;
+    package = pkgs-unstable.spotify-player;
+  };
+  systemd.user.services = {
+    librespot = {
+      Unit = {
+        Description = "Librespot (an open source Spotify client)";
+        Documentation = [ "https://github.com/librespot-org/librespot" "https://github.com/librespot-org/librespot/wiki/Options" ];
+      };
+      Service = {
+        Restart = "always";
+        RestartSec = 10;
+        ExecStart = "${pkgs-unstable.librespot}/bin/librespot --backend pulseaudio --system-cache /home/joey/.spotify -j";
+      };
+    };
+  };
   home.enableNixpkgsReleaseCheck = false;
   home.preferXdgDirectories = true;
   home.username = "joey";
@@ -268,8 +286,6 @@
     base16-schemes
     ollama
     protonup-ng
-    pkgs-unstable.fzf
-    inputs.deploy-rs.defaultPackage.x86_64-linux
   ];
   home.file = {
     "continue-config.json" = {
