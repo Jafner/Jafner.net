@@ -51,8 +51,6 @@
       { name = "fedora"; location = "oci+https://registry.fedoraproject.org"; }
     ];
     packages = [
-      "com.obsproject.Studio/x86_64/stable"
-      "com.obsproject.Studio.Plugin.OBSVkCapture/x86_64/stable"
       "com.usebottles.bottles/x86_64/stable"
       "dev.vencord.Vesktop/x86_64/stable"
       "io.github.zen_browser.zen/x86_64/stable"
@@ -70,9 +68,6 @@
       "org.freedesktop.Platform.GL.default/x86_64/24.08extra"
       "org.freedesktop.Platform.GL32.default/x86_64/23.08"
       "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
-      "org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/23.08"
-      "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/22.08"
-      "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
       "org.freedesktop.Platform.VulkanLayer.vkBasalt/x86_64/23.08"
       "org.freedesktop.Platform.ffmpeg-full/x86_64/23.08"
       "org.freedesktop.Platform.ffmpeg-full/x86_64/24.08"
@@ -80,8 +75,6 @@
       "org.freedesktop.Platform.openh264/x86_64/2.2.0"
       "org.freedesktop.Platform.openh264/x86_64/2.4.1"
       "org.freedesktop.Sdk/x86_64/23.08"
-      "org.gnome.Boxes/x86_64/stable"
-      "org.gnome.Boxes.Extension.OsinfoDb/x86_64/stable"
       "org.gnome.Platform/x86_64/45"
       "org.gnome.Platform/x86_64/46"
       "org.gnome.Platform/x86_64/47"
@@ -110,7 +103,6 @@
       { appId = "org.gimp.GIMP/x86_64/stable"; origin = "fedora"; }
       { appId = "org.kde.kontact/x86_64/stable"; origin = "fedora"; }
       { appId = "org.kde.neochat/x86_64/stable"; origin = "fedora"; }
-      { appId = "org.mozilla.Thunderbird/x86_64/stable"; origin = "fedora"; }
       { appId = "org.fedoraproject.KDE6Platform/x86_64/f40"; origin = "fedora"; }
       { appId = "org.fedoraproject.Platform/x86_64/f40"; origin = "fedora"; }
     ];
@@ -275,6 +267,7 @@
     wl-clipboard
     base16-schemes
     ollama
+    protonup-ng
     pkgs-unstable.fzf
     inputs.deploy-rs.defaultPackage.x86_64-linux
   ];
