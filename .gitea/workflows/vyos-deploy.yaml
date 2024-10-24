@@ -7,19 +7,27 @@ on:
 
 jobs:
   ssh:
+    defaults:
+      run: 
+        working-directory: homelab/vyos
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Jafner.net repo
         uses: actions/checkout@v4
-      - name: Print env value
+      - name: Configure SSH agent
         run: |
-          echo "${{ vars.TESTVAR }}"
-      - name: SSH into host
-        uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: 192.168.1.1
-          username: vyos
-          key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
-          debug: true
-          script: |
-            echo "$(date)" >> ~/hello.txt
+          echo ${{ secrets.RUNNER_SSH_PRIVATEKEY }} >> /tmp/key
+          alias ssh='ssh -i /tmp/key'
+      - name: Print running VyOS version
+        run: |
+          ./vyos.sh op show system image 
+          
+      # - name: SSH into host
+      #   uses: appleboy/ssh-action@v1.1.0
+      #   with:
+      #     host: 192.168.1.1
+      #     username: vyos
+      #     key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
+      #     debug: true
+      #     script: |
+      #       echo "$(date)" >> ~/hello.txt
