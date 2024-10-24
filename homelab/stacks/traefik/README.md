@@ -7,7 +7,7 @@ Previous version was naive, and had a subnet equal in size to the IP range. This
 ### Useful Labels
 
 Basic web-facing service: 
-- `traefik.http.routers.<router-name>.rule=Host(\`<subdomain>.jafner.net\`)`
+- ```traefik.http.routers.<router-name>.rule=Host(`<subdomain>.jafner.net`)```
 - `traefik.http.routers.<router-name>.tls.certresolver=lets-encrypt`
 
 Restrict access to IPs in list defined in [`./config/config_addons.yaml`](./config/config_addons.yaml):
