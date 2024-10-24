@@ -12,8 +12,8 @@ jobs:
       - name: SSH into host
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.HOST_DOMAIN }}
-          username: ${{ secrets.HOST_USERNAME }}
+          host: 192.168.1.1
+          username: vyos
           key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
           script: |
             echo "Hello, world!" >> ~/hello.txt
