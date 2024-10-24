@@ -9,11 +9,14 @@ jobs:
   ssh:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Jafner.net repo
+        uses: actions/checkout@v4
       - name: SSH into host
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 192.168.1.1
           username: vyos
           key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
+          debug: true
           script: |
             echo "$(date)" >> ~/hello.txt
