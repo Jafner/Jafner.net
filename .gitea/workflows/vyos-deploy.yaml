@@ -11,8 +11,11 @@ jobs:
     steps:
       - name: Checkout Jafner.net repo
         uses: actions/checkout@v4
+      - name: Print env value
+        run: |
+          echo "${{ secrets.RUNNER_SSH_PUBKEY }}"
       - name: SSH into host
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.1.0
         with:
           host: 192.168.1.1
           username: vyos
