@@ -194,6 +194,7 @@
       neofetch = "fetch";
       find = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
       hmu = "home-manager switch -b backup --flake ~/Git/Jafner.net/nix/dungeon-master/home-manager/ --impure";
+      nixgc = "nix-env --delete-generations 7d && nix-store --gc --print-dead";
       kitty = "nixGL kitty";
       fzf-ssh = "ssh $(cat ~/.ssh/profiles | fzf --height 20%)";
       fsh = "fzf-ssh";

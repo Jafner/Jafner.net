@@ -5,6 +5,11 @@
       name = "send-to-x264-mp4"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
       runtimeInputs = [
         libnotify
+        ( writeShellApplication { name = "check-inputs"; } )
+        ( writeShellApplication { name = "transcode-av1"; } ) # https://trac.ffmpeg.org/wiki/Encode/AV1
+        ( writeShellApplication { name = "transcode-x264"; } ) # https://trac.ffmpeg.org/wiki/Encode/H.264
+        ( writeShellApplication { name = "upload-zipline"; } )
+        ( writeShellApplication { name = "slow-motion"; } ) # https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
       ];
       text = ''
         INPUT_FILE=$(realpath "$1")
