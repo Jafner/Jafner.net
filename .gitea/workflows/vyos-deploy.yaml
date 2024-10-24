@@ -2,8 +2,8 @@ name: SSH and echo to file
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    paths: [ 'homelab/vyos/config.boot' ]
 
 jobs:
   ssh:
@@ -16,4 +16,4 @@ jobs:
           username: vyos
           key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
           script: |
-            echo "Hello, world!" >> ~/hello.txt
+            echo "$(date)" >> ~/hello.txt
