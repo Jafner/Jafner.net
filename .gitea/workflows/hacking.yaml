@@ -15,7 +15,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
-      - name: Show changes in the most recent commit
-        run: |
-          git show HEAD^1
+      # - name: Show changes in the most recent commit
+      #   run: |
+      #     git show HEAD^1
       - run: echo "🍏 This job's status is ${{ gitea.status }}."

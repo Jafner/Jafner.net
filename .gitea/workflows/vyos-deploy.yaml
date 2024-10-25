@@ -16,7 +16,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Check network connectivity to host
         run: |
-          sudo apt-get install -y iputils
+          sudo apt-get update &&\
+          sudo apt-get install -y iputils-ping
           ping -c 1 -t 1 -q 192.168.1.1
       - name: Configure SSH
         run: |
