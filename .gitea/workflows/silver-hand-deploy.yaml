@@ -18,7 +18,11 @@ jobs:
         uses: cachix/install-nix-action@v30
         with:
           github_access_token: ${{ secrets.RUNNER_GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-24.05
       - name: Check Nix Install
         run: |
           nix flake show github:NixOS/nixpkgs
           nix --version
+      - name: Run deploy-rs from flake
+        run: |
+          nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --version

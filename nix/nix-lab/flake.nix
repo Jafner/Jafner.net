@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, deploy-rs, home-manager, ... }: 
+  outputs = inputs@{ self, nixpkgs, deploy-rs, ... }: 
   let 
     system = "x86_64-linux";
     pkgs = import inputs.nixpkgs { 
