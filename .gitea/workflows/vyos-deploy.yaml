@@ -25,7 +25,7 @@ jobs:
           ssh-keyscan -t ed25519 192.168.1.1 >> ~/.ssh/known_hosts
       - name: Connect to VyOS
         run: |
-          ssh -vv -i /tmp/key vyos@192.168.1.1:22 'whoami'
+          ssh -vv -i /tmp/key -p 22 vyos@192.168.1.1 'whoami'
           
       # - name: SSH into host
       #   uses: appleboy/ssh-action@v1.1.0
