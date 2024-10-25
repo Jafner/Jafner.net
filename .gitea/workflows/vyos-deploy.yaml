@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo apt-get update &&\
           sudo apt-get install -y iputils-ping
-          ping -c 1 -t 1 -q 192.168.1.1
+          ping -c 1 -t 5 -q 192.168.1.1
       - name: Configure SSH
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
