@@ -72,13 +72,6 @@
         };
       };
     };
-    homeConfigurations = {
-      admin = home-manager.lib.homeManagerConfiguration {
-        modules = [ ./users/admin.nix ];
-        inherit pkgs;
-        extraSpecialArgs = { inherit pkgs; };
-      };
-    };
     deploy = {
       nodes = {
         bard = {
