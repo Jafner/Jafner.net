@@ -14,19 +14,20 @@ jobs:
     steps:
       - name: Checkout Jafner.net repo
         uses: actions/checkout@v4
-      - name: Configure SSH agent
+      - name: Check network connectivity to host
+        run: ping -c 1 -t 1 -q 192.168.1.1
+      - name: Configure SSH
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
           chmod 0600 /tmp/key
           ssh-keygen -y -f /tmp/key > /tmp/key.pub
           ssh-keygen -l -E sha256 -f /tmp/key.pub
-          cat /tmp/key.pub
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           ssh-keyscan 192.168.1.1 > ~/.ssh/known_hosts
           chmod 0600 ~/.ssh/known_hosts
-          ssh vyos@192.168.1.1 'echo $(date)'
       - name: Print running VyOS version
         run: |
+          whoami
           ./vyos.sh op show system image 
           
       # - name: SSH into host
