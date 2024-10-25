@@ -27,7 +27,7 @@ jobs:
           chmod 0600 ~/.ssh/known_hosts
       - name: Connect to VyOS
         run: |
-          ssh -i /tmp/key vyos@192.168.1.1
+          ssh -vvv -i /tmp/key vyos@192.168.1.1 'whoami'
           
       # - name: SSH into host
       #   uses: appleboy/ssh-action@v1.1.0
