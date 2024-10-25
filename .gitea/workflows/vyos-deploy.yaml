@@ -29,14 +29,15 @@ jobs:
       - name: Connect to VyOS
         run: |
           ssh -i /tmp/key vyos@192.168.1.1 'whoami'
-          SSH_CMD="ssh -i /tmp/key" SCP_CMD="scp -i /tmp/key -q" ./vyos.sh op show system image
-          
-      # - name: SSH into host
-      #   uses: appleboy/ssh-action@v1.1.0
-      #   with:
-      #     host: 192.168.1.1
-      #     username: vyos
-      #     key: ${{ secrets.RUNNER_SSH_PRIVATEKEY }}
-      #     debug: true
-      #     script: |
-      #       echo "$(date)" >> ~/hello.txt
+      - name: Install SOPS
+        run: |
+          curl -o sops -L https://github.com/getsops/sops/releases/download/v3.9.1/sops-v3.9.1.linux.amd64
+          chmod +x sops; mv sops /usr/local/bin/sops
+          sops --version
+      - name: Decrypt config.boot
+        run: |
+          echo -e "$(ssh -i /tmp/key vyos@192.168.1.1 'cat /config/wizard.host.key')\n${{ secrets.AGE_DEPLOY_KEY }}" > /tmp/combined.key
+          export SOPS_AGE_KEY_FILE=/tmp/combined.key
+          sops decrypt -i --input-type json config.boot 2>/dev/null && echo "Decrypted config.boot"
+      - name: Push config to VyOS
+          SSH_CMD="ssh -i /tmp/key" SCP_CMD="scp -i /tmp/key -q" ./vyos.sh push
