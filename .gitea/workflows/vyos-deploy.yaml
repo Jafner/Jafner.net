@@ -40,4 +40,5 @@ jobs:
           export SOPS_AGE_KEY_FILE=/tmp/combined.key
           sops decrypt -i --input-type json config.boot 2>/dev/null && echo "Decrypted config.boot"
       - name: Push config to VyOS
+        run: |
           SSH_CMD="ssh -i /tmp/key" SCP_CMD="scp -i /tmp/key -q" ./vyos.sh push
