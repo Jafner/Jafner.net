@@ -1,0 +1,24 @@
+name: Deploy NixOS System Configurations to Silver-Hand Hosts
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'nix/nix-lab/**' ]
+
+jobs:
+  deploy:
+    defaults:
+      run: 
+        working-directory: nix/nix-lab
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Jafner.net repo
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+        with:
+          github_access_token: ${{ secrets.RUNNER_GITHUB_TOKEN }}
+      - name: Check Nix Install
+        run: |
+          nix flake show github:NixOS/nixpkgs
+          nix --version
