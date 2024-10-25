@@ -21,13 +21,11 @@ jobs:
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
           chmod 600 /tmp/key
           ssh-keygen -y -f /tmp/key > /tmp/key.pub
-          ssh-keygen -l -E sha256 -f /tmp/key.pub
-          mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
-          ssh-keyscan 192.168.1.1 > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+          mkdir -p ~/.ssh && touch ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 192.168.1.1 >> ~/.ssh/known_hosts
       - name: Connect to VyOS
         run: |
-          ssh -vvv -i /tmp/key -o StrictHostKeyChecking=no vyos@192.168.1.1 'whoami'
+          ssh -vvv -i /tmp/key -o "StrictHostKeyChecking no" vyos@192.168.1.1 'whoami'
           
       # - name: SSH into host
       #   uses: appleboy/ssh-action@v1.1.0
