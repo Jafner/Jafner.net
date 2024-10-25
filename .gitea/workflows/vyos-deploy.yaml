@@ -14,8 +14,8 @@ jobs:
     steps:
       - name: Checkout Jafner.net repo
         uses: actions/checkout@v4
-      - name: Check network connectivity to host
-        run: ping -c 1 -t 1 -q 192.168.1.1
+      # - name: Check network connectivity to host
+      #   run: ping -c 1 -t 1 -q 192.168.1.1
       - name: Configure SSH
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
