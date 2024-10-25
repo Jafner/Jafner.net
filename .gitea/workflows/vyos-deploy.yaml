@@ -19,16 +19,15 @@ jobs:
       - name: Configure SSH
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
-          chmod 0600 /tmp/key
+          chmod 600 /tmp/key
           ssh-keygen -y -f /tmp/key > /tmp/key.pub
           ssh-keygen -l -E sha256 -f /tmp/key.pub
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           ssh-keyscan 192.168.1.1 > ~/.ssh/known_hosts
           chmod 0600 ~/.ssh/known_hosts
-      - name: Print running VyOS version
+      - name: Connect to VyOS
         run: |
-          whoami
-          ./vyos.sh op show system image 
+          ssh -i /tmp/key vyos@192.168.1.1
           
       # - name: SSH into host
       #   uses: appleboy/ssh-action@v1.1.0
