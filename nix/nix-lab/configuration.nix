@@ -32,7 +32,8 @@
     ];
     clusterInit = (hostConf.name == "bard");
     serverAddr = (if hostConf.name == "bard" then "" else "https://192.168.1.31:6443");
-    manifests = { longhorn-nixos-path.source = ./manifests/longhorn-nixos-path.yaml; };
+    manifests = {  }; # We are going to manage k8s resources separately from 
+                      # the infrastructure config
   };
   services.openiscsi = {
     enable = false;
