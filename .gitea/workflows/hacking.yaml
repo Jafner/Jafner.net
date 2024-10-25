@@ -15,4 +15,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
+      - name: List files changed in the most recent commit
+        run: |
+          git diff --name-only HEAD HEAD~1
       - run: echo "🍏 This job's status is ${{ gitea.status }}."
