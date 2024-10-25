@@ -20,6 +20,9 @@ jobs:
           chmod 0600 /tmp/key
           ssh-keygen -y -f /tmp/key > /tmp/key.pub
           ssh-keygen -l -E sha256 -f /tmp/key.pub
+          mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
+          ssh-keyscan 192.168.1.1 > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
           alias ssh='ssh -i /tmp/key -o StrictHostKeyChecking=accept-new'
       - name: Print running VyOS version
         run: |
