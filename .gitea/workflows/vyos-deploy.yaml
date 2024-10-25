@@ -1,4 +1,4 @@
-name: SSH and echo to file
+name: Deploy VyOS config.boot to Wizard
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     paths: [ 'homelab/vyos/config.boot' ]
 
 jobs:
-  ssh:
+  deploy:
     defaults:
       run: 
         working-directory: homelab/vyos
