@@ -24,10 +24,10 @@ jobs:
           ssh-keygen -l -E sha256 -f /tmp/key.pub
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           ssh-keyscan 192.168.1.1 > ~/.ssh/known_hosts
-          chmod 0600 ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
       - name: Connect to VyOS
         run: |
-          ssh -vvv -i /tmp/key vyos@192.168.1.1 'whoami'
+          ssh -vvv -i /tmp/key -o StrictHostKeyChecking=no vyos@192.168.1.1 'whoami'
           
       # - name: SSH into host
       #   uses: appleboy/ssh-action@v1.1.0
