@@ -24,7 +24,7 @@ jobs:
       - name: Set up Cachix
         uses: cachix/cachix-action@v15
         with:
-          name: jafnernet
+          name: jafnernet # https://app.cachix.org/cache/jafnernet
           authToken: '${{ secrets.CACHIX_TOKEN }}'
           extraPullNames: nix-community
       - name: Set up deploy-rs
