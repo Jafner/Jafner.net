@@ -41,4 +41,4 @@ jobs:
           done
       - name: Dry-run deploy
         run: |
-          ./deploy/bin/deploy --ssh-opts '-i /tmp/key' --dry-activate
+          ./deploy/bin/deploy --ssh-opts '-i /tmp/key'
