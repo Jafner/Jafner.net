@@ -39,6 +39,6 @@ jobs:
           for host in $(cat /tmp/hostlist); do 
             ssh-keyscan -t ed25519 $host >> ~/.ssh/known_hosts
           done
-      - name: Run deploy-rs from flake
+      - name: Dry-run deploy
         run: |
-          ./deploy --ssh-opts '-i /tmp/key' --dry-activate
+          ./deploy/bin/deploy --ssh-opts '-i /tmp/key' --dry-activate
