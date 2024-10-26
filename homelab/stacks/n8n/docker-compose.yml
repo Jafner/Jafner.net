@@ -1,0 +1,19 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n_n8n
+    restart: "unless-stopped"
+    networks: 
+      web:
+    volumes:
+      - $FILE_STORAGE/n8n:/home/node/.n8n
+    labels:
+      - traefik.http.routers.n8n.rule=Host(`n8n.jafner.net`)
+      - traefik.http.routers.n8n.tls.certresolver=lets-encrypt
+    environment:
+      - N8N_EDITOR_BASE_URL=https://n8n.jafner.net/
+      - WEBHOOK_URL=https://n8n.jafner.net/
+
+networks:
+  web:
+    external: true
