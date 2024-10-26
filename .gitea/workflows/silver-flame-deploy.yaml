@@ -21,13 +21,15 @@ jobs:
         with:
           github_access_token: ${{ secrets.RUNNER_GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-24.05
-      - name: Configure Cachix
+      - name: Set up Cachix
         uses: cachix/cachix-action@v15
         with:
           name: jafnernet
           authToken: '${{ secrets.CACHIX_TOKEN }}'
           extraPullNames: nix-community
-      - name: Configure SSH
+      - name: Set up deploy-rs
+        run: nix build -o deploy github:serokell/deploy-rs#defaultPackage.x86_64-linux
+      - name: Set up SSH
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
           chmod 600 /tmp/key
@@ -37,11 +39,6 @@ jobs:
           for host in $(cat /tmp/hostlist); do 
             ssh-keyscan -t ed25519 $host >> ~/.ssh/known_hosts
           done
-      # - name: Test SSH connections
-      #   run: |
-      #     for host in $(cat /tmp/hostlist); do
-      #       ssh -i /tmp/key root@$host 'whoami; echo $HOSTNAME'
-      #     done
       - name: Run deploy-rs from flake
         run: |
-          nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --ssh-opts '-i /tmp/key' --dry-activate
+          ./deploy --ssh-opts '-i /tmp/key' --dry-activate
