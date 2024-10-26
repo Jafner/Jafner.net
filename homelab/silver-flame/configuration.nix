@@ -109,4 +109,4 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "nfs" ];
   system.stateVersion = "24.05";
-}
+} 
