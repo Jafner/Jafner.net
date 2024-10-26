@@ -29,12 +29,16 @@ jobs:
           extraPullNames: nix-community
       - name: Set up deploy-rs
         run: nix build -o deploy github:serokell/deploy-rs#defaultPackage.x86_64-linux
-      - name: Set up SSH
+      - name: Set up SSH key
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
           chmod 600 /tmp/key
+      - name: Derive host IPs
+        run: |
           nix eval --json .#deploy.nodes --apply 'builtins.attrValues' |\
           jq -r '.[].hostname' | xargs echo > /tmp/hostlist
+      - name: Add host keys to known_hosts
+        run: |
           mkdir -p ~/.ssh && touch ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
           for host in $(cat /tmp/hostlist); do 
             ssh-keyscan -t ed25519 $host >> ~/.ssh/known_hosts
