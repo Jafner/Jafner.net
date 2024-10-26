@@ -25,7 +25,6 @@ jobs:
         run: |
           echo -e "${{ secrets.RUNNER_SSH_PRIVATEKEY }}" > /tmp/key
           chmod 600 /tmp/key
-          ssh -i /tmp/key
       - name: Get list of hosts
         run: |
           nix eval --json .#deploy.nodes --apply 'builtins.attrValues' |\
