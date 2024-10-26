@@ -35,17 +35,17 @@ jobs:
         run: |
           nix eval --json .#deploy.nodes --apply 'builtins.attrValues' |\
           jq -r '.[].hostname' | xargs echo > /tmp/hostlist
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh && touch ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
-          for host in $(cat /tmp/hostlist); do 
-            ssh-keyscan -t ed25519 $host >> ~/.ssh/known_hosts
-          done
-      - name: Test SSH connections
-        run: |
-          for host in $(cat /tmp/hostlist); do
-            ssh -i /tmp/key root@$host 'whoami; echo $HOSTNAME'
-          done
+      # - name: Add known hosts
+      #   run: |
+      #     mkdir -p ~/.ssh && touch ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
+      #     for host in $(cat /tmp/hostlist); do 
+      #       ssh-keyscan -t ed25519 $host >> ~/.ssh/known_hosts
+      #     done
+      # - name: Test SSH connections
+      #   run: |
+      #     for host in $(cat /tmp/hostlist); do
+      #       ssh -i /tmp/key root@$host 'whoami; echo $HOSTNAME'
+      #     done
       - name: Run deploy-rs from flake
         run: |
           nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --ssh-opts '-i /tmp/key' --dry-activate
