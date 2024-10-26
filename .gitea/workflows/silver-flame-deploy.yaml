@@ -40,6 +40,6 @@ jobs:
           for host in $(cat /tmp/hostlist); do
             ssh -i /tmp/key root@$host 'whoami; echo $HOSTNAME'
           done
-      # - name: Run deploy-rs from flake
-      #   run: |
-      #     nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --version
+      - name: Run deploy-rs from flake
+        run: |
+          nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --dry-activate
