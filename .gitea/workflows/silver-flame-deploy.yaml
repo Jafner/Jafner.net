@@ -48,4 +48,4 @@ jobs:
           done
       - name: Run deploy-rs from flake
         run: |
-          nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --dry-activate
+          nix run github:serokell/deploy-rs#defaultPackage.x86_64-linux -- --ssh-opts '-i /tmp/key' --dry-activate
