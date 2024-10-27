@@ -1,4 +1,4 @@
-require ["fileinto", "include", "environment", "variables", "relational", "comparator-i;ascii-numeric", "spamtest", "regex", "imap4flags", "date"];
+require ["fileinto", "include", "environment", "variables", "relational", "comparator-i;ascii-numeric", "spamtest", "regex", "imap4flags", "date", "copy"];
 
 # Generated: Do not run this script on spam messages
 if allof (
