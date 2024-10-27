@@ -3,7 +3,7 @@
   imports = [
     ./unstable.nix
     ./python.nix
-    ./scripts.nix
+    #./scripts.nix
   ];
   sops = {
     age.sshKeyPaths = [ "/home/joey/.ssh/main_id_ed25519" ];
@@ -108,6 +108,7 @@
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
+      adzero.vscode-sievehighlight
       #continue.continue
     ];
     userSettings = {
@@ -150,7 +151,7 @@
     }; 
     terminal = false;
     settings = {
-      StartupNotify = true;
+      StartupNotify = "true";
       StartupWMClass = "obs";
     };
   };
@@ -304,6 +305,8 @@
     base16-schemes
     ollama
     protonup-ng
+    betterbird-unwrapped
+    protonmail-bridge-gui
   ];
   home.file = {
     "continue-config.json" = {
