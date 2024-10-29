@@ -73,8 +73,19 @@
         modules = [ 
           ./nixos/laptop/configuration.nix 
           inputs.hyprland.nixosModules.default
-          inputs.stylix.nixosModules.stylix
+          #inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              users.joey = import ./home-manager/laptop/home.nix;
+              sharedModules = [
+                inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                inputs.stylix.homeManagerModules.stylix
+              ];
+              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
+            };
+          }
         ];
         inherit system;
         specialArgs = { 

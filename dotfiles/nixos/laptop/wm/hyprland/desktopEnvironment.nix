@@ -1,11 +1,12 @@
 { pkgs, vars, ... }:
 {
   environment.systemPackages = with pkgs; [
-   mako libnotify
-   swww
-   wofi
-   polkit-kde-agent
-   xfce.thunar
+    brightnessctl
+    mako libnotify
+    swww
+    wofi
+    polkit-kde-agent
+    xfce.thunar
   ];
   programs.hyprland = {
     enable = true;
