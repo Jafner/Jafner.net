@@ -1,8 +1,0 @@
-version: '3.3'
-services:
-        iperf3-server:
-                container_name: iperf3-server
-                command: iperf3 -s -p 5201
-                ports:
-                        - '50201:5201'
-                image: networkstatic/iperf3

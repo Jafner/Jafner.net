@@ -1,6 +1,0 @@
-providers:
-  docker:
-    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.jafner.net`)"
-
-api:
-  insecure: true

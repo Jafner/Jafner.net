@@ -1,8 +1,0 @@
-# for all web-facing services
-traefik.http.routers.router-name.rule=Host(`subdomain.jafner.net`)
-traefik.http.routers.router-name.tls=true
-traefik.http.routers.router-name.tls.certresolver=lets-encrypt
-# for restricting service to LAN IPs
-traefik.http.routers.router-name.middlewares=lan-only@file
-# for setting a non-default port
-traefik.http.services.service-name.loadbalancer.server.port=1234
