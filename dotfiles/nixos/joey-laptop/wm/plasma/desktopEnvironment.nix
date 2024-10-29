@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   # Configure displayManager
@@ -6,7 +6,7 @@
   services.displayManager = {
     enable = true;
     autoLogin.enable = true;
-    autoLogin.user = "joey";
+    autoLogin.user = "${inputs.vars."joey-laptop".username}";
     sddm = {
       enable = true;
       autoNumlock = true;

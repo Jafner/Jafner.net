@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     stylix = {
       url = "github:danth/stylix";
@@ -25,63 +26,68 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix"; 
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    deploy-rs.url = "github:serokell/deploy-rs";
+    vars = {
+      "joey-laptop" = {
+        username = "joey";
+        hostname = "joey-laptop";
+        theme = "gruvbox-warm";
+        wm = "hyprland";
+      };
+      "joey-desktop" = {
+        realname = "Joey Hafner";
+        username = "joey";
+        hostname = "joey-desktop";
+        email = "joey@jafner.net";
+      };
+    };
   };
   outputs = inputs@{ 
     nixpkgs, 
     nixpkgs-unstable, 
     home-manager, 
+    nixgl,
+    plasma-manager,
     ... 
   }:
   let
-    systemSettings = {
-      system = "x86_64-linux";
-      hostname = "joey-laptop";
-    };
-    userSettings = {
-      user = "joey";
-      theme = "gruvbox-warm";
-      wm = "hyprland";
-    };
+    system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = import inputs.nixpkgs {
-        system = systemSettings.system;
-        config = { allowUnfreePredicate = (_: true); };
+      inherit system;
+      overlays = [ nixgl.overlay ];
+      config = { allowUnfreePredicate = (_: true); };
     };
-    pkgs-unstable = nixpkgs-unstable.legacyPackages.${systemSettings.system};
-    
-
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      overlays = [ nixgl.overlay ];
+      config = { allowUnfreePredicate = (_: true); };
+    };
   in {
     nixosConfigurations = {
-      iso = lib.nixosSystem {
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-          ./iso/server-configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-        ];
-        specialArgs = {inherit pkgs; };
-      };
-      ${systemSettings.hostname} = lib.nixosSystem {        
+      joey-laptop = lib.nixosSystem {        
         modules = [ 
-          ./nixos/configuration.nix 
+          ./nixos/joey-laptop/configuration.nix 
           inputs.hyprland.nixosModules.default
           inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
         ];
-        system = systemSettings.system;
+        inherit system;
         specialArgs = { 
           inherit pkgs;
           inherit pkgs-unstable; 
-          inherit systemSettings;
-          inherit userSettings;
           inherit inputs; 
         };
       };
     };
     homeConfigurations = {
-      ${userSettings.user} = home-manager.lib.homeManagerConfiguration {
+      "joey-laptop" = home-manager.lib.homeManagerConfiguration {
         modules = [ 
-          ./home-manager/home.nix 
+          ./home-manager/joey-laptop/home.nix 
           inputs.stylix.homeManagerModules.stylix 
           inputs.plasma-manager.homeManagerModules.plasma-manager
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
@@ -90,8 +96,21 @@
         extraSpecialArgs = { 
           inherit pkgs;
           inherit pkgs-unstable; 
-          inherit systemSettings;
-          inherit userSettings;
+          inherit inputs; 
+        };
+      };
+      "joey-desktop" = home-manager.lib.homeManagerConfiguration {
+        modules = [ 
+          ./home-manager/joey-desktop/home.nix 
+          inputs.sops-nix.homeManagerModules.sops
+          inputs.stylix.homeManagerModules.stylix
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          inputs.plasma-manager.homeManagerModules.plasma-manager
+        ];
+        inherit pkgs;
+        extraSpecialArgs = { 
+          inherit pkgs;
+          inherit pkgs-unstable;
           inherit inputs; 
         };
       };

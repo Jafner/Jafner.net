@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, inputs, ... }:
+{ pkgs, pkgs-unstable, inputs, ... }:
 {
   imports = [
     ./unstable.nix
@@ -6,7 +6,7 @@
     #./scripts.nix
   ];
   sops = {
-    age.sshKeyPaths = [ "/home/joey/.ssh/main_id_ed25519" ];
+    age.sshKeyPaths = [ "/home/${inputs.vars."joey-desktop".username}/.ssh/main_id_ed25519" ];
     defaultSopsFile = ./secrets.yaml;
   };
   stylix = {
@@ -157,10 +157,10 @@
   };
   programs.git = {
     enable = true;
-    userName = "Joey Hafner";
-    userEmail = "joey@jafner.net";
+    userName = "${inputs.vars."joey-desktop".realname}";
+    userEmail = "${inputs.vars."joey-desktop".email}";
     extraConfig = {
-      core.sshCommand = "ssh -i /home/joey/.ssh/main_id_ed25519";
+      core.sshCommand = "ssh -i /home/${inputs.vars."joey-desktop".username}/.ssh/main_id_ed25519";
     };
     delta.enable = true;
     delta.options = {
@@ -194,7 +194,7 @@
       fetch = "fastfetch";
       neofetch = "fetch";
       find = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
-      hmu = "home-manager switch -b backup --flake ~/Git/Jafner.net/nix/dungeon-master/home-manager/ --impure";
+      hmu = "home-manager switch -b backup --flake ~/Git/Jafner.net/dotfiles#joey-desktop --impure";
       nixgc = "nix-env --delete-generations 7d && nix-store --gc --print-dead";
       kitty = "nixGL kitty";
       fzf-ssh = "ssh $(cat ~/.ssh/profiles | fzf --height 20%)";
@@ -282,14 +282,14 @@
       Service = {
         Restart = "always";
         RestartSec = 10;
-        ExecStart = "${pkgs-unstable.librespot}/bin/librespot --backend pulseaudio --system-cache /home/joey/.spotify -j";
+        ExecStart = "${pkgs-unstable.librespot}/bin/librespot --backend pulseaudio --system-cache /home/${inputs.vars."joey-desktop".username}/.spotify -j";
       };
     };
   };
   home.enableNixpkgsReleaseCheck = false;
   home.preferXdgDirectories = true;
-  home.username = "joey";
-  home.homeDirectory = "/home/joey";
+  home.username = "${inputs.vars."joey-desktop".username}";
+  home.homeDirectory = "/home/${inputs.vars."joey-desktop".username}";
   home.stateVersion = "24.05"; 
   home.packages = with pkgs; [
     rofi rofi-rbw-wayland rbw pinentry-rofi pinentry-all

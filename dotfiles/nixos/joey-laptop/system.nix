@@ -1,4 +1,4 @@
-{ pkgs, inputs, systemSettings, ... }:
+{ pkgs, inputs, ... }:
 {
   # Configure system packages
   environment.systemPackages = with pkgs; [
@@ -21,7 +21,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Configure networking
-  networking.hostName = "${systemSettings.hostname}";
+  networking.hostName = "${inputs.vars."joey-laptop".hostname}";
   networking.networkmanager.enable = true;
 
   # Disable systemd's getty and autovt on tty1

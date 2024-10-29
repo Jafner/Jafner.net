@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
    mako libnotify
@@ -18,7 +18,7 @@
   services.displayManager = {
     autoLogin = {
       enable = true;
-      user = "joey";
+      user = "${inputs.vars."joey-laptop".username}";
     };
     sddm = {
       enable = true;
