@@ -1,4 +1,4 @@
-# Using `inxi`
+## Hardware Reports with `inxi`
 `inxi` is a script which employs a wide array of system information utilities to assemble a holistic system summary. Check out [the repository](https://github.com/smxi/inxi) for more information.
 
 ### Install `inxi`
