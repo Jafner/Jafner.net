@@ -3,13 +3,13 @@ name: Deploy NixOS System Configurations to Silver-Flame Hosts
 on:
   push:
     branches: [ main ]
-    paths: [ 'homelab/silver-flame/**' ]
+    paths: [ 'homelab/local-hosts/silver-flame/**' ]
 
 jobs:
   deploy:
     defaults:
       run: 
-        working-directory: homelab/silver-flame
+        working-directory: homelab/local-hosts/silver-flame
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Jafner.net repo
