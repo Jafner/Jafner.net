@@ -35,8 +35,12 @@ jobs:
           chmod 600 /tmp/key
       - name: Derive host IPs
         run: |
-          nix eval --json .#deploy.nodes --apply 'builtins.attrValues' |\
-          jq -r '.[].hostname' | xargs echo > /tmp/hostlist
+          nix-shell -p nixfmt-rfc-style
+          nix-instantiate --parse flake.nix |\
+            nixfmt |\
+            grep 'hostname =' |\
+            cut -d'"' -f2 |\
+            xargs echo > /tmp/hostlist
       - name: Add host keys to known_hosts
         run: |
           mkdir -p ~/.ssh && touch ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
