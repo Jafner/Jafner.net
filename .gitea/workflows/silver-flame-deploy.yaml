@@ -35,7 +35,7 @@ jobs:
           chmod 600 /tmp/key
       - name: Derive host IPs
         run: |
-          nix-shell -p nixfmt-rfc-style
+          nix shell nixpkgs#nixfmt-rfc-style
           nix-instantiate --parse flake.nix |\
             nixfmt |\
             grep 'hostname =' |\
