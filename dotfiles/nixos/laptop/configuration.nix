@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./wm/${vars.laptop.wm}/desktopEnvironment.nix
+    ./wm/hyprland/desktopEnvironment.nix
     ./system.nix
     ./security.nix
     ./flatpak.nix
