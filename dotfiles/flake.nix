@@ -30,21 +30,7 @@
       url = "github:Mic92/sops-nix"; 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deploy-rs.url = "github:serokell/deploy-rs";
-    vars = {
-      "joey-laptop" = {
-        username = "joey";
-        hostname = "joey-laptop";
-        theme = "gruvbox-warm";
-        wm = "hyprland";
-      };
-      "joey-desktop" = {
-        realname = "Joey Hafner";
-        username = "joey";
-        hostname = "joey-desktop";
-        email = "joey@jafner.net";
-      };
-    };
+    deploy-rs.url = "github:serokell/deploy-rs"; 
   };
   outputs = inputs@{ 
     nixpkgs, 
@@ -55,6 +41,20 @@
     ... 
   }:
   let
+    vars = {
+      user = {
+        username = "joey";
+        realname = "Joey Hafner";
+        email = "joey@jafner.net";
+      };
+      laptop = {
+        hostname = "joey-laptop";
+        theme = "gruvbox-warm";
+      };
+      desktop = {
+        hostname = "joey-desktop";
+      };
+    }; 
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = import inputs.nixpkgs {
@@ -69,39 +69,37 @@
     };
   in {
     nixosConfigurations = {
-      joey-laptop = lib.nixosSystem {        
+      laptop = lib.nixosSystem {        
         modules = [ 
-          ./nixos/joey-laptop/configuration.nix 
+          ./nixos/laptop/configuration.nix 
           inputs.hyprland.nixosModules.default
           inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
         ];
         inherit system;
         specialArgs = { 
-          inherit pkgs;
-          inherit pkgs-unstable; 
-          inherit inputs; 
+          inherit pkgs pkgs-unstable inputs;
+          inherit vars; 
         };
       };
     };
     homeConfigurations = {
-      "joey-laptop" = home-manager.lib.homeManagerConfiguration {
+      laptop = home-manager.lib.homeManagerConfiguration {
         modules = [ 
-          ./home-manager/joey-laptop/home.nix 
+          ./home-manager/laptop/home.nix 
           inputs.stylix.homeManagerModules.stylix 
           inputs.plasma-manager.homeManagerModules.plasma-manager
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
         ];
         inherit pkgs; 
         extraSpecialArgs = { 
-          inherit pkgs;
-          inherit pkgs-unstable; 
-          inherit inputs; 
+          inherit pkgs pkgs-unstable inputs; 
+          inherit vars;
         };
       };
-      "joey-desktop" = home-manager.lib.homeManagerConfiguration {
+      desktop = home-manager.lib.homeManagerConfiguration {
         modules = [ 
-          ./home-manager/joey-desktop/home.nix 
+          ./home-manager/desktop/home.nix 
           inputs.sops-nix.homeManagerModules.sops
           inputs.stylix.homeManagerModules.stylix
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
@@ -109,9 +107,8 @@
         ];
         inherit pkgs;
         extraSpecialArgs = { 
-          inherit pkgs;
-          inherit pkgs-unstable;
-          inherit inputs; 
+          inherit pkgs pkgs-unstable inputs; 
+          inherit vars;
         };
       };
     };

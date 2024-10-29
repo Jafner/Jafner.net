@@ -1,8 +1,8 @@
-{ pkgs, inputs, ... }:
+{ pkgs, vars, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    ./wm/${inputs.vars."joey-laptop".wm}/desktopEnvironment.nix
+    ./wm/${vars.laptop.wm}/desktopEnvironment.nix
     ./system.nix
     ./security.nix
     ./flatpak.nix
@@ -13,10 +13,10 @@
   
   # Configure user
   programs.zsh.enable = true;
-  users.users.${inputs.vars."joey-laptop".username} = {
+  users.users.${vars.user.username} = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    description = "${inputs.vars."joey-laptop".username}";
+    description = "${vars.user.username}";
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = let
       authorizedKeys = pkgs.fetchurl {

@@ -1,8 +1,8 @@
-{ pkgs, userSettings, ... }:
+{ pkgs, vars, ... }:
 {
   home.packages = with pkgs; [ base16-schemes ];
   ## Stylix 
-  imports = [ ./themes/${userSettings.theme}/theme.nix ];
+  imports = [ ./themes/${vars.laptop.theme}/theme.nix ];
   stylix = {
     enable = true;
     autoEnable = true;
