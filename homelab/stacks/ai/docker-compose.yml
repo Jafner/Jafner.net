@@ -39,14 +39,15 @@ services:
     networks:
       - ai
     privileged: false
-    ports:
-      - 8000:8000/tcp
     volumes:
-      - $HOME/docker-data/sillytavern/config:/home/node/app/config
-      - $HOME/docker-data/sillytavern/data:/home/node/app/data
-      - $HOME/docker-data/sillytavern/plugins:/home/node/app/plugins
+      - $DOCKER_DATA/sillytavern/config:/home/node/app/config
+      - $DOCKER_DATA/sillytavern/data:/home/node/app/data
+      - $DOCKER_DATA/sillytavern/plugins:/home/node/app/plugins
     environment:
       TZ: America/Los_Angeles
+    labels:
+      - traefik.http.routers.sillytavern.rule=Host(`sillytavern.jafner.net`)
+      - traefik.http.routers.sillytavern.tls.certresolver=lets-encrypt
 
   n8n:
     container_name: ai_n8n
