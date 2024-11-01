@@ -98,6 +98,19 @@
       remoteBuild = true;
       confirmTimeout = 60;
     };
+    devShells."x86_64-linux".default = pkgs.mkShell {
+      packages = [ 
+        pkgs.nixfmt-rfc-style 
+        #(builtins.getFlake "github:serokell/deploy-rs").packages."x86_64-linux".deploy-rs
+          # sha256-3KyjMPUKHkiWhwR91J1YchF6zb6gvckCAY1jOE+ne0U=
+          # fetchFromGitHub {
+          # >   owner = "serokell";
+          # >   repo = "deploy-rs";
+          # >   rev = "aa07eb0";
+          # >   sha256 = "sha256:0000000000000000000000000000000000000000000000000000";
+          # > }
+      ];
+    };
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
