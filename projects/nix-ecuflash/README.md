@@ -5,6 +5,39 @@
 
 This project attempts to create a reproducible package for running Tactrix' Windows-only software on Linux. 
 
-# Installation
+# Usage
+`nix-ecuflash` is a wine-wrapped Windows application. You can run it with:  
 
-<TODO>
+```sh
+nix shell "github:Jafner/Jafner.net?dir=projects/nix-ecuflash#ecuflash"
+```
+
+# Installation
+In 2024, I assume you're using flakes. 
+
+
+Start by adding this flake as an input:
+**Flake.nix**
+```nix 
+inputs = { 
+    nix-ecuflash.url = "github:Jafner/Jafner.net?dir=projects/nix-ecuflash";
+};
+```
+
+And then reference the package in a package list:
+
+**home.nix**
+```nix
+home.packages = [
+    inputs.nix-ecuflash.packages."x86_64-linux".ecuflash
+];
+```
+
+Or 
+
+**configuration.nix**
+```nix
+environment.systemPackages = [
+    inputs.nix-ecuflash.packages."x86_64-linux".ecuflash
+];
+```

@@ -25,13 +25,10 @@
   nativeBuildInputs = [ copyDesktopItems ];
   winAppInstall = ''
     d="$WINEPREFIX/drive_c/Program Files (x86)/OpenECU/${pname}/"
-    config_dir="$HOME/.config/ecuflash"
 
     mkdir -p "$d"
     cp ${src} "$d/${pname}_${version_raw}.exe"
     wine "$WINEPREFIX/drive_c/Program Files (x86)/OpenECU/${pname}/${pname}_${version_raw}.exe"
-
-    mkdir -p "$config_dir"
   '';
   winAppPreRun = ''
   '';
