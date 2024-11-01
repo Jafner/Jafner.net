@@ -7,6 +7,7 @@
 
   imports = [ 
     ./style.nix
+    ./app/wine/wine.nix
     ./app/browser/zen.nix
     ./app/flatpak/flatpak.nix
     ./app/git/git.nix

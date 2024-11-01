@@ -31,6 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs.url = "github:serokell/deploy-rs"; 
+    nix-ecuflash.url = "github:Jafner/Jafner.net?dir=projects/nix-ecuflash";
   };
   outputs = inputs@{ 
     nixpkgs, 

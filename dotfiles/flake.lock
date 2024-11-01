@@ -121,15 +121,15 @@
     },
     "erosanix": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "flake-compat": "flake-compat_3",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1730211782,
-        "narHash": "sha256-RPTCSbYPcIv6jaEMaBrW2h1W9mAlWFR7BiIZwGIRiJM=",
+        "lastModified": 1730470491,
+        "narHash": "sha256-vh8DM+5/BhqZXzqB99CCeqNo01pzzYTY8COq+5ptXUs=",
         "owner": "emmanuelrosa",
         "repo": "erosanix",
-        "rev": "11da2620ebd67fc75207833fbdd3ba51efb95c2e",
+        "rev": "8f79749eef7becb102342d37e9689cde1dfcee42",
         "type": "github"
       },
       "original": {
@@ -157,11 +157,11 @@
     "flake-compat_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1673956053,
-        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
         "type": "github"
       },
       "original": {
@@ -173,11 +173,11 @@
     "flake-compat_3": {
       "flake": false,
       "locked": {
-        "lastModified": 1696426674,
-        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "lastModified": 1673956053,
+        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
         "type": "github"
       },
       "original": {
@@ -563,6 +563,27 @@
         "type": "github"
       }
     },
+    "nix-ecuflash": {
+      "inputs": {
+        "erosanix": "erosanix",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "dir": "projects/nix-ecuflash",
+        "lastModified": 1730491783,
+        "narHash": "sha256-qPKr1YENWMPimQR6OmFSnRaaeFdIaPAH0n9wLwPwJOk=",
+        "owner": "Jafner",
+        "repo": "Jafner.net",
+        "rev": "a03bde27a79e9e95d22b02e0b4476b7237058292",
+        "type": "github"
+      },
+      "original": {
+        "dir": "projects/nix-ecuflash",
+        "owner": "Jafner",
+        "repo": "Jafner.net",
+        "type": "github"
+      }
+    },
     "nix-flatpak": {
       "locked": {
         "lastModified": 1730108712,
@@ -581,7 +602,7 @@
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1713543440,
@@ -701,6 +722,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1730327045,
+        "narHash": "sha256-xKel5kd1AbExymxoIfQ7pgcX6hjw9jCgbiBjiUfSVJ8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "080166c15633801df010977d9d7474b4a6c549d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1660551188,
         "narHash": "sha256-a1LARMMYQ8DPx1BgoI/UN4bXe12hhZkCNqdxNi6uS0g=",
         "owner": "nixos",
@@ -714,7 +751,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1730327045,
         "narHash": "sha256-xKel5kd1AbExymxoIfQ7pgcX6hjw9jCgbiBjiUfSVJ8=",
@@ -755,7 +792,7 @@
     },
     "pre-commit-hooks": {
       "inputs": {
-        "flake-compat": "flake-compat_3",
+        "flake-compat": "flake-compat_2",
         "gitignore": "gitignore",
         "nixpkgs": [
           "hyprland",
@@ -780,13 +817,13 @@
     "root": {
       "inputs": {
         "deploy-rs": "deploy-rs",
-        "erosanix": "erosanix",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "nix-ecuflash": "nix-ecuflash",
         "nix-flatpak": "nix-flatpak",
         "nixgl": "nixgl",
         "nixos-conf-editor": "nixos-conf-editor",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
