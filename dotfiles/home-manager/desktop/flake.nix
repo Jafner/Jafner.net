@@ -49,7 +49,7 @@
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
           inputs.plasma-manager.homeManagerModules.plasma-manager
         ];
-        extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; };
+        extraSpecialArgs = { inherit pkgs pkgs-unstable inputs vars; };
       };
     };
 }

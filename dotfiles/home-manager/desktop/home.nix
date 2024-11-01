@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, inputs, ... }:
+{ pkgs, pkgs-unstable, inputs, vars, ... }:
 {
   imports = [
     ./unstable.nix
@@ -6,7 +6,7 @@
     #./scripts.nix
   ];
   sops = {
-    age.sshKeyPaths = [ "/home/${inputs.vars."joey-desktop".username}/.ssh/main_id_ed25519" ];
+    age.sshKeyPaths = [ "/home/${vars.user.username}/.ssh/main_id_ed25519" ];
     defaultSopsFile = ./secrets.yaml;
   };
   stylix = {
@@ -58,7 +58,6 @@
       "dev.vencord.Vesktop/x86_64/stable"
       "io.github.zen_browser.zen/x86_64/stable"
       "io.missioncenter.MissionCenter/x86_64/stable"
-      "md.obsidian.Obsidian/x86_64/stable"
       "no.mifi.losslesscut/x86_64/stable"
       "org.freedesktop.Platform/x86_64/22.08"
       "org.freedesktop.Platform/x86_64/23.08"
@@ -157,10 +156,10 @@
   };
   programs.git = {
     enable = true;
-    userName = "${inputs.vars."joey-desktop".realname}";
-    userEmail = "${inputs.vars."joey-desktop".email}";
+    userName = "${vars.user.realname}";
+    userEmail = "${vars.user.email}";
     extraConfig = {
-      core.sshCommand = "ssh -i /home/${inputs.vars."joey-desktop".username}/.ssh/main_id_ed25519";
+      core.sshCommand = "ssh -i /home/${vars.user.username}/.ssh/main_id_ed25519";
     };
     delta.enable = true;
     delta.options = {
@@ -282,14 +281,14 @@
       Service = {
         Restart = "always";
         RestartSec = 10;
-        ExecStart = "${pkgs-unstable.librespot}/bin/librespot --backend pulseaudio --system-cache /home/${inputs.vars."joey-desktop".username}/.spotify -j";
+        ExecStart = "${pkgs-unstable.librespot}/bin/librespot --backend pulseaudio --system-cache /home/${vars.user.username}/.spotify -j";
       };
     };
   };
   home.enableNixpkgsReleaseCheck = false;
   home.preferXdgDirectories = true;
-  home.username = "${inputs.vars."joey-desktop".username}";
-  home.homeDirectory = "/home/${inputs.vars."joey-desktop".username}";
+  home.username = "${vars.user.username}";
+  home.homeDirectory = "/home/${vars.user.username}";
   home.stateVersion = "24.05"; 
   home.packages = with pkgs; [
     rofi rofi-rbw-wayland rbw pinentry-rofi pinentry-all
@@ -305,8 +304,11 @@
     base16-schemes
     ollama
     protonup-ng
-    betterbird-unwrapped
     protonmail-bridge-gui
+    goxlr-utility
+    obsidian
+    gamepad-tool
+    linuxKernel.packages.linux_6_11.xpadneo
   ];
   home.file = {
     "continue-config.json" = {

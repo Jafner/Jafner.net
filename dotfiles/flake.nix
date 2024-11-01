@@ -37,7 +37,6 @@
     nixpkgs-unstable, 
     home-manager, 
     nixgl,
-    plasma-manager,
     ... 
   }:
   let
