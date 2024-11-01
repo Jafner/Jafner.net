@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout Jafner.net repo
         uses: actions/checkout@v4
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install jq
       - name: Install Nix
         uses: cachix/install-nix-action@v30
         with:
