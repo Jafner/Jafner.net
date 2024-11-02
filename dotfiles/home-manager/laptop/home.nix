@@ -25,6 +25,7 @@
   home.packages = with pkgs; [
     git
     kdePackages.kdeconnect-kde
+    nix-prefetch
   ];
   programs.home-manager = {
     enable = true;

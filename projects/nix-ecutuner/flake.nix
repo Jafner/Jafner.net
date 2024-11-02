@@ -1,21 +1,20 @@
 {
-  description = "A Nix flake for EcuFlash";
+  description = "A Nix flake with tools for working with ECUs";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    erosanix.url = "github:emmanuelrosa/erosanix";
   };
-  outputs = { self, nixpkgs, erosanix }: {
+  outputs = { self, nixpkgs }: {
     packages.x86_64-linux = let
       pkgs = import "${nixpkgs}" {
         system = "x86_64-linux";
       };
-    in with (pkgs // erosanix.packages.x86_64-linux // erosanix.lib.x86_64-linux); {
+    in with pkgs; {
       default = self.packages.x86_64-linux.ecuflash;
-
-      ecuflash = callPackage ./ecuflash.nix {
-        inherit mkWindowsAppNoCC;
-        wine = wineWowPackages.full;
+      j2534 = callPackage ./j2534.nix {
+        inherit libusb1 pkg-config;
+        inherit fetchFromGitHub;
+        inherit stdenv;
       };
     };
 
