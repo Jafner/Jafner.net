@@ -16,11 +16,15 @@
         inherit fetchFromGitHub;
         inherit stdenv;
       };
+      romraider = callPackage ./romraider.nix {
+        inherit fetchFromGitHub;
+        inherit stdenv;
+      };
     };
 
-    apps.x86_64-linux.ecuflash = {
+    apps.x86_64-linux.romraider = {
       type = "app";
-      program = "${self.packages.x86_64-linux.ecuflash}/bin/ecuflash";
+      program = "${self.packages.x86_64-linux.romraider}/bin/romraider";
     };
 
     apps.x86_64-linux.default = self.apps.x86_64-linux.ecuflash;
