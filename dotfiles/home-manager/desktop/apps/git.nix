@@ -6,6 +6,7 @@
     userEmail = "${vars.user.email}";
     extraConfig = {
       core.sshCommand = "ssh -i /home/${vars.user.username}/.ssh/main_id_ed25519";
+      init.defaultBranch = "main";
     };
     delta.enable = true;
     delta.options = {
