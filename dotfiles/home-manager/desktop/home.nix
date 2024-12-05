@@ -8,6 +8,7 @@
     ./apps/terminal.nix
     ./apps/vscode.nix
     ./apps/iac-tools.nix
+    ./apps/spotify.nix
     ./hardware/goxlr.nix
   ];
 
