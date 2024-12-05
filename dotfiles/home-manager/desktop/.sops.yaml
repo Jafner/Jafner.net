@@ -1,8 +1,0 @@
-keys:
-  - &primary age1v5wy7epv5mm8ddf3cfv8m0e9w4s693dw7djpuytz9td8ycha5f0sv2se9n
-creation_rules:
-  - path_regex: continue-config.json
-    encrypted_regex: "^(apiKey)$"
-    key_groups:
-    - age:
-      - *primary

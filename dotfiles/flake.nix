@@ -1,14 +1,14 @@
 { 
   description = "Joey's Flake";
   inputs = {  
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:nix-community/nixGL";
@@ -17,21 +17,11 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-conf-editor = {
-      url = "github:snowfallorg/nixos-conf-editor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
     sops-nix = {
       url = "github:Mic92/sops-nix"; 
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs.url = "github:serokell/deploy-rs"; 
-    nix-ecuflash.url = "github:Jafner/Jafner.net?dir=projects/nix-ecuflash";
   };
   outputs = inputs@{ 
     nixpkgs, 
@@ -69,6 +59,27 @@
     };
   in {
     nixosConfigurations = {
+      desktop = lib.nixosSystem {
+        modules = [
+          ./nixos/desktop/configuration.nix
+          inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              users.joey = import ./home-manager/desktop/home.nix;
+              sharedModules = [
+                inputs.nix-flatpak.homeManagerModules.nix-flatpak
+              ];
+              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
+            };
+          }
+        ];
+        inherit system;
+        specialArgs = {
+          inherit pkgs pkgs-unstable inputs;
+          inherit vars;
+        };
+      };
       laptop = lib.nixosSystem {        
         modules = [ 
           ./nixos/laptop/configuration.nix 
@@ -111,10 +122,7 @@
       desktop = home-manager.lib.homeManagerConfiguration {
         modules = [ 
           ./home-manager/desktop/home.nix 
-          inputs.sops-nix.homeManagerModules.sops
-          inputs.stylix.homeManagerModules.stylix
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          inputs.plasma-manager.homeManagerModules.plasma-manager
         ];
         inherit pkgs;
         extraSpecialArgs = { 
