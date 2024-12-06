@@ -1,6 +1,7 @@
 { pkgs, pkgs-unstable, ... }: {
 
   home.packages = with pkgs; [
+    fastfetch
     tree
     btop
     bat

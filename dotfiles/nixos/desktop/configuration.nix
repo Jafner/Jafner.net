@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ./addons/goxlr.nix
     ./addons/samba-client.nix
+    ./addons/plasma6.nix
   ];
   
   # Configure user
@@ -138,7 +139,6 @@
 
 
   # Configure displayManager
-  services.displayManager.defaultSession = "plasma";
   services.displayManager = {
     enable = true;
     autoLogin.enable = true;
@@ -150,15 +150,14 @@
   }; 
 
   # Configure X11 server 
-  services.xserver.enable = true;
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services.xserver = {
+    enable = true;
+    excludePackages = [ pkgs.xterm ];
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
-
-  # Configure KDE Plasma 6
-  services.desktopManager.plasma6.enable = true;
-  programs.kdeconnect.enable = true;
  
   # DO NOT CHANGE
   system.stateVersion = "24.11"; 

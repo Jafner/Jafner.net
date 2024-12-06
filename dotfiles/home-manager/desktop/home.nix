@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, inputs, vars, ... }:
+{ vars, ... }:
 {
   imports = [
     ./apps/browser.nix
@@ -8,22 +8,26 @@
     ./apps/terminal.nix
     ./apps/vscode.nix
     ./apps/iac-tools.nix
+    ./apps/minecraft.nix
+    ./apps/multimedia.nix
+    ./apps/obsidian.nix
     ./apps/spotify.nix
+    ./apps/taskmanager.nix
     ./hardware/goxlr.nix
+    ./hardware/razer.nix
+    ./hardware/game-controller.nix
+    ./services/ai.nix
+    ./services/flatpak.nix
+    ./services/kdeconnect.nix
+    ./services/nextcloud.nix
+    ./services/protonmail.nix
   ];
-
 
   services.flatpak = {
     enable = true;
     uninstallUnmanaged = true;
     remotes = [
       { name = "flathub"; location = "https://flathub.org/repo/flathub.flatpakrepo"; }
-    ];
-    packages = [
-      "io.missioncenter.MissionCenter/x86_64/stable"
-      "no.mifi.losslesscut/x86_64/stable"
-      "org.prismlauncher.PrismLauncher/x86_64/stable"
-      "org.videolan.VLC/x86_64/stable"
     ];
   };
 
@@ -32,19 +36,6 @@
   home.username = "${vars.user.username}";
   home.homeDirectory = "/home/${vars.user.username}";
   home.stateVersion = "24.11";
-  home.packages = with pkgs; [
-    flatpak
-    fastfetch
-    nixd
-    kdePackages.kdeconnect-kde
-    vlc
-    #ollama
-    #protonup-ng
-    #protonmail-bridge-gui
-    #obsidian
-    #gamepad-tool
-    #linuxKernel.packages.linux_6_11.xpadneo
-  ];
   home.file = { };
   home.sessionVariables = { };
   programs.home-manager.enable = true;
