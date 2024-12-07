@@ -24,6 +24,7 @@
     ./services/kdeconnect.nix
     ./services/nextcloud.nix
     ./services/protonmail.nix
+    ./scripts/ffmpeg.nix
   ];
 
   services.flatpak = {

@@ -30,9 +30,6 @@
     enable = true;  
     uninstallUnmanaged = true;
     remotes = [ { name = "flathub"; location = "https://flathub.org/repo/flathub.flatpakrepo"; } ];
-    packages = [
-      "runtime/org.freedesktop.Platform.ffmpeg-full/x86_64/24.08"
-    ];
   };
   
   time.timeZone = "America/Los_Angeles";
@@ -74,9 +71,6 @@
   environment.systemPackages = with pkgs; [
     git
     networkmanagerapplet
-    steam
-    steam-run
-    lutris-unwrapped
   ];
 
   # Configure mouse and touchpad
