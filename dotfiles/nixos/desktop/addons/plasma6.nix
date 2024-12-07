@@ -6,5 +6,6 @@
     elisa
     kate
     okular
+    discover
   ];
 }

@@ -18,6 +18,7 @@
       "git.enableSmartCommit" = true;
       "security.workspace.trust.untrustedFiles" = "open";
       "terminal.integrated.defaultProfile.linux" = "zsh";
+      "terminal.integrated.fontFamily" = "'DejaVu Sans Mono'";
       "terminal.integrated.profiles.linux.zsh.path" = "/usr/bin/zsh";
     };
   };

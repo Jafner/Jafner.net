@@ -5,8 +5,12 @@
     ./addons/goxlr.nix
     ./addons/samba-client.nix
     ./addons/plasma6.nix
+    ./addons/gaming.nix
+    ./addons/fonts.nix
   ];
-  
+
+  home-manager.backupFileExtension = "backup";
+
   # Configure user
   programs.zsh.enable = true;
   users.users.joey = {

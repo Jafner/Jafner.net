@@ -17,6 +17,7 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
     sops-nix = {
       url = "github:Mic92/sops-nix"; 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,11 +65,13 @@
           ./nixos/desktop/configuration.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
+          #inputs.stylix.nixosModules.stylix
           {
             home-manager = {
               users.joey = import ./home-manager/desktop/home.nix;
               sharedModules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                inputs.stylix.homeManagerModules.stylix
               ];
               extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
             };
