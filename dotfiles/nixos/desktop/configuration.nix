@@ -2,11 +2,12 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./addons/goxlr.nix
+    ./addons/peripherals.nix
     ./addons/samba-client.nix
     ./addons/plasma6.nix
     ./addons/gaming.nix
     ./addons/fonts.nix
+    ./addons/ollama.nix
   ];
 
   home-manager.backupFileExtension = "backup";
