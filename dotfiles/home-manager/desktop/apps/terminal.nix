@@ -3,21 +3,17 @@
   home.packages = with pkgs; [
     fastfetch
     tree
-    btop
     bat
     fd
     eza
     fzf-git-sh
     wl-clipboard
+    jq
   ];
 
   programs.kitty = {
     enable = true;
-    package =
-    pkgs.writeShellScriptBin "kitty" ''
-        #!/bin/sh
-        ${pkgs-unstable.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs-unstable.kitty}/bin/kitty "$@"
-      '';
+    package = pkgs.kitty;
   };
 
   programs.tmux = {
@@ -40,9 +36,7 @@
       fetch = "fastfetch";
       neofetch = "fetch";
       find = ''fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'';
-      hmu = "home-manager switch -b backup --flake ~/Git/Jafner.net/dotfiles#joey-desktop --impure";
       nixgc = "nix-env --delete-generations 7d && nix-store --gc --print-dead";
-      kitty = "nixGL kitty";
       fzf-ssh = "ssh $(cat ~/.ssh/profiles | fzf --height 20%)";
       fsh = "fzf-ssh";
       k = "kubectl";

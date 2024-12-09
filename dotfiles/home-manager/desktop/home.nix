@@ -13,18 +13,21 @@
     ./apps/multimedia.nix
     ./apps/obsidian.nix
     ./apps/spotify.nix
-    ./apps/taskmanager.nix
+    ./apps/systeminfo.nix
     ./apps/password-manager.nix
     ./apps/email.nix
+    ./apps/emulators.nix
+    ./apps/ai.nix
     ./hardware/goxlr.nix
     ./hardware/razer.nix
     ./hardware/game-controller.nix
-    ./services/ai.nix
+    ./hardware/amdgpu.nix
     ./services/flatpak.nix
     ./services/kdeconnect.nix
     ./services/nextcloud.nix
     ./services/protonmail.nix
     ./scripts/ffmpeg.nix
+    ./scripts/kitty-popup.nix
   ];
 
   services.flatpak = {
