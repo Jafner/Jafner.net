@@ -5,8 +5,12 @@
     userName = "${vars.user.realname}";
     userEmail = "${vars.user.email}";
     extraConfig = {
-      core.sshCommand = "ssh -i /home/${vars.user.username}/.ssh/main_id_ed25519";
       init.defaultBranch = "main";
+      core.sshCommand = "ssh -i /home/${vars.user.username}/.ssh/${vars.desktop.sshKey}";
+      gpg.format = "ssh";
+      commit.gpgsign = true;
+      tag.gpgsign = true;
+      user.signingKey = "/home/${vars.user.username}/.ssh/${vars.desktop.sshKey}.pub";
     };
     delta.enable = true;
     delta.options = {

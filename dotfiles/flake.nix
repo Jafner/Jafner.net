@@ -41,9 +41,11 @@
       laptop = {
         hostname = "joey-laptop";
         theme = "gruvbox-warm";
+        sshKey = "joey.laptop@jafner.net";
       };
       desktop = {
         hostname = "joey-desktop";
+        sshKey = "joey.desktop@jafner.net";
       };
     }; 
     system = "x86_64-linux";

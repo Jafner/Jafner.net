@@ -2,9 +2,10 @@
 {
   imports = [
     ./configuration/stylix.nix
+    ./configuration/git.nix
+    ./configuration/keys.nix
     ./apps/browser.nix
     ./apps/discord.nix
-    ./apps/git.nix
     ./apps/obs-studio.nix
     ./apps/terminal.nix
     ./apps/vscode.nix
@@ -43,7 +44,12 @@
   home.username = "${vars.user.username}";
   home.homeDirectory = "/home/${vars.user.username}";
   home.stateVersion = "24.11";
-  home.file = { };
+  home.file = {
+    "Music" = {
+      enable = false;
+      target = "Music/";
+    };
+  };
   home.sessionVariables = { };
   programs.home-manager.enable = true;
   xdg.systemDirs.data = [
