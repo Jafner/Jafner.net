@@ -1,38 +1,5 @@
 name: 'ai'
 services:
-  traefik:
-    container_name: ai_traefik
-    image: traefik:latest
-    networks:
-      - web
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yaml:/traefik.yaml
-      - ./config:/config
-      - ./acme.json:/acme.json
-
-  ollama:
-    container_name: ai_ollama
-    image: ollama/ollama:0.2.5-rocm
-    networks:
-      - ai
-    privileged: false
-    group_add:
-      - video
-    ports:
-      - 11434:11434
-    devices:
-      - /dev/kfd
-      - /dev/dri
-    volumes:
-      - $HOME/docker-data/models:/models
-      - $HOME/docker-data/ollama:/root/.ollama
-    environment:
-      OLLAMA_MAX_LOADED_MODELS: 0
-
   sillytavern:
     container_name: ai_sillytavern
     image: ghcr.io/sillytavern/sillytavern:1.12.2
@@ -49,27 +16,6 @@ services:
       - traefik.http.routers.sillytavern.rule=Host(`sillytavern.jafner.net`)
       - traefik.http.routers.sillytavern.tls.certresolver=lets-encrypt
 
-  n8n:
-    container_name: ai_n8n
-    image: docker.n8n.io/n8nio/n8n:latest
-    networks:
-      - web
-    volumes:
-      - n8n:/home/node/.n8n
-    labels:
-      - traefik.http.routers.n8n.rule=Host(`n8n.jafner.net`)
-      - traefik.http.routers.n8n.tls.certresolver=lets-encrypt
-
-volumes:
-  ollama:
-  sillytavern:
-  n8n:
 networks:
   web:
     external: true
-  ai:
-    name: "ai"
-    ipam:
-      driver: default
-      config: 
-       - subnet: 172.22.0.0/16
