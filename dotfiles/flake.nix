@@ -62,6 +62,29 @@
     };
   in {
     nixosConfigurations = {
+      installer = lib.nixosSystem {
+        modules = [
+          ./nixos/installer/configuration.nix
+          inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              users.joey = import ./home-manager/installer/home.nix;
+              sharedModules = [
+                inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                inputs.stylix.homeManagerModules.stylix
+              ];
+              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
+            };
+          }
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+        ];
+        inherit system;
+        specialArgs = {
+          inherit pkgs pkgs-unstable inputs;
+          inherit vars;
+        };
+      };
       desktop = lib.nixosSystem {
         modules = [
           ./nixos/desktop/configuration.nix

@@ -1,5 +1,7 @@
 { pkgs, ... }: {
-  home.packages = [ pkgs.goxlr-utility ];
+  home.packages = with pkgs; [ 
+    goxlr-utility 
+  ];
   systemd.user.services = {
     goxlr-utility = {
       Unit = {

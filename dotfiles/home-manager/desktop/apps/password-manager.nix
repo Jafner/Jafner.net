@@ -1,7 +1,7 @@
 { vars, pkgs, ... }:
 {
   home.packages = with pkgs; [ 
-    rofi-rbw
+    rofi-rbw-wayland
     wl-clipboard
     dotool
   ];
@@ -11,6 +11,10 @@
   };
   programs.rofi = {
     enable = false;
+    configPath = "$XDG_CONFIG_HOME/rofi/config.rasi";
+    extraConfig = {};
+    location = "center";
+    terminal = "${pkgs.kitty}/bin/kitty";
   };
   programs.wofi = {
     enable = true;
@@ -21,14 +25,14 @@
     settings = {
       base_url = "https://bitwarden.jafner.tools";
       email = "jafner425@gmail.com";
-      lock_timeout = 604800;
+      lock_timeout = 2592000;
       pinentry = pkgs.pinentry-qt;
     };
   };
 
   xdg.desktopEntries = {
     rofi-rbw = {
-      exec = "${pkgs.rofi-rbw}/bin/rofi-rbw";
+      exec = "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
       icon = "/home/${vars.user.username}/.icons/custom/bitwarden.png"; 
       name = "Bitwarden";
       categories = [ "Utility" "Security" ]; 
@@ -40,12 +44,12 @@
     target = ".config/rofi-rbw.rc";
     text = ''
     action="type"
-    typing-key-delay=5
-    no-folder
+    typing-key-delay=0
     selector-args="-W 40% -H 30%"
     selector="wofi"
     clipboarder="wl-copy"
     typer="dotool"
+    keybindings="Enter:type:username:enter:tab:type:password:enter:copy:totp"
     '';
   };
 
