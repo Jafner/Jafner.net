@@ -28,6 +28,7 @@
     ./services/goxlr-utility.nix
     ./scripts/ffmpeg.nix
     ./scripts/kitty-popup.nix
+    ./scripts/nixos.nix
   ];
 
   services.flatpak = {
