@@ -8,6 +8,9 @@
     enable = true;
     target = ".config/MangoHud/MyConfig.conf";
     text = ''
+      # FPS Limit
+      fps_limit=240,0
+      fps_limit_method=late
       # Software Information
       ##  FPS
       fps=0
