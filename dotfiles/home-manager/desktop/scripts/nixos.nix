@@ -31,6 +31,12 @@
           notify-send "Rebuilt successfully" 
         }
 
+        update() {
+          notify-send "Beginning update" "Updating lockfile $FLAKE_DIR/flake.lock"
+          nix flake update --flake "$FLAKE_DIR"
+          notify-send "Update complete" "Finished updating lockfile $FLAKE_DIR/flake.lock"
+        }
+
         finish() {
           mkdir -p "$HOME/.nixos"
           nixos-rebuild list-generations --json > "$HOME/.nixos/nixos-generations.json"
@@ -43,6 +49,7 @@
 
         case "$1" in
           rebuild) handleUntracked && rebuild && finish;;
+          update) handleUntracked && update && finish;;
           *) error "Unrecognized subcommand $1";;
         esac
       '';

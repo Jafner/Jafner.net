@@ -8,7 +8,7 @@
       adzero.vscode-sievehighlight
     ];
     userSettings = {
-      "editor.fontFamily" = "'DejaVu Sans Mono'";
+      #"editor.fontFamily" = "'DejaVu Sans Mono'";
       "nix.serverPath" = "nixd";
       "nix.enableLanguageServer" = true;
       "explorer.confirmDragAndDrop" = false;
@@ -18,7 +18,7 @@
       "git.enableSmartCommit" = true;
       "security.workspace.trust.untrustedFiles" = "open";
       "terminal.integrated.defaultProfile.linux" = "zsh";
-      "terminal.integrated.fontFamily" = "'DejaVu Sans Mono'";
+      #"terminal.integrated.fontFamily" = "'DejaVu Sans Mono'";
       "terminal.integrated.profiles.linux.zsh.path" = "/usr/bin/zsh";
     };
   };
