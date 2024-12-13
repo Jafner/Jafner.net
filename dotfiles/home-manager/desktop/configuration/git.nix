@@ -7,10 +7,10 @@
     extraConfig = {
       init.defaultBranch = "main";
       core.sshCommand = "ssh -i /home/${vars.user.username}/.ssh/${vars.desktop.sshKey}";
-      gpg.format = "ssh";
+      gpg.format = "openpgp";
       commit.gpgsign = true;
       tag.gpgsign = true;
-      user.signingKey = "/home/${vars.user.username}/.ssh/${vars.desktop.sshKey}.pub";
+      user.signingKey = "${vars.user.signingKey}";
     };
     delta.enable = true;
     delta.options = {

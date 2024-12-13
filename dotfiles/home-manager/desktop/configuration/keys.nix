@@ -2,7 +2,8 @@
   home.packages = with pkgs; [
     ssh-to-age
     pinentry-all
-    ( writers.writeShellApplication "keyman" {
+    ( writeShellApplication {
+      name = "keyman";
       runtimeInputs = [];
       text = ''
       #!/bin/bash
@@ -10,12 +11,13 @@
       # Fuck GPG. Miserable UX.
       
       id="joey@jafner.net"
+      device="desktop"
       homedir="/home/${vars.user.username}/.gpg"
       backupdir="/home/${vars.user.username}/.keys"
       mkdir -p "$homedir" "$backupdir"
 
       getPrimaryKeyFingerprint() {
-        return $(gpg --list-keys | grep fingerprint | tr -s ' ' | cut -d'=' -f2 | xargs)
+        return "$(gpg --list-keys | grep fingerprint | tr -s ' ' | cut -d'=' -f2 | xargs)"
       }
 
       bootstrap() {
@@ -45,11 +47,11 @@
         stty icrnl
         unlockPrimary
         gpg --quick-add-key "$(getPrimaryKeyFingerprint)" ed25519 sign 0
-        if [[ $(gpg --list-keys | grep $(date +%Y-%m-%d) | grep "[S]") -gt 1 ]]; then
+        if [[ $(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]") -gt 1 ]]; then
           echo "More than one loaded signing key is listed for today's date. Please select one:"
           while read -r key; do 
             key_list+=( "$key" )
-          done< <(gpg --list-keys | grep $(date +%Y-%m-%d) | grep "[S]")
+          done< <(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]")
           select key in "''$''\{key_list[@]}"; do 
             SUBKEY_FINGERPRINT=$(echo "$key" | cut -d'/' -f2 | cut -d' ' -f1)
             export SUBKEY_FINGERPRINT
@@ -57,10 +59,10 @@
             break
           done
         else
-          SUBKEY_FINGERPRINT=$(gpg --list-keys | grep $(date +%Y-%m-%d) | grep "[S]" | cut -d'/' -f2 | cut -d' ' -f1 | head -1)
+          SUBKEY_FINGERPRINT=$(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]" | cut -d'/' -f2 | cut -d' ' -f1 | head -1)
           export SUBKEY_FINGERPRINT
         fi
-        gpg --list-keys | grep $(date +%Y-%m-%d) | grep "[S]"
+        gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]"
         gpg -a --export-secret-key "$SUBKEY_FINGERPRINT" > "$backupdir/$id.$device.gpg"
         gpg -a --export "$SUBKEY_FINGERPRINT" > "$backupdir/$id.$device.gpg.pub"
 

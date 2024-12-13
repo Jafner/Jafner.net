@@ -37,6 +37,7 @@
         username = "joey";
         realname = "Joey Hafner";
         email = "joey@jafner.net";
+        signingKey = "B0BBF464024BCEAE";
       };
       laptop = {
         hostname = "joey-laptop";
