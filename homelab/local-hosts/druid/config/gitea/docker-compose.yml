@@ -16,7 +16,7 @@ services:
     ports:
       - "2225:22"
     labels:
-      - traefik.http.routers.gitea.rule=Host(`gitea.jafner.tools`)
+      - traefik.http.routers.gitea.rule=Host(`gitea.jafner.tools`,`git.jafner.net`)
       - traefik.http.routers.gitea.tls.certresolver=lets-encrypt
       - traefik.http.routers.gitea.tls.options=tls12@file
       - traefik.http.routers.gitea.middlewares=securityheaders@file
