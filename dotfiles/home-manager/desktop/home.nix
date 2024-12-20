@@ -6,6 +6,7 @@
     ./configuration/keys.nix
     ./configuration/defaultApps.nix
     ./configuration/mangohud.nix
+    ./apps/zed.nix
     ./apps/browser.nix
     ./apps/discord.nix
     ./apps/obs-studio.nix
