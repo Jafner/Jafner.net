@@ -10,7 +10,7 @@
       gpg.format = "openpgp";
       commit.gpgsign = true;
       tag.gpgsign = true;
-      user.signingKey = "${vars.user.signingKey}";
+      user.signingKey = "${vars.user.keys.gpgSigningKeyFingerprint}";
     };
     delta.enable = true;
     delta.options = {
