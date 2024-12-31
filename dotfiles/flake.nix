@@ -1,6 +1,6 @@
-{ 
+{
   description = "Joey's Flake";
-  inputs = {  
+  inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland = {
@@ -19,17 +19,17 @@
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     sops-nix = {
-      url = "github:Mic92/sops-nix"; 
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deploy-rs.url = "github:serokell/deploy-rs"; 
+    deploy-rs.url = "github:serokell/deploy-rs";
   };
-  outputs = inputs@{ 
-    nixpkgs, 
-    nixpkgs-unstable, 
-    home-manager, 
+  outputs = inputs@{
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
     nixgl,
-    ... 
+    ...
   }:
   let
     vars = {
@@ -37,7 +37,13 @@
         username = "joey";
         realname = "Joey Hafner";
         email = "joey@jafner.net";
-        signingKey = "B0BBF464024BCEAE";
+        keys = {
+          gpgSigningKey = "$HOME/.keys/joey@jafner.net.desktop.sign.gpg";
+          gpgSigningKeyFingerprint = "B0BBF464024BCEAE";
+          gpgEncryptKey = "$HOME/.keys/joey@jafner.net.encrypt.gpg";
+          sshKey = "$HOME/.keys/joey.desktop@jafner.net";
+          ageKey = "$HOME/.keys/joey.author.key";
+        };
       };
       laptop = {
         hostname = "joey-laptop";
@@ -48,7 +54,7 @@
         hostname = "joey-desktop";
         sshKey = "joey.desktop@jafner.net";
       };
-    }; 
+    };
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = import inputs.nixpkgs {
@@ -109,9 +115,9 @@
           inherit vars;
         };
       };
-      laptop = lib.nixosSystem {        
-        modules = [ 
-          ./nixos/laptop/configuration.nix 
+      laptop = lib.nixosSystem {
+        modules = [
+          ./nixos/laptop/configuration.nix
           inputs.hyprland.nixosModules.default
           #inputs.stylix.nixosModules.stylix
           inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -128,38 +134,37 @@
           }
         ];
         inherit system;
-        specialArgs = { 
+        specialArgs = {
           inherit pkgs pkgs-unstable inputs;
-          inherit vars; 
+          inherit vars;
         };
       };
     };
     homeConfigurations = {
       laptop = home-manager.lib.homeManagerConfiguration {
-        modules = [ 
-          ./home-manager/laptop/home.nix 
-          inputs.stylix.homeManagerModules.stylix 
+        modules = [
+          ./home-manager/laptop/home.nix
+          inputs.stylix.homeManagerModules.stylix
           inputs.plasma-manager.homeManagerModules.plasma-manager
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
         ];
-        inherit pkgs; 
-        extraSpecialArgs = { 
-          inherit pkgs pkgs-unstable inputs; 
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit pkgs pkgs-unstable inputs;
           inherit vars;
         };
       };
       desktop = home-manager.lib.homeManagerConfiguration {
-        modules = [ 
-          ./home-manager/desktop/home.nix 
+        modules = [
+          ./home-manager/desktop/home.nix
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
         ];
         inherit pkgs;
-        extraSpecialArgs = { 
-          inherit pkgs pkgs-unstable inputs; 
+        extraSpecialArgs = {
+          inherit pkgs pkgs-unstable inputs;
           inherit vars;
         };
       };
     };
   };
 }
-
