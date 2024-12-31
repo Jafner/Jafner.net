@@ -6,6 +6,7 @@
     ./configuration/keys.nix
     ./configuration/defaultApps.nix
     ./configuration/mangohud.nix
+
     ./apps/zed.nix
     ./apps/browser.nix
     ./apps/discord.nix
@@ -22,11 +23,14 @@
     ./apps/email.nix
     ./apps/emulators.nix
     ./apps/ai.nix
+
     ./services/flatpak.nix
     ./services/kdeconnect.nix
     ./services/nextcloud.nix
     ./services/protonmail.nix
     ./services/goxlr-utility.nix
+    #./services/syncthing.nix
+
     ./scripts/ffmpeg.nix
     ./scripts/kitty-popup.nix
     ./scripts/nixos.nix
@@ -46,13 +50,7 @@
   home.username = "${vars.user.username}";
   home.homeDirectory = "/home/${vars.user.username}";
   home.stateVersion = "24.11";
-  home.file = {
-    "Music" = {
-      enable = false;
-      target = "Music/";
-    };
-  };
-  home.sessionVariables = { };
+  home.sessionVariables = {  };
   programs.home-manager.enable = true;
   xdg.systemDirs.data = [
     "/usr/share"
