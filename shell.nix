@@ -1,6 +1,6 @@
 # Install core packages, configure toolkits
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-24.05";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-24.11";
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
@@ -37,7 +37,7 @@ in
       git config core.pager "delta"
       git config delta.side-by-side "true"
       git config interactive.difffilter "delta --color-only"
-      
+
       # repo
       git config core.repositoryformatversion "0"
       git config core.filemode "true"
@@ -49,9 +49,9 @@ in
       git config branch.main.merge "refs/heads/main"
       git config submodule.sites/Jafner.dev/themes/hello-friend-ng.active "true"
       git config submodule.sites/Jafner.dev/themes/hello-friend-ng.url "https://github.com/rhazdon/hugo-theme-hello-friend-ng.git"
-      
+
       # Configure sops
-      ssh-2-age -p -i $SSH_KEY $HOME/.age/key 
+      ssh-2-age -p -i $SSH_KEY $HOME/.age/key
       git config filter.sops.smudge '.sops/decrypt-filter.sh %f'
       git config filter.sops.clean '.sops/encrypt-filter.sh %f'
       git config filter.sops.required "true"
@@ -59,4 +59,3 @@ in
     '';
 
 };
-
