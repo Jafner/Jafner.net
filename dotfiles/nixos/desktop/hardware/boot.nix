@@ -3,7 +3,7 @@
   hardware.cpu.amd.updateMicrocode = true;
   boot = {
     #kernelPackages = pkgs.linuxKernel.kernels.linux_xanmod_latest
-    kernelPackages = pkgs.linuxPackages_6_11;
+    kernelPackages = pkgs.linuxPackages_zen;
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
       kernelModules = [ ];
