@@ -12,6 +12,8 @@
     ./services/ollama.nix
     ./services/printing.nix
     ./services/ssh.nix
+    ./services/syncthing.nix
+    ./services/vintagestory.nix
 
     ./sysconfig/desktop-environment.nix
     ./sysconfig/fonts.nix
@@ -21,8 +23,7 @@
     ./sysconfig/user.nix
     ./sysconfig/ydotool.nix
   ];
- 
-  # DO NOT CHANGE
-  system.stateVersion = "24.11"; 
-}
 
+  # DO NOT CHANGE
+  system.stateVersion = "24.11";
+}
