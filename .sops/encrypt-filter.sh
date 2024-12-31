@@ -1,4 +1,4 @@
-#!/bin/bash
+
 # Takes file path as $1
 # Takes file contents from stdin
 # Outputs to stdout

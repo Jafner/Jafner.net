@@ -1,5 +1,5 @@
-#!/bin/bash
-# Takes file path as first positional argument  
+
+# Takes file path as first positional argument
 # Takes encrypted file contents from /dev/stdin
 # Outputs to stdout
 
