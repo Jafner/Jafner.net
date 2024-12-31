@@ -43,7 +43,7 @@
       fzf.enable = true;
       gnome.enable = true;
       gtk.enable = true;
-      kde.enable = true; 
+      kde.enable = true;
       rofi.enable = true;
       vesktop.enable = true;
       vscode.enable = true;
@@ -51,3 +51,9 @@
     };
   };
 }
+
+# Use the following to get an ordered list of color codes from ~/.config/stylix/palette.json:
+#
+#   cat ~/.config/stylix/palette.json | jq 'to_entries | .[] | select(.key | contains("base")) | .value'
+# To convert that to the format expected by [genix7000](https://github.com/cab404/genix7000):
+# sed 's/^"/"\\#/' | tr '\n' ' '
