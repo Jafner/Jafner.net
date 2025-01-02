@@ -14,6 +14,7 @@
     ./services/ssh.nix
     ./services/syncthing.nix
     ./services/vintagestory.nix
+    ./services/minecraft-server.nix
 
     ./sysconfig/desktop-environment.nix
     ./sysconfig/fonts.nix
