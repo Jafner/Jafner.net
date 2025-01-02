@@ -23,12 +23,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs.url = "github:serokell/deploy-rs";
+    ghostty.url = "github:ghostty-org/ghostty";
   };
   outputs = inputs@{
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
     nixgl,
+    ghostty,
     ...
   }:
   let
@@ -97,13 +99,12 @@
           ./nixos/desktop/configuration.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
-          #inputs.stylix.nixosModules.stylix
           {
             home-manager = {
               users.joey = import ./home-manager/desktop/home.nix;
               sharedModules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                inputs.stylix.homeManagerModules.stylix
+                #inputs.stylix.homeManagerModules.stylix
               ];
               extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
             };
