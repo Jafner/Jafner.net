@@ -1,7 +1,7 @@
 { vars, ... }:
 {
   imports = [
-    ./configuration/stylix.nix
+    #./configuration/stylix.nix
     ./configuration/git.nix
     ./configuration/keys.nix
     ./configuration/defaultApps.nix
@@ -18,7 +18,6 @@
     ./apps/multimedia.nix
     ./apps/obsidian.nix
     ./apps/spotify.nix
-    ./apps/systeminfo.nix
     ./apps/password-manager.nix
     ./apps/email.nix
     ./apps/emulators.nix

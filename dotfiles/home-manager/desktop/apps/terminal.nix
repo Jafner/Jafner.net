@@ -9,55 +9,21 @@
     fzf-git-sh
     wl-clipboard
     jq
+    amdgpu_top
+    mission-center
     nethogs
     ( writeShellApplication {
       name = "kitty-popup";
-      runtimeInputs = [
-        kitty
-      ];
+      runtimeInputs = [];
       text = ''
         #!/bin/bash
 
-        ${pkgs.kitty}/bin/kitty \
+        kitty \
           --override initial_window_width=1280 \
           --override initial_window_height=720 \
           --override remember_window_size=no \
           --class kitty-popup \
           "$@"
-      '';
-    } )
-    ( writeShellApplication {
-      name = "nethogs";
-      runtimeInputs = [
-        kitty
-        nethogs
-      ];
-      text = ''
-        #!/bin/bash
-
-        ${pkgs.kitty}/bin/kitty \
-          --override initial_window_width=1280 \
-          --override initial_window_height=720 \
-          --override remember_window_size=no \
-          --class kitty-popup \
-          ${pkgs.nethogs}/bin/nethogs
-      '';
-    } )
-    ( writeShellApplication {
-      name = "btop";
-      runtimeInputs = [
-        kitty
-        btop
-      ];
-      text = ''
-        #!/bin/bash
-
-        ${pkgs.kitty}/bin/kitty \
-          --override initial_window_width=1280 \
-          --override initial_window_height=720 \
-          --override remember_window_size=no \
-          --class kitty-popup \
-          ${pkgs.btop}/bin/btop
       '';
     } )
   ];
@@ -163,4 +129,31 @@
     package = pkgs-unstable.fzf;
   };
 
+
+  programs.btop = {
+    enable = true;
+    package = pkgs.btop-rocm;
+    settings = {
+      color_theme = "stylix";
+      theme_background = true;
+      update_ms = 500;
+    };
+  };
+
+  xdg.desktopEntries = {
+    btop = {
+      exec = "kitty-popup btop";
+      icon = "utilities-system-monitor"; 
+      name = "btop";
+      categories = [ "Utility" "System" ]; 
+      type = "Application";
+    };
+    nethogs = {
+      exec = "kitty-popup nethogs";
+      icon = "utilities-system-monitor"; 
+      name = "btop";
+      categories = [ "Utility" "System" ]; 
+      type = "Application";
+    };
+  };
 }
