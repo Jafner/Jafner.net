@@ -9,7 +9,60 @@
     fzf-git-sh
     wl-clipboard
     jq
+    nethogs
+    ( writeShellApplication {
+      name = "kitty-popup";
+      runtimeInputs = [
+        kitty
+      ];
+      text = ''
+        #!/bin/bash
+
+        ${pkgs.kitty}/bin/kitty \
+          --override initial_window_width=1280 \
+          --override initial_window_height=720 \
+          --override remember_window_size=no \
+          --class kitty-popup \
+          "$@"
+      '';
+    } )
+    ( writeShellApplication {
+      name = "nethogs";
+      runtimeInputs = [
+        kitty
+        nethogs
+      ];
+      text = ''
+        #!/bin/bash
+
+        ${pkgs.kitty}/bin/kitty \
+          --override initial_window_width=1280 \
+          --override initial_window_height=720 \
+          --override remember_window_size=no \
+          --class kitty-popup \
+          ${pkgs.nethogs}/bin/nethogs
+      '';
+    } )
+    ( writeShellApplication {
+      name = "btop";
+      runtimeInputs = [
+        kitty
+        btop
+      ];
+      text = ''
+        #!/bin/bash
+
+        ${pkgs.kitty}/bin/kitty \
+          --override initial_window_width=1280 \
+          --override initial_window_height=720 \
+          --override remember_window_size=no \
+          --class kitty-popup \
+          ${pkgs.btop}/bin/btop
+      '';
+    } )
   ];
+
+
 
   programs.kitty = {
     enable = true;
@@ -109,4 +162,5 @@
     enable = true;
     package = pkgs-unstable.fzf;
   };
+
 }

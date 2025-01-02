@@ -32,7 +32,6 @@
     #./services/syncthing.nix
 
     ./scripts/ffmpeg.nix
-    ./scripts/kitty-popup.nix
     ./scripts/nixos.nix
     ./scripts/obs-toggle-recording.nix
   ];
