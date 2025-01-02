@@ -26,6 +26,7 @@
           "$@"
       '';
     } )
+    pkgs-unstable.ghostty
   ];
 
 
@@ -149,9 +150,9 @@
       type = "Application";
     };
     nethogs = {
-      exec = "kitty-popup nethogs";
+      exec = "kitty-popup sudo nethogs";
       icon = "utilities-system-monitor"; 
-      name = "btop";
+      name = "nethogs";
       categories = [ "Utility" "System" ]; 
       type = "Application";
     };

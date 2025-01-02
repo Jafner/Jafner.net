@@ -261,11 +261,11 @@
         "zig": "zig"
       },
       "locked": {
-        "lastModified": 1735857268,
-        "narHash": "sha256-3HUcKCGVSeDPSnwR0k1hOc6s1MPXym4SESkS/s8HYsA=",
+        "lastModified": 1735861317,
+        "narHash": "sha256-XpFTJoY+0nsVdIQZmJt3SMgQkYr8KI5DFQ4b5cf3LM4=",
         "owner": "ghostty-org",
         "repo": "ghostty",
-        "rev": "602e4eb606edbe058d5f4899d1a02d8479a9b129",
+        "rev": "b65c26966a73b0a2142d69c69c4e486c1e3f38f9",
         "type": "github"
       },
       "original": {
@@ -342,11 +342,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735774425,
-        "narHash": "sha256-C73gLFnEh8ZI0uDijUgCDWCd21T6I6tsaWgIBHcfAXg=",
+        "lastModified": 1733085484,
+        "narHash": "sha256-dVmNuUajnU18oHzBQWZm1BQtANCHaqNuxTHZQ+GN0r8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5f6aa268e419d053c3d5025da740e390b12ac936",
+        "rev": "c1fee8d4a60b89cae12b288ba9dbc608ff298163",
         "type": "github"
       },
       "original": {
@@ -816,16 +816,17 @@
         "tinted-tmux": "tinted-tmux"
       },
       "locked": {
-        "lastModified": 1735844476,
-        "narHash": "sha256-ohqGT79H5cw4bSNffVvthWLiPN4LZdvQJVIZEdfFWYI=",
+        "lastModified": 1735840530,
+        "narHash": "sha256-4O+KR6WSb40pcIPO9QboI59eH3/oxNEvCwXkFi6QvvM=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "6eb0597e345a7f4a16f7d7b14154fc151790b419",
+        "rev": "90f95c5d8408360fc38cb3a862565bcb08ae6aa8",
         "type": "github"
       },
       "original": {
         "owner": "danth",
         "repo": "stylix",
+        "rev": "90f95c5d8408360fc38cb3a862565bcb08ae6aa8",
         "type": "github"
       }
     },

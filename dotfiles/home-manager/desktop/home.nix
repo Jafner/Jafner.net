@@ -1,7 +1,7 @@
 { vars, ... }:
 {
   imports = [
-    #./configuration/stylix.nix
+    ./configuration/stylix.nix
     ./configuration/git.nix
     ./configuration/keys.nix
     ./configuration/defaultApps.nix

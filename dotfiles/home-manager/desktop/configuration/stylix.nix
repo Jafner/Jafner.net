@@ -5,8 +5,8 @@
   # if one run with backups has already been done, clean it up with:
   # rm ~/.gtkrc-2.0.backup ~/.config/gtk-3.0/settings.ini.backup ~/.config/gtk-3.0/gtk.css.backup ~/.config/gtk-4.0/settings.ini.backup ~/.config/gtk-4.0/gtk.css.backup
   stylix = {
-    enable = false;
-    autoEnable = false;
+    enable = true;
+    autoEnable = true;
     polarity = "dark";
     #image = ./plasma6-2560x1440.png;
     image = ./romb-3840x2160.png;
@@ -48,7 +48,7 @@
       vesktop.enable = true;
       vscode.enable = true;
       wofi.enable = true;
-      ghostty.enable = false;
+      #ghostty.enable = false;
     };
   };
 }

@@ -14,7 +14,12 @@
     nixgl.url = "github:nix-community/nixGL";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     stylix = {
-      url = "github:danth/stylix";
+      type = "github";
+      owner = "danth";
+      repo = "stylix";
+      rev = "90f95c5d8408360fc38cb3a862565bcb08ae6aa8"; # Before breaking commit that inits ghostty
+      #rev = "6eb0597e345a7f4a16f7d7b14154fc151790b419"; 
+      #url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -104,7 +109,7 @@
               users.joey = import ./home-manager/desktop/home.nix;
               sharedModules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                #inputs.stylix.homeManagerModules.stylix
+                inputs.stylix.homeManagerModules.stylix
               ];
               extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
             };
