@@ -1,25 +1,23 @@
 {
   description = "Joey's Flake";
   inputs = {
+    # Package repositories:
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Applications:
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nixgl.url = "github:nix-community/nixGL";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     stylix = {
-      type = "github";
-      owner = "danth";
-      repo = "stylix";
-      rev = "90f95c5d8408360fc38cb3a862565bcb08ae6aa8"; # Before breaking commit that inits ghostty
-      #rev = "6eb0597e345a7f4a16f7d7b14154fc151790b419"; 
-      #url = "github:danth/stylix";
+      url = "github:danth/stylix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -40,6 +38,16 @@
   }:
   let
     vars = {
+      repo = {
+        gitServerHttp = "https://gitea.jafner.tools";
+        gitServerSsh = "ssh://git@gitea.jafner.tools:2225";
+        owner = "Jafner";
+        repoName = "Jafner.net";
+        branch = "main";
+        flakePath = "dotfiles/flake.nix";
+      };
+      flakeRepo = "$HOME/Git/Jafner.net";
+      flakeDir = "$HOME/Git/Jafner.net/dotfiles";
       user = {
         username = "joey";
         realname = "Joey Hafner";
@@ -57,10 +65,6 @@
         theme = "gruvbox-warm";
         sshKey = "joey.laptop@jafner.net";
       };
-      desktop = {
-        hostname = "joey-desktop";
-        sshKey = "joey.desktop@jafner.net";
-      };
     };
     system = "x86_64-linux";
     lib = nixpkgs.lib;
@@ -76,22 +80,28 @@
     };
   in {
     nixosConfigurations = {
-      installer = lib.nixosSystem {
+      # Build nixos-installer with:
+      # nix build .#nixosConfigurations.nixos-installer.config.system.build.isoImage
+      nixos-installer = let
+        sysVars = {
+          username = "nixos-installer";
+          arch = "x86_64-linux";
+        };
+        in lib.nixosSystem {
         modules = [
-          ./nixos/installer/configuration.nix
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+          ./nixos-installer.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              users.joey = import ./home-manager/installer/home.nix;
+          { home-manager = {
+              users.nixos-installer = import ./nixos-installer.hm.nix;
               sharedModules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 inputs.stylix.homeManagerModules.stylix
               ];
-              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
-            };
-          }
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars sysVars; };
+          }; }
         ];
         inherit system;
         specialArgs = {
@@ -99,51 +109,56 @@
           inherit vars;
         };
       };
-      desktop = lib.nixosSystem {
+      desktop = let sysVars = {
+        username = "joey";
+        arch = "x86_64-linux";
+        hostname = "joey-desktop-nixos";
+        sshKey = "joey.desktop@jafner.net";
+        signingKey = "B0BBF464024BCEAE";
+        kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+        wallpaper = ./assets/romb-3840x2160.png;
+      }; in lib.nixosSystem {
         modules = [
-          ./nixos/desktop/configuration.nix
+          ./desktop/nixos/configuration.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
-              users.joey = import ./home-manager/desktop/home.nix;
+              users.joey = import ./desktop/home-manager/home.nix;
               sharedModules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 inputs.stylix.homeManagerModules.stylix
               ];
-              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
+              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars sysVars; };
             };
           }
         ];
         inherit system;
-        specialArgs = {
-          inherit pkgs pkgs-unstable inputs;
-          inherit vars;
-        };
+        specialArgs = { inherit pkgs pkgs-unstable inputs vars sysVars; };
       };
-      laptop = lib.nixosSystem {
+      desktop-refactored = let sysVars = {
+        username = "joey";
+        arch = "x86_64-linux";
+        hostname = "joey-desktop-nixos";
+        sshKey = "joey.desktop@jafner.net";
+        signingKey = "B0BBF464024BCEAE";
+        kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+        wallpaper = ./assets/romb-3840x2160.png;
+      }; in lib.nixosSystem {
         modules = [
-          ./nixos/laptop/configuration.nix
-          inputs.hyprland.nixosModules.default
-          #inputs.stylix.nixosModules.stylix
+          ./desktop-refactored.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager = {
-              users.joey = import ./home-manager/laptop/home.nix;
-              sharedModules = [
+            home-manager.sharedModules = [
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 inputs.stylix.homeManagerModules.stylix
               ];
-              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars; };
-            };
+              extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars sysVars; };
           }
         ];
         inherit system;
-        specialArgs = {
-          inherit pkgs pkgs-unstable inputs;
-          inherit vars;
-        };
+        specialArgs = { inherit pkgs pkgs-unstable inputs; inherit vars sysVars; };
       };
     };
     homeConfigurations = {
