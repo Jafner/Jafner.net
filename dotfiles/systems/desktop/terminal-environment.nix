@@ -1,4 +1,11 @@
-{ sys, pkgs, usr, flake, ... }: {
+{ sys, pkgs, usr, flake, ... }: let
+  aliases = {
+    cat = "bat --paging=never --color=always";
+    ls = "eza";
+    tree = "eza --tree";
+    fetch = "fastfetch";
+  };
+in {
   users.users."${sys.username}".shell = pkgs.${sys.shellPackage};
   programs."${sys.shellPackage}".enable = true;
   home-manager.users."${sys.username}" = {
@@ -309,12 +316,7 @@
       };
     };
 
-    home.shellAliases = {
-      cat = "bat --paging=never --color=always";
-      ls = "eza";
-      tree = "eza --tree";
-      fetch = "fastfetch";
-    };
+    home.shellAliases = aliases;
 
     programs.zsh = {
       enable = true;
@@ -322,6 +324,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      shellAliases = aliases;
       history = {
         share = true;
         save = 10000;
@@ -352,6 +355,5 @@
         fetch
       '';
     };
-
   };
 }
