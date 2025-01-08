@@ -7,6 +7,7 @@
     ./theme.nix
   ];
 
+  home-manager.backupFileExtension = "2025-08-01";
   home-manager.users."${sys.username}" = {
     nixGL = {
       vulkan.enable = true;
