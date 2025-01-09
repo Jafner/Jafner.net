@@ -56,7 +56,7 @@
     };
   in {
     nixosConfigurations = {
-      desktop = let 
+      desktop = let
         sys = {
           username = "joey";
           hostname = "desktop@jafner.net";
@@ -67,7 +67,7 @@
           wallpaper = ./assets/romb-3840x2160.png;
           arch = "x86_64-linux";
           flakeDir = "Git/Jafner.net/dotfiles";
-        }; 
+        };
         system = "x86_64-linux";
         lib = nixpkgs.lib;
         pkgs = import inputs.nixpkgs {

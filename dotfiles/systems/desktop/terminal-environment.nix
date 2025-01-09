@@ -71,8 +71,8 @@ in {
             zeditor "/home/${sys.username}/${flake.repoPath}"
             }
 
-            where() { 
-              tree "$(realpath "$(which "$1")" | cut -d'/' -f-4)" 
+            where() {
+              tree "$(realpath "$(which "$1")" | cut -d'/' -f-4)"
             }
 
             finish() {
@@ -352,7 +352,7 @@ in {
             fd --hidden --exclude .git . "$1"
         }
         eval "$(~/.nix-profile/bin/fzf --zsh)"
-        fetch
+        fastfetch
       '';
     };
   };

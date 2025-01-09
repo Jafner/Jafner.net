@@ -1,36 +1,7 @@
-{ pkgs, sys, inputs, usr, ... }: 
-let defaultApps = {
-  webBrowser.pkg = "${inputs.zen-browser.packages."${sys.arch}".default}";
-  webBrowser.desktopFile = "zen.desktop";
-  
-  emailClient.pkg = "${pkgs.protonmail-desktop}";
-  emailClient.desktopFile = "proton-mail.desktop";
-
-  imageViewer.pkg = "${pkgs.kdePackages.gwenview}";
-  imageViewer.desktopFile = "org.kde.gwenview.desktop";
-
-  musicPlayer.pkg = "${pkgs.vlc}";
-  musicPlayer.desktopFile = "vlc.desktop";
-
-  videoPlayer.pkg = "${pkgs.vlc}";
-  videoPlayer.desktopFile = "vlc.desktop";
-
-  textEditor.pkg = "${pkgs.zed-editor}";
-  textEditor.desktopFile = "dev.zed.Zed.desktop";
-
-  docViewer.pkg = "${inputs.zen-browser.packages."${sys.arch}".default}";
-  docViewer.desktopFile = "zen.desktop";
-
-  fileManager.pkg = "${pkgs.kdePackages.dolphin}";
-  fileManager.desktopFile = "org.kde.dolphin.desktop";
-
-  terminal.pkg = "${pkgs.kdePackages.konsole}";
-  terminal.desktopFile = "org.kde.konsole.desktop";
-
-  archiveManager.pkg = "${pkgs.kdePackages.ark}";
-  archiveManager.desktopFile = "org.kde.ark.desktop";
-}; 
-in {
+{ pkgs, sys, inputs, usr, ... }: {
+  imports = [
+      ./defaultApplications.nix
+  ];
   programs.kdeconnect.enable = true;
   programs.xwayland.enable = true;
   programs.steam.enable = true;
@@ -40,11 +11,11 @@ in {
   };
   programs.gamemode = {
     enable = true;
-    enableRenice = true; 
+    enableRenice = true;
   };
 
   home-manager.users."${sys.username}" = {
-    home.packages = with pkgs; 
+    home.packages = with pkgs;
     [ # Productivity
       obsidian
       libreoffice-qt6
@@ -347,7 +318,7 @@ in {
 
         output_folder = "/home/${sys.username}/.config/MangoHud";
 
-        
+
       };
       settingsPerApplication = {
         Overwatch = {
@@ -425,7 +396,7 @@ in {
         };
       };
       ollama = {
-        exec = "${defaultApps.terminal.pkg}/share/applications/${defaultApps.terminal.desktopFile} ollama-wrapped";
+        exec = "ollama-wrapped";
         icon = "/home/${sys.username}/.icons/custom/ollama.png";
         name = "AI Chat";
         categories = [ "Utility" ];
@@ -462,30 +433,6 @@ in {
       };
     };
 
-    xdg.mimeApps = {
-      enable = true;
-      defaultApplications = let
-        webBrowser = "${defaultApps.webBrowser.pkg}/share/applications/${defaultApps.webBrowser.desktopFile}";
-        textEditor = "${defaultApps.textEditor.pkg}/share/applications/${defaultApps.textEditor.desktopFile}";
-        videoPlayer = "${defaultApps.videoPlayer.pkg}/share/applications/${defaultApps.videoPlayer.desktopFile}";
-      in {
-        "x-scheme-handler/http" = "${webBrowser}";
-        "x-scheme-handler/https" = "${webBrowser}";
-        "x-scheme-handler/about" = "${webBrowser}";
-        "x-scheme-handler/unknown" = "${webBrowser}";
-        "application/json" = "${textEditor}";
-        "application/pdf" = "${webBrowser}";
-        "application/vnd.apple.keynote" = "${textEditor}";
-        "application/vnd.ms-publisher" = "${textEditor}";
-        "application/x-desktop" = "${textEditor}";
-        "application/x-executable" = "${textEditor}";
-        "text/css" = "${textEditor}";
-        "text/html" = "${textEditor}";
-        "text/plain" = "${textEditor}";
-        "video/mp4" = "${videoPlayer}";
-        "video/x-matroska" = "${videoPlayer}";
-      };
-    };
     systemd.user.services.librespot = {
       Unit = {
         Description = "Librespot (an open source Spotify client)";

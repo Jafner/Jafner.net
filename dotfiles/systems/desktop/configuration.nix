@@ -7,7 +7,7 @@
     ./theme.nix
   ];
 
-  home-manager.backupFileExtension = "2025-08-01";
+  home-manager.backupFileExtension = "bk";
   home-manager.users."${sys.username}" = {
     nixGL = {
       vulkan.enable = true;
@@ -71,12 +71,12 @@
 
   fonts.packages = with pkgs; [
     font-awesome
-    noto-fonts 
+    noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
     powerline-symbols
-    (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})  
-  ]; 
+    (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+  ];
 
   system.autoUpgrade = {
     enable = true;
