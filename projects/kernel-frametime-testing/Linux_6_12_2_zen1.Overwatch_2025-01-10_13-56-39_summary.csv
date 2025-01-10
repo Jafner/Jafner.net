@@ -1,2 +1,2 @@
 0.1% Min FPS,1% Min FPS,97% Percentile FPS,Average FPS,GPU Load,CPU Load,Average Frame Time,Average GPU Temp,Average CPU Temp,Average VRAM Used,Average RAM Used,Average Swap Used,Peak GPU Load,Peak CPU Load,Peak GPU Temp,Peak CPU Temp,Peak VRAM Used,Peak RAM Used,Peak Swap Used
-121.9,140.6,458.7,282.2,77.1,38.1,3.5,71.0,73.0,4.2,12.2,0.0,85,40.5,72,74,4.3,12.2,0.0
+125.0,148.3,452.1,304.7,83.1,36.4,3.3,74.0,72.0,3.8,10.9,0.0,90,41.3,75,74,3.8,11.0,0.0

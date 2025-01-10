@@ -249,79 +249,66 @@
     };
     programs.mangohud = {
       enable = true;
-      settings = {
-        fps = false;
-        fps_color_change = false;
-        fps_text = "";
-        fps_value = "59,239";
-        fps_metrics = false;
-
-        frame_timing = true;
-        frame_timing_detailed = false;
-        dynamic_frame_timing = true;
-        frametime = false;
-        histogram = true;
-        show_fps_limit = false;
-
-        gamemode = false;
-        present_mode = false;
-        vulkan_driver = false;
-        engine_version = false;
-        engine_short_names = false;
-
-        exec_name = false;
-        vkbasalt = false;
-        wine = false;
-        winesync = false;
-
-        cpu_text = "";
-        cpu_stats = false;
-        core_load = false;
-        core_bars = false;
-        cpu_power = false;
-        cpu_temp = false;
-
-        gpu_text = "";
-        gpu_stats = false;
-        gpu_power = false;
-        gpu_temp = false;
-        gpu_core_clock = false;
-        gpu_mem_clock = false;
-        gpu_fan = false;
-        gpu_voltage = false;
-        throttling_status = false;
-        throttling_status_graph = false;
-
-        procmem = false;
-        procmem_shared = false;
-        procmem_virt = false;
-        ram = false;
-        vram = false;
-        swap = false;
-
-        network = false;
-
-        time = false;
-        time_format = "%r";
-        time_no_label = true;
-
-        graphs = "";
-
-        toggle_hud = "Shift_R+F12";
-        toggle_logging = "Shift_L+F2";
-        toggle_hud_position = "Shift_R+F11";
-        toggle_preset = "Shift_R+F10";
-        toggle_fps_limit = "Shift_L+F1";
-        reload_cfg = "Shift_L+F4";
-        reload_log = "Shift_L+F3";
-        reset_fps_metrics = "Shift_R+F9";
-
-        output_folder = "/home/${sys.username}/.config/MangoHud";
-
-
-      };
       settingsPerApplication = {
-        Overwatch = {
+        wine-Overwatch = {
+          fps = false;
+          fps_color_change = false;
+          fps_text = "";
+          fps_value = "59,239";
+          fps_metrics = false;
+          frame_timing = true;
+          frame_timing_detailed = false;
+          dynamic_frame_timing = true;
+          frametime = false;
+          histogram = true;
+          show_fps_limit = false;
+          gamemode = false;
+          present_mode = false;
+          vulkan_driver = false;
+          engine_version = false;
+          engine_short_names = false;
+          exec_name = false;
+          vkbasalt = false;
+          wine = false;
+          winesync = false;
+          cpu_text = "";
+          cpu_stats = false;
+          core_load = false;
+          core_bars = false;
+          cpu_power = false;
+          cpu_temp = false;
+          gpu_text = "";
+          gpu_stats = false;
+          gpu_power = false;
+          gpu_temp = false;
+          gpu_core_clock = false;
+          gpu_mem_clock = false;
+          gpu_fan = false;
+          gpu_voltage = false;
+          throttling_status = false;
+          throttling_status_graph = false;
+          procmem = false;
+          procmem_shared = false;
+          procmem_virt = false;
+          ram = false;
+          vram = false;
+          swap = false;
+          network = false;
+          time = false;
+          time_format = "%r";
+          time_no_label = true;
+          graphs = "";
+
+          toggle_hud = "Shift_R+F12";
+          toggle_logging = "Shift_L+F2";
+          toggle_hud_position = "Shift_R+F11";
+          toggle_preset = "Shift_R+F10";
+          toggle_fps_limit = "Shift_L+F1";
+          reload_cfg = "Shift_L+F4";
+          reload_log = "Shift_L+F3";
+          reset_fps_metrics = "Shift_R+F9";
+          output_folder = "/home/${sys.username}/.config/MangoHud";
+
           width = 240;
           table_columns = 2;
           offset_x = 3;
