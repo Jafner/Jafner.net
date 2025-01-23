@@ -44,6 +44,7 @@
       wl-color-picker
       dotool
       nixd
+      sops
     ] ++ [ # Media creation tools
       losslesscut-bin
       ffmpeg-full
@@ -66,7 +67,30 @@
 
           # Actual transcoding happens here:
           notify-send -t 2000 "Transcode starting" "$FILE_NAME"
-          ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,hwupload' -c:v h264_vaapi -b:v 8M -c:a copy "$OUTFILE"
+          ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,scale=-1:720,hwupload' -c:v h264_vaapi -b:v 8M -c:a copy -r 30 "$OUTFILE"
+          notify-send -t 4000 "Transcode complete" "$FILE_NAME"
+        '';
+      } )
+      ( writeShellApplication {
+        name = "convert-lossless"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+        runtimeInputs = [
+          libnotify
+          ffmpeg-full
+        ];
+        text = ''
+          #!/bin/bash
+
+          INPUT_FILE="''$''\{1:-INPUT_FILE}"
+          INPUT_FILE=$(realpath "$INPUT_FILE")
+          FILE_PATH=$(dirname "$INPUT_FILE")
+          FILE_NAME=$(basename "$INPUT_FILE")
+          #FILE_EXT="''$''\{FILE_NAME##*.}"
+          FILE_NAME="''$''\{FILE_NAME%.*}"
+          OUTFILE="$FILE_PATH/$FILE_NAME.mp4"
+
+          # Actual transcoding happens here:
+          notify-send -t 2000 "Transcode starting" "$FILE_NAME"
+          ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -movflags faststart -map 0 -c:v copy -c:a copy "$OUTFILE"
           notify-send -t 4000 "Transcode complete" "$FILE_NAME"
         '';
       } )
@@ -82,22 +106,100 @@
         text = ''
           #!/bin/bash
 
+          INPUT_FILE="''$''\{1:-INPUT_FILE}"
           INPUT_FILE=$(realpath "$INPUT_FILE")
           FILE_NAME=$(basename "$INPUT_FILE")
           FILE_NAME="''$''\{FILE_NAME%.*}"
 
           ZIPLINE_HOST_ROOT=https://zipline.jafner.net
           TOKEN=$(cat ~/.zipline-auth)
-          LINK=$(curl \
+          RESPONSE=$(curl \
               --header "authorization: $TOKEN" \
               $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
               --header "Content-Type: multipart/form-data" \
               --header "Format: name" \
               --header "Embed: true" \
               --header "Original-Name: true")
-          LINK=$(echo "$LINK" | jq -r .'files[0]')
-          echo "[$FILE_NAME]($LINK)" | wl-copy
+          LINK=$(echo "$RESPONSE" | jq -r .'files[0]')
           notify-send -t 4000 "Zipline - Upload complete." "Link copied to clipboard: $LINK"
+          echo "[$FILE_NAME]($LINK)" 
+        '';
+      } )
+      ( writeShellApplication {
+        name = "send-to-cloudflare"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+        runtimeInputs = [
+          libnotify
+          curl
+          jq
+          wl-clipboard
+          wl-clip-persist
+        ];
+        text = ''
+          #!/bin/bash
+
+          INPUT_FILE="''$''\{1:-INPUT_FILE}" 
+          INPUT_FILE=$(realpath "$INPUT_FILE")
+          FILE_NAME=$(basename "$INPUT_FILE")
+          FILE_NAME="''$''\{FILE_NAME%.*}"
+
+          CF_TOKEN="$(cat ~/.cf-auth)"
+          CF_ID="$(cat ~/.cf-id)"
+
+          notify-send -t 2000 "Cloudflare - Beginning upload."
+
+          # shellcheck disable=SC2086
+          RESPONSE=$(curl -X POST \
+            --header "Authorization: Bearer $CF_TOKEN" \
+            --form "file=@$INPUT_FILE" \
+            https://api.cloudflare.com/client/v4/accounts/$CF_ID/stream 
+          )
+          LINK=$(echo "$RESPONSE" | jq -r '.result.preview')
+          notify-send -t 4000 "Cloudflare - Upload complete." "Link copied to clipboard: $LINK"
+          echo "[$FILE_NAME]($LINK)" 
+        '';
+      } )
+      ( writeShellApplication {
+        name = "send-to-zipline-and-cloudflare"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+        runtimeInputs = [
+          libnotify
+          curl
+          jq
+          wl-clipboard
+          wl-clip-persist
+        ];
+        text = ''
+          #!/bin/bash
+
+          INPUT_FILE="''$''\{1:-INPUT_FILE}" 
+          INPUT_FILE=$(realpath "$INPUT_FILE")
+          FILE_NAME=$(basename "$INPUT_FILE")
+          FILE_NAME="''$''\{FILE_NAME%.*}"
+
+          ZIPLINE_HOST_ROOT=https://zipline.jafner.net
+          TOKEN=$(cat ~/.zipline-auth)
+
+          notify-send -t 2000 "Zipline and Cloudflare - Beginning upload."
+          RESPONSE=$(curl \
+              --header "authorization: $TOKEN" \
+              $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
+              --header "Content-Type: multipart/form-data" \
+              --header "Format: name" \
+              --header "Embed: true" \
+              --header "Original-Name: true")
+          LINK=$(echo "$RESPONSE" | jq -r .'files[0]' | sed 's/\/u\//\/r\//')
+
+          CF_TOKEN="$(cat ~/.cf-auth)"
+          CF_ID="$(cat ~/.cf-id)"
+
+          # shellcheck disable=SC2086
+          RESPONSE=$(curl -X POST \
+            --header "Authorization: Bearer $CF_TOKEN" \
+            --data "{\"url\":\"$LINK\",\"meta\":{\"name\":\"$FILE_NAME\"}}" \
+            https://api.cloudflare.com/client/v4/accounts/$CF_ID/stream/copy
+          )
+          LINK=$(echo "$RESPONSE" | jq -r '.result.preview')
+          notify-send -t 4000 "Zipline and Cloudflare - Upload complete." "Link copied to clipboard: $LINK"
+          echo "[$FILE_NAME]($LINK)" 
         '';
       } )
       ( writers.writePython3Bin "obs-toggle-recording" {
@@ -361,27 +463,6 @@
         categories = [ "Utility" "Security" ];
         type = "Application";
       };
-      send-to-ffmpeg = {
-        name = "Send to ffmpeg";
-        type = "Application";
-        mimeType = [ "video" ];
-        icon = "video-mp4";
-        settings = {
-          X-KDE-Submenu = "Run script...";
-          ServiceTypes = "KonqPopupMenu/Plugin";
-          TryExec = "ffmpeg";
-        };
-        actions = {
-          "convert-for-discord" = {
-            icon = "video-mp4";
-            exec = ''convert-for-discord "%f"'';
-          };
-          "send-to-zipline" = {
-            icon = "video-mp4";
-            exec = ''send-to-zipline "%f"'';
-          };
-        };
-      };
       ollama = {
         exec = "ollama-wrapped";
         icon = "/home/${sys.username}/.icons/custom/ollama.png";
@@ -417,6 +498,43 @@
           url = "https://ollama.com/public/icon-64x64.png";
           sha256 = "sha256-jzjt+wB9e3TwPSrXpXwCPapngDF5WtEYNt9ZOXB2Sgs=";
         };
+      };
+      "run-video-script" = {
+        target = ".local/share/kio/servicemenus/run-video-script.desktop";
+        text = ''
+          [Desktop Entry]
+          Type=Service
+          MimeType=video/*;
+          Actions=convertForDiscord;convertLossless;sendToZipline;sendToCloudflare;sendToZiplineAndCloudflare;
+          X-KDE-Submenu=Run video script...
+
+          [Desktop Action convertForDiscord]
+          Name=Convert for Discord
+          Icon=video-mp4
+          Exec=kitty convert-for-discord "%f"
+
+          [Desktop Action convertLossless]
+          Name=Convert losslessly to MP4
+          Icon=video-mp4
+          Exec=kitty convert-lossless "%f"
+
+          [Desktop Action sendToZipline]
+          Name=Send to Zipline
+          Icon=video-mp4
+          Exec=send-to-zipline "%f" | wl-copy
+
+          [Desktop Action sendToCloudflare]
+          Name=Send to Cloudflare
+          Icon=video-mp4
+          Exec=send-to-cloudflare "%f" | wl-copy
+
+          [Desktop Action sendToZiplineAndCloudflare]
+          Name=Send to Zipline and Cloudflare
+          Icon=video-mp4
+          Exec=send-to-zipline-and-cloudflare "%f" | wl-copy
+
+          
+        '';
       };
     };
 
