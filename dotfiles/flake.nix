@@ -113,6 +113,9 @@
         inherit system pkgs;
         specialArgs = { inherit sys; };
       };
+
+      # build with:
+      # nix build .#nixosConfigurations.cloudimage.config.system.build.digitalOceanImage
       cloudimage = let 
         sys = {
           username = "admin";
@@ -127,8 +130,13 @@
           "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
           {
             system.stateVersion = "24.11";
+            environment.systemPackages = with pkgs; [
+              git
+            ];
             users.users."${sys.username}" = {
               isNormalUser = true;
+              extraGroups = [ "networkmanager" "wheel" ];
+              description = "${sys.username}";
               openssh.authorizedKeys.keys = let
                 authorizedKeys = pkgs.fetchurl {
                   url = "https://github.com/Jafner.keys";
@@ -152,6 +160,7 @@
                 groups = [ "wheel" ];
               }];
             };
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
           }
         ];
         inherit system pkgs;
