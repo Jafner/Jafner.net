@@ -69,7 +69,6 @@
           flakeDir = "Git/Jafner.net/dotfiles";
         };
         system = "x86_64-linux";
-        lib = nixpkgs.lib;
         pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [ nixgl.overlay ];
@@ -80,7 +79,7 @@
           overlays = [ nixgl.overlay ];
           config = { allowUnfreePredicate = (_: true); };
         };
-        in lib.nixosSystem {
+      in nixpkgs.lib.nixosSystem {
         modules = [
           ./systems/desktop/configuration.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -95,6 +94,68 @@
         ];
         inherit system;
         specialArgs = { inherit pkgs pkgs-unstable inputs sys usr flake; };
+      };
+      iso = let 
+        sys = {
+          username = "admin";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+      in nixpkgs.lib.nixosSystem {
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
+          #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+        ];
+        inherit system pkgs;
+        specialArgs = { inherit sys; };
+      };
+      cloudimage = let 
+        sys = {
+          username = "admin";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+      in nixpkgs.lib.nixosSystem {
+        modules = [
+          "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+          {
+            system.stateVersion = "24.11";
+            users.users."${sys.username}" = {
+              isNormalUser = true;
+              openssh.authorizedKeys.keys = let
+                authorizedKeys = pkgs.fetchurl {
+                  url = "https://github.com/Jafner.keys";
+                  sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
+                }; in pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
+            };
+            services.openssh = {
+              enable = true;
+              settings.PasswordAuthentication = false;
+              settings.KbdInteractiveAuthentication = false;
+            };
+            security.sudo = {
+              enable = true;
+              extraRules = [{
+                commands = [
+                  {
+                    command = "ALL";
+                    options = [ "NOPASSWD" ];
+                  }
+                ];
+                groups = [ "wheel" ];
+              }];
+            };
+          }
+        ];
+        inherit system pkgs;
+        specialArgs = { inherit sys; };
       };
     };
   };
