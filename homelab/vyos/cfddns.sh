@@ -1,4 +1,3 @@
-#!bash
 # Takes two positional arguments:
 # $1 is the name of the zone to update
 #   E.g. jafner.net
