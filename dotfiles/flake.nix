@@ -34,6 +34,8 @@
     home-manager,
     nixgl,
     ghostty,
+    deploy-rs,
+    self, 
     ...
   }:
   let
@@ -166,6 +168,42 @@
         inherit system pkgs;
         specialArgs = { inherit sys; };
       };
+      artificer = let 
+        sys = {
+          username = "admin";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+      in nixpkgs.lib.nixosSystem {
+        modules = [
+          ./systems/artificer/configuration.nix
+        ];
+        inherit system pkgs;
+        specialArgs = { inherit sys; };
+      };
     };
+    deploy = {
+      nodes = {
+        artificer = {
+          hostname = "143.198.68.202";
+          profilesOrder = [ "system" ];
+          profiles.system = {
+            user = "root";
+            sshUser = "admin";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.artificer;
+          };
+        };
+      };
+      fastConnection = true;
+      interactiveSudo = false;
+      autoRollback = true;
+      magicRollback = true;
+      remoteBuild = true;
+      confirmTimeout = 60;
+    };
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
