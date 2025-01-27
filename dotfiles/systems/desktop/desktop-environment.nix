@@ -1,4 +1,4 @@
-{ pkgs, sys, inputs, usr, ... }: {
+{ pkgs, sys, inputs, ... }: {
   imports = [
       ./defaultApplications.nix
   ];
