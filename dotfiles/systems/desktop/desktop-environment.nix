@@ -14,6 +14,8 @@
     enableRenice = true;
   };
 
+  programs.partition-manager.enable = true;
+
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs;
     [ # Productivity
