@@ -180,6 +180,7 @@
       in nixpkgs.lib.nixosSystem {
         modules = [
           ./systems/artificer/configuration.nix
+          "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
