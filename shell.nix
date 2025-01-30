@@ -11,6 +11,18 @@ in
       tree btop
       bat fd eza fzf
       ssh-to-age
+    ] ++ [
+      ( writeShellApplication {
+        name = "docker-list-mounts";
+        runtimeInputs = [
+            docker
+            jq
+        ];
+        text = ''
+            #! bash
+            docker inspect $(docker ps -aq) | jq -r '.[].Mounts' | jq '.[]' | jq -r '.Source' | sort -u
+        '';
+      } )
     ];
     shellHook = ''
       # Configure env
@@ -58,4 +70,4 @@ in
 
     '';
 
-};
+}
