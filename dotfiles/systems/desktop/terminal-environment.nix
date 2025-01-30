@@ -27,73 +27,83 @@ in {
             git
         ];
         text = ''
-            #!/bin/bash
-            # shellcheck disable=SC2088
-            FLAKE_DIR=$(dirname "/home/${sys.username}/${flake.repoPath}/${flake.path}")
-            CURRENT_CONFIGURATION="desktop"
-            cd "$FLAKE_DIR"
+          #!/bin/bash
+          # shellcheck disable=SC2088
+          FLAKE_DIR=$(dirname "/home/${sys.username}/${flake.repoPath}/${flake.path}")
+          CURRENT_CONFIGURATION="desktop"
+          cd "$FLAKE_DIR"
 
-            handleUntracked() {
+          handleUntracked() {
             UNTRACKED=$(git ls-files -o --directory --exclude-standard --no-empty-directory)
             if [[ $(echo "$UNTRACKED" | wc -l) -gt 0 ]]; then
-                git add -A
-                notify-send "Adding untracked files" "$UNTRACKED"
+              git add -A
+              notify-send "Adding untracked files" "$UNTRACKED"
             fi
-            }
+          }
 
-            rebuild() {
+          rebuild() {
             notify-send "Nixos: Beginning rebuild"
             sudo nixos-rebuild switch \
-                --flake ".#$CURRENT_CONFIGURATION" \
-                --impure \
-                --show-trace &&\
+              --flake ".#$CURRENT_CONFIGURATION" \
+              --impure \
+              --show-trace &&\
             notify-send "Nixos: Rebuilt successfully"
-            }
+          }
 
-            update() {
+          build() {
+            notify-send "Nixos: Beginning rebuild"
+            sudo nixos-rebuild switch \
+              --flake ".#$CURRENT_CONFIGURATION" \
+              --impure \
+              --show-trace &&\
+            notify-send "Nixos: Rebuilt successfully"
+          }
+
+          update() {
             notify-send "Nixos: Beginning update" "Updating lockfile $FLAKE_DIR/flake.lock"
             nix flake update --flake "$FLAKE_DIR"
             notify-send "Nixos: Update complete" "Finished updating lockfile $FLAKE_DIR/flake.lock"
-            }
+          }
 
-            garbageCollect() {
+          garbageCollect() {
             notify-send "Nixos: Collecting garbage" "Deleting generations older than 7 days."
             nix-env --delete-generations 7d &&\
             nix-store --gc --print-dead
             notify-send "Nixos: Garbage collection complete"
-            }
+          }
 
-            listGenerations() {
+          listGenerations() {
             nixos-rebuild list-generations | less
-            }
+          }
 
-            edit() {
+          edit() {
             zeditor "/home/${sys.username}/${flake.repoPath}"
-            }
+          }
 
-            where() {
-              tree "$(realpath "$(which "$1")" | cut -d'/' -f-4)"
-            }
+          where() {
+            tree "$(realpath "$(which "$1")" | cut -d'/' -f-4)"
+          }
 
-            finish() {
+          finish() {
             mkdir -p "$HOME/.nixos"
             nixos-rebuild list-generations --json > "$HOME/.nixos/nixos-generations.json"
-            }
+          }
 
-            error() {
+          error() {
             notify-send "Nixos Script Error" "$@"
             exit 1
-            }
+          }
 
-            case "$1" in
-            rebuild) handleUntracked && rebuild && finish;;
-            update) handleUntracked && update && finish;;
-            clean) garbageCollect && finish;;
-            ls) listGenerations;;
-            edit) edit;;
-            where) where "$2";;
-            *) error "Unrecognized subcommand $1";;
-            esac
+          case "$1" in
+            rebuild) handleUntracked && rebuild && finish ;;
+            build) handleUntracked && build && finish ;;
+            update) handleUntracked && update && finish ;;
+            clean) garbageCollect && finish ;;
+            ls) listGenerations ;;
+            edit) edit ;;
+            where) where "$2" ;;
+            *) error "Unrecognized subcommand $1" ;;
+          esac
         '';
       } )
       ( writeShellApplication {
