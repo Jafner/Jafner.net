@@ -1,19 +1,9 @@
+keys:
+  - &joey_desktop_jafner_net age1v5wy7epv5mm8ddf3cfv8m0e9w4s693dw7djpuytz9td8ycha5f0sv2se9n
+  - &joey_age age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00
 creation_rules:
-  - path_regex: .*
-    # The below key_group and shamir_threshold configuration
-    #   allows any single author key to decrypt secrets,
-    #   but hosts and deploy runners *must* use both keys
-    #   to decrypt. This prevents a compromised host or 
-    #   runner from leaking all secrets.
-    shamir_threshold: 2
+  - path_regex: ^.*(\.(secrets|token|passwd)|secrets.env|config.boot)
     key_groups:
-      - age: # Author keys; to be held by contributors to the repo
-        - 'age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00' # joey@dungeon-master
-      - age: # Author keys (again); hacky way to give author keys a weight of 2 shares
-        - 'age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00' # joey@dungeon-master
-      - age: # Deploy keys; to be held by the deploy environment (e.g. Gitea Actions)
-        - 'age193t908fjxl8ekl77p5xqnpj4xmw3y0khvyzlrw22hdzjduk6l53q05spq3'  # deploy@gitea.jafner.tools
-      - age: # Host key; to be held by hosts to which Stacks should be deployed
-        - 'age13prhyye2jy3ysa6ltnjgkrqtxrxgs0035d86jyn4ltgk3wxtqgrqgav855' # fighter
-        - 'age1n20krynrj75jqfy2muvhrygvzd4ee8ngamljqavsrk033zwx0ses2tdtfe' # druid
-        - 'age1m0jpnk4t7hph5tdva3y9ap7scl8vfly9ufazr0h3cuwpcytlsulqjrt58y' # wizard
+    - age:
+      - *joey_desktop_jafner_net
+      - *joey_age

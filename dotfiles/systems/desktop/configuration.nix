@@ -1,11 +1,16 @@
-{ sys, pkgs, inputs, ... }: {
+{ sys, pkgs, inputs, flake, ... }: {
   imports = [
     ./hardware.nix
     ./services.nix
     ./desktop-environment.nix
     ./terminal-environment.nix
     ./theme.nix
+    ../../modules/sops.nix
   ];
+
+  environment.sessionVariables = {
+    "FLAKE_DIR" = "/home/${sys.username}/${flake.repoPath}/${flake.path}/";
+  };
 
   home-manager.backupFileExtension = "bk";
   home-manager.users."${sys.username}" = {
