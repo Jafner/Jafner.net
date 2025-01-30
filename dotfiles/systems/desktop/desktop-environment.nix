@@ -1,6 +1,7 @@
 { pkgs, sys, inputs, ... }: {
   imports = [
       ./defaultApplications.nix
+      ../../modules/programs/spotify.nix
   ];
   programs.kdeconnect.enable = true;
   programs.xwayland.enable = true;
@@ -26,8 +27,6 @@
       inputs.zen-browser.packages."${sys.arch}".default
     ] ++ [ # Multimedia viewers
       vlc
-      spotify-qt
-      librespot
     ] ++ [ # Messaging tools
       protonmail-desktop
       protonmail-bridge-gui
@@ -537,18 +536,6 @@
 
           
         '';
-      };
-    };
-
-    systemd.user.services.librespot = {
-      Unit = {
-        Description = "Librespot (an open source Spotify client)";
-        Documentation = [ "https://github.com/librespot-org/librespot" "https://github.com/librespot-org/librespot/wiki/Options" ];
-      };
-      Service = {
-        Restart = "always";
-        RestartSec = 10;
-        ExecStart = "${pkgs.librespot}/bin/librespot --backend pulseaudio --system-cache /home/${sys.username}/.spotify -j";
       };
     };
   };
