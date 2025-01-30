@@ -56,19 +56,34 @@
       encryptKey = "$HOME/.keys/joey@jafner.net.encrypt.gpg";
       ageKey = "$HOME/.keys/joey.author.key";
     };
+    usr.admin = {
+      realname = "admin";
+      email = "noreply@jafner.net";
+    };
+    jafnerKeys = let file = (import inputs.nixpkgs { system = "x86_64-linux"; }).fetchurl {
+        url = "https://github.com/Jafner.keys";
+        sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
+    }; in inputs.nixpkgs.lib.splitString "\n" (builtins.readFile file);
   in {
     nixosConfigurations = {
       desktop = let
         sys = {
           username = "joey";
-          hostname = "desktop@jafner.net";
-          sshKey = "joey.desktop@jafner.net";
+          hostname = "desktop";
+          sshKey = "/home/joey/.ssh/joey.desktop@jafner.net";
           signingKey = "B0BBF464024BCEAE";
           shellPackage = "zsh";
           kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
           wallpaper = ./assets/romb-3840x2160.png;
           arch = "x86_64-linux";
           flakeDir = "Git/Jafner.net/dotfiles";
+          authorizedKeys = jafnerKeys;
+          dockerData = "/home/joey/docker/data";
+          ssh = {
+            path = "/home/joey/.ssh";
+            privateKey = "joey.desktop@jafner.net";
+            publicKey = "joey.desktop@jafner.net.pub";
+          };
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -86,6 +101,7 @@
           ./systems/desktop/configuration.nix
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
           {
             home-manager.sharedModules = [
               inputs.nix-flatpak.homeManagerModules.nix-flatpak
@@ -93,13 +109,18 @@
             ];
             home-manager.extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit sys usr flake; };
           }
+          
         ];
         inherit system;
         specialArgs = { inherit pkgs pkgs-unstable inputs sys usr flake; };
       };
+
+      # build with:
+      # nix build .#nixosConfigurations.iso.config.system.build.isoImage
       iso = let 
         sys = {
           username = "admin";
+          authorizedKeys = jafnerKeys;
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -108,9 +129,39 @@
         };
       in nixpkgs.lib.nixosSystem {
         modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
-          #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+          {
+            system.stateVersion = "24.11";
+            environment.systemPackages = with pkgs; [
+              git
+            ];
+            users.users."${sys.username}" = {
+              isNormalUser = true;
+              extraGroups = [ "networkmanager" "wheel" ];
+              description = "${sys.username}";
+              openssh.authorizedKeys.keys = sys.authorizedKeys;
+            };
+            services.openssh = {
+              enable = true;
+              settings.PasswordAuthentication = false;
+              settings.KbdInteractiveAuthentication = false;
+            };
+            security.sudo = {
+              enable = true;
+              extraRules = [{
+                commands = [
+                  {
+                    command = "ALL";
+                    options = [ "NOPASSWD" ];
+                  }
+                ];
+                groups = [ "wheel" ];
+              }];
+            };
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+          }
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
@@ -121,6 +172,7 @@
       cloudimage = let 
         sys = {
           username = "admin";
+          authorizedKeys = jafnerKeys;
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -139,11 +191,7 @@
               isNormalUser = true;
               extraGroups = [ "networkmanager" "wheel" ];
               description = "${sys.username}";
-              openssh.authorizedKeys.keys = let
-                authorizedKeys = pkgs.fetchurl {
-                  url = "https://github.com/Jafner.keys";
-                  sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
-                }; in pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
+              openssh.authorizedKeys.keys = sys.authorizedKeys;
             };
             services.openssh = {
               enable = true;
@@ -181,6 +229,25 @@
         modules = [
           ./systems/artificer/configuration.nix
           "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+        ];
+        inherit system pkgs;
+        specialArgs = { inherit sys; };
+      };
+      fighter = let 
+        sys = {
+          username = "admin";
+          hostname = "fighter";
+          authorizedKeys = jafnerKeys;
+          shellPackage = "bash";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+      in nixpkgs.lib.nixosSystem {
+        modules = [
+          ./systems/fighter/configuration.nix
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
