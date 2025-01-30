@@ -44,6 +44,9 @@
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs; [ amdgpu_top ];
   };
+
+  networking.hostName = "${sys.hostname}";
+
   imports = [
     ../../modules/hardware/audio.nix
     ../../modules/hardware/goxlr-mini.nix
