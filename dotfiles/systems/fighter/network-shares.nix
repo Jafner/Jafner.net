@@ -1,4 +1,4 @@
-{ pkgs, ... }: let
+{ pkgs, sys, ... }: let
   iqn = "iqn.2020-03.net.jafner:fighter";
   portals = { 
     barbarian = {
@@ -14,7 +14,6 @@ in {
   services.openiscsi = {
     enable = true;
     discoverPortal = "${portals.paladin.ip}:${portals.paladin.port}";
-    target = iqn;
   };
 
   systemd.services = {
