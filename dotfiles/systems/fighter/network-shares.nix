@@ -1,4 +1,4 @@
-{ pkgs, sys, ... }: let
+{ pkgs, ... }: let
   iqn = "iqn.2020-03.net.jafner:fighter";
   portals = { 
     barbarian = {
