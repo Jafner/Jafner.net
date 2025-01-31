@@ -47,8 +47,6 @@
       branch = "main";
       repoPath = "Git/Jafner.net";
       path = "dotfiles/flake.nix";
-      # Use the following to compose the full absolute path:
-      # "/home/${sys.username}/${flake.repoPath}/${flake.path}"
     };
     usr.joey = {
       realname = "Joey Hafner";
@@ -219,6 +217,7 @@
       artificer = let 
         sys = {
           username = "admin";
+          authorizedKeys = jafnerKeys;
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
