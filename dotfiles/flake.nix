@@ -248,6 +248,7 @@
       in nixpkgs.lib.nixosSystem {
         modules = [
           ./systems/fighter/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
