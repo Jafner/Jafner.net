@@ -14,7 +14,7 @@ in {
   services.openiscsi = {
     enable = true;
     discoverPortal = "${portals.paladin.ip}:${portals.paladin.port}";
-    targets = [ iqn ];
+    target = iqn;
   };
 
   systemd.services = {
