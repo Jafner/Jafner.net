@@ -1,4 +1,4 @@
-{ sys, pkgs }: {
+{ sys, pkgs, ... }: {
   users.users."${sys.username}".shell = pkgs.${sys.shellPackage};
   programs."${sys.shellPackage}".enable = true;
   home-manager.users."${sys.username}" = {

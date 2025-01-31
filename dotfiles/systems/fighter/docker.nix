@@ -1,4 +1,4 @@
-{ pkgs, sys }: {
+{ pkgs, sys, ... }: {
   virtualisation.docker = {
     enable = true;
     rootless.enable = true;
