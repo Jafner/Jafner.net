@@ -13,6 +13,7 @@
 in {
   services.openiscsi = {
     enable = true;
+    name = iqn;
     discoverPortal = "${portals.paladin.ip}:${portals.paladin.port}";
   };
 
