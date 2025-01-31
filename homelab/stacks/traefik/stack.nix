@@ -1,4 +1,4 @@
-{ sys, inputs, ... }: let stack = "traefik"; in {
+{ sys, ... }: let stack = "traefik"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -13,7 +13,7 @@
     };
   };
 
-  imports = [ inputs.sops-nix.nixosModules.sops ]; 
+  #imports = [ inputs.sops-nix.nixosModules.sops ]; 
   sops.secrets."${stack}" = { 
     sopsFile = ./secrets.env;
     key = "";
