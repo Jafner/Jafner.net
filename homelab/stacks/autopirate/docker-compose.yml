@@ -10,7 +10,7 @@ services:
       PGID: 1001
     volumes:
       - "${MUSIC_DIR}:/music"
-      - "${DOCKER_DATA}/lidarr_config:/config"
+      - "${APPDATA}/lidarr_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.lidarr.rule=Host(`lidarr.jafner.net`)
@@ -29,7 +29,7 @@ services:
       PGID: 1001        
     volumes:
       - "${MOVIES_DIR}:/movies"
-      - "${DOCKER_DATA}/radarr_config:/config"
+      - "${APPDATA}/radarr_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.radarr.rule=Host(`radarr.jafner.net`)
@@ -48,7 +48,7 @@ services:
       PGID: 1001        
     volumes:
       - "${SHOWS_DIR}:/shows"
-      - "${DOCKER_DATA}/sonarr_config:/config"
+      - "${APPDATA}/sonarr_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.sonarr.rule=Host(`sonarr.jafner.net`)
@@ -67,7 +67,7 @@ services:
       PGID: 1001        
     volumes:
       - "${BOOKS_DIR}:/books"
-      - "${DOCKER_DATA}/readarr_config:/config"
+      - "${APPDATA}/readarr_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.readarr.rule=Host(`readarr.jafner.net`)
@@ -85,7 +85,7 @@ services:
       PUID: 1001
       PGID: 1001        
     volumes:
-      - "${DOCKER_DATA_LOCAL}/bazarr:/config"
+      - "${APPDATA}/bazarr:/config"
       - "${MOVIES_DIR}:/movies"
       - "${SHOWS_DIR}:/tv"
     labels:
@@ -104,7 +104,7 @@ services:
       PUID: 1001
       PGID: 1001        
     volumes:
-      - "${DOCKER_DATA}/nzbhydra2_config:/config"
+      - "${APPDATA}/nzbhydra2_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.nzbhydra2.rule=Host(`nzbhydra.jafner.net`)
@@ -125,7 +125,7 @@ services:
     ports:
       - 8085:8080
     volumes:
-      - "${DOCKER_DATA_LOCAL}/sabnzbd_config:/config"
+      - "${APPDATA}/sabnzbd_config:/config"
       - "${MOVIES_DIR}:/movies"
       - "${SHOWS_DIR}:/shows"
       - "${MUSIC_DIR}:/music"
@@ -162,9 +162,9 @@ services:
       serverPort: 8266
       webUIPort: 8265
     volumes:
-      - ${DOCKER_DATA}/tdarr/server:/app/server
-      - ${DOCKER_DATA}/tdarr/configs:/app/configs
-      - ${DOCKER_DATA}/tdarr/logs:/app/logs
+      - ${APPDATA}/tdarr/server:/app/server
+      - ${APPDATA}/tdarr/configs:/app/configs
+      - ${APPDATA}/tdarr/logs:/app/logs
       - ${MOVIES_DIR}:/movies
       - ${SHOWS_DIR}:/shows
       - ${TRANSCODE_DIR}/transcode_cache:/temp
@@ -188,8 +188,8 @@ services:
       NVIDIA_VISIBLE_DEVICES: all
       NVIDIA_DRIVER_CAPABILITIES: all
     volumes:
-      - ${DOCKER_DATA}/tdarr/configs:/app/configs
-      - ${DOCKER_DATA}/tdarr/logs:/app/logs
+      - ${APPDATA}/tdarr/configs:/app/configs
+      - ${APPDATA}/tdarr/logs:/app/logs
       - ${MOVIES_DIR}:/movies
       - ${SHOWS_DIR}:/shows
       - ${TRANSCODE_DIR}/transcode_cache:/temp
@@ -205,7 +205,7 @@ services:
       PGID: 1001        
       AUTO_UPDATE: false
     volumes:
-      - "${DOCKER_DATA}/jackett_config:/config"
+      - "${APPDATA}/jackett_config:/config"
       - "${NZB_DIR}:/downloads"
     labels:
       - traefik.http.routers.jackett.rule=Host(`jackett.jafner.net`)
