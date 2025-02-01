@@ -23,8 +23,8 @@ services:
       - path: /run/secrets/zipline/zipline
         required: true
     volumes:
-      - $APPDATA/zipline/uploads:/uploads
-      - $APPDATA/zipline/public:/public
+      - $APPDATA/uploads:/uploads
+      - $APPDATA/public:/public
     labels:
       - traefik.http.routers.zipline.rule=Host(`zipline.jafner.net`)
       - traefik.http.routers.zipline.tls.certresolver=lets-encrypt

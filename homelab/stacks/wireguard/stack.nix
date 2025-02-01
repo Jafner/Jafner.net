@@ -8,14 +8,8 @@
     };
     "${stack}/.env" = {
       enable = true;
-      text = ''APPDATA=${sys.dataDirs.appdata}'';
+      text = ''APPDATA=${sys.dataDirs.appdata}/${stack}'';
       target = "stacks/${stack}/.env";
     };
-  };
-  sops.secrets."${stack}" = { 
-    sopsFile = ./secrets.env;
-    key = "";
-    mode = "0440";
-    owner = sys.username;
   };
 }
