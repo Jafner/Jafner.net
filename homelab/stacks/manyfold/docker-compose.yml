@@ -11,10 +11,10 @@ services:
       DATABASE_USER: "manyfold"
       DATABASE_NAME: "manyfold"
     env_file:
-      - path: ./manyfold.secrets
+      - path: /run/secrets/manyfold/manyfold
         required: true
     volumes:
-      - ${STL_DIR}:/libraries
+      - $LIBRARY:/libraries
     networks:
       - web
       - manyfold
@@ -34,19 +34,16 @@ services:
     environment:
       POSTGRES_USER: manyfold
     env_file:
-      - path: ./postgres.secrets
+      - path: /run/secrets/manyfold/postgres
         required: true
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - $APPDATA:/var/lib/postgresql/data
 
   redis:
     image: redis:7
     networks:
       - manyfold
     container_name: manyfold_redis
-
-volumes:
-  postgres_data:
 
 networks:
   web:
