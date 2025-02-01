@@ -18,8 +18,8 @@ services:
       - web
       - nextcloud
     volumes:
-      - $DOCKER_DATA/config:/config
-      - $DOCKER_DATA/data:/data
+      - $APPDATA/config:/config
+      - $APPDATA/data:/data
 
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
@@ -33,10 +33,10 @@ services:
       MYSQL_DATABASE: "nextcloud"
       MYSQL_USER: "ncuser"
     env_file:
-      - path: ./mariadb.secrets
+      - path: /run/secrets/nextcloud/mariadb
         required: true
     volumes:
-      - $DOCKER_DATA/mariadb:/config
+      - $APPDATA/mariadb:/config
 
   redis:
     image: redis:latest
@@ -44,7 +44,7 @@ services:
     networks:
       - nextcloud
     volumes:
-      - $DOCKER_DATA/redis:/data
+      - $APPDATA/redis:/data
 
 networks:
   web:
