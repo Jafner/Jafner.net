@@ -4,10 +4,10 @@ services:
     image: gitea/act_runner:latest
     volumes:
       - ./config.yaml:/config.yaml
-      - ./registration.token:/registration.token
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       CONFIG_FILE: /config.yaml
       GITEA_INSTANCE_URL: https://gitea.jafner.tools
     env_file:
-      - ./secrets.env # Defines GITEA_RUNNER_REGISTRATION_TOKEN
+      - path: /run/secrets/gitea-runner # Defines GITEA_RUNNER_REGISTRATION_TOKEN
+        required: true
