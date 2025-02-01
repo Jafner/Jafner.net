@@ -11,7 +11,7 @@ services:
       MEM_LIMIT: "1024M"
       MEM_STARTUP: "1024M"
     volumes:
-      - ${DOCKER_DATA}/config:/config
+      - ${APPDATA}/config:/config
     ports:
       - 3478:3478/udp # unifi STUN port
       - 10001:10001/udp # AP discovery port
