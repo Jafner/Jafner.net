@@ -9,40 +9,26 @@ services:
       - 25565:25565
     command: --api-binding=0.0.0.0:25566 --mapping=e9.jafner.net=192.168.1.135:25566
 
-  exporter-minecraft:
-    image: itzg/mc-monitor:latest
-    container_name: minecraft_exporter
-    command: export-for-prometheus
-    restart: "no"
-    networks:
-      - monitoring
-      - minecraft
-    env_file:
-      - path: ./exporter.env
-        required: true
-    labels:
-      - traefik.enable=false
-
   e10:
     image: itzg/minecraft-server:latest
     user: 1001:1001
     container_name: minecraft_e10
-    env_file:
-      - path: ./minecraft.env
-        required: true
-      - path: ./minecraft_secrets.env
-        required: false
-      - path: ./e10.env
-        required: true
+    environment:
+      EULA: TRUE
+      OPS: jafner425,mollymsmom,galaxysqvid
+      ENABLE_RCON: true
+      UID: 1001
+      GID: 1001
+      MEMORY: 6G
+      VERSION: 1.21
+      MOD_PLATFORM: AUTO_CURSEFORGE
+      TYPE: AUTO_CURSEFORGE
+      CF_PAGE_URL: https://www.curseforge.com/minecraft/modpacks/enigmatica10
     volumes:
-      - $DOCKER_DATA/e10:/data:rw
+      - $APPDATA/e10:/data:rw
     networks:
       - minecraft
     restart: "no"
 
 networks:
   minecraft:
-  monitoring: 
-    external: true
-volumes:
-  mc-router:
