@@ -10,7 +10,7 @@ services:
       - web
     restart: "no"
     volumes:
-      - $DOCKER_DATA:/config
+      - $APPDATA:/config
       - $TORRENT_DATA:/torrenting
     environment:
       PUID: 1001
