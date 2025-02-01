@@ -7,9 +7,9 @@ services:
       - ai
     privileged: false
     volumes:
-      - $DOCKER_DATA/sillytavern/config:/home/node/app/config
-      - $DOCKER_DATA/sillytavern/data:/home/node/app/data
-      - $DOCKER_DATA/sillytavern/plugins:/home/node/app/plugins
+      - $APPDATA/sillytavern/config:/home/node/app/config
+      - $APPDATA/sillytavern/data:/home/node/app/data
+      - $APPDATA/sillytavern/plugins:/home/node/app/plugins
     environment:
       TZ: America/Los_Angeles
     labels:
