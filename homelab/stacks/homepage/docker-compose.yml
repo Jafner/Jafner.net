@@ -5,7 +5,7 @@ services:
     networks:
       - web
     volumes:
-      - $DOCKER_DATA/logs:/app/config/logs
+      - $APPDATA/logs:/app/config/logs
       - ./icons/:/app/public/icons
       - ./config:/app/config/
       - /var/run/docker.sock:/var/run/docker.sock
