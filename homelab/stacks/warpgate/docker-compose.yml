@@ -6,7 +6,7 @@ services:
       - 2222:2222
       - 33306:33306
     volumes:
-      - $DOCKER_DATA:/data
+      - $APPDATA:/data
     labels:
       - traefik.http.routers.warpgate.rule=Host(`warpgate.jafner.net`)
       - traefik.http.routers.warpgate.tls.certresolver=lets-encrypt
