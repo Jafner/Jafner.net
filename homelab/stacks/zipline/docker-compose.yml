@@ -20,10 +20,11 @@ services:
       UPLOADER_ADMIN_LIMIT: 25gb
       UPLOADER_USER_LIMIT: 100mb
     env_file:
-      - zipline.secrets
+      - path: /run/secrets/zipline/zipline
+        required: true
     volumes:
-      - $DOCKER_DATA/zipline/uploads:/uploads
-      - $DOCKER_DATA/zipline/public:/public
+      - $APPDATA/zipline/uploads:/uploads
+      - $APPDATA/zipline/public:/public
     labels:
       - traefik.http.routers.zipline.rule=Host(`zipline.jafner.net`)
       - traefik.http.routers.zipline.tls.certresolver=lets-encrypt
@@ -42,9 +43,10 @@ services:
       POSTGRES_USER: zipline
       POSTGRES_DATABASE: zipline
     env_file:
-      postgres.secrets
+      - path: /run/secrets/zipline/postgres
+        required: true
     volumes:
-      - $DOCKER_DATA/postgres:/var/lib/postgresql/data
+      - $APPDATA/postgres:/var/lib/postgresql/data
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U zipline']
       interval: 10s
