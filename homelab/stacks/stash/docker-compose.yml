@@ -4,13 +4,14 @@ services:
     image: stashapp/stash:latest
     restart: "no"
     volumes:
+      - $APPDATA/.stash:/root/.stash
+      - $APPDATA/generated:/generated
+      - $APPDATA/metadata:/metadata
+      - $APPDATA/cache:/cache
+      - $LIBRARY/Videos:/media/Videos
+      - $LIBRARY/Galleries:/media/Galleries
       - /etc/localtime:/etc/localtime:ro
-      - $METADATA_DIR/generated:/generated
-      - $METADATA_DIR/metadata:/metadata
-      - $METADATA_DIR/cache:/cache
-      - $MEDIA_DIR/Videos:/media/Videos
-      - $MEDIA_DIR/Galleries:/media/Galleries
-      - $DOCKER_DATA:/root/.stash
+      
     environment:
       STASH_STASH: "/media/"
       STASH_GENERATED: "/generated/"
