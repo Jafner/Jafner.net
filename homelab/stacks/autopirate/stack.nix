@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "coder"; in {
+{ sys, ... }: let stack = "autopirate"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -20,11 +20,5 @@
       '';
       target = "stacks/${stack}/.env";
     };
-  };
-  sops.secrets."${stack}" = { 
-    sopsFile = ./secrets.env;
-    key = "";
-    mode = "0440";
-    owner = sys.username;
   };
 }
