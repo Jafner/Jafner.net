@@ -12,10 +12,4 @@
       target = "stacks/${stack}/.env";
     };
   };
-  sops.secrets."${stack}" = { 
-    sopsFile = ./secrets.env;
-    key = "";
-    mode = "0440";
-    owner = sys.username;
-  };
 }
