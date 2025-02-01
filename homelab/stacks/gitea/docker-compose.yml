@@ -2,21 +2,21 @@ services:
   gitea:
     image: gitea/gitea:latest
     container_name: gitea_gitea
-    env_file:
-      - path: ./gitea.env
-        required: true
     restart: always
+    env_file:
+      - path: /run/secrets/gitea/gitea
+        required: true
     networks:
       - web
       - gitea
     volumes:
-      - $DOCKER_DATA/gitea:/data
+      - $APPDATA/gitea:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "2225:22"
     labels:
-      - traefik.http.routers.gitea.rule=Host(`gitea.jafner.tools`,`git.jafner.net`)
+      - traefik.http.routers.gitea.rule=Host(`git.jafner.net`)
       - traefik.http.routers.gitea.tls.certresolver=lets-encrypt
       - traefik.http.routers.gitea.tls.options=tls12@file
       - traefik.http.routers.gitea.middlewares=securityheaders@file
@@ -29,32 +29,12 @@ services:
     networks:
       - gitea
     env_file:
-      - path: ./postgres_secrets.env
-        required: false
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-  
-  runner-ubuntu:
-    image: gitea/act_runner:latest
-    container_name: gitea_runner-ubuntu
-    depends_on:
-      - gitea
-    env_file:
-      - path: ./runner-ubuntu.env
+      - path: /run/secrets/gitea/postgres
         required: true
-      - path: ./runner_secrets.env
-        required: false
-    networks:
-      - gitea
-    volumes: 
-      - ./runner_ubuntu_config.yaml:/config.yaml
-      - $DOCKER_DATA/runner-ubuntu:/data
-      - /var/run/docker.sock:/var/run/docker.sock
+    volumes:
+      - $APPDATA/postgres:/var/lib/postgresql/data
 
 networks:
   web:
     external: true
   gitea:
-
-volumes:
-  postgres_data:
