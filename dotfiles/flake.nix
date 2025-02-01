@@ -238,7 +238,18 @@
           hostname = "fighter";
           authorizedKeys = jafnerKeys;
           shellPackage = "bash";
-          dockerData = "/home/admin/data";
+          dataDirs = {
+            appdata = "/appdata";
+            library = {
+              digitalModels = "/mnt/3DPrinting";
+              av = "/mnt/av";
+              books = "/mnt/books";
+              movies = "/mnt/movies";
+              music = "/mnt/music";
+              shows = "/mnt/shows";
+              torrenting = "/mnt/torrenting";
+            };
+          };
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {

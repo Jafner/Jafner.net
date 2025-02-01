@@ -1,4 +1,4 @@
-{ pkgs, ... }: let
+{ pkgs, sys, ... }: let
   iqn = "iqn.2020-03.net.jafner:fighter";
   portals = { 
     barbarian = {
@@ -47,88 +47,39 @@ in {
   environment.systemPackages = with pkgs; [ cifs-utils ];
   fileSystems =
     let
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-        permissions_opts = "credentials=/etc/nixos/smb-secrets,uid=1000,gid=1000";
+        fsType = "cifs";
+        options = [
+          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s" 
+          "credentials=/etc/nixos/smb-secrets,uid=1000,gid=1000"
+        ];
     in {
-    # Pool Media on Paladin
-    "/mnt/smb/paladin/Media/AV" = {
-      device = "//192.168.1.12/AV";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+    "${sys.dataDirs.library.av}" = { 
+      device = "//192.168.1.12/AV"; 
+      inherit fsType options; 
     };
-    "/mnt/smb/paladin/Media/3DPrinting" = {
+    "${sys.dataDirs.library.digitalModels}" = { 
       device = "//192.168.1.12/3DPrinting";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+      inherit fsType options;
     };
-    "/mnt/smb/paladin/Media/Movies" = {
+    "${sys.dataDirs.library.movies}" = {
       device = "//192.168.1.12/Movies";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+      inherit fsType options;
     };
-    "/mnt/smb/paladin/Media/Music" = {
+    "${sys.dataDirs.library.music}" = {
       device = "//192.168.1.12/Music";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+      inherit fsType options;
     };
-    "/mnt/smb/paladin/Media/Shows" = {
+    "${sys.dataDirs.library.shows}" = {
       device = "//192.168.1.12/Shows";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+      inherit fsType options;
     };
-    "/mnt/smb/paladin/Media/Text" = {
+    "${sys.dataDirs.library.books}" = {
       device = "//192.168.1.12/Text";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+      inherit fsType options;
     };
-
-    # Pool Tank on Paladin
-    "/mnt/smb/paladin/Tank/AppData" = {
-      device = "//192.168.1.12/AppData";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
-    };
-    "/mnt/smb/paladin/Tank/Archive" = {
-      device = "//192.168.1.12/Archive";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
-    };
-    "/mnt/smb/paladin/Tank/HomeVideos" = {
-      device = "//192.168.1.12/HomeVideos";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
-    };
-    "/mnt/smb/paladin/Tank/Images" = {
-      device = "//192.168.1.12/Images";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
-    };
-    "/mnt/smb/paladin/Tank/Recordings" = {
-      device = "//192.168.1.12/Recordings";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
-    };
-    "/mnt/smb/paladin/Tank/Software" = {
-      device = "//192.168.1.12/Software";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
-    };
-    "/mnt/smb/paladin/Tank/Torrenting" = {
+    "${sys.dataDirs.library.torrenting}" = {
       device = "//192.168.1.12/Torrenting";
-      fsType = "cifs";
-      options = ["${automount_opts},${permissions_opts}"];
+      inherit fsType options;
     };
-
-    # iSCSI devices
-    # "/mnt/iscsi/paladin" = {
-    #   device = "/dev/disk/by-uuid/...";
-    #   fsType = "ext4";
-    #   options = [ "nofail" "_netdev" "auto" "exec" "defaults"];
-    # };
-    # "/mnt/iscsi/barbarian" = {
-    #   device = "/dev/disk/by-uuid/...";
-    #   fsType = "ext4";
-    #   options = [ "nofail" "_netdev" "auto" "exec" "defaults"];
-    # };
   };
 }
