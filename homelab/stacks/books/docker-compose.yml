@@ -64,10 +64,12 @@ services:
       - seccomp:unconfined
     networks:
       - web
+    env_file:
+      - path: /run/secrets/books
+        required: true
     environment:
       CALIBRE_OVERRIDE_DATABASE_PATH: /config/metadata.db
       CUSTOM_USER: admin
-      PASSWORD: ${calibre_PASSWORD}
       PGID: "1001"
       PUID: "1001"
       TZ: America/Los_Angeles
