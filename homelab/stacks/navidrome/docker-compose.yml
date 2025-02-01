@@ -6,12 +6,14 @@ services:
     user: 1001:1001
     networks:
       - web
-    env_file:
-      - path: ./navidrome.env
-        required: true
+    environment:
+      ND_SCANSCHEDULE: 1h
+      ND_LOGLEVEL: info
+      ND_SESSIONTIMEOUT: 24h
+      ND_BASEURL: "https://music.jafner.net"
     volumes:
-      - "${MUSIC_DIR}:/music:ro"
-      - "${DOCKER_DATA}:/data"
+      - "$MUSIC_DIR:/music:ro"
+      - "$APPDATA:/data"
     labels:
       - traefik.http.routers.navidrome.rule=Host(`music.jafner.net`)
       - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
