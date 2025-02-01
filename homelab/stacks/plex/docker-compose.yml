@@ -3,6 +3,13 @@ services:
     image: linuxserver/plex:latest
     container_name: plex_plex
     restart: "no"
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     networks:
       - web
     ports:
@@ -16,18 +23,18 @@ services:
       - 32412:32412/udp
       - 32413:32413/udp
       - 32414:32414/udp
-    env_file:
-      - path: ./plex.env
-        required: true
-      - path: ./plex_stack.env
-        required: true
-      - path: ./plex_secrets.env
-        required: false
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/Los_Angeles
+      VERSION: latest
+      ADVERTISE_IP: "https://plex.jafner.net:443"
+      #NVIDIA_VISIBLE_DEVICES: all
     volumes:
-      - "${MOVIES_DIR}:/movies"
-      - "${SHOWS_DIR}:/shows"
-      - "${MUSIC_DIR}:/music"
-      - "${DOCKER_DATA}/plex:/config"
+      - "$MOVIES_DIR:/movies"
+      - "$SHOWS_DIR:/shows"
+      - "$MUSIC_DIR:/music"
+      - "$APPDATA/plex:/config"
     labels:
       - traefik.http.routers.plex.rule=Host(`plex.jafner.net`)
       - traefik.http.routers.plex.tls.certresolver=lets-encrypt
@@ -39,30 +46,18 @@ services:
     restart: "no"
     networks:
       - web
-    env_file:
-      - path: ./plex_stack.env
-        required: true
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/Los_Angeles
     volumes:
-      - "${DOCKER_DATA}/ombi:/config"
+      - "$APPDATA/ombi:/config"
     labels:
       - traefik.http.routers.ombi.rule=Host(`ombi.jafner.net`)
       - traefik.http.routers.ombi.tls.certresolver=lets-encrypt
       - traefik.http.routers.ombi.tls.options=tls12@file
       - traefik.http.routers.ombi.middlewares=securityheaders@file
       - traefik.http.services.ombi.loadbalancer.server.port=3579   
-
-  exporter-plex:
-    image: granra/plex_exporter:latest
-    container_name: plex_exporter
-    restart: "no"
-    networks:
-      - monitoring
-    command: 
-      - "--plex-server=https://plex.jafner.net"
-      - "--token=***REMOVED***"
-      - "--auto-discover"
-    labels:
-      - traefik.enable=false
 
 networks:
   web:
