@@ -8,9 +8,8 @@
     };
     "${stack}/.env" = {
       enable = true;
-      text = ''DOCKER_DATA=${sys.dockerData}'';
+      text = ''APPDATA=${sys.dataDirs.appdata}'';
       target = "stacks/${stack}/.env";
     };
   };
-  #home-manager.users."${sys.username}".systemd.user.services."${stack}" = {};
 }
