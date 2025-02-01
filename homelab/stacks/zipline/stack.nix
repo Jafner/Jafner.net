@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "coder"; in {
+{ sys, ... }: let stack = "zipline"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
