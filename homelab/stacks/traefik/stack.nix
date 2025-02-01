@@ -8,7 +8,7 @@
     };
     "${stack}/.env" = {
       enable = true;
-      text = ''APPDATA=${sys.dataDirs.appdata}'';
+      text = ''APPDATA=${sys.dataDirs.appdata}/${stack}'';
       target = "stacks/${stack}/.env";
     };
   };

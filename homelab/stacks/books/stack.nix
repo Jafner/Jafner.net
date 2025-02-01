@@ -9,7 +9,7 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/books
+        APPDATA=${sys.dataDirs.appdata}/${stack}
         EBOOKS_LIBRARY=${sys.dataDirs.library.books}/ebooks
         AUDIOBOOKS_LIBRARY=${sys.dataDirs.library.books}/audiobooks
         NZB_COMPLETED=${sys.dataDirs.appdata}/torrenting/NZB
