@@ -4,7 +4,8 @@ services:
     container_name: coder_coder
     restart: "no"
     env_file:
-      - secrets.env
+      - path: /run/secrets/coder
+        required: true
     environment:
       - CODER_ACCESS_URL="https://coder.jafner.net"
       - CODER_HTTP_ADDRESS="0.0.0.0:7080"
@@ -13,7 +14,7 @@ services:
       - web
       - coder
     volumes:
-      - ${DOCKER_DATA}/coder:/home/coder/.config
+      - $APPDATA/coder:/home/coder/.config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       - traefik.http.routers.coder.rule=Host(`coder.jafner.net`)
@@ -29,7 +30,8 @@ services:
     image: postgres:16
     container_name: coder_postgres
     env_file:
-      - secrets.env
+      - path: /run/secrets/coder
+        required: true
     networks:
       - coder
     healthcheck:
