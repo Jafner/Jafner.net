@@ -1,9 +1,4 @@
-{ pkgs, ... }: {
-  imports = [
-    ../../modules/services/ssh.nix
-    ../../modules/services/flatpak.nix
-    ../../modules/services/minecraft-server.nix
-  ];
+{ pkgs, sys, ... }: {
   services.ollama = {
     enable = true;
     port = 11434;
@@ -15,5 +10,8 @@
     package = pkgs.ollama-rocm;
     rocmOverrideGfx = "11.0.0";
     acceleration = "rocm";
+  };
+  home-manager.users."${sys.username}" = {
+    home.packages = with pkgs; [ lmstudio ];
   };
 }

@@ -1,11 +1,25 @@
 { sys, pkgs, inputs, flake, ... }: {
   imports = [
     ./hardware.nix
-    ./services.nix
     ./desktop-environment.nix
     ./terminal-environment.nix
     ./theme.nix
+    ./filesystems.nix
+    ./defaultApplications.nix
+    ./ai.nix
+    ../../modules/programs/spotify.nix
     ../../modules/sops.nix
+    ../../modules/services/ssh.nix
+    ../../modules/services/flatpak.nix
+    ../../modules/services/minecraft-server.nix
+    ../../modules/hardware/audio.nix
+    ../../modules/hardware/goxlr-mini.nix
+    ../../modules/hardware/libinput.nix
+    ../../modules/hardware/network-shares.nix
+    ../../modules/hardware/printing.nix
+    ../../modules/hardware/razer.nix
+    ../../modules/hardware/wooting.nix
+    ../../modules/hardware/xpad.nix
   ];
 
   environment.sessionVariables = {

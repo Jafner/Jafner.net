@@ -1,8 +1,4 @@
 { pkgs, sys, inputs, ... }: {
-  imports = [
-      ./defaultApplications.nix
-      ../../modules/programs/spotify.nix
-  ];
   programs.kdeconnect.enable = true;
   programs.xwayland.enable = true;
   programs.steam.enable = true;
@@ -46,6 +42,7 @@
       dotool
       nixd
       sops
+      kdePackages.filelight
     ] ++ [ # Media creation tools
       losslesscut-bin
       ffmpeg-full

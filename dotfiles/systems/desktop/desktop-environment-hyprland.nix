@@ -1,7 +1,4 @@
 { pkgs, sys, inputs, ... }: {
-  imports = [
-      ./defaultApplications.nix
-  ];
   programs.kdeconnect.enable = true;
   programs.xwayland.enable = true;
   programs.steam.enable = true;
