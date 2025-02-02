@@ -286,7 +286,7 @@ in {
       userEmail = "${usr.${sys.username}.email}";
       extraConfig = {
         init.defaultBranch = "main";
-        core.sshCommand = "ssh -i /home/${sys.username}/.ssh/${sys.sshKey}";
+        core.sshCommand = "ssh -i ${sys.sshKey}";
         gpg.format = "openpgp";
         commit.gpgsign = true;
         tag.gpgsign = true;
