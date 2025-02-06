@@ -23,7 +23,7 @@ services:
       KC_METRICS_ENABLED: true
       KEYCLOAK_ADMIN: Jafner
     env_file:
-      - path: /run/secret/keycloak/keycloak
+      - path: /run/secrets/keycloak/keycloak
         required: true
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
@@ -49,7 +49,7 @@ services:
       CLIENT_ID: "traefik-forward-auth"
       LOG_LEVEL: "debug"
     env_file:
-      - path: /run/secret/keycloak/forwardauth
+      - path: /run/secrets/keycloak/forwardauth
         required: true
     labels:
       - "traefik.enable=false"
@@ -72,7 +72,7 @@ services:
       CLIENT_ID: "traefik-forward-auth-privileged"
       LOG_LEVEL: "debug"
     env_file:
-      - path: /run/secret/keycloak/forwardauth-privileged
+      - path: /run/secrets/keycloak/forwardauth-privileged
         required: true
     labels:
       - "traefik.enable=false"
@@ -88,7 +88,7 @@ services:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
     env_file:
-     - path: /run/secret/keycloak/postgres
+     - path: /run/secrets/keycloak/postgres
        required: true
     volumes:
       - $APPDATA/postgres:/var/lib/postgresql/data
