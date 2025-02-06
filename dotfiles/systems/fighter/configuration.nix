@@ -1,6 +1,5 @@
 { sys, ... }: {
   imports = [
-    ./boot.nix
     ./docker.nix
     ./hardware.nix
     ./network-shares.nix
