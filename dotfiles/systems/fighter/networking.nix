@@ -8,5 +8,8 @@
       ipv4.addresses = [ { address = "192.168.1.23"; prefixLength = 24; } ];
     };
     nameservers = [ "10.0.0.1" ];
+    firewall.allowedTCPPorts = [
+      5201
+    ];
   };
 }
