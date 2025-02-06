@@ -49,7 +49,7 @@ services:
       PGID: "1001"
       PUID: "1001"
     volumes:
-      - "${DOCKER_DATA}/sabnzbd:/config"
+      - "${APPDATA}/sabnzbd:/config"
       - "${NZB_COMPLETED}:/downloads"
       - "${NZB_INCOMPLETE}:/incomplete-downloads"
     labels:
@@ -75,7 +75,7 @@ services:
       TZ: America/Los_Angeles
     volumes:
       - "${EBOOKS_LIBRARY}:/ebooks"
-      - "${DOCKER_DATA}/calibre:/config"
+      - "${APPDATA}/calibre:/config"
     restart: unless-stopped
     labels:
       traefik.http.routers.books-calibre-desktop.middlewares: lan-only@file,traefik-forward-auth-privileged@file
@@ -97,8 +97,8 @@ services:
       TZ: America/Los_Angeles
     volumes:
       - "${EBOOKS_LIBRARY}:/ebooks"
-      - "${DOCKER_DATA}/calibre-web:/config"
-      - "${DOCKER_DATA}/calibre/metadata.db:/ebooks/metadata.db"
+      - "${APPDATA}/calibre-web:/config"
+      - "${APPDATA}/calibre/metadata.db:/ebooks/metadata.db"
     labels:
       traefik.http.routers.books-calibre-web.middlewares: lan-only@file,traefik-forward-auth-privileged@file
       traefik.http.routers.books-calibre-web.rule: Host(`calibreweb.books.jafner.net`)
@@ -116,8 +116,8 @@ services:
       TZ: America/Los_Angeles
     volumes:
       - "${AUDIOBOOKS_LIBRARY}:/books"
-      - "${DOCKER_DATA}/audiobookshelf:/config"
-      - "${DOCKER_DATA}/audiobookshelf-metadata:/metadata"
+      - "${APPDATA}/audiobookshelf:/config"
+      - "${APPDATA}/audiobookshelf-metadata:/metadata"
     labels:
       traefik.http.routers.books-audiobookshelf.middlewares: lan-only@file,traefik-forward-auth-privileged@file
       traefik.http.routers.books-audiobookshelf.rule: Host(`audiobookshelf.books.jafner.net`)
