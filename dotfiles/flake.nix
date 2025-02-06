@@ -268,6 +268,7 @@
         modules = [
           ./systems/fighter/configuration.nix
           inputs.home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
         ];
         inherit system pkgs;
         specialArgs = { inherit sys flake; };
