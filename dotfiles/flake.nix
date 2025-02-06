@@ -71,7 +71,7 @@
           sshKey = "/home/joey/.ssh/joey.desktop@jafner.net";
           signingKey = "B0BBF464024BCEAE";
           shellPackage = "zsh";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
           wallpaper = ./assets/romb-3840x2160.png;
           arch = "x86_64-linux";
           flakeDir = "Git/Jafner.net/dotfiles";
@@ -258,7 +258,7 @@
               torrenting = "/mnt/torrenting";
             };
           };
-          kernelPackage = "";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
