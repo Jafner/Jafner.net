@@ -6,6 +6,7 @@
     ./stacks.nix
     ./terminal-environment.nix
     ./boot.nix
+    ../../modules/sops.nix
   ];
   # DO NOT CHANGE
   system.stateVersion = "24.11";
