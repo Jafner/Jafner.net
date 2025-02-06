@@ -46,6 +46,7 @@ in {
 
   sops.secrets."smb" = { 
     sopsFile = ./smb.secrets;
+    format = "binary";
     key = "";
     mode = "0440";
     owner = sys.username;
