@@ -1,7 +1,10 @@
 { sys, pkgs, inputs, flake, ... }: {
   imports = [ inputs.sops-nix.nixosModules.sops ]; 
   sops = {
-    age.sshKeyPaths = [ "/home/${sys.username}/${sys.ssh.privateKey}" ];
+    age.sshKeyPaths = [ 
+      "/home/${sys.username}/${sys.ssh.privateKey}" 
+      "/etc/ssh/ssh_host_ed25519_key"
+    ];
     age.generateKey = false;
   };
 
