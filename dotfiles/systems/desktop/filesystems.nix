@@ -17,8 +17,14 @@
     };
 
     "/mnt/iscsi/joey-desktop" = {
-      device = "/dev/disk/by-uuid/7446B1DB46B19DF4";
-      fsType = "ntfs3";
+     device = "/dev/disk/by-uuid/7446B1DB46B19DF4";
+     fsType = "ntfs3";
+     options = [
+      "nofail"
+      "auto"
+      "users"
+      "x-systemd.automount"
+     ];
     };
   };
 
