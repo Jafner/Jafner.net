@@ -1,11 +1,14 @@
 { sys, ... }: {
   imports = [
-    ./server.nix
+    ./boot.nix
     ./docker.nix
+    ./hardware.nix
     ./network-shares.nix
+    ./networking.nix
+    ./server.nix
     ./stacks.nix
     ./terminal-environment.nix
-    ./boot.nix
+
     ../../modules/sops.nix
   ];
   # DO NOT CHANGE
