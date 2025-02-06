@@ -44,13 +44,19 @@ in {
     };
   };
 
+  sops.secrets."smb" = { 
+    sopsFile = ./smb.secrets;
+    key = "";
+    mode = "0440";
+    owner = sys.username;
+  };
   environment.systemPackages = with pkgs; [ cifs-utils ];
   fileSystems =
     let
         fsType = "cifs";
         options = [
           "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s" 
-          "credentials=/etc/nixos/smb-secrets,uid=1000,gid=1000"
+          "credentials=/run/secrets/smb,uid=1000,gid=1000"
         ];
     in {
     "${sys.dataDirs.library.av}" = { 
