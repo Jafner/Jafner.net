@@ -13,7 +13,7 @@
     };
   };
   sops.secrets."${stack}" = { 
-    sopsFile = ./secrets.env;
+    sopsFile = "./${stack}.secrets";
     key = "";
     mode = "0440";
     owner = sys.username;
