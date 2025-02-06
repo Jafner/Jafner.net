@@ -6,9 +6,9 @@
   musicPlayer = "vlc.desktop";
   videoPlayer = "vlc.desktop";
   textEditor = "dev.zed.Zed.desktop";
-  docViewer = "zen.desktop";
+  #docViewer = "zen.desktop";
   fileManager = "org.kde.dolphin.desktop";
-  terminal = "org.kde.konsole.desktop";
+  #terminal = "org.kde.konsole.desktop";
   archiveManager = "org.kde.ark.desktop";
 in {
   home-manager.users."${sys.username}".xdg.mimeApps = {
