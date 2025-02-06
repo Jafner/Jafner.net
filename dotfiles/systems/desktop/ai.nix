@@ -12,6 +12,28 @@
     acceleration = "rocm";
   };
   home-manager.users."${sys.username}" = {
-    home.packages = with pkgs; [ lmstudio ];
+    home.packages = with pkgs; [ 
+      lmstudio 
+      docker 
+      docker-compose
+      ( writeShellApplication {
+        name = "ai";
+        runtimeInputs = [
+            libnotify
+            jq
+            git
+        ];
+        text = ''
+          #!/bin/bash
+        '';
+      } )
+    ];
   };
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings.data-root = "/docker";
+    rootless.enable = true;
+    rootless.setSocketVariable = true;
+  };
+  users.users.${sys.username}.extraGroups = [ "docker" ];
 }
