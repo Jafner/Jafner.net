@@ -46,7 +46,7 @@ in {
 
   sops.secrets."smb" = { 
     sopsFile = ./smb.secrets;
-    format = "binary";
+    format = "dotenv";
     key = "";
     mode = "0440";
     owner = sys.username;
