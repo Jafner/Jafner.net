@@ -2,7 +2,7 @@
   virtualisation.docker = {
     enable = true;
     daemon.settings.data-root = "/docker";
-    rootless.enable = true;
+    rootless.enable = false; 
     rootless.setSocketVariable = true;
   };
 
