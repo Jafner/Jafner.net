@@ -20,7 +20,7 @@
     };
   };
   sops.secrets."${stack}" = { 
-    sopsFile = "./${stack}.secrets";
+    sopsFile = ./books.secrets;
     key = "";
     mode = "0440";
     owner = sys.username;

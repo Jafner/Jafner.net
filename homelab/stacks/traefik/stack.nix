@@ -13,7 +13,7 @@
     };
   };
   sops.secrets."${stack}" = { 
-    sopsFile = "./${stack}.secrets";
+    sopsFile = ./traefik.secrets;
     key = "";
     mode = "0440";
     owner = sys.username;
