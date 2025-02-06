@@ -26,6 +26,7 @@
             rebuild() {
               notify-send "Nixos: Beginning rebuild"
               sudo nixos-rebuild switch \
+                  --refresh \
                   --flake "$FLAKE_URI" \
                   --impure \
                   --show-trace &&\
