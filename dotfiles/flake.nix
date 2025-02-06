@@ -243,6 +243,10 @@
             mac = "00:02:C9:56:BF:9A";
             ip = "192.168.1.23";
           };
+          ssh = {
+            path = ".ssh";
+            privateKey = "admin@fighter";
+          };
           dataDirs = {
             appdata = "/appdata";
             library = {
