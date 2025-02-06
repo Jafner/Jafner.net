@@ -1,7 +1,7 @@
 { sys, pkgs, inputs, flake, ... }: {
   imports = [ inputs.sops-nix.nixosModules.sops ]; 
   sops = {
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.sshKeyPaths = [ "${sys.ssh.path}/${sys.ssh.privateKey}" ];
     #age.keyFile = "/home/${sys.username}/.config/sops/age/keys.txt"; # This file is expected to be provided from outside the nix-store
     age.generateKey = false;
   };
