@@ -39,3 +39,4 @@ providers:
     network: web
   file:
     directory: /config
+    watch: false
