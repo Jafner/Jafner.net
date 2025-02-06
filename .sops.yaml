@@ -1,9 +1,11 @@
 keys:
   - &joey_desktop_jafner_net age1v5wy7epv5mm8ddf3cfv8m0e9w4s693dw7djpuytz9td8ycha5f0sv2se9n
   - &joey_age age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00
+  - &admin_fighter age1qn4d34uzq26khsdd4x5ndhaek4xflfc3sddk7xeanmp47unlc46st6l7vc
 creation_rules:
   - path_regex: ^.*(\.(secrets|token|passwd)|secrets.env|config.boot)
     key_groups:
     - age:
       - *joey_desktop_jafner_net
       - *joey_age
+      - *admin_fighter
