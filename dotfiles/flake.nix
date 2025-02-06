@@ -238,6 +238,11 @@
           hostname = "fighter";
           authorizedKeys = jafnerKeys;
           shellPackage = "bash";
+          networking = {
+            ifname = "enp3s0";
+            mac = "00:02:C9:56:BF:9A";
+            ip = "192.168.1.23";
+          };
           dataDirs = {
             appdata = "/appdata";
             library = {
