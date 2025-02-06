@@ -6,8 +6,6 @@ services:
     restart: "no"
     networks:
       web:
-        ipv4_address: 172.20.0.10
-      monitoring: 
     ports:
       - 80:80
       - 443:443
@@ -23,6 +21,4 @@ services:
 
 networks:
   web:
-    external: true
-  monitoring:
     external: true
