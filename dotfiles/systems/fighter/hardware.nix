@@ -37,6 +37,10 @@
     rocmPackages_5.rocminfo
   ];
 
+  home-manager.users."${sys.username}" = {
+    home.packages = with pkgs; [ amdgpu_top ];
+  };
+
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
