@@ -20,10 +20,22 @@
     loader.systemd-boot.enable = true;
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ "amdgpu" "kvm-amd" ];
     kernelPackages = pkgs.linuxKernel.packages."${sys.kernelPackage}";
     extraModulePackages = [ ];
   };
+
+  hardware = {
+    amdgpu.amdvlk.enable = false;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+  };
+  environment.systemPackages = with pkgs; [
+    rocmPackages_5.rocm-smi
+    rocmPackages_5.rocminfo
+  ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = true;
