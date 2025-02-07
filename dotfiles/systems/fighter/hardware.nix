@@ -19,7 +19,7 @@
   boot = { 
     loader.systemd-boot.enable = true;
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-    initrd.kernelModules = [ ];
+    initrd.kernelModules = [ "amdgpu" ];
     kernelModules = [ "amdgpu" "kvm-amd" ];
     kernelPackages = pkgs.linuxKernel.packages."${sys.kernelPackage}";
     extraModulePackages = [ ];
@@ -33,8 +33,8 @@
     };
   };
   environment.systemPackages = with pkgs; [
-    rocmPackages_5.rocm-smi
-    rocmPackages_5.rocminfo
+    rocmPackages.rocm-smi
+    rocmPackages.rocminfo
   ];
 
   home-manager.users."${sys.username}" = {
