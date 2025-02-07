@@ -263,7 +263,7 @@
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
           inherit system;
-          config = { allowUnfreePredicate = (_: true); };
+          config = { allowUnfreePredicate = (_: true); allowUnfree = true; };
         };
       in nixpkgs.lib.nixosSystem {
         modules = [
