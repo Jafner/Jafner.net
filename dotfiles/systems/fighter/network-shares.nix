@@ -73,6 +73,10 @@ in {
       device = "//192.168.1.12/Torrenting";
       inherit fsType options;
     };
+    "/mnt/archive" = {
+      device = "//192.168.1.12/Archive";
+      inherit fsType options;
+    };
     "/mnt/iscsi/fighter" = {
      device = "/dev/disk/by-uuid/cf3a253c-e792-48b5-89a1-f91deb02b3be";
      fsType = "ext4";
