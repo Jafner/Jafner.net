@@ -19,12 +19,7 @@
     "/mnt/iscsi/joey-desktop" = {
      device = "/dev/disk/by-uuid/7446B1DB46B19DF4";
      fsType = "ntfs3";
-     options = [
-      "nofail"
-      "auto"
-      "users"
-      "x-systemd.automount"
-     ];
+     options = [ "rw" "uid=1000" "gid=100" ];
     };
   };
 
@@ -41,7 +36,7 @@
       serviceConfig = {
         ExecStartPre = "${pkgs.openiscsi}/bin/iscsiadm -m discovery -t sendtargets -p 192.168.1.12:3260";
         ExecStart = "${pkgs.openiscsi}/bin/iscsiadm -m node -T iqn.2020-03.net.jafner:joey-desktop -p 192.168.1.12:3260 --login";
-        ExecStop = "${pkgs.openiscsi}/bin/iscsiadm -m node -T iqn.2020-03.net.jafner:joey-desktop -p $192.168.1.12:3260 --logout";
+        ExecStop = "${pkgs.openiscsi}/bin/iscsiadm -m node -T iqn.2020-03.net.jafner:joey-desktop -p 192.168.1.12:3260 --logout";
         Restart = "on-failure";
         RemainAfterExit = true;
       };
