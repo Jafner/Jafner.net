@@ -36,6 +36,7 @@
   environment.systemPackages = with pkgs; [
     rocmPackages.rocm-smi
     rocmPackages.rocminfo
+    amdgpu_top
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
