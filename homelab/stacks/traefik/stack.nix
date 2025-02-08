@@ -5,10 +5,11 @@
       text = ''APPDATA=${sys.dataDirs.appdata}/${stack}'';
       target = "stacks/${stack}/.env";
     };
-    "${stack}/config/config.yaml" = {
+    "${stack}" = {
       enable = true;
-      source = ./config/config.yaml;
-      target = "stacks/${stack}/config/config.yaml";
+      recursive = true;
+      source = ./.;
+      target = "stacks/${stack}/";
     };
   };
   sops.secrets."${stack}" = { 
