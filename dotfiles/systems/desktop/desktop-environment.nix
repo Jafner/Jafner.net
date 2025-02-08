@@ -327,6 +327,7 @@
         "terminal.integrated.defaultProfile.linux" = "zsh";
         "terminal.integrated.fontFamily" = pkgs.lib.mkDefault "'DejaVu Sans Mono'"; # Potentially collides with Stylix
         "terminal.integrated.profiles.linux.zsh.path" = "/usr/bin/zsh";
+        "diffEditor.maxComputationTime" = 0;
       };
     };
     programs.obs-studio = {
