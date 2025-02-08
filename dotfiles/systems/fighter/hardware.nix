@@ -19,26 +19,10 @@
   boot = { 
     loader.systemd-boot.enable = true;
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-    initrd.kernelModules = [ "amdgpu" ];
-    kernelModules = [ "amdgpu" "kvm-amd" ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxKernel.packages."${sys.kernelPackage}";
     extraModulePackages = [ ];
-  };
-
-  hardware = {
-    amdgpu.amdvlk.enable = false;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-  };
-  environment.systemPackages = with pkgs; [
-    rocmPackages.rocm-smi
-    rocmPackages.rocminfo
-  ];
-
-  home-manager.users."${sys.username}" = {
-    home.packages = with pkgs; [ amdgpu_top ];
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
