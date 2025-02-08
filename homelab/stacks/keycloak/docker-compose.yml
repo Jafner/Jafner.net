@@ -25,6 +25,8 @@ services:
     env_file:
       - path: /run/secrets/keycloak/keycloak
         required: true
+    volumes:
+      - $APPDATA/import:/import
     labels:
       traefik.http.routers.keycloak.rule: Host(`keycloak.jafner.net`)
       traefik.http.routers.keycloak.tls.certresolver: lets-encrypt
