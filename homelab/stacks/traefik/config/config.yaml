@@ -1,0 +1,298 @@
+tls:
+  options:
+    tls12:
+      minVersion: VersionTLS12
+
+http:
+  routers:
+    api:
+      rule: "Host(`traefik.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares: 
+       - "lan-only@file"
+      service: "api@internal"
+      tls:
+        certResolver: "lets-encrypt"
+    barbarian:
+      rule: "Host(`barbarian.nas.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "barbarian@file"
+      tls:
+        certResolver: "lets-encrypt"
+    monk:
+      rule: "Host(`monk.nas.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "monk@file"
+      tls:
+        certResolver: "lets-encrypt"
+    paladin:
+      rule: "Host(`paladin.nas.jafner.net`)" 
+      entryPoints: "websecure"
+      middlewares: 
+        - "lan-only@file"
+      service: "paladin@file"
+      tls:
+        certResolver: "lets-encrypt"
+    ranger:
+      rule: "Host(`pihole.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "ranger@file"
+      tls:
+        certResolver: "lets-encrypt"
+    silver-hand:
+      entrypoints:
+        - "websecure"
+        - "web"
+      rule: HostRegexp(`^.+\.jafner\.dev$`)
+      service: "silver-hand@file"
+    desktop:
+      entrypoints:
+        - "websecure"
+        - "web"
+      rule: HostRegexp(`^.+\.ai\.jafner\.(net|dev)$`)
+      service: "desktop@file"
+    toes-day:
+      rule: "Host(`day.toes.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "toes-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    toes-night:
+      rule: "Host(`night.toes.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "toes-night@file"
+      tls:
+        certResolver: "lets-encrypt"
+    lab-rack:
+      rule: "Host(`rack.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "lab-rack@file"
+      tls:
+        certResolver: "lets-encrypt"
+    sprout-day:
+      rule: "Host(`day.sprout.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "sprout-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    figment-day:
+      rule: "Host(`day.figment.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "figment-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    figment-night:
+      rule: "Host(`night.figment.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "figment-night@file"
+      tls:
+        certResolver: "lets-encrypt"
+    president-day:
+      rule: "Host(`day.president.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "president-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+    cowboy-day:
+      rule: "Host(`day.cowboy.tasmota.jafner.net`)"
+      entryPoints: "websecure"
+      middlewares:
+        - "lan-only@file"
+      service: "cowboy-day@file"
+      tls:
+        certResolver: "lets-encrypt"
+        
+  middlewares:
+    lan-only:
+      ipWhiteList:
+        sourceRange:
+          - "127.0.0.1/32"
+          - "192.168.1.1/24"
+    simple-auth:
+      basicAuth:
+        usersFile: "/.htpasswd"
+    securityheaders:
+      headers:
+        customResponseHeaders:
+          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex"
+          server: ""
+        sslProxyHeaders:
+          X-Forwarded-Proto: https
+        referrerPolicy: "same-origin"
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+          X-Scheme: https
+        contentTypeNosniff: true
+        browserXssFilter: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsSeconds: 63072000
+        stsPreload: true
+    pihole:
+      addprefix:
+        prefix: "/admin"
+    traefik-forward-auth:
+      forwardauth:
+        address: http://forwardauth:4181
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-Forwarded-User
+    traefik-forward-auth-privileged:
+      forwardauth:
+        address: http://forwardauth-privileged:4181
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-Forwarded-User
+    nextcloud-headers:
+      headers:
+        accessControlMaxAge: 100
+        sslRedirect: true
+        stsSeconds: 63072000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true
+        customFrameOptionsValue: "SAMEORIGIN" #CSP takes care of this but may be needed for organizr.
+        contentTypeNosniff: true
+        browserXssFilter: true
+        sslForceHost: true 
+        sslHost: "nextcloud.jafner.net"
+        referrerPolicy: "no-referrer"
+        #contentSecurityPolicy: "frame-ancestors '*.example.com:*';object-src 'none';script-src 'none';"
+        featurePolicy: "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';"
+        customResponseHeaders:
+          X-Robots-Tag: "noindex, nofollow"
+          server: ""
+    nextcloud-redirect:
+      redirectRegex:
+        permanent: true
+        regex: "https://(.*)/.well-known/(card|cal)dav"
+        replacement: "https://${1}/remote.php/dav/"
+    keycloak:
+      headers:
+        customResponseHeaders:
+          X-Robots-Tag: "noindex, nofollow"
+        referrerPolicy: "same-origin"
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+          X-Scheme: https
+
+  serversTransports:
+    insecureskipverify:
+      insecureSkipVerify: true
+
+  services:
+    barbarian:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.10/"
+    monk:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.11/"
+    paladin:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.12/"
+    ranger:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.32/"
+    silver-hand:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "https://192.168.1.31"
+          - url: "https://192.168.1.32"
+          - url: "https://192.168.1.33"
+    desktop:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "https://192.168.1.135"
+    toes-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.50/"
+    lab-rack:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.51/"
+    cowboy-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.52/"
+    figment-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.53/"
+    figment-night:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.54/"
+    president-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.55/"
+    toes-night:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.56"
+    sprout-day:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.57/"
+
+tcp:
+  routers:
+    silver-hand:
+      entrypoints: 
+        - "websecure"
+        - "web"
+      rule: HostSNIRegexp(`^.+\.jafner\.dev$`)
+      service: "silver-hand@file"
+      tls: 
+        passthrough: true
+    desktop:
+      entrypoints: 
+        - "websecure"
+        - "web"
+      rule: HostSNIRegexp(`^.+\.ai\.jafner\.(net|dev)$`)
+      service: "desktop@file"
+      tls: 
+        passthrough: true
+
+  services:
+    silver-hand:
+      loadBalancer:
+        servers:
+          - address: "192.168.1.31:443"
+          - address: "192.168.1.32:443"
+          - address: "192.168.1.33:443"
+    desktop:
+      loadBalancer:
+        servers:
+          - address: "192.168.1.135:443"

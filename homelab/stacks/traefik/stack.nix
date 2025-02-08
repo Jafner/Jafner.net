@@ -1,15 +1,14 @@
 { sys, ... }: let stack = "traefik"; in {
   home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
     "${stack}/.env" = {
       enable = true;
       text = ''APPDATA=${sys.dataDirs.appdata}/${stack}'';
       target = "stacks/${stack}/.env";
+    };
+    "${stack}/config/config.yaml" = {
+      enable = true;
+      source = ./config/config.yaml;
+      target = "stacks/${stack}/config/config.yaml";
     };
   };
   sops.secrets."${stack}" = { 
