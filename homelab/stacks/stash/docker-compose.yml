@@ -4,7 +4,8 @@ services:
     image: stashapp/stash:latest
     restart: "no"
     devices:
-      - /dev/dri/renderD128
+      - /dev/kfd
+      - /dev/dri
     group_add:
       - video
     cap_add:
