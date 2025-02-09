@@ -11,7 +11,7 @@
       nethogs
       pinentry-all
       ffmpeg-full
-      libvautils
+      libva-utils
     ] ++ [
       ( writeShellApplication {
         name = "nixos";
