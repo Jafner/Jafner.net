@@ -4,11 +4,10 @@ services:
     image: stashapp/stash:latest
     restart: "no"
     devices:
-      - /dev/kfd
       - /dev/dri
     group_add:
-      - 26 #video
-      - 303 #render
+      - video
+      - render
     cap_add:
       - SYS_PTRACE
     security_opt:
@@ -36,5 +35,3 @@ services:
 networks:
   web:
     external: true
-
-# ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "/media/Videos/test.mp4" -vf 'format=nv12,hwupload' -c:v hevc_vaapi -c:a copy "/media/Videos/test-hevc.mp4"
