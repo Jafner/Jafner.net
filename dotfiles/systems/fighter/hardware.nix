@@ -38,6 +38,7 @@
     rocmPackages.rocminfo
     amdgpu_top
   ];
+  users.users."${sys.username}".extraGroups = [ "video" "render" ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = true;
