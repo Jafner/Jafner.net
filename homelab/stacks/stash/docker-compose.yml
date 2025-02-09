@@ -4,13 +4,13 @@ services:
     image: stashapp/stash:latest
     restart: "no"
     devices:
-      - "/dev/dri/renderD128:/dev/dri/renderD128"
+      - /dev/dri/renderD128
     group_add:
       - video
     cap_add:
       - SYS_PTRACE
     security_opt:
-      - seccomp=unconfined
+      - seccomp:unconfined
     volumes:
       - $APPDATA/.stash:/root/.stash
       - $APPDATA/generated:/generated
