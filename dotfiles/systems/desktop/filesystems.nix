@@ -16,17 +16,16 @@
       fsType = "btrfs";
     };
 
-    "/mnt/iscsi/joey-desktop" = {
-     device = "/dev/disk/by-uuid/7446B1DB46B19DF4";
-     fsType = "ntfs3";
-     options = [ "rw" "uid=1000" "gid=100" ];
+    "/mnt/nas" = {
+     device = "/dev/disk/by-uuid/fe61c053-9df9-4276-ba4b-ce2f44f91883";
+     fsType = "ext4";
     };
   };
 
   services.openiscsi = {
     enable = true;
     discoverPortal = "192.168.1.12:3260";
-    name = "joey-desktop";
+    name = "nas";
   };
   systemd.services = {
     iscsi-autoconnect-paladin = {
