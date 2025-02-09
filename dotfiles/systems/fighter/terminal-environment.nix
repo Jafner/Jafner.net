@@ -10,6 +10,8 @@
       tree
       nethogs
       pinentry-all
+      ffmpeg-full
+      libvautils
     ] ++ [
       ( writeShellApplication {
         name = "nixos";
