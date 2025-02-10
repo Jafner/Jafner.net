@@ -21,4 +21,5 @@
   };
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+  services.dbus.implementation = "broker";
 }
