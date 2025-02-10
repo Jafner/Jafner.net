@@ -7,11 +7,7 @@ services:
       - /dev/dri
     group_add:
       - video
-      - render
-    cap_add:
-      - SYS_PTRACE
-    security_opt:
-      - seccomp:unconfined
+    shm_size: 8G
     volumes:
       - $APPDATA/.stash:/root/.stash
       - $APPDATA/generated:/generated
