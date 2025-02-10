@@ -16,10 +16,10 @@
       fsType = "btrfs";
     };
 
-    "/mnt/nas" = {
-     device = "/dev/disk/by-uuid/fe61c053-9df9-4276-ba4b-ce2f44f91883";
-     fsType = "ext4";
-    };
+    # "/mnt/nas" = {
+    #  device = "/dev/disk/by-uuid/fe61c053-9df9-4276-ba4b-ce2f44f91883";
+    #  fsType = "ext4";
+    # };
   };
 
   services.openiscsi = {
@@ -28,7 +28,7 @@
     name = "nas";
   };
   systemd.services = {
-    iscsi-autoconnect-paladin = {
+    iscsi-autoconnect = {
       description = "Log into iSCSI target joey-desktop on paladin";
       after = [ "network.target" "iscsid.service" ];
       wants = [ "iscsid.service" ];
