@@ -16,6 +16,7 @@
     sopsFile = ./mosquitto.passwd;
     key = "";
     mode = "0440";
+    format = "binary";
     owner = sys.username;
   };
 }
