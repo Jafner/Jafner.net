@@ -7,6 +7,8 @@
     ./filesystems.nix
     ./defaultApplications.nix
     ./ai.nix
+    ./clips.nix
+    ../../modules/services/minecraft-server.nix
     ../../modules/programs/spotify.nix
     ../../modules/sops.nix
     ../../modules/services/ssh.nix
