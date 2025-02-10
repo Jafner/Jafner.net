@@ -1,6 +1,5 @@
 { sys, pkgs, usr, flake, ... }: let
   aliases = {
-    cat = "bat --paging=never --color=always";
     ls = "eza";
     tree = "eza --tree";
     fetch = "fastfetch";
@@ -10,7 +9,6 @@ in {
   programs."${sys.shellPackage}".enable = true;
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs; [
-      bat
       fd
       fastfetch
       fzf
@@ -286,7 +284,7 @@ in {
       userEmail = "${usr.${sys.username}.email}";
       extraConfig = {
         init.defaultBranch = "main";
-        core.sshCommand = "ssh -i ${sys.sshKey}";
+        core.sshCommand = "ssh -i $HOME/${sys.ssh.privateKey}";
         gpg.format = "openpgp";
         commit.gpgsign = true;
         tag.gpgsign = true;
