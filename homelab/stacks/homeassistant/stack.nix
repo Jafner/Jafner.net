@@ -19,4 +19,6 @@
     format = "binary";
     owner = sys.username;
   };
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }
