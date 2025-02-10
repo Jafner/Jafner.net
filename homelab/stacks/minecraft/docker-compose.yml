@@ -7,28 +7,7 @@ services:
       - minecraft
     ports:
       - 25565:25565
-    command: --api-binding=0.0.0.0:25566 --mapping=e9.jafner.net=192.168.1.135:25566
-
-  e10:
-    image: itzg/minecraft-server:latest
-    user: 1001:1001
-    container_name: minecraft_e10
-    environment:
-      EULA: TRUE
-      OPS: jafner425,mollymsmom,galaxysqvid
-      ENABLE_RCON: true
-      UID: 1001
-      GID: 1001
-      MEMORY: 6G
-      VERSION: 1.21
-      MOD_PLATFORM: AUTO_CURSEFORGE
-      TYPE: AUTO_CURSEFORGE
-      CF_PAGE_URL: https://www.curseforge.com/minecraft/modpacks/enigmatica10
-    volumes:
-      - $APPDATA/e10:/data:rw
-    networks:
-      - minecraft
-    restart: "no"
+    command: --api-binding=0.0.0.0:25566 --mapping=mc.jafner.net=192.168.1.135:25565
 
 networks:
   minecraft:
