@@ -68,7 +68,6 @@
         sys = {
           username = "joey";
           hostname = "desktop";
-          sshKey = "/home/joey/.ssh/joey.desktop@jafner.net";
           signingKey = "B0BBF464024BCEAE";
           shellPackage = "zsh";
           kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
@@ -79,8 +78,8 @@
           dockerData = "/home/joey/docker/data";
           ssh = {
             path = "/home/joey/.ssh";
-            privateKey = "joey.desktop@jafner.net";
-            publicKey = "joey.desktop@jafner.net.pub";
+            privateKey = ".ssh/joey.desktop@jafner.net";
+            publicKey = ".ssh/joey.desktop@jafner.net.pub";
           };
         };
         system = "x86_64-linux";
