@@ -71,7 +71,9 @@
           FILE_NAME="''$''\{FILE_NAME%.*}"
 
           ZIPLINE_HOST_ROOT=https://zipline.jafner.net
-          TOKEN=$(cat /run/secrets/clips/zipline)
+
+          export $(cat /run/secrets/clips)
+
           RESPONSE=$(curl \
               --header "authorization: $TOKEN" \
               $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
@@ -101,8 +103,7 @@
           FILE_NAME=$(basename "$INPUT_FILE")
           FILE_NAME="''$''\{FILE_NAME%.*}"
 
-          CF_TOKEN="$(cat /run/secrets/clips/cloudflare/token)"
-          CF_ID="$(cat /run/secrets/clips/cloudflare/id)"
+          export $(cat /run/secrets/clips)
 
           notify-send -t 2000 "Cloudflare - Beginning upload."
 
@@ -135,7 +136,8 @@
           FILE_NAME="''$''\{FILE_NAME%.*}"
 
           ZIPLINE_HOST_ROOT=https://zipline.jafner.net
-          TOKEN=$(cat ~/.zipline-auth)
+          
+          export $(cat /run/secrets/clips)
 
           notify-send -t 2000 "Zipline and Cloudflare - Beginning upload."
           RESPONSE=$(curl \
@@ -146,9 +148,6 @@
               --header "Embed: true" \
               --header "Original-Name: true")
           LINK=$(echo "$RESPONSE" | jq -r .'files[0]' | sed 's/\/u\//\/r\//')
-
-          CF_TOKEN="$(cat ~/.cf-auth)"
-          CF_ID="$(cat ~/.cf-id)"
 
           # shellcheck disable=SC2086
           RESPONSE=$(curl -X POST \
