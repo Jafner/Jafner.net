@@ -16,12 +16,14 @@
     sopsFile = ./postgres.secrets;
     key = "";
     mode = "0440";
+    format = "binary";
     owner = sys.username;
   };
   sops.secrets."${stack}/zipline" = { 
     sopsFile = ./zipline.secrets;
     key = "";
     mode = "0440";
+    format = "binary";
     owner = sys.username;
   };
 }
