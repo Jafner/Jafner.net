@@ -32,7 +32,7 @@ services:
       - traefik.http.services.zipline.loadbalancer.server.port=3000
 
   postgres:
-    image: postgres:latest
+    image: postgres:15
     container_name: zipline_postgres
     restart: unless-stopped
     networks:
