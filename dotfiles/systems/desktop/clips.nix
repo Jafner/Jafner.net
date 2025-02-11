@@ -1,6 +1,20 @@
 { pkgs, sys, ... }: {
-  sops.secrets.clips = { 
-    sopsFile = ./clips.secrets;
+  sops.secrets.zipline = { 
+    sopsFile = ./zipline.token;
+    key = "";
+    mode = "0440";
+    format = "binary";
+    owner = sys.username;
+  };
+  sops.secrets."cloudflare/id" = { 
+    sopsFile = ./cloudflare_id.token;
+    key = "";
+    mode = "0440";
+    format = "binary";
+    owner = sys.username;
+  };
+  sops.secrets."cloudflare/token" = { 
+    sopsFile = ./cloudflare_stream.token;
     key = "";
     mode = "0440";
     format = "binary";
@@ -72,10 +86,10 @@
 
           ZIPLINE_HOST_ROOT=https://zipline.jafner.net
 
-          export $(cat /run/secrets/clips)
+          ZIPLINE_TOKEN="$(cat /run/secrets/zipline)"
 
           RESPONSE=$(curl \
-              --header "authorization: $TOKEN" \
+              --header "authorization: $ZIPLINE_TOKEN" \
               $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
               --header "Content-Type: multipart/form-data" \
               --header "Format: name" \
@@ -103,7 +117,8 @@
           FILE_NAME=$(basename "$INPUT_FILE")
           FILE_NAME="''$''\{FILE_NAME%.*}"
 
-          export $(cat /run/secrets/clips)
+          CF_TOKEN="$(cat /run/secrets/cloudflare/token)"
+          CF_ID="$(cat /run/secrets/cloudflare/id)"
 
           notify-send -t 2000 "Cloudflare - Beginning upload."
 
@@ -137,11 +152,14 @@
 
           ZIPLINE_HOST_ROOT=https://zipline.jafner.net
           
-          export $(cat /run/secrets/clips)
+          CF_TOKEN="$(cat /run/secrets/cloudflare/token)"
+          CF_ID="$(cat /run/secrets/cloudflare/id)"
+          ZIPLINE_TOKEN="$(cat /run/secrets/zipline)"
+
 
           notify-send -t 2000 "Zipline and Cloudflare - Beginning upload."
           RESPONSE=$(curl \
-              --header "authorization: $TOKEN" \
+              --header "authorization: $ZIPLINE_TOKEN" \
               $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
               --header "Content-Type: multipart/form-data" \
               --header "Format: name" \
