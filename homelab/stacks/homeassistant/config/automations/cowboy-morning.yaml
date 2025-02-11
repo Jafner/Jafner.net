@@ -1,0 +1,16 @@
+alias: Cowboy Morning
+description: ""
+mode: single
+triggers:
+  - at: "08:00:00"
+    trigger: time
+conditions: []
+actions:
+  - data:
+      dimmer_entity_id: light.tp_link_smart_dimmer_d226
+    action: script.dawn_simulation_generic
+  - metadata: {}
+    data: {}
+    target:
+      entity_id: switch.tasmota_cowboy_day
+    action: switch.turn_on

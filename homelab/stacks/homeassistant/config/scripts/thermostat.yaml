@@ -1,0 +1,61 @@
+alias: Thermostat (Generic)
+sequence:
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states(thermometer_temperature_entity_id)|float > upper_threshold_f
+          }}
+    then:
+      - target:
+          entity_id: "{{ dimmer_entity_id }}"
+        data:
+          brightness_step_pct: -10
+        action: light.turn_on
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states(thermometer_temperature_entity_id)|float < lower_threshold_f
+          }}
+    then:
+      - target:
+          entity_id: "{{ dimmer_entity_id }}"
+        data:
+          brightness_step_pct: 10
+        action: light.turn_on
+mode: single
+icon: mdi:thermometer-alert
+fields:
+  lower_threshold_f:
+    selector:
+      number:
+        min: 40
+        max: 100
+        step: 1
+    name: Lower Temp Threshold
+    description: >-
+      Temperature threshold below which the dimmer should be increased (in
+      Fahrenheit)
+    required: true
+  upper_threshold_f:
+    selector:
+      number:
+        min: 40
+        max: 100
+        step: 1
+    name: Upper Temp Threshold
+    description: >-
+      Temperature threshold above which the dimmer should be increased (in
+      Fahrenheit)
+    required: true
+  dimmer_entity_id:
+    selector:
+      entity: {}
+    name: Dimmer Entity ID
+    description: Homeassistant entity ID of dimmer to use for output
+    required: true
+  thermometer_temperature_entity_id:
+    selector:
+      entity: {}
+    name: Thermometer Entity ID
+    description: Homeassistant entity ID of the thermometer to use
+    required: true

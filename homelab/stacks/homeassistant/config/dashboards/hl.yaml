@@ -1,0 +1,128 @@
+views:
+  - title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.nextcloud_jafner_net_amount_of_active_users_last_day
+            name: Active Users (24H)
+          - entity: sensor.nextcloud_jafner_net_amount_of_files
+            name: File Count (Total)
+          - entity: sensor.nextcloud_jafner_net_amount_of_link_shares
+            name: Shared Links
+          - entity: sensor.nextcloud_jafner_net_cache_memory_size
+            name: Cache Memory
+          - entity: sensor.nextcloud_jafner_net_cpu_load_last_15_minutes
+            name: CPU Load (core)
+          - entity: sensor.nextcloud_jafner_net_database_size
+            name: Database Size
+          - entity: sensor.nextcloud_jafner_net_total_memory
+            name: System Memory (Total)
+        title: Nextcloud
+        show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: switch.pi_hole
+            name: Blocking Enabled
+          - entity: sensor.pi_hole_ads_blocked_today
+            name: Ads Blocked (24H)
+          - entity: sensor.pi_hole_dns_unique_clients
+            name: Unique Clients
+          - entity: sensor.pi_hole_dns_queries_cached
+            name: DNS Cached Hits
+          - entity: sensor.pi_hole_dns_queries_forwarded
+            name: DNS Cache Misses
+          - entity: sensor.pi_hole_dns_queries_today
+            name: DNS Queries (24H)
+          - entity: sensor.pi_hole_dns_unique_domains
+            name: Unique Domains
+          - entity: sensor.pi_hole_domains_blocked
+            name: Domains on Blocklist
+        title: Pi-Hole
+        show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: switch.tasmota_lab_rack
+            name: Enabled
+            secondary_info: none
+          - entity: sensor.tasmota_lab_rack_energy_power
+            name: Power Draw
+            secondary_info: none
+          - entity: sensor.tasmota_lab_rack_energy_today
+            secondary_info: none
+            name: Energy Total (Today)
+          - entity: sensor.tasmota_lab_rack_energy_yesterday
+            name: Energy Total (Yesterday)
+        title: Tasmota - Lab Rack
+      - type: entities
+        entities:
+          - entity: device_tracker.joey_s_pixel_6a
+            secondary_info: none
+          - entity: sensor.joey_s_pixel_6a_app_rx_gb
+            secondary_info: none
+            name: HA Data Receive
+          - entity: sensor.joey_s_pixel_6a_app_tx_gb
+            name: HA Data Transmit
+          - entity: sensor.joey_s_pixel_6a_battery_level
+            name: Battery Charge
+          - entity: sensor.joey_s_pixel_6a_charger_type
+            name: Connected Charger
+          - entity: sensor.joey_s_pixel_6a_detected_activity
+            name: Detected Activity
+          - entity: sensor.joey_s_pixel_6a_do_not_disturb_sensor
+            name: Do Not Disturb
+          - entity: sensor.joey_s_pixel_6a_geocoded_location
+            name: GPS Location
+          - entity: sensor.joey_s_pixel_6a_internal_storage
+            name: Storage Used
+          - entity: sensor.joey_s_pixel_6a_mobile_rx_gb
+            name: 5G Rx (since Last Boot)
+          - entity: sensor.joey_s_pixel_6a_mobile_tx_gb
+            name: 5G Tx (since Last Boot)
+          - entity: sensor.joey_s_pixel_6a_os_version
+            name: Android Version
+          - entity: sensor.joey_s_pixel_6a_pressure_sensor
+            name: Pressure
+          - entity: sensor.joey_s_pixel_6a_public_ip_address
+            name: IP Address
+          - entity: sensor.joey_s_pixel_6a_wifi_connection
+            name: Current Wifi
+          - entity: sensor.joey_s_pixel_6a_wifi_signal_strength
+            name: Wifi Strength
+        title: Joey's Pixel
+        show_header_toggle: false
+      - type: grid
+        square: false
+        columns: 1
+        cards:
+          - type: entities
+            entities:
+              - entity: button.joey_s_server_scan_clients
+                name: Scan Clients
+              - entity: update.plex_media_server_joey_s_server
+                name: Active Streams
+              - entity: sensor.joey_s_server_library_movies
+                name: Movies in Library
+                secondary_info: none
+              - entity: sensor.joey_s_server_library_shows
+                name: Shows in Library
+                type: attribute
+                attribute: shows
+                suffix: Items
+      - type: entities
+        entities:
+          - entity: sensor.eaton5px1500rt_status
+            name: Status
+            secondary_info: none
+          - entity: sensor.eaton5px1500rt_battery_charge
+            name: Battery Charge
+          - entity: sensor.eaton5px1500rt_input_voltage
+            name: Input
+          - entity: sensor.eaton5px1500rt_load
+            name: Load
+          - entity: sensor.eaton5px1500rt_output_voltage
+            name: Output
+          - entity: sensor.eaton5px1500rt_battery_capacity
+            name: Capacity
+        title: Eaton UPS (5PX1500RT)
+        state_color: true
+        show_header_toggle: false

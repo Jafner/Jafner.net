@@ -1,0 +1,27 @@
+views:
+  - title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: light.tp_link_smart_dimmer_d226
+          - entity: switch.tasmota_cowboy_day
+            name: Light Switch
+          - entity: sensor.h5101_4c94_temperature
+            name: Warm
+          - entity: sensor.h5101_4c94_humidity
+            name: Warm
+          - entity: sensor.h5101_4c94_battery
+            name: Warm
+          - entity: sensor.h5101_6627_temperature
+            name: Cool
+          - entity: sensor.h5101_6627_humidity
+            name: Cool
+          - entity: sensor.h5101_6627_battery
+            name: Cool
+          - entity: sensor.tasmota_cowboy_day_energy_power
+            name: Power Draw
+          - entity: sensor.tasmota_cowboy_day_energy_today
+            name: Energy Used Today
+          - entity: sensor.tasmota_cowboy_day_energy_yesterday
+            name: 'Energy Used Yesterday '
+        title: Cowboy

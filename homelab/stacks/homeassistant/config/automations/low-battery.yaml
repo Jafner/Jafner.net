@@ -1,0 +1,15 @@
+alias: Low Battery Notification
+description: Send a discord notification when battery level is below 20%.
+use_blueprint:
+  path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+  input:
+    time: "10:00:00"
+    exclude:
+      entity_id: []
+      device_id: 700be9e5b405e952816078e20e88ae80
+    actions:
+      - metadata: {}
+        data:
+          target: "974011788372901908"
+          message: The battery for {{sensors}} is low. Replace soon.
+        action: notify.homeassistant

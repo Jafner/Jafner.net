@@ -1,0 +1,44 @@
+alias: Reptiles Night
+description: ""
+mode: single
+triggers:
+  - at: "20:00:00"
+    trigger: time
+conditions: []
+actions:
+  - metadata: {}
+    data: {}
+    target:
+      entity_id:
+        - switch.figment_nighttime_timer
+    alias: "Night Heat On: Figment"
+    action: switch.turn_on
+  - metadata: {}
+    data: {}
+    target:
+      entity_id:
+        - switch.figment_nighttime_timer
+    alias: "Night Heat On: President"
+    action: switch.turn_on
+  - parallel:
+      - alias: "Dusk Simulation: President"
+        data:
+          dimmer_entity_id: light.president_day_heat_23ee
+        action: script.dusk_simulation_generic
+      - data:
+          dimmer_entity_id: light.sprout_day_heat_1d71
+        alias: "Dusk Simulation: Sprout"
+        action: script.dusk_simulation_generic
+      - alias: "Dusk Simulation: Figment"
+        data:
+          dimmer_entity_id: light.figment_day_heat_1e07
+        action: script.dusk_simulation_generic
+      - alias: "Dusk Simulation: Toes"
+        data:
+          dimmer_entity_id: light.toes_heat_day_7855
+        action: script.dusk_simulation_generic
+  - alias: "UVB Off: Toes"
+    target:
+      entity_id: light.toes_day_11bc
+    data: {}
+    action: light.turn_off

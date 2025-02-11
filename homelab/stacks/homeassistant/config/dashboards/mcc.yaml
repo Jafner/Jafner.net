@@ -1,0 +1,69 @@
+views:
+  - title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: light.sprout_day_heat_1d71
+            name: Sprout Day Dimmer
+          - entity: switch.lizard_light_switch_tasmota
+            name: Sprout Day Plug
+          - entity: sensor.h5075_eed0_temperature
+          - entity: sensor.h5075_eed0_humidity
+          - entity: sensor.h5075_5301_temperature
+          - entity: sensor.h5075_5301_humidity
+          - entity: sensor.lizard_light_switch_energy_power
+          - entity: sensor.h5075_eed0_battery
+          - entity: sensor.h5075_5301_battery
+        title: Sprout
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: light.toes_heat_day_7855
+            name: Toes Day Dimmer
+          - entity: light.toes_day_11bc
+            name: Toes Day Switch
+          - entity: sensor.h5101_4456_temperature
+          - entity: sensor.h5101_4456_humidity
+          - entity: sensor.h5101_1f4b_temperature
+          - entity: sensor.h5101_1f4b_humidity
+          - entity: sensor.gecko_daytime_timer_energy_power
+          - entity: sensor.h5101_4456_battery
+          - entity: sensor.h5101_1f4b_battery
+        title: Toes
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: light.figment_day_heat_1e07
+            name: Figment Day Dimmer
+          - entity: switch.figment_daytime_timer
+            name: Figment Day Switch
+          - entity: switch.figment_nighttime_timer
+            name: Figment Night Switch
+          - entity: sensor.h5075_059d_temperature
+          - entity: sensor.h5075_059d_humidity
+          - entity: sensor.h5075_4ef1_temperature
+          - entity: sensor.h5075_4ef1_humidity
+          - entity: sensor.figment_nighttime_timer_energy_power
+          - entity: sensor.figment_daytime_timer_energy_power
+          - entity: sensor.h5075_059d_battery
+          - entity: sensor.h5075_4ef1_battery
+        title: Figment
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: light.president_day_heat_23ee
+            name: President Day Dimmer
+          - entity: switch.tasmota
+            name: President Day Switch
+          - entity: sensor.h5075_c470_temperature
+          - entity: sensor.h5075_c470_humidity
+          - entity: sensor.h5075_f77f_temperature
+          - entity: sensor.h5075_f77f_humidity
+          - entity: sensor.tasmota_energy_power
+          - entity: sensor.h5075_c470_battery
+          - entity: sensor.h5075_f77f_battery
+        title: Mr. President
+        state_color: true

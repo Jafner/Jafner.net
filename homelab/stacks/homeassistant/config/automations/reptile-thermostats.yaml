@@ -1,0 +1,46 @@
+alias: Reptile Thermostats
+description: ""
+mode: single
+triggers:
+  - minutes: /10
+    trigger: time_pattern
+conditions:
+  - condition: time
+    before: "21:00:00"
+    after: "08:00:00"
+actions:
+  - metadata: {}
+    data:
+      dimmer_entity_id: light.tp_link_smart_dimmer_1e07
+      lower_threshold_f: 83
+      upper_threshold_f: 85
+      thermometer_temperature_entity_id: sensor.h5075_059d_temperature
+    action: script.dimmer_adjust_figment
+  - metadata: {}
+    data:
+      dimmer_entity_id: light.tp_link_smart_dimmer_1d71
+      lower_threshold_f: 83
+      upper_threshold_f: 85
+      thermometer_temperature_entity_id: sensor.h5075_eed0_temperature
+    action: script.dimmer_adjust_figment
+  - metadata: {}
+    data:
+      dimmer_entity_id: light.tp_link_smart_dimmer_23ee
+      lower_threshold_f: 83
+      upper_threshold_f: 85
+      thermometer_temperature_entity_id: sensor.h5075_c470_temperature
+    action: script.dimmer_adjust_figment
+  - metadata: {}
+    data:
+      dimmer_entity_id: light.tp_link_smart_dimmer_d226
+      lower_threshold_f: 90
+      thermometer_temperature_entity_id: sensor.h5101_4c94_temperature
+      upper_threshold_f: 94
+    action: script.dimmer_adjust_figment
+  - metadata: {}
+    data:
+      dimmer_entity_id: light.tp_link_smart_dimmer_7855
+      lower_threshold_f: 80
+      thermometer_temperature_entity_id: sensor.h5101_4456_temperature
+      upper_threshold_f: 83
+    action: script.dimmer_adjust_figment

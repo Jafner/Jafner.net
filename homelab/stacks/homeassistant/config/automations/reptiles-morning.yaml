@@ -1,0 +1,54 @@
+alias: Reptiles Morning
+description: ""
+mode: single
+triggers:
+  - at: "07:00:00"
+    trigger: time
+conditions: []
+actions:
+  - metadata: {}
+    data: {}
+    target:
+      entity_id:
+        - switch.lizard_light_switch_tasmota
+        - switch.gecko_daytime_timer
+        - switch.tasmota
+        - switch.figment_daytime_timer
+      device_id:
+        - 36ed49d33ceff8304792e3354a3b72c0
+        - c76e31686cdea736e8267274c9ff6cd2
+    action: switch.turn_on
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 30
+      milliseconds: 0
+  - parallel:
+      - data:
+          dimmer_entity_id: light.sprout_day_heat_1d71
+        alias: "Dawn Simulation: Sprout"
+        action: script.dawn_simulation_generic
+      - data:
+          dimmer_entity_id: light.president_day_heat_23ee
+        alias: "Dawn Simulation: President"
+        action: script.dawn_simulation_generic
+      - data:
+          dimmer_entity_id: light.figment_day_heat_1e07
+        alias: "Dawn Simulation: Figment"
+        action: script.dawn_simulation_generic
+      - metadata: {}
+        data: {}
+        target:
+          entity_id: light.toes_day_11bc
+        alias: "UVB+Lights on: Toes"
+        action: light.turn_on
+      - data:
+          dimmer_entity_id: light.toes_heat_day_7855
+        alias: "Dawn Simulation: Toes"
+        action: script.dawn_simulation_generic
+  - metadata: {}
+    data: {}
+    target:
+      entity_id: switch.figment_nighttime_timer
+    enabled: false
+    action: switch.turn_off
