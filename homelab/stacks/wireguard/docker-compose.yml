@@ -6,7 +6,7 @@ services:
     environment:
       WG_HOST: vpn.jafner.net
       WG_PORT: 53820
-      WG_DEFAULT_DNS: 192.168.1.1
+      WG_DEFAULT_DNS: 10.0.0.1
     ports:
       - 53820:51820/udp
     networks:
