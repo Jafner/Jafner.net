@@ -1,26 +1,29 @@
-{ sys, pkgs, inputs, flake, ... }: {
-  #imports = [ inputs.sops-nix.nixosModules.sops ]; 
+{ sops, pkgs ? import <nixpkgs>, ... }: {
   sops = {
-    age.sshKeyPaths = [ "/home/${sys.username}/${sys.ssh.privateKey}" ];
+    age.sshKeyPaths = [ "/home/${sops.username}/${sops.sshPrivateKey}" ];
     age.generateKey = false;
   };
 
-  home-manager.users.${sys.username}.home.packages = with pkgs; [
-    sops
-    age
-    ssh-to-age
-    ( writeShellApplication {
+  home-manager.users.${sops.username}.home.packages = [
+    pkgs.sops
+    pkgs.age
+    pkgs.ssh-to-age
+    ( pkgs.writeShellApplication {
         name = "sops-nix";
-        runtimeInputs = [ git ssh-to-age openssh yq  ];
+        runtimeInputs = [ 
+          pkgs.git 
+          pkgs.ssh-to-age 
+          pkgs.openssh 
+          pkgs.yq  ];
         text = ''
           #! bash
 
           # shellcheck disable=SC2002
           # shellcheck disable=SC2016
 
-          REPO_ROOT="/home/${sys.username}/${flake.repoPath}"
+          REPO_ROOT="${sops.repoRoot}"
           # shellcheck disable=SC2034
-          SOPS_AGE_KEY_FILE="/home/${sys.username}/.config/sops/age/keys.txt"
+          SOPS_AGE_KEY_FILE="/home/${sops.username}/.config/sops/age/keys.txt"
 
           listSecrets () {
             # shellcheck disable=SC2002

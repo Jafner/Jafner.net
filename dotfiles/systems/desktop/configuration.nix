@@ -11,7 +11,6 @@
     ../../modules/services/minecraft-server.nix
     ../../modules/programs/spotify.nix
     ../../modules/sops.nix
-    ../../modules/services/ssh.nix
     ../../modules/services/flatpak.nix
     ../../modules/services/minecraft-server.nix
     ../../modules/hardware/audio.nix

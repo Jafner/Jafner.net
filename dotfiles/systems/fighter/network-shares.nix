@@ -1,33 +1,4 @@
-{ pkgs, sys, ... }: let
-  
-  iscsi = { 
-    iqn = "iqn.2020-03.net.jafner:fighter";
-    portal = { # For Paladin
-      ip = "192.168.1.12";
-      port = "3260";
-    };
-  };
-in {
-  services.openiscsi = {
-    enable = true;
-    name = iscsi.iqn;
-    discoverPortal = "${iscsi.portal.ip}:${iscsi.portal.port}";
-  };
-
-  systemd.services = {
-    iscsi-autoconnect-paladin = {
-      description = "Log into iSCSI target ${iscsi.iqn} on paladin";
-      after = [ "network.target" "iscsid.service" ];
-      wants = [ "iscsid.service" ];
-      serviceConfig = {
-        ExecStartPre = "${pkgs.openiscsi}/bin/iscsiadm -m discovery -t sendtargets -p ${iscsi.portal.ip}:${iscsi.portal.port}";
-        ExecStart = "${pkgs.openiscsi}/bin/iscsiadm -m node -T ${iscsi.iqn} -p ${iscsi.portal.ip}:${iscsi.portal.port} --login";
-        ExecStop = "${pkgs.openiscsi}/bin/iscsiadm -m node -T ${iscsi.iqn} -p ${iscsi.portal.ip}:${iscsi.portal.port} --logout";
-        Restart = "on-failure";
-        RemainAfterExit = true;
-      };
-    };
-  };
+{ pkgs, sys, ... }: {
 
   sops.secrets."smb" = { 
     sopsFile = ./smb.secrets;
@@ -77,15 +48,6 @@ in {
       device = "//192.168.1.12/Archive";
       inherit fsType options;
     };
-    "/mnt/iscsi/fighter" = {
-     device = "/dev/disk/by-uuid/cf3a253c-e792-48b5-89a1-f91deb02b3be";
-     fsType = "ext4";
-     options = [
-      "nofail"
-      "auto"
-      "users"
-      "x-systemd.automount"
-     ];
-    };
+    
   };
 }

@@ -1,10 +1,4 @@
-{ sys, pkgs, usr, flake, ... }: let
-  aliases = {
-    ls = "eza";
-    tree = "eza --tree";
-    fetch = "fastfetch";
-  };
-in {
+{ sys, pkgs, usr, flake, ... }: {
   users.users."${sys.username}".shell = pkgs.${sys.shellPackage};
   programs."${sys.shellPackage}".enable = true;
   home-manager.users."${sys.username}" = {
@@ -278,22 +272,6 @@ in {
       '';
     };
 
-    programs.git = {
-      enable = true;
-      userName = "${usr.${sys.username}.realname}";
-      userEmail = "${usr.${sys.username}.email}";
-      extraConfig = {
-        init.defaultBranch = "main";
-        core.sshCommand = "ssh -i $HOME/${sys.ssh.privateKey}";
-        gpg.format = "openpgp";
-        commit.gpgsign = true;
-        tag.gpgsign = true;
-        user.signingKey = "${sys.signingKey}";
-      };
-      delta.enable = true;
-      delta.options.side-by-side = true;
-    };
-
     programs.gpg = {
       enable = true;
       homedir = "/home/${sys.username}/.gpg";
@@ -324,15 +302,12 @@ in {
       };
     };
 
-    home.shellAliases = aliases;
-
     programs.zsh = {
       enable = true;
       dotDir = ".config/zsh";
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases = aliases;
       history = {
         share = true;
         save = 10000;
