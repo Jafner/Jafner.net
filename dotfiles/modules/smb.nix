@@ -1,26 +1,60 @@
-{ smb, pkgs, ... }: {
+{ smb, sys, pkgs, ... }: {
 
   sops.secrets."smb" = { 
     sopsFile = ./smb.secrets;
     format = "binary";
     key = "";
     mode = "0440";
-    owner = smb.username;
+    owner = sys.username;
   };
 
   environment.systemPackages = with pkgs; [ cifs-utils ];
-  fileSystems = let
-    automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    permissions_opts = "credentials=/run/secrets/smb,uid=1000,gid=1000"; 
-  in { "${smb.name}" = {
-      mountPoint = smb.mountPoint;
-      device = smb.device;
-      fsType = "cifs";
-      options = [ 
-        "${automount_opts}"
-        "${permissions_opts}"
-        "${smb.extra_opts}" 
-      ];
-    };
+  fileSystems."movies" = {
+    mountPoint = "/mnt/movies";
+    device = "//192.168.1.12/Movies";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."music" = {
+    mountPoint = "/mnt/music";
+    device = "//192.168.1.12/Music";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."shows" = {
+    mountPoint = "/mnt/shows";
+    device = "//192.168.1.12/Shows";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."av" = { 
+    mountPoint = "/mnt/av";
+    device = "//192.168.1.12/AV"; 
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."printing" = { 
+    mountPoint = "/mnt/3dprinting";
+    device = "//192.168.1.12/3DPrinting";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."books" = {
+    mountPoint = "/mnt/books";
+    device = "//192.168.1.12/Text";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."torrenting" = {
+    mountPoint = "/mnt/torrenting";
+    device = "//192.168.1.12/Torrenting";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
+  fileSystems."archive" = {
+    mountPoint = "/mnt/archive";
+    device = "//192.168.1.12/Archive";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
   };
 }

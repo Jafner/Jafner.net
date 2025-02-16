@@ -20,7 +20,7 @@
       libreoffice-qt6
       kdePackages.kcalc
     ] ++ [ # Browser(s)
-      inputs.zen-browser.packages."${sys.arch}".default
+      inputs.zen-browser.packages."x86_64-linux".default
     ] ++ [ # Multimedia viewers
       vlc
     ] ++ [ # Messaging tools

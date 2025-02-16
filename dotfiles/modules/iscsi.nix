@@ -1,7 +1,7 @@
-{ iscsi, pkgs, ... }: {
+{ iscsi, sys, pkgs, ... }: {
   services.openiscsi = {
     enable = true;
-    name = iscsi.iqn;
+    name = sys.hostname;
     discoverPortal = "${iscsi.portalIP}";
   };
 
@@ -19,14 +19,14 @@
       };
     };
   };
-  
-  fileSystems."${iscsi.mountPath}" = {
-     device = "/dev/disk/by-path/ip-${iscsi.portalIP}-iscsi-${iscsi.iqn}-lun-0-part1";
-     fsType = "${iscsi.fsType}";
-     options = [
-      "x-systemd.requires=iscsi.service"
-      "_netdev"
-      "users"
-     ];
-  };
+
+  # fileSystems."${iscsi.mountPath}" = {
+  #    device = "/dev/disk/by-path/ip-${iscsi.portalIP}-iscsi-${iscsi.iqn}-lun-0-part1";
+  #    fsType = "${iscsi.fsType}";
+  #    options = [
+  #     "x-systemd.requires=iscsi.service"
+  #     "_netdev"
+  #     "users"
+  #    ];
+  # };
 }

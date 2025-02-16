@@ -1,27 +1,27 @@
-{ sys, pkgs, usr, flake, ... }: {
+{ sys, pkgs, git, ... }: {
   users.users."${sys.username}".shell = pkgs.zsh;
   programs.zsh.enable = true;
   home-manager.users."${sys.username}" = {
-    home.packages = with pkgs; [
-      fd
-      fastfetch
-      fzf
-      jq
-      tree
-      nethogs
-      pinentry-all
+    home.packages = [
+      pkgs.fd
+      pkgs.fastfetch
+      pkgs.fzf
+      pkgs.jq
+      pkgs.tree
+      pkgs.nethogs
+      pkgs.pinentry-all
     ] ++ [
-      ( writeShellApplication {
+      ( pkgs.writeShellApplication {
         name = "nixos";
         runtimeInputs = [
-            libnotify
-            jq
-            git
+            pkgs.libnotify
+            pkgs.jq
+            pkgs.git
         ];
         text = ''
           #!/bin/bash
           # shellcheck disable=SC2088
-          FLAKE_DIR=$(dirname "/home/${sys.username}/${flake.repoPath}/${flake.path}")
+          FLAKE_DIR=$(dirname "/home/${sys.username}/Git/Jafner.net/dotfiles")
           CURRENT_CONFIGURATION="desktop"
           cd "$FLAKE_DIR"
 
@@ -69,7 +69,7 @@
           }
 
           edit() {
-            zeditor "/home/${sys.username}/${flake.repoPath}"
+            zeditor "$FLAKE_DIR"
           }
 
           where() {
@@ -98,7 +98,7 @@
           esac
         '';
       } )
-      ( writeShellApplication {
+      ( pkgs.writeShellApplication {
         name = "kitty-popup";
         runtimeInputs = [];
         text = ''
@@ -112,77 +112,77 @@
             "$@"
         '';
       } )
-      ( writeShellApplication {
-        name = "keyman";
-        runtimeInputs = [];
-        text = ''
-        #!/bin/bash
+      # ( pkgs.writeShellApplication {
+      #   name = "keyman";
+      #   runtimeInputs = [];
+      #   text = ''
+      #   #!/bin/bash
 
-        # Fuck GPG. Miserable UX.
+      #   # Fuck GPG. Miserable UX.
 
-        id="${usr.${sys.username}.email}"
-        device="desktop"
-        homedir="/home/${sys.username}/.gpg"
-        backupdir="/home/${sys.username}/.keys"
-        mkdir -p "$homedir" "$backupdir"
+      #   id="${git.email}"
+      #   device="desktop"
+      #   homedir="/home/${sys.username}/.gpg"
+      #   backupdir="/home/${sys.username}/.keys"
+      #   mkdir -p "$homedir" "$backupdir"
 
-        getPrimaryKeyFingerprint() {
-          return "$(gpg --list-keys | grep fingerprint | tr -s ' ' | cut -d'=' -f2 | xargs)"
-        }
+      #   getPrimaryKeyFingerprint() {
+      #     return "$(gpg --list-keys | grep fingerprint | tr -s ' ' | cut -d'=' -f2 | xargs)"
+      #   }
 
-        bootstrap() {
-          gpg --quick-generate-key '${usr.${sys.username}.realname} < ${usr.${sys.username}.email} >' ed25519 cert 0
-          gpg --quick-add-key "$(getPrimaryKeyFingerprint)" ed25519 sign 0
-          gpg --quick-add-key "$(getPrimaryKeyFingerprint)" cv25519 encrypt 0
-        }
+      #   bootstrap() {
+      #     gpg --quick-generate-key '${git.realname} < ${git.email} >' ed25519 cert 0
+      #     gpg --quick-add-key "$(getPrimaryKeyFingerprint)" ed25519 sign 0
+      #     gpg --quick-add-key "$(getPrimaryKeyFingerprint)" cv25519 encrypt 0
+      #   }
 
-        lockPrimary() {
-          gpg -a --export-secret-key "$(getPrimaryKeyFingerprint)" > "$backupdir/$id.primary.gpg"
-          gpg -a --export "$(getPrimaryKeyFingerprint)" > "$backupdir/$id.primary.gpg.pub"
-          gpg -a --export-secret-subkeys "$(getPrimaryKeyFingerprint)" > "/tmp/subkeys.gpg"
-          gpg --delete-secret-subkeys "$(getPrimaryKeyFingerprint)"
-          gpg --import "/tmp/subkeys.gpg" && rm "/tmp/subkeys.gpg"
-        }
+      #   lockPrimary() {
+      #     gpg -a --export-secret-key "$(getPrimaryKeyFingerprint)" > "$backupdir/$id.primary.gpg"
+      #     gpg -a --export "$(getPrimaryKeyFingerprint)" > "$backupdir/$id.primary.gpg.pub"
+      #     gpg -a --export-secret-subkeys "$(getPrimaryKeyFingerprint)" > "/tmp/subkeys.gpg"
+      #     gpg --delete-secret-subkeys "$(getPrimaryKeyFingerprint)"
+      #     gpg --import "/tmp/subkeys.gpg" && rm "/tmp/subkeys.gpg"
+      #   }
 
-        unlockPrimary() {
-          gpg --import "$backupdir/$id.primary.gpg"
-          if gpg --list-secret-keys | grep -q sec#; then
-            echo "Unlocked primary key $backupdir/$id.primary.gpg"
-          else
-            echo "Failed to unlock primary key $backupdir/$id.primary.gpg"
-          fi
-        }
+      #   unlockPrimary() {
+      #     gpg --import "$backupdir/$id.primary.gpg"
+      #     if gpg --list-secret-keys | grep -q sec#; then
+      #       echo "Unlocked primary key $backupdir/$id.primary.gpg"
+      #     else
+      #       echo "Failed to unlock primary key $backupdir/$id.primary.gpg"
+      #     fi
+      #   }
 
-        initNewDevice() {
-          stty icrnl
-          unlockPrimary
-          gpg --quick-add-key "$(getPrimaryKeyFingerprint)" ed25519 sign 0
-          if [[ $(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]") -gt 1 ]]; then
-            echo "More than one loaded signing key is listed for today's date. Please select one:"
-            while read -r key; do
-              key_list+=( "$key" )
-            done< <(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]")
-            select key in "''$''\{key_list[@]}"; do
-              SUBKEY_FINGERPRINT=$(echo "$key" | cut -d'/' -f2 | cut -d' ' -f1)
-              export SUBKEY_FINGERPRINT
-              echo "Subkey fingerprint: $SUBKEY_FINGERPRINT"
-              break
-            done
-          else
-            SUBKEY_FINGERPRINT=$(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]" | cut -d'/' -f2 | cut -d' ' -f1 | head -1)
-            export SUBKEY_FINGERPRINT
-          fi
-          gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]"
-          gpg -a --export-secret-key "$SUBKEY_FINGERPRINT" > "$backupdir/$id.$device.gpg"
-          gpg -a --export "$SUBKEY_FINGERPRINT" > "$backupdir/$id.$device.gpg.pub"
+      #   initNewDevice() {
+      #     stty icrnl
+      #     unlockPrimary
+      #     gpg --quick-add-key "$(getPrimaryKeyFingerprint)" ed25519 sign 0
+      #     if [[ $(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]") -gt 1 ]]; then
+      #       echo "More than one loaded signing key is listed for today's date. Please select one:"
+      #       while read -r key; do
+      #         key_list+=( "$key" )
+      #       done< <(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]")
+      #       select key in "''$''\{key_list[@]}"; do
+      #         SUBKEY_FINGERPRINT=$(echo "$key" | cut -d'/' -f2 | cut -d' ' -f1)
+      #         export SUBKEY_FINGERPRINT
+      #         echo "Subkey fingerprint: $SUBKEY_FINGERPRINT"
+      #         break
+      #       done
+      #     else
+      #       SUBKEY_FINGERPRINT=$(gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]" | cut -d'/' -f2 | cut -d' ' -f1 | head -1)
+      #       export SUBKEY_FINGERPRINT
+      #     fi
+      #     gpg --list-keys | grep "$(date +%Y-%m-%d)" | grep "[S]"
+      #     gpg -a --export-secret-key "$SUBKEY_FINGERPRINT" > "$backupdir/$id.$device.gpg"
+      #     gpg -a --export "$SUBKEY_FINGERPRINT" > "$backupdir/$id.$device.gpg.pub"
 
-          lockPrimary
-        }
+      #     lockPrimary
+      #   }
 
-        "$@" || declare -F
+      #   "$@" || declare -F
 
-        '';
-      } )
+      #   '';
+      # } )
     ];
 
     programs.kitty = {
@@ -225,7 +225,7 @@
         { plugin = tmuxPlugins.resurrect; }
         { plugin = tmuxPlugins.tmux-fzf; }
       ];
-      shell = "${pkgs.${sys.shellPackage}.shellPath}";
+      shell = "${pkgs.zsh.shellPath}";
       # TODO: Declare tmux session presets
       # - 'sysmon' session
       #   - 'sysmon' window

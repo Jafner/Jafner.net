@@ -9,7 +9,7 @@
       enable = true;
       autoEnable = true;
       polarity = "dark";
-      image = "${sys.wallpaper}";
+      image = ./romb-3840x2160.png;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       fonts = {
         sizes = {

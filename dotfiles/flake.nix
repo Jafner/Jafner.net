@@ -39,71 +39,87 @@
     ...
   }: {
     nixosConfigurations = {
-      # desktop = let
-      #   sys = {
-      #     username = "joey";
-      #     hostname = "desktop";
-      #     kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-      #     sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-      #   };
-      #   system = "x86_64-linux";
-      #   pkgs = import inputs.nixpkgs {
-      #     inherit system;
-      #     overlays = [ nixgl.overlay ];
-      #     config = { allowUnfreePredicate = (_: true); };
-      #   };
-      # in nixpkgs.lib.nixosSystem {
-      #   modules = [
-      #     ./systems/desktop/configuration.nix
-      #     inputs.nix-flatpak.nixosModules.nix-flatpak
-      #     inputs.home-manager.nixosModules.home-manager
-      #     inputs.sops-nix.nixosModules.sops
-      #     {
-      #       home-manager.sharedModules = [
-      #         inputs.nix-flatpak.homeManagerModules.nix-flatpak
-      #         inputs.stylix.homeManagerModules.stylix
-      #       ];
-      #       home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
-      #     }
-      #     { imports = [ ./modules/system.nix ]; 
-      #       sys = sys; }
-      #     { imports = [ ./modules/git.nix ]; 
-      #       git = { 
-      #         username = sys.username; 
-      #         realname = sys.hostname; 
-      #         email = "joey@jafner.net"; 
-      #         sshPrivateKey = sys.ssyPrivateKey; 
-      #         signingKey = ""; 
-      #       }; }
-      #     { imports = [ ./modules/sops.nix ]; 
-      #       sops = { 
-      #         username = sys.username; 
-      #         sshPrivateKey = sys.sshPrivateKey; 
-      #         repoRoot = "/home/joey/Git/Jafner.net"; 
-      #       }; }
-      #     { imports = [ ./modules/docker.nix ]; 
-      #       docker = { 
-      #         username = sys.username; 
-      #       }; }
-      #     { imports = [ ./modules/smb.nix ];
-      #       smb = { 
-      #         name = "movies";
-      #         device = "//192.168.1.12/Movies";
-      #         mountPoint = "/mnt/movies";
-      #         username = sys.username;
-      #       }; }
-      #     { imports = [ ./modules/smb.nix ];
-      #       smb = { 
-      #         name = "shows";
-      #         device = "//192.168.1.12/Shows";
-      #         mountPoint = "/mnt/Shows";
-      #         username = sys.username;
-      #       }; }
-          
-      #   ];
-      #   inherit system;
-      #   specialArgs = { inherit pkgs inputs sys; };
-      # };
+      desktop = let
+        sys = {
+          username = "joey";
+          hostname = "desktop";
+          kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [ nixgl.overlay ];
+          config = { allowUnfreePredicate = (_: true); };
+        };
+      in nixpkgs.lib.nixosSystem {
+        modules = [
+          ./systems/desktop/configuration.nix
+          inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
+          {
+            home-manager.sharedModules = [
+              inputs.nix-flatpak.homeManagerModules.nix-flatpak
+              inputs.stylix.homeManagerModules.stylix
+            ];
+            home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
+          }
+          ./modules/system.nix
+          ./modules/git.nix
+          ./modules/sops.nix
+          ./modules/docker.nix
+          ./modules/smb.nix
+          ./modules/iscsi.nix
+          ./modules/services/minecraft-server.nix
+          ./modules/programs/spotify.nix
+          ./modules/services/flatpak.nix
+          ./modules/services/minecraft-server.nix
+          ./systems/desktop/hardware/audio.nix
+          ./systems/desktop/hardware/goxlr-mini.nix
+          ./systems/desktop/hardware/libinput.nix
+          ./systems/desktop/hardware/printing.nix
+          ./systems/desktop/hardware/razer.nix
+          ./systems/desktop/hardware/wooting.nix
+          ./systems/desktop/hardware/xpad.nix
+          ./systems/desktop/hardware.nix
+          ./systems/desktop/desktop-environment.nix
+          ./systems/desktop/terminal-environment.nix
+          ./systems/desktop/theme.nix
+          ./systems/desktop/filesystems.nix
+          ./systems/desktop/defaultApplications.nix
+          ./systems/desktop/clips.nix
+        ];
+        inherit system;
+        specialArgs = { inherit pkgs inputs; 
+          sys = sys;
+          docker = { 
+            username = sys.username; 
+          };
+          sops = { 
+            username = sys.username; 
+            sshPrivateKey = sys.sshPrivateKey; 
+            repoRoot = "/home/joey/Git/Jafner.net"; 
+          };
+          git = { 
+            username = sys.username; 
+            realname = "Joey Hafner"; 
+            email = "joey@jafner.net"; 
+            sshPrivateKey = sys.sshPrivateKey; 
+            signingKey = "B0BBF464024BCEAE"; 
+          };
+          smb = {
+            automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+            permissions_opts = "credentials=/run/secrets/smb,uid=1000,gid=1000";
+          };
+          iscsi = {
+            iqn = "iqn.2020-03.net.jafner:joey-desktop";
+            portalIP = "192.168.1.12:3260";
+            mountPath = "/mnt/iscsi"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
+            fsType = "ext4"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
+          };
+        };
+      };
 
       # # build with:
       # # nix build .#nixosConfigurations.iso.config.system.build.isoImage
