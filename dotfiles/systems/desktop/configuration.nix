@@ -13,14 +13,13 @@
     ../../modules/sops.nix
     ../../modules/services/flatpak.nix
     ../../modules/services/minecraft-server.nix
-    ../../modules/hardware/audio.nix
-    ../../modules/hardware/goxlr-mini.nix
-    ../../modules/hardware/libinput.nix
-    ../../modules/hardware/network-shares.nix
-    ../../modules/hardware/printing.nix
-    ../../modules/hardware/razer.nix
-    ../../modules/hardware/wooting.nix
-    ../../modules/hardware/xpad.nix
+    ./hardware/audio.nix
+    ./hardware/goxlr-mini.nix
+    ./hardware/libinput.nix
+    ./hardware/printing.nix
+    ./hardware/razer.nix
+    ./hardware/wooting.nix
+    ./hardware/xpad.nix
   ];
 
   environment.sessionVariables = {

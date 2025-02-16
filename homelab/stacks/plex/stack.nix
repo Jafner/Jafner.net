@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "plex"; in {
+{ sys, stacks, ... }: let stack = "plex"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -9,10 +9,10 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/${stack}
-        MOVIES_DIR=${sys.dataDirs.library.movies}
-        SHOWS_DIR=${sys.dataDirs.library.shows}
-        MUSIC_DIR=${sys.dataDirs.library.music}
+        APPDATA=${stacks.appdata}/${stack}
+        MOVIES_DIR=${stacks.library.movies}
+        SHOWS_DIR=${stacks.library.shows}
+        MUSIC_DIR=${stacks.library.music}
       '';
       target = "stacks/${stack}/.env";
     };

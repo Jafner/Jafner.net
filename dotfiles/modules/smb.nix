@@ -1,4 +1,4 @@
-{ smb, pkgs ? import <nixpkgs>, ... }: {
+{ smb, pkgs, ... }: {
 
   sops.secrets."smb" = { 
     sopsFile = ./smb.secrets;

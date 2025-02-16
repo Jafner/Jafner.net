@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "manyfold"; in {
+{ sys, stacks, ... }: let stack = "manyfold"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -9,8 +9,8 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/${stack}
-        LIBRARY=${sys.dataDirs.library.digitalModels}/Model Library/VanDAM
+        APPDATA=${stacks.appdata}/${stack}
+        LIBRARY=${stacks.library.digitalModels}/Model Library/VanDAM
       '';
       target = "stacks/${stack}/.env";
     };

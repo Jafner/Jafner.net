@@ -1,5 +1,5 @@
 { sys, pkgs, ... }: {
-  users.users."${sys.username}".shell = pkgs.${sys.shellPackage};
+  users.users."${sys.username}".shell = pkgs.bash;
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs; [
       bat
@@ -93,7 +93,7 @@
         { plugin = tmuxPlugins.resurrect; }
         { plugin = tmuxPlugins.tmux-fzf; }
       ];
-      shell = "${pkgs.${sys.shellPackage}.shellPath}";
+      shell = "${pkgs.bash.shellPath}";
       # TODO: Declare tmux session presets
       # - 'sysmon' session
       #   - 'sysmon' window

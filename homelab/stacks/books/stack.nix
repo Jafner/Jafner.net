@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "books"; in {
+{ sys, stacks, ... }: let stack = "books"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -9,12 +9,12 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/${stack}
-        EBOOKS_LIBRARY=${sys.dataDirs.library.books}/ebooks
-        AUDIOBOOKS_LIBRARY=${sys.dataDirs.library.books}/audiobooks
-        NZB_COMPLETED=${sys.dataDirs.appdata}/torrenting/NZB
-        NZB_INCOMPLETE=${sys.dataDirs.appdata}/torrenting/NZB_incomplete
-        LIBRARY_DIR=${sys.dataDirs.library.books}/Calibre
+        APPDATA=${stacks.appdata}/${stack}
+        EBOOKS_LIBRARY=${stacks.library.books}/ebooks
+        AUDIOBOOKS_LIBRARY=${stacks.library.books}/audiobooks
+        NZB_COMPLETED=${stacks.appdata}/torrenting/NZB
+        NZB_INCOMPLETE=${stacks.appdata}/torrenting/NZB_incomplete
+        LIBRARY_DIR=${stacks.library.books}/Calibre
       '';
       target = "stacks/${stack}/.env";
     };

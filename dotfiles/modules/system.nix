@@ -1,4 +1,4 @@
-{ sys, pkgs ? import <nixpkgs>, ... }: {
+{ sys, pkgs, ... }: {
 
   environment.systemPackages = with pkgs; [
     git
@@ -17,10 +17,10 @@
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
     description = "${sys.username}";
-    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile pkgs.fetchurl {  
+    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile (pkgs.fetchurl {  
       url = "https://github.com/Jafner.keys"; 
       sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4="; 
-    }); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+    })); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
   };
 
   security.sudo = {
@@ -50,7 +50,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "24.11";

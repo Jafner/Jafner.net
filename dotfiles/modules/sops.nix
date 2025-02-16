@@ -1,4 +1,4 @@
-{ sops, pkgs ? import <nixpkgs>, ... }: {
+{ sops, pkgs, ... }: {
   sops = {
     age.sshKeyPaths = [ "/home/${sops.username}/${sops.sshPrivateKey}" ];
     age.generateKey = false;

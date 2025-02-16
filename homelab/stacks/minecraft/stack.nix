@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "minecraft"; in {
+{ sys, stacks, ... }: let stack = "minecraft"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -9,7 +9,7 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/${stack}
+        APPDATA=${stacks.appdata}/${stack}
       '';
       target = "stacks/${stack}/.env";
     };

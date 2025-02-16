@@ -1,4 +1,4 @@
-{ iscsi, pkgs ? import <nixpkgs>, ... }: {
+{ iscsi, pkgs, ... }: {
   services.openiscsi = {
     enable = true;
     name = iscsi.iqn;

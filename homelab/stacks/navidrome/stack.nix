@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "navidrome"; in {
+{ sys, stacks, ... }: let stack = "navidrome"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -9,8 +9,8 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/${stack}
-        MUSIC_DIR=${sys.dataDirs.library.music}
+        APPDATA=${stacks.appdata}/${stack}
+        MUSIC_DIR=${stacks.library.music}
       '';
       target = "stacks/${stack}/.env";
     };

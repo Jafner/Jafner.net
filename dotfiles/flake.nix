@@ -39,163 +39,163 @@
     ...
   }: {
     nixosConfigurations = {
-      desktop = let
-        sys = {
-          username = "joey";
-          hostname = "desktop";
-          kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          overlays = [ nixgl.overlay ];
-          config = { allowUnfreePredicate = (_: true); };
-        };
-      in nixpkgs.lib.nixosSystem {
-        modules = [
-          ./systems/desktop/configuration.nix
-          inputs.nix-flatpak.nixosModules.nix-flatpak
-          inputs.home-manager.nixosModules.home-manager
-          inputs.sops-nix.nixosModules.sops
-          {
-            home-manager.sharedModules = [
-              inputs.nix-flatpak.homeManagerModules.nix-flatpak
-              inputs.stylix.homeManagerModules.stylix
-            ];
-            home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
-          }
-          { imports = [ ./modules/system.nix ]; 
-            sys = sys; }
-          { imports = [ ./modules/git.nix ]; 
-            git = { 
-              username = sys.username; 
-              realname = sys.hostname; 
-              email = "joey@jafner.net"; 
-              sshPrivateKey = sys.ssyPrivateKey; 
-              signingKey = ""; 
-            }; }
-          { imports = [ ./modules/sops.nix ]; 
-            sops = { 
-              username = sys.username; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              repoRoot = "/home/joey/Git/Jafner.net"; 
-            }; }
-          { imports = [ ./modules/docker.nix ]; 
-            docker = { 
-              username = sys.username; 
-            }; }
-          { imports = [ ./modules/smb.nix ];
-            smb = { 
-              name = "movies";
-              device = "//192.168.1.12/Movies";
-              mountPoint = "/mnt/movies";
-              username = sys.username;
-            }; }
-          { imports = [ ./modules/smb.nix ];
-            smb = { 
-              name = "shows";
-              device = "//192.168.1.12/Shows";
-              mountPoint = "/mnt/Shows";
-              username = sys.username;
-            }; }
+      # desktop = let
+      #   sys = {
+      #     username = "joey";
+      #     hostname = "desktop";
+      #     kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+      #     sshPrivateKey = ".ssh/joey.desktop@jafner.net";
+      #   };
+      #   system = "x86_64-linux";
+      #   pkgs = import inputs.nixpkgs {
+      #     inherit system;
+      #     overlays = [ nixgl.overlay ];
+      #     config = { allowUnfreePredicate = (_: true); };
+      #   };
+      # in nixpkgs.lib.nixosSystem {
+      #   modules = [
+      #     ./systems/desktop/configuration.nix
+      #     inputs.nix-flatpak.nixosModules.nix-flatpak
+      #     inputs.home-manager.nixosModules.home-manager
+      #     inputs.sops-nix.nixosModules.sops
+      #     {
+      #       home-manager.sharedModules = [
+      #         inputs.nix-flatpak.homeManagerModules.nix-flatpak
+      #         inputs.stylix.homeManagerModules.stylix
+      #       ];
+      #       home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
+      #     }
+      #     { imports = [ ./modules/system.nix ]; 
+      #       sys = sys; }
+      #     { imports = [ ./modules/git.nix ]; 
+      #       git = { 
+      #         username = sys.username; 
+      #         realname = sys.hostname; 
+      #         email = "joey@jafner.net"; 
+      #         sshPrivateKey = sys.ssyPrivateKey; 
+      #         signingKey = ""; 
+      #       }; }
+      #     { imports = [ ./modules/sops.nix ]; 
+      #       sops = { 
+      #         username = sys.username; 
+      #         sshPrivateKey = sys.sshPrivateKey; 
+      #         repoRoot = "/home/joey/Git/Jafner.net"; 
+      #       }; }
+      #     { imports = [ ./modules/docker.nix ]; 
+      #       docker = { 
+      #         username = sys.username; 
+      #       }; }
+      #     { imports = [ ./modules/smb.nix ];
+      #       smb = { 
+      #         name = "movies";
+      #         device = "//192.168.1.12/Movies";
+      #         mountPoint = "/mnt/movies";
+      #         username = sys.username;
+      #       }; }
+      #     { imports = [ ./modules/smb.nix ];
+      #       smb = { 
+      #         name = "shows";
+      #         device = "//192.168.1.12/Shows";
+      #         mountPoint = "/mnt/Shows";
+      #         username = sys.username;
+      #       }; }
           
-        ];
-        inherit system;
-        specialArgs = { inherit pkgs inputs sys; };
-      };
+      #   ];
+      #   inherit system;
+      #   specialArgs = { inherit pkgs inputs sys; };
+      # };
 
-      # build with:
-      # nix build .#nixosConfigurations.iso.config.system.build.isoImage
-      iso = let 
-        sys = {
-          username = "admin";
-          hostname = "installer";
-          signingKey = "";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-      in nixpkgs.lib.nixosSystem {
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-          { imports = [ ./modules/system.nix ]; }
-        ];
-        inherit system pkgs;
-        specialArgs = { inherit sys; };
-      };
+      # # build with:
+      # # nix build .#nixosConfigurations.iso.config.system.build.isoImage
+      # iso = let 
+      #   sys = {
+      #     username = "admin";
+      #     hostname = "installer";
+      #     signingKey = "";
+      #     kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+      #     sshPrivateKey = ".ssh/joey.desktop@jafner.net";
+      #   };
+      #   system = "x86_64-linux";
+      #   pkgs = import inputs.nixpkgs {
+      #     inherit system;
+      #     config = { allowUnfreePredicate = (_: true); };
+      #   };
+      # in nixpkgs.lib.nixosSystem {
+      #   modules = [
+      #     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+      #     "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+      #     { imports = [ ./modules/system.nix ]; }
+      #   ];
+      #   inherit system pkgs;
+      #   specialArgs = { inherit sys; };
+      # };
 
-      # build with:
-      # nix build .#nixosConfigurations.cloudimage.config.system.build.digitalOceanImage
-      cloudimage = let 
-        sys = {
-          username = "admin";
-          hostname = "digital-ocean";
-          signingKey = "";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-      in nixpkgs.lib.nixosSystem {
-        modules = [
-          "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-          { imports = [ ./modules/system.nix ]; }
-        ];
-        inherit system pkgs;
-        specialArgs = { inherit sys; };
-      };
-      artificer = let 
-        sys = {
-          username = "admin";
-          hostname = "artificer";
-          signingKey = "";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/admin@artificer";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-      in nixpkgs.lib.nixosSystem {
-        modules = [
-          ./systems/artificer/configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          inputs.sops-nix.nixosModules.sops
-          "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-          { imports = [ ./modules/system.nix ]; 
-            sys = sys; }
-          { imports = [ ./modules/git.nix ]; 
-            git = { 
-              username = sys.username; 
-              realname = sys.hostname; 
-              email = "noreply@jafner.net"; 
-              sshPrivateKey = sys.ssyPrivateKey; 
-              signingKey = ""; 
-            }; }
-          { imports = [ ./modules/sops.nix ]; 
-            sops = { 
-              username = sys.username; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              repoRoot = "/home/admin/Jafner.net"; 
-            }; }
-          { imports = [ ./modules/docker.nix ]; 
-            docker = { 
-              username = sys.username; 
-            }; }
-        ];
-        inherit system pkgs;
-        specialArgs = { inherit sys; };
-      };
+      # # build with:
+      # # nix build .#nixosConfigurations.cloudimage.config.system.build.digitalOceanImage
+      # cloudimage = let 
+      #   sys = {
+      #     username = "admin";
+      #     hostname = "digital-ocean";
+      #     signingKey = "";
+      #     kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+      #     sshPrivateKey = ".ssh/joey.desktop@jafner.net";
+      #   };
+      #   system = "x86_64-linux";
+      #   pkgs = import inputs.nixpkgs {
+      #     inherit system;
+      #     config = { allowUnfreePredicate = (_: true); };
+      #   };
+      # in nixpkgs.lib.nixosSystem {
+      #   modules = [
+      #     "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+      #     { imports = [ ./modules/system.nix ]; }
+      #   ];
+      #   inherit system pkgs;
+      #   specialArgs = { inherit sys; };
+      # };
+      # artificer = let 
+      #   sys = {
+      #     username = "admin";
+      #     hostname = "artificer";
+      #     signingKey = "";
+      #     kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+      #     sshPrivateKey = ".ssh/admin@artificer";
+      #   };
+      #   system = "x86_64-linux";
+      #   pkgs = import inputs.nixpkgs {
+      #     inherit system;
+      #     config = { allowUnfreePredicate = (_: true); };
+      #   };
+      # in nixpkgs.lib.nixosSystem {
+      #   modules = [
+      #     ./systems/artificer/configuration.nix
+      #     inputs.home-manager.nixosModules.home-manager
+      #     inputs.sops-nix.nixosModules.sops
+      #     "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+      #     { imports = [ ./modules/system.nix ]; 
+      #       sys = sys; }
+      #     { imports = [ ./modules/git.nix ]; 
+      #       git = { 
+      #         username = sys.username; 
+      #         realname = sys.hostname; 
+      #         email = "noreply@jafner.net"; 
+      #         sshPrivateKey = sys.ssyPrivateKey; 
+      #         signingKey = ""; 
+      #       }; }
+      #     { imports = [ ./modules/sops.nix ]; 
+      #       sops = { 
+      #         username = sys.username; 
+      #         sshPrivateKey = sys.sshPrivateKey; 
+      #         repoRoot = "/home/admin/Jafner.net"; 
+      #       }; }
+      #     { imports = [ ./modules/docker.nix ]; 
+      #       docker = { 
+      #         username = sys.username; 
+      #       }; }
+      #   ];
+      #   inherit system pkgs;
+      #   specialArgs = { inherit sys; };
+      # };
       fighter = let 
         sys = {
           username = "admin";
@@ -213,58 +213,58 @@
           ./systems/fighter/configuration.nix
           inputs.home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
-          { imports = [ ./modules/system.nix ]; 
-            sys = sys; }
-          { imports = [ ./modules/git.nix ]; 
-            git = { 
-              username = sys.username; 
-              realname = sys.hostname; 
-              email = "noreply@jafner.net"; 
-              sshPrivateKey = sys.ssyPrivateKey; 
-              signingKey = ""; 
-            }; }
-          { imports = [ ./modules/sops.nix ]; 
-            sops = { 
-              username = sys.username; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              repoRoot = "/home/admin/Jafner.net"; 
-            }; }
-          { imports = [ ./modules/docker.nix ]; 
-            docker = { 
-              username = sys.username; 
-            }; }
-          { imports = [ ./systems/fighter/stacks.nix ]; 
-            stacks = {
-              appdata = "/appdata";
-              library = {
-                digitalModels = "/mnt/3DPrinting";
-                av = "/mnt/av";
-                books = "/mnt/books";
-                movies = "/mnt/movies";
-                music = "/mnt/music";
-                shows = "/mnt/shows";
-                torrenting = "/mnt/torrenting";
-              };
-            }; }
-          { imports = [ ./modules/hardware/networking.nix ]; 
-            networking = {
-              hostname = sys.hostname;
-              interface = "enp3s0";
-              mac = "00:02:c9:56:bf:9a";
-              ip = "192.168.1.23";
-              dns = [ "10.0.0.1" ];
-            }; }
-          { imports = [ ./modules/iscsi.nix ]; 
-            iscsi = {
-              iqn = "iqn.2020-03.net.jafner:fighter";
-              portalIP = "192.168.1.12:3260";
-              mountPath = "/mnt/iscsi";
-              fsType = "ext4";
-            };
-          }
+          ./modules/system.nix 
+          ./modules/git.nix 
+          ./modules/sops.nix
+          ./modules/docker.nix
+          ./systems/fighter/stacks.nix
+          ./modules/networking.nix 
+          ./modules/iscsi.nix
         ];
         inherit system pkgs;
-        specialArgs = { inherit sys; };
+        specialArgs = { 
+          sys = sys; 
+          iscsi = {
+            iqn = "iqn.2020-03.net.jafner:fighter";
+            portalIP = "192.168.1.12:3260";
+            mountPath = "/mnt/iscsi";
+            fsType = "ext4";
+          };
+          networking = {
+            hostname = sys.hostname;
+            interface = "enp3s0";
+            mac = "00:02:c9:56:bf:9a";
+            ip = "192.168.1.23";
+            dns = [ "10.0.0.1" ];
+          };
+          stacks = {
+            appdata = "/appdata";
+            library = {
+              digitalModels = "/mnt/3DPrinting";
+              av = "/mnt/av";
+              books = "/mnt/books";
+              movies = "/mnt/movies";
+              music = "/mnt/music";
+              shows = "/mnt/shows";
+              torrenting = "/mnt/torrenting";
+            };
+          };
+          docker = { 
+            username = sys.username; 
+          };
+          sops = { 
+            username = sys.username; 
+            sshPrivateKey = sys.sshPrivateKey; 
+            repoRoot = "/home/admin/Jafner.net"; 
+          };
+          git = { 
+            username = sys.username; 
+            realname = sys.hostname; 
+            email = "noreply@jafner.net"; 
+            sshPrivateKey = sys.sshPrivateKey; 
+            signingKey = ""; 
+          };
+        };
       };
     };
     deploy = {

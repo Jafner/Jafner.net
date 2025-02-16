@@ -16,31 +16,31 @@
           "credentials=/run/secrets/smb,uid=1000,gid=1000"
         ];
     in {
-    "${sys.dataDirs.library.av}" = { 
+    "/mnt/av" = { 
       device = "//192.168.1.12/AV"; 
       inherit fsType options; 
     };
-    "${sys.dataDirs.library.digitalModels}" = { 
+    "/mnt/3dprinting" = { 
       device = "//192.168.1.12/3DPrinting";
       inherit fsType options;
     };
-    "${sys.dataDirs.library.movies}" = {
+    "/mnt/movies" = {
       device = "//192.168.1.12/Movies";
       inherit fsType options;
     };
-    "${sys.dataDirs.library.music}" = {
+    "/mnt/music" = {
       device = "//192.168.1.12/Music";
       inherit fsType options;
     };
-    "${sys.dataDirs.library.shows}" = {
+    "/mnt/shows" = {
       device = "//192.168.1.12/Shows";
       inherit fsType options;
     };
-    "${sys.dataDirs.library.books}" = {
+    "/mnt/books" = {
       device = "//192.168.1.12/Text";
       inherit fsType options;
     };
-    "${sys.dataDirs.library.torrenting}" = {
+    "/mnt/torrenting" = {
       device = "//192.168.1.12/Torrenting";
       inherit fsType options;
     };
@@ -48,6 +48,5 @@
       device = "//192.168.1.12/Archive";
       inherit fsType options;
     };
-    
   };
 }

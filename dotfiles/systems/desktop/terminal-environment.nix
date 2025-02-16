@@ -1,6 +1,6 @@
 { sys, pkgs, usr, flake, ... }: {
-  users.users."${sys.username}".shell = pkgs.${sys.shellPackage};
-  programs."${sys.shellPackage}".enable = true;
+  users.users."${sys.username}".shell = pkgs.zsh;
+  programs.zsh.enable = true;
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs; [
       fd

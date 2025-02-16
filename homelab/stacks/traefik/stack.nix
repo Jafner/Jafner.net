@@ -1,8 +1,8 @@
-{ sys, ... }: let stack = "traefik"; in {
+{ sys, stacks, ... }: let stack = "traefik"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}/.env" = {
       enable = true;
-      text = ''APPDATA=${sys.dataDirs.appdata}/${stack}'';
+      text = ''APPDATA=${stacks.appdata}/${stack}'';
       target = "stacks/${stack}/.env";
     };
     "${stack}" = {

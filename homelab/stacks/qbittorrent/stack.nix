@@ -1,4 +1,4 @@
-{ sys, ... }: let stack = "qbittorrent"; in {
+{ sys, stacks, ... }: let stack = "qbittorrent"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -9,8 +9,8 @@
     "${stack}/.env" = {
       enable = true;
       text = ''
-        APPDATA=${sys.dataDirs.appdata}/${stack}
-        TORRENT_DATA=${sys.dataDirs.library.torrenting}
+        APPDATA=${stacks.appdata}/${stack}
+        TORRENT_DATA=${stacks.library.torrenting}
       '';
       target = "stacks/${stack}/.env";
     };
