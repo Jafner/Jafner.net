@@ -7,7 +7,23 @@ services:
       - minecraft
     ports:
       - 25565:25565
-    command: --api-binding=0.0.0.0:25566 --mapping=mc.jafner.net=192.168.1.135:25565
+    environment:
+      MAPPING: |
+        mc.jafner.net=server:25565
+  server:
+    image: itzg/minecraft-server:java17-graalvm
+    container_name: minecraft_server
+    environment: 
+      EULA: "TRUE"
+      TYPE: "FORGE"
+      VERSION: "1.20.1"
+      FORGE_VERSION: "47.3.1"
+      MEMORY: 8G
+      USE_AIKAR_FLAGS: false
+      DIFFICULTY: hard
+      ALLOW_FLIGHT: true
+    volumes:
+      - $APPDATA/tnp7:/data
 
 networks:
   minecraft:
