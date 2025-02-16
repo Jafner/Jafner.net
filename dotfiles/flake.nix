@@ -219,17 +219,17 @@
           ./modules/docker.nix
           ./systems/fighter/stacks.nix
           ./modules/networking.nix 
-          ./modules/iscsi.nix
+          #./modules/iscsi.nix
         ];
         inherit system pkgs;
         specialArgs = { 
           sys = sys; 
-          iscsi = {
-            iqn = "iqn.2020-03.net.jafner:fighter";
-            portalIP = "192.168.1.12:3260";
-            mountPath = "/mnt/iscsi";
-            fsType = "ext4";
-          };
+          # iscsi = {
+          #   iqn = "iqn.2020-03.net.jafner:fighter";
+          #   portalIP = "192.168.1.12:3260";
+          #   mountPath = "/mnt/iscsi";
+          #   fsType = "ext4";
+          # };
           networking = {
             hostname = sys.hostname;
             interface = "enp3s0";

@@ -1,10 +1,4 @@
 { sys, stacks, pkgs, ... }: let stack = "minecraft"; in {
-  environment.systemPackages = [
-    pkgs.jdk8_headless
-    pkgs.jdk17_headless
-    pkgs.jdk21_headless
-  ];
-  networking.firewall.allowedTCPPorts = [ 25565 ];
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -20,4 +14,7 @@
       target = "stacks/${stack}/.env";
     };
   };
+  environment.systemPackages = [ pkgs.minecraft-server ];
+  networking.firewall.allowedTCPPorts = [ 25565 ];
+  networking.firewall.allowedUDPPorts = [ 25565 ];
 }
