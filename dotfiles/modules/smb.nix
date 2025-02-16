@@ -1,7 +1,7 @@
 { smb, sys, pkgs, ... }: {
 
   sops.secrets."smb" = { 
-    sopsFile = ./smb.secrets;
+    sopsFile = smb.secretsFile;
     format = "binary";
     key = "";
     mode = "0440";
