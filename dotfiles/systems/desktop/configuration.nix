@@ -33,8 +33,6 @@
     group = "wheel";
   };
 
-  systemd.enableEmergencyMode = false;
-
   fonts.packages = with pkgs; [
     font-awesome
     noto-fonts

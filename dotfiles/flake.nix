@@ -227,7 +227,9 @@
         };
       in nixpkgs.lib.nixosSystem {
         modules = [
-          ./systems/fighter/configuration.nix
+          ./systems/fighter/hardware.nix
+          ./systems/fighter/stacks.nix
+          ./systems/fighter/terminal-environment.nix
           inputs.home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
           ./modules/system.nix 
@@ -236,17 +238,12 @@
           ./modules/docker.nix
           ./systems/fighter/stacks.nix
           ./modules/networking.nix 
-          #./modules/iscsi.nix
+          ./modules/smb.nix
+          ./modules/iscsi.nix
         ];
         inherit system pkgs;
         specialArgs = { 
           sys = sys; 
-          # iscsi = {
-          #   iqn = "iqn.2020-03.net.jafner:fighter";
-          #   portalIP = "192.168.1.12:3260";
-          #   mountPath = "/mnt/iscsi";
-          #   fsType = "ext4";
-          # };
           networking = {
             hostname = sys.hostname;
             interface = "enp3s0";

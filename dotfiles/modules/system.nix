@@ -5,6 +5,7 @@
   ];
 
   programs.nix-ld.enable = true;
+  systemd.enableEmergencyMode = false;
 
   # Enable SSH server with exclusively key-based auth
   services.openssh = {
