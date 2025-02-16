@@ -37,58 +37,17 @@
     deploy-rs,
     self, 
     ...
-  }:
-  let
-    flake = {
-      gitServer.http = "https://gitea.jafner.tools";
-      gitServer.ssh = "ssh://git@gitea.jafner.tools:2225";
-      owner = "Jafner";
-      repoName = "Jafner.net";
-      branch = "main";
-      repoPath = "Git/Jafner.net";
-      path = "dotfiles/flake.nix";
-    };
-    usr.joey = {
-      realname = "Joey Hafner";
-      email = "joey@jafner.net";
-      encryptKey = "$HOME/.keys/joey@jafner.net.encrypt.gpg";
-      ageKey = "$HOME/.keys/joey.author.key";
-    };
-    usr.admin = {
-      realname = "admin";
-      email = "noreply@jafner.net";
-    };
-    jafnerKeys = let file = (import inputs.nixpkgs { system = "x86_64-linux"; }).fetchurl {
-        url = "https://github.com/Jafner.keys";
-        sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
-    }; in inputs.nixpkgs.lib.splitString "\n" (builtins.readFile file);
-  in {
+  }: {
     nixosConfigurations = {
       desktop = let
         sys = {
           username = "joey";
           hostname = "desktop";
-          signingKey = "B0BBF464024BCEAE";
-          shellPackage = "zsh";
           kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          wallpaper = ./assets/romb-3840x2160.png;
-          arch = "x86_64-linux";
-          flakeDir = "Git/Jafner.net/dotfiles";
-          authorizedKeys = jafnerKeys;
-          dockerData = "/home/joey/docker/data";
-          ssh = {
-            path = "/home/joey/.ssh";
-            privateKey = ".ssh/joey.desktop@jafner.net";
-            publicKey = ".ssh/joey.desktop@jafner.net.pub";
-          };
+          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
-          inherit system;
-          overlays = [ nixgl.overlay ];
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           overlays = [ nixgl.overlay ];
           config = { allowUnfreePredicate = (_: true); };
@@ -104,12 +63,46 @@
               inputs.nix-flatpak.homeManagerModules.nix-flatpak
               inputs.stylix.homeManagerModules.stylix
             ];
-            home-manager.extraSpecialArgs = { inherit pkgs pkgs-unstable inputs; inherit sys usr flake; };
+            home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
           }
+          { imports = [ ./modules/system.nix ]; 
+            sys = sys; }
+          { imports = [ ./modules/git.nix ]; 
+            git = { 
+              username = sys.username; 
+              realname = sys.hostname; 
+              email = "joey@jafner.net"; 
+              sshPrivateKey = sys.ssyPrivateKey; 
+              signingKey = ""; 
+            }; }
+          { imports = [ ./modules/sops.nix ]; 
+            sops = { 
+              username = sys.username; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              repoRoot = "/home/joey/Git/Jafner.net"; 
+            }; }
+          { imports = [ ./modules/docker.nix ]; 
+            docker = { 
+              username = sys.username; 
+            }; }
+          { imports = [ ./modules/smb.nix ];
+            smb = { 
+              name = "movies";
+              device = "//192.168.1.12/Movies";
+              mountPoint = "/mnt/movies";
+              username = sys.username;
+            }; }
+          { imports = [ ./modules/smb.nix ];
+            smb = { 
+              name = "shows";
+              device = "//192.168.1.12/Shows";
+              mountPoint = "/mnt/Shows";
+              username = sys.username;
+            }; }
           
         ];
         inherit system;
-        specialArgs = { inherit pkgs pkgs-unstable inputs sys usr flake; };
+        specialArgs = { inherit pkgs inputs sys; };
       };
 
       # build with:
@@ -117,7 +110,10 @@
       iso = let 
         sys = {
           username = "admin";
-          authorizedKeys = jafnerKeys;
+          hostname = "installer";
+          signingKey = "";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -126,39 +122,9 @@
         };
       in nixpkgs.lib.nixosSystem {
         modules = [
-          #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-          {
-            system.stateVersion = "24.11";
-            environment.systemPackages = with pkgs; [
-              git
-            ];
-            users.users."${sys.username}" = {
-              isNormalUser = true;
-              extraGroups = [ "networkmanager" "wheel" ];
-              description = "${sys.username}";
-              openssh.authorizedKeys.keys = sys.authorizedKeys;
-            };
-            services.openssh = {
-              enable = true;
-              settings.PasswordAuthentication = false;
-              settings.KbdInteractiveAuthentication = false;
-            };
-            security.sudo = {
-              enable = true;
-              extraRules = [{
-                commands = [
-                  {
-                    command = "ALL";
-                    options = [ "NOPASSWD" ];
-                  }
-                ];
-                groups = [ "wheel" ];
-              }];
-            };
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
-          }
+          { imports = [ ./modules/system.nix ]; }
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
@@ -169,7 +135,10 @@
       cloudimage = let 
         sys = {
           username = "admin";
-          authorizedKeys = jafnerKeys;
+          hostname = "digital-ocean";
+          signingKey = "";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -179,36 +148,7 @@
       in nixpkgs.lib.nixosSystem {
         modules = [
           "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-          {
-            system.stateVersion = "24.11";
-            environment.systemPackages = with pkgs; [
-              git
-            ];
-            users.users."${sys.username}" = {
-              isNormalUser = true;
-              extraGroups = [ "networkmanager" "wheel" ];
-              description = "${sys.username}";
-              openssh.authorizedKeys.keys = sys.authorizedKeys;
-            };
-            services.openssh = {
-              enable = true;
-              settings.PasswordAuthentication = false;
-              settings.KbdInteractiveAuthentication = false;
-            };
-            security.sudo = {
-              enable = true;
-              extraRules = [{
-                commands = [
-                  {
-                    command = "ALL";
-                    options = [ "NOPASSWD" ];
-                  }
-                ];
-                groups = [ "wheel" ];
-              }];
-            };
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
-          }
+          { imports = [ ./modules/system.nix ]; }
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
@@ -216,7 +156,10 @@
       artificer = let 
         sys = {
           username = "admin";
-          authorizedKeys = jafnerKeys;
+          hostname = "artificer";
+          signingKey = "";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/admin@artificer";
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -226,7 +169,29 @@
       in nixpkgs.lib.nixosSystem {
         modules = [
           ./systems/artificer/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
           "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+          { imports = [ ./modules/system.nix ]; 
+            sys = sys; }
+          { imports = [ ./modules/git.nix ]; 
+            git = { 
+              username = sys.username; 
+              realname = sys.hostname; 
+              email = "noreply@jafner.net"; 
+              sshPrivateKey = sys.ssyPrivateKey; 
+              signingKey = ""; 
+            }; }
+          { imports = [ ./modules/sops.nix ]; 
+            sops = { 
+              username = sys.username; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              repoRoot = "/home/admin/Jafner.net"; 
+            }; }
+          { imports = [ ./modules/docker.nix ]; 
+            docker = { 
+              username = sys.username; 
+            }; }
         ];
         inherit system pkgs;
         specialArgs = { inherit sys; };
@@ -235,28 +200,7 @@
         sys = {
           username = "admin";
           hostname = "fighter";
-          authorizedKeys = jafnerKeys;
-          shellPackage = "bash";
-          networking = {
-            ifname = "enp3s0";
-            mac = "00:02:C9:56:BF:9A";
-            ip = "192.168.1.23";
-          };
-          ssh = {
-            privateKey = ".ssh/admin@fighter";
-          };
-          dataDirs = {
-            appdata = "/appdata";
-            library = {
-              digitalModels = "/mnt/3DPrinting";
-              av = "/mnt/av";
-              books = "/mnt/books";
-              movies = "/mnt/movies";
-              music = "/mnt/music";
-              shows = "/mnt/shows";
-              torrenting = "/mnt/torrenting";
-            };
-          };
+          sshPrivateKey = ".ssh/admin@fighter";
           kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
         };
         system = "x86_64-linux";
@@ -269,9 +213,58 @@
           ./systems/fighter/configuration.nix
           inputs.home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
+          { imports = [ ./modules/system.nix ]; 
+            sys = sys; }
+          { imports = [ ./modules/git.nix ]; 
+            git = { 
+              username = sys.username; 
+              realname = sys.hostname; 
+              email = "noreply@jafner.net"; 
+              sshPrivateKey = sys.ssyPrivateKey; 
+              signingKey = ""; 
+            }; }
+          { imports = [ ./modules/sops.nix ]; 
+            sops = { 
+              username = sys.username; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              repoRoot = "/home/admin/Jafner.net"; 
+            }; }
+          { imports = [ ./modules/docker.nix ]; 
+            docker = { 
+              username = sys.username; 
+            }; }
+          { imports = [ ./systems/fighter/stacks.nix ]; 
+            stacks = {
+              appdata = "/appdata";
+              library = {
+                digitalModels = "/mnt/3DPrinting";
+                av = "/mnt/av";
+                books = "/mnt/books";
+                movies = "/mnt/movies";
+                music = "/mnt/music";
+                shows = "/mnt/shows";
+                torrenting = "/mnt/torrenting";
+              };
+            }; }
+          { imports = [ ./modules/hardware/networking.nix ]; 
+            networking = {
+              hostname = sys.hostname;
+              interface = "enp3s0";
+              mac = "00:02:c9:56:bf:9a";
+              ip = "192.168.1.23";
+              dns = [ "10.0.0.1" ];
+            }; }
+          { imports = [ ./modules/iscsi.nix ]; 
+            iscsi = {
+              iqn = "iqn.2020-03.net.jafner:fighter";
+              portalIP = "192.168.1.12:3260";
+              mountPath = "/mnt/iscsi";
+              fsType = "ext4";
+            };
+          }
         ];
         inherit system pkgs;
-        specialArgs = { inherit sys flake; };
+        specialArgs = { inherit sys; };
       };
     };
     deploy = {
