@@ -1,4 +1,4 @@
-{ sys, config, ... }: let stack = "homeassistant"; in {
+{ sys, ... }: let stack = "homeassistant"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
