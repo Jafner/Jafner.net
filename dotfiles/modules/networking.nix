@@ -1,4 +1,5 @@
-{ networking, ... }: {
+{ networking, sys, ... }: {
+  users.users."${sys.username}".extraGroups = [ "networkmanager" ];
   networking = {
     hostName = networking.hostname;
     defaultGateway = { address = networking.gatewayIP; interface = networking.interface; };
