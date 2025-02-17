@@ -13,6 +13,8 @@ services:
   server:
     image: itzg/minecraft-server:java17-graalvm
     container_name: minecraft_server
+    networks:
+      - minecraft
     environment: 
       EULA: "TRUE"
       TYPE: "FORGE"
