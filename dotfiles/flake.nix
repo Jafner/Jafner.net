@@ -71,6 +71,7 @@
           ./modules/docker.nix
           ./modules/smb.nix
           ./modules/iscsi.nix
+          ./modules/networking.nix
           ./modules/services/minecraft-server.nix
           ./modules/programs/spotify.nix
           ./modules/services/flatpak.nix
@@ -118,6 +119,14 @@
             portalIP = "192.168.1.12:3260";
             mountPath = "/mnt/iscsi"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
             fsType = "ext4"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
+          };
+          networking = {
+            hostname = sys.hostname;
+            interface = "enp4s0f0";
+            mac = "90:e2:ba:e3:f7:94";
+            ip = "192.168.1.135";
+            gatewayIP = "192.168.1.1";
+            dns = [ "10.0.0.1" ];
           };
         };
       };
@@ -249,6 +258,7 @@
             interface = "enp3s0";
             mac = "00:02:c9:56:bf:9a";
             ip = "192.168.1.23";
+            gatewayIP = "192.168.1.1";
             dns = [ "10.0.0.1" ];
           };
           stacks = {
