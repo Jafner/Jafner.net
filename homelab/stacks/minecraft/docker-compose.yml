@@ -8,8 +8,7 @@ services:
     ports:
       - 25565:25565
     environment:
-      MAPPING: |
-        mc.jafner.net=server:25565
+      DEFAULT: server:25565
   server:
     image: itzg/minecraft-server:java17-graalvm
     container_name: minecraft_server
@@ -21,9 +20,10 @@ services:
       VERSION: "1.20.1"
       FORGE_VERSION: "47.3.1"
       MEMORY: 8G
-      USE_AIKAR_FLAGS: false
+      USE_AIKAR_FLAGS: true
       DIFFICULTY: hard
       ALLOW_FLIGHT: true
+      LEVEL: world
     volumes:
       - $APPDATA/tnp7:/data
 
