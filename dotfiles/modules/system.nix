@@ -55,4 +55,12 @@
 
   system.stateVersion = "24.11";
   home-manager.users.${sys.username}.home.stateVersion = "24.11";
+  home-manager.users."${sys.username}".home.file = {
+    "repo" = {
+      enable = true;
+      recursive = true;
+      source = ../../.;
+      target = sys.repoPath;
+    };
+  };
 }
