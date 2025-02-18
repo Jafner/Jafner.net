@@ -1,4 +1,4 @@
-{ sys, pkgs, inputs, ... }: {
+{ sys, pkgs, ... }: {
 
   environment.sessionVariables = {
     "FLAKE_DIR" = "/home/${sys.username}/Git/Jafner.net/dotfiles";
