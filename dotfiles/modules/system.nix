@@ -54,9 +54,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "24.11";
-  home-manager.users.${sys.username}.home.stateVersion = "24.11";
-  home-manager.users."${sys.username}".home.file = {
-    "repo" = {
+  home-manager.users."${sys.username}" = { 
+    home.stateVersion = "24.11";
+    home.file."repo" = {
       enable = true;
       recursive = true;
       source = ../../.;
