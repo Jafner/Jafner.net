@@ -45,7 +45,7 @@
           hostname = "desktop";
           kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
           sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-          repoPath = "Git/Jafner.net";
+          repoPath = "Jafner.net";
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
