@@ -73,7 +73,6 @@
             ./modules/smb.nix
             ./modules/iscsi.nix
             ./modules/networking.nix
-            ./modules/wireguard.nix
             ./modules/services/minecraft-server.nix
             ./modules/programs/spotify.nix
             ./modules/services/flatpak.nix
@@ -129,9 +128,6 @@
               ip = "192.168.1.135";
               gatewayIP = "192.168.1.1";
               dns = [ "10.0.0.1" ];
-            };
-            wireguard = {
-              secretsFile = ./systems/desktop/wireguard.token;
             };
           };
         };
