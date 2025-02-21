@@ -66,6 +66,7 @@
               ];
               home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
             }
+            { nix.download-buffer-size = 1073741824; }
             ./modules/system.nix
             ./modules/git.nix
             ./modules/sops.nix
