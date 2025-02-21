@@ -21,7 +21,7 @@
         text = ''
           #!/bin/bash
           # shellcheck disable=SC2088
-          FLAKE_DIR=$(dirname "/home/${sys.username}/Git/Jafner.net/dotfiles")
+          FLAKE_DIR="/home/${sys.username}/Git/Jafner.net/dotfiles"
           CURRENT_CONFIGURATION="desktop"
           cd "$FLAKE_DIR"
 
