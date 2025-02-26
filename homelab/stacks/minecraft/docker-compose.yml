@@ -10,7 +10,7 @@ services:
     environment:
       DEFAULT: server:25565
   server:
-    image: itzg/minecraft-server:java17-graalvm
+    image: itzg/minecraft-server:java17
     container_name: minecraft_server
     networks:
       - minecraft
