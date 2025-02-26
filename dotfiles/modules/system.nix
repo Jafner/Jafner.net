@@ -57,7 +57,7 @@
   home-manager.users."${sys.username}" = { 
     home.stateVersion = "24.11";
     home.file."repo" = {
-      enable = true;
+      enable = false;
       recursive = true;
       source = ../../.;
       target = sys.repoPath;
