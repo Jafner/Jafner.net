@@ -57,4 +57,10 @@
     fsType = "cifs"; 
     options = [ smb.permissions_opts smb.automount_opts ];
   };
+  fileSystems."recordings" = {
+    mountPoint = "/mnt/recordings";
+    device = "//192.168.1.12/Recordings";
+    fsType = "cifs"; 
+    options = [ smb.permissions_opts smb.automount_opts ];
+  };
 }
