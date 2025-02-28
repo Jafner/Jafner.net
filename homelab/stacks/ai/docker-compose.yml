@@ -4,7 +4,7 @@ services:
     container_name: ai_sillytavern
     image: ghcr.io/sillytavern/sillytavern:1.12.2
     networks:
-      - ai
+      - web
     privileged: false
     volumes:
       - $APPDATA/sillytavern/config:/home/node/app/config
@@ -15,6 +15,7 @@ services:
     labels:
       - traefik.http.routers.sillytavern.rule=Host(`sillytavern.jafner.net`)
       - traefik.http.routers.sillytavern.tls.certresolver=lets-encrypt
+      - traefik.http.routers.sillytavern.middlewares=traefik-forward-auth-privileged@file
 
 networks:
   web:
