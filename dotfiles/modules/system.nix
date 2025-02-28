@@ -1,4 +1,4 @@
-{ sys, pkgs, ... }: {
+{ sys, pkgs, pkgs-unstable, ... }: {
 
   environment.systemPackages = with pkgs; [
     git
@@ -51,6 +51,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  nix.package = pkgs-unstable.nixVersions.latest;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "24.11";

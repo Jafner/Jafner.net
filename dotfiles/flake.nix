@@ -53,6 +53,11 @@
           overlays = [ nixgl.overlay ];
           config = { allowUnfreePredicate = (_: true); };
         };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          overlays = [ nixgl.overlay ];
+          config = { allowUnfreePredicate = (_: true); };
+        };
         in nixpkgs.lib.nixosSystem {
           modules = [
             ./systems/desktop/configuration.nix
@@ -64,7 +69,7 @@
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 inputs.stylix.homeManagerModules.stylix
               ];
-              home-manager.extraSpecialArgs = { inherit pkgs inputs sys; };
+              home-manager.extraSpecialArgs = { inherit pkgs pkgs-unstable inputs sys; };
             }
             { nix.settings.download-buffer-size = 1073741824; }
             ./modules/system.nix
@@ -94,7 +99,8 @@
             ./systems/desktop/clips.nix
           ];
           inherit system;
-          specialArgs = { inherit pkgs inputs; 
+          specialArgs = { 
+            inherit pkgs pkgs-unstable inputs; 
             sys = sys;
             docker = { 
               username = sys.username; 
@@ -148,6 +154,10 @@
           inherit system;
           config = { allowUnfreePredicate = (_: true); };
         };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
         in nixpkgs.lib.nixosSystem {
           modules = [
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
@@ -155,8 +165,9 @@
             inputs.home-manager.nixosModules.home-manager
             ./modules/system.nix
           ];
-          inherit system pkgs;
-          specialArgs = { inherit pkgs inputs; 
+          inherit system;
+          specialArgs = { 
+            inherit pkgs pkgs-unstable inputs; 
             sys = sys;
           };
         };
@@ -176,14 +187,19 @@
           inherit system;
           config = { allowUnfreePredicate = (_: true); };
         };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
         in nixpkgs.lib.nixosSystem {
           modules = [
             "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
             inputs.home-manager.nixosModules.home-manager
             ./modules/system.nix
           ];
-          inherit system pkgs;
+          inherit system;
           specialArgs = { 
+            inherit pkgs pkgs-unstable inputs;
             sys = sys; 
           };
         };
@@ -200,6 +216,10 @@
           inherit system;
           config = { allowUnfreePredicate = (_: true); };
         };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
         in nixpkgs.lib.nixosSystem {
           modules = [
             inputs.home-manager.nixosModules.home-manager
@@ -212,8 +232,9 @@
             ./modules/docker.nix
             ./systems/artificer/stacks.nix
           ];
-          inherit system pkgs;
-          specialArgs = { inherit inputs pkgs; 
+          inherit system;
+          specialArgs = { 
+            inherit inputs pkgs pkgs-unstable; 
             sys = sys;
             git = { 
               username = sys.username; 
@@ -251,6 +272,10 @@
           inherit system;
           config = { allowUnfreePredicate = (_: true); allowUnfree = true; };
         };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
         in nixpkgs.lib.nixosSystem {
           modules = [
             ./systems/fighter/hardware.nix
@@ -267,8 +292,9 @@
             ./modules/smb.nix
             ./modules/iscsi.nix
           ];
-          inherit system pkgs;
+          inherit system;
           specialArgs = { 
+            inherit inputs pkgs pkgs-unstable;
             sys = sys; 
             networking = {
               hostname = sys.hostname;
