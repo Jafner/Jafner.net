@@ -20,7 +20,7 @@ services:
       VERSION: "1.20.1"
       FORGE_VERSION: "47.3.1"
       MEMORY: 16G
-      USE_AIKAR_FLAGS: true
+      USE_AIKAR_FLAGS: false
       DIFFICULTY: hard
       ALLOW_FLIGHT: true
       LEVEL: world
