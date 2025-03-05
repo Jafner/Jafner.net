@@ -379,7 +379,7 @@
       interactiveSudo = false;
       autoRollback = true;
       magicRollback = true;
-      remoteBuild = true;
+      remoteBuild = false;
       confirmTimeout = 60;
     };
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
