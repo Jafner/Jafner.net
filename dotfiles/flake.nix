@@ -97,6 +97,8 @@
             ./systems/desktop/filesystems.nix
             ./systems/desktop/defaultApplications.nix
             ./systems/desktop/clips.nix
+            ./systems/desktop/hosts.nix
+            ./systems/desktop/sshconfig.nix
           ];
           inherit system;
           specialArgs = { 
@@ -138,71 +140,6 @@
             };
           };
         };
-
-      # build with:
-      # nix build .#nixosConfigurations.iso.config.system.build.isoImage
-      iso = let 
-        sys = {
-          username = "admin";
-          hostname = "installer";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-          repoPath = "Jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in nixpkgs.lib.nixosSystem {
-          modules = [
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-            inputs.home-manager.nixosModules.home-manager
-            ./modules/system.nix
-          ];
-          inherit system;
-          specialArgs = { 
-            inherit pkgs pkgs-unstable inputs; 
-            sys = sys;
-          };
-        };
-
-      # build with:
-      # nix build .#nixosConfigurations.cloudimage.config.system.build.digitalOceanImage
-      cloudimage = let 
-        sys = {
-          username = "admin";
-          hostname = "digital-ocean";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-          repoPath = "Jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in nixpkgs.lib.nixosSystem {
-          modules = [
-            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-            inputs.home-manager.nixosModules.home-manager
-            ./modules/system.nix
-          ];
-          inherit system;
-          specialArgs = { 
-            inherit pkgs pkgs-unstable inputs;
-            sys = sys; 
-          };
-        };
       artificer = let 
         sys = {
           username = "admin";
@@ -225,7 +162,6 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
             "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-
             ./modules/system.nix
             ./modules/git.nix
             ./modules/sops.nix
@@ -344,11 +280,75 @@
             };
           };
         };
+      # build with:
+      # nix build .#nixosConfigurations.iso.config.system.build.isoImage
+      iso = let 
+        sys = {
+          username = "admin";
+          hostname = "installer";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
+          repoPath = "Jafner.net";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        in nixpkgs.lib.nixosSystem {
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+            inputs.home-manager.nixosModules.home-manager
+            ./modules/system.nix
+          ];
+          inherit system;
+          specialArgs = { 
+            inherit pkgs pkgs-unstable inputs; 
+            sys = sys;
+          };
+        };
+
+      # build with:
+      # nix build .#nixosConfigurations.cloudimage.config.system.build.digitalOceanImage
+      cloudimage = let 
+        sys = {
+          username = "admin";
+          hostname = "digital-ocean";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
+          repoPath = "Jafner.net";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        in nixpkgs.lib.nixosSystem {
+          modules = [
+            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+            inputs.home-manager.nixosModules.home-manager
+            ./modules/system.nix
+          ];
+          inherit system;
+          specialArgs = { 
+            inherit pkgs pkgs-unstable inputs;
+            sys = sys; 
+          };
+        };
     };
     deploy = {
       nodes = {
-        artificer = {
-          hostname = "143.198.68.202";
+        artificer = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#artificer.system
+          hostname = "artificer";
           profilesOrder = [ "system" ];
           profiles.system = {
             user = "root";
@@ -356,13 +356,22 @@
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.artificer;
           };
         };
-        fighter = {
+        fighter = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#fighter.system
           hostname = "fighter";
           profilesOrder = [ "system" ];
           profiles.system = {
             user = "root";
             sshUser = "admin";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.artificer;
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fighter;
+          };
+        };
+        desktop = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#fighter.system
+          hostname = "desktop";
+          profilesOrder = [ "system" ];
+          profiles.system = {
+            user = "root";
+            sshUser = "joey";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
           };
         };
       };

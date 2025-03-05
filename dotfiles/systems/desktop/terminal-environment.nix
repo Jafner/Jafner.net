@@ -327,7 +327,7 @@
         bindkey '^[w' kill-region # Delete
         bindkey '^I^I' autosuggest-accept # Tab, Tab
         bindkey '^[' autosuggest-clear # Esc
-        bindkey -s '^E' 'fzf-ssh\n'
+        bindkey -s '^E' 'ssh $(cat ~/.ssh/profiles | fzf --multi)\n'
         _fzf_compgen_path() {
             fd --hidden --exclude .git . "$1"
         }
