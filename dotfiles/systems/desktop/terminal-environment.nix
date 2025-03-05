@@ -1,4 +1,4 @@
-{ sys, pkgs, git, ... }: {
+{ sys, pkgs, ... }: {
   users.users."${sys.username}".shell = pkgs.zsh;
   programs.zsh.enable = true;
   home-manager.users."${sys.username}" = {
