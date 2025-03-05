@@ -1,5 +1,6 @@
 { sys, pkgs, pkgs-unstable, ... }: {
 
+  environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
     git
   ];
