@@ -3,6 +3,8 @@
   environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
     git
+    fastfetch
+    dig
   ];
 
   programs.nix-ld.enable = true;
