@@ -1,6 +1,6 @@
 services:
   gitea:
-    image: gitea/gitea:latest
+    image: gitea/gitea:1.23
     container_name: gitea_gitea
     restart: always
     env_file:
@@ -24,7 +24,7 @@ services:
       - traefik.http.services.gitea.loadbalancer.server.port=3000
 
   postgres:
-    image: postgres:13
+    image: postgres:14
     container_name: gitea_postgres
     networks:
       - gitea

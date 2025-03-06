@@ -16,12 +16,14 @@
     sopsFile = ./gitea.secrets;
     key = "";
     mode = "0440";
+    format = "binary";
     owner = sys.username;
   };
   sops.secrets."${stack}/postgres" = { 
     sopsFile = ./postgres.secrets;
     key = "";
     mode = "0440";
+    format = "binary";
     owner = sys.username;
   };
 }
