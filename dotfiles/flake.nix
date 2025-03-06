@@ -193,6 +193,9 @@
             repo = {
               path = "Jafner.net"; # Path to copy repo, relative to home.
             };
+            traefik = {
+              configFile = ./systems/artificer/traefik_config.yaml;
+            };
           };
         };
       fighter = let 
@@ -251,6 +254,9 @@
                 shows = "/mnt/shows";
                 torrenting = "/mnt/torrenting";
               };
+            };
+            traefik = {
+              configFile = ./systems/artificer/traefik_config.yaml;
             };
             docker = { 
               username = sys.username; 

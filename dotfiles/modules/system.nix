@@ -7,6 +7,8 @@
     git
     fastfetch
     dig
+    btop
+    vim
   ];
 
   programs.nix-ld.enable = true;
