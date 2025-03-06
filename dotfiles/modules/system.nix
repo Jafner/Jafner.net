@@ -1,5 +1,7 @@
 { sys, pkgs, pkgs-unstable, ... }: {
 
+  boot.kernelPackages = pkgs.linuxKernel.packages."${sys.kernelPackage}";
+  
   environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
     git

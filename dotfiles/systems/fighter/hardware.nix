@@ -21,7 +21,6 @@
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "amdgpu" "kvm-amd" ];
-    kernelPackages = pkgs.linuxKernel.packages."${sys.kernelPackage}";
     extraModulePackages = [ ];
   };
 
