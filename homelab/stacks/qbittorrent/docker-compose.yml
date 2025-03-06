@@ -13,8 +13,8 @@ services:
       - $APPDATA:/config
       - $TORRENT_DATA:/torrenting
     environment:
-      PUID: 1001
-      PGID: 1001
+      PUID: 1000
+      PGID: 1000
       TZ: America/Los_Angeles
       WEBUI_PORT: 8080
     ports:
