@@ -31,6 +31,10 @@
       url = "github:Janik-Haag/nixos-dns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs@{
     nixpkgs,
@@ -199,6 +203,84 @@
             };
             traefik = {
               configFile = ./hosts/artificer/traefik_config.yaml;
+            };
+          };
+        };
+      champion = let 
+        sys = {
+          username = "admin";
+          hostname = "champion";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/admin@champion";
+          repoPath = "Jafner.net";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        in nixpkgs.lib.nixosSystem {
+          modules = [
+            inputs.home-manager.nixosModules.home-manager
+            inputs.sops-nix.nixosModules.sops
+            inputs.disko.nixosModules.disko
+            {
+              disko.devices.disk.mydisk = {
+                device = "/dev/vda";
+                type = "disk";
+                content = {
+                  type = "gpt";
+                  partitions = { 
+                    ESP = {
+                      type = "EF00";
+                      size = "500M";
+                      content = {
+                        type = "filesystem";
+                        format = "vfat";
+                        mountpoint = "/boot";
+                        mountOptions = [ "umask=0077" ];
+                      };
+                    };
+                    root = {
+                      size = "100%";
+                      content = {
+                        type = "filesystem";
+                        format = "ext4";
+                        mountpoint = "/";
+                      };
+                    };
+                  };
+                };
+              };
+            }
+            { boot.loader.grub.device = "/dev/vda"; }
+            ./modules/system.nix
+            ./modules/git.nix
+            ./modules/sops.nix
+            ./modules/docker.nix
+          ];
+          inherit system;
+          specialArgs = { 
+            inherit inputs pkgs pkgs-unstable; 
+            sys = sys;
+            git = { 
+              username = sys.username; 
+              realname = sys.hostname; 
+              email = "noreply@jafner.net"; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              signingKey = ""; 
+            };
+            sops = { 
+              username = sys.username; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              repoRoot = "/home/admin/Jafner.net"; 
+            };
+            docker = { 
+              username = sys.username; 
             };
           };
         };
