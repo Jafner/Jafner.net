@@ -1,7 +1,7 @@
 services:
   send:
     image: registry.gitlab.com/timvisee/send:latest
-    user: 1001:1001
+    user: 1000:1000
     container_name: send_send
     restart: "no"
     networks:
@@ -23,7 +23,7 @@ services:
       - traefik.http.routers.send.rule=Host(`send.jafner.net`)
       - traefik.http.routers.send.tls.certresolver=lets-encrypt-dns01
       - traefik.http.routers.send.tls.options=tls12@file
-      - traefik.http.routers.send.middlewares=securityheaders@file
+      #- traefik.http.routers.send.middlewares=securityheaders@file
       - traefik.http.services.send.loadbalancer.server.port=1234
 
   redis:
