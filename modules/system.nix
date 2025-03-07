@@ -63,6 +63,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
+  networking.hostName = sys.hostname;
+
   system.stateVersion = "24.11";
   home-manager.users."${sys.username}" = { 
     home.stateVersion = "24.11";
