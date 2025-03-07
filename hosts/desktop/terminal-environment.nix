@@ -284,6 +284,8 @@
       enableZshIntegration = true;
       enableScDaemon = false;
       pinentryPackage = pkgs.pinentry-qt;
+      maxCacheTtl = 86400;
+      defaultCacheTtl = 86400;
     };
 
     xdg.desktopEntries = {
