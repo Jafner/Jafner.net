@@ -1,9 +1,5 @@
 { sys, pkgs, ... }: {
 
-  environment.sessionVariables = {
-    "FLAKE_DIR" = "/home/${sys.username}/Git/Jafner.net/dotfiles";
-  };
-
   home-manager.backupFileExtension = "bk";
   home-manager.users."${sys.username}" = {
     nixGL = {
