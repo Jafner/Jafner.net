@@ -16,6 +16,7 @@
         admin@paladin
         admin@fighter
         admin@artificer
+        admin@champion
       '';
       target = ".ssh/profiles";
     };
