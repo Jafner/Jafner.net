@@ -1,14 +1,16 @@
 # Jafner.net
-A monorepo for all my projects and dotfiles. Hosted on [my Gitea](https://gitea.jafner.tools/Jafner/Jafner.net) and mirrored to [GitHub](https://github.com/Jafner/Jafner.net).
+A monorepo for all my projects and dotfiles. Hosted on [my Gitea](https://git.jafner.net/Jafner/Jafner.net) and mirrored to [GitHub](https://github.com/Jafner/Jafner.net).
 
 ## Map of Contents
 
 | Project                | Summary |
 |:----------------------:|:-------:|
-| [dotfiles](dotfiles/) | Configuration and documentation for my PCs. |
-| [homelab](homelab/)   | Configuration and documentation for my homelab. |
+| [applications](applications/) | Nix modules for PC applications. |
+| [hosts](hosts/) | Host-specific documentation and Nix configuration. |
+| [modules](modules/) | Host-agnostic Nix modules.
 | [projects](projects/) | Self-contained projects in a variety of scripting and programming languages.   |
-| [sites](sites/)       | Static site files |
+| [services](services/) | Nix, Docker Compose, and other files necessary to deploy a service. |
+| [sites/Jafner.dev](sites/Jafner.dev/)       | Static site files for Jafner.dev. |
 | [.gitea/workflows](.gitea/workflows/) & [.github/workflows](.github/workflows/) | GitHub Actions workflows running on [Gitea](https://gitea.jafner.tools/Jafner/Jafner.net/actions) and [GitHub](https://github.com/Jafner/Jafner.net/actions), respectively. |
 | [.sops](.sops/) | Scripts and documentation implementing [sops](https://github.com/getsops/sops) to securely store secrets in this repo. |
 
