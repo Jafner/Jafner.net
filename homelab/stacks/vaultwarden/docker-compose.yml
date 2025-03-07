@@ -7,8 +7,8 @@ services:
       - path: /run/secrets/vaultwarden
         required: true
     environment:
-      - DOMAIN: "https://bitwarden.jafner.net"
-      - SIGNUPS_ALLOWED: true
+      DOMAIN: "https://bitwarden.jafner.net"
+      SIGNUPS_ALLOWED: "true"
     volumes:
       - $APPDATA/data:/data
     networks:
