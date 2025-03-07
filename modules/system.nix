@@ -9,6 +9,7 @@
     dig
     btop
     vim
+    tree
   ];
 
   programs.nix-ld.enable = true;
