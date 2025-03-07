@@ -68,7 +68,6 @@
         };
         in nixpkgs.lib.nixosSystem {
           modules = [
-            ./hosts/desktop/configuration.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
@@ -91,14 +90,7 @@
             ./applications/spotify.nix
             ./modules/flatpak.nix
             ./applications/minecraft-server.nix
-            ./hosts/desktop/hardware/audio.nix
-            ./hosts/desktop/hardware/goxlr-mini.nix
-            ./hosts/desktop/hardware/libinput.nix
-            ./hosts/desktop/hardware/printing.nix
-            ./hosts/desktop/hardware/razer.nix
-            ./hosts/desktop/hardware/wooting.nix
-            ./hosts/desktop/hardware/xpad.nix
-            ./hosts/desktop/hardware.nix
+            ./hosts/desktop/configuration.nix
             ./hosts/desktop/desktop-environment.nix
             ./hosts/desktop/terminal-environment.nix
             ./hosts/desktop/theme.nix
@@ -107,6 +99,14 @@
             ./hosts/desktop/clips.nix
             ./hosts/desktop/hosts.nix
             ./hosts/desktop/sshconfig.nix
+            ./hosts/desktop/hardware/audio.nix
+            ./hosts/desktop/hardware/goxlr-mini.nix
+            ./hosts/desktop/hardware/libinput.nix
+            ./hosts/desktop/hardware/printing.nix
+            ./hosts/desktop/hardware/razer.nix
+            ./hosts/desktop/hardware/wooting.nix
+            ./hosts/desktop/hardware/xpad.nix
+            ./hosts/desktop/hardware.nix
           ];
           inherit system;
           specialArgs = { 
@@ -169,12 +169,14 @@
           modules = [
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
             ./modules/system.nix
             ./modules/git.nix
             ./modules/sops.nix
             ./modules/docker.nix
             ./hosts/artificer/stacks.nix
+            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
           ];
           inherit system;
           specialArgs = { 
@@ -228,36 +230,33 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
             inputs.disko.nixosModules.disko
+            "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
             {
-              disko.devices.disk.mydisk = {
-                device = "/dev/vda";
-                type = "disk";
-                content = {
-                  type = "gpt";
-                  partitions = { 
-                    ESP = {
-                      type = "EF00";
-                      size = "500M";
-                      content = {
-                        type = "filesystem";
-                        format = "vfat";
-                        mountpoint = "/boot";
-                        mountOptions = [ "umask=0077" ];
+              disko.devices = {
+                disk.primary = {
+                  device = "/dev/vda";
+                  type = "disk";
+                  content = {
+                    type = "gpt";
+                    partitions = { 
+                      boot = {
+                        size = "1M";
+                        type = "EF02";
                       };
-                    };
-                    root = {
-                      size = "100%";
-                      content = {
-                        type = "filesystem";
-                        format = "ext4";
-                        mountpoint = "/";
+                      root = {
+                        name = "root";
+                        size = "100%";
+                        content = {
+                          type = "filesystem";
+                          format = "ext4";
+                          mountpoint = "/";
+                        };
                       };
                     };
                   };
                 };
               };
             }
-            { boot.loader.grub.device = "/dev/vda"; }
             ./modules/system.nix
             ./modules/git.nix
             ./modules/sops.nix
@@ -447,6 +446,15 @@
             user = "root";
             sshUser = "admin";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.artificer;
+          };
+        };
+        champion = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#champion
+          hostname = "champion";
+          profilesOrder = [ "system" ];
+          profiles.system = {
+            user = "root";
+            sshUser = "admin";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.champion;
           };
         };
         fighter = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#fighter
