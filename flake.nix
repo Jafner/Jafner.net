@@ -47,6 +47,149 @@
     ...
   }: {
     nixosConfigurations = {
+      artificer = let 
+        sys = {
+          username = "admin";
+          hostname = "artificer";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/admin@artificer";
+          repoPath = "Jafner.net";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        in nixpkgs.lib.nixosSystem {
+          modules = [
+            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+            inputs.home-manager.nixosModules.home-manager
+            inputs.sops-nix.nixosModules.sops
+            inputs.nixos-dns.nixosModules.dns
+            ./modules/system.nix
+            ./modules/git.nix
+            ./modules/sops.nix
+            ./modules/docker.nix
+            ./services/gitea/stack.nix
+            ./services/gitea-runner/stack.nix
+            ./services/vaultwarden/stack.nix
+            ./services/monitoring/stack.nix
+            ./services/traefik/stack.nix         
+          ];
+          inherit system;
+          specialArgs = { 
+            inherit inputs pkgs pkgs-unstable; 
+            sys = sys;
+            git = { 
+              username = sys.username; 
+              realname = sys.hostname; 
+              email = "noreply@jafner.net"; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              signingKey = ""; 
+            };
+            sops = { 
+              username = sys.username; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              repoRoot = "/home/admin/Jafner.net"; 
+            };
+            docker = { 
+              username = sys.username; 
+            };
+            stacks = {
+              appdata = "/appdata";
+            };
+            repo = {
+              path = "Jafner.net"; # Path to copy repo, relative to home.
+            };
+            traefik = {
+              configFile = ./hosts/artificer/traefik_config.yaml;
+            };
+            gitea-runner = {
+              tokenFile = ./hosts/artificer/registration.token;
+            };
+          };
+        };
+      champion = let 
+        sys = {
+          username = "admin";
+          hostname = "champion";
+          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
+          sshPrivateKey = ".ssh/admin@champion";
+          repoPath = "Jafner.net";
+        };
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config = { allowUnfreePredicate = (_: true); };
+        };
+        in nixpkgs.lib.nixosSystem {
+          modules = [
+            "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
+            inputs.home-manager.nixosModules.home-manager
+            inputs.sops-nix.nixosModules.sops
+            inputs.disko.nixosModules.disko
+            {
+              disko.devices = {
+                disk.primary = {
+                  device = "/dev/vda";
+                  type = "disk";
+                  content = {
+                    type = "gpt";
+                    partitions = { 
+                      boot = {
+                        size = "1M";
+                        type = "EF02";
+                      };
+                      root = {
+                        name = "root";
+                        size = "100%";
+                        content = {
+                          type = "filesystem";
+                          format = "ext4";
+                          mountpoint = "/";
+                        };
+                      };
+                    };
+                  };
+                };
+              };
+            }
+            ./modules/system.nix
+            ./modules/git.nix
+            ./modules/sops.nix
+            ./modules/docker.nix
+          ];
+          inherit system;
+          specialArgs = { 
+            inherit inputs pkgs pkgs-unstable; 
+            sys = sys;
+            git = { 
+              username = sys.username; 
+              realname = sys.hostname; 
+              email = "noreply@jafner.net"; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              signingKey = ""; 
+            };
+            sops = { 
+              username = sys.username; 
+              sshPrivateKey = sys.sshPrivateKey; 
+              repoRoot = "/home/admin/Jafner.net"; 
+            };
+            docker = { 
+              username = sys.username; 
+            };
+          };
+        };
       desktop = let
         sys = {
           username = "joey";
@@ -145,148 +288,6 @@
               ip = "192.168.1.135";
               gatewayIP = "192.168.1.1";
               dns = [ "10.0.0.1" ];
-            };
-          };
-        };
-      artificer = let 
-        sys = {
-          username = "admin";
-          hostname = "artificer";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/admin@artificer";
-          repoPath = "Jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in nixpkgs.lib.nixosSystem {
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            inputs.sops-nix.nixosModules.sops
-            ./modules/system.nix
-            ./modules/git.nix
-            ./modules/sops.nix
-            ./modules/docker.nix
-            ./services/gitea/stack.nix
-            ./services/gitea-runner/stack.nix
-            ./services/vaultwarden/stack.nix
-            ./services/monitoring/stack.nix
-            ./services/traefik/stack.nix
-            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-          ];
-          inherit system;
-          specialArgs = { 
-            inherit inputs pkgs pkgs-unstable; 
-            sys = sys;
-            git = { 
-              username = sys.username; 
-              realname = sys.hostname; 
-              email = "noreply@jafner.net"; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              signingKey = ""; 
-            };
-            sops = { 
-              username = sys.username; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              repoRoot = "/home/admin/Jafner.net"; 
-            };
-            docker = { 
-              username = sys.username; 
-            };
-            stacks = {
-              appdata = "/appdata";
-            };
-            repo = {
-              path = "Jafner.net"; # Path to copy repo, relative to home.
-            };
-            traefik = {
-              configFile = ./hosts/artificer/traefik_config.yaml;
-            };
-            gitea-runner = {
-              tokenFile = ./hosts/artificer/registration.token;
-            };
-          };
-        };
-      champion = let 
-        sys = {
-          username = "admin";
-          hostname = "champion";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/admin@champion";
-          repoPath = "Jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in nixpkgs.lib.nixosSystem {
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            inputs.sops-nix.nixosModules.sops
-            inputs.disko.nixosModules.disko
-            "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
-            {
-              disko.devices = {
-                disk.primary = {
-                  device = "/dev/vda";
-                  type = "disk";
-                  content = {
-                    type = "gpt";
-                    partitions = { 
-                      boot = {
-                        size = "1M";
-                        type = "EF02";
-                      };
-                      root = {
-                        name = "root";
-                        size = "100%";
-                        content = {
-                          type = "filesystem";
-                          format = "ext4";
-                          mountpoint = "/";
-                        };
-                      };
-                    };
-                  };
-                };
-              };
-            }
-            ./modules/system.nix
-            ./modules/git.nix
-            ./modules/sops.nix
-            ./modules/docker.nix
-          ];
-          inherit system;
-          specialArgs = { 
-            inherit inputs pkgs pkgs-unstable; 
-            sys = sys;
-            git = { 
-              username = sys.username; 
-              realname = sys.hostname; 
-              email = "noreply@jafner.net"; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              signingKey = ""; 
-            };
-            sops = { 
-              username = sys.username; 
-              sshPrivateKey = sys.sshPrivateKey; 
-              repoRoot = "/home/admin/Jafner.net"; 
-            };
-            docker = { 
-              username = sys.username; 
             };
           };
         };
@@ -395,70 +396,6 @@
             gitea-runner = {
               tokenFile = ./hosts/fighter/registration.token;
             };
-          };
-        };
-      # build with:
-      # nix build .#nixosConfigurations.iso.config.system.build.isoImage
-      iso = let 
-        sys = {
-          username = "admin";
-          hostname = "installer";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-          repoPath = "Jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in nixpkgs.lib.nixosSystem {
-          modules = [
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-            inputs.home-manager.nixosModules.home-manager
-            ./modules/system.nix
-          ];
-          inherit system;
-          specialArgs = { 
-            inherit pkgs pkgs-unstable inputs; 
-            sys = sys;
-          };
-        };
-
-      # build with:
-      # nix build .#nixosConfigurations.cloudimage.config.system.build.digitalOceanImage
-      cloudimage = let 
-        sys = {
-          username = "admin";
-          hostname = "digital-ocean";
-          kernelPackage = "linux_6_12"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
-          sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-          repoPath = "Jafner.net";
-        };
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in nixpkgs.lib.nixosSystem {
-          modules = [
-            "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-            inputs.home-manager.nixosModules.home-manager
-            ./modules/system.nix
-          ];
-          inherit system;
-          specialArgs = { 
-            inherit pkgs pkgs-unstable inputs;
-            sys = sys; 
           };
         };
     };
