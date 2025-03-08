@@ -13,5 +13,5 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install Nix
-        uses: DeterminiteSystems/nix-installer-action@v16
+        uses: DeterminateSystems/nix-installer-action@v16
       - run: nix flake check .
