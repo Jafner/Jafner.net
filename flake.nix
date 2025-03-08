@@ -210,6 +210,9 @@
             traefik = {
               configFile = ./hosts/artificer/traefik_config.yaml;
             };
+            gitea-runner = {
+              tokenFile = ./hosts/artificer/registration.token;
+            };
           };
         };
       champion = let 

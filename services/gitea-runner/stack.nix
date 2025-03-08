@@ -16,6 +16,7 @@
     sopsFile = gitea-runner.tokenFile;
     key = "";
     mode = "0440";
+    format = "binary";
     owner = sys.username;
   };
 }
