@@ -62,6 +62,7 @@
   nix.package = pkgs-unstable.nixVersions.latest;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.settings.auto-optimise-store = true;
 
   networking.hostName = sys.hostname;
 
