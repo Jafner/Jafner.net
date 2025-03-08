@@ -7,7 +7,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       CONFIG_FILE: /config.yaml
-      GITEA_INSTANCE_URL: https://gitea.jafner.tools
+      GITEA_INSTANCE_URL: https://git.jafner.net
     env_file:
       - path: /run/secrets/gitea-runner # Defines GITEA_RUNNER_REGISTRATION_TOKEN
         required: true

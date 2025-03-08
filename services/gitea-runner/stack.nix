@@ -1,4 +1,4 @@
-{ sys, stacks, ... }: let stack = "gitea-runner"; in {
+{ sys, stacks, gitea-runner, ... }: let stack = "gitea-runner"; in {
   home-manager.users."${sys.username}".home.file = {
     "${stack}" = {
       enable = true;
@@ -13,7 +13,7 @@
     };
   };
   sops.secrets."${stack}" = { 
-    sopsFile = ./registration.token;
+    sopsFile = gitea-runner.tokenFile;
     key = "";
     mode = "0440";
     owner = sys.username;
