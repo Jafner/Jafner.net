@@ -173,7 +173,11 @@
             ./modules/git.nix
             ./modules/sops.nix
             ./modules/docker.nix
-            ./hosts/artificer/stacks.nix
+            ./services/gitea/stack.nix
+            ./services/gitea-runner/stack.nix
+            ./services/vaultwarden/stack.nix
+            ./services/monitoring/stack.nix
+            ./services/traefik/stack.nix
             "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
             "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
@@ -302,9 +306,6 @@
         };
         in nixpkgs.lib.nixosSystem {
           modules = [
-            ./hosts/fighter/hardware.nix
-            ./hosts/fighter/stacks.nix
-            ./hosts/fighter/terminal-environment.nix
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
             inputs.nixos-dns.nixosModules.dns
@@ -312,10 +313,28 @@
             ./modules/git.nix 
             ./modules/sops.nix
             ./modules/docker.nix
-            ./hosts/fighter/stacks.nix
             ./modules/networking.nix 
             ./modules/smb.nix
             ./modules/iscsi.nix
+            ./services/ai/stack.nix
+            ./services/autopirate/stack.nix
+            ./services/gitea-runner/stack.nix
+            ./services/homeassistant/stack.nix
+            ./services/keycloak/stack.nix
+            ./services/manyfold/stack.nix
+            ./services/minecraft/stack.nix
+            ./services/monitoring/stack.nix
+            ./services/navidrome/stack.nix
+            ./services/plex/stack.nix
+            ./services/qbittorrent/stack.nix
+            ./services/send/stack.nix
+            ./services/stash/stack.nix
+            ./services/traefik/stack.nix
+            ./services/unifi/stack.nix
+            ./services/wireguard/stack.nix
+            ./services/zipline/stack.nix
+            ./hosts/fighter/hardware.nix
+            ./hosts/fighter/terminal-environment.nix
           ];
           inherit system;
           specialArgs = { 
@@ -369,6 +388,9 @@
               portalIP = "192.168.1.12:3260";
               mountPath = "/mnt/iscsi"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
               fsType = "ext4"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
+            };
+            gitea-runner = {
+              tokenFile = ./hosts/fighter/registration.token;
             };
           };
         };
