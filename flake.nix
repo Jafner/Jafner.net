@@ -419,15 +419,6 @@
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.champion;
           };
         };
-        fighter = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#fighter
-          hostname = "fighter";
-          profilesOrder = [ "system" ];
-          profiles.system = {
-            user = "root";
-            sshUser = "admin";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fighter;
-          };
-        };
         desktop = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#desktop
           hostname = "desktop";
           profilesOrder = [ "system" ];
@@ -435,6 +426,15 @@
             user = "root";
             sshUser = "joey";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
+          };
+        };
+        fighter = { # deploy with nix run github:serokell/deploy-rs -- --targets dotfiles#fighter
+          hostname = "fighter";
+          profilesOrder = [ "system" ];
+          profiles.system = {
+            user = "root";
+            sshUser = "admin";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fighter;
           };
         };
       };
@@ -445,12 +445,6 @@
       remoteBuild = false;
       confirmTimeout = 60;
     };
-    # packages = {
-    #   zoneFiles = inputs.nixos-dns.utils.generate nixpkgs.legacyPackages."x86_64-linux".zoneFiles {
-    #     inherit (self) nixosConfigurations;
-    #     extraConfig = import ./dns.nix;
-    #   };
-    # };
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
