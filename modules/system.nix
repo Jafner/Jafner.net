@@ -63,6 +63,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "@wheel" ];
   nix.settings.auto-optimise-store = true;
+  nix.extraOptions = ''
+    accept-flake-config = true
+    warn-dirty = false
+  '';
 
   networking.hostName = sys.hostname;
 
