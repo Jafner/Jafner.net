@@ -1,5 +1,5 @@
 {
-  description = "Joey's Flake";
+  description = "Jafner.net Flake";
   inputs = {
     # Package repositories:
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -103,6 +103,9 @@
             };
             stacks = {
               appdata = "/appdata";
+              monitoring = {
+                
+              };
             };
             repo = {
               path = "Jafner.net"; # Path to copy repo, relative to home.
@@ -196,7 +199,6 @@
           hostname = "desktop";
           kernelPackage = "linux_zen"; # Read more: https://nixos.wiki/wiki/Linux_kernel; Other options: https://mynixos.com/nixpkgs/packages/linuxKernel.packages;
           sshPrivateKey = ".ssh/joey.desktop@jafner.net";
-          repoPath = "Jafner.net";
         };
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
@@ -214,14 +216,8 @@
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-            {
-              home-manager.sharedModules = [
-                inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                inputs.stylix.homeManagerModules.stylix
-              ];
-              home-manager.extraSpecialArgs = { inherit pkgs pkgs-unstable inputs sys; };
-            }
-            { nix.settings.download-buffer-size = 1073741824; }
+            { home-manager.extraSpecialArgs = { inherit pkgs pkgs-unstable inputs sys; }; }
+
             ./modules/system.nix
             ./modules/git.nix
             ./modules/sops.nix
@@ -229,27 +225,49 @@
             ./modules/smb.nix
             ./modules/iscsi.nix
             ./modules/networking.nix
-            ./applications/minecraft-server.nix
-            ./applications/spotify.nix
             ./modules/flatpak.nix
-            ./applications/minecraft-server.nix
+
             ./hosts/desktop/configuration.nix
-            ./hosts/desktop/desktop-environment.nix
-            ./hosts/desktop/terminal-environment.nix
-            ./hosts/desktop/theme.nix
-            ./hosts/desktop/filesystems.nix
-            ./hosts/desktop/defaultApplications.nix
-            ./hosts/desktop/clips.nix
-            ./hosts/desktop/hosts.nix
-            ./hosts/desktop/sshconfig.nix
+
+            ./hosts/desktop/applications/ai.nix
+            ./hosts/desktop/applications/cli.nix
+            ./hosts/desktop/applications/clips.nix
+            ./hosts/desktop/applications/default-applications.nix
+            ./hosts/desktop/applications/dev.nix
+            ./hosts/desktop/applications/minecraft-server.nix
+            ./hosts/desktop/applications/password-manager.nix
+            ./hosts/desktop/applications/sh.nix
+            ./hosts/desktop/applications/spotify.nix
+            ./hosts/desktop/applications/stylix.nix
+            ./hosts/desktop/applications/terminal.nix
+            ./hosts/desktop/applications/tui.nix
+            ./hosts/desktop/applications/vintagestory.nix
+            ./hosts/desktop/applications/web-browser.nix
+            ./hosts/desktop/applications/keybase.nix
+
+            ./hosts/desktop/gaming/games-recording.nix
+            ./hosts/desktop/gaming/gaming.nix
+
             ./hosts/desktop/hardware/audio.nix
+            ./hosts/desktop/hardware/filesystems.nix
             ./hosts/desktop/hardware/goxlr-mini.nix
+            ./hosts/desktop/hardware/hardware.nix
+            ./hosts/desktop/hardware/hosts.nix
             ./hosts/desktop/hardware/libinput.nix
             ./hosts/desktop/hardware/printing.nix
             ./hosts/desktop/hardware/razer.nix
             ./hosts/desktop/hardware/wooting.nix
             ./hosts/desktop/hardware/xpad.nix
-            ./hosts/desktop/hardware.nix
+
+            ./hosts/desktop/plasma6/plasma6.nix
+
+            { specialisation."hyprland".configuration = { 
+                imports = [ ./hosts/desktop/hyprland/hyprland.nix ]; 
+                disabledModules = [ ./hosts/desktop/plasma6/plasma6.nix ];
+              }; 
+            }
+            { programs.nh = { enable = true; flake = "/home/joey/Git/Jafner.net";}; }
+
           ];
           inherit system;
           specialArgs = { 
@@ -271,7 +289,7 @@
               signingKey = "B0BBF464024BCEAE"; 
             };
             smb = {
-              secretsFile = ./hosts/desktop/smb.secrets;
+              secretsFile = ./hosts/desktop/secrets/smb.secrets;
               automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
               permissions_opts = "credentials=/run/secrets/smb,uid=1000,gid=1000";
             };
