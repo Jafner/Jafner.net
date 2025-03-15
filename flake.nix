@@ -241,6 +241,7 @@
             ./hosts/desktop/applications/stylix.nix
             ./hosts/desktop/applications/terminal.nix
             ./hosts/desktop/applications/tui.nix
+            ./hosts/desktop/applications/gui.nix
             ./hosts/desktop/applications/vintagestory.nix
             ./hosts/desktop/applications/web-browser.nix
             ./hosts/desktop/applications/keybase.nix
