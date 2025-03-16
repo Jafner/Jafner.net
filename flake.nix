@@ -358,6 +358,9 @@
             ./services/zipline/stack.nix
             ./hosts/fighter/hardware.nix
             ./hosts/fighter/terminal-environment.nix
+
+            { programs.nh = { enable = true; flake = "git+https://git.jafner.net/Jafner/Jafner.net";}; }
+
           ];
           inherit system;
           specialArgs = { 
