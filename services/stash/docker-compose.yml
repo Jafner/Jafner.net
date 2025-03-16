@@ -3,6 +3,7 @@ services:
     container_name: stash
     image: stashapp/stash:latest
     restart: "no"
+    mem_limit: 8G
     devices:
       - /dev/dri
     group_add:
