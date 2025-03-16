@@ -217,6 +217,7 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
             { home-manager.extraSpecialArgs = { inherit pkgs pkgs-unstable inputs sys; }; }
+            { home-manager.users.${sys.username}.home.packages = [ inputs.deploy-rs.packages."x86_64-linux".deploy-rs ]; }
 
             ./modules/system.nix
             ./modules/git.nix
@@ -268,6 +269,7 @@
               }; 
             }
             { programs.nh = { enable = true; flake = "/home/joey/Git/Jafner.net";}; }
+            
 
           ];
           inherit system;
@@ -359,7 +361,7 @@
             ./hosts/fighter/hardware.nix
             ./hosts/fighter/terminal-environment.nix
 
-            { programs.nh = { enable = true; flake = "git+https://git.jafner.net/Jafner/Jafner.net";}; }
+            { programs.nh = { enable = true; }; }
 
           ];
           inherit system;
