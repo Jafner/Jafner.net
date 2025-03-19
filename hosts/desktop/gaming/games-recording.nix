@@ -1,7 +1,7 @@
-{ pkgs, sys, ... }: {
+{ pkgs, pkgs-unstable, sys, ... }: {
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs; [ 
-      losslesscut-bin
+      pkgs-unstable.losslesscut-bin
       ffmpeg-full
       libnotify
       ( writers.writePython3Bin "obs-toggle-recording" {

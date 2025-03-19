@@ -1,9 +1,10 @@
-{ pkgs, sys, ... }: { 
+{ pkgs, pkgs-unstable, sys, ... }: {
   home-manager.users."${sys.username}" = {
     home.packages = with pkgs; [ nixd sops ];
     programs.zed-editor = {
       # https://mynixos.com/home-manager/options/programs.zed-editor
       enable = true;
+      package = pkgs-unstable.zed-editor;
       extensions = [ "Nix" "Catppuccin" ];
       userSettings = {
         languages."Nix"."language_servers" = [ "!nil" "nixd" ];
