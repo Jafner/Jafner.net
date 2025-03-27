@@ -850,11 +850,11 @@
                 userEmail = "joey@jafner.net";
                 extraConfig = {
                   init.defaultBranch = "main";
-                  core.sshCommand = "ssh -i $HOME/${sshPrivateKeyPath}";
+                  core.sshCommand = "ssh -i /home/${username}/${sshPrivateKeyPath}";
                   gpg.format = "ssh";
                   commit.gpgsign = true;
                   tag.gpgsign = true;
-                  user.signingKey = "$HOME/${sshPrivateKeyPath}.pub";
+                  user.signingKey = "/home/${username}/${sshPrivateKeyPath}.pub";
                 };
                 delta.enable = true;
                 delta.options.side-by-side = true;
