@@ -1,17 +1,12 @@
-{ pkgs, config, ... }: let stack = "wireguard"; in let cfg = config.modules.stacks.${stack}; in {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "wireguard"; in let cfg = config.stacks.${stack}; in {
   options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
         type = types.str;
         default = "admin";
         description = "Username of the default, primary user.";
         example = "john";
-      };
-      secretsFile = mkOption {
-        type = types.pathInStore;
-        default = null;
-        description = "Path to the stack's sops-nix-encrypted secrets file.";
       };
       paths = mkOption {
         type = types.submodule {
@@ -42,52 +37,44 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
-    sops.secrets."${stack}" = {
-      sopsFile = cfg.secretsFile;
-      key = "";
-      mode = "0440";
-      owner = cfg.username;
-    };
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable  {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
           services:
-            ${stack}:
-              image: image:tag
-              container_name: ${stack}_service
+            wg-easy:
+              image: weejewel/wg-easy:latest
+              container_name: wireguard_wg-easy
               restart: "no"
+              environment:
+                WG_HOST: ${cfg.domains.${stack}}
+                WG_PORT: 53820
+                WG_DEFAULT_DNS: 10.0.0.1
+              ports:
+                - 53820:51820/udp
               networks:
-                web:
+                - web
               volumes:
-                - ${cfg.paths.appdata}:/data
-              env_file:
-                - path: /run/secrets/${stack}
-                  required: true
+                - ${cfg.paths.appdata}:/etc/wireguard
+              cap_add:
+                - NET_ADMIN
+                - SYS_MODULE
+              sysctls:
+                - net.ipv4.conf.all.src_valid_mark=1
+                - net.ipv4.ip_forward=1
+              labels:
+                - traefik.http.routers.wg-easy.rule=Host(`${cfg.domains.${stack}}`)
+                - traefik.http.routers.wg-easy.tls.certresolver=lets-encrypt
+                - traefik.http.services.wg-easy.loadbalancer.server.port=51821
+                - traefik.http.routers.wg-easy.middlewares=traefik-forward-auth@file
+
           networks:
             web:
               external: true
         '';
         target = "stacks/${stack}/docker-compose.yml";
       };
-    };
-  };
-}
-
-
-{ sys, stacks, ... }: let stack = "wireguard"; in {
-  home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
-    "${stack}/.env" = {
-      enable = true;
-      text = ''APPDATA=${stacks.appdata}/${stack}'';
-      target = "stacks/${stack}/.env";
     };
   };
 }
