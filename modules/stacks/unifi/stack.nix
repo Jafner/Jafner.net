@@ -8,11 +8,6 @@
         description = "Username of the default, primary user.";
         example = "john";
       };
-      secretsFile = mkOption {
-        type = types.pathInStore;
-        default = null;
-        description = "Path to the stack's sops-nix-encrypted secrets file.";
-      };
       paths = mkOption {
         type = types.submodule {
           options = {
@@ -42,52 +37,47 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
-    sops.secrets."${stack}" = {
-      sopsFile = cfg.secretsFile;
-      key = "";
-      mode = "0440";
-      owner = cfg.username;
-    };
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable  {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
           services:
-            ${stack}:
-              image: image:tag
-              container_name: ${stack}_service
+            unifi-controller:
+              image: lscr.io/linuxserver/unifi-controller:latest
+              container_name: unifi_controller
               restart: "no"
               networks:
-                web:
+                - web
+              environment:
+                PUID: "1000"
+                PGID: "1000"
+                MEM_LIMIT: "1024" # in MB
+                MEM_STARTUP: "1024" # in MB
               volumes:
-                - ${cfg.paths.appdata}:/data
-              env_file:
-                - path: /run/secrets/${stack}
-                  required: true
+                - ${cfg.paths.appdata}/config:/config
+              ports:
+                - 3478:3478/udp # unifi STUN port
+                - 10001:10001/udp # AP discovery port
+                - 8080:8080 # communicate with devices
+                - 8843:8843 # guest portal http
+                - 8880:8880 # guest portal https
+                - 6789:6789 # mobile throughput test port
+                - 5514:5514/udp # remote syslog
+              labels:
+                - traefik.http.routers.unifi.rule=Host(`${cfg.domains.${stack}}`)
+                - traefik.http.routers.unifi.tls.certresolver=lets-encrypt
+                - traefik.http.routers.unifi.tls=true
+                - traefik.http.routers.unifi.middlewares=lan-only@file
+                - traefik.http.services.unifi.loadbalancer.server.port=8443
+                - traefik.http.services.unifi.loadbalancer.server.scheme=https
+
           networks:
             web:
               external: true
         '';
         target = "stacks/${stack}/docker-compose.yml";
       };
-    };
-  };
-}
-
-
-{ sys, stacks, ... }: let stack = "unifi"; in {
-  home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
-    "${stack}/.env" = {
-      enable = true;
-      text = ''APPDATA=${stacks.appdata}/${stack}'';
-      target = "stacks/${stack}/.env";
     };
   };
 }
