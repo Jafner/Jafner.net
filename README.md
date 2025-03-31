@@ -14,6 +14,9 @@ A monorepo for all my projects and dotfiles. Hosted on [my Gitea](https://git.ja
 | [.gitea/workflows](.gitea/workflows/) & [.github/workflows](.github/workflows/) | GitHub Actions workflows running on [Gitea](https://gitea.jafner.tools/Jafner/Jafner.net/actions) and [GitHub](https://github.com/Jafner/Jafner.net/actions), respectively. |
 | [.sops](.sops/) | Scripts and documentation implementing [sops](https://github.com/getsops/sops) to securely store secrets in this repo. |
 
+## Flake.nix
+This repo is centered on [flake.nix](flake.nix). You can list its outputs with: `nix flake show github:Jafner/Jafner.net`
+
 ## LICENSE: MIT License
 > See [LICENSE](LICENSE) for details.
 
