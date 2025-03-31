@@ -1,5 +1,5 @@
 { pkgs, lib, config, username, ... }: with lib; let stack = "coder"; in let cfg = config.stacks.${stack}; in {
-  options ={
+  options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       secretsFiles = mkOption {

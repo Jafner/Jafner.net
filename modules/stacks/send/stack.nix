@@ -1,5 +1,5 @@
 { pkgs, lib, config, username, ... }: with lib; let stack = "send"; in let cfg = config.stacks.${stack}; in {
-  options = with pkgs.lib; {
+  options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
