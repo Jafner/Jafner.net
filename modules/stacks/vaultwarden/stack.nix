@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: let stack = "vaultwarden"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "vaultwarden"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
         type = types.str;
@@ -42,29 +42,37 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config = mkIf cfg.enable  {
     sops.secrets."${stack}" = {
       sopsFile = cfg.secretsFile;
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
-    home-manager.users."${cfg.username}".home.file = {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
           services:
             ${stack}:
-              image: image:tag
-              container_name: ${stack}_service
+              image: vaultwarden/server:1.33.2
+              container_name: ${stack}_vaultwarden
               restart: "no"
-              networks:
-                web:
-              volumes:
-                - ${cfg.paths.appdata}:/data
               env_file:
-                - path: /run/secrets/${stack}
+                - path: /run/secrets/vaultwarden
                   required: true
+              environment:
+                DOMAIN: "${cfg.domains.${stack}}"
+                SIGNUPS_ALLOWED: "true"
+              volumes:
+                - ${cfg.paths.appdata}/data:/data
+              networks:
+                - web
+              labels:
+                - traefik.http.routers.${stack}.middlewares=securityheaders@file
+                - traefik.http.routers.${stack}.rule=Host(`${cfg.domains.${stack}}`)
+                - traefik.http.routers.${stack}.tls.certresolver=lets-encrypt
+                - traefik.http.routers.${stack}.tls.options=tls12@file
           networks:
             web:
               external: true
@@ -72,29 +80,5 @@
         target = "stacks/${stack}/docker-compose.yml";
       };
     };
-  };
-}
-
-
-{ sys, stacks, ... }: let stack = "vaultwarden"; in {
-  home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
-    "${stack}/.env" = {
-      enable = true;
-      text = ''APPDATA=${stacks.appdata}/${stack}'';
-      target = "stacks/${stack}/.env";
-    };
-  };
-  sops.secrets."${stack}" = {
-    sopsFile = ./admin.token;
-    key = "";
-    format = "binary";
-    mode = "0440";
-    owner = sys.username;
   };
 }
