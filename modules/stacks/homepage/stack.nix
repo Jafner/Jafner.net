@@ -1,17 +1,12 @@
-{ pkgs, config, ... }: let stack = "homepage"; in let cfg = config.modules.stacks.${stack}; in {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "homepage"; in let cfg = config.stacks.${stack}; in {
   options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
         type = types.str;
         default = "admin";
         description = "Username of the default, primary user.";
         example = "john";
-      };
-      secretsFile = mkOption {
-        type = types.pathInStore;
-        default = null;
-        description = "Path to the stack's sops-nix-encrypted secrets file.";
       };
       paths = mkOption {
         type = types.submodule {
@@ -42,52 +37,37 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
-    sops.secrets."${stack}" = {
-      sopsFile = cfg.secretsFile;
-      key = "";
-      mode = "0440";
-      owner = cfg.username;
-    };
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable  {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
           services:
-            ${stack}:
-              image: image:tag
-              container_name: ${stack}_service
-              restart: "no"
+            homepage:
+              image: ghcr.io/gethomepage/homepage:latest
+              container_name: homepage_homepage
               networks:
-                web:
+                - web
               volumes:
-                - ${cfg.paths.appdata}:/data
-              env_file:
-                - path: /run/secrets/${stack}
-                  required: true
+                - ${cfg.paths.appdata}/logs:/app/config/logs
+                - ./icons/:/app/public/icons
+                - ./config:/app/config/
+                - /var/run/docker.sock:/var/run/docker.sock
+              labels:
+                - traefik.http.routers.homepage.rule=Host(`${cfg.domains.${stack}}`)
+                - traefik.http.routers.homepage.tls.certresolver=lets-encrypt
+                - homepage.group=Public
+                - homepage.name=Homepage
+                - homepage.icon=Homepage.png
+                - homepage.href=https://${cfg.domains.${stack}}
+                - homepage.description=This page!
+
           networks:
             web:
               external: true
         '';
         target = "stacks/${stack}/docker-compose.yml";
       };
-    };
-  };
-}
-
-
-{ sys, stacks, ... }: let stack = "homepage"; in {
-  home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
-    "${stack}/.env" = {
-      enable = true;
-      text = ''APPDATA=${stacks.appdata}/${stack}'';
-      target = "stacks/${stack}/.env";
     };
   };
 }
