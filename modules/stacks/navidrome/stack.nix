@@ -1,17 +1,12 @@
-{ pkgs, config, ... }: let stack = "navidrome"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "navidrome"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
         type = types.str;
         default = "admin";
         description = "Username of the default, primary user.";
         example = "john";
-      };
-      secretsFile = mkOption {
-        type = types.pathInStore;
-        default = null;
-        description = "Path to the stack's sops-nix-encrypted secrets file.";
       };
       paths = mkOption {
         type = types.submodule {
@@ -42,55 +37,38 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
-    sops.secrets."${stack}" = {
-      sopsFile = cfg.secretsFile;
-      key = "";
-      mode = "0440";
-      owner = cfg.username;
-    };
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable  {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
           services:
-            ${stack}:
-              image: image:tag
-              container_name: ${stack}_service
+            navidrome:
+              image: deluan/navidrome:latest
+              container_name: navidrome_navidrome
               restart: "no"
+              user: 1001:1001
               networks:
-                web:
+                - web
+              environment:
+                ND_SCANSCHEDULE: 1h
+                ND_LOGLEVEL: info
+                ND_SESSIONTIMEOUT: 24h
+                ND_BASEURL: "https://${cfg.domains.${stack}}"
               volumes:
-                - ${cfg.paths.appdata}:/data
-              env_file:
-                - path: /run/secrets/${stack}
-                  required: true
+                - "${cfg.paths.music}:/music:ro"
+                - "${cfg.paths.appdata}:/data"
+              labels:
+                - traefik.http.routers.navidrome.rule=Host(`${cfg.domains.${stack}}`)
+                - traefik.http.routers.navidrome.tls.certresolver=lets-encrypt
+                - traefik.http.services.navidrome.loadbalancer.server.port=4533
+
           networks:
             web:
               external: true
         '';
         target = "stacks/${stack}/docker-compose.yml";
       };
-    };
-  };
-}
-
-
-{ sys, stacks, ... }: let stack = "navidrome"; in {
-  home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
-    "${stack}/.env" = {
-      enable = true;
-      text = ''
-        APPDATA=${stacks.appdata}/${stack}
-        MUSIC_DIR=${stacks.library.music}
-      '';
-      target = "stacks/${stack}/.env";
     };
   };
 }
