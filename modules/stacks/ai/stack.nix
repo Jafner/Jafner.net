@@ -1,13 +1,7 @@
-{ pkgs, config, ... }: let stack = "ai"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "ai"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
-      username = mkOption {
-        type = types.str;
-        default = "admin";
-        description = "Username of the default, primary user.";
-        example = "john";
-      };
       paths = mkOption {
         type = types.submodule {
           options = {
@@ -37,8 +31,8 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable  {
+    home-manager.users."${username}".home.file = {
       "${stack}" = {
         enable = true;
         recursive = true;

@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: let stack = "minecraft"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "minecraft"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
         type = types.str;
@@ -37,8 +37,8 @@
       };
     };
   };
-  config = pkgs.lib.mkIf cfg.enable {
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
@@ -82,10 +82,10 @@
       after = [ "docker.service" ];
       serviceConfig = {
         Restart = "no";
-        User = "${cfg.username}";
+        User = "${username}";
         Group = "docker";
         TimeoutStopSec = "120";
-        WorkingDirectory = "/home/${cfg.username}/stacks/${stack}";
+        WorkingDirectory = "/home/${username}/stacks/${stack}";
         ExecStartPre = "docker compose down";
         ExecStart = "docker compose up";
         ExecStop = "docker compose down";

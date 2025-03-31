@@ -1,13 +1,7 @@
-{ pkgs, config, ... }: let stack = "keycloak"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "keycloak"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
-      username = mkOption {
-        type = types.str;
-        default = "admin";
-        description = "Username of the default, primary user.";
-        example = "john";
-      };
       keycloakAdminUsername = mkOption {
         type = types.str;
         default = "admin";
@@ -65,32 +59,32 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config =  mkIf cfg.enable  {
     sops.secrets."${stack}/keycloak" = {
       sopsFile = cfg.secretsFiles.keycloak;
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
     sops.secrets."${stack}/postgres" = {
       sopsFile = cfg.secretsFiles.postgres;
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
     sops.secrets."${stack}/forwardauth" = {
       sopsFile = cfg.secretsFiles.forwardauth;
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
     sops.secrets."${stack}/forwardauth-privileged" = {
       sopsFile = cfg.secretsFiles.forwardauth-privileged;
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
-    home-manager.users."${cfg.username}".home.file = {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''

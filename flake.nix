@@ -188,6 +188,244 @@
             };
           };
         };
+      fighter = let
+        # TODO:
+        # Gitea/runner
+        # Homeassistant
+        # plex
+        # qbittorrent
+        # send
+        # stash
+        # unifi
+        # vaultwarden
+        # zipline
+        username = "admin";
+        hostname = "fighter";
+        system = "x86_64-linux";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = {
+            allowUnfreePredicate = (_: true);
+            allowUnfree = true;
+          };
+        };
+        in inputs.nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = username;
+            hostname = hostname;
+          };
+          modules = [ # Import modules from other flakes.
+            inputs.home-manager.nixosModules.home-manager
+            inputs.sops-nix.nixosModules.sops
+            self.nixosModules.roles
+            self.nixosModules.stacks
+          ] ++ [ # Configure this system.
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
+            { # Network shares
+              sops.secrets."smb" = {
+                sopsFile = ./hosts/desktop/secrets/smb.secrets;
+                format = "binary";
+                key = "";
+                mode = "0440";
+                owner = username;
+              };
+              environment.systemPackages = with pkgs; [ cifs-utils ];
+              fileSystems = let
+                automountOpts = [
+                  "x-systemd.automount"
+                  "noauto"
+                  "x-systemd.idle-timeout=60"
+                  "x-systemd.device-timeout=5s"
+                  "x-systemd.mount-timeout=5s"
+                ];
+                permissionsOpts = [
+                  "credentials=/run/secrets/smb"
+                  "uid=1000"
+                  "gid=1000"
+                ]; in {
+                "movies" = {
+                  enable = false;
+                  mountPoint = "/mnt/movies";
+                  device = "//192.168.1.12/Movies";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "music" = {
+                  enable = false;
+                  mountPoint = "/mnt/music";
+                  device = "//192.168.1.12/Music";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "shows" = {
+                  enable = false;
+                  mountPoint = "/mnt/shows";
+                  device = "//192.168.1.12/Shows";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "av" = {
+                  enable = true;
+                  mountPoint = "/mnt/av";
+                  device = "//192.168.1.12/AV";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "printing" = {
+                  enable = false;
+                  mountPoint = "/mnt/3dprinting";
+                  device = "//192.168.1.12/3DPrinting";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "books" = {
+                  enable = false;
+                  mountPoint = "/mnt/books";
+                  device = "//192.168.1.12/Text";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "torrenting" = {
+                  enable = true;
+                  mountPoint = "/mnt/torrenting";
+                  device = "//192.168.1.12/Torrenting";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "archive" = {
+                  enable = false;
+                  mountPoint = "/mnt/archive";
+                  device = "//192.168.1.12/Archive";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+                "recordings" = {
+                  enable = true;
+                  mountPoint = "/mnt/recordings";
+                  device = "//192.168.1.12/Recordings";
+                  fsType = "cifs";
+                  options = builtins.concatLists [ automountOpts permissionsOpts ];
+                };
+              };
+            }
+            { # Roles
+              roles.system = {
+                enable = true;
+                authorizedKeysSource.url = "https://github.com/Jafner.keys";
+                authorizedKeysSource.hash = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
+                sshPrivateKeyPath = ".ssh/${username}@${hostname}";
+              };
+            }
+            { # Stacks
+              stacks.ai = {
+                enable = true;
+                paths.appdata = "/appdata/ai";
+                domains.base = "jafner.net";
+              };
+              stacks.autopirate = {
+                enable = true;
+                paths = {
+                  appdata = "/appdata/autopirate";
+                  movies = "/mnt/movies";
+                  shows = "/mnt/shows";
+                  music = "/mnt/music";
+                };
+                domains = {
+                  base = "jafner.net";
+                };
+              };
+              stacks.books = {
+                enable = true;
+                paths.appdata = "/appdata/books";
+                paths.books = "/mnt/books";
+                domains.base = "jafner.net";
+              };
+              stacks.coder = {
+                enable = true;
+                secretsFiles.coder = ./hosts/fighter/secrets/coder.secrets;
+                paths.appdata = "/appdata/coder";
+                domains.base = "jafner.net";
+              };
+              stacks.gitea = {
+                enable = true;
+                secretsFiles.gitea = ./hosts/fighter/secrets/gitea.secrets;
+                secretsFiles.postgres = ./hosts/fighter/secrets/gitea_postgres.secrets;
+                paths.appdata = "/appdata/gitea";
+                domains.base = "jafner.net";
+              };
+              stacks.gitea-runner = {
+                enable = true;
+                secretsFile = ./hosts/fighter/secrets/gitea-runner.token;
+                domains.gitea-host = "git.jafner.net";
+              };
+              stacks.keycloak = {
+                enable = true;
+                keycloakAdminUsername = "jafner425@gmail.com";
+                secretsFiles = {
+                  keycloak = ./hosts/fighter/secrets/keycloak.secrets;
+                  postgres = ./hosts/fighter/secrets/keycloak_postgres.secrets;
+                  forwardauth = ./hosts/fighter/secrets/forwardauth.secrets;
+                  forwardauth-privileged = ./hosts/fighter/secrets/forwardauth-privileged.secrets;
+                };
+                paths.appdata = "/appdata/keycloak";
+                domains.base = "jafner.net";
+              };
+              stacks.minecraft = {
+                enable = true;
+                paths.appdata = "/appdata/minecraft";
+              };
+              stacks.traefik = {
+                enable = true;
+                secretsFile = ./hosts/fighter/secrets/traefik.secrets;
+                extraConf = ./hosts/fighter/traefik_config.yaml;
+                domainOwnerEmail = "jafner425@gmail.com";
+                paths.appdata = "/appdata/traefik";
+                domains.base = "jafner.net";
+                domains.traefik = "traefik.jafner.net";
+              };
+            }
+            {
+              fileSystems = {
+                "/" = {
+                  device = "/dev/disk/by-uuid/88a3f223-ed42-4be1-a748-bb9e0f9007dc";
+                  fsType = "ext4";
+                };
+                "/boot" = {
+                  device = "/dev/disk/by-uuid/744D-0867";
+                  fsType = "vfat";
+                  options = [ "fmask=0077" "dmask=0077" ];
+                };
+              };
+              swapDevices = [ { device = "/.swapfile"; size = 32*1024;} ];
+              boot = {
+                loader.systemd-boot.enable = true;
+                initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+                initrd.kernelModules = [ ];
+                kernelModules = [ "amdgpu" "kvm-amd" ];
+                extraModulePackages = [ ];
+              };
+              hardware = {
+                amdgpu.amdvlk.enable = false;
+                graphics = {
+                  enable = true;
+                  enable32Bit = true;
+                };
+              };
+              environment.systemPackages = with pkgs; [
+                rocmPackages.rocm-smi
+                rocmPackages.rocminfo
+                amdgpu_top
+              ];
+              users.users."${username}".extraGroups = [ "video" "render" ];
+              nixpkgs.hostPlatform = "x86_64-linux";
+              hardware.cpu.amd.updateMicrocode = true;
+              hardware.enableRedistributableFirmware = true;
+            }
+          ];
+          inherit system;
+        };
       desktop = let
         username = "joey";
         hostname = "desktop";
@@ -209,7 +447,7 @@
             inputs.chaotic.nixosModules.default
           ] ++ [ # Configure this system.
             {
-              chaotic.mesa-git.enable = true;
+              chaotic.mesa-git.enable = false;
             }
             { # Configure nixpkgs
               nixpkgs.config.allowUnfree = true;
@@ -328,15 +566,9 @@
                 pulse.enable = true;
                 jack.enable = true;
               };
-              services.pulseaudio.enable = false;
-              services.printing.enable = true;
               hardware.wooting.enable = true;
               hardware.xpadneo.enable = true;
               users.users."${username}".extraGroups = [ "input" ];
-              programs.ydotool = {
-                enable = true;
-                group = "wheel";
-              };
               fonts.packages = with pkgs; [
                 font-awesome
                 noto-fonts
@@ -387,15 +619,15 @@
                 programs.home-manager.enable = true;
                 home.stateVersion = "24.11";
                 programs.chromium = {
-                  enable = true;
+                  enable = false;
                   package = pkgs.chromium;
                 };
                 programs.firefox = {
-                  enable = true;
+                  enable = false;
                   package = pkgs.firefox;
                 };
                 programs.tmux = {
-                  enable = true;
+                  enable = false;
                   newSession = true;
                   baseIndex = 1;
                   disableConfirmationPrompt = true;
@@ -410,7 +642,7 @@
                 };
                 programs.vim = {
                   enable = true;
-                  defaultEditor = true;
+                  defaultEditor = false;
                   settings = {
                     copyindent = true;
                     relativenumber = true;
@@ -450,7 +682,7 @@
                 ];
               };
               programs.gamescope = {
-                enable = true;
+                enable = false;
                 capSysNice = false;
               };
               programs.gamemode = {
@@ -575,6 +807,188 @@
                   # cat ~/.config/MangoHud/MangoHud.conf
                 };
               };
+            }
+            { # Clipit
+              sops.secrets.zipline = {
+                sopsFile = ./hosts/desktop/secrets/zipline.token;
+                key = "";
+                mode = "0440";
+                format = "binary";
+                owner = username;
+              };
+              sops.secrets."cloudflare/id" = {
+                sopsFile = ./hosts/desktop/secrets/cloudflare_id.token;
+                key = "";
+                mode = "0440";
+                format = "binary";
+                owner = username;
+              };
+              sops.secrets."cloudflare/token" = {
+                sopsFile = ./hosts/desktop/secrets/cloudflare_stream.token;
+                key = "";
+                mode = "0440";
+                format = "binary";
+                owner = username;
+              };
+              home-manager.users.${username}.home.packages = with pkgs; [
+                ffmpeg
+                ( writeShellApplication {
+                  name = "convert-for-discord"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+                  runtimeInputs = [
+                    libnotify
+                    ffmpeg-full
+                  ];
+                  text = ''
+                    #!/bin/bash
+
+                    INPUT_FILE=$(realpath "$1")
+                    FILE_PATH=$(dirname "$INPUT_FILE")
+                    FILE_NAME=$(basename "$INPUT_FILE")
+                    #FILE_EXT="''$''\{FILE_NAME##*.}"
+                    FILE_NAME="''$''\{FILE_NAME%.*}"
+                    OUTFILE="$FILE_PATH/$FILE_NAME.mp4"
+
+                    # Actual transcoding happens here:
+                    notify-send -t 2000 "Transcode starting" "$FILE_NAME"
+                    ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,scale=-1:720,hwupload' -c:v h264_vaapi -b:v 8M -c:a copy -r 30 "$OUTFILE"
+                    notify-send -t 4000 "Transcode complete" "$FILE_NAME"
+                  '';
+                } )
+                ( writeShellApplication {
+                  name = "convert-lossless"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+                  runtimeInputs = [
+                    libnotify
+                    ffmpeg-full
+                  ];
+                  text = ''
+                    #!/bin/bash
+
+                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
+                    INPUT_FILE=$(realpath "$INPUT_FILE")
+                    FILE_PATH=$(dirname "$INPUT_FILE")
+                    FILE_NAME=$(basename "$INPUT_FILE")
+                    #FILE_EXT="''$''\{FILE_NAME##*.}"
+                    FILE_NAME="''$''\{FILE_NAME%.*}"
+                    OUTFILE="$FILE_PATH/$FILE_NAME.mp4"
+
+                    # Actual transcoding happens here:
+                    notify-send -t 2000 "Transcode starting" "$FILE_NAME"
+                    ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -movflags faststart -map 0 -c:v copy -c:a copy "$OUTFILE"
+                    notify-send -t 4000 "Transcode complete" "$FILE_NAME"
+                  '';
+                } )
+                ( writeShellApplication {
+                  name = "send-to-zipline"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+                  runtimeInputs = [
+                    libnotify
+                    curl
+                    jq
+                    wl-clipboard
+                    wl-clip-persist
+                  ];
+                  text = ''
+                    #!/bin/bash
+
+                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
+                    INPUT_FILE=$(realpath "$INPUT_FILE")
+                    FILE_NAME=$(basename "$INPUT_FILE")
+                    FILE_NAME="''$''\{FILE_NAME%.*}"
+
+                    ZIPLINE_HOST_ROOT=https://zipline.jafner.net
+
+                    ZIPLINE_TOKEN="$(cat /run/secrets/zipline)"
+
+                    RESPONSE=$(curl \
+                        --header "authorization: $ZIPLINE_TOKEN" \
+                        $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
+                        --header "Content-Type: multipart/form-data" \
+                        --header "Format: name" \
+                        --header "Embed: true" \
+                        --header "Original-Name: true")
+                    LINK=$(echo "$RESPONSE" | jq -r .'files[0]')
+                    notify-send -t 4000 "Zipline - Upload complete." "Link copied to clipboard: $LINK"
+                    echo "[$FILE_NAME]($LINK)"
+                  '';
+                } )
+                ( writeShellApplication {
+                  name = "send-to-cloudflare"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+                  runtimeInputs = [
+                    libnotify
+                    curl
+                    jq
+                    wl-clipboard
+                    wl-clip-persist
+                  ];
+                  text = ''
+                    #!/bin/bash
+
+                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
+                    INPUT_FILE=$(realpath "$INPUT_FILE")
+                    FILE_NAME=$(basename "$INPUT_FILE")
+                    FILE_NAME="''$''\{FILE_NAME%.*}"
+
+                    CF_TOKEN="$(cat /run/secrets/cloudflare/token)"
+                    CF_ID="$(cat /run/secrets/cloudflare/id)"
+
+                    notify-send -t 2000 "Cloudflare - Beginning upload."
+
+                    # shellcheck disable=SC2086
+                    RESPONSE=$(curl -X POST \
+                    --header "Authorization: Bearer $CF_TOKEN" \
+                    --form "file=@$INPUT_FILE" \
+                    https://api.cloudflare.com/client/v4/accounts/$CF_ID/stream
+                    )
+                    LINK=$(echo "$RESPONSE" | jq -r '.result.preview')
+                    notify-send -t 4000 "Cloudflare - Upload complete." "Link copied to clipboard: $LINK"
+                    echo "[$FILE_NAME]($LINK)"
+                  '';
+                } )
+                ( writeShellApplication {
+                  name = "send-to-zipline-and-cloudflare"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
+                  runtimeInputs = [
+                    libnotify
+                    curl
+                    jq
+                    wl-clipboard
+                    wl-clip-persist
+                  ];
+                  text = ''
+                    #!/bin/bash
+
+                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
+                    INPUT_FILE=$(realpath "$INPUT_FILE")
+                    FILE_NAME=$(basename "$INPUT_FILE")
+                    FILE_NAME="''$''\{FILE_NAME%.*}"
+
+                    ZIPLINE_HOST_ROOT=https://zipline.jafner.net
+
+                    CF_TOKEN="$(cat /run/secrets/cloudflare/token)"
+                    CF_ID="$(cat /run/secrets/cloudflare/id)"
+                    ZIPLINE_TOKEN="$(cat /run/secrets/zipline)"
+
+
+                    notify-send -t 2000 "Zipline and Cloudflare - Beginning upload."
+                    RESPONSE=$(curl \
+                        --header "authorization: $ZIPLINE_TOKEN" \
+                        $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
+                        --header "Content-Type: multipart/form-data" \
+                        --header "Format: name" \
+                        --header "Embed: true" \
+                        --header "Original-Name: true")
+                    LINK=$(echo "$RESPONSE" | jq -r .'files[0]' | sed 's/\/u\//\/r\//')
+
+                    # shellcheck disable=SC2086
+                    RESPONSE=$(curl -X POST \
+                    --header "Authorization: Bearer $CF_TOKEN" \
+                    --data "{\"url\":\"$LINK\",\"meta\":{\"name\":\"$FILE_NAME\"}}" \
+                    https://api.cloudflare.com/client/v4/accounts/$CF_ID/stream/copy
+                    )
+                    LINK=$(echo "$RESPONSE" | jq -r '.result.preview')
+                    notify-send -t 4000 "Zipline and Cloudflare - Upload complete." "Link copied to clipboard: $LINK"
+                    echo "[$FILE_NAME]($LINK)"
+                  '';
+                } )
+              ];
             }
             { # Default DE: Plasma6
               programs.kdeconnect.enable = true;
@@ -919,187 +1333,6 @@
                 # sed 's/^"/"\\#/' | tr '\n' ' '
               };
             }
-            { # Clipit
-              sops.secrets.zipline = {
-                sopsFile = ./hosts/desktop/secrets/zipline.token;
-                key = "";
-                mode = "0440";
-                format = "binary";
-                owner = username;
-              };
-              sops.secrets."cloudflare/id" = {
-                sopsFile = ./hosts/desktop/secrets/cloudflare_id.token;
-                key = "";
-                mode = "0440";
-                format = "binary";
-                owner = username;
-              };
-              sops.secrets."cloudflare/token" = {
-                sopsFile = ./hosts/desktop/secrets/cloudflare_stream.token;
-                key = "";
-                mode = "0440";
-                format = "binary";
-                owner = username;
-              };
-              home-manager.users."${username}".home.packages = with pkgs; [
-                ( writeShellApplication {
-                name = "convert-for-discord"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
-                runtimeInputs = [
-                    libnotify
-                    ffmpeg-full
-                ];
-                text = ''
-                    #!/bin/bash
-
-                    INPUT_FILE=$(realpath "$1")
-                    FILE_PATH=$(dirname "$INPUT_FILE")
-                    FILE_NAME=$(basename "$INPUT_FILE")
-                    #FILE_EXT="''$''\{FILE_NAME##*.}"
-                    FILE_NAME="''$''\{FILE_NAME%.*}"
-                    OUTFILE="$FILE_PATH/$FILE_NAME.mp4"
-
-                    # Actual transcoding happens here:
-                    notify-send -t 2000 "Transcode starting" "$FILE_NAME"
-                    ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -map 0 -vf 'format=nv12,scale=-1:720,hwupload' -c:v h264_vaapi -b:v 8M -c:a copy -r 30 "$OUTFILE"
-                    notify-send -t 4000 "Transcode complete" "$FILE_NAME"
-                '';
-                } )
-                ( writeShellApplication {
-                name = "convert-lossless"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
-                runtimeInputs = [
-                    libnotify
-                    ffmpeg-full
-                ];
-                text = ''
-                    #!/bin/bash
-
-                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
-                    INPUT_FILE=$(realpath "$INPUT_FILE")
-                    FILE_PATH=$(dirname "$INPUT_FILE")
-                    FILE_NAME=$(basename "$INPUT_FILE")
-                    #FILE_EXT="''$''\{FILE_NAME##*.}"
-                    FILE_NAME="''$''\{FILE_NAME%.*}"
-                    OUTFILE="$FILE_PATH/$FILE_NAME.mp4"
-
-                    # Actual transcoding happens here:
-                    notify-send -t 2000 "Transcode starting" "$FILE_NAME"
-                    ffmpeg -hide_banner -vaapi_device /dev/dri/renderD128 -i "$INPUT_FILE" -movflags faststart -map 0 -c:v copy -c:a copy "$OUTFILE"
-                    notify-send -t 4000 "Transcode complete" "$FILE_NAME"
-                '';
-                } )
-                ( writeShellApplication {
-                name = "send-to-zipline"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
-                runtimeInputs = [
-                    libnotify
-                    curl
-                    jq
-                    wl-clipboard
-                    wl-clip-persist
-                ];
-                text = ''
-                    #!/bin/bash
-
-                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
-                    INPUT_FILE=$(realpath "$INPUT_FILE")
-                    FILE_NAME=$(basename "$INPUT_FILE")
-                    FILE_NAME="''$''\{FILE_NAME%.*}"
-
-                    ZIPLINE_HOST_ROOT=https://zipline.jafner.net
-
-                    ZIPLINE_TOKEN="$(cat /run/secrets/zipline)"
-
-                    RESPONSE=$(curl \
-                        --header "authorization: $ZIPLINE_TOKEN" \
-                        $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
-                        --header "Content-Type: multipart/form-data" \
-                        --header "Format: name" \
-                        --header "Embed: true" \
-                        --header "Original-Name: true")
-                    LINK=$(echo "$RESPONSE" | jq -r .'files[0]')
-                    notify-send -t 4000 "Zipline - Upload complete." "Link copied to clipboard: $LINK"
-                    echo "[$FILE_NAME]($LINK)"
-                '';
-                } )
-                ( writeShellApplication {
-                name = "send-to-cloudflare"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
-                runtimeInputs = [
-                    libnotify
-                    curl
-                    jq
-                    wl-clipboard
-                    wl-clip-persist
-                ];
-                text = ''
-                    #!/bin/bash
-
-                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
-                    INPUT_FILE=$(realpath "$INPUT_FILE")
-                    FILE_NAME=$(basename "$INPUT_FILE")
-                    FILE_NAME="''$''\{FILE_NAME%.*}"
-
-                    CF_TOKEN="$(cat /run/secrets/cloudflare/token)"
-                    CF_ID="$(cat /run/secrets/cloudflare/id)"
-
-                    notify-send -t 2000 "Cloudflare - Beginning upload."
-
-                    # shellcheck disable=SC2086
-                    RESPONSE=$(curl -X POST \
-                    --header "Authorization: Bearer $CF_TOKEN" \
-                    --form "file=@$INPUT_FILE" \
-                    https://api.cloudflare.com/client/v4/accounts/$CF_ID/stream
-                    )
-                    LINK=$(echo "$RESPONSE" | jq -r '.result.preview')
-                    notify-send -t 4000 "Cloudflare - Upload complete." "Link copied to clipboard: $LINK"
-                    echo "[$FILE_NAME]($LINK)"
-                '';
-                } )
-                ( writeShellApplication {
-                name = "send-to-zipline-and-cloudflare"; # { filePath }: { none } (side-effect: transcodes & remuxes file to x264/mp4)
-                runtimeInputs = [
-                    libnotify
-                    curl
-                    jq
-                    wl-clipboard
-                    wl-clip-persist
-                ];
-                text = ''
-                    #!/bin/bash
-
-                    INPUT_FILE="''$''\{1:-INPUT_FILE}"
-                    INPUT_FILE=$(realpath "$INPUT_FILE")
-                    FILE_NAME=$(basename "$INPUT_FILE")
-                    FILE_NAME="''$''\{FILE_NAME%.*}"
-
-                    ZIPLINE_HOST_ROOT=https://zipline.jafner.net
-
-                    CF_TOKEN="$(cat /run/secrets/cloudflare/token)"
-                    CF_ID="$(cat /run/secrets/cloudflare/id)"
-                    ZIPLINE_TOKEN="$(cat /run/secrets/zipline)"
-
-
-                    notify-send -t 2000 "Zipline and Cloudflare - Beginning upload."
-                    RESPONSE=$(curl \
-                        --header "authorization: $ZIPLINE_TOKEN" \
-                        $ZIPLINE_HOST_ROOT/api/upload -F "file=@$INPUT_FILE" \
-                        --header "Content-Type: multipart/form-data" \
-                        --header "Format: name" \
-                        --header "Embed: true" \
-                        --header "Original-Name: true")
-                    LINK=$(echo "$RESPONSE" | jq -r .'files[0]' | sed 's/\/u\//\/r\//')
-
-                    # shellcheck disable=SC2086
-                    RESPONSE=$(curl -X POST \
-                    --header "Authorization: Bearer $CF_TOKEN" \
-                    --data "{\"url\":\"$LINK\",\"meta\":{\"name\":\"$FILE_NAME\"}}" \
-                    https://api.cloudflare.com/client/v4/accounts/$CF_ID/stream/copy
-                    )
-                    LINK=$(echo "$RESPONSE" | jq -r '.result.preview')
-                    notify-send -t 4000 "Zipline and Cloudflare - Upload complete." "Link copied to clipboard: $LINK"
-                    echo "[$FILE_NAME]($LINK)"
-                '';
-                } )
-              ];
-            }
             { # Zsh
               users.users."${username}".shell = pkgs.zsh;
               programs.zsh.enable = true;
@@ -1356,6 +1589,10 @@
                       dark = "Catppuccin Mocha";
                       light = "Catppuccin Mocha";
                     };
+                    show_edit_predictions = false;
+                    edit_predictions = {
+                      mode = "subtle";
+                    };
                     terminal = {
                       shell = { program = "zsh"; };
                     };
@@ -1365,6 +1602,16 @@
                         formatting.command = "nixfmt";
                         options = {
                           nixos.expr = "(builtins.getFlake \"/home/joey/Git/Jafner.net\").nixosConfigurations.desktop.options";
+                        };
+                      };
+                      "rust-analyzer" = {
+                        "initialization_options" = {
+                          "inlayHints" = {
+                            "maxLength" = null;
+                            "closureReturnTypeHints" = {
+                              "enable" = "always";
+                            };
+                          };
                         };
                       };
                     };
@@ -2818,227 +3065,7 @@
             }
           ];
         };
-      fighter = let
-        # TODO:
-        # Gitea/runner
-        # Homeassistant
-        # plex
-        # qbittorrent
-        # send
-        # stash
-        # unifi
-        # vaultwarden
-        # zipline
-        username = "admin";
-        hostname = "fighter";
-        system = "x86_64-linux";
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); allowUnfree = true; };
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config = { allowUnfreePredicate = (_: true); };
-        };
-        in inputs.nixpkgs.lib.nixosSystem {
-          modules = [ # Import modules from other flakes.
-            inputs.home-manager.nixosModules.home-manager
-            inputs.sops-nix.nixosModules.sops
-          ] ++ [ # Import modules from this flake.
-            ./modules/default.nix
-            ./modules/stacks/ai/stack.nix
-            ./modules/stacks/autopirate/stack.nix
-            ./modules/stacks/books/stack.nix
-            ./modules/stacks/coder/stack.nix
-            ./modules/stacks/gitea/stack.nix
-            ./modules/stacks/gitea-runner/stack.nix
-            ./modules/stacks/keycloak/stack.nix
-            ./modules/stacks/minecraft/stack.nix
-            ./modules/stacks/traefik/stack.nix
-          ] ++ [ # Configure this system.
-            {
-              modules = {
-                roles = {
-                  system = { enable = true; username = username; hostname = hostname;
-                    authorizedKeysSource.url = "https://github.com/Jafner.keys";
-                    authorizedKeysSource.hash = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
-                    sshPrivateKeyPath = ".ssh/${username}@${hostname}";
-                    ageKeyFilePath = ".config/sops/age/keys.txt";
-                    repoRoot = "/home/${username}/Jafner.net";
-                  };
-                };
-                programs = {
-                  zsh = { enable = true; username = username; };
-                  git = {
-                    enable = true;
-                    username = username;
-                    realname = "Joey Hafner";
-                    email = "noreply@jafner.net";
-                    sshPrivateKeyPath = ".ssh/${username}@${hostname}";
-                    signingKey = "";
-                  };
-                };
-                hardware = {
-                  iscsi = {
-                    enable = true;
-                    hostname = hostname;
-                    portalAddr = "192.168.1.12";
-                    iqn = "iqn.2020-03.net.jafner:fighter";
-                  };
-                  smb = {
-                    enable = true;
-                    username = username;
-                    smbSecretsFile = ./hosts/fighter/secrets/smb.secrets;
-                    shares.movies.enable = true;
-                    shares.music.enable = true;
-                    shares.shows.enable = true;
-                    shares.books.enable = true;
-                    shares.torrenting.enable = true;
-                    shares.archive.enable = true;
-                  };
-                };
-                services = {
-                  docker = {
-                    enable = true;
-                    username = username;
-                  };
-                };
-                stacks = {
-                  ai = {
-                    enable = true;
-                    username = username;
-                    paths.appdata = "/appdata/ai";
-                    domains.base = "jafner.net";
-                  };
-                  autopirate = {
-                    enable = true;
-                    username = username;
-                    paths = {
-                      appdata = "/appdata/autopirate";
-                      movies = "/mnt/movies";
-                      shows = "/mnt/shows";
-                      music = "/mnt/music";
-                    };
-                    domains = {
-                      base = "jafner.net";
-                    };
-                  };
-                  books = {
-                    enable = true;
-                    username = username;
-                    paths.appdata = "/appdata/books";
-                    paths.books = "/mnt/books";
-                    domains.base = "jafner.net";
-                  };
-                  coder = {
-                    enable = true;
-                    username = username;
-                    secretsFiles.coder = ./hosts/fighter/secrets/coder.secrets;
-                    paths.appdata = "/appdata/coder";
-                    domains.base = "jafner.net";
-                  };
-                  gitea = {
-                    enable = true;
-                    username = username;
-                    secretsFiles.gitea = ./hosts/fighter/secrets/gitea.secrets;
-                    secretsFiles.postgres = ./hosts/fighter/secrets/gitea_postgres.secrets;
-                    paths.appdata = "/appdata/gitea";
-                    domains.base = "jafner.net";
-                  };
-                  gitea-runner = {
-                    enable = true;
-                    username = username;
-                    secretsFile = ./hosts/fighter/secrets/gitea-runner.token;
-                    domains.gitea-host = "git.jafner.net";
-                  };
-                  keycloak = {
-                    enable = true;
-                    username = username;
-                    keycloakAdminUsername = "jafner425@gmail.com";
-                    secretsFiles = {
-                      keycloak = ./hosts/fighter/secrets/keycloak.secrets;
-                      postgres = ./hosts/fighter/secrets/keycloak_postgres.secrets;
-                      forwardauth = ./hosts/fighter/secrets/forwardauth.secrets;
-                      forwardauth-privileged = ./hosts/fighter/secrets/forwardauth-privileged.secrets;
-                    };
-                    paths.appdata = "/appdata/keycloak";
-                    domains.base = "jafner.net";
-                  };
-                  minecraft = {
-                    enable = true;
-                    username = username;
-                    paths.appdata = "/appdata/minecraft";
-                  };
-                  traefik = {
-                    enable = true;
-                    username = username;
-                    secretsFile = ./hosts/fighter/secrets/traefik.secrets;
-                    extraConf = ./hosts/fighter/traefik_config.yaml;
-                    domainOwnerEmail = "jafner425@gmail.com";
-                    paths.appdata = "/appdata/traefik";
-                    domains.base = "jafner.net";
-                    domains.traefik = "traefik.jafner.net";
-                  };
-                };
-              };
-            }
-            {
-              fileSystems = {
-                "/" = {
-                  device = "/dev/disk/by-uuid/88a3f223-ed42-4be1-a748-bb9e0f9007dc";
-                  fsType = "ext4";
-                };
-                "/boot" = {
-                  device = "/dev/disk/by-uuid/744D-0867";
-                  fsType = "vfat";
-                  options = [ "fmask=0077" "dmask=0077" ];
-                };
-              };
-              swapDevices = [ { device = "/.swapfile"; size = 32*1024;} ];
-              boot = {
-                loader.systemd-boot.enable = true;
-                initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-                initrd.kernelModules = [ ];
-                kernelModules = [ "amdgpu" "kvm-amd" ];
-                extraModulePackages = [ ];
-              };
-              hardware = {
-                amdgpu.amdvlk.enable = false;
-                graphics = {
-                  enable = true;
-                  enable32Bit = true;
-                };
-              };
-              environment.systemPackages = with pkgs; [
-                rocmPackages.rocm-smi
-                rocmPackages.rocminfo
-                amdgpu_top
-              ];
-              users.users."${username}".extraGroups = [ "video" "render" ];
-              nixpkgs.hostPlatform = "x86_64-linux";
-              hardware.cpu.amd.updateMicrocode = true;
-              hardware.enableRedistributableFirmware = true;
-            }
-          ];
-          inherit system;
-          specialArgs = { inherit pkgs pkgs-unstable inputs system; };
-            # networking = {
-            #   hostname = sys.hostname;
-            #   interface = "enp3s0";
-            #   mac = "00:02:c9:56:bf:9a";
-            #   ip = "192.168.1.23";
-            #   gatewayIP = "192.168.1.1";
-            #   dns = [ "10.0.0.1" ];
-
-            # };
-            # iscsi = {
-            #   iqn = "iqn.2020-03.net.jafner:fighter";
-            #   portalIP = "192.168.1.12:3260";
-            #   mountPath = "/mnt/iscsi"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
-            #   fsType = "ext4"; # Unused until I can figure out how to write a proper iscsi fileSystems block.
-            # };
-        };
-      };
+    };
     deploy = {
       nodes = {
         artificer = { # deploy with nix run github:serokell/deploy-rs -- --targets .#artificer
@@ -3085,7 +3112,15 @@
       remoteBuild = false;
       confirmTimeout = 60;
     };
-    nixosModules.networkshares = import ./modules/networkshares/default.nix;
+    nixosModules.networkShares = import ./modules/networkShares/default.nix;
+    nixosModules.roles = import ./modules/roles/default.nix;
+    nixosModules.stacks = import ./modules/stacks/default.nix;
+    packages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      default = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
+    });
+    devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      default = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
+    });
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
   };
 }

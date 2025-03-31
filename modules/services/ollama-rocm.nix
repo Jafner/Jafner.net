@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: let cfg = config.modules.services.ollama-rocm; in {
+{ pkgs, config, ... }: let cfg = config.services.ollama-rocm; in {
   options = with pkgs.lib; {
-    modules.services.ollama-rocm = {
+    services.ollama-rocm = {
       enable = mkEnableOption "ollama-rocm";
       username = mkOption {
         type = types.str;

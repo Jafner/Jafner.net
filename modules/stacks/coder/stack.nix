@@ -1,13 +1,7 @@
-{ pkgs, config, ... }: let stack = "coder"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "coder"; in let cfg = config.stacks.${stack}; in {
+  options ={
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
-      username = mkOption {
-        type = types.str;
-        default = "admin";
-        description = "Username of the default, primary user.";
-        example = "john";
-      };
       secretsFiles = mkOption {
         type = types.submodule {
           options = {
@@ -51,14 +45,14 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config = mkIf cfg.enable  {
     sops.secrets."${stack}" = {
       sopsFile = cfg.secretsFiles.${stack};
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
-    home-manager.users."${cfg.username}".home.file = {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''

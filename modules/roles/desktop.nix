@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: let cfg = config.modules.roles.desktop; in {
-  options = with pkgs.lib; {
-    modules.roles.desktop = {
+{ pkgs, lib, config, username, ... }: with lib; let cfg = config.roles.desktop; in {
+  options = {
+    roles.desktop = {
       enable = mkEnableOption "desktop";
       username = mkOption {
         type = types.str;
@@ -10,7 +10,7 @@
       };
     };
   };
-  config = pkgs.lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
@@ -82,10 +82,6 @@
         enable = true;
         package = pkgs.chromium;
       };
-      programs.firefox = {
-        enable = true;
-        package = pkgs.firefox;
-      };
       programs.tmux = {
         enable = true;
         newSession = true;
@@ -102,7 +98,7 @@
       };
       programs.vim = {
         enable = true;
-        defaultEditor = true;
+        defaultEditor = false;
         settings = {
           copyindent = true;
           relativenumber = true;

@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: let cfg = config.modules.roles.gaming; in {
-  options = with pkgs.lib; {
-    modules.roles.gaming = {
+{ pkgs, lib, config, username, ... }: with lib; let cfg = config.roles.gaming; in {
+  options = {
+    roles.gaming = {
       enable = mkEnableOption "gaming";
       username = mkOption {
         type = types.str;
@@ -10,7 +10,7 @@
       };
     };
   };
-  config = pkgs.lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     networking.firewall = {
       allowedTCPPorts = [ 25565 ];
       allowedUDPPorts = [ 25565 ];

@@ -1,13 +1,7 @@
-{ pkgs, config, ... }: let stack = "gitea-runner"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "gitea-runner"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
-      username = mkOption {
-        type = types.str;
-        default = "admin";
-        description = "Username of the default, primary user.";
-        example = "john";
-      };
       secretsFile = mkOption {
         type = types.pathInStore;
         description = "Path to a sops-nix-encrypted secrets file for gitea-runner.";
@@ -25,14 +19,14 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config = mkIf cfg.enable  {
     sops.secrets."${stack}" = {
       sopsFile = cfg.secretsFile;
       key = "";
       mode = "0440";
-      owner = cfg.username;
+      owner = username;
     };
-    home-manager.users."${cfg.username}".home.file = {
+    home-manager.users."${username}".home.file = {
       "${stack}" = {
         enable = true;
         source = ./config.yaml;

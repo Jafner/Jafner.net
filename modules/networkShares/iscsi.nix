@@ -1,6 +1,6 @@
-{ pkgs, config, ... }: let cfg = config.networkshares.iscsi; in {
+{ pkgs, config, hostname, ... }: let cfg = config.networkShares.iscsi; in {
   options = with pkgs.lib; {
-    networkshares.iscsi = {
+    networkShares.iscsi = {
       enable = mkEnableOption "iSCSI";
       hostname = mkOption {
         type = types.str;
