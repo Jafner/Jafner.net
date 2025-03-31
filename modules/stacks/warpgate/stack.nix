@@ -1,17 +1,12 @@
-{ pkgs, config, ... }: let stack = "warpgate"; in let cfg = config.modules.stacks.${stack}; in {
-  options = with pkgs.lib; {
-    modules.stacks.${stack} = {
+{ pkgs, lib, config, username, ... }: with lib; let stack = "warpgate"; in let cfg = config.stacks.${stack}; in {
+  options = {
+    stacks.${stack} = {
       enable = mkEnableOption "${stack}";
       username = mkOption {
         type = types.str;
         default = "admin";
         description = "Username of the default, primary user.";
         example = "john";
-      };
-      secretsFile = mkOption {
-        type = types.pathInStore;
-        default = null;
-        description = "Path to the stack's sops-nix-encrypted secrets file.";
       };
       paths = mkOption {
         type = types.submodule {
@@ -42,52 +37,35 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
-    sops.secrets."${stack}" = {
-      sopsFile = cfg.secretsFile;
-      key = "";
-      mode = "0440";
-      owner = cfg.username;
-    };
-    home-manager.users."${cfg.username}".home.file = {
+  config = mkIf cfg.enable  {
+    home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
         text = ''
           services:
-            ${stack}:
-              image: image:tag
-              container_name: ${stack}_service
-              restart: "no"
-              networks:
-                web:
+            warpgate:
+              image: ghcr.io/warp-tech/warpgate
+              container_name: warpgate_warpgate
+              ports:
+                - 2222:2222
+                - 33306:33306
               volumes:
                 - ${cfg.paths.appdata}:/data
-              env_file:
-                - path: /run/secrets/${stack}
-                  required: true
+              labels:
+                - traefik.http.routers.warpgate.rule=Host(`${cfg.domains.${stack}}`)
+                - traefik.http.routers.warpgate.tls.certresolver=lets-encrypt
+                - traefik.http.services.warpgate.loadbalancer.server.port=8888
+                - traefik.http.services.warpgate.loadbalancer.server.scheme=https
+              stdin_open: true
+              tty: true
+              networks:
+                web:
           networks:
             web:
               external: true
         '';
         target = "stacks/${stack}/docker-compose.yml";
       };
-    };
-  };
-}
-
-
-{ sys, stacks, ... }: let stack = "warpgate"; in {
-  home-manager.users."${sys.username}".home.file = {
-    "${stack}" = {
-      enable = true;
-      recursive = true;
-      source = ./.;
-      target = "stacks/${stack}/";
-    };
-    "${stack}/.env" = {
-      enable = true;
-      text = ''APPDATA=${stacks.appdata}/${stack}'';
-      target = "stacks/${stack}/.env";
     };
   };
 }
