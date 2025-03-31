@@ -3116,9 +3116,11 @@
     nixosModules.roles = import ./modules/roles/default.nix;
     nixosModules.stacks = import ./modules/stacks/default.nix;
     packages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      helloworld = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
       default = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
     });
     devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      helloworld = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
       default = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
     });
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
