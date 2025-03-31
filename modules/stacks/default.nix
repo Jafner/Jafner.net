@@ -7,8 +7,12 @@
     ./gitea/stack.nix
     ./gitea-runner/stack.nix
     ./homeassistant/stack.nix
+    ./homepage/stack.nix
     ./keycloak/stack.nix
     ./minecraft/stack.nix
+    ./n8n/stack.nix
+    ./navidrome/stack.nix
+    ./nextcloud/stack.nix
     ./plex/stack.nix
     ./qbittorrent/stack.nix
     ./send/stack.nix
