@@ -51,7 +51,7 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config = mkIf cfg.enable  {
     sops.secrets."${stack}/coder" = {
       sopsFile = cfg.secretsFiles.${stack};
       key = "";

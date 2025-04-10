@@ -1,4 +1,4 @@
-{ pkgs, lib, config, username, hostname, ... }: with lib; let cfg = config.roles.system; in {
+{ pkgs, lib, config, username, hostname, systemKey, ... }: with lib; let cfg = config.roles.system; in {
   options = {
     roles.system = {
       enable = mkEnableOption "Standard system";
@@ -8,28 +8,36 @@
         description = "The Linux kernel package to use.";
         example = "pkgs.linuxKernel.packages.\"linux_zen\"";
       };
-      authorizedKeysSource.url = mkOption {
+      systemKey = mkOption {
         type = types.str;
-        default = null;
-        description = "URL from which to source authorized_keys. Must be plain text.";
-        example = "https://github.com/MyUser.keys";
-      };
-      authorizedKeysSource.hash = mkOption {
-        type = types.str;
-        default = null;
-        description = "Hash of authorized_keys content. Must be sha256.";
-        example = "1i3Vs6mPPl965g4sRmbXYzx6zQMs5geBCgNx2zfpjF4=";
-      };
-      sshPrivateKeyPath = mkOption {
-        type = types.str;
-        default = ".ssh/id_ed_25519";
-        description = "Path to private key to use for age. Relative to home of primary user.";
+        default = systemKey;
+        description = "Path to private SSH key to use for age. Relative to home of primary user.";
         example = ".ssh/me@example.tld";
       };
     };
   };
   config = mkIf cfg.enable {
     home-manager.users."${username}" = {
+      home.file.".ssh/config" = {
+        enable = true;
+        text = ''
+          Host *
+              ForwardAgent yes
+              IdentityFile ~/${cfg.systemKey}
+        '';
+        target = ".ssh/config";
+      };
+      home.file.".ssh/profiles" = {
+        enable = true;
+        text = ''
+          vyos@wizard
+          admin@paladin
+          admin@fighter
+          admin@artificer
+          admin@champion
+        '';
+        target = ".ssh/profiles";
+      };
       home.packages = with pkgs; [
         sops
         age
@@ -38,7 +46,7 @@
       home.stateVersion = "24.11";
     };
     sops = {
-      age.sshKeyPaths = [ "/home/${username}/${cfg.sshPrivateKeyPath}" ];
+      age.sshKeyPaths = [ "/home/${username}/${cfg.systemKey}" ];
       age.generateKey = false;
     };
     services.libinput = {
@@ -82,8 +90,8 @@
       extraGroups = [ "networkmanager" "wheel" ];
       description = "${username}";
       openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile (pkgs.fetchurl {
-        url = cfg.authorizedKeysSource.url; # https://github.com/Jafner.keys
-        sha256 = cfg.authorizedKeysSource.hash; # 1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=
+        url = "https://github.com/Jafner.keys";
+        sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
       })); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
     };
 

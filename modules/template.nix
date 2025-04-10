@@ -23,7 +23,7 @@
       };
     };
   };
-  config = pkgs.lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     # actual configuration goes here.
     # use cfg.<parameter> to refer to values defined in options above
   };

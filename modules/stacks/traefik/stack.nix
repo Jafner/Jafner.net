@@ -134,7 +134,7 @@
         target = "stacks/${stack}/traefik.yaml";
       };
 
-      "${stack}/config/" = pkgs.lib.mkIf (cfg.extraConf != null) {
+      "${stack}/config/" = mkIf (cfg.extraConf != null) {
         enable = true;
         recursive = true;
         source = cfg.extraConf;

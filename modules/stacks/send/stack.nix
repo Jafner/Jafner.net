@@ -37,7 +37,7 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config = mkIf cfg.enable  {
     home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;
