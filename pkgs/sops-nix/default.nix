@@ -1,6 +1,6 @@
 { pkgs, ... }: pkgs.writeShellApplication {
   name = "sops-nix";
-  runtimeInputs = [
+  runtimeInputs = with pkgs; [
     git
     sops
     ssh-to-age
