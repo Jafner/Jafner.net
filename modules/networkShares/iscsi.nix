@@ -1,52 +1,38 @@
-{ pkgs, config, hostname, ... }: let cfg = config.networkShares.iscsi; in {
-  options = with pkgs.lib; {
-    networkShares.iscsi = {
-      enable = mkEnableOption "iSCSI";
-      hostname = mkOption {
-        type = types.str;
-        default = null;
-        example = "nixos";
-        description = "Hostname of the iSCSI initiator.";
-      };
-      portalAddr = mkOption {
-        type = types.str;
-        default = null;
-        example = "192.168.1.40";
-        description = "Hostname or IP address of the iSCSI portal.";
-      };
-      portalPort = mkOption {
-        type = types.str;
-        default = "3260";
-        example = "30260";
-        description = "Port on which the iSCSI portal is listening.";
-      };
-      iqn = mkOption {
-        type = types.str;
-        default = null;
-        example = "iqn.2003-06.org.nixos:nixos";
-        description = "IQN of the iSCSI target.";
-      };
+{ pkgs, lib, config, ... }: with lib; let cfg = config.iscsi; in {
+  options = {
+    enable = mkEnableOption "Mount iSCSI target";
+    target = mkOption {
+      type = types.str;
+      default = null;
+      example = "desktop";
+      description = "Name of the iSCSI target.";
     };
   };
-  config = pkgs.lib.mkIf cfg.enable {
-    services.openiscsi = {
-      enable = true;
-      name = cfg.hostname;
-      discoverPortal = cfg.portalAddr;
-    };
-    systemd.services = {
-      iscsi-autoconnect = {
-        description = "Log into iSCSI target ${cfg.iqn}";
-        after = [ "network.target" "iscsid.service" ];
-        wants = [ "iscsid.service" ];
-        serviceConfig = {
-          ExecStartPre = "${pkgs.openiscsi}/bin/iscsiadm -m discovery -t sendtargets -p ${cfg.portalAddr}:${cfg.portalPort}";
-          ExecStart = "${pkgs.openiscsi}/bin/iscsiadm -m node -T ${cfg.iqn} -p ${cfg.portalAddr}:${cfg.portalPort} --login";
-          ExecStop = "${pkgs.openiscsi}/bin/iscsiadm -m node -T ${cfg.iqn} -p ${cfg.portalAddr}:${cfg.portalPort} --logout";
-          Restart = "on-failure";
-          RemainAfterExit = true;
-        };
+  config = let host = "192.168.1.12"; iqn = "iqn.2020-03.net.jafner"; in mkIf cfg.enable {
+    systemd.services."iscsi-autoconnect-${cfg.target}" = {
+      description = "Log into iSCSI target ${iqn}:${cfg.target}";
+      after = [ "network.target" "iscsid.service" ];
+      requires = [ "iscsi.service" ];
+      serviceConfig = {
+        ExecStartPre = "${pkgs.openiscsi}/bin/iscsiadm -m discovery -t sendtargets -p ${host}:3260";
+        ExecStart = "${pkgs.openiscsi}/bin/iscsiadm -m node -T ${target} -p ${host}:3260 --login";
+        ExecStop = "${pkgs.openiscsi}/bin/iscsiadm -m node -T ${target} -p ${host}:3260 --logout";
+        Restart = "on-failure";
+        RemainAfterExit = true;
       };
+    };
+    fileSystems."iscsi-${cfg.target}" = {
+      enable = true;
+      mountPoint = "/mnt/iscsi/${cfg.name}";
+      device = "/dev/disk/by-path/ip-${host}:3260-iscsi-${target}-lun-0";
+      fsType = "auto";
+      options = [
+        "x-systemd.automount"
+        "x-systemd.requires=iscsi-autoconnect-${cfg.target}.service"
+        "user"
+        "rw"
+      ];
+      noCheck = true;
     };
   };
 }

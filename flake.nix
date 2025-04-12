@@ -36,7 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs.url = "github:serokell/deploy-rs";
-    #ghostty.url = "github:ghostty-org/ghostty";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -215,7 +214,7 @@
             }
             { # Network shares
               sops.secrets."smb" = {
-                sopsFile = ./hosts/desktop/secrets/smb.secrets;
+                sopsFile = ./hosts/fighter/secrets/smb.secrets;
                 format = "binary";
                 key = "";
                 mode = "0440";
@@ -303,9 +302,7 @@
             { # Roles
               roles.system = {
                 enable = true;
-                authorizedKeysSource.url = "https://github.com/Jafner.keys";
-                authorizedKeysSource.hash = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
-                sshPrivateKeyPath = ".ssh/${username}@${hostname}";
+                systemKey = ".ssh/${username}@${hostname}";
               };
             }
             { # Stacks
@@ -433,7 +430,131 @@
         };
       in inputs.nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs username hostname system systemKey; };
-        modules = [ # Temporary or experimental configurations
+        modules = [ # Disks, filesystems, network shares.
+          inputs.disko.nixosModules.disko
+          #inputs.impermanence.nixosModules.impermanence
+          {
+            # environment.persistence."/steam" = {
+            #   enable = true;
+            #   hideMounts = true;
+            #   directories = [];
+            #   files = [];
+            #   users.${username} = {
+            #     directories = [];
+            #     files = [];
+            #   };
+            # };
+            # services.beesd.filesystems.root = {
+            #   spec = "LABEL=root";
+            #   hashTableSizeMB = 4096;
+            #   extraOptions = [ "--thread-count" "4" ];
+            # };
+            services.beesd.filesystems.store = {
+              spec = "LABEL=store";
+              hashTableSizeMB = 8192;
+              extraOptions = [ "--thread-count" "4" ];
+            };
+            # disko.devices.disk.root = {
+            #   type = "disk";
+            #   device = "/dev/disk/by-id/nvme-Predator_SSD_GM3500_1TB_PSF41380100026";
+            #   content = {
+            #     type = "gpt";
+            #     partitions = {
+            #       ESP = {
+            #         type = "EF00";
+            #         size = "500M";
+            #         content = {
+            #           type = "filesystem";
+            #           format = "vfat";
+            #           mountpoint = "/boot";
+            #           mountOptions = [ "umask=0077" ];
+            #         };
+            #       };
+            #       root = {
+            #         size = "-8G";
+            #         content = {
+            #           type = "btrfs";
+            #           extraArgs = [ "-f" ];
+            #           mountpoint = "/";
+            #           mountOptions = [
+            #             "compress=zstd"
+            #             "noatime"
+            #           ];
+            #         };
+            #       };
+            #       swap = {
+            #         size = "100%";
+            #         content = {
+            #           type = "swap";
+            #           discardPolicy = "both";
+            #         };
+            #       };
+            #     };
+            #   };
+            # };
+            disko.devices.disk.store = {
+              type = "disk";
+              device = "/dev/disk/by-id/nvme-ADATA_SX8200PNP_2L2329AG5BXU";
+              content = {
+                type = "gpt";
+                partitions = {
+                  store = {
+                    size = "100%";
+                    content = {
+                      type = "btrfs";
+                      extraArgs = [ "-f" ];
+                      subvolumes = {
+                        "/store/steam" = { mountpoint = "/steam"; };
+                        "/store/docker" = { mountpoint = "/docker"; };
+                      };
+                    };
+                  };
+                };
+              };
+            };
+          }
+          { fileSystems = {
+            "av" = self.datasets.mountSmbShare.av;
+            "recordings" = self.datasets.mountSmbShare.recordings;
+            "torrenting" = self.datasets.mountSmbShare.torrenting;
+          }; }
+        ] ++ [ # Temporary or experimental configurations
+          {
+            services.ollama = {
+              enable = true;
+              port = 11434;
+              host = "127.0.0.1";
+              home = "/var/lib/ollama";
+              group = "users";
+              models = "/var/lib/ollama/models";
+              package = pkgs.ollama-rocm;
+              rocmOverrideGfx = "11.0.0";
+              acceleration = "rocm";
+            };
+            home-manager.users."${username}" = {
+              home.packages = with pkgs; [
+                ollama-rocm
+              ];
+              xdg.desktopEntries = {
+                ollama = {
+                  exec = "ollama-wrapped";
+                  icon = "/home/${username}/.icons/custom/ollama.png";
+                  name = "AI Chat";
+                  categories = [ "Utility" ];
+                  type = "Application";
+                };
+              };
+              home.file = {
+                "ollama.png" = {
+                  target = ".icons/custom/ollama.png";
+                  source = pkgs.fetchurl {
+                    url = "https://ollama.com/public/icon-64x64.png";
+                    sha256 = "sha256-jzjt+wB9e3TwPSrXpXwCPapngDF5WtEYNt9ZOXB2Sgs=";
+                  };
+                };
+              };
+            };
+          }
           { # Temp Packages
             home-manager.users."${username}" = {
               programs.ghostty = {
@@ -1197,7 +1318,26 @@
       remoteBuild = false;
       confirmTimeout = 60;
     };
-    nixosModules.networkShares = import ./modules/networkShares/default.nix;
+    datasets = {
+      mountSmbShare = { # Each returns a configured submodule of fileSystems.
+        movies = import ./utils/mkMountSmbShare.nix "movies";
+        music = import ./utils/mkMountSmbShare.nix "music";
+        shows = import ./utils/mkMountSmbShare.nix "shows";
+        av = import ./utils/mkMountSmbShare.nix "av";
+        printing = import ./utils/mkMountSmbShare.nix "printing";
+        books = import ./utils/mkMountSmbShare.nix "books";
+        torrenting = import ./utils/mkMountSmbShare.nix "torrenting";
+        archive = import ./utils/mkMountSmbShare.nix "archive";
+        recordings = import ./utils/mkMountSmbShare.nix "recordings";
+      };
+      mountIscsiTarget = { # Each returns a nixosModule.
+        fighter = import ./utils/mkMountIscsiTarget.nix "fighter";
+        desktop = import ./utils/mkMountIscsiTarget.nix "joey-desktop";
+      };
+      sharedDataset = {
+
+      };
+    };
     nixosModules.roles = import ./modules/roles/default.nix;
     nixosModules.stacks = import ./modules/stacks/default.nix;
     packages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {

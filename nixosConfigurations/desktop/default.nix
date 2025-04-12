@@ -11,7 +11,6 @@
     ./obs-studio.nix
     ./plasma.nix
     ./scripts.nix
-    ./smb-shares.nix
     ./spotify.nix
     ./stylix.nix
     ./zed.nix
@@ -172,6 +171,15 @@
     xdg.systemDirs.data = [ "/usr/share" ];
     home.stateVersion = "24.11";
   };
+
+  sops.secrets."smb" = {
+    sopsFile = ../../hosts/desktop/secrets/smb.secrets;
+    format = "binary";
+    key = "";
+    mode = "0440";
+    owner = username;
+  };
+  environment.systemPackages = with pkgs; [ cifs-utils ];
 
   networking.firewall = {
     allowedTCPPorts = [ 25565 ];
