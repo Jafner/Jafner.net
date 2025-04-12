@@ -1,0 +1,51 @@
+name: Check Internal Links
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  check_links:
+    name: Check for broken internal links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Link Validation
+        run: |
+          #!/bin/bash
+          EXIT_CODE=0
+          # Find all markdown files
+          while IFS= read -r -d $'\0' MD_FILE; do
+            # Get directory of the markdown file
+            DIR=$(dirname "$MD_FILE")
+
+            # Extract links and validate
+            while IFS= read -r LINK; do
+              [ -z "$LINK" ] && continue  # Skip empty lines
+
+              # Skip external links
+              if [[ "$LINK" =~ ^https?:// ]]; then
+                continue
+              fi
+
+              # Resolve target path
+              if [[ "$LINK" =~ ^/ ]]; then
+                TARGET=".${LINK}"
+              else
+                TARGET="${DIR}/${LINK}"
+              fi
+
+              # Check if target exists
+              if [ ! -e "$TARGET" ]; then
+                echo "::error file=$MD_FILE::Broken link: '$LINK' in '$MD_FILE' points to non-existent path: $TARGET"
+                EXIT_CODE=1
+              fi
+            done < <(grep -hPo '(?<=\]\()[^)#?]+' "$MD_FILE" || true)
+
+          done < <(find . -name "*.md" -print0)
+
+          exit $EXIT_CODE
