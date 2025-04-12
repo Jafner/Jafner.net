@@ -14,8 +14,8 @@ draft = false
 *Table of contents*
 {{% toc %}}
 
-### What is a monorepo? 
-Take all your projects across GitHub, GitLab, Gitea, and local. Plop them into one big repo. That's it. 
+### What is a monorepo?
+Take all your projects across GitHub, GitLab, Gitea, and local. Plop them into one big repo. That's it.
 
 ### Why would I want one?
 *An illustration of the issue*
@@ -23,34 +23,34 @@ Take all your projects across GitHub, GitLab, Gitea, and local. Plop them into o
 
 That's more complicated. Especially for a non-traditional type of monorepo like mine. Wikipedia gives a pretty good summary on its [Monorepo](https://en.wikipedia.org/wiki/Monorepo) page, which I'll summarize briefly here:
 
-- You can re-use code more easily. 
+- You can re-use code more easily.
 - You can centralize management of dependencies.
-- You can synchronize work-in-progress across projects very easily. 
-- You can refactor code across the entire organization at once. 
+- You can synchronize work-in-progress across projects very easily.
+- You can refactor code across the entire organization at once.
 
 A lot of those benefits are specific to collaborative environments where a monolithic shared version control system mitigates patterns of divergent work. But I'm just one guy writing mostly scripts and infrastructure-as-code. What do I get out of migrating to a monorepo?
 
-- *Visibility.* A centralized body of work lets me *see everything* at once without pulling 15 repos. 
+- *Visibility.* A centralized body of work lets me *see everything* at once without pulling 15 repos.
 - *Centralized workflow.* I'm constantly finding ways to improve my workflow. If I add a `.pre-commit-config.yaml` file to stop myself from committing secrets, I won't accidentally forget when I work in another repo.
-- *Integration of infrastructure and application.* Most of my work is piles of `docker-compose.yml` files and bash scripts. But every once in a while I actually make something worth running. By keeping applications and infrastructure in the same repo, I can dramatically simplify CI/CD workflows. 
+- *Integration of infrastructure and application.* Most of my work is piles of `docker-compose.yml` files and bash scripts. But every once in a while I actually make something worth running. By keeping applications and infrastructure in the same repo, I can dramatically simplify CI/CD workflows.
 
 ## How to migrate to a monorepo
-If you're reading this, you probably know what a monorepo is, and why you might want one. Let's get into the juice. 
+If you're reading this, you probably know what a monorepo is, and why you might want one. Let's get into the juice.
 
 I broke down the project into **four stages**: *collect, clean, combine, and commit*. Let's dig into what each of those mean.
 
 ### Collect: Grabbing all the pieces
-The first step in this project for me was to make a list of all the repos I wanted to consolidate. This included public and private repos, and only repos containing my original work. 
+The first step in this project for me was to make a list of all the repos I wanted to consolidate. This included public and private repos, and only repos containing my original work.
 
 **My list:**
-1. homelab - The various iterations of my homelab configuration repos. [Gitea](https://gitea.jafner.tools/Jafner/homelab), [Github (docker_config)](https://github.com/Jafner/docker_config), [Github (wiki)](https://github.com/Jafner/wiki), [Github (cloud_tools)](https://github.com/Jafner/cloud_tools), [Github (self-hosting)](https://github.com/Jafner/self-hosting).
+1. homelab - The various iterations of my homelab configuration repos. Gitea(https://gitea.jafner.tools/Jafner/homelab), [Github (docker_config)](https://github.com/Jafner/docker_config), [Github (wiki)](https://github.com/Jafner/wiki), [Github (cloud_tools)](https://github.com/Jafner/cloud_tools), [Github (self-hosting)](https://github.com/Jafner/self-hosting).
 2. Jafner.dev - This blog! [Github](https://github.com/Jafner/Jafner.dev).
-3. dotfiles - The two copies of my dotfiles repo. [Gitea](https://gitea.jafner.tools/Jafner/dotfiles), [Github](https://github.com/Jafner/dotfiles).
-4. nvgm - An unlaunched TTRPG blog in the vein of [Angry GM](https://theangrygm.com/), or [SlyFlourish](https://slyflourish.com/). [Gitea](https://gitea.jafner.tools/Jafner/nvgm)
-5. pamidi - Bash script to control PulseAudio with a MIDI device. [Gitea](https://gitea.jafner.tools/Jafner/pamidi), [Github](https://github.com/Jafner/pamidi)
-6. docker-llm-amd - Docker AI stack optimized for my RX 7900XTX. [Gitea](https://gitea.jafner.tools/Jafner/docker-llm-amd)
-7. doradash - Programming practice project, meant to calculate DORA metrics from observability and CD platforms. [Gitea](https://gitea.jafner.tools/Jafner/doradash)
-8. clip-it-and-ship-it - Programming practice project, meant to provide a Twitch Clips-like video highlighting experience for locally-recorded videos. [Gitea (PyClipIt)](https://gitea.jafner.tools/Jafner/PyClipIt), [Github](https://github.com/Jafner/clip-it-and-ship-it). 
+3. dotfiles - The two copies of my dotfiles repo. Gitea(https://gitea.jafner.tools/Jafner/dotfiles), [Github](https://github.com/Jafner/dotfiles).
+4. nvgm - An unlaunched TTRPG blog in the vein of [Angry GM](https://theangrygm.com/), or [SlyFlourish](https://slyflourish.com/). Gitea (https://gitea.jafner.tools/Jafner/nvgm)
+5. pamidi - Bash script to control PulseAudio with a MIDI device. Gitea(https://gitea.jafner.tools/Jafner/pamidi), [Github](https://github.com/Jafner/pamidi)
+6. docker-llm-amd - Docker AI stack optimized for my RX 7900XTX. Gitea(https://gitea.jafner.tools/Jafner/docker-llm-amd)
+7. doradash - Programming practice project, meant to calculate DORA metrics from observability and CD platforms. Gitea (https://gitea.jafner.tools/Jafner/doradash)
+8. clip-it-and-ship-it - Programming practice project, meant to provide a Twitch Clips-like video highlighting experience for locally-recorded videos. Gitea (PyClipIt)(https://gitea.jafner.tools/Jafner/PyClipIt), [Github](https://github.com/Jafner/clip-it-and-ship-it).
 9. razer-bat - Python script to indicate Razer mouse battery level on the wireless dock's RGBs. [Github](https://github.com/Jafner/Razer-BatteryLevelRGB)
 10. 5etools-docker - Docker image to make hosting 5eTools a *bit* better. [Github](https://github.com/Jafner/5etools-docker)
 11. jafner-homebrew - 5eTools-compatible homebrew files for my original content. [Github](https://github.com/Jafner/jafner-homebrew)
@@ -62,7 +62,7 @@ I chose to impose upon myself two constraints for this project:
 
 Without those constraints, it would be as simple as pulling all the repos, running a quick `mkdir ~/Git/Monorepo && for repo in ~/Git/temp/*; do cd $repo; rm -rf .git; done && cp -rp ~/Git/temp/* ~/Git/Monorepo/ && cd ~/Git/Monorepo && git init` and boom, monorepo. Might have some secrets in the code, but those can get cleaned out before the initial commit. Quick and easy. But alas, such a solution wouldn't make a good blog post.
 
-So, the first part is to **pull the repositories we want to consolidate**. 
+So, the first part is to **pull the repositories we want to consolidate**.
 
 1. Configure the paths we want to use for the monorepo, and the temporary directory into which we'll clone the constituent repos. I used the following shell environment variables:
   - `MONOREPO_DIR=""` the path we want the monorepo to exist at. I used `~/Git/Jafner.net`.
@@ -76,9 +76,9 @@ So, the first part is to **pull the repositories we want to consolidate**.
   - [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/)
 3. Clone all of our repos and homologize our default branch.
   - We set all of our repos' default branch to `main`, as some of our later steps get messy if we have multiple branches.
-  - I'm not sure how non-main branches are handled beyond this point. All my personal repos are single-branch. 
+  - I'm not sure how non-main branches are handled beyond this point. All my personal repos are single-branch.
 
-And at this point we have all our repos together in one place. Next we need to prep each repo to be consolidated. But before that, here's the script for the steps described above in this 
+And at this point we have all our repos together in one place. Next we need to prep each repo to be consolidated. But before that, here's the script for the steps described above in this
 
 #### 1. Configure paths and variables
 ```bash
@@ -87,7 +87,7 @@ And at this point we have all our repos together in one place. Next we need to p
     echo "  # Configure local paths for Git repos. Should not contain any of the git directories involved, as all will be cloned fresh. Consider using a temporary project directory."
     MONOREPO_DIR=$HOME/Git/Jafner.net
     TEMP_CLONE_DIR=$HOME/Git/monorepo-temp
-    mkdir -p "$TEMP_CLONE_DIR" 
+    mkdir -p "$TEMP_CLONE_DIR"
     mkdir -p "$MONOREPO_DIR"
     echo "  # Configure array of repositories to compose into monorepo."
     echo "    # Note: First repository in list is parent monorepo."
@@ -120,7 +120,7 @@ And at this point we have all our repos together in one place. Next we need to p
 
 #### 2. Assert dependencies are installed
 ```bash
-{ 
+{
     echo "# 2. Assert dependencies are installed: started"
     echo -n "  # gitleaks: "
     gitleaks version > /dev/null 2>&1
@@ -143,10 +143,10 @@ And at this point we have all our repos together in one place. Next we need to p
     FILTER_REPO_MISSING=$?
     if [[ $FILTER_REPO_MISSING != "0" ]]; then
         echo "missing"
-        echo "    # git-filter repo not installed. Attempting to install from https://github.com/newren/git-filter-repo" 
+        echo "    # git-filter repo not installed. Attempting to install from https://github.com/newren/git-filter-repo"
         echo "    # Installing at ~/.local/bin/git-filter-repo"
         mkdir -p ~/.local/bin/git-filter-repo
-        curl -o ~/.local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo 
+        curl -o ~/.local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
         chmod +x ~/.local/bin/git-filter-repo
     else
         echo "found at $(which git-filter-repo)"
@@ -175,7 +175,7 @@ And at this point we have all our repos together in one place. Next we need to p
 {
     echo "# 3. Clone all constituent repositories, assert default branch is main: started"
     cd "$TEMP_CLONE_DIR"
-    for repo in "${REPOSITORIES[@]:1}"; do 
+    for repo in "${REPOSITORIES[@]:1}"; do
         REPO_NAME=$(echo $repo | cut -d' ' -f1)
         echo "  # Cloning repo $REPO_NAME"
         git clone --quiet $(echo "$repo" | cut -d' ' -f2) "$REPO_NAME" > /dev/null
@@ -196,23 +196,23 @@ The next stage of the process is to prepare each of our repos to be integrated i
 
 4. Rewrite each repo into a self-named subdirectory of itself.
   - We do this so that our files don't collide when we merge everything into the monorepo.
-  - We use `git filter-repo --to-subdirectory-filter` to rewrite the entire history of the repo. 
+  - We use `git filter-repo --to-subdirectory-filter` to rewrite the entire history of the repo.
   - This looks like moving all of the contents of `~/Git/homelab` to `~/Git/homelab/homelab`.
   - The root of the repo doesn't move, so we still have `.git` at `~/Git/homelab/.git`.
-  - If you wanted to handle this process manually, you could reorganize your repos during this step. For example, rewriting `~/Git/pamidi` to `~/Git/pamidi/projects/pamidi`. 
+  - If you wanted to handle this process manually, you could reorganize your repos during this step. For example, rewriting `~/Git/pamidi` to `~/Git/pamidi/projects/pamidi`.
 5. Scan each repo's files *and history* for exposed secrets.
-  - We use gitleaks to scrub through the full history of each repo and create a report of all findings. 
-  - We place the report into a subdirectory of `/tmp`, which helps mitigate the risk of accidentally keeping a list of every API key and password you've ever accidentally leaked sitting somewhere on your system. 
-  - You may want to add custom rules to help gitleaks find secrets matching an usual pattern. Check the [configuration documentation](https://github.com/gitleaks/gitleaks?tab=readme-ov-file#configuration) for details on how to write your own detection rules. 
-  - You may want to explicitly permit some secrets to remain in a repo, such as example API keys or passwords in documentation. See [gitleaks' documentation](https://github.com/gitleaks/gitleaks?tab=readme-ov-file#additional-configuration) for guidance on how to handle that situation. Just make sure to re-run this step with the new rules before proceeding to the next step. 
+  - We use gitleaks to scrub through the full history of each repo and create a report of all findings.
+  - We place the report into a subdirectory of `/tmp`, which helps mitigate the risk of accidentally keeping a list of every API key and password you've ever accidentally leaked sitting somewhere on your system.
+  - You may want to add custom rules to help gitleaks find secrets matching an usual pattern. Check the [configuration documentation](https://github.com/gitleaks/gitleaks?tab=readme-ov-file#configuration) for details on how to write your own detection rules.
+  - You may want to explicitly permit some secrets to remain in a repo, such as example API keys or passwords in documentation. See [gitleaks' documentation](https://github.com/gitleaks/gitleaks?tab=readme-ov-file#additional-configuration) for guidance on how to handle that situation. Just make sure to re-run this step with the new rules before proceeding to the next step.
 6. Nuke secrets from git histories.
   - We generate a text file containing all the secrets listed in our gitleaks report.
-  - We use BFG Repo-Cleaner's `--replace-text` flag to find and replace all historic and present instances of each secret. 
-  - **Warning:** this process is not perfect. Any *multi-line secrets* in the gitleaks report will be passed into BFG *one line at a time*. So if you have a multi-line secret with a *line which matches non-secrets*, BFG will nuke all matches. 
-  - After we're done with the secrets file, we overwrite its contents with random characters before deleting it. 
+  - We use BFG Repo-Cleaner's `--replace-text` flag to find and replace all historic and present instances of each secret.
+  - **Warning:** this process is not perfect. Any *multi-line secrets* in the gitleaks report will be passed into BFG *one line at a time*. So if you have a multi-line secret with a *line which matches non-secrets*, BFG will nuke all matches.
+  - After we're done with the secrets file, we overwrite its contents with random characters before deleting it.
 7. Verify repository histories are clean.
-  - We use gitleaks to scrub through the full history of each repo *again*. This time we only print information to the console and don't store a report file. 
-  - If any repos still contain secrets, we need to address that manually. 
+  - We use gitleaks to scrub through the full history of each repo *again*. This time we only print information to the console and don't store a report file.
+  - If any repos still contain secrets, we need to address that manually.
 
 And after that, we've got our repos prepared to consolidate. The next steps are mostly manual and to-taste, rather than prescribed. Before that, here's the script for each of the steps above:
 
@@ -242,7 +242,7 @@ And after that, we've got our repos prepared to consolidate. The next steps are 
         mkdir -p /tmp/gitleaks/$REPO_NAME/
         echo -n "  # Scanning repo $REPO_NAME "
         rm -f /tmp/gitleaks/$REPO_NAME/gitleaks-report.json
-        gitleaks detect -l warn --no-banner -r /tmp/gitleaks/$REPO_NAME/gitleaks-report.json && echo "No secrets detected" || COMPROMISED_REPOS+="$REPO_NAME\n" 
+        gitleaks detect -l warn --no-banner -r /tmp/gitleaks/$REPO_NAME/gitleaks-report.json && echo "No secrets detected" || COMPROMISED_REPOS+="$REPO_NAME\n"
     done
     cd $TEMP_CLONE_DIR
     echo "# 5. Scan each constituent repository for leaked secrets: completed"
@@ -263,7 +263,7 @@ And after that, we've got our repos prepared to consolidate. The next steps are 
         fi
         echo "  # Nuking secrets in repo $REPO_NAME"
         cat $report | jq -r '.[].Secret' > /tmp/gitleaks/secret.txt
-        bfg --replace-text /tmp/gitleaks/secret.txt --no-blob-protection . 
+        bfg --replace-text /tmp/gitleaks/secret.txt --no-blob-protection .
         git reflog expire --expire=now --all && git gc --prune=now --aggressive
         cat /dev/urandom | tr -dc A-Za-z0-9 | head -c1000 > /tmp/gitleaks/secret.txt
         rm /tmp/gitleaks/secret.txt
@@ -294,13 +294,13 @@ And after that, we've got our repos prepared to consolidate. The next steps are 
 Our third stage is the last one we can handle programmatically. Just initialize the new monorepo.
 
 1. Initialize the new monorepo and add constituent repos.
-  - It's *almost* as simple as `cp -r old-repo new-repo/old-repo`, but not quite. 
-  - First we run a good old-fashioned `git init`. Quick reminder to run whatever `git config --global` commands you need to ensure it initializes properly for your system. 
+  - It's *almost* as simple as `cp -r old-repo new-repo/old-repo`, but not quite.
+  - First we run a good old-fashioned `git init`. Quick reminder to run whatever `git config --global` commands you need to ensure it initializes properly for your system.
   - Next we glomb each of our constituent repos onto the new one in four steps:
     - Add the local path to the repo as a remote.
     - Fetch the remote with tags.
     - Merge the changes on the `main` branch.
-    - Then remove the remote. 
+    - Then remove the remote.
   - After all that I ran one last gitleaks scan for good measure. This is entirely superstition.
 
 #### 8. Initialize the monorepo and add constituent repos
@@ -309,7 +309,7 @@ Our third stage is the last one we can handle programmatically. Just initialize 
     echo "# 8. Init monorepo and add constituent repos: started"
     cd "$MONOREPO_DIR"
     git init
-    for repo in $(echo "$TEMP_CLONE_DIR"/*); do 
+    for repo in $(echo "$TEMP_CLONE_DIR"/*); do
         REPO_NAME=$(basename $repo)
         echo "Adding $REPO_NAME"
         git remote add "$REPO_NAME" "$repo"
@@ -327,12 +327,12 @@ Our third stage is the last one we can handle programmatically. Just initialize 
 ### Commit: Reorganizing and publishing the monorepo
 The last stage is to tie everything up nicely and push to the upstream.
 
-9. Reorganize the repo to taste. 
-  - In my case, that meant creating the `archive`, `dotfiles`, `homelab`, `projects`, and `sites` root-level subdirectories, and sorting my other repos into those. 
-10. Update repo-root configuration files. 
-  - Files like `.gitignore`, `.gitattributes`, `.gitmodules`, *do still work in subdirectories*. But I prefer to consolidate these into one root-level file. 
+9. Reorganize the repo to taste.
+  - In my case, that meant creating the `archive`, `dotfiles`, `homelab`, `projects`, and `sites` root-level subdirectories, and sorting my other repos into those.
+10. Update repo-root configuration files.
+  - Files like `.gitignore`, `.gitattributes`, `.gitmodules`, *do still work in subdirectories*. But I prefer to consolidate these into one root-level file.
   - Similar stuff like `.dockerignore`, `.pre-commit-config.yaml`, and whatever your project has should be considered.
-  - `.github/workflows`, `.gitea/workflows`, and `.gitlab-ci.yml` all need to be at the repo root in order to work, which will necessitate some refactoring of those jobs. 
+  - `.github/workflows`, `.gitea/workflows`, and `.gitlab-ci.yml` all need to be at the repo root in order to work, which will necessitate some refactoring of those jobs.
 11. Write a new `README.md` for the newly-created monorepo root. In my case, I chose to populate it with a Map of Contents for the repo. It looks like this:
 
 ![example readme for jafner.net monorepo|400](readme-example.png)
@@ -347,7 +347,7 @@ And that's it. Well, except for all the stuff that still needs to be done!
 ## Closing thoughts and next steps
 At this point we probably still have some work to do before our repo is at function parity with our distributed, self-contained repos. For my repo, these are the last steps before we can mark this migration project as resolved:
 
-- Reconfigure CI/CD pipelines to work properly with subdirectories. 
+- Reconfigure CI/CD pipelines to work properly with subdirectories.
 - Migrate relevant issues from old repos to new repo. I have no idea how to do this, especially when repos are split across multiple platforms.
 - Comb through all the cobwebbed projects we've just consolidated and archive or delete as appropriate.
 - Read through [korfuri/awesome-monorepo](https://github.com/korfuri/awesome-monorepo), which is a dope page I *really* wish I'd seen before I undertook this project.
@@ -357,9 +357,9 @@ Go forth and consolidate!
 ## The Script
 In the interest of ensuring my process was maximally reproducible (so I could wipe and restart every time I made a mistake), I wrote this script.
 
-Steps 1, 2, and 3 are hard-coded with parameters specific to the directories and repos I'm working with. After that, everything *should be* agnostic of directories and repos. 
+Steps 1, 2, and 3 are hard-coded with parameters specific to the directories and repos I'm working with. After that, everything *should be* agnostic of directories and repos.
 
-Additionally, I wrote it such that the entire thing could be copied in chunks or in full and pasted into a terminal (zero-indent curly brackets `{}` indicate self-contained chunks). I have tested this script in both bash and zsh. 
+Additionally, I wrote it such that the entire thing could be copied in chunks or in full and pasted into a terminal (zero-indent curly brackets `{}` indicate self-contained chunks). I have tested this script in both bash and zsh.
 
 ### `monorepo.sh`
 ```bash
@@ -368,8 +368,8 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
 {
     echo "# 0. Quick reset: started"
     rm -rf $HOME/Git/Jafner.net
-    rm -rf $HOME/Git/monorepo-temp  
-    rm -rf /tmp/gitleaks 
+    rm -rf $HOME/Git/monorepo-temp
+    rm -rf /tmp/gitleaks
     cd $HOME/Git
     echo "# 0. Quick reset: completed"
 }
@@ -379,7 +379,7 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
     echo "  # Configure local paths for Git repos. Should not contain any of the git directories involved, as all will be cloned fresh. Consider using a temporary project directory."
     MONOREPO_DIR=$HOME/Git/Jafner.net
     TEMP_CLONE_DIR=$HOME/Git/monorepo-temp
-    mkdir -p "$TEMP_CLONE_DIR" 
+    mkdir -p "$TEMP_CLONE_DIR"
     mkdir -p "$MONOREPO_DIR"
     echo "  # Configure array of repositories to compose into monorepo."
     echo "    # Note: First repository in list is parent monorepo."
@@ -409,7 +409,7 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
     echo "# 1. Configure paths and variables: completed"
 }
 
-{ 
+{
     echo "# 2. Assert dependencies are installed: started"
     echo -n "  # gitleaks: "
     gitleaks version > /dev/null 2>&1
@@ -432,10 +432,10 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
     FILTER_REPO_MISSING=$?
     if [[ $FILTER_REPO_MISSING != "0" ]]; then
         echo "missing"
-        echo "    # git-filter repo not installed. Attempting to install from https://github.com/newren/git-filter-repo" 
+        echo "    # git-filter repo not installed. Attempting to install from https://github.com/newren/git-filter-repo"
         echo "    # Installing at ~/.local/bin/git-filter-repo"
         mkdir -p ~/.local/bin/git-filter-repo
-        curl -o ~/.local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo 
+        curl -o ~/.local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
         chmod +x ~/.local/bin/git-filter-repo
     else
         echo "found at $(which git-filter-repo)"
@@ -461,7 +461,7 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
 {
     echo "# 3. Clone all constituent repositories, assert default branch is main: started"
     cd "$TEMP_CLONE_DIR"
-    for repo in "${REPOSITORIES[@]:1}"; do 
+    for repo in "${REPOSITORIES[@]:1}"; do
         REPO_NAME=$(echo $repo | cut -d' ' -f1)
         echo "  # Cloning repo $REPO_NAME"
         git clone --quiet $(echo "$repo" | cut -d' ' -f2) "$REPO_NAME" > /dev/null
@@ -497,7 +497,7 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
         mkdir -p /tmp/gitleaks/$REPO_NAME/
         echo -n "  # Scanning repo $REPO_NAME "
         rm -f /tmp/gitleaks/$REPO_NAME/gitleaks-report.json
-        gitleaks detect -l warn --no-banner -r /tmp/gitleaks/$REPO_NAME/gitleaks-report.json && echo "No secrets detected" || COMPROMISED_REPOS+="$REPO_NAME\n" 
+        gitleaks detect -l warn --no-banner -r /tmp/gitleaks/$REPO_NAME/gitleaks-report.json && echo "No secrets detected" || COMPROMISED_REPOS+="$REPO_NAME\n"
     done
     cd $TEMP_CLONE_DIR
     echo "# 5. Scan each constituent repository for leaked secrets: completed"
@@ -515,7 +515,7 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
         fi
         echo "  # Nuking secrets in repo $REPO_NAME"
         cat $report | jq -r '.[].Secret' > /tmp/gitleaks/secret.txt
-        bfg --replace-text /tmp/gitleaks/secret.txt --no-blob-protection . 
+        bfg --replace-text /tmp/gitleaks/secret.txt --no-blob-protection .
         git reflog expire --expire=now --all && git gc --prune=now --aggressive
         cat /dev/urandom | tr -dc A-Za-z0-9 | head -c1000 > /tmp/gitleaks/secret.txt
         rm /tmp/gitleaks/secret.txt
@@ -542,7 +542,7 @@ Additionally, I wrote it such that the entire thing could be copied in chunks or
     echo "# 8. Init monorepo and add constituent repos: started"
     cd "$MONOREPO_DIR"
     git init
-    for repo in $(echo "$TEMP_CLONE_DIR"/*); do 
+    for repo in $(echo "$TEMP_CLONE_DIR"/*); do
         REPO_NAME=$(basename $repo)
         echo "Adding $REPO_NAME"
         git remote add "$REPO_NAME" "$repo"

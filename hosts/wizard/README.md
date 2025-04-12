@@ -1,19 +1,19 @@
 # Working With VyOS
-We have a helper script, [`vyos.sh`](./vyos.sh) that provides useful utilities for interacting with our VyOS host. 
+We have a helper script, [`vyos.sh`](./vyos.sh) that provides useful utilities for interacting with our VyOS host.
 
-Run `alias vy="$(realpath ./vyos.sh)"` for faster usage. 
+Run `alias vy="$(realpath ./vyos.sh)"` for faster usage.
 
 - The host to interact with is configured via the `VYOS_TARGET` near the top of the script.
 - `get_config_saved` Prints the contents of `/config/config.boot` to stdout.
 - `get_config_active` Prints the active config (like `show` in config mode) to stdout.
-- `post_config` Copies the local `config.boot` to the remote `/home/vyos/config.boot`. 
+- `post_config` Copies the local `config.boot` to the remote `/home/vyos/config.boot`.
 - `load_config` Enters config mode and runs `load /home/vyos/config.boot`, then attempts to `commit; exit` (note: does not save config).
 - `save_config` Enters config mode and runs `save; exit`.
 - `op` Runs the proceding commands in op mode on the target.
 
 ## Workflow Examples
 1. Pull the latest config with `vy get_config_saved > config.boot`
-2. Edit the config file with the desired changes. 
+2. Edit the config file with the desired changes.
 3. Push the changes to the remote with `vy post_config && vy load_config && vy save_config`
 
 This workflow is provided with a compound function from the helper script; `vy edit`.
@@ -24,7 +24,7 @@ This workflow is provided with a compound function from the helper script; `vy e
 3. When prompted, answer yes (default) to:
 	1. Would you like to save current configuration directory and config file? (Yes/No) [Yes]
 	2. Would you like to save the SSH host keys from your current configuration? (Yes/No) [Yes]
-4. Reboot into the new image. 
+4. Reboot into the new image.
 
 Note: If you do not want the most recent image to be used by default, you can use the command `set system image default-boot <image>`
 You can view available system images with `show system image`, which will include telling you which is currently the default boot image.
@@ -45,7 +45,7 @@ You can delete old system images with `delete system image <image>`
 ## Non-Default Port Mappings
 Some services have been configured to use non-standard port mappings. This is usually done to mitigate the risk of automated port-checking probes.
 
-* BitTorrent. This range is used to distribute all bittorrent connections across a wide range of high-number ports. See [deluge configuration](../seedbox/config/deluge) for more information about what port ranges go to which torrent clients.
+* BitTorrent. This range is used to distribute all bittorrent connections across a wide range of high-number ports.
 * Wireguard. This was set to a non-standard port-mapping before I learned [WireGuard doesn't respond to unauthenticated packets](https://news.ycombinator.com/item?id=24550238), which makes this unnecessary.
 * Iperf. Iperf defaults to port 5201, which is not a high-number port. Since it is unauthenticated, I use a non-default, high-number port instead.
 * Git SSH. I use a non-default port for my GitLab SSH server to minimize potential conflicts with other services on the network. It is important to be able to access the GitLab instance over SSH outside the network.
@@ -72,7 +72,7 @@ graph TD;
 | Lease TTL | 86400 seconds |
 
 ## Static DHCP Mappings
-On the VyOS router, enter configuration mode with `configure`, then run `show service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping` (assuming you use the network name "LAN" and the subnet "192.168.1.0/24").  
+On the VyOS router, enter configuration mode with `configure`, then run `show service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping` (assuming you use the network name "LAN" and the subnet "192.168.1.0/24").
 
 ```
 static-mapping U6-Lite {
@@ -158,7 +158,7 @@ Via: https://thehomeofthefuture.com/how-to/use-an-ssh-key-with-an-ubiquiti-edger
 ### Via SSH
 1. SSH into system
 2. `configure`
-3. 
+3.
 ```sh
 set system login user admin authentication public-keys jafner425@gmail.com
 set system login user admin authentication public-keys jafner425@gmail.com type ssh-rsa
@@ -182,4 +182,3 @@ Followed the instructions given in [this video](https://www.youtube.com/watch?v=
 5. Flashed new firmware image (7.4.0.7, built 2021_07_07) to backup boot partition.
 
 Additional reference: https://forums.serverbuilds.net/t/official-aruba-s2500-managed-ethernet-switch-poe-10gsfp/5038
-

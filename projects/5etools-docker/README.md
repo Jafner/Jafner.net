@@ -1,7 +1,7 @@
-This is a simple image for hosting your own 5eTools instance. It is based on the Apache `httpd` image and uses components of the auto-updater script from the [5eTools wiki](https://wiki.tercept.net/en/5eTools/InstallGuide). This image is built from [this GitHub repository](https://github.com/Jafner/5etools-docker). 
+This is a simple image for hosting your own 5eTools instance. It is based on the Apache `httpd` image and uses components of the auto-updater script from the 5eTools wiki. This image is built from [this GitHub repository](https://github.com/Jafner/5etools-docker).
 
 # Usage
-Below we talk about how to install and configure the container. 
+Below we talk about how to install and configure the container.
 
 ## Default Configuration
 You can quick-start this image by running:
@@ -16,7 +16,7 @@ Then give the container a few minutes to come online (it takes a while to pull t
 When you stop the container, it will automatically delete itself. The downloaded files will remain in the `~/5etools-docker/htdocs` directory, so you can always start the container back up by running `docker-compose up -d`.
 
 ## Volume Mapping
-By default, I assume you want to keep downloaded files, even if the container dies. And you want the downloaded files to be located at `~/5etools-docker/htdocs`.  
+By default, I assume you want to keep downloaded files, even if the container dies. And you want the downloaded files to be located at `~/5etools-docker/htdocs`.
 
 If you want the files to be located somewhere else on your system, change the left side of the volume mapping. For example, if I wanted to keep my files at `~/data/docker/5etools`, the volume mapping would be:
 
@@ -25,7 +25,7 @@ If you want the files to be located somewhere else on your system, change the le
       - ~/data/docker/5etools:/usr/local/apache2/htdocs
 ```
 
-Alternatively, you can have Docker or Compose manage your volume. (This makes adding homebrew practically impossible.)  
+Alternatively, you can have Docker or Compose manage your volume. (This makes adding homebrew practically impossible.)
 
 Use a Compose-managed volume with:
 ```
@@ -49,30 +49,30 @@ volumes:
 ```
 
 ## Environment Variables
-The image uses environment variables to figure out how you want it to run. 
+The image uses environment variables to figure out how you want it to run.
 By default, I assume you want to automatically download the latest files from the Github mirror. Use the environment variables in the `docker-compose.yml` file to configure things.
 
 ### IMG (defaults to FALSE)
 Required unless OFFLINE_MODE=TRUE.
-Expects one of "TRUE", "FALSE" Where:  
+Expects one of "TRUE", "FALSE" Where:
   > "TRUE" pulls from https://github.com/5etools-mirror-2/5etools-mirror-2.github.io.git and adds https://github.com/5etools-mirror-2/5etools-img as a submodule for image files.
-  > "FALSE" pulls from https://github.com/5etools-mirror-2/5etools-mirror-2.github.io.git without image files.  
+  > "FALSE" pulls from https://github.com/5etools-mirror-2/5etools-mirror-2.github.io.git without image files.
 
-The get.5e.tools source has been down (redirecting to 5e.tools) during development. This method is not tested.  
+The get.5e.tools source has been down (redirecting to 5e.tools) during development. This method is not tested.
 
 ### OFFLINE_MODE
-Optional. Expects "TRUE" to enable. 
-Setting this to true tells the server to run from the local files if available, or exits if there is no local version. 
+Optional. Expects "TRUE" to enable.
+Setting this to true tells the server to run from the local files if available, or exits if there is no local version.
 
 ### PUID and PGID
 During the image build process, we set the owner of the `htdocs` directory to `1000:1000` by default. If you need a different UID and GID to own the files, you can build the image from the source Dockerfile and pass the PUID and PGID variables as desired.
 
 ## Integrating a reverse proxy
-Supporting integration of a reverse proxy is beyond the scope of this guide. 
+Supporting integration of a reverse proxy is beyond the scope of this guide.
 However, any instructions which work for the base `httpd` (Apache) image, should also work for this, as it is minimally different.
 
 # Auto-loading homebrew
-To use auto-loading homebrew, you will need to use a host directory mapping as described above. 
+To use auto-loading homebrew, you will need to use a host directory mapping as described above.
 
 1. Online the container and wait for the container to finish starting. You can monitor its progress with `docker logs -f 5etools-docker`.
 2. Assuming you are using the mapping `~/5etools-docker/htdocs:/usr/local/apache2/htdocs` place your homebrew json files into the `~/5etools-docker/htdocs/homebrew/` folder, then add their filenames to the `~/5etools-docker/htdocs/homebrew/index.json` file.
@@ -103,4 +103,4 @@ Then your `index.json` should look like:
 ```
 
 Note the commas after each entry except the last in each array.
-See the [wiki page](https://wiki.5e.tools/index.php/5eTools_Install_Guide) for more information. 
+See the [wiki page](https://wiki.5e.tools/index.php/5eTools_Install_Guide) for more information.

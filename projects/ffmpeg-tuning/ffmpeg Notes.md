@@ -39,26 +39,26 @@
 FFmpeg is a free and open-source software project consisting of a suite of libraries and programs for handling video, audio, and other multimedia files and streams. At its core is the command-line ffmpeg tool itself, designed for processing of video and audio files. [Wikipedia](https://en.wikipedia.org/wiki/FFmpeg). [ffmpeg.org](https://ffmpeg.org/).
 
 # Get Video Info with `mediainfo`
-MediaInfo is a free, cross-platform and open-source program that displays technical information about media files, as well as tag information for many audio and video files. [Wikipedia](https://en.wikipedia.org/wiki/MediaInfo).  
+MediaInfo is a free, cross-platform and open-source program that displays technical information about media files, as well as tag information for many audio and video files. [Wikipedia](https://en.wikipedia.org/wiki/MediaInfo).
 
-To install on Debian, run `sudo apt install mediainfo`. 
-To get comprehensive media information about a file, simply use `mediainfo <file>`. 
+To install on Debian, run `sudo apt install mediainfo`.
+To get comprehensive media information about a file, simply use `mediainfo <file>`.
 
 # Remux MKV to MP4 with ffmpeg
 To remux an mkv file to mp4 with ffmpeg, use `ffmpeg -i "$input" -codec copy "$output"`. Note that ffmpeg pays attention to the file extensions, so `$input` should have a `.mkv` extension, and `$output` should have a `.mp4` extension.
 
 ## Adding ffmpeg Scripts to Windows SendTo Menu
-Inspired by this [Tek Syndicate video](https://www.youtube.com/watch?v=BrbfQqjHE68), we can add arbitrary ffmpeg scripts to Windows' built-in send-to menu. (Note that while it might be prettier to add a new expandable right-click menu, this is [much less trivial](https://superuser.com/questions/444726/windows-how-to-add-batch-script-action-to-right-click-menu/444787#444787)).  
+Inspired by this [Tek Syndicate video](https://www.youtube.com/watch?v=BrbfQqjHE68), we can add arbitrary ffmpeg scripts to Windows' built-in send-to menu. (Note that while it might be prettier to add a new expandable right-click menu, this is [much less trivial](https://superuser.com/questions/444726/windows-how-to-add-batch-script-action-to-right-click-menu/444787#444787)).
 
 But rather than using Windows Batch Scripting, we're going to use PowerShell, a competent language. This assumes you are using Windows 10.
 
-1. Write the PowerShell script. Example scripts are provided in [scripts/](/docs/attach/scripts/ffmpeg/). 
+1. Write the PowerShell script.
 2. Place the PowerShell script somewhere safe. I place my scripts next to the ffmpeg binary `C:\Users\$user\Programs\ffmpeg\bin\my_script.ps1`.
 3. Add a shortcut for the script to Windows' SendTo directory: `Windows + R` to open the Run dialog, then enter `shell:SendTo` and hit enter. In this directory, create a new shortcut. For the "location", enter the location of your PowerShell executable (for me: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`) and name as you want it to appear in the right-click menu.
 4. Fix the shortcut. Right-click your new shortcut, then click "Properties". Change the "Target" to call PowerShell with the `-File` flag with the path of your script in quotes (e.g. Target: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File "C:\Users\jafne\Programs\ffmpeg\bin\remux.ps1"`). For the example scripts, "Start in" is set to the location of the ffmpeg binary, but that should not be required if ffmpeg is added to your system path. However, if you fail to supply a proper output file path, the working directory will be used. The working directory defaults to the "Start in" directory.
 
 # Get Test Image with ffmpeg
-To get the test image, we extract frame of timestamp 15:20.01 from the test video with `ffmpeg -ss 00:15:20.01 -i "$input" -frames:v 1 "$output"`. 
+To get the test image, we extract frame of timestamp 15:20.01 from the test video with `ffmpeg -ss 00:15:20.01 -i "$input" -frames:v 1 "$output"`.
 
 In other situations, we can extract a frame at a specific frame number with `ffmpeg -i "$input" -vf "select=eq(n\,1201)" -vframes 1 "$output"`. Where `1201` indicates we want the 1202nd frame.
 
@@ -74,7 +74,7 @@ done
 # Concatenate Compatible Files
 If two (or more) recordings should be joined, and are compatible (same codec, resolution), you can concatenate them in two steps:
 
-1. Write a `cat.txt` file with the filenames to be concatenated, preceded with the keyword `file`. 
+1. Write a `cat.txt` file with the filenames to be concatenated, preceded with the keyword `file`.
 For example:
 
 ```
@@ -86,16 +86,16 @@ file 'part3.mp4'
 2. Run ffmpeg with the concat demuxer: `ffmpeg -f concat -safe 0 -i cat.txt -c copy "$output"`
 
 # Add Metadata to File
-ffmpeg can add metadata to files using the `-metadata` flag. In the profiles described below, this is used to add a comment describing the profile used to create the file (e.g. `-metadata comment="x264 720p CRF 27"`).   
+ffmpeg can add metadata to files using the `-metadata` flag. In the profiles described below, this is used to add a comment describing the profile used to create the file (e.g. `-metadata comment="x264 720p CRF 27"`).
 
-This comment flag is visible in Windows file details.  
+This comment flag is visible in Windows file details.
 
-![File details](img/ffmpeg/File%20Details.png)
+![File details](img/File%20Details.png)
 
 More information: [corbpie.com](https://write.corbpie.com/adding-metadata-to-a-video-or-audio-file-with-ffmpeg/).
 
 # Create Slow-mo
-Creating a slow-mo clip is a two-step process. This assumes your input is encoded with h264. 
+Creating a slow-mo clip is a two-step process. This assumes your input is encoded with h264.
 
 1. Copy the video to a raw h264 bitstream: `ffmpeg -i "$input" -map 0:v -c:v copy -bsf:v h264_mp4toannexb 'raw.h264'`
 2. Generate new timestamps for each frame with `genpts` (generate presentation timestamps): `ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy -movflags faststart "$output"`. The `-r 30` flag sets the new framerate to 30 frames per second, which results in a 0.2x playback rate for a 150 fps input video. Alternatively, use `-r 60` or omit the `-r` flag to get 60 fps, which results in a 0.4x playback rate for a 150 fps input video.
@@ -103,17 +103,17 @@ Creating a slow-mo clip is a two-step process. This assumes your input is encode
 
 Note that these slow-mo files will have no audio.
 
-If you need audio, or just more information, see the [ffmpeg docs](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video).  
+If you need audio, or just more information, see the [ffmpeg docs](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video).
 
 For documentation on interpolation settings, see [minterpolate docs](http://ffmpeg.org/ffmpeg-filters.html#minterpolate)
 
 # Resample 120 FPS to 60 FPS
-This works, but runs at <1.0x transcode speed. 
+This works, but runs at <1.0x transcode speed.
 `ffmpeg -i "$input" -filter:v fps=60 "$output"`
 
 # Transcode Profiles
 ## Original [40.3 Mb/s]
-The pre-transcode data for the sample video. It was recorded using OBS with the following encoder settings at 1440p60: 
+The pre-transcode data for the sample video. It was recorded using OBS with the following encoder settings at 1440p60:
 
 | Parameter | Value |
 |:---------:|:-----:|
@@ -196,7 +196,7 @@ Alternate group                          : 1
 
 ### Test Image
 
-![Test Image - Original](img/ffmpeg/original.png)
+![Test Image - Original](img/original.png)
 
 ## CRF 21 [19.9 Mb/s]
 `ffmpeg -i "$input" -metadata comment="x264 CRF 21" -movflags +faststart -c:v libx264 -preset slower -crf 21 "$output"`
@@ -260,12 +260,12 @@ Alternate group                          : 1
 
 ### Test Image
 
-![Test Image - CRF 21](img/ffmpeg/CRF%2021.png)
+![Test Image - CRF 21](img/CRF%2021.png)
 
 ## CRF 27 [10.3 Mb/s]
 `ffmpeg -i "$input" -metadata comment="x264 CRF 27" -movflags +faststart -c:v libx264 -preset slower -crf 27 "$output"`
 
-### Mediainfo 
+### Mediainfo
 ```
 General
 Complete name                            : CRF 27.mp4
@@ -331,7 +331,7 @@ mdhd_Duration                            : 972629
 
 ### Test Image
 
-![Test Image - CRF 27](img/ffmpeg/CRF%2027.png)
+![Test Image - CRF 27](img/CRF%2027.png)
 
 ## 1080p CRF 21 [11.9 Mb/s]
 `ffmpeg -i "$input" -metadata comment="x264 1080p CRF 21" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 21 "$output"`
@@ -395,11 +395,11 @@ Alternate group                          : 1
 
 ### Test Image
 
-![Test Image - 1080p CRF 21](img/ffmpeg/1080p%20CRF%2021.png)
+![Test Image - 1080p CRF 21](img/1080p%20CRF%2021.png)
 
 ## 1080p CRF 27 [6,232 kb/s]
 `ffmpeg -i "$input" -metadata comment="x264 1080p CRF 27" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 27 "$output"`
-Our test file described in the [Get Video Info](#get-video-info-with-mediainfo) section was compressed from 40.5 Mbps (over 16m12s) to 
+Our test file described in the [Get Video Info](#get-video-info-with-mediainfo) section was compressed from 40.5 Mbps (over 16m12s) to
 
 ### Mediainfo
 ```
@@ -460,7 +460,7 @@ Alternate group                          : 1
 ```
 
 ### Test Image
-![Test Image - 1080p CRF 27](img/ffmpeg/1080p%20crf%2027.png)
+![Test Image - 1080p CRF 27](img/1080p%20crf%2027.png)
 
 
 ## 720p CRF 21 [6,314 kb/s]
@@ -532,7 +532,7 @@ mdhd_Duration                            : 972629
 
 ### Test Image
 
-![Test Image - 720p CRF 21](img/ffmpeg/720p%20CRF%2021.png)
+![Test Image - 720p CRF 21](img/720p%20CRF%2021.png)
 
 ## 720p CRF 27 [3,305 kb/s]
 `ffmpeg -i "$input" -metadata comment="x264 720p CRF 27" -movflags +faststart -vf scale=1280:720 -c:v libx264 -preset slower -crf 27 "$output"`
@@ -595,7 +595,7 @@ Alternate group                          : 1
 ```
 ### Test Image
 
-![Test Image - 720p CRF 27](img/ffmpeg/720p%20CRF%2027.png)
+![Test Image - 720p CRF 27](img/720p%20CRF%2027.png)
 
 # Test a New Profile
 0. Name the profile. `profile="<profile name>"` (E.g. "720p CRF 21")
@@ -605,7 +605,7 @@ Alternate group                          : 1
 4. Update this doc!
 
 # Create a Clip from a Video
-You can create a clip from a video file without reencoding given a single time span. 
+You can create a clip from a video file without reencoding given a single time span.
 `ffmpeg -ss 00:05:20 -i "$input" -to 00:15:30 -c:v copy -c:a copy "$output"`
 
 The time to perform this operation is based on the *size of the input file up to the starting timestamp*, not the length of the clip.

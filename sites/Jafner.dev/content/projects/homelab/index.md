@@ -8,16 +8,16 @@ draft = true
 # Preamble: How to Use My Homelab Repo
 
 # Intro
-- My homelab is always evolving, so I will aim to keep the contents of this page agnostic to any current setup. 
-- Always intended to make the repository publicly accessible, but left secrets in the code early on. 
+- My homelab is always evolving, so I will aim to keep the contents of this page agnostic to any current setup.
+- Always intended to make the repository publicly accessible, but left secrets in the code early on.
 - Always pushed toward complete configuration as code. Application data and secrets excepted, all application configuration *should* be defined in the application's config directory.
 - Some docker images don't get us 100% of the way there, so we define what we can in the compose file, then either scripts or a README to fill in the gaps.
 
 # Principles and Goals
 1. Be useful. First and foremost we should remove anything that isn't useful, and trial anything that may be.
 2. Be resilient. We should integrate configuration code with process documentation to make rebuilding from scratch as easy as possible.
-3. Be simple. 
-4. Be helpful. First for myself to make future work easier, and second to make writing this page easier (3 years later). 
+3. Be simple.
+4. Be helpful. First for myself to make future work easier, and second to make writing this page easier (3 years later).
 
 # Development: Problems and Solutions
 
@@ -48,7 +48,7 @@ Appendix of tools.
 ## Local Tools
 - Docker
 - Docker-compose
-- Git 
+- Git
 - Ansible
 - VSCodium
 - Terraform
@@ -58,7 +58,7 @@ Appendix of tools.
 
 ### The Before Times
 - Teamspeak 3
-- Terraria 
+- Terraria
 - Minecraft
 - 5eTools
 
@@ -99,7 +99,7 @@ Appendix of tools.
 
 ### Serve Files
 - Video: Plex, Peertube, Zipline, Jellyfin
-- Image: Ass, 
+- Image: Ass,
 - 3D Models: Vandam (now Manyfold)
 - Ebooks: Calibre-web
 - Notes: Joplin
@@ -143,9 +143,3 @@ Appendix of tools.
 - Unturned
 - Terraria
 - 7 Days to Die
-
-# References
-1. [Jafner/homelab](https://gitea.jafner.tools/Jafner/homelab)
-2. [Initial commit](https://gitea.jafner.tools/Jafner/homelab/commit/45c541999d972020f21547c2d0ddea739f7103ce)
-3. [Example secret in code - Cloudflare API Key](https://gitea.jafner.tools/Jafner/homelab/src/commit/45c541999d972020f21547c2d0ddea739f7103ce/server/config/cloudflare-ddns/docker-compose.yml#L8)
-4. [Example secret in code - SSH key](https://gitea.jafner.tools/Jafner/homelab/src/commit/45c541999d972020f21547c2d0ddea739f7103ce/server/config/wikijs/id_rsa)

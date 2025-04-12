@@ -1,5 +1,5 @@
 # Jafner.net
-A monorepo for all my projects and dotfiles. Hosted on [my Gitea](https://git.jafner.net/Jafner/Jafner.net) and mirrored to [GitHub](https://github.com/Jafner/Jafner.net).
+A monorepo for all my projects and dotfiles. Hosted on [GitHub](https://github.com/Jafner/Jafner.net).
 
 ## Map of Contents
 

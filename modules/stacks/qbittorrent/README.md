@@ -78,7 +78,7 @@ Many private trackers will delete or trump (replace with better quality) torrent
 
 User `animosity22` posted a quick python script [on Github](https://github.com/qbittorrent/qBittorrent/issues/11469#issuecomment-553459887) to find, print, and delete all torrents with the 'Unregistered torrent' message from the tracker.
 
-But that script used hardcoded credentials for host, username, and password. We don't want that if it will be entered into version control. So I had ChatGPT rewrite the script for me to make those user-inputted. It can be found [here](../../scripts/remove_trumped_torrents.py).
+But that script used hardcoded credentials for host, username, and password. We don't want that if it will be entered into version control. So I had ChatGPT rewrite the script for me to make those user-inputted.
 
 ### Using the Script
 Prerequisites:
