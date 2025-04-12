@@ -90,7 +90,7 @@ ffmpeg can add metadata to files using the `-metadata` flag. In the profiles des
 
 This comment flag is visible in Windows file details.
 
-![File details](img/File%20Details.png)
+![File details](<img/File Details.png>)
 
 More information: [corbpie.com](https://write.corbpie.com/adding-metadata-to-a-video-or-audio-file-with-ffmpeg/).
 
@@ -109,6 +109,7 @@ For documentation on interpolation settings, see [minterpolate docs](http://ffmp
 
 # Resample 120 FPS to 60 FPS
 This works, but runs at <1.0x transcode speed.
+
 `ffmpeg -i "$input" -filter:v fps=60 "$output"`
 
 # Transcode Profiles
@@ -196,7 +197,7 @@ Alternate group                          : 1
 
 ### Test Image
 
-![Test Image - Original](img/original.png)
+![Test Image - Original](<img/original.png>)
 
 ## CRF 21 [19.9 Mb/s]
 `ffmpeg -i "$input" -metadata comment="x264 CRF 21" -movflags +faststart -c:v libx264 -preset slower -crf 21 "$output"`
@@ -260,7 +261,7 @@ Alternate group                          : 1
 
 ### Test Image
 
-![Test Image - CRF 21](img/CRF%2021.png)
+![Test Image - CRF 21](<img/CRF 21.png>)
 
 ## CRF 27 [10.3 Mb/s]
 `ffmpeg -i "$input" -metadata comment="x264 CRF 27" -movflags +faststart -c:v libx264 -preset slower -crf 27 "$output"`
@@ -331,7 +332,7 @@ mdhd_Duration                            : 972629
 
 ### Test Image
 
-![Test Image - CRF 27](img/CRF%2027.png)
+![Test Image - CRF 27](<img/CRF 27.png>)
 
 ## 1080p CRF 21 [11.9 Mb/s]
 `ffmpeg -i "$input" -metadata comment="x264 1080p CRF 21" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 21 "$output"`
@@ -395,7 +396,7 @@ Alternate group                          : 1
 
 ### Test Image
 
-![Test Image - 1080p CRF 21](img/1080p%20CRF%2021.png)
+![Test Image - 1080p CRF 21](<img/1080p CRF 21.png>)
 
 ## 1080p CRF 27 [6,232 kb/s]
 `ffmpeg -i "$input" -metadata comment="x264 1080p CRF 27" -movflags +faststart -vf scale=1920:1080 -c:v libx264 -preset slower -crf 27 "$output"`
@@ -460,7 +461,7 @@ Alternate group                          : 1
 ```
 
 ### Test Image
-![Test Image - 1080p CRF 27](img/1080p%20crf%2027.png)
+![Test Image - 1080p CRF 27](<img/1080p CRF 27.png>)
 
 
 ## 720p CRF 21 [6,314 kb/s]
@@ -532,7 +533,7 @@ mdhd_Duration                            : 972629
 
 ### Test Image
 
-![Test Image - 720p CRF 21](img/720p%20CRF%2021.png)
+![Test Image - 720p CRF 21](<img/720p CRF 21.png>)
 
 ## 720p CRF 27 [3,305 kb/s]
 `ffmpeg -i "$input" -metadata comment="x264 720p CRF 27" -movflags +faststart -vf scale=1280:720 -c:v libx264 -preset slower -crf 27 "$output"`
@@ -595,7 +596,7 @@ Alternate group                          : 1
 ```
 ### Test Image
 
-![Test Image - 720p CRF 27](img/720p%20CRF%2027.png)
+![Test Image - 720p CRF 27](<img/720p CRF 27.png>)
 
 # Test a New Profile
 0. Name the profile. `profile="<profile name>"` (E.g. "720p CRF 21")

@@ -11,7 +11,7 @@ A monorepo for all my projects and dotfiles. Hosted on [GitHub](https://github.c
 | [pkgs](pkgs/) | Scripts and programs packaged with Nix. |
 | [projects](projects/) | Self-contained projects in a variety of scripting and programming languages.   |
 | [sites/Jafner.dev](sites/Jafner.dev/)       | Static site files for Jafner.dev. |
-| [.gitea/workflows](.gitea/workflows/) & [.github/workflows](.github/workflows/) | GitHub Actions workflows running on [Gitea](https://gitea.jafner.tools/Jafner/Jafner.net/actions) and [GitHub](https://github.com/Jafner/Jafner.net/actions), respectively. |
+| [.github/workflows](.github/workflows/) | GitHub Actions workflows |
 | [.sops](.sops/) | Scripts and documentation implementing [sops](https://github.com/getsops/sops) to securely store secrets in this repo. |
 
 ## Flake.nix

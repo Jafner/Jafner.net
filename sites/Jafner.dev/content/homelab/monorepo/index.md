@@ -43,17 +43,18 @@ I broke down the project into **four stages**: *collect, clean, combine, and com
 The first step in this project for me was to make a list of all the repos I wanted to consolidate. This included public and private repos, and only repos containing my original work.
 
 **My list:**
-1. homelab - The various iterations of my homelab configuration repos. Gitea(https://gitea.jafner.tools/Jafner/homelab), [Github (docker_config)](https://github.com/Jafner/docker_config), [Github (wiki)](https://github.com/Jafner/wiki), [Github (cloud_tools)](https://github.com/Jafner/cloud_tools), [Github (self-hosting)](https://github.com/Jafner/self-hosting).
-2. Jafner.dev - This blog! [Github](https://github.com/Jafner/Jafner.dev).
-3. dotfiles - The two copies of my dotfiles repo. Gitea(https://gitea.jafner.tools/Jafner/dotfiles), [Github](https://github.com/Jafner/dotfiles).
-4. nvgm - An unlaunched TTRPG blog in the vein of [Angry GM](https://theangrygm.com/), or [SlyFlourish](https://slyflourish.com/). Gitea (https://gitea.jafner.tools/Jafner/nvgm)
-5. pamidi - Bash script to control PulseAudio with a MIDI device. Gitea(https://gitea.jafner.tools/Jafner/pamidi), [Github](https://github.com/Jafner/pamidi)
-6. docker-llm-amd - Docker AI stack optimized for my RX 7900XTX. Gitea(https://gitea.jafner.tools/Jafner/docker-llm-amd)
-7. doradash - Programming practice project, meant to calculate DORA metrics from observability and CD platforms. Gitea (https://gitea.jafner.tools/Jafner/doradash)
-8. clip-it-and-ship-it - Programming practice project, meant to provide a Twitch Clips-like video highlighting experience for locally-recorded videos. Gitea (PyClipIt)(https://gitea.jafner.tools/Jafner/PyClipIt), [Github](https://github.com/Jafner/clip-it-and-ship-it).
-9. razer-bat - Python script to indicate Razer mouse battery level on the wireless dock's RGBs. [Github](https://github.com/Jafner/Razer-BatteryLevelRGB)
-10. 5etools-docker - Docker image to make hosting 5eTools a *bit* better. [Github](https://github.com/Jafner/5etools-docker)
-11. jafner-homebrew - 5eTools-compatible homebrew files for my original content. [Github](https://github.com/Jafner/jafner-homebrew)
+Most of these have been scrubbed at this point.
+1. homelab - The various iterations of my homelab configuration repos.
+2. Jafner.dev - This blog!
+3. dotfiles - The two copies of my dotfiles repo.
+4. nvgm - An unlaunched TTRPG blog in the vein of [Angry GM](https://theangrygm.com/), or [SlyFlourish](https://slyflourish.com/).
+5. pamidi - Bash script to control PulseAudio with a MIDI device.
+6. docker-llm-amd - Docker AI stack optimized for my RX 7900XTX.
+7. doradash - Programming practice project, meant to calculate DORA metrics from observability and CD platforms.
+8. clip-it-and-ship-it - Programming practice project, meant to provide a Twitch Clips-like video highlighting experience for locally-recorded videos.
+9. razer-bat - Python script to indicate Razer mouse battery level on the wireless dock's RGBs.
+10. 5etools-docker - Docker image to make hosting 5eTools a *bit* better.
+11. jafner-homebrew - 5eTools-compatible homebrew files for my original content.
 
 I chose to impose upon myself two constraints for this project:
 

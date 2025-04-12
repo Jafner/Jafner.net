@@ -39,22 +39,6 @@ Bitwarden has an [excellent security track record *so far*](https://bitwarden.co
 
 I've had an excellent experience with Bitwarden so far. The user experience is fluid enough that I was able to onboard my family without issue.
 
-### Nextcloud: Corner office with a view
-*Office services (files, photos, calendar, contacts).* | [Nextcloud](https://nextcloud.com/) | [`nextcloud.jafner.net`](https://nextcloud.jafner.net)
-
-Google Drive is pretty cool and useful. I didn't care much for Docs and the other office products, but the storage, sharing, and sync functionality Drive provided was useful at school, at home, at work, and even for gaming. But it's hard-limited to 15 GB on the free version. And expanding that costs ~$5/TB mo., which is only $0.63 cheaper than buying an 8TB SAS HDD *every month*. So I decided `drives > Drive`.
-
-And it feels luxurious. Knowing that all my phone's photos and videos are stored on my hardware and won't every touch Google's servers. I can take a full-fat video without worrying that 600 MB will eat up a bunch of my quota. Nextcloud also offers a wide swathe of plugins for other functionalities via their [App store](https://apps.nextcloud.com/).
-
-### Manyfold: Library management for 3D models
-*3D Model library manager.* | [Manyfold](https://github.com/manyfold3d/manyfold) | [`3d.jafner.net`](https://3d.jafner.net/)
-
-Over the years I've spent a *lot* of money on 3D models for fantasy RPG miniatures. My collection of models is measured in *terrabytes*. And I have a deep appreciation for the creative work of the artists who make these models. But artists, I think, are not naturally inclined toward robust file organization practices. So my "collection" is really more like a pile.
-
-But Manyfold (formerly "VanDAM") has helped enormously with the process of making that collection usable. Search and preview are the two biggest features. Automated tagging and other organizational features also help a lot.
-
-I still have a lot of manual work to do though...
-
 ### Send: The service formerly known as Firefox Send
 *Quick and secure file share. [XKCD#949](https://xkcd.com/949/).* | [Send](https://github.com/timvisee/send) | [`send.jafner.net`](https://send.jafner.net/)
 
@@ -66,8 +50,8 @@ The XKCD comic above articulates and experience I've had enough times. Nextcloud
 This service exists exclusively to let me right click the video file of a gaming highlight, hit "Share", and send the link to my friends as seamlessly as possible *while supporting high-fidelity content*. I record my gameplay at 1440p 120 FPS. Check it out:
 
 - [Venture 5k](https://zipline.jafner.net/u/%5B2024-06-19%5D%20Neato.mp4).
-- [Venture scrim highlight](https://zipline.jafner.net/u/%5B2024-06-19%5D%20Scrim%20(1:55:22-1:56:02).mp4)
-- [My greatest widowmaker highlight](https://zipline.jafner.net/u/ImYtUX.mp4)
+- [Venture scrim highlight](https://zipline.jafner.net/u/%5B2024-05-22%5D%20Venture%20Clutch.mp4)
+- [My greatest widowmaker highlight](https://zipline.jafner.net/u/%5B2023-04-10%5D%20Sombra's%20Here.mp4)
 
 That last one's not even 120 fps, I just love to show it. To be honest though, if Youtube supported scripted/automated uploads I would just use that. But it's probably for the best that they don't.
 
@@ -106,7 +90,7 @@ But I digress...
 5eTools is an insanely high quality, data-driven repository for each and every piece of content ever made for D&D 5th edition. Fortunately, they have a *blocklist* feature to restrict the visible content to only the stuff I've bought the books for.
 
 ### Calibre-web: Frontend for the premiere ebook library manager
-[Calibre-web](https://github.com/janeczku/calibre-web) | [Calibre](https://calibre-ebook.com/) | [`rpg.calibre.jafner.net`](https://rpg.calibre.jafner.net/) | [`sff.calibre.jafner.net`](https://sff.calibre.jafner.net/)
+[Calibre-web](https://github.com/janeczku/calibre-web) | [Calibre](https://calibre-ebook.com/)
 
 Sometimes, rarely, I read a book. Much more freqeuently, I want to check a section from a book. Calibre(-web) affords me access to my entire library of books and ebooks from a web browser. Frustratingly, the owner of the project has decided not to implement generic OAuth2/OIDC support. [But open-source, uh, finds a way.](https://github.com/janeczku/calibre-web/pull/2211#issuecomment-1182460156)
 
@@ -174,7 +158,7 @@ Lots of iteration led to this configuration. I'm sure I'll write it out at some 
 
 Before I knew what "Site Reliability Engineering" was, I had a Grafana instance (using ye olde Telegraf and InfluxDB) showing me pretty graphs. I was exposed to the timeseries database paradigm, and how to query it in a useful way. And later down the line I integrated [Loki](https://grafana.com/docs/loki/latest/) to pull all my Docker container logs into my one pretty visualization platform. I built dashboards for monitoring host health, troubleshooting specific issues, statuspages; I built alert policies to send notifications via Discord and email; and I exported data from practically every service. And then things settled down, and that data-analytics muscle began to atrophy. My environment was stable. So I changed tact.
 
-Uptime-kuma is simple, beautiful, and does all the things I need. HTTP and ping-based uptime monitoring, outage notifications (via email and Discord), and [status pages](https://uptime.jafner.tools/status/net).
+Uptime-kuma is simple, beautiful, and does all the things I need. HTTP and ping-based uptime monitoring, outage notifications (via email and Discord), and status pages.
 
 All this lets me sleep easy knowing that if any of my services go down, I'll get a Discord notification. When someone asks me "Hey, is \<service\> down?" I can answer confidently, "Nope, works on my system."
 
