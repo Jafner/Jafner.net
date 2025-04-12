@@ -103,4 +103,3 @@ Then your `index.json` should look like:
 ```
 
 Note the commas after each entry except the last in each array.
-See the [wiki page](https://wiki.5e.tools/index.php/5eTools_Install_Guide) for more information.
