@@ -171,4 +171,4 @@ In addition to the hundreds of individual project founders, maintainers, and con
 
 ---
 
-Thanks for reading. If you want to contact me to chat about homelabbing, D&D, tech writing, gaming, A/V streaming tech, or because you think I can help you solve a problem, email me at [`joey@jafner.net`](mailto:joey@jafner.net) or use any of [my other socials]({{< ref "/" >}} "Homepage").
+Thanks for reading. If you want to contact me to chat about homelabbing, D&D, tech writing, gaming, A/V streaming tech, or because you think I can help you solve a problem, email me at [`joey@jafner.net`](mailto:joey@jafner.net).
