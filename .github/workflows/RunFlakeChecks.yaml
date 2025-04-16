@@ -1,0 +1,16 @@
+name: Nix Flake Check
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v31
+      - name: Nix Flake Check
+        run: |
+          nix flake check .
