@@ -1,4 +1,4 @@
-{ pkgs, lib, config, username, hostname, systemKey, ... }: with lib; let cfg = config.roles.system; in {
+{ pkgs, lib, config, username, hostname, ... }: with lib; let cfg = config.roles.system; in {
   options = {
     roles.system = {
       enable = mkEnableOption "Standard system";
@@ -10,7 +10,7 @@
       };
       systemKey = mkOption {
         type = types.str;
-        default = systemKey;
+        default = ".ssh/${username}@${hostname}";
         description = "Path to private SSH key to use for age. Relative to home of primary user.";
         example = ".ssh/me@example.tld";
       };
@@ -42,6 +42,7 @@
         sops
         age
         ssh-to-age
+        nvd
       ];
       home.stateVersion = "24.11";
     };
