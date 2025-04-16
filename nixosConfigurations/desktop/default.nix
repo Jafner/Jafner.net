@@ -1,14 +1,18 @@
 { pkgs, lib, inputs, username, hostname, system, ... }: {
   imports = [
     ./default-applications.nix
+    ./docker.nix
     ./extrautils.nix
+    ./filesystems.nix
     ./git.nix
     ./goxlr.nix
     ./hardware.nix
     ./home-manager.nix
     ./iscsi-shares.nix
+    ./keybase.nix
     ./networking.nix
     ./obs-studio.nix
+    ./ollama.nix
     ./plasma.nix
     ./scripts.nix
     ./spotify.nix
@@ -16,6 +20,14 @@
     ./zed.nix
     ./zsh.nix
   ];
+
+  roles.system = {
+    enable = true;
+    kernelPackage = pkgs.linuxPackages_cachyos;
+    systemKey = ".ssh/joey.desktop@jafner.net";
+  };
+
+  chaotic.mesa-git.enable = true;
 
   # User Programs
   programs.nh = { enable = true; flake = "/home/joey/Git/Jafner.net";};
@@ -32,7 +44,14 @@
       protonmail-bridge-gui
       losslesscut-bin
       prismlauncher
+      protonup-qt
+      aichat
+      yek
     ];
+    programs.ghostty = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     programs.home-manager.enable = true;
     programs.kitty.enable = true;
     programs.mpv.enable = true;
@@ -171,15 +190,6 @@
     xdg.systemDirs.data = [ "/usr/share" ];
     home.stateVersion = "24.11";
   };
-
-  sops.secrets."smb" = {
-    sopsFile = ../../hosts/desktop/secrets/smb.secrets;
-    format = "binary";
-    key = "";
-    mode = "0440";
-    owner = username;
-  };
-  environment.systemPackages = with pkgs; [ cifs-utils ];
 
   networking.firewall = {
     allowedTCPPorts = [ 25565 ];
