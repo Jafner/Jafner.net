@@ -62,6 +62,7 @@
               self.nixosModules.basicSystem
               self.nixosModules.stacks
               ./nixosConfigurations/artificer
+              # TODO: Implement stack configuration (Traefik, UptimeKuma, Vaultwarden)
             ];
             inherit system;
             specialArgs = {

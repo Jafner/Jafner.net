@@ -1,4 +1,4 @@
-name: Nix Flake Check
+name: Build Nix Outputs
 on:
   pull_request:
     types: [opened, reopened, synchronize]
@@ -11,6 +11,26 @@ jobs:
         with:
           fetch-depth: 0
       - uses: cachix/install-nix-action@v31
-      - name: Nix Flake Check
+      - name: Install jq
+        run: sudo apt-get install -y jq
+      - name: Build configurations sequentially
         run: |
-          nix flake check .
+          set -euo pipefail
+          echo "Getting NixOS configuration names from flake..."
+          configs=$(nix eval --json .#nixosConfigurations --apply "x: builtins.attrNames x" | jq -r '.[]')
+
+          any_failed=false
+          for config in $configs; do
+            echo "🚧 Building configuration: $config"
+            if nix build --no-link ".#nixosConfigurations.$config.config.system.build.toplevel"; then
+              echo "✅ Success: $config"
+            else
+              echo "❌ Failed: build for $config"
+              any_failed=true
+            fi
+          done
+
+          if [ "$any_failed" = true ]; then
+            echo "🔥 Some configurations failed to build"
+            exit 1
+          fi
