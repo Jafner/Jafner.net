@@ -35,4 +35,4 @@ jobs:
         uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v25
       - run: sudo apt-get update && sudo apt-get install -y curl jq
-      - run: nix flake check --no-build --refresh --repair --log-format internal-json .
+      - run: nix flake check --no-build --refresh --repair .
