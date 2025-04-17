@@ -109,7 +109,7 @@ in
         builtins.readFile (
           pkgs.fetchurl {
             url = "https://github.com/Jafner.keys";
-            sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
+            sha256 = "sha256-aMSTuD7cw65EM6w9TaX4O9EtYuRebr9V41iA1cjpBJk=";
           }
         )
       ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
