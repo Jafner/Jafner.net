@@ -37,7 +37,7 @@
     };
   };
   outputs =
-    { inputs, self, ... }:
+    { self, ... }@inputs:
     {
       nixosConfigurations = {
         artificer =
