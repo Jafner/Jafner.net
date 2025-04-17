@@ -34,4 +34,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v25
-      - run: nix flake check --no-build .
+      - run: sudo apt-get update && sudo apt-get install -y curl jq
+      - run: nix flake check --no-build --refresh --repair --log-format internal-json .
