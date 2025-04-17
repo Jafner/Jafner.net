@@ -2,16 +2,16 @@ name: Build 5etools-docker
 
 on:
   # Triggers the workflow when changes are made to the image on the main branch
-  push:
-    branches: [main]
-    paths:
-      - "projects/5etools-docker/Dockerfile"
-      - "projects/5etools-docker/init.sh"
-  pull_request:
-    branches: [main]
-    paths:
-      - "projects/5etools-docker/Dockerfile"
-      - "projects/5etools-docker/init.sh"
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - "projects/5etools-docker/Dockerfile"
+  #     - "projects/5etools-docker/init.sh"
+  # pull_request:
+  #   branches: [main]
+  #   paths:
+  #     - "projects/5etools-docker/Dockerfile"
+  #     - "projects/5etools-docker/init.sh"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
