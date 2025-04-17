@@ -15,10 +15,7 @@
   };
 
   # User Programs
-  programs.nh = {
-    enable = true;
-    flake = "github:Jafner/Jafner.net";
-  };
+  programs.nh.enable = true;
   home-manager.users."${username}" = {
     programs.home-manager.enable = true;
     programs.nnn.enable = true;
