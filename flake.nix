@@ -47,25 +47,9 @@
       nixosConfigurations = {
         artificer =
           let
-            sys = {
-              username = "admin";
-              hostname = "artificer";
-              sshPrivateKey = ".ssh/admin@artificer";
-              repoPath = "Jafner.net";
-            };
+            username = "admin";
+            hostname = "artificer";
             system = "x86_64-linux";
-            pkgs = import inputs.nixpkgs {
-              inherit system;
-              config = {
-                allowUnfreePredicate = (_: true);
-              };
-            };
-            pkgs-unstable = import inputs.nixpkgs-unstable {
-              inherit system;
-              config = {
-                allowUnfreePredicate = (_: true);
-              };
-            };
           in
           inputs.nixpkgs.lib.nixosSystem {
             modules = [
@@ -75,73 +59,25 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
               inputs.nixos-dns.nixosModules.dns
-              ./modules/system.nix
-              ./modules/git.nix
-              ./modules/sops.nix
-              ./modules/docker.nix
-              ./services/gitea/stack.nix
-              ./services/gitea-runner/stack.nix
-              ./services/vaultwarden/stack.nix
-              ./services/monitoring/stack.nix
-              ./services/traefik/stack.nix
+              self.nixosModules.basicSystem
+              self.nixosModules.stacks
+              ./nixosConfigurations/artificer
             ];
             inherit system;
             specialArgs = {
-              inherit inputs pkgs pkgs-unstable;
-              sys = sys;
-              git = {
-                username = sys.username;
-                realname = sys.hostname;
-                email = "noreply@jafner.net";
-                sshPrivateKey = sys.sshPrivateKey;
-                signingKey = "";
-              };
-              sops = {
-                username = sys.username;
-                sshPrivateKey = sys.sshPrivateKey;
-                repoRoot = "/home/admin/Jafner.net";
-              };
-              docker = {
-                username = sys.username;
-              };
-              stacks = {
-                appdata = "/appdata";
-                monitoring = {
-
-                };
-              };
-              repo = {
-                path = "Jafner.net"; # Path to copy repo, relative to home.
-              };
-              traefik = {
-                configFile = ./hosts/artificer/traefik_config.yaml;
-              };
-              gitea-runner = {
-                tokenFile = ./hosts/artificer/registration.token;
-              };
+              inherit
+                inputs
+                username
+                hostname
+                system
+                ;
             };
           };
         champion =
           let
-            sys = {
-              username = "admin";
-              hostname = "champion";
-              sshPrivateKey = ".ssh/admin@champion";
-              repoPath = "Jafner.net";
-            };
+            username = "admin";
+            hostname = "champion";
             system = "x86_64-linux";
-            pkgs = import inputs.nixpkgs {
-              inherit system;
-              config = {
-                allowUnfreePredicate = (_: true);
-              };
-            };
-            pkgs-unstable = import inputs.nixpkgs-unstable {
-              inherit system;
-              config = {
-                allowUnfreePredicate = (_: true);
-              };
-            };
           in
           inputs.nixpkgs.lib.nixosSystem {
             modules = [
@@ -149,6 +85,8 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
               inputs.disko.nixosModules.disko
+              self.nixosModules.basicSystem
+              self.nixosModules.stacks
               {
                 disko.devices = {
                   disk.primary = {
@@ -175,30 +113,16 @@
                   };
                 };
               }
-              ./modules/system.nix
-              ./modules/git.nix
-              ./modules/sops.nix
-              ./modules/docker.nix
+              ./nixosConfigurations/champion
             ];
             inherit system;
             specialArgs = {
-              inherit inputs pkgs pkgs-unstable;
-              sys = sys;
-              git = {
-                username = sys.username;
-                realname = sys.hostname;
-                email = "noreply@jafner.net";
-                sshPrivateKey = sys.sshPrivateKey;
-                signingKey = "";
-              };
-              sops = {
-                username = sys.username;
-                sshPrivateKey = sys.sshPrivateKey;
-                repoRoot = "/home/admin/Jafner.net";
-              };
-              docker = {
-                username = sys.username;
-              };
+              inherit
+                inputs
+                username
+                hostname
+                system
+                ;
             };
           };
         fighter =
