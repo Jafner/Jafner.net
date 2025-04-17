@@ -33,6 +33,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v25
+      - uses: DeterminateSystems/nix-installer-action@v16
       - run: sudo apt-get update && sudo apt-get install -y curl jq
-      - run: nix flake check --no-build --refresh --repair .
+      - run: nix flake check --no-build --refresh --repair --offline .
