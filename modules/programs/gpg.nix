@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.gpg; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.gpg;
+in
+{
   options = with pkgs.lib; {
     modules.programs.gpg = {
       enable = mkEnableOption "gpg";
@@ -20,7 +24,7 @@
         homedir = "/home/${cfg.username}/.gpg";
         mutableKeys = true;
         mutableTrust = true;
-        publicKeys = [  ];
+        publicKeys = [ ];
       };
       services.gpg-agent = {
         enable = true;

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   stacks.ai = {
     enable = true;
     paths.appdata = "/appdata/ai";

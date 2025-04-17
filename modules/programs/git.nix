@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.git; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.git;
+in
+{
   options = with pkgs.lib; {
     modules.programs.git = {
       enable = mkEnableOption "Git";

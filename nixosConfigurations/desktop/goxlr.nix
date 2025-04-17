@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   services.goxlr-utility.enable = true;
   home-manager.users."${username}" = {
     home.packages = with pkgs; [ goxlr-utility ];

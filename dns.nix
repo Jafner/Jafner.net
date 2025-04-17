@@ -30,13 +30,16 @@
           "v=spf1 include:_spf.protonmail.ch ~all"
           "protonmail-verification=9ace10d9bb99433b56318ee90826fbff3b80fb91"
         ];
-        a.data = ["97.113.241.118"];
+        a.data = [ "97.113.241.118" ];
       };
       "_dmarc".txt.data = "v=DMARC1; p=quarantine";
       "*".cname.data = "jafner.net";
-      "protonmail._domainkey".cname.data = "protonmail.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
-      "protonmail2._domainkey".cname.data = "protonmail2.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
-      "protonmail3._domainkey".cname.data = "protonmail3.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
+      "protonmail._domainkey".cname.data =
+        "protonmail.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
+      "protonmail2._domainkey".cname.data =
+        "protonmail2.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
+      "protonmail3._domainkey".cname.data =
+        "protonmail3.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
     };
   };
 }

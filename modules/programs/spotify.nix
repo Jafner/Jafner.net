@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.spotify; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.spotify;
+in
+{
   options = with pkgs.lib; {
     modules.programs.spotify = {
       enable = mkEnableOption "spotify";
@@ -22,7 +26,10 @@
       systemd.user.services.librespot = {
         Unit = {
           Description = "Librespot (an open source Spotify client)";
-          Documentation = [ "https://github.com/librespot-org/librespot" "https://github.com/librespot-org/librespot/wiki/Options" ];
+          Documentation = [
+            "https://github.com/librespot-org/librespot"
+            "https://github.com/librespot-org/librespot/wiki/Options"
+          ];
         };
         Service = {
           Restart = "always";

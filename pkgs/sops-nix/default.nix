@@ -1,11 +1,13 @@
-{ pkgs, ... }: pkgs.writeShellApplication {
+{ pkgs, ... }:
+pkgs.writeShellApplication {
   name = "sops-nix";
   runtimeInputs = with pkgs; [
     git
     sops
     ssh-to-age
     openssh
-    yq  ];
+    yq
+  ];
   text = ''
     #! bash
 

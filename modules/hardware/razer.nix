@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.hardware.razer; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.hardware.razer;
+in
+{
   options = with pkgs.lib; {
     modules.hardware.razer = {
       enable = mkEnableOption "razer";

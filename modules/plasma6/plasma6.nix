@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.plasma6; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.plasma6;
+in
+{
   imports = [ ../default-applications.nix ];
   options = with pkgs.lib; {
     modules.plasma6 = {
@@ -32,7 +36,8 @@
     programs.xwayland.enable = true;
     programs.partition-manager.enable = true;
 
-    home-manager.users."${cfg.username}" = { # TODO: Identify which packages we would only use with Plasma6 (vs. Hyrpland)
+    home-manager.users."${cfg.username}" = {
+      # TODO: Identify which packages we would only use with Plasma6 (vs. Hyrpland)
       home.packages = with pkgs; [
         kdePackages.kcalc
         kdePackages.filelight
@@ -40,7 +45,8 @@
         wl-color-picker
         dotool
       ];
-      home.file = { # Note: Will need to be integrated with any file manager that isn't dolphin
+      home.file = {
+        # Note: Will need to be integrated with any file manager that isn't dolphin
         "run-video-script" = {
           target = ".local/share/kio/servicemenus/run-video-script.desktop";
           text = ''

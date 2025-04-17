@@ -1,4 +1,17 @@
-{ lib, config, username, ... }: with lib; let stack = "homeassistant"; in let cfg = config.stacks.${stack}; in {
+{
+  lib,
+  config,
+  username,
+  ...
+}:
+with lib;
+let
+  stack = "homeassistant";
+in
+let
+  cfg = config.stacks.${stack};
+in
+{
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
@@ -42,7 +55,7 @@
       };
     };
   };
-  config = mkIf cfg.enable  {
+  config = mkIf cfg.enable {
     hardware.bluetooth.enable = true;
     services.blueman.enable = true;
     services.dbus.implementation = "broker";

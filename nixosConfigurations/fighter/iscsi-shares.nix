@@ -1,4 +1,8 @@
-{ pkgs, hostname, ... }: let target = "iqn.2020-03.net.jafner:fighter"; in {
+{ pkgs, hostname, ... }:
+let
+  target = "iqn.2020-03.net.jafner:fighter";
+in
+{
   services.openiscsi = {
     enable = true;
     name = hostname;
@@ -7,7 +11,10 @@
   systemd.services = {
     iscsi-autoconnect = {
       description = "Log into iSCSI target ${target}";
-      after = [ "network.target" "iscsid.service" ];
+      after = [
+        "network.target"
+        "iscsid.service"
+      ];
       requires = [ "iscsid.service" ];
       serviceConfig = {
         ExecStartPre = "${pkgs.openiscsi}/bin/iscsiadm -m discovery -t sendtargets -p 192.168.1.12:3260";

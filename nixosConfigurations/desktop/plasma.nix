@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
 
   programs.kdeconnect.enable = true;
   programs.xwayland.enable = true;

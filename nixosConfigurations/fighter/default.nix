@@ -1,4 +1,11 @@
-{ pkgs, username, hostname, system, ... }: {
+{
+  pkgs,
+  username,
+  hostname,
+  system,
+  ...
+}:
+{
   imports = [
     ./filesystems.nix
     ./git.nix
@@ -14,7 +21,10 @@
   };
 
   # User Programs
-  programs.nh = { enable = true; flake = "/home/${username}/Jafner.net";};
+  programs.nh = {
+    enable = true;
+    flake = "/home/${username}/Jafner.net";
+  };
   home-manager.users."${username}" = {
     programs.home-manager.enable = true;
     programs.nnn.enable = true;

@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.services.docker; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.services.docker;
+in
+{
   options = with pkgs.lib; {
     modules.services.docker = {
       enable = mkEnableOption "docker";

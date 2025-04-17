@@ -1,4 +1,11 @@
-{ pkgs, inputs, username, system, ... }: {
+{
+  pkgs,
+  inputs,
+  username,
+  system,
+  ...
+}:
+{
   imports = [
     ./default-applications.nix
     ./docker.nix
@@ -30,11 +37,20 @@
   chaotic.mesa-git.enable = true;
 
   # User Programs
-  programs.nh = { enable = true; flake = "/home/joey/Git/Jafner.net";};
+  programs.nh = {
+    enable = true;
+    flake = "/home/joey/Git/Jafner.net";
+  };
   programs.chromium.enable = false;
   programs.steam.enable = true;
-  programs.gamescope = { enable = true; capSysNice = false; };
-  programs.gamemode = { enable = true; enableRenice = true; };
+  programs.gamescope = {
+    enable = true;
+    capSysNice = false;
+  };
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+  };
   home-manager.users."${username}" = {
     home.packages = with pkgs; [
       vesktop

@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.networkShares.smb; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.networkShares.smb;
+in
+{
   options = with pkgs.lib; {
     networkShares.smb = {
       enable = mkEnableOption "Samba client";
@@ -35,22 +39,24 @@
         example = "hosts/desktop/secrets/smb.secrets";
       };
       shares = mkOption {
-        type = types.listOf (types.submodule {
-          options = {
-            name = mkOption {
-              description = "Name of the share. Used to set the mount point unless otherwise specified.";
-              type = types.str;
+        type = types.listOf (
+          types.submodule {
+            options = {
+              name = mkOption {
+                description = "Name of the share. Used to set the mount point unless otherwise specified.";
+                type = types.str;
+              };
+              sambaHost = mkOption {
+                description = "IP address or hostname of the SMB server.";
+                type = types.str;
+              };
+              shareName = mkOption {
+                description = "Name of the share on the SMB server.";
+                type = types.str;
+              };
             };
-            sambaHost = mkOption {
-              description = "IP address or hostname of the SMB server.";
-              type = types.str;
-            };
-            shareName = mkOption {
-              description = "Name of the share on the SMB server.";
-              type = types.str;
-            };
-          };
-        });
+          }
+        );
       };
       # shares = mkOption {
       #   type = types.submodule {
@@ -84,7 +90,10 @@
       mountPoint = "/mnt/${cfg.shares.name}";
       device = "//${cfg.shares.sambaHost}/${cfg.shares.shareName}";
       fsType = "cifs";
-      options = builtins.concatLists [ cfg.automountOpts cfg.permissionsOpts ];
+      options = builtins.concatLists [
+        cfg.automountOpts
+        cfg.permissionsOpts
+      ];
     };
 
     # fileSystems."movies" = pkgs.lib.mkIf cfg.shares.movies.enable {

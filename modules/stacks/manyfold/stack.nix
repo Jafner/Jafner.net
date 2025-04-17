@@ -1,4 +1,18 @@
-{ pkgs, lib, config, username, ... }: with lib; let stack = "manyfold"; in let cfg = config.stacks.${stack}; in {
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
+with lib;
+let
+  stack = "manyfold";
+in
+let
+  cfg = config.stacks.${stack};
+in
+{
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
@@ -51,7 +65,7 @@
       };
     };
   };
-  config =  pkgs.lib.mkIf cfg.enable  {
+  config = pkgs.lib.mkIf cfg.enable {
     sops.secrets."${stack}/manyfold" = {
       sopsFile = cfg.secretsFiles.manyfold;
       key = "";

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./goxlr-mini.nix
     ./networking.nix

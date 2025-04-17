@@ -1,4 +1,11 @@
-{ pkgs, config, ... }: let stack = ""; in let cfg = config.modules.stacks.${stack}; in {
+{ pkgs, config, ... }:
+let
+  stack = "";
+in
+let
+  cfg = config.modules.stacks.${stack};
+in
+{
   options = with pkgs.lib; {
     modules.stacks.${stack} = {
       enable = mkEnableOption "${stack}";
@@ -51,7 +58,7 @@
       };
     };
   };
-  config = mkIf cfg.enable  {
+  config = mkIf cfg.enable {
     sops.secrets."${stack}/coder" = {
       sopsFile = cfg.secretsFiles.${stack};
       key = "";

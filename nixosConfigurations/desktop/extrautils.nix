@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   home-manager.users."${username}" = {
     home.packages = with pkgs; [
       delta
@@ -22,7 +23,9 @@
       sysz
       lazycli
     ];
-    programs.bat = { enable = true; };
+    programs.bat = {
+      enable = true;
+    };
     programs.btop = {
       enable = true;
       package = pkgs.btop-rocm;
@@ -32,17 +35,39 @@
         update_ms = 500;
       };
     };
-    programs.eza = { enable = true; };
-    programs.lsd = { enable = true; };
-    programs.broot = { enable = true; };
-    programs.fd = { enable = true; };
-    programs.ripgrep = { enable = true; };
-    programs.fzf = { enable = true; };
-    programs.mcfly = { enable = true; };
-    programs.jq = { enable = true; };
-    programs.bottom = { enable = true; };
-    programs.zoxide = { enable = true; };
-    programs.lazygit = { enable = true; };
+    programs.eza = {
+      enable = true;
+    };
+    programs.lsd = {
+      enable = true;
+    };
+    programs.broot = {
+      enable = true;
+    };
+    programs.fd = {
+      enable = true;
+    };
+    programs.ripgrep = {
+      enable = true;
+    };
+    programs.fzf = {
+      enable = true;
+    };
+    programs.mcfly = {
+      enable = true;
+    };
+    programs.jq = {
+      enable = true;
+    };
+    programs.bottom = {
+      enable = true;
+    };
+    programs.zoxide = {
+      enable = true;
+    };
+    programs.lazygit = {
+      enable = true;
+    };
   };
   security.wrappers.nethogs = {
     source = "${pkgs.nethogs}/bin/nethogs";

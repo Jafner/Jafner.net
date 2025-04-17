@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.desktop.thismodule; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.desktop.thismodule;
+in
+{
   options = with pkgs.lib; {
     desktop.thismodule = {
       enable = mkEnableOption "";

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   name = "ffaart";
   runtimeInputs = [
     pkgs.ffmpeg-full

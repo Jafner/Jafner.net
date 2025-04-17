@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   home-manager.users.${username} = {
     home.packages = with pkgs; [ base16-schemes ];
     # Use the following before running a switch to prevent clobbering:

@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: let
+{ pkgs, username, ... }:
+let
   automountOpts = [
     "x-systemd.automount"
     "noauto"
@@ -10,7 +11,9 @@
     "credentials=/run/secrets/smb"
     "uid=1000"
     "gid=1000"
-  ]; in {
+  ];
+in
+{
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/88a3f223-ed42-4be1-a748-bb9e0f9007dc";
     fsType = "ext4";
@@ -18,9 +21,17 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-partuuid/518e8d5f-cba4-4d87-a80a-e06a811f73e4";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
-  swapDevices = [ { device = "/.swapfile"; size = 32*1024;} ];
+  swapDevices = [
+    {
+      device = "/.swapfile";
+      size = 32 * 1024;
+    }
+  ];
 
   sops.secrets."smb" = {
     sopsFile = ../../hosts/fighter/secrets/smb.secrets;
@@ -36,63 +47,90 @@
     mountPoint = "/mnt/movies";
     device = "//192.168.1.12/Movies";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."music" = {
     enable = true;
     mountPoint = "/mnt/music";
     device = "//192.168.1.12/Music";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."shows" = {
     enable = true;
     mountPoint = "/mnt/shows";
     device = "//192.168.1.12/Shows";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."av" = {
     enable = true;
     mountPoint = "/mnt/av";
     device = "//192.168.1.12/AV";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."printing" = {
     enable = true;
     mountPoint = "/mnt/3dprinting";
     device = "//192.168.1.12/3DPrinting";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."books" = {
     enable = true;
     mountPoint = "/mnt/books";
     device = "//192.168.1.12/Text";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."torrenting" = {
     enable = true;
     mountPoint = "/mnt/torrenting";
     device = "//192.168.1.12/Torrenting";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."archive" = {
     enable = true;
     mountPoint = "/mnt/archive";
     device = "//192.168.1.12/Archive";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   fileSystems."recordings" = {
     enable = true;
     mountPoint = "/mnt/recordings";
     device = "//192.168.1.12/Recordings";
     fsType = "cifs";
-    options = builtins.concatLists [ automountOpts permissionsOpts ];
+    options = builtins.concatLists [
+      automountOpts
+      permissionsOpts
+    ];
   };
   # inputs.disko.nixosModules.disko
   # inputs.impermanence.nixosModules.impermanence

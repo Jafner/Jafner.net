@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   home-manager.users."${username}" = {
     services.keybase.enable = true;
     services.kbfs.enable = true;

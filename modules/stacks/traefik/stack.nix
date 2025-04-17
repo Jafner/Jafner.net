@@ -1,4 +1,17 @@
-{ lib, config, username, ... }: with lib; let stack = "traefik"; in let cfg = config.stacks.${stack}; in {
+{
+  lib,
+  config,
+  username,
+  ...
+}:
+with lib;
+let
+  stack = "traefik";
+in
+let
+  cfg = config.stacks.${stack};
+in
+{
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
@@ -11,7 +24,7 @@
         description = "Paths containing dynamic Traefik config files to place in `/config` in the container. Can be a directory, which will be copied recursively.";
         type = types.pathInStore;
         default = null;
-        example = '' "./hosts/myserver/middlewares/" '';
+        example = ''"./hosts/myserver/middlewares/" '';
       };
       domainOwnerEmail = mkOption {
         type = types.str;

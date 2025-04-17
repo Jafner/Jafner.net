@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   sops.secrets."smb" = {
     sopsFile = ../../hosts/desktop/secrets/smb.secrets;
     format = "binary";
@@ -15,7 +16,10 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-partuuid/ff24dcbc-39e9-4bbe-b013-50d755c9d13d";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/f023ae02-7742-4e13-a8ea-c1ea634436fa";

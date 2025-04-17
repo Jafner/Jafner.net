@@ -1,4 +1,18 @@
-{ pkgs, lib, config, username, ... }: with lib; let stack = "minecraft"; in let cfg = config.stacks.${stack}; in {
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
+with lib;
+let
+  stack = "minecraft";
+in
+let
+  cfg = config.stacks.${stack};
+in
+{
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
