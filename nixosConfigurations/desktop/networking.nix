@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+{ ... }: {
   systemd.network = {
     enable = true;
     networks."50-enp4s0f0" = {

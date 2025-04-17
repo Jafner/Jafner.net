@@ -1,4 +1,4 @@
-{ pkgs, lib, config, username, ... }: with lib; let stack = "qbittorrent"; in let cfg = config.stacks.${stack}; in {
+{ lib, config, ... }: with lib; let stack = "qbittorrent"; in let cfg = config.stacks.${stack}; in {
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";

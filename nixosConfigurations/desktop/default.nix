@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, username, hostname, system, ... }: {
+{ pkgs, inputs, username, system, ... }: {
   imports = [
     ./default-applications.nix
     ./docker.nix

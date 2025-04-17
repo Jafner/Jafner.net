@@ -1,4 +1,4 @@
-{ pkgs, config, username, ... }: let cfg = config.networkShares.smb; in {
+{ pkgs, config, ... }: let cfg = config.networkShares.smb; in {
   options = with pkgs.lib; {
     networkShares.smb = {
       enable = mkEnableOption "Samba client";

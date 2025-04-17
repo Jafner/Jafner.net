@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+{ pkgs, ... }: {
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
   boot.loader = {
     systemd-boot.enable = true;

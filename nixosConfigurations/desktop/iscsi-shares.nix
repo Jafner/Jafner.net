@@ -1,4 +1,4 @@
-{ pkgs, username, hostname, ... }: let target = "iqn.2020-03.net.jafner:joey-desktop"; in {
+{ pkgs, hostname, ... }: let target = "iqn.2020-03.net.jafner:joey-desktop"; in {
   services.openiscsi = {
     enable = true;
     name = hostname;

@@ -1,4 +1,4 @@
-{ pkgs, lib, config, username, ... }: with lib; let stack = "keycloak"; in let cfg = config.stacks.${stack}; in {
+{ lib, config, username, ... }: with lib; let stack = "keycloak"; in let cfg = config.stacks.${stack}; in {
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";

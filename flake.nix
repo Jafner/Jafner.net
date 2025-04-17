@@ -284,7 +284,7 @@
       };
     });
     checks = builtins.mapAttrs
-      (system:
+      (_system:
         deployLib:
           deployLib.deployChecks
             self.deploy

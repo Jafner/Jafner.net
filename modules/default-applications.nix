@@ -74,8 +74,7 @@
     videoPlayer = "${cfg.videoPlayer}"; # "vlc.desktop";
     textEditor = "${cfg.textEditor}"; # "dev.zed.Zed.desktop";
     docViewer = "${cfg.docViewer}"; # "zen.desktop";
-    fileManager = "${cfg.fileManager}"; # "org.kde.dolphin.desktop";
-    terminal = "${cfg.terminal}"; # "org.kde.konsole.desktop";
+    fileManager = "${cfg.fileManager}"; # "org.kde.dolphin.desktop"; # "org.kde.konsole.desktop";
     archiveManager = "${cfg.archiveManager}"; # "org.kde.ark.desktop";
   in pkgs.lib.mkIf cfg.enable {
     home-manager.users."${cfg.username}".xdg.mimeApps = {
