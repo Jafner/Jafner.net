@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  deadnix:
+    name: Check for unused nix code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v25
+      - uses: cachix/cachix-action@v14
+        with:
+          name: deadnix
+      - uses: astro/deadnix-action@main
+  check_links:
+    name: Check for broken links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check for dead links
+        uses: AlexanderDokuchaev/md-dead-link-check@v1.2.0
+  flake_check:
+    name: Run default flake checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v25
+      - uses: cachix/cachix-action@v14
+      - run: nix flake check --no-build .

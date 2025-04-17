@@ -178,7 +178,6 @@
       deploy = {
         nodes = {
           artificer = {
-            # deploy with nix run github:serokell/deploy-rs -- --targets .#artificer
             hostname = "artificer";
             profilesOrder = [ "system" ];
             profiles.system = {
@@ -188,7 +187,6 @@
             };
           };
           champion = {
-            # deploy with nix run github:serokell/deploy-rs -- --targets .#champion
             hostname = "champion";
             profilesOrder = [ "system" ];
             profiles.system = {
@@ -198,7 +196,6 @@
             };
           };
           desktop = {
-            # deploy with nix run github:serokell/deploy-rs -- --targets .#desktop
             hostname = "desktop";
             profilesOrder = [ "system" ];
             profiles.system = {
@@ -208,7 +205,6 @@
             };
           };
           fighter = {
-            # deploy with nix run github:serokell/deploy-rs -- --targets .#fighter
             hostname = "fighter";
             profilesOrder = [ "system" ];
             profiles.system = {
