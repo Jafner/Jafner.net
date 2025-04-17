@@ -106,12 +106,7 @@ in
       ];
       description = "${username}";
       openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
-        builtins.readFile (
-          pkgs.fetchurl {
-            url = "https://github.com/Jafner.keys";
-            sha256 = "sha256-aMSTuD7cw65EM6w9TaX4O9EtYuRebr9V41iA1cjpBJk=";
-          }
-        )
+        builtins.readFile ../keys.txt
       ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
     };
 
