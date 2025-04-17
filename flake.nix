@@ -9,10 +9,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nur = {
-    #   url = "github:nix-community/NUR";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Applications:
@@ -25,7 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:nix-community/nixGL";
-    #nix-flatpak.url = "github:gmodena/nix-flatpak";
     stylix = {
       url = "github:danth/stylix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +37,7 @@
     };
   };
   outputs =
-    inputs@{ nixpkgs, self, ... }:
+    { inputs, self, ... }:
     {
       nixosConfigurations = {
         artificer =
@@ -225,13 +220,13 @@
         basicSystem = import ./modules/basicSystem.nix;
         stacks = import ./modules/stacks/default.nix;
       };
-      packages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
-        sdwebui-rocm = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/sdwebui-rocm { };
-        helloworld = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
+      packages = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+        sdwebui-rocm = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/sdwebui-rocm { };
+        helloworld = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
       });
-      devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
-        default = nixpkgs.legacyPackages.${system}.mkShellNoCC {
-          packages = with nixpkgs.legacyPackages.${system}; [
+      devShells = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+        default = inputs.nixpkgs.legacyPackages.${system}.mkShellNoCC {
+          packages = with inputs.nixpkgs.legacyPackages.${system}; [
             inputs.deploy-rs.packages.${system}.deploy-rs
             yek
           ];
@@ -240,7 +235,7 @@
           ];
         };
       });
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       checks = builtins.mapAttrs (
         _system: deployLib: deployLib.deployChecks self.deploy
       ) inputs.deploy-rs.lib;
