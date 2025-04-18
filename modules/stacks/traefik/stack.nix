@@ -20,12 +20,6 @@ in
         default = null;
         description = "Path to the stack's sops-nix-encrypted secrets file.";
       };
-      extraConf = mkOption {
-        description = "Paths containing dynamic Traefik config files to place in `/config` in the container. Can be a directory, which will be copied recursively.";
-        type = types.pathInStore;
-        default = null;
-        example = ''"./hosts/myserver/middlewares/" '';
-      };
       domainOwnerEmail = mkOption {
         type = types.str;
         default = null;
@@ -145,13 +139,6 @@ in
               watch: false
         '';
         target = "stacks/${stack}/traefik.yaml";
-      };
-
-      "${stack}/config/" = mkIf (cfg.extraConf != null) {
-        enable = true;
-        recursive = true;
-        source = cfg.extraConf;
-        target = "stacks/${stack}/config/";
       };
     };
   };
