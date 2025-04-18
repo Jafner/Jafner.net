@@ -34,5 +34,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v16
-      - run: sudo apt-get update && sudo apt-get install -y curl jq
+        with:
+          nix-package-url: https://github.com/NixOS/nix/archive/refs/tags/2.28.2.tar.gz
       - run: nix flake check --no-build --refresh --repair --offline .
