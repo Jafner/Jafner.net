@@ -34,6 +34,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
-        with:
-          install_url: https://releases.nixos.org/nix/nix-2.28.2/install
-      - run: nix flake check --no-build --refresh --repair --offline .
+      - run: nix flake check .
