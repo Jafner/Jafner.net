@@ -1,6 +1,7 @@
-{ pkgs, stdenv, ... }: stdenv.mkDerivation {
+{ pkgs, stdenv, ... }:
+stdenv.mkDerivation {
   name = "helloworld";
-  src = pkgs.callPackage ./pkg.nix {  };
+  src = pkgs.callPackage ./pkg.nix { };
   nativeBuildInputs = with pkgs; [
     rustc
     cargo

@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.vscode; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.vscode;
+in
+{
   options = with pkgs.lib; {
     modules.programs.vscode = {
       enable = mkEnableOption "vscode";
@@ -12,7 +16,10 @@
   };
   config = pkgs.lib.mkIf cfg.enable {
     home-manager.users."${cfg.username}" = {
-      home.packages = with pkgs; [ nixd sops ];
+      home.packages = with pkgs; [
+        nixd
+        sops
+      ];
       programs.vscode = {
         enable = true;
         package = pkgs.vscodium;

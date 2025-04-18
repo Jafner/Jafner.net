@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.services.hello; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.services.hello;
+in
+{
   options = with pkgs.lib; {
     services.hello = {
       enable = mkEnableOption "hello service";

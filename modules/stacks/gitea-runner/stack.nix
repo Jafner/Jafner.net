@@ -1,4 +1,17 @@
-{ pkgs, lib, config, username, ... }: with lib; let stack = "gitea-runner"; in let cfg = config.stacks.${stack}; in {
+{
+  lib,
+  config,
+  username,
+  ...
+}:
+with lib;
+let
+  stack = "gitea-runner";
+in
+let
+  cfg = config.stacks.${stack};
+in
+{
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
@@ -19,7 +32,7 @@
       };
     };
   };
-  config = mkIf cfg.enable  {
+  config = mkIf cfg.enable {
     sops.secrets."${stack}" = {
       sopsFile = cfg.secretsFile;
       key = "";

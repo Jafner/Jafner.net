@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.hardware.networking; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.hardware.networking;
+in
+{
   options = with pkgs.lib; {
     modules.hardware.networking = {
       enable = mkEnableOption "networking";
@@ -42,7 +46,11 @@
         type = types.listOf types.str;
         default = null;
         description = "List of nameservers. It can be left empty to be auto-detected via DHCP.";
-        example = [ "1.1.1.1" "8.8.8.8" "10.0.0.10" ];
+        example = [
+          "1.1.1.1"
+          "8.8.8.8"
+          "10.0.0.10"
+        ];
       };
     };
   };
@@ -50,11 +58,19 @@
     users.users."${cfg.username}".extraGroups = [ "networkmanager" ];
     networking = {
       hostName = cfg.hostname;
-      defaultGateway = { address = cfg.gatewayIP; interface = cfg.interface; };
+      defaultGateway = {
+        address = cfg.gatewayIP;
+        interface = cfg.interface;
+      };
       interfaces."${cfg.interface}" = {
         useDHCP = true;
         macAddress = cfg.mac;
-        ipv4.addresses = [ { address = cfg.ip; prefixLength = 24; } ];
+        ipv4.addresses = [
+          {
+            address = cfg.ip;
+            prefixLength = 24;
+          }
+        ];
       };
       nameservers = cfg.dns;
     };

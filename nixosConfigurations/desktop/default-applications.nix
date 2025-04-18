@@ -1,4 +1,5 @@
-{ username, ... }: let
+{ username, ... }:
+let
   webBrowser = "zen.desktop";
   emailClient = "proton-mail.desktop";
   phoneHandler = "org.kde.kdeconnect.handler.desktop";
@@ -8,9 +9,9 @@
   textEditor = "dev.zed.Zed.desktop";
   docViewer = "zen.desktop";
   fileManager = "org.kde.dolphin.desktop";
-  terminal = "org.kde.konsole.desktop";
   archiveManager = "org.kde.ark.desktop";
-in {
+in
+{
   home-manager.users."${username}".xdg.mimeApps = {
     enable = true;
     defaultApplications = {

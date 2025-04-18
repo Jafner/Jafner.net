@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.keybase; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.keybase;
+in
+{
   options = with pkgs.lib; {
     modules.programs.keybase = {
       enable = mkEnableOption "keybase";

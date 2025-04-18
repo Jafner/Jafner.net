@@ -1,6 +1,10 @@
 # TODO: Refactor to modularize themes. Use `modules/themes/sometheme/` to contain wallpaper image and theme configs.
 
-{ pkgs, config, ... }: let cfg = config.modules.programs.stylix; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.stylix;
+in
+{
   options = with pkgs.lib; {
     modules.programs.stylix = {
       enable = mkEnableOption "stylix";

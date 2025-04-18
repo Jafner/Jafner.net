@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   networking.firewall.allowedTCPPorts = [ 57621 ];
   networking.firewall.allowedUDPPorts = [ 5353 ];
   home-manager.users.${username} = {
@@ -10,7 +11,10 @@
     systemd.user.services.librespot = {
       Unit = {
         Description = "Librespot (an open source Spotify client)";
-        Documentation = [ "https://github.com/librespot-org/librespot" "https://github.com/librespot-org/librespot/wiki/Options" ];
+        Documentation = [
+          "https://github.com/librespot-org/librespot"
+          "https://github.com/librespot-org/librespot/wiki/Options"
+        ];
       };
       Service = {
         Restart = "always";

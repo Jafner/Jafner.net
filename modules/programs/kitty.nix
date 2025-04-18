@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.kitty; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.kitty;
+in
+{
   options = with pkgs.lib; {
     modules.programs.kitty = {
       enable = mkEnableOption "kitty";
@@ -13,9 +17,9 @@
   config = pkgs.lib.mkIf cfg.enable {
     home-manager.users."${cfg.username}" = {
       home.packages = with pkgs; [
-        ( writeShellApplication {
+        (writeShellApplication {
           name = "kitty-popup";
-          runtimeInputs = [];
+          runtimeInputs = [ ];
           text = ''
             #!/bin/bash
 
@@ -26,7 +30,7 @@
               --class kitty-popup \
               "$@"
           '';
-        } )
+        })
       ];
       programs.kitty.enable = true;
     };

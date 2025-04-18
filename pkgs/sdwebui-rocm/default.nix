@@ -1,4 +1,5 @@
-{ pkgs, stdenv, ... }: stdenv.mkDerivation {
+{ pkgs, stdenv, ... }:
+stdenv.mkDerivation {
   name = "sdwebui-rocm";
   src = pkgs.dockerTools.buildImage {
     name = "sdwebui-rocm";
@@ -19,9 +20,9 @@
     '';
     config = {
       User = "dockerx";
-      Env = ["HIP_VISIBLE_DEVICES=0"];
+      Env = [ "HIP_VISIBLE_DEVICES=0" ];
       WorkingDir = "/dockerx";
-      Cmd = ["./bootstrap.sh"];
+      Cmd = [ "./bootstrap.sh" ];
     };
   };
   buildInputs = with pkgs; [

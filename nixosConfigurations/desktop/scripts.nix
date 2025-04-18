@@ -1,4 +1,5 @@
-{ pkgs, username, ... }: {
+{ pkgs, username, ... }:
+{
   sops.secrets.zipline = {
     sopsFile = ../../hosts/desktop/secrets/zipline.token;
     key = "";
@@ -22,7 +23,7 @@
   };
   home-manager.users."${username}" = {
     home.packages = [
-      ( pkgs.writeShellApplication {
+      (pkgs.writeShellApplication {
         name = "convert-to";
         runtimeInputs = with pkgs; [
           libnotify
@@ -109,8 +110,8 @@
             eval "${pkgs.ffmpeg}/bin/ffmpeg $FFMPEG_CMD"
           fi
         '';
-      } )
-      ( pkgs.writeShellApplication {
+      })
+      (pkgs.writeShellApplication {
         name = "send-to";
         runtimeInputs = with pkgs; [
           libnotify
@@ -168,8 +169,8 @@
           else echo "Error: Unknown mode $MODE"; exit 1; fi
 
         '';
-      } )
-      ( pkgs.writeShellApplication {
+      })
+      (pkgs.writeShellApplication {
         name = "fix-hm-collision";
         text = ''
           rm "$(systemctl status home-manager-joey.service --no-pager --lines=200 |\
@@ -179,85 +180,90 @@
             xargs \
           )"
         '';
-      } )
+      })
     ];
-    home.file = let launcher = "${pkgs.kitty}/bin/kitty --override initial_window_width=1280 --override initial_window_height=720 --override remember_window_size=no"; in { # Note: Will need to be integrated with any file manager that isn't dolphin
-      "convert-video-to" = {
-        target = ".local/share/kio/servicemenus/convert-video-to.desktop";
-        text = ''
-          [Desktop Entry]
-          Type=Service
-          MimeType=video/*;
-          Actions=convertAndReplace;convertAndCopy;convertToMp4;convertToSlowmo;convertToSlowmoDry;convert1080p60;convert1080p30;convert720p60;convert720p30
-          X-KDE-Submenu=Convert to...
+    home.file =
+      let
+        launcher = "${pkgs.kitty}/bin/kitty --override initial_window_width=1280 --override initial_window_height=720 --override remember_window_size=no";
+      in
+      {
+        # Note: Will need to be integrated with any file manager that isn't dolphin
+        "convert-video-to" = {
+          target = ".local/share/kio/servicemenus/convert-video-to.desktop";
+          text = ''
+            [Desktop Entry]
+            Type=Service
+            MimeType=video/*;
+            Actions=convertAndReplace;convertAndCopy;convertToMp4;convertToSlowmo;convertToSlowmoDry;convert1080p60;convert1080p30;convert720p60;convert720p30
+            X-KDE-Submenu=Convert to...
 
-          [Desktop Action convertAndReplace]
-          Name=Convert and replace
-          Icon=video-mp4
-          Exec=${launcher} convert-to --replace "%f"
+            [Desktop Action convertAndReplace]
+            Name=Convert and replace
+            Icon=video-mp4
+            Exec=${launcher} convert-to --replace "%f"
 
-          [Desktop Action convertAndCopy]
-          Name=Convert and copy
-          Icon=video-mp4
-          Exec=${launcher} convert-to "%f"
+            [Desktop Action convertAndCopy]
+            Name=Convert and copy
+            Icon=video-mp4
+            Exec=${launcher} convert-to "%f"
 
-          [Desktop Action convertToMp4]
-          Name=Convert to MP4
-          Icon=video-mp4
-          Exec=${launcher} convert-to --profile mp4 "%f"
+            [Desktop Action convertToMp4]
+            Name=Convert to MP4
+            Icon=video-mp4
+            Exec=${launcher} convert-to --profile mp4 "%f"
 
-          [Desktop Action convertToSlowmo]
-          Name=Convert to slow-motion (0.5x)
-          Icon=video-mp4
-          Exec=${launcher} convert-to --profile slowmo "%f"
+            [Desktop Action convertToSlowmo]
+            Name=Convert to slow-motion (0.5x)
+            Icon=video-mp4
+            Exec=${launcher} convert-to --profile slowmo "%f"
 
-          [Desktop Action convertToSlowmoDry]
-          Name=Convert to slow-motion (0.5x) (dry-run)
-          Icon=video-mp4
-          Exec=${launcher} convert-to --dry-run --profile slowmo "%f"
+            [Desktop Action convertToSlowmoDry]
+            Name=Convert to slow-motion (0.5x) (dry-run)
+            Icon=video-mp4
+            Exec=${launcher} convert-to --dry-run --profile slowmo "%f"
 
-          [Desktop Action convert1080p60]
-          Name=Convert to 1080p60
-          Icon=video-mp4
-          Exec=${launcher} convert-to --profile 1080p60 "%f"
+            [Desktop Action convert1080p60]
+            Name=Convert to 1080p60
+            Icon=video-mp4
+            Exec=${launcher} convert-to --profile 1080p60 "%f"
 
-          [Desktop Action convert1080p30]
-          Name=Convert to 1080p30
-          Icon=video-mp4
-          Exec=${launcher} convert-to --profile 1080p30 "%f"
+            [Desktop Action convert1080p30]
+            Name=Convert to 1080p30
+            Icon=video-mp4
+            Exec=${launcher} convert-to --profile 1080p30 "%f"
 
-          [Desktop Action convert720p60]
-          Name=Convert to 720p60
-          Icon=video-mp4
-          Exec=${launcher} convert-to --profile 720p60 "%f"
+            [Desktop Action convert720p60]
+            Name=Convert to 720p60
+            Icon=video-mp4
+            Exec=${launcher} convert-to --profile 720p60 "%f"
 
-          [Desktop Action convert720p30]
-          Name=Convert to 720p30
-          Icon=video-mp4
-          Exec=${launcher} convert-to --profile 720p30 "%f"
-        '';
+            [Desktop Action convert720p30]
+            Name=Convert to 720p30
+            Icon=video-mp4
+            Exec=${launcher} convert-to --profile 720p30 "%f"
+          '';
+        };
+        "send-video-to" = {
+          target = ".local/share/kio/servicemenus/send-video-to.desktop";
+          text = ''
+            [Desktop Entry]
+            Type=Service
+            MimeType=video/*;
+            Actions=sendToZipline;sendToCloudflare;
+            X-KDE-Submenu=Send to...
+
+            [Desktop Action sendToZipline]
+            Name=Send to Zipline
+            Icon=video-mp4
+            Exec=${launcher} send-to zipline "https://zipline.jafner.net/api/upload" "$(cat /run/secrets/zipline)" "%f" | wl-copy
+
+            [Desktop Action sendToCloudflare]
+            Name=Send to Cloudflare
+            Icon=video-mp4
+            Exec=${launcher} send-to cloudflare "$(cat /run/secrets/cloudflare/id)" "$(cat /run/secrets/cloudflare/token)" "%f" | wl-copy
+          '';
+        };
       };
-      "send-video-to" = {
-        target = ".local/share/kio/servicemenus/send-video-to.desktop";
-        text = ''
-          [Desktop Entry]
-          Type=Service
-          MimeType=video/*;
-          Actions=sendToZipline;sendToCloudflare;
-          X-KDE-Submenu=Send to...
-
-          [Desktop Action sendToZipline]
-          Name=Send to Zipline
-          Icon=video-mp4
-          Exec=${launcher} send-to zipline "https://zipline.jafner.net/api/upload" "$(cat /run/secrets/zipline)" "%f" | wl-copy
-
-          [Desktop Action sendToCloudflare]
-          Name=Send to Cloudflare
-          Icon=video-mp4
-          Exec=${launcher} send-to cloudflare "$(cat /run/secrets/cloudflare/id)" "$(cat /run/secrets/cloudflare/token)" "%f" | wl-copy
-        '';
-      };
-    };
   };
 }
 

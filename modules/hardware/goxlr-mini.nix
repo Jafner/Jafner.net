@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.hardware.goxlr-mini; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.hardware.goxlr-mini;
+in
+{
   options = with pkgs.lib; {
     modules.hardware.goxlr-mini = {
       enable = mkEnableOption "GoXLR-Mini";

@@ -1,4 +1,16 @@
-{ pkgs, lib, config, username, hostname, systemKey, ... }: with lib; let cfg = config.roles.system; in {
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  hostname,
+  ...
+}:
+with lib;
+let
+  cfg = config.roles.system;
+in
+{
   options = {
     roles.system = {
       enable = mkEnableOption "Standard system";
@@ -10,7 +22,7 @@
       };
       systemKey = mkOption {
         type = types.str;
-        default = systemKey;
+        default = ".ssh/${username}@${hostname}";
         description = "Path to private SSH key to use for age. Relative to home of primary user.";
         example = ".ssh/me@example.tld";
       };
@@ -42,6 +54,7 @@
         sops
         age
         ssh-to-age
+        nvd
       ];
       home.stateVersion = "24.11";
     };
@@ -56,10 +69,10 @@
     };
 
     boot.kernelPackages = cfg.kernelPackage;
-      # Read more: https://wiki.nixos.org/wiki/Linux_kernel
-      # Other options:
-      # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
-      # - https://mynixos.com/nixpkgs/packages/linuxPackages
+    # Read more: https://wiki.nixos.org/wiki/Linux_kernel
+    # Other options:
+    # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
+    # - https://mynixos.com/nixpkgs/packages/linuxPackages
 
     environment.etc."current-nixos".source = ../.;
     environment.systemPackages = with pkgs; [
@@ -87,25 +100,29 @@
 
     users.users."${username}" = {
       isNormalUser = true;
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       description = "${username}";
-      openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile (pkgs.fetchurl {
-        url = "https://github.com/Jafner.keys";
-        sha256 = "1i3Vs6mPPl965g3sRmbXGzx6zQBs5geBCgNx2zfpjF4=";
-      })); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+      openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
+        builtins.readFile ../keys.txt
+      ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
     };
 
     security.sudo = {
       enable = true;
-      extraRules = [{
-        commands = [
-          {
-            command = "ALL";
-            options = [ "NOPASSWD" ];
-          }
-        ];
-        groups = [ "wheel" ];
-      }];
+      extraRules = [
+        {
+          commands = [
+            {
+              command = "ALL";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+          groups = [ "wheel" ];
+        }
+      ];
     };
 
     time.timeZone = "America/Los_Angeles";
@@ -122,8 +139,14 @@
       LC_TIME = "en_US.UTF-8";
     };
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    nix.settings.trusted-users = [ "root" "@wheel" ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    nix.settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
     nix.settings.auto-optimise-store = true;
     nix.extraOptions = ''
       accept-flake-config = true

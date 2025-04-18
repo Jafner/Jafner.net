@@ -1,4 +1,17 @@
-{ pkgs, lib, config, username, ... }: with lib; let stack = "stash"; in let cfg = config.stacks.${stack}; in {
+{
+  lib,
+  config,
+  username,
+  ...
+}:
+with lib;
+let
+  stack = "stash";
+in
+let
+  cfg = config.stacks.${stack};
+in
+{
   options = {
     stacks.${stack} = {
       enable = mkEnableOption "${stack}";
@@ -45,7 +58,7 @@
       };
     };
   };
-  config = mkIf cfg.enable  {
+  config = mkIf cfg.enable {
     home-manager.users."${username}".home.file = {
       "${stack}/docker-compose.yml" = {
         enable = true;

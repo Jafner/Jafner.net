@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.bitwarden; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.bitwarden;
+in
+{
   options = with pkgs.lib; {
     modules.programs.bitwarden = {
       enable = mkEnableOption "Bitwarden";
@@ -42,7 +46,10 @@
           exec = "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
           icon = "/home/${cfg.username}/.icons/custom/bitwarden.png";
           name = "Bitwarden";
-          categories = [ "Utility" "Security" ];
+          categories = [
+            "Utility"
+            "Security"
+          ];
           type = "Application";
         };
       };

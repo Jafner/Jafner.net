@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.zsh; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.zsh;
+in
+{
   options = with pkgs.lib; {
     modules.programs.zsh = {
       enable = mkEnableOption "zsh";

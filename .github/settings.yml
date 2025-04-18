@@ -1,0 +1,42 @@
+# These settings are synced to GitHub by https://probot.github.io/apps/settings/
+
+repository:
+  # See https://docs.github.com/en/rest/reference/repos#update-a-repository for all available settings.
+  name: Jafner.net
+  description: Monorepo for my homelab and other projects
+  private: false
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+  has_downloads: true
+  default_branch: main
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: false
+  delete_branch_on_merge: true
+  enable_automated_security_fixes: true
+  enable_vulnerability_alerts: true
+
+labels:
+  - name: bug
+    color: CC0000
+    description: An issue with the system 🐛.
+
+  - name: feature
+    # If including a `#`, make sure to wrap it with quotes!
+    color: "#336699"
+    description: New functionality.
+
+branches:
+  - name: main
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: false
+        dismissal_restrictions:
+      required_status_checks:
+        strict: true
+        contexts: []
+      enforce_admins: true
+      required_linear_history: true

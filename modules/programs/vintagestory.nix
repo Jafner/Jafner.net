@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.programs.vintagestory; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.programs.vintagestory;
+in
+{
   options = with pkgs.lib; {
     modules.programs.vintagestory = {
       enable = mkEnableOption "vintagestory";

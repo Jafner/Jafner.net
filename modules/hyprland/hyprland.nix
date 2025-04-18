@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.modules.hyprland; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.modules.hyprland;
+in
+{
   options = with pkgs.lib; {
     modules.hyprland = {
       enable = mkEnableOption "hyprland";
@@ -36,7 +40,7 @@
         enable = true;
         xwayland.enable = true;
         systemd.enable = true;
-        plugins = [];
+        plugins = [ ];
         settings = {
           source = [
             "~/.config/hypr/custom.conf"
@@ -47,12 +51,12 @@
             "DP-2, 2560x1440@120, 2560x0, 1" # Tertiary (right) display, Dell S2716DG
           ];
           general = {
-              gaps_in = 5;
-              gaps_out = 20;
-              border_size = 2;
-              resize_on_border = false;
-              allow_tearing = false;
-              layout = "dwindle";
+            gaps_in = 5;
+            gaps_out = 20;
+            border_size = 2;
+            resize_on_border = false;
+            allow_tearing = false;
+            layout = "dwindle";
           };
           animations = {
             enabled = "yes, please :)";
@@ -94,7 +98,8 @@
             follow_mouse = 0;
             sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
           };
-          bindd = [ # Third argument is bind description
+          bindd = [
+            # Third argument is bind description
             "MOD4 SHIFT, R, Reload hyprland, exec, hyprctl reload"
             "MOD4 SHIFT CONTROL, R, Rebuild NixOS and switch, exec, kitty -T \"system rebuild\" nh os switch -s hyprland ~/Git/Jafner.net"
             "MOD4, Q, Launch terminal, exec, kitty"
@@ -109,7 +114,8 @@
 
             "Alt_L, numpad0, Forward the Alt_L+Num0 hotkey to OBS Studio, pass, class:^(com\.obsproject\.Studio)$"
           ];
-          bindm = [ # Binds with mouse (m) flag
+          bindm = [
+            # Binds with mouse (m) flag
             # middle mouse press = mouse:274
             # forward mouse side button press = mouse:276
             # rearward mouse side button press = mouse:275

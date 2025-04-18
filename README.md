@@ -9,7 +9,6 @@ A monorepo for all my projects and dotfiles. Hosted on [GitHub](https://github.c
 | [hosts](hosts/) | Host-specific documentation and configuration. |
 | [modules](modules/) | Custom NixOS modules. |
 | [pkgs](pkgs/) | Scripts and programs packaged with Nix. |
-| [projects](projects/) | Self-contained projects in a variety of scripting and programming languages.   |
 | [sites/Jafner.dev](sites/Jafner.dev/)       | Static site files for Jafner.dev. |
 | [.github/workflows](.github/workflows/) | GitHub Actions workflows |
 | [.sops](.sops/) | Scripts and documentation implementing [sops](https://github.com/getsops/sops) to securely store secrets in this repo. |

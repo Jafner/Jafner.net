@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let cfg = config.services.ollama-rocm; in {
+{ pkgs, config, ... }:
+let
+  cfg = config.services.ollama-rocm;
+in
+{
   options = with pkgs.lib; {
     services.ollama-rocm = {
       enable = mkEnableOption "ollama-rocm";
@@ -54,7 +58,7 @@
     home-manager.users."${cfg.username}" = {
       home.packages = with pkgs; [
         ollama-rocm
-        ( writeShellApplication {
+        (writeShellApplication {
           name = "ollama-chat";
           runtimeInputs = [
             libnotify
@@ -76,7 +80,7 @@
             echo "Unloading model $MODEL"
             ${pkgs.ollama-rocm}/bin/ollama stop "$MODEL"
           '';
-        } )
+        })
       ];
       xdg.desktopEntries = {
         ollama = {
