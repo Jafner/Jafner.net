@@ -49,13 +49,11 @@
           inputs.nixpkgs.lib.nixosSystem {
             modules = [
               "${inputs.nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-              "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-              "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+              # "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+              # "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
               inputs.nixos-dns.nixosModules.dns
-              self.nixosModules.basicSystem
-              self.nixosModules.stacks
               ./nixosConfigurations/artificer
               # TODO: Implement stack configuration (Traefik, UptimeKuma, Vaultwarden)
             ];
@@ -81,8 +79,6 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
               inputs.disko.nixosModules.disko
-              self.nixosModules.basicSystem
-              self.nixosModules.stacks
               {
                 disko.devices = {
                   disk.primary = {
@@ -140,8 +136,6 @@
             modules = [
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
-              self.nixosModules.basicSystem
-              self.nixosModules.stacks
               ./nixosConfigurations/fighter
             ];
           };
@@ -165,8 +159,8 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
               inputs.chaotic.nixosModules.default
-              self.nixosModules.basicSystem
               ./nixosConfigurations/desktop
+              { time.hardwareClockInLocalTime = true; }
             ];
           };
       };
