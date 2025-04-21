@@ -12,6 +12,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Applications:
+    terranix.url = "github:terranix/terranix";
     nixos-dns = {
       url = "github:Janik-Haag/nixos-dns";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,13 +50,10 @@
           inputs.nixpkgs.lib.nixosSystem {
             modules = [
               "${inputs.nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
-              # "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-              # "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
               inputs.nixos-dns.nixosModules.dns
               ./nixosConfigurations/artificer
-              # TODO: Implement stack configuration (Traefik, UptimeKuma, Vaultwarden)
             ];
             inherit system;
             specialArgs = {
@@ -210,13 +208,10 @@
         remoteBuild = false;
         confirmTimeout = 60;
       };
-      nixosModules = {
-        basicSystem = import ./modules/basicSystem.nix;
-        stacks = import ./modules/stacks/default.nix;
-      };
       packages = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
         sdwebui-rocm = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/sdwebui-rocm { };
         helloworld = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
+        terranix-test = inputs.terranix.lib.terranixConfiguration { inherit system; modules = [ ./pkgs/terranix ]; };
       });
       devShells = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
         default = inputs.nixpkgs.legacyPackages.${system}.mkShellNoCC {
@@ -227,6 +222,18 @@
           nativeBuildInputs = [
             inputs.deploy-rs.packages.${system}.deploy-rs
           ];
+        };
+      });
+      apps = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+        # nix run .#tfapply
+        tfapply = {
+          type = "app";
+          program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "tfapply" ''
+            if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
+            cp ${self.packages.${system}.terranix-test} config.tf.json \
+              && ${inputs.nixpkgs.legacyPackages.${system}.terraform}/bin/terraform init \
+              && ${inputs.nixpkgs.legacyPackages.${system}.terraform}/bin/terraform apply
+          '');
         };
       });
       formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
