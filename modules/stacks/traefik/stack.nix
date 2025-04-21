@@ -36,23 +36,6 @@ in
           };
         };
       };
-      domains = mkOption {
-        type = types.submodule {
-          options = {
-            base = mkOption {
-              type = types.str;
-              description = "Base domain for the stack.";
-              example = "mydomain.tld";
-            };
-            ${stack} = mkOption {
-              type = types.str;
-              default = "${stack}.${cfg.domains.base}";
-              description = "Domain for ${stack}.";
-              example = "someservice.mydomain.tld";
-            };
-          };
-        };
-      };
     };
   };
   config = mkIf cfg.enable {

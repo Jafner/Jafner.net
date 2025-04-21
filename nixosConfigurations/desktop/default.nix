@@ -28,12 +28,6 @@
     ./zsh.nix
   ];
 
-  roles.system = {
-    enable = true;
-    kernelPackage = pkgs.linuxPackages_cachyos;
-    systemKey = ".ssh/joey.desktop@jafner.net";
-  };
-
   chaotic.mesa-git.enable = true;
 
   # User Programs
@@ -52,7 +46,32 @@
     enableRenice = true;
   };
   home-manager.users."${username}" = {
+    home.file.".ssh/config" = {
+      enable = true;
+      text = ''
+        Host *
+            ForwardAgent yes
+            IdentityFile ~/.ssh/joey.desktop@jafner.net
+      '';
+      target = ".ssh/config";
+    };
+    home.file.".ssh/profiles" = {
+      enable = true;
+      text = ''
+        vyos@wizard
+        admin@paladin
+        admin@fighter
+        admin@artificer
+        admin@champion
+      '';
+      target = ".ssh/profiles";
+    };
+
     home.packages = with pkgs; [
+      sops
+      age
+      ssh-to-age
+      nvd
       vesktop
       libreoffice-qt6
       obsidian
@@ -238,7 +257,6 @@
   services.printing.enable = false;
   hardware.wooting.enable = true;
   hardware.xpadneo.enable = true;
-  users.users."${username}".extraGroups = [ "input" ];
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -248,4 +266,112 @@
     powerline-symbols
     nerd-fonts.symbols-only
   ];
+
+  sops = {
+    age.sshKeyPaths = [ "/home/${username}/.ssh/joey.desktop@jafner.net" ];
+    age.generateKey = false;
+  };
+  services.libinput = {
+    enable = true;
+    mouse.naturalScrolling = true;
+    touchpad.naturalScrolling = true;
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  # Read more: https://wiki.nixos.org/wiki/Linux_kernel
+  # Other options:
+  # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
+  # - https://mynixos.com/nixpkgs/packages/linuxPackages
+
+  environment.etc."current-nixos".source = ../.;
+  environment.systemPackages = with pkgs; [
+    coreutils
+    git
+    tree
+    htop
+    file
+    fastfetch
+    dig
+    btop
+    vim
+    tree
+  ];
+
+  programs.nix-ld.enable = true;
+  systemd.enableEmergencyMode = false;
+
+  # Enable SSH server with exclusively key-based auth
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
+
+  users.users."${username}" = {
+    isNormalUser = true;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+    ];
+    description = "${username}";
+    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
+      builtins.readFile ../../keys.txt
+    ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+  };
+
+  security.sudo = {
+    enable = true;
+    extraRules = [
+      {
+        commands = [
+          {
+            command = "ALL";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+        groups = [ "wheel" ];
+      }
+    ];
+  };
+
+  time.timeZone = "America/Los_Angeles";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
+  nix.settings.auto-optimise-store = true;
+  nix.extraOptions = ''
+    accept-flake-config = true
+    warn-dirty = false
+  '';
+
+  networking.hostName = "desktop";
+  networking.hosts = {
+    "192.168.1.1" = [ "wizard" ];
+    "192.168.1.12" = [ "paladin" ];
+    "192.168.1.23" = [ "fighter" ];
+    "192.168.1.135" = [ "desktop" ];
+    "143.198.68.202" = [ "artificer" ];
+    "172.245.108.219" = [ "champion" ];
+  };
+
+  system.stateVersion = "24.11";
 }
