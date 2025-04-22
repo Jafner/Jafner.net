@@ -4,7 +4,7 @@
   networking.firewall.allowedUDPPorts = [ 5353 ];
   home-manager.users.${username} = {
     home.packages = with pkgs; [
-      spotify-qt
+      #spotify-qt
       ncspot
       librespot
     ];

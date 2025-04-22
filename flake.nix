@@ -12,7 +12,6 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Applications:
-    terranix.url = "github:terranix/terranix";
     nixos-dns = {
       url = "github:Janik-Haag/nixos-dns";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -211,7 +210,6 @@
       packages = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
         sdwebui-rocm = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/sdwebui-rocm { };
         helloworld = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
-        terranix-test = inputs.terranix.lib.terranixConfiguration { inherit system; modules = [ ./pkgs/terranix ]; };
       });
       devShells = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
         default = inputs.nixpkgs.legacyPackages.${system}.mkShellNoCC {
@@ -225,14 +223,11 @@
         };
       });
       apps = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
-        # nix run .#tfapply
-        tfapply = {
+        # nix run .#deploy
+        deploy = {
           type = "app";
-          program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "tfapply" ''
-            if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
-            cp ${self.packages.${system}.terranix-test} config.tf.json \
-              && ${inputs.nixpkgs.legacyPackages.${system}.terraform}/bin/terraform init \
-              && ${inputs.nixpkgs.legacyPackages.${system}.terraform}/bin/terraform apply
+          program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "deploy" ''
+            ${inputs.deploy-rs.packages.${system}.deploy-rs}/bin/deploy
           '');
         };
       });
