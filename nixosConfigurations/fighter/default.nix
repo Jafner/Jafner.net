@@ -13,8 +13,8 @@
     ./home-manager.nix
     ./iscsi-shares.nix
     ./networking.nix
-    ./traefik.nix
-
+  ] ++ [
+    ./services
   ];
 
   sops = {
