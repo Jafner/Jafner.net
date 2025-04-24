@@ -1,21 +1,21 @@
 { pkgs, username, ... }:
 {
   sops.secrets.zipline = {
-    sopsFile = ../../hosts/desktop/secrets/zipline.token;
+    sopsFile = ./secrets/zipline.token;
     key = "";
     mode = "0440";
     format = "binary";
     owner = username;
   };
   sops.secrets."cloudflare/id" = {
-    sopsFile = ../../hosts/desktop/secrets/cloudflare_id.token;
+    sopsFile = ./secrets/cloudflare_id.token;
     key = "";
     mode = "0440";
     format = "binary";
     owner = username;
   };
   sops.secrets."cloudflare/token" = {
-    sopsFile = ../../hosts/desktop/secrets/cloudflare_stream.token;
+    sopsFile = ./secrets/cloudflare_stream.token;
     key = "";
     mode = "0440";
     format = "binary";

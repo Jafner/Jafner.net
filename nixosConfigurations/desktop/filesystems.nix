@@ -1,7 +1,7 @@
 { pkgs, username, ... }:
 {
   sops.secrets."smb" = {
-    sopsFile = ../../hosts/desktop/secrets/smb.secrets;
+    sopsFile = ./secrets/smb.secrets;
     format = "binary";
     key = "";
     mode = "0440";

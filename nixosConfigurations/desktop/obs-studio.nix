@@ -69,9 +69,13 @@
       plugins = with pkgs.obs-studio-plugins; [
         obs-vaapi
         obs-vkcapture
-        input-overlay
         wlrobs
       ];
+    };
+    home.file."theme" = {
+      recursive = true;
+      source = ./custom-obs-theme/Custom.obt;
+      target = .config/obs-studio/themes/Custom.obt;
     };
   };
 
