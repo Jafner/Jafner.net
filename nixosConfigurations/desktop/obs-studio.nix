@@ -75,7 +75,7 @@
     home.file."theme" = {
       recursive = true;
       source = ./custom-obs-theme/Custom.obt;
-      target = .config/obs-studio/themes/Custom.obt;
+      target = ".config/obs-studio/themes/Custom.obt";
     };
   };
 
