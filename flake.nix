@@ -157,7 +157,6 @@
               inputs.sops-nix.nixosModules.sops
               inputs.chaotic.nixosModules.default
               ./nixosConfigurations/desktop
-              { time.hardwareClockInLocalTime = true; }
             ];
           };
       };
@@ -228,6 +227,15 @@
           type = "app";
           program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "deploy" ''
             ${inputs.deploy-rs.packages.${system}.deploy-rs}/bin/deploy
+          '');
+        };
+        # nix run .#compare
+        compare = {
+          type = "app";
+          program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "compare" ''
+            echo "Info: "
+            WD=$(pwd); cd /tmp; nixos-rebuild build --flake github:Jafner/Jafner.net; cd $WD
+            nix store diff-closures $(readlink -f /run/current-system) $(readlink -f /tmp/result)
           '');
         };
       });
