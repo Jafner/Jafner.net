@@ -3,29 +3,12 @@
   inputs = {
     # Package repositories:
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    "nixpkgs-24.11".url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Applications:
-    nixos-dns = {
-      url = "github:Janik-Haag/nixos-dns";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    nixgl.url = "github:nix-community/nixGL";
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,9 +20,6 @@
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
-    catppuccin.url = "github:catppuccin/nix";
-    ffaart.url = "github:Jafner/ffaart";
-    nixcord.url = "github:KaylorBen/nixcord";
   };
   outputs = inputs @ { self, ... }:
     let
@@ -59,7 +39,6 @@
               "${inputs.nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
-              inputs.nixos-dns.nixosModules.dns
               ./nixosConfigurations/artificer
             ];
             inherit system;
@@ -144,33 +123,6 @@
               ./nixosConfigurations/fighter
             ];
           };
-        desktop =
-          let
-            inherit inputs;
-            username = "joey";
-            hostname = "desktop";
-            system = "x86_64-linux";
-          in
-          inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit
-                inputs
-                username
-                hostname
-                system
-                ;
-            };
-            modules = [
-              inputs.home-manager.nixosModules.home-manager
-              inputs.sops-nix.nixosModules.sops
-              inputs.chaotic.nixosModules.default
-              ./nixosConfigurations/desktop
-              { home-manager.users.${username}.home.packages = [
-                inputs.ffaart.packages.${system}.ffaart
-                inputs.nixpkgs.legacyPackages.${system}.b3sum
-              ];}
-            ];
-          };
       };
       deploy = {
         nodes = {
@@ -190,15 +142,6 @@
               user = "root";
               sshUser = "admin";
               path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.champion;
-            };
-          };
-          desktop = {
-            hostname = "desktop";
-            profilesOrder = [ "system" ];
-            profiles.system = {
-              user = "root";
-              sshUser = "joey";
-              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
             };
           };
           fighter = {
