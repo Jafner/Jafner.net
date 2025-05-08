@@ -5,9 +5,9 @@ A monorepo for all my projects and dotfiles. Hosted on [GitHub](https://github.c
 
 | Project                | Summary |
 |:----------------------:|:-------:|
-| [assets](assets/) | Non-text files required by NixOS configs. |
 | [hosts](hosts/) | Host-specific documentation and configuration. |
 | [modules](modules/) | Custom NixOS modules. |
+| [nixosConfigurations](nixosConfigurations) | Configurations for NixOS systems. |
 | [pkgs](pkgs/) | Scripts and programs packaged with Nix. |
 | [sites/Jafner.dev](sites/Jafner.dev/)       | Static site files for Jafner.dev. |
 | [.github/workflows](.github/workflows/) | GitHub Actions workflows |
