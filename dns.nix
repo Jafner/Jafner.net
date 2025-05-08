@@ -34,12 +34,9 @@
       };
       "_dmarc".txt.data = "v=DMARC1; p=quarantine";
       "*".cname.data = "jafner.net";
-      "protonmail._domainkey".cname.data =
-        "protonmail.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
-      "protonmail2._domainkey".cname.data =
-        "protonmail2.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
-      "protonmail3._domainkey".cname.data =
-        "protonmail3.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
+      "protonmail._domainkey".cname.data = "protonmail.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
+      "protonmail2._domainkey".cname.data = "protonmail2.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
+      "protonmail3._domainkey".cname.data = "protonmail3.domainkey.djxxgyo3stmnxbea3zrilgfg6ubqvox2hrpxff2krv5dd57kqd4ga.domains.proton.ch";
     };
   };
 }

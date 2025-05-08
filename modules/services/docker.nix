@@ -1,4 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs
+, config
+, ...
+}:
 let
   cfg = config.modules.services.docker;
 in

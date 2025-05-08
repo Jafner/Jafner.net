@@ -1,4 +1,7 @@
-{ pkgs, stdenv, ... }:
+{ pkgs
+, stdenv
+, ...
+}:
 stdenv.mkDerivation {
   name = "helloworld";
   src = pkgs.callPackage ./pkg.nix { };

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   imports = [
     ./ai/stack.nix
     ./autopirate/stack.nix

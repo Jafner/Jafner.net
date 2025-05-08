@@ -1,5 +1,7 @@
-{ pkgs, username, ... }:
-{
+{ pkgs
+, username
+, ...
+}: {
   boot = {
     loader.systemd-boot.enable = true;
     initrd.availableKernelModules = [

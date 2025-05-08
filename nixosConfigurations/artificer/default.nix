@@ -1,11 +1,9 @@
-{
-  pkgs,
-  username,
-  hostname,
-  system,
-  ...
-}:
-{
+{ pkgs
+, username
+, hostname
+, system
+, ...
+}: {
   imports = [
     ./git.nix
     ./traefik.nix
@@ -30,8 +28,14 @@
 
   networking = {
     hostName = hostname;
-    firewall.allowedUDPPorts = [ 80 443 ];
-    firewall.allowedTCPPorts = [ 80 443 ];
+    firewall.allowedUDPPorts = [
+      80
+      443
+    ];
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
   environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
@@ -62,9 +66,7 @@
       "docker"
     ];
     description = "${username}";
-    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
-      builtins.readFile ../../keys.txt
-    ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile ../../keys.txt); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
   };
 
   security.sudo = {
@@ -95,8 +97,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-
 
   system.stateVersion = "24.11";
   virtualisation.docker.enable = true;
@@ -138,7 +138,7 @@
     hostPlatform = system;
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 }

@@ -1,4 +1,10 @@
-{ username, pkgs, ... }: let stack = "minecraft"; in
+{ username
+, pkgs
+, ...
+}:
+let
+  stack = "minecraft";
+in
 {
   home-manager.users."${username}".home.file = {
     "${stack}/docker-compose.yml" = {

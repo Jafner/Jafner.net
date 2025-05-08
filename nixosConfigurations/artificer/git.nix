@@ -1,5 +1,7 @@
-{ username, hostname, ... }:
-{
+{ username
+, hostname
+, ...
+}: {
   home-manager.users.${username}.programs.git = {
     enable = true;
     userName = "${username}@${hostname}";

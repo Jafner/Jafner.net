@@ -1,11 +1,9 @@
-{
-  pkgs,
-  username,
-  hostname,
-  system,
-  ...
-}:
-{
+{ pkgs
+, username
+, hostname
+, system
+, ...
+}: {
   imports = [
     ./git.nix
   ];
@@ -57,9 +55,7 @@
       "wheel"
     ];
     description = "${username}";
-    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
-      builtins.readFile ../../keys.txt
-    ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile ../../keys.txt); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
   };
 
   security.sudo = {
@@ -135,7 +131,7 @@
     hostPlatform = system;
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 }

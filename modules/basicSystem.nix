@@ -1,13 +1,11 @@
-{
-  pkgs,
-  lib,
-  config,
-  username,
-  hostname,
-  ...
+{ pkgs
+, lib
+, config
+, username
+, hostname
+, ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.roles.system;
 in
 {
@@ -105,9 +103,7 @@ in
         "wheel"
       ];
       description = "${username}";
-      openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
-        builtins.readFile ../keys.txt
-      ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+      openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile ../keys.txt); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
     };
 
     security.sudo = {

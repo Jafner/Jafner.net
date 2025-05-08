@@ -1,4 +1,8 @@
-{ username, ... }: let stack = "keycloak"; in {
+{ username, ... }:
+let
+  stack = "keycloak";
+in
+{
   sops.secrets."${stack}/keycloak" = {
     sopsFile = ./keycloak.secrets;
     key = "";

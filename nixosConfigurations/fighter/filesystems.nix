@@ -1,4 +1,7 @@
-{ pkgs, username, ... }:
+{ pkgs
+, username
+, ...
+}:
 let
   automountOpts = [
     "x-systemd.automount"

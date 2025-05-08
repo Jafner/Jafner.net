@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   name = "ffaart";
   runtimeInputs = [
     pkgs.ffmpeg-full
   ];
-  text = (builtins.readFile ./ffaart.sh);
+  text = builtins.readFile ./ffaart.sh;
 }

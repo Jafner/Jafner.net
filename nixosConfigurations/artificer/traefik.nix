@@ -1,4 +1,9 @@
-{ username, ... }: let stack = "traefik"; paths.appdata = "/appdata/${stack}"; domainOwnerEmail = "jafner425@gmail.com"; in
+{ username, ... }:
+let
+  stack = "traefik";
+  paths.appdata = "/appdata/${stack}";
+  domainOwnerEmail = "jafner425@gmail.com";
+in
 {
   sops.secrets."cloudflare_dns" = {
     sopsFile = ./cloudflare_dns.secrets;
