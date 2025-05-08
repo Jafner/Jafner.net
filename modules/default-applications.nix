@@ -1,4 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs
+, config
+, ...
+}:
 let
   cfg = config.modules.default-applications;
 in
@@ -402,3 +405,4 @@ in
 # fileManager = "org.kde.dolphin.desktop";
 # terminal = "org.kde.konsole.desktop";
 # archiveManager = "org.kde.ark.desktop";
+

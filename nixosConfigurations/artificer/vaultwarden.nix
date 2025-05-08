@@ -1,4 +1,8 @@
-{ username, ... }: let stack = "vaultwarden"; in {
+{ username, ... }:
+let
+  stack = "vaultwarden";
+in
+{
   sops.secrets."${stack}" = {
     sopsFile = ./vaultwarden_admin.token;
     key = "";

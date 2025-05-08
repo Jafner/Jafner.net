@@ -1,4 +1,7 @@
-{ pkgs, stdenv, ... }:
+{ pkgs
+, stdenv
+, ...
+}:
 stdenv.mkDerivation {
   name = "sdwebui-rocm";
   src = pkgs.dockerTools.buildImage {

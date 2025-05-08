@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   systemd.network = {
     enable = true;
     networks."50-enp4s0f0" = {
@@ -18,7 +17,6 @@
           Destination = "192.168.1.0/24";
           Source = "192.168.1.135";
         }
-
       ];
       matchConfig.Name = "enp4s0f0";
       linkConfig.RequiredForOnline = "routable";

@@ -1,4 +1,7 @@
-{ pkgs, hostname, ... }:
+{ pkgs
+, hostname
+, ...
+}:
 let
   target = "iqn.2020-03.net.jafner:fighter";
 in

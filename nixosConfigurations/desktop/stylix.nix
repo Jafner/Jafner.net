@@ -1,5 +1,16 @@
-{ pkgs, username, ... }:
-{
+{ pkgs
+, lib
+, username
+, ...
+}: {
+  # Stylix sticks its fingers into a lot of pies.
+  # As such, it breaks more often (and more dramatically) than other programs.
+  # So we set up a Stylix-free safe mode specialisation.
+  specialisation.no-stylix.configuration = {
+    home-manager.users.${username} = {
+      stylix.enable = lib.mkForce false;
+    };
+  };
   home-manager.users.${username} = {
     home.packages = with pkgs; [ base16-schemes ];
     # Use the following before running a switch to prevent clobbering:
@@ -37,18 +48,8 @@
         };
       };
       targets = {
-        bat.enable = true;
-        btop.enable = true;
-        firefox.enable = true;
-        firefox.profileNames = [ "Default" ];
-        fzf.enable = true;
-        gnome.enable = true;
-        gtk.enable = true;
         kde.enable = true;
-        rofi.enable = true;
-        vesktop.enable = true;
-        vscode.enable = true;
-        wofi.enable = true;
+        qt.enable = false;
       };
     };
     # Use the following to get an ordered list of color codes from ~/.config/stylix/palette.json:

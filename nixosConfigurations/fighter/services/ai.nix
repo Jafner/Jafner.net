@@ -1,4 +1,8 @@
-{ username, ... }: let stack = "ai"; in {
+{ username, ... }:
+let
+  stack = "ai";
+in
+{
   home-manager.users."${username}".home.file = {
     "${stack}" = {
       enable = true;

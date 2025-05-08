@@ -1,5 +1,7 @@
-{ pkgs, username, ... }:
-{
+{ pkgs
+, username
+, ...
+}: {
   sops.secrets.zipline = {
     sopsFile = ./secrets/zipline.token;
     key = "";
@@ -22,6 +24,7 @@
     owner = username;
   };
   home-manager.users."${username}" = {
+    programs.zsh.initContent = ''PATH="$PATH:/home/${username}/scripts"'';
     home.packages = [
       (pkgs.writeShellApplication {
         name = "convert-to";
@@ -181,6 +184,24 @@
           )"
         '';
       })
+      (pkgs.writeShellApplication {
+        name = "mpv-shuffle-all";
+        text = ''
+          find . -type f -name "*.mp4" > .playlist
+          mpv --playlist=.playlist --shuffle
+          rm .playlist
+        '';
+      })
+      (pkgs.writeShellApplication {
+        name = "fjq";
+        runtimeInputs = with pkgs; [
+          fzf
+          jq
+        ];
+        text = ''
+          echo '  ' | fzf-tmux -p '80%' --print-query --preview "cat ''$''\{1} | jq {q}"
+        '';
+      })
     ];
     home.file =
       let
@@ -266,7 +287,6 @@
       };
   };
 }
-
 # For more rapid iteration:
 # cp $(realpath $(which send-to)) ./send-to; chmod +rwx ./send-to; alias send-to="$(realpath ./send-to)"
 # cp $(realpath $(which convert-to)) ./convert-to; chmod +rwx ./convert-to; alias convert-to="$(realpath ./convert-to)"

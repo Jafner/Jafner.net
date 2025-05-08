@@ -1,5 +1,7 @@
-{ pkgs, username, ... }:
-{
+{ pkgs
+, username
+, ...
+}: {
   services.ollama = {
     enable = true;
     port = 11434;

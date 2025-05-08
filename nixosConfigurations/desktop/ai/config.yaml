@@ -1,0 +1,76 @@
+# see https://github.com/sigoden/aichat/blob/main/config.example.yaml
+
+# LLM
+model: openrouter:deepseek/deepseek-r1:free # <client>:<model>
+temperature: 0.6 # Set default temperature parameter, range (0, 1)
+top_p: 0.5 # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
+
+# Behavior
+# https://github.com/sigoden/aichat/wiki/Configuration-Guide#behavior
+stream: true # Controls whether to use the stream-style API.
+save: true # Indicates whether to persist the message
+keybindings: emacs # Choose keybinding style (emacs, vi)
+editor: null # Specifies the command used to edit input buffer or session.yaml. env: EDITOR
+wrap: auto # Controls text wrapping (no, auto, <max-width>)
+wrap_code: true # Enables or disables wrapping of code blocks
+
+# Function calling
+# https://github.com/sigoden/aichat/wiki/Configuration-Guide#prelude
+# https://github.com/sigoden/llm-functions
+function_calling: false
+mapping_tools:
+  fs: "fs_cat,fs_ls,fs_mkdir,fs_rm,fs_write"
+  fs-ro: "fs_cat,fs_ls"
+use_tools: null
+
+# Prelude
+# https://github.com/sigoden/aichat/wiki/Configuration-Guide#prelude
+repl_prelude: null
+cmd_prelude: null
+agent_prelude: null
+
+# Session
+save_session: null
+compress_threshold: 4000
+summarize_prompt: "Summarize the discussion briefly in 200 words or less to use as a prompt for future context."
+summary_prompt: "This is a summary of the chat history as a recap: "
+
+# Appearance
+highlight: true
+light_theme: false
+left_prompt: "{color.green}{?session {?agent {agent}>}{session}{?role /}}{!session {?agent {agent}>}}{role}{?rag @{rag}}{color.cyan}{?session )}{!session >}{color.reset} "
+right_prompt: "{color.purple}{?session {?consume_tokens {consume_tokens}({consume_percent}%)}{!consume_tokens {consume_tokens}}}{color.reset}"
+
+# RAG
+document_loaders:
+  jina: 'curl -fsSL https://r.jina.ai/$1 -H "Authorization: Bearer $JINA_API_KEY'
+  git: >
+    sh -c "yek $1 --json | jq '[.[] | { path: .filename, contents: .content }]'"
+
+clients:
+  - type: openai-compatible
+    name: openrouter
+    api_base: https://openrouter.ai/api/v1
+    # API Key from $OPENROUTER_API_KEY
+    models:
+      - name: deepseek/deepseek-chat-v3-0324:free
+        max_input_tokens: 160000
+        supports_vision: false
+        supports_function_calling: false
+        no_stream: false
+        no_system_message: false
+  - type: openai-compatible
+    name: ollama
+    api_base: http://localhost:11434/v1
+    models:
+      - name: nomic-embed-text
+        type: embedding
+        default_chunk_size: 1500
+        max_tokens_per_chunk: 2048
+      - name: bge-large:335m
+        type: embedding
+        default_chunk_size: 400
+        max_tokens_per_chunk: 512
+      - name: linux6200/bge-reranker-v2-m3
+        type: reranker
+        max_input_tokens: 8192

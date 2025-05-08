@@ -1,4 +1,8 @@
-{ username, ... }: let stack = "traefik"; in {
+{ username, ... }:
+let
+  stack = "traefik";
+in
+{
   sops.secrets."${stack}" = {
     sopsFile = ../cloudflare_dns.secrets;
     key = "";

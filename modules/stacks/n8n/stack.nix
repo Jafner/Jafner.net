@@ -1,11 +1,9 @@
-{
-  lib,
-  config,
-  username,
-  ...
+{ lib
+, config
+, username
+, ...
 }:
-with lib;
-let
+with lib; let
   stack = "n8n";
 in
 let

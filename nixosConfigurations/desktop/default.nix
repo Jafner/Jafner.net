@@ -1,15 +1,14 @@
-{
-  pkgs,
-  inputs,
-  username,
-  system,
-  ...
-}:
-{
+{ pkgs
+, inputs
+, username
+, system
+, ...
+}: {
   imports = [
+    ./ai
     ./bitwarden.nix
-    ./bleeding-edge.nix
     ./default-applications.nix
+    ./discord.nix
     ./docker.nix
     ./extrautils.nix
     ./filesystems.nix
@@ -17,6 +16,7 @@
     ./goxlr.nix
     ./hardware.nix
     ./home-manager.nix
+    #./hyprland
     ./iscsi-shares.nix
     ./keybase.nix
     ./mangohud.nix
@@ -35,6 +35,10 @@
   programs.nh = {
     enable = true;
     flake = "/home/joey/Git/Jafner.net";
+  };
+  chaotic.mesa-git = {
+    enable = true;
+    fallbackSpecialisation = true;
   };
   programs.chromium.enable = false;
   programs.steam.enable = true;
@@ -68,30 +72,40 @@
       target = ".ssh/profiles";
     };
 
-    home.packages = with pkgs; [
-      sops
-      age
-      ssh-to-age
-      nvd
-      vesktop
-      libreoffice-qt6
-      obsidian
-      protonmail-desktop
-      protonmail-bridge-gui
-      losslesscut-bin
-      aichat
-      yek
-    ] ++ [ # Purely gaming
-      prismlauncher
-      protonup-qt
-    ];
+    home.packages = with pkgs;
+      [
+        sops
+        age
+        ssh-to-age
+        nvd
+        libreoffice-qt6
+        obsidian
+        protonmail-desktop
+        protonmail-bridge-gui
+        losslesscut-bin
+        aichat
+        yek
+        ffmpeg-full
+      ]
+      ++ [
+        # Purely gaming
+        prismlauncher
+        protonup-qt
+      ];
     programs.ghostty = {
       enable = true;
       enableZshIntegration = true;
     };
     programs.home-manager.enable = true;
     programs.kitty.enable = true;
-    programs.mpv.enable = true;
+    programs.mpv = {
+      enable = true;
+      config = {
+        autofit-larger = "100%x100%";
+        hwdec = "yes";
+        audio-device = "alsa/pipewire";
+      };
+    };
     programs.tmux = {
       enable = true;
       newSession = true;
@@ -135,7 +149,7 @@
     ];
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 
@@ -211,9 +225,7 @@
       "input"
     ];
     description = "${username}";
-    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (
-      builtins.readFile ../../keys.txt
-    ); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
+    openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile ../../keys.txt); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
   };
 
   security.sudo = {

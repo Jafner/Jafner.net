@@ -1,7 +1,8 @@
 { username, ... }:
-  let
-    stack = "autopirate";
-  in {
+let
+  stack = "autopirate";
+in
+{
   home-manager.users."${username}".home.file = {
     "${stack}/docker-compose.yml" = {
       enable = true;

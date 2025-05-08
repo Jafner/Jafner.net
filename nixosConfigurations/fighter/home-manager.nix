@@ -1,10 +1,8 @@
-{
-  inputs,
-  username,
-  system,
-  ...
-}:
-{
+{ inputs
+, username
+, system
+, ...
+}: {
   home-manager = {
     users."${username}" = {
       home.packages = [

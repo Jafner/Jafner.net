@@ -1,0 +1,13 @@
+embedding_model: ollama:nomic-embed-text
+chunk_size: 1000
+chunk_overlap: 50
+reranker_model: null
+top_k: 5
+batch_size: 50
+next_file_id: 11
+document_paths:
+  - https://github.com/sigoden/aichat/wiki/**
+  - git:https://github.com/sigoden/aichat/**
+  - git:/home/joey/Git/Jafner.net/**
+  - https://nix.dev/manual/nix/2.28/nix-2.28.html
+  - https://nixos.org/manual/nixos/unstable/**

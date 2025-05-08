@@ -22,7 +22,7 @@
     };
     nixgl.url = "github:nix-community/nixGL";
     stylix = {
-      url = "github:danth/stylix/release-24.11";
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -35,9 +35,17 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    catppuccin.url = "github:catppuccin/nix";
+    ffaart.url = "github:Jafner/ffaart";
+    nixcord.url = "github:KaylorBen/nixcord";
   };
-  outputs =
-    inputs@{ self, ... }:
+  outputs = inputs @ { self, ... }:
+    let
+      supportedSystems = [ "x86_64-linux" ];
+      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
+    in
     {
       nixosConfigurations = {
         artificer =
@@ -157,6 +165,10 @@
               inputs.sops-nix.nixosModules.sops
               inputs.chaotic.nixosModules.default
               ./nixosConfigurations/desktop
+              { home-manager.users.${username}.home.packages = [
+                inputs.ffaart.packages.${system}.ffaart
+                inputs.nixpkgs.legacyPackages.${system}.b3sum
+              ];}
             ];
           };
       };
@@ -206,11 +218,11 @@
         remoteBuild = false;
         confirmTimeout = 60;
       };
-      packages = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      packages = forAllSystems (system: {
         sdwebui-rocm = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/sdwebui-rocm { };
         helloworld = inputs.nixpkgs.legacyPackages.${system}.callPackage ./pkgs/helloworld { };
       });
-      devShells = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      devShells = forAllSystems (system: {
         default = inputs.nixpkgs.legacyPackages.${system}.mkShellNoCC {
           packages = with inputs.nixpkgs.legacyPackages.${system}; [
             inputs.deploy-rs.packages.${system}.deploy-rs
@@ -221,27 +233,52 @@
           ];
         };
       });
-      apps = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+      apps = forAllSystems (system: {
         # nix run .#deploy
         deploy = {
           type = "app";
-          program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "deploy" ''
-            ${inputs.deploy-rs.packages.${system}.deploy-rs}/bin/deploy
-          '');
+          program = toString (
+            inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "deploy" ''
+              ${inputs.deploy-rs.packages.${system}.deploy-rs}/bin/deploy
+            ''
+          );
+        };
+        # nix run .#fmt
+        fmt = {
+          type = "app";
+          program = toString (
+            inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "fmt" ''
+              nix fmt .
+            ''
+          );
         };
         # nix run .#compare
         compare = {
           type = "app";
-          program = toString (inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "compare" ''
-            echo "Info: "
-            WD=$(pwd); cd /tmp; nixos-rebuild build --flake github:Jafner/Jafner.net; cd $WD
-            nix store diff-closures $(readlink -f /run/current-system) $(readlink -f /tmp/result)
-          '');
+          program = toString (
+            inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "compare" ''
+              echo "Info: "
+              WD=$(pwd); cd /tmp; nixos-rebuild build --flake github:Jafner/Jafner.net; cd $WD
+              nix store diff-closures $(readlink -f /run/current-system) $(readlink -f /tmp/result)
+            ''
+          );
         };
       });
-      formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-      checks = builtins.mapAttrs (
-        _system: deployLib: deployLib.deployChecks self.deploy
-      ) inputs.deploy-rs.lib;
+      formatter.x86_64-linux =
+        (inputs.treefmt-nix.lib.evalModule inputs.nixpkgs.legacyPackages.x86_64-linux {
+          projectRootFile = "flake.nix";
+          programs.nixpkgs-fmt.enable = true; # **.nix
+          programs.deadnix.enable = true; # **.nix
+        }).config.build.wrapper;
+      checks.x86_64-linux = {
+        pre-commit-check = inputs.pre-commit-hooks.lib.x86_64-linux.run {
+          src = ./.;
+          hooks = {
+            nixpkgs-fmt.enable = true;
+            deadnix.enable = true;
+          };
+        };
+        deploy-check = (inputs.deploy-rs.lib.x86_64-linux.deployChecks self.deploy).deploy-activate;
+      };
     };
 }

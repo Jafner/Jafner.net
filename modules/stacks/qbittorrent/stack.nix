@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-with lib;
-let
+{ lib
+, config
+, ...
+}:
+with lib; let
   stack = "qbittorrent";
 in
 let

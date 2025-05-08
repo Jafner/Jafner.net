@@ -1,10 +1,8 @@
-{
-  inputs,
-  username,
-  system,
-  ...
-}:
-{
+{ inputs
+, username
+, system
+, ...
+}: {
   home-manager = {
     users."${username}" = {
       home.packages = [
@@ -17,6 +15,7 @@
     sharedModules = [
       inputs.stylix.homeManagerModules.stylix
       inputs.chaotic.homeManagerModules.default
+      inputs.nixcord.homeManagerModules.nixcord
     ];
   };
 }

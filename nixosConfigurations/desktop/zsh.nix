@@ -1,5 +1,7 @@
-{ pkgs, username, ... }:
-{
+{ pkgs
+, username
+, ...
+}: {
   users.users."${username}".shell = pkgs.zsh;
   programs.zsh.enable = true;
   environment.pathsToLink = [ "/share/zsh" ];
@@ -19,7 +21,7 @@
         ignoreAllDups = false;
         ignoreDups = true;
       };
-      initExtra = ''
+      initContent = ''
         bindkey '^[[1;5A' history-search-backward # Ctrl+Up-arrow
         bindkey '^[[1;5B' history-search-forward # Ctrl+Down-arrow
         bindkey '^[[1;5D' backward-word # Ctrl+Left-arrow
@@ -39,6 +41,7 @@
         eval "$(~/.nix-profile/bin/fzf --zsh)"
         fastfetch
       '';
+      
     };
     home.packages = with pkgs; [
       zsh-completions
