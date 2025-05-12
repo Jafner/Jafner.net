@@ -9,7 +9,7 @@
     ./keycloak.nix
     ./minecraft.nix
     ./immich.nix
-    # ./homeassistant.nix # TODO
+    ./homeassistant.nix
     # ./qbittorrent.nix # TODO
     # ./plex.nix # TODO
     # ./send.nix # TODO
