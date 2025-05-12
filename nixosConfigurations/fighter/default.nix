@@ -91,19 +91,21 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
-  nix.settings.auto-optimise-store = true;
-  nix.extraOptions = ''
-    accept-flake-config = true
-    warn-dirty = false
-  '';
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
+    settings.auto-optimise-store = true;
+    extraOptions = ''
+      accept-flake-config = true
+      warn-dirty = false
+    '';
+  };
 
   networking.hostName = hostname;
   networking.hosts = {
@@ -125,6 +127,10 @@
   home-manager.users."${username}" = {
     programs.home-manager.enable = true;
     programs.nnn.enable = true;
+    programs.zed-editor = {
+      enable = true;
+      installRemoteServer = true;
+    };
     home = {
       enableNixpkgsReleaseCheck = false;
       preferXdgDirectories = true;
