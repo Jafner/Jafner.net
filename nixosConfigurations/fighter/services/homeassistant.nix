@@ -20,7 +20,7 @@ in
       enable = true;
       text = ''
         services:
-        homeassistant:
+          homeassistant:
             image: lscr.io/linuxserver/homeassistant:latest
             container_name: homeassistant_homeassistant
             environment:
