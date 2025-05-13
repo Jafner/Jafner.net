@@ -3,7 +3,7 @@ let
   stack = "homeassistant";
 in
 {
-  sops.secrets."${stack}/mosquitto" = {
+  sops.secrets."${stack}/mosquitto.passwd" = {
     sopsFile = ./homeassistant_mosquitto.secrets;
     key = "";
     mode = "0440";
@@ -11,6 +11,11 @@ in
     format = "binary";
   };
   home-manager.users."${username}".home.file = {
+    "${stack}/.env" = {
+      enable = true;
+      target = "stacks/${stack}/.env";
+      text = ''APPDATA=/appdata/${stack}'';
+    };
     "${stack}/docker-compose.yml" = {
       enable = true;
       text = ''
@@ -39,7 +44,7 @@ in
               - homeassistant
             volumes:
               - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-              - /run/secrets/homeassistant/mosquitto:/mosquitto/config/mosquitto.passwd
+              - /run/secrets/homeassistant/mosquitto.passwd:/mosquitto/config/mosquitto.passwd
             ports:
               - 12883:1883
               - 19001:9001
