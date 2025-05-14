@@ -4,7 +4,7 @@
 }: {
   imports = [
     ./traefik.nix
-    ./ai.nix
+    ./ai
     ./autopirate.nix
     ./keycloak.nix
     ./minecraft.nix
