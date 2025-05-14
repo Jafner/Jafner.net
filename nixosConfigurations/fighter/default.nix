@@ -7,6 +7,7 @@
   imports =
     [
       ./filesystems.nix
+      ./filesync
       ./git.nix
       ./hardware.nix
       ./home-manager.nix
