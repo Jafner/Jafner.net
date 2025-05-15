@@ -3,25 +3,25 @@ let
   stack = "autopirate";
 in
 {
-  sops.secrets."restic/${stack}" = {
-    sopsFile = ./restic_${stack}.token;
-    mode = "0440";
-    format = "binary";
-    owner = username;
-  };
-  services.restic.backups.${stack} = {
-    rcloneConfigFile = "/home/${username}/.config/rclone/rclone.conf";
-    repository = "rclone:r2:fighter/${stack}";
-    initialize = true;
-    passwordFile = "/run/secrets/restic/${stack}";
-    paths = [
-      "/appdata/${stack}"
-    ];
-    timerConfig = {
-      Persistent = true;
-      OnCalendar = "daily";
-    };
-  };
+  # sops.secrets."restic/${stack}" = {
+  #   sopsFile = ./restic_${stack}.token;
+  #   mode = "0440";
+  #   format = "binary";
+  #   owner = username;
+  # };
+  # services.restic.backups.${stack} = {
+  #   rcloneConfigFile = "/home/${username}/.config/rclone/rclone.conf";
+  #   repository = "rclone:r2:fighter/${stack}";
+  #   initialize = true;
+  #   passwordFile = "/run/secrets/restic/${stack}";
+  #   paths = [
+  #     "/appdata/${stack}"
+  #   ];
+  #   timerConfig = {
+  #     Persistent = true;
+  #     OnCalendar = "daily";
+  #   };
+  # };
   home-manager.users."${username}" = {
     home.file = {
       "${stack}/docker-compose.yml" = {

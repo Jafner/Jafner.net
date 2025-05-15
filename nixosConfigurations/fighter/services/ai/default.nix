@@ -1,26 +1,35 @@
-{ username, ... }:
+{ pkgs, username, ... }:
 let
   stack = "ai";
 in
 {
-  sops.secrets."restic/${stack}" = {
-    sopsFile = ./restic_${stack}.token;
-    mode = "0440";
-    format = "binary";
-    owner = username;
-  };
-  services.restic.backups.${stack} = {
-    rcloneConfigFile = "/home/${username}/.config/rclone/rclone.conf";
-    repository = "rclone:r2:fighter/${stack}";
-    initialize = true;
-    passwordFile = "/run/secrets/restic/${stack}";
-    paths = [
-      "/appdata/${stack}"
-    ];
-    timerConfig = {
-      Persistent = true;
-      OnCalendar = "daily";
+  # sops.secrets."restic/${stack}" = {
+  #   sopsFile = ./restic_${stack}.token;
+  #   mode = "0440";
+  #   format = "binary";
+  #   owner = username;
+  # };
+  # services.restic.backups.${stack} = {
+  #   rcloneConfigFile = "/home/${username}/.config/rclone/rclone.conf";
+  #   repository = "rclone:r2:fighter/${stack}";
+  #   initialize = true;
+  #   passwordFile = "/run/secrets/restic/${stack}";
+  #   paths = [
+  #     "/appdata/${stack}"
+  #   ];
+  #   timerConfig = {
+  #     Persistent = true;
+  #     OnCalendar = "daily";
+  #   };
+  # };
+  systemd.services."rclone-sync-${stack}" = {
+    script = ''
+      ${pkgs.rclone}/bin/rclone sync /appdata/${stack} r2:fighter/${stack}
+    '';
+    serviceConfig = {
+      User = "${username}";
     };
+    startAt = [ "*-*-* 05:00:00" ];
   };
   home-manager.users."${username}" = {
     home.file = {
