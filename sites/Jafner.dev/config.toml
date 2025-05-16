@@ -68,7 +68,7 @@ disableHugoGeneratorInject = false
     author = false
 
     topText = [
-      "Source on <a href=\"https://github.com/Jafner/jafner.net/sites/Jafner.dev\">GitHub</a>"
+      "Source on <a href=\"https://github.com/Jafner/Jafner.net/tree/main/sites/Jafner.dev\">GitHub</a>"
     ]
     bottomText = [
     ]
@@ -94,10 +94,6 @@ disableHugoGeneratorInject = false
   [[params.social]]
     name = "github"
     url  = "https://github.com/Jafner"
-
-  [[params.social]]
-    name = "gitea"
-    url   = "https://gitea.jafner.tools/Jafner"
 
   [[params.social]]
     name = "linkedin"
