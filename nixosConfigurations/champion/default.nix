@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./git.nix
+    ./services
   ];
 
   services.tailscale.enable = true;
