@@ -8,6 +8,8 @@
     ./git.nix
   ];
 
+  services.tailscale.enable = true;
+
   sops = {
     age.sshKeyPaths = [ "/home/${username}/.ssh/${username}@${hostname}" ];
     age.generateKey = false;
