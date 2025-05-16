@@ -56,6 +56,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     description = "${username}";
     openssh.authorizedKeys.keys = pkgs.lib.splitString "\n" (builtins.readFile ../../keys.txt); # Equivalent to `curl https://github.com/Jafner.keys > /home/$USER/.ssh/authorized_keys`
