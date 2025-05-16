@@ -11,11 +11,17 @@
     format = "binary";
     owner = username;
   };
-  home-manager.users.${username} = {
-    home.packages = with pkgs; [ rclone-browser restic ];
-    programs.zsh.initContent = ''
-      eval $(${pkgs.restic}/bin/restic generate --zsh-completion -)
+  systemd.services."rclone-sync-appdata" = {
+    script = ''
+      ${pkgs.rclone}/bin/rclone sync /appdata/ r2:fighter/
     '';
+    serviceConfig = {
+      User = "${username}";
+    };
+    startAt = [ "*-*-* 05:00:00" ];
+  };
+  home-manager.users.${username} = {
+    home.packages = with pkgs; [ rclone-browser ];
     programs.rclone = {
       enable = true;
       remotes = {

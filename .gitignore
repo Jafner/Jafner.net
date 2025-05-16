@@ -3,3 +3,7 @@
 **/Jafner.dev/.hugo_build.lock
 
 **/result
+
+**/.terraform*
+
+**/.direnv
