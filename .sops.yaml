@@ -3,11 +3,13 @@ keys:
   - &joey_age age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00
   - &admin_fighter age1nq652a3y063dy5wllucf5ww29g7sx3lt8ehhspxk6u9d28t8ndgq9q0926
   - &admin_artificer age1mmy5xx4nxun5fexpxdl2tjx60akc4sgktrquq8c6ggvtehcpa3ss2hh2tj
+  - &admin_champion age10k706un6exgaym7yt8jnxz8m8n25wd9fezqxr43zkzatjleagg2s64mwt6
 creation_rules:
   - path_regex: ^.*(\.(secrets|token|passwd)|secrets.env|config.boot)
     key_groups:
-    - age:
-      - *joey_desktop_jafner_net
-      - *joey_age
-      - *admin_fighter
-      - *admin_artificer
+      - age:
+          - *joey_desktop_jafner_net
+          - *joey_age
+          - *admin_fighter
+          - *admin_artificer
+          - *admin_champion
