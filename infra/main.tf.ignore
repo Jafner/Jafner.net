@@ -1,0 +1,35 @@
+terraform {
+  required_providers {
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "~> 4"
+    }
+  }
+  backend "s3" {
+    bucket = "terraform"
+    key = "main.tfstate"
+    region = "auto"
+    skip_credentials_validation = true
+    skip_metadata_api_check     = true
+    skip_region_validation      = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+    use_path_style              = true
+    # -backend-config="access_key=$(rbw get cloudflare jafner425@gmail.com --field "R2 Access Key ID")"
+    # -backend-config="secret_key=$(rbw get cloudflare jafner425@gmail.com --field "R2 Secret Access Key")"
+    endpoints = {
+      s3 = "https://9c3bc49e4d283320f5df4fc2e8ed9acc.r2.cloudflarestorage.com"
+    }
+  }
+}
+
+provider "cloudflare" {
+  # requires CLOUDFLARE_API_TOKEN
+}
+
+variable "account_id" { default = "9c3bc49e4d283320f5df4fc2e8ed9acc" }
+
+resource "cloudflare_r2_bucket" "backend" {
+  account_id = var.account_id
+  name = "terraform"
+}
