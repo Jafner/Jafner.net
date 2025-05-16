@@ -1,5 +1,14 @@
+# Hugo
 **/Jafner.dev/public/
 **/Jafner.dev/resources/_gen
 **/Jafner.dev/.hugo_build.lock
 
+# Nix
 **/result
+
+# Terraform
+**/.terraform
+.terraform.lock.hcl
+
+# Direnv
+**/.direnv
