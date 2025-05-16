@@ -3,7 +3,7 @@
 , ...
 }: {
   imports = [
-    ./traefik.nix
+    ./traefik
     ./ai.nix
     ./autopirate.nix
     ./keycloak.nix
