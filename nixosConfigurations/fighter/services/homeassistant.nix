@@ -25,7 +25,7 @@ in
             container_name: homeassistant_homeassistant
             environment:
               PUID: "1000"
-              PGID: "1000"
+              PGID: "100"
               TZ: "America/Los_Angeles"
             networks:
               - web
