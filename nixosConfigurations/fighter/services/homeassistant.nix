@@ -24,8 +24,8 @@ in
             image: lscr.io/linuxserver/homeassistant:latest
             container_name: homeassistant_homeassistant
             environment:
-              PUID: "1001"
-              PGID: "1001"
+              PUID: "1000"
+              PGID: "1000"
               TZ: "America/Los_Angeles"
             networks:
               - web
@@ -70,6 +70,5 @@ in
       '';
       target = "stacks/${stack}/mosquitto.conf";
     };
-
   };
 }
