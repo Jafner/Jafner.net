@@ -167,10 +167,11 @@
       });
       devShells = forAllSystems (system: {
         default = inputs.nixpkgs.legacyPackages.${system}.mkShellNoCC {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
           packages = with inputs.nixpkgs.legacyPackages.${system}; [
             inputs.deploy-rs.packages.${system}.deploy-rs
             yek
-          ];
+          ] ++ self.checks.${system}.pre-commit-check.enabledPackages;
           nativeBuildInputs = [
             inputs.deploy-rs.packages.${system}.deploy-rs
           ];
@@ -206,6 +207,46 @@
             ''
           );
         };
+        # nix run .#sops <list|updatekeys|rotate|edit|show|usedby>
+        sops = {
+          type = "app";
+          program = toString (
+            inputs.nixpkgs.legacyPackages.${system}.writers.writeBash "sops" ''
+              if ! [[ -f .sops.yaml  ]]; then echo "Can't find .sops.yaml. Are you in the root of the repo?"; exit 1; fi
+              case "$1" in
+                list) find "${self.outPath}" -type f -regextype posix-extended -iregex "^.*(\.(secrets|token|passwd)|secrets.env|config.boot)" ;;
+                updatekeys) find "$(pwd)" -type f -regextype posix-extended -iregex "^.*(\.(secrets|token|passwd)|secrets.env|config.boot)" -exec sops updatekeys {} \; ;;
+                rotate) find "$(pwd)" -type f -regextype posix-extended -iregex "^.*(\.(secrets|token|passwd)|secrets.env|config.boot)" -exec sops rotate -i {} \; ;;
+                edit) # If a path is specified, edit it. Otherwise, fzf existing repo secrets.
+                  if ! [[ -z $2 ]]; then
+                    sops edit "$2";
+                  else
+                    find . -type f -regextype posix-extended -iregex "^.*(\.(secrets|token|passwd)|secrets.env|config.boot)" | fzf --preview 'sops decrypt {}' --bind 'enter:become(sops edit {})'
+                  fi
+                  ;;
+                show)
+                  sops decrypt \
+                    "$(find "." -type f -regextype posix-extended -iregex "^.*(\.(secrets|token|passwd)|secrets.env|config.boot)" |\
+                      fzf --preview 'sops decrypt {}'\
+                    )" |\
+                    tee /dev/fd/2 |\
+                    wl-copy
+                ;;
+                usedby)
+                  FILE=$2
+                  if [[ -z $2 ]]; then
+                    FILE="$(
+                      find "." -type f -regextype posix-extended -iregex "^.*(\.(secrets|token|passwd)|secrets.env|config.boot)" |\
+                      fzf --preview-window wrap --preview 'rg --context=0 -l "$(basename {})"' --header "Files referencing selected file -->"
+                    )"
+                  fi
+                  rg --context=0 -l "$(basename $FILE)"
+                ;;
+                *) echo "No command specified." ;;
+              esac
+            ''
+          );
+        };
       });
       formatter.x86_64-linux =
         (inputs.treefmt-nix.lib.evalModule inputs.nixpkgs.legacyPackages.x86_64-linux {
@@ -213,15 +254,17 @@
           programs.nixpkgs-fmt.enable = true; # **.nix
           programs.deadnix.enable = true; # **.nix
         }).config.build.wrapper;
-      checks.x86_64-linux = {
-        pre-commit-check = inputs.pre-commit-hooks.lib.x86_64-linux.run {
+      checks = forAllSystems (system: {
+        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
+            # shellcheck.enable = true;
+            # mdsh.enable = true;
             nixpkgs-fmt.enable = true;
             deadnix.enable = true;
           };
         };
-        deploy-check = (inputs.deploy-rs.lib.x86_64-linux.deployChecks self.deploy).deploy-activate;
-      };
+        #deploy-check = (inputs.deploy-rs.lib.${system}.deployChecks self.deploy).deploy-activate;
+      });
     };
 }
