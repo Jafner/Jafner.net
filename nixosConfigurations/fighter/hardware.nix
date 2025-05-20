@@ -26,6 +26,8 @@
       enable32Bit = true;
     };
   };
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
   environment.systemPackages = with pkgs; [
     rocmPackages.rocm-smi
     rocmPackages.rocminfo
