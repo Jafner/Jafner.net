@@ -264,7 +264,7 @@
             deadnix.enable = true;
           };
         };
-        #deploy-check = (inputs.deploy-rs.lib.${system}.deployChecks self.deploy).deploy-activate;
+        deploy-check = (inputs.deploy-rs.lib.${system}.deployChecks self.deploy).deploy-activate;
       });
     };
 }

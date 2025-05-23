@@ -76,7 +76,7 @@ in
                 - ${cfg.paths.appdata}/uploads:/uploads
               labels:
                 - traefik.http.routers.send.rule=Host(`${cfg.domains.${stack}}`)
-                - traefik.http.routers.send.tls.certresolver=lets-encrypt-dns01
+                - traefik.http.routers.send.tls.certresolver=lets-encrypt
                 - traefik.http.routers.send.tls.options=tls12@file
                 - traefik.http.services.send.loadbalancer.server.port=1234
 

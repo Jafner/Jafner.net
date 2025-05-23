@@ -36,10 +36,8 @@ in
     }
   ];
 
-  sops.secrets."smb" = {
-    sopsFile = ../../hosts/fighter/secrets/smb.secrets;
-    format = "binary";
-    key = "";
+  sops.secrets."truenas/smb/fighter" = {
+    sopsFile = ../../secrets/truenas.secrets.yml;
     mode = "0440";
     owner = username;
   };

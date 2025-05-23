@@ -4,7 +4,7 @@ let
 in
 {
   sops.secrets."${stack}" = {
-    sopsFile = ./vaultwarden_admin.token;
+    sopsFile = ./vaultwarden.secrets.env;
     key = "";
     mode = "0440";
     owner = username;
