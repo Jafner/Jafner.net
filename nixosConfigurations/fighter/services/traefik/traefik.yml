@@ -15,15 +15,6 @@ certificatesResolvers:
       email: jafner42@gmail.com
       storage: acme.json
       tlsChallenge: {}
-  lets-encrypt-dns01:
-    acme:
-      email: jafner42@gmail.com
-      storage: acme-dns01.json
-      dnsChallenge:
-        provider: cloudflare
-        resolvers:
-          - "1.1.1.1:53"
-          - "8.8.8.8:53"
 
 api:
   insecure: true
@@ -40,9 +31,3 @@ providers:
   file:
     directory: /config
     watch: false
-
-experimental:
-  plugins:
-    webfinger:
-      moduleName: github.com/NX211/traefik-webfinger
-      version: v0.3.5

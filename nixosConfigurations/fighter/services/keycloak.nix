@@ -78,7 +78,7 @@ in
             depends_on:
               - keycloak
             environment:
-              PROVIDER_URI: "https://keycloak.jafner.net/realms/jafner.net"
+              PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
               CLIENT_ID: "traefik-forward-auth"
               LOG_LEVEL: "debug"
             env_file:
@@ -101,7 +101,7 @@ in
             depends_on:
               - keycloak
             environment:
-              PROVIDER_URI: "https://keycloak.jafner.net/realms/jafner.net"
+              PROVIDER_URI: "https://keycloak.jafner.net/realms/Jafner.net"
               CLIENT_ID: "traefik-forward-auth-privileged"
               LOG_LEVEL: "debug"
             env_file:

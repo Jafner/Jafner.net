@@ -87,7 +87,7 @@ in
                 - /var/run/docker.sock:/var/run/docker.sock:ro
               labels:
                 - traefik.http.routers.coder.rule=Host(`${cfg.domains.${stack}}`)
-                - traefik.http.routers.coder.tls.certresolver=lets-encrypt-dns01
+                - traefik.http.routers.coder.tls.certresolver=lets-encrypt
                 - traefik.http.routers.coder.tls.options=tls12@file
                 - traefik.http.routers.coder.middlewares=securityheaders@file
                 #- traefik.http.services.coder.loadbalancer.server.port=1234
