@@ -44,7 +44,7 @@ in
 
   environment.systemPackages = with pkgs; [ cifs-utils ];
   fileSystems."movies" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/movies";
     device = "//192.168.1.12/Movies";
     fsType = "cifs";
@@ -54,7 +54,7 @@ in
     ];
   };
   fileSystems."music" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/music";
     device = "//192.168.1.12/Music";
     fsType = "cifs";
@@ -64,7 +64,7 @@ in
     ];
   };
   fileSystems."shows" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/shows";
     device = "//192.168.1.12/Shows";
     fsType = "cifs";
@@ -74,7 +74,7 @@ in
     ];
   };
   fileSystems."av" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/av";
     device = "//192.168.1.12/AV";
     fsType = "cifs";
@@ -84,7 +84,7 @@ in
     ];
   };
   fileSystems."printing" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/3dprinting";
     device = "//192.168.1.12/3DPrinting";
     fsType = "cifs";
@@ -94,7 +94,7 @@ in
     ];
   };
   fileSystems."books" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/books";
     device = "//192.168.1.12/Text";
     fsType = "cifs";
@@ -104,7 +104,7 @@ in
     ];
   };
   fileSystems."torrenting" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/torrenting";
     device = "//192.168.1.12/Torrenting";
     fsType = "cifs";
@@ -114,7 +114,7 @@ in
     ];
   };
   fileSystems."archive" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/archive";
     device = "//192.168.1.12/Archive";
     fsType = "cifs";
@@ -124,7 +124,7 @@ in
     ];
   };
   fileSystems."recordings" = {
-    enable = true;
+    enable = false;
     mountPoint = "/mnt/recordings";
     device = "//192.168.1.12/Recordings";
     fsType = "cifs";

@@ -80,7 +80,7 @@
         };
         samba = {
           config = {
-            type = "samba";
+            type = "smb";
             host = "192.168.1.12";
             user = "${username}";
           };
