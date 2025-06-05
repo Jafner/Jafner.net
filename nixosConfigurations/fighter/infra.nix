@@ -68,7 +68,7 @@
           include:
             - caddy-docker-compose.yml
             - dockge-docker-compose.yml
-            - whatsupdocke-docker-compose.yml
+            - whatsupdocker-docker-compose.yml
             - kuma-docker-compose.yml
             - forwardauth-docker-compose.yml
         '';
