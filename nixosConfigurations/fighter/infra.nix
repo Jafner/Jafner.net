@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, pkgs, ... }:
 {
   virtualisation.docker = {
     enable = true;
@@ -7,6 +7,8 @@
     rootless.enable = false;
     rootless.setSocketVariable = true;
   };
+  users.users.${username}.extraGroups = [ "docker" ];
+  environment.systemPackages = [ pkgs.docker-compose ];
   sops.secrets."autokuma" = {
     sopsFile = builtins.toFile "autokuma" ''
       AUTOKUMA__KUMA__URL=ENC[AES256_GCM,data:pzdNkA8aCx//wmWrfFx6q9v+ecwoKsA=,iv:0dC1my8vYoxFir1Xq6ZdFEF1A3ku19h3tPdIu/X9H2g=,tag:9H7+wht4RAPpQ5XNsFCZFA==,type:str]
