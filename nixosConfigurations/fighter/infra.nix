@@ -112,6 +112,7 @@
           networks:
             caddy:
               name: caddy
+              external: true
         '';
       };
       "dockge-docker-compose.yml" = {
