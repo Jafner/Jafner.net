@@ -231,7 +231,7 @@
               networks:
                 - caddy
               env_file:
-                path: /run/secrets/forwardauth
+                - path: /run/secrets/forwardauth
               labels:
                 caddy: auth.jafner.net
                 caddy.reverse_proxy: "{{upstreams 4181}}"
