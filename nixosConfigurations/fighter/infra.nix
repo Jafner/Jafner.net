@@ -11,21 +11,21 @@
   environment.systemPackages = [ pkgs.docker-compose ];
   sops.secrets."autokuma" = {
     sopsFile = builtins.toFile "autokuma" ''
-      AUTOKUMA__KUMA__URL=ENC[AES256_GCM,data:pzdNkA8aCx//wmWrfFx6q9v+ecwoKsA=,iv:0dC1my8vYoxFir1Xq6ZdFEF1A3ku19h3tPdIu/X9H2g=,tag:9H7+wht4RAPpQ5XNsFCZFA==,type:str]
-      AUTOKUMA__KUMA__USERNAME=ENC[AES256_GCM,data:JpPsI2o/,iv:pqVCZ8L9407hCM29UDXJ4aVjG3vzZfQyq6IG8z5JGd4=,tag:IK6J+obG+eDcvs3KXHedCA==,type:str]
-      AUTOKUMA__KUMA__PASSWORD=ENC[AES256_GCM,data:JxsxaES6cjOrpUMmAp0LiFllwDRxgm7zE9RoMq6ZK07VrkE3V5id1RbfEUGi6yS/1tAg6ADaQLdpIPmGm3yj,iv:kTa1vuWNnPezIQjuuEXcd8EspkXD2/JnRlP/aTDT5LM=,tag:vqhJ8H7fP6xwJb/yLpbz4w==,type:str]
-      sops_age__list_0__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpMjJyVmhZNklNTXl2OEZ0\nVVJrM282bElDMkF5SktIVkZHaXJQOFFUT1JBCmJwV3k3Wnd4TnBJeXRmZlpYenVR\nQlNGaW14UDd6Z3I4YVNBUXBPZkVIZVEKLS0tIFdUTUdyNkxkQ254Ny81blZ6ckFj\nbWZQaXVQV0poZFRLUUp5Zm1SMFR6V2MKW8ztOA69cBCABdLP5sDWXC4h5MZGSW3a\nGiQ74kFrVKbFDO42VLgWVm2qZd1KYDRav+rOmoZLX2yhSeCf03wxgg==\n-----END AGE ENCRYPTED FILE-----\n
+      AUTOKUMA__KUMA__URL=ENC[AES256_GCM,data:ECuFz9QD3Vw0tDN2L9rb4GotwFzv490=,iv:uDe25r8ON1FuW1LlNbulJPiPou+ha3Z2UOQy8yhWds8=,tag:xPtWj6kUsWaAAHc6aTQ8Aw==,type:str]
+      AUTOKUMA__KUMA__USERNAME=ENC[AES256_GCM,data:ZYNkxOh2,iv:7HwDFyS8khl77xOGgcOwNEKAjvsCpD4IMsdhE6LC7DA=,tag:jdBVBNFxBw04tzspXDaabg==,type:str]
+      AUTOKUMA__KUMA__PASSWORD=ENC[AES256_GCM,data:t+jYULNZSbhjfuEVGk0ip6eNao3DzAa6b18xsvVkbnXHmA==,iv:mi45HIOkYNyBvKwmuhreEYY155AYLmgdrVkitb9/z2s=,tag:vgvUiPC7SqszHfrNSNtOGg==,type:str]
+      sops_age__list_0__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBOdVVuWUJ6dzY0SzNnOUZ1\nWVFjOFFkNkVCODhLcmJORjNBd2t3YmU2bDFrCkZ4Z3U4aG5FNjFZa01ZREZPMGNW\nVlh1Y25TYm1QUU5DK0VrNDgxYi82bVkKLS0tIGFFMDdtR1RxWnM3eUxSbGV2djVZ\nbG9PTVh1RE8yL3pRZWhGV2dBb3NMR1kKKSj6WD55bI9Y+bsmj4460ia21xrukXOi\n4Ki8GW5k2PI65gJMS7mr1kCy+RD0uE5vypeO+d9YCHZkCtri2ftPwg==\n-----END AGE ENCRYPTED FILE-----\n
       sops_age__list_0__map_recipient=age1v5wy7epv5mm8ddf3cfv8m0e9w4s693dw7djpuytz9td8ycha5f0sv2se9n
-      sops_age__list_1__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGVlNRM0VoTzZtMGtwQ2Zv\nUUJsZnF6aE90eGxmRXJSNC9kdGJMTHp3TmlRClV0OUFad29jSXkyMUx1Q0J0Y1ZD\nNGhLZ0Q5ZlJJbXdOSlpvRysvckRYdDQKLS0tIHlNU1pNa0pHajNMcUlJQXVxQ3dy\nL2FGWW9GNDN6K0RudWVZTGpVbnp6Z1UKmLVNuc9GAiOINCPySTbx03LXh10eS13j\njgaSgaU4uymFnGyS9ekNOZZoaiMlzgAitCg1BvtXVazhb56ySYIosA==\n-----END AGE ENCRYPTED FILE-----\n
+      sops_age__list_1__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSY2dRUy9jdWZrYUJ4eVd3\nNTgwb21EeHM4U3RtRWlzYkFwZDBONVlNakRNCi84QVRoUGJKelJSeUkrRzlWZmJJ\nY0JjaVFsazIvUlJraUhUaEVYK3JSOGcKLS0tIGhnY1NKeXBkMTVsRmdrM0YwdFoy\nWlU2ZjdySG53VkpINU12b0ZXbFc1VncKJvzc9zQVzg06jdwbzf0ihKZI3VR8uHXF\nfj+LHOr20yQ5nYwbWwtPQEmeBTedgwi2/clZcVYZmwbyJjoOrxzg2w==\n-----END AGE ENCRYPTED FILE-----\n
       sops_age__list_1__map_recipient=age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00
-      sops_age__list_2__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWOSsxZk5ydVdyWVVRS1pM\nREhZU1RsdUlkYjhNUEhFRERESHQzaFVVZEJNCnFVOXpoZmpRdEpyMTY2SmFVaWdu\nQUZJTEpDSlFaWVRBMm5YM3hDcFZoVHMKLS0tIFJKWWkyM08vWDhuZGJoYzR4a2NO\ncGlFUytlM2Mxd3FHNDJ1R29oUGlJYlUKbIhAonxZb9PPoDrPBSd0a8FAA6j34tCH\nqFth2ij+B2rb9xjfrv/eefCLPEkeZd/rOdzZGRZozFGMC9TvrsR14w==\n-----END AGE ENCRYPTED FILE-----\n
+      sops_age__list_2__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEYVZIcENmY2ZYb1l3RlhZ\nOVU5cFN6cC9ROXc4OHIxb0NDa3kvRTFMc200CnJJaStuMjN1V2oyNVhmUU53eDhh\nRktLajRnVkgwOEIzUnkvQk1uUktpQjQKLS0tIHhLSVdUY2Y4MlB1VUprV21oRzlT\nSUh0TmdQSnJTQU0rNDVNb3Bma2NaNUkK7cjOzc04VAFuYY6VpFjJXd7PRibNmgOn\no2jRAknXwNGUHNmjtgwkK0lqZhW8b8OmWbU9n2uL0nMzrVcRogpw6g==\n-----END AGE ENCRYPTED FILE-----\n
       sops_age__list_2__map_recipient=age1nq652a3y063dy5wllucf5ww29g7sx3lt8ehhspxk6u9d28t8ndgq9q0926
-      sops_age__list_3__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1a0NkcjIyNUpMSTN3L05W\nWmZVZDAreTZyZEdmQ3RuQWJEanNtWXdoSmdRCjlNK2YyZ2Q2d3RldVJHdmZhR0Q4\nUFNyVHRpYjVHdjl3TVFvcnlVdTR0SE0KLS0tIEY1Ynk4M2hmUkc4NmJ5bEo4bGtW\nRExGMDZzSEtMSXJoRG5jODNiWEFlWmcKStV+G40tosuURi0Dy189Y5iRvrB1/GLr\ni++7y8KIKaqxsBf53VHKIFOmbNMl/qqE0wsd8C/wLvBhvGGGtznrsA==\n-----END AGE ENCRYPTED FILE-----\n
+      sops_age__list_3__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTeDljMjY4R3BWVGtxcHZl\ncEczeklKUzl5dUZ4ZDVmMzkrd1R4NEJlcUhNCmdkYzZyNjVRZTRsZEc1U0N6Zmk0\nVldIZFhRVDlFSmsxYnVyd2FKUEZVMUEKLS0tIHNtWlJzNVJTZnhoTXRaUGJNeHcx\nd2NXYjBxZDlJYzZRcFhIZ1dsK3o4MXMKLfHa48KRVOQf4ByzbsQ93AyY6AqsG60/\n2oyVdqz4SWkdAFFj1JC2meU35EA2jQWMJ/GonR8IavrCsWo9yrfTDA==\n-----END AGE ENCRYPTED FILE-----\n
       sops_age__list_3__map_recipient=age1mmy5xx4nxun5fexpxdl2tjx60akc4sgktrquq8c6ggvtehcpa3ss2hh2tj
-      sops_age__list_4__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAzanIrSllPajVidzZEYmMr\nWEN6aGt5V1hTc0dHNURnR3ZocWc0YjNuUDJRCjVkeGV5WlFhZk9XekZEMHdKK1dN\neVdWd0JGSHZDQUpFblE2Ynpaa29sb28KLS0tIHpRV251QkFrY1pGSVFNbERYM1FW\najN1OUQ2ZUNNcDNiUXcwRHN1d3kzcGsKPm4MQnFpl9Ndv7/2xOIfPMbXjMC28Pb0\nAYvSnXe4XEignGpukjviYdZVS8Ax+CZiD0oVy5e+pSEAYI13CXKqoA==\n-----END AGE ENCRYPTED FILE-----\n
+      sops_age__list_4__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1di94QWlzNnJFZjZtbDNl\nMUN0VmxMQW00aXhmZkpQcUZkVVRoQ094SENJCjlYbDV1VVJwSUc1YVdwdmJVK0xs\nVFRaZlVCZHRvNWRzYno1Ukh5Z3VVTDgKLS0tIFhzYmVnb3VHaE0zTzZBMTFxYVdj\nbzRqVjJEeFZIaU82QURmM2lzKzBnZ2cKaa8kFGmyBJzaQQOi84giTni/1b6pAyt/\nRNQkgh0WBZ4rl5xIKrbozL7rq/rrFqXC/2wPq4T7M5VXDJfRodeE5w==\n-----END AGE ENCRYPTED FILE-----\n
       sops_age__list_4__map_recipient=age10k706un6exgaym7yt8jnxz8m8n25wd9fezqxr43zkzatjleagg2s64mwt6
-      sops_lastmodified=2025-05-21T01:07:04Z
-      sops_mac=ENC[AES256_GCM,data:cwkEaBIaHaTwSyEhtR1XwVKj9qodt9odwo6ty4oCjdTCUUoLeoPHDRqfJomYjiREr8unUUt4bx7ZtucLKIimpEfEdu2cPflQ1whD+XMtF7CO2FK+H0Iv242jgxSehpecUng/rRJWZ7ezm0VN8NrkkXqyjArX1n8/4O4xIYW8AoE=,iv:vaAw0p/6cYBr51OB8+V3O1DOg2un+ExVP/oVrjqctec=,tag:Vy6Kcbo/ZEobKo9dDctoFw==,type:str]
+      sops_lastmodified=2025-06-05T19:17:24Z
+      sops_mac=ENC[AES256_GCM,data:iXE4NKmeEbUAydxJ1gMwuItxLAtmltrKj9rtmh3QAolhUDLBec/xQdBjRIMevGTbRshyvvvqm1d3IXWAgInlgfdRYHPn6+zIQqUZA7TOx1IO1DqgwZezWXjQPXBT+lmv98xRKSRg+/p2sDfHOHNiPoX6NFcQBHW10ZcgvVdT4Wc=,iv:bva9deA+7sOu0vYG/96UwgvZsVwsjTBdDvGU2xz7P4o=,tag:4FoWPzY1Gvu8XGG7MGk/lw==,type:str]
       sops_unencrypted_suffix=_unencrypted
       sops_version=3.10.2
     '';
@@ -243,7 +243,8 @@
                 homepage.href: https://uptime.jafner.net
                 homepage.description: Simple service monitor.
           networks:
-            kuma: null
+            kuma:
+              name: kuma
             caddy:
               name: caddy
               external: true
