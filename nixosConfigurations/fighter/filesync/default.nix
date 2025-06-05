@@ -19,18 +19,20 @@
     mode = "0440";
     owner = username;
   };
-  systemd.services."rclone-sync-appdata" = {
-    script = ''
-      ${pkgs.rclone}/bin/rclone sync /appdata/ r2:fighter/
-      for service in /appdata/*; do
-        service=$(basename $service)
-        sudo rclone --no-check-certificate sync /appdata/$service minio:$service
-      done
-    '';
-    serviceConfig = {
-      User = "${username}";
-    };
-    startAt = [ "*-*-* 05:00:00" ];
+  sops.secrets."truenas/versity/secret_key" = {
+    sopsFile = ../../../secrets/truenas.secrets.yml;
+    mode = "0440";
+    owner = username;
+  };
+  sops.secrets."truenas/versity/access_key" = {
+    sopsFile = ../../../secrets/truenas.secrets.yml;
+    mode = "0440";
+    owner = username;
+  };
+  sops.secrets."truenas/samba/fighter/password" = {
+    sopsFile = ../../../secrets/truenas.secrets.yml;
+    mode = "0440";
+    owner = username;
   };
   home-manager.users.${username} = {
     home.packages = with pkgs; [ rclone-browser ];
@@ -61,6 +63,29 @@
           secrets = {
             access_key_id = "/run/secrets/truenas/minio/fighter/access_key";
             secret_access_key = "/run/secrets/truenas/minio/fighter/secret_key";
+          };
+        };
+        versity = {
+          config = {
+            type = "s3";
+            provider = "Other";
+            env_auth = "true";
+            region = "auto";
+            endpoint = "https://192.168.1.10:30157";
+          };
+          secrets = {
+            access_key_id = "/run/secrets/truenas/versity/access_key";
+            secret_access_key = "/run/secrets/truenas/versity/secret_key";
+          };
+        };
+        samba = {
+          config = {
+            type = "samba";
+            host = "192.168.1.12";
+            user = "${username}";
+          };
+          secrets = {
+            pass = "/run/secrets/truenas/samba/fighter/password";
           };
         };
       };
