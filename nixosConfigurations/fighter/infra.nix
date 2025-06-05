@@ -157,6 +157,7 @@
         enable = true;
         target = "whatsupdocker-docker-compose.yml";
         text = ''
+          name: whatsupdocker
           services:
             whatsupdocker:
               image: getwud/wud
@@ -170,6 +171,7 @@
                 caddy.reverse_proxy: "{{upstreams 3000}}"
           networks:
             caddy:
+              name: caddy
               external: true
           x-dockge:
             urls:
@@ -180,6 +182,7 @@
         enable = true;
         target = "kuma-docker-compose.yml";
         text = ''
+          name: kuma
           services:
             autokuma:
               image: ghcr.io/bigboot/autokuma:latest
@@ -213,6 +216,7 @@
           networks:
             kuma: null
             caddy:
+              name: caddy
               external: true
           x-dockge:
             urls:
@@ -223,6 +227,7 @@
         enable = true;
         target = "forwardauth-docker-compose.yml";
         text = ''
+          name: forwardauth
           services:
             forwardauth:
               image: mesosphere/traefik-forward-auth:v3.2.1
@@ -249,6 +254,7 @@
                 caddy.reverse_proxy: "{{upstreams 80}}"
           networks:
             caddy:
+              name: caddy
               external: true
           x-dockge:
             urls:
