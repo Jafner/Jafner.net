@@ -11,11 +11,10 @@
       ./git.nix
       ./hardware.nix
       ./home-manager.nix
-      ./iscsi-shares.nix
       ./networking.nix
     ]
     ++ [
-      ./services
+      ./infra.nix
     ];
 
   sops = {

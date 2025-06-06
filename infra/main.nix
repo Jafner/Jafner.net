@@ -1,4 +1,5 @@
-{ config, ... }: let account_id = "9c3bc49e4d283320f5df4fc2e8ed9acc"; in {
+{ config, ... }:
+let account_id = "9c3bc49e4d283320f5df4fc2e8ed9acc"; in {
   terraform.required_providers.cloudflare = { source = "cloudflare/cloudflare"; version = "~> 4"; };
   terraform.backend.s3 = {
     bucket = "terraform";
@@ -14,7 +15,7 @@
     # Credentials should be provided via:
     # -backend-config="access_key=..." -backend-config="secret_key=..."
   };
-  provider.cloudflare = {};
+  provider.cloudflare = { };
   variable.account_id = { default = "${account_id}"; };
   resource.cloudflare_r2_bucket.backend = {
     account_id = "${config.variable.account_id.default}";

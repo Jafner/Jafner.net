@@ -1,16 +1,9 @@
 { username, ... }:
 let
   stack = "traefik";
-  paths.appdata = "/appdata/${stack}";
   domainOwnerEmail = "jafner425@gmail.com";
 in
 {
-  sops.secrets."cloudflare_dns" = {
-    sopsFile = ./cloudflare_dns.secrets;
-    mode = "0440";
-    format = "dotenv";
-    owner = username;
-  };
   home-manager.users."${username}".home.file = {
     "${stack}/docker-compose.yml" = {
       enable = true;
@@ -30,11 +23,7 @@ in
               - /var/run/docker.sock:/var/run/docker.sock:ro
               - ./traefik.yaml:/traefik.yaml
               - ./config:/config
-              - ${paths.appdata}/acme.json:/acme.json
-              - ${paths.appdata}/acme-dns01.json:/acme-dns01.json
-            env_file:
-              - path: /run/secrets/cloudflare_dns
-                required: true
+              - /appdata/traefik/acme.json:/acme.json
         networks:
           web:
             external: true
