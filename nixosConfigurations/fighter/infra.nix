@@ -7,6 +7,7 @@
     rootless.enable = false;
     rootless.setSocketVariable = true;
   };
+  programs.fuse.userAllowOther = true;
   users.users.${username}.extraGroups = [ "docker" ];
   environment.systemPackages = [ pkgs.docker-compose ];
   sops.secrets."autokuma" = {
@@ -347,6 +348,30 @@
         '';
       };
     };
+    home.packages = [
+      (pkgs.writeShellApplication {
+        name = "rmount";
+        runtimeInputs = [
+          pkgs.rclone
+        ];
+        text = ''
+          #! /usr/bin/env bash
+          rmount() {
+            SOURCE="$1"
+            DEST="''$''\{2:-$(echo $SOURCE | sed 's/:/\//' | sed 's/^/\/mnt\//')}"
+            if ! [ -d $DEST ]; then sudo mkdir -p "$DEST"; sudo chown -R ${username}:users "$DEST"; fi
+            rclone \
+              --no-check-certificate \
+              --config /home/$USER/.config/rclone/rclone.conf \
+              mount \
+              --daemon \
+              "$SOURCE" \
+              "$DEST"
+          }
+          rmount "$@"
+        '';
+      })
+    ];
   };
   systemd.services."rclone-mount" = {
     script = ''
