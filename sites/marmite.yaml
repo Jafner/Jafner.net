@@ -1,0 +1,21 @@
+name: Jafner.dev
+tagline: ""
+url: "https://jafner.dev"
+footer: ""
+language: "en-us"
+pagination: 10
+default_author: jafner
+enable_search: false
+enable_related_content: false
+default_date_format: "%b %e, %Y"
+menu:
+  - ["me", "me.html"]
+extra:
+  colorscheme_toggle: false
+  colorscheme: catppuccin
+authors:
+  jafner:
+    name: Joey Hafner
+    avatar: ./media/pfp.webp
+toc: true
+json_feed: false

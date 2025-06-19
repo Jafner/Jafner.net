@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "DejaVuSans";
+  src: url("./DejaVuSans.ttf");
+}
+:root {
+  --pico-font-family: "DejaVuSans", sans-serif;
+}
