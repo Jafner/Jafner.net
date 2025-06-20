@@ -16,6 +16,6 @@ extra:
 authors:
   jafner:
     name: Joey Hafner
-    avatar: ./media/pfp.webp
+    avatar: media/pfp.webp
 toc: true
 json_feed: false
