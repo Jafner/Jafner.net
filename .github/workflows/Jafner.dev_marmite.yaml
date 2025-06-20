@@ -22,28 +22,25 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: sites/Jafner.dev
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          sparse-checkout: "sites/Jafner.dev"
+          sparse-checkout: "sites/"
       - name: Install Marmite
         run: |
           wget https://github.com/rochacbruno/marmite/releases/download/0.2.5/marmite-0.2.5-x86_64-unknown-linux-gnu.tar.gz
           tar -xf marmite-0.2.5-x86_64-unknown-linux-gnu.tar.gz
       - name: Build Site
-        run: ./marmite . site
+        run: ./marmite --config sites/marmite.yaml ./sites/Jafner.dev sites/generated
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "sites/Jafner.dev/site"
+          path: "sites/generated"
 
   deploy-github-pages:
     environment:
