@@ -1,24 +1,22 @@
-{ pkgs
-, username
-, hostname
-, system
-, ...
+{
+  pkgs,
+  username,
+  hostname,
+  system,
+  ...
 }: {
-  imports =
-    [
-      ./filesystems.nix
-      ./filesync
-      ./git.nix
-      ./hardware.nix
-      ./home-manager.nix
-      ./networking.nix
-    ]
-    ++ [
-      ./infra.nix
-    ];
+  imports = [
+    ./docker.nix
+    ./filesystems.nix
+    ./git.nix
+    ./hardware.nix
+    ./home-manager.nix
+    ./networking.nix
+    ./rclone.nix
+  ];
 
   sops = {
-    age.sshKeyPaths = [ "/home/${username}/.ssh/${username}@${hostname}" ];
+    age.sshKeyPaths = ["/home/${username}/.ssh/${username}@${hostname}"];
     age.generateKey = false;
   };
 
@@ -30,6 +28,7 @@
 
   environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
+    comma
     coreutils
     git
     tree
@@ -40,6 +39,7 @@
     btop
     vim
     tree
+    jq
   ];
 
   programs.nix-ld.enable = true;
@@ -69,10 +69,10 @@
         commands = [
           {
             command = "ALL";
-            options = [ "NOPASSWD" ];
+            options = ["NOPASSWD"];
           }
         ];
-        groups = [ "wheel" ];
+        groups = ["wheel"];
       }
     ];
   };
@@ -109,12 +109,12 @@
 
   networking.hostName = hostname;
   networking.hosts = {
-    "192.168.1.1" = [ "wizard" ];
-    "192.168.1.12" = [ "paladin" ];
-    "192.168.1.23" = [ "fighter" ];
-    "192.168.1.135" = [ "desktop" ];
-    "143.198.68.202" = [ "artificer" ];
-    "172.245.108.219" = [ "champion" ];
+    "192.168.1.1" = ["wizard"];
+    "192.168.1.12" = ["paladin"];
+    "192.168.1.23" = ["fighter"];
+    "192.168.1.135" = ["desktop"];
+    "143.198.68.202" = ["artificer"];
+    "172.245.108.219" = ["champion"];
   };
 
   system.stateVersion = "24.11";
@@ -143,7 +143,7 @@
         nvd
       ];
     };
-    xdg.systemDirs.data = [ "/usr/share" ];
+    xdg.systemDirs.data = ["/usr/share"];
     home.stateVersion = "24.11";
   };
 
