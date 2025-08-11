@@ -8,30 +8,30 @@ Next we destroy the `Media` pool. [TrueNAS docs](https://www.truenas.com/docs/sc
 These services depend on pool Media and will be disrupted if the pool is detached:
     SMB Share:
         Media
-        AV 
+        AV
     Snapshot Task:
         Media/AV
-        Media/Media 
+        Media/Media
     Rsync Task:
         /mnt/Media/Media/Video/HomeVideos
         /mnt/Media/Media/Images/
-        /mnt/Media/Media/Video/Recordings/ 
+        /mnt/Media/Media/Video/Recordings/
 ```
 
-We check all three boxes for destroying the data, deleting the share configurations, and to confirm the export/disconnect. Type the pool name into the confirm box, and hit the big red button. 
+We check all three boxes for destroying the data, deleting the share configurations, and to confirm the export/disconnect. Type the pool name into the confirm box, and hit the big red button.
 
 At this point my exhaustion 48 hours ago bit me in the ass. When I created the TEMP pool, I thoughtlessly added the two drives which had been removed from Media to create a 10-wide RAID-Z2. Okay, so we've got a rough situation on our hands. I see two possibilities:
 
-1. Offline the two misplaced drives from TEMP, create a 12-wide Media pool, and begin the copy. Life is for the living. 
-2. Just order a couple more drives on Ebay, replace the two misplaced drives, resilver, and continue as planned. 
+1. Offline the two misplaced drives from TEMP, create a 12-wide Media pool, and begin the copy. Life is for the living.
+2. Just order a couple more drives on Ebay, replace the two misplaced drives, resilver, and continue as planned.
 
-I carefully calculated that the number of times you live is once, so we're flying by the seat of our pants. 
+I carefully calculated that the number of times you live is once, so we're flying by the seat of our pants.
 
-We identify which drives are in the wrong pool by running `sudo zpool status TEMP`, finding each part-uuid in the `/dev/disk/by-partuuid` directory, where it's symlinked to a standard Linux partition name (e.g. `/dev/sda1`). From there, we run `smartctl -a` against the device name and filter to get the serial number. Then we check each serial number against the table in [diskshelfmap](DISKSHELFMAP.md). I wrote a one-liner.
+We identify which drives are in the wrong pool by running `sudo zpool status TEMP`, finding each part-uuid in the `/dev/disk/by-partuuid` directory, where it's symlinked to a standard Linux partition name (e.g. `/dev/sda1`). From there, we run `smartctl -a` against the device name and filter to get the serial number. Then we check each serial number against the table in diskshelfmap. I wrote a one-liner.
 
 ```sh
-for id in $(sudo zpool status TEMP | grep -E "[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}  (ONLINE|DEGRADED)" | tr -s ' ' | cut -d' ' -f 2); do 
-  echo -n "$id -> "; 
+for id in $(sudo zpool status TEMP | grep -E "[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}  (ONLINE|DEGRADED)" | tr -s ' ' | cut -d' ' -f 2); do
+  echo -n "$id -> ";
   ls -l /dev/disk/by-partuuid |\
   grep $id |\
   cut -d' ' -f 12 |\
@@ -49,6 +49,7 @@ for id in $(sudo zpool status TEMP | grep -E "[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-
 ```
 
 Output:
+
 ```
 dad98d96-3cbe-469e-b262-b8416dfc72ec -> 2EKA92XX
 0fabfe6b-5305-4711-921c-926110df24b7 -> VJG282NX
@@ -64,35 +65,36 @@ cf9cc737-a704-4bea-bcee-db2cfe4490b7 -> VJG2808X
 
 At time of error, our disk shelf map looks like:
 
-|    | X1        | X2       | X3       | X4       |
-|:--:|:---------:|:--------:|:--------:|:--------:|
-| Y1 | VJGPS30X  | VK0ZD6ZY | VJG282NX | VJG2PVRX |
-| Y2 | VJGR6TNX  | 2EG14YNJ | VJGJVTZX | VJG1H9UX |
-| Y3 | VJGJUWNX  | 2EGXD27V | VJGJAS1X | VJG2UTUX |
-| Y4 | VJGRGD2X  | 2EGL8AVV | 2EKA903X | VJGRRG9X |
-| Y5 | VJGK56KX  | 2EGNPVWV | 2EKATR2X | VKH3Y3XX |
-| Y6 | VLKV9N8V  | R5G4W2VV | VLKXPS1V | VKGW5YGX |
+|     |    X1    |    X2    |    X3    |    X4    |
+| :-: | :------: | :------: | :------: | :------: |
+| Y1  | VJGPS30X | VK0ZD6ZY | VJG282NX | VJG2PVRX |
+| Y2  | VJGR6TNX | 2EG14YNJ | VJGJVTZX | VJG1H9UX |
+| Y3  | VJGJUWNX | 2EGXD27V | VJGJAS1X | VJG2UTUX |
+| Y4  | VJGRGD2X | 2EGL8AVV | 2EKA903X | VJGRRG9X |
+| Y5  | VJGK56KX | 2EGNPVWV | 2EKATR2X | VKH3Y3XX |
+| Y6  | VLKV9N8V | R5G4W2VV | VLKXPS1V | VKGW5YGX |
 
 So our matches are:
 
 - Serial: `VJG282NX`, partuuid: `0fabfe6b-5305-4711-921c-926110df24b7`, shelf coordinates: Y1/X3
 
-Hmm. That's it? Something's unaccounted for. Also one of those drives is weird. Let's check the full `smartctl` output for that drive. 
+Hmm. That's it? Something's unaccounted for. Also one of those drives is weird. Let's check the full `smartctl` output for that drive.
 
-`id=dd453900-d8c0-430d-bc1f-c022e62417ae; ls -l /dev/disk/by-partuuid | grep $id | cut-d' ' -f 11 | xargs basename | sed 's/^/\/dev\//' | xargs sudo smartctl -a` returns a normal-looking output. 
+`id=dd453900-d8c0-430d-bc1f-c022e62417ae; ls -l /dev/disk/by-partuuid | grep $id | cut-d' ' -f 11 | xargs basename | sed 's/^/\/dev\//' | xargs sudo smartctl -a` returns a normal-looking output.
 Except the serial is a little weird.
+
 ```
 Serial number:        001703PXPS1V        VLKXPS1V
 ```
 
-Huh. Interesting. That maps to our Y6/X3 serial. I wonder how that happened. 
+Huh. Interesting. That maps to our Y6/X3 serial. I wonder how that happened.
 
-So our *actual* matches are:
+So our _actual_ matches are:
 
 - Serial: `VJG282NX`, partuuid: `0fabfe6b-5305-4711-921c-926110df24b7`, shelf coordinates: Y1/X3
 - Serial: `VLKXPS1V`, partuuid: `dd453900-d8c0-430d-bc1f-c022e62417ae`, shelf coordinates: Y6/X3
 
-So we have our two misplaced drives. Just as a sanity check, we'll physically remove each drive (one at a time) and make sure the correct devices are disappearing from the pool. 
+So we have our two misplaced drives. Just as a sanity check, we'll physically remove each drive (one at a time) and make sure the correct devices are disappearing from the pool.
 We remove the drive at Y1/X3, then run `zpool status TEMP` and we see `0fabfe6b-5305-4711-921c-926110df24b7  REMOVED`. That matches. Cool. Plug it back in and wait for it to go back to ONLINE status.
 Next we remove the drive at Y6/X3. Same test, `zpool status TEMP` which contains `dd453900-d8c0-430d-bc1f-c022e62417ae  REMOVED`. Dope. All looking good. Plug it back in and wait for return to normal.
 
@@ -156,10 +158,10 @@ config:
 errors: No known data errors
 ```
 
-No drives awaiting resilver. But the resilver claims to be in progress with zero bytes scanned. 
-A quick `zpool clear TEMP` doesn't change anything. Same with `zpool resilver TEMP`. We'll give a reboot a shot. 
+No drives awaiting resilver. But the resilver claims to be in progress with zero bytes scanned.
+A quick `zpool clear TEMP` doesn't change anything. Same with `zpool resilver TEMP`. We'll give a reboot a shot.
 
-Huh, alright. 
+Huh, alright.
 
 ```
   pool: TEMP
@@ -220,23 +222,24 @@ config:
 errors: No known data errors
 ```
 
-Now if I did my homework properly, we should be able to build a new pool which contains the offlined drives. And sure enough the web UI corroborates. 
-We navigate to the Storage page, then click "Create Pool". We add all available drives (`sdd sdf sdh sdj sdl sdp sdq sdr sdt sdu sdx sdy`) to a data vdev in a RAID-Z2 configuration. We name the pool `Media`. 
+Now if I did my homework properly, we should be able to build a new pool which contains the offlined drives. And sure enough the web UI corroborates.
+We navigate to the Storage page, then click "Create Pool". We add all available drives (`sdd sdf sdh sdj sdl sdp sdq sdr sdt sdu sdx sdy`) to a data vdev in a RAID-Z2 configuration. We name the pool `Media`.
 And we hit Create, check the confirm box, and click Create Pool. It only takes a few seconds and we're back in business. Our new pool has one disk failing SMART tests, but we're going to tolerate that for now.
-We recreate our datasets with default settings and begin the copy back from `TEMP` to `Media`. We'll use a slightly more sophisticated strategy for copying back. We run the [`copy.sh` ](./copy.sh) script from a remote SSH session with nohup. 
+We recreate our datasets with default settings and begin the copy back from `TEMP` to `Media`. We'll use a slightly more sophisticated strategy for copying back. We run the `copy.sh` script from a remote SSH session with nohup.
 
 `ssh admin@192.168.1.10 nohup ~/copy.sh /mnt/TEMP/Media/ /mnt/Media/Media/`
 
-And we wait. Painfully. We can check in occasionally with `tail -f ~/copy.tmp`, and we should get an email notification when the command completes. 
+And we wait. Painfully. We can check in occasionally with `tail -f ~/copy.tmp`, and we should get an email notification when the command completes.
 
 Compare disk usage and file count between directories:
+
 ```
-CHECKPATH="Sub/Directory"; 
-echo "Source: /mnt/TEMP/$CHECKPATH"; 
-    echo -n "    Disk usage: " && sudo du -s /mnt/TEMP/$CHECKPATH; 
-    echo -n "    File count: " && sudo find /mnt/TEMP/$CHECKPATH -type f | wc -l; 
-echo "Dest: /mnt/Media/$CHECKPATH"; 
-    echo -n "    Disk usage: " && sudo du -s /mnt/Media/$CHECKPATH; 
+CHECKPATH="Sub/Directory";
+echo "Source: /mnt/TEMP/$CHECKPATH";
+    echo -n "    Disk usage: " && sudo du -s /mnt/TEMP/$CHECKPATH;
+    echo -n "    File count: " && sudo find /mnt/TEMP/$CHECKPATH -type f | wc -l;
+echo "Dest: /mnt/Media/$CHECKPATH";
+    echo -n "    Disk usage: " && sudo du -s /mnt/Media/$CHECKPATH;
     echo -n "    File count: " && sudo find /mnt/Media/$CHECKPATH -type f | wc -l
 ```
 
@@ -299,8 +302,8 @@ config:
 And we get the serials of each of our drives so as to ensure the degraded drives don't get pulled back into the pool:
 
 ```sh
-for id in $(sudo zpool status TEMP | grep -E "[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}  (ONLINE|DEGRADED|FAULTED)" | tr -s ' ' | cut -d' ' -f 2); do 
-  echo -n "$id -> "; 
+for id in $(sudo zpool status TEMP | grep -E "[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}  (ONLINE|DEGRADED|FAULTED)" | tr -s ' ' | cut -d' ' -f 2); do
+  echo -n "$id -> ";
   ls -l /dev/disk/by-partuuid |\
   grep $id |\
   tr -s ' ' |\
@@ -328,11 +331,12 @@ cf9cc737-a704-4bea-bcee-db2cfe4490b7 -> VJG2808X
 ```
 
 Then we hit the big red button again: `Storage -> TEMP -> Export/Disconnect`
-- [X] Destroy data on this pool?
-- [X] Delete configuration of shares that used this pool?
-- [X] Confirm Export/Disconnect?
 
-Cry a little bit, then hit the final Export/Disconnect button. 
+- [x] Destroy data on this pool?
+- [x] Delete configuration of shares that used this pool?
+- [x] Confirm Export/Disconnect?
+
+Cry a little bit, then hit the final Export/Disconnect button.
 
 And we'll also grab the partuuid-to-serial mappings for the Media pool:
 
@@ -352,7 +356,7 @@ cd4808a8-a137-4121-a5ff-4181faadee64 -> VJGJUWNX
 
 We shutdown the server, then the NAS.
 
-After shutting down the NAS, I realize that I am stupid. My one-liner to convert partuuid to serial only grabs devices with the ONLINE or DEGRADED status, not FAULTED. Whatever. We can fix that later. 
+After shutting down the NAS, I realize that I am stupid. My one-liner to convert partuuid to serial only grabs devices with the ONLINE or DEGRADED status, not FAULTED. Whatever. We can fix that later.
 
 Next, we're going to formalize a few of the datasets we had in the Media pool:
 
@@ -362,42 +366,45 @@ Next, we're going to formalize a few of the datasets we had in the Media pool:
 - `Media/Media/Text` -> `Media/Text`
 - `Media/Media/Video` -> `Media/Video`
 
-We're basically pulling every type of Media up one directory. 
+We're basically pulling every type of Media up one directory.
 
 ### Configuring ACLs for New Datasets
-Our hosts are configured to connect as the user `smbuser` with the group `smbuser`. 
+
+Our hosts are configured to connect as the user `smbuser` with the group `smbuser`.
 So when we create a Unix ACL for a new dataset, we configure as follows:
 
 1. Owner -> User: `smbuser` with box checked for Apply User
 2. Owner -> Group: `smbuser` with box checked for Apply Group
 3. Check box for Apply permissions recursively. (Confirm and continue).
 4. Leave access mode matrix as default (755).
-5. Save. 
+5. Save.
 
 ### Riding the Update Train
-*choo choo*
 
-It's been a while since I updated TrueNAS. This install was created a bit before TrueNAS existed, and updated once from FreeNAS (BSD) to TrueNAS Scale (Linux). 
+_choo choo_
 
-Our installed version is TrueNAS-22.12.3. Latest stable is 23.10.2. Latest beta is 24.04. 
+It's been a while since I updated TrueNAS. This install was created a bit before TrueNAS existed, and updated once from FreeNAS (BSD) to TrueNAS Scale (Linux).
+
+Our installed version is TrueNAS-22.12.3. Latest stable is 23.10.2. Latest beta is 24.04.
 
 According to the [upgrade paths](https://www.truenas.com/docs/truenasupgrades/#upgrade-paths) page, our upgrade path should go:
 
 1. To `22.12.4.2`, the final patch of 22.12.
-2. To `23.10.1.3`, the latest stable version of the Cobria update train. 
+2. To `23.10.1.3`, the latest stable version of the Cobria update train.
 
-From there, we have the choice to upgrade to the Dragonfish nightly build ([release notes](https://www.truenas.com/docs/scale/gettingstarted/scalereleasenotes/)). 
+From there, we have the choice to upgrade to the Dragonfish nightly build ([release notes](https://www.truenas.com/docs/scale/gettingstarted/scalereleasenotes/)).
 
 ### Setting up Rsync Backups
+
 In order to connect to our backup NAS, we use the following parameters when configuring our Rsync tasks (we'll use the `HomeVideos` dataset for example):
 
-- Path: `/mnt/Media/HomeVideos/` We use the trailing slash. I'm not sure why, but that's how it was, and so it shall stay. 
-- Rsync Mode: `SSH` 
-- Connect using: `SSH private key stored in user's home directory` We have an SSH private key in the home directory of the `root` user. 
-- Remote Host: `admin@192.168.1.11` 
+- Path: `/mnt/Media/HomeVideos/` We use the trailing slash. I'm not sure why, but that's how it was, and so it shall stay.
+- Rsync Mode: `SSH`
+- Connect using: `SSH private key stored in user's home directory` We have an SSH private key in the home directory of the `root` user.
+- Remote Host: `admin@192.168.1.11`
 - Remote SSH Port: `22`
 - Remote Path: `/mnt/Backup/Backup/Media/Media/Video/HomeVideos` We have the data organized by the old dataset layout. Some day I'll fix that. Surely...
-- User: `root` 
+- User: `root`
 - Direction: `Push`
 - Description: `Backup: HomeVideos`
 - Schedule: `Daily (0 0 * * *) At 00:00 (12:00 AM)`
@@ -410,9 +417,10 @@ In order to connect to our backup NAS, we use the following parameters when conf
 - Delay Updates: `[X]`
 
 ### Reorganizing our Media shares
+
 In moving our datasets,
 
-- `/mnt/Media/Media/Video/Movies` to `/mnt/Media/Movies`, 
+- `/mnt/Media/Media/Video/Movies` to `/mnt/Media/Movies`,
 - `/mnt/Media/Media/Video/Shows` to `/mnt/Media/Shows`, and
 - `/mnt/Media/Media/Audio/Music` to `/mnt/Media/Music`
 
@@ -436,16 +444,17 @@ Below I document all uses of the `/mnt/nas/media` directory in absolute host:con
 - Plex:
   - Plex: `/mnt/nas/media/Video/Movies:/movies`, `/mnt/nas/media/Video/Shows:/shows`, `/mnt/nas/media/Audio/Music:/music`
 
-We're gonna have to refactor all of these. 
-Most use `MEDIA_DIR=/mnt/nas/media` in their `.env` file as the baseline. 
+We're gonna have to refactor all of these.
+Most use `MEDIA_DIR=/mnt/nas/media` in their `.env` file as the baseline.
 We'll need to replace that with `MOVIES_DIR=/mnt/nas/movies` and `SHOWS_DIR=/mnt/nas/shows`. Also `MUSIC_DIR=/mnt/nas/music` I guess.
-Then we'll need to find the lines in each compose file which look like `${MEDIA_DIR}/Video/Movies` and `${MEDIA_DIR}/Video/Shows` and replace them with `${MOVIES_DIR}` and `${SHOWS_DIR}` respectively. 
-Also `${MEDIA_DIR}/Audio/Music` to `${MUSIC_DIR}`. 
-None of the container-side mappings should need to be changed. 
+Then we'll need to find the lines in each compose file which look like `${MEDIA_DIR}/Video/Movies` and `${MEDIA_DIR}/Video/Shows` and replace them with `${MOVIES_DIR}` and `${SHOWS_DIR}` respectively.
+Also `${MEDIA_DIR}/Audio/Music` to `${MUSIC_DIR}`.
+None of the container-side mappings should need to be changed.
 
 ### Replacing Yet Another Disk
+
 The drive hosting part-uuid `d50abb30-81fd-49c6-b22e-43fcee2022fe` failed 7 SMART short tests in a row while we were moving our data around. Great.
 
-So we get the disk ID from the part uuid (we already knew it was `/dev/sdx` because of the email notifications I was getting spammed with during the move, but let's follow the exercise) with `ls -l /dev/disk/by-partuuid | grep d50abb30-81fd-49c6-b22e-43fcee2022fe`, which informed us that the partition label was `../../sdx2`. So we open the web UI, navigate to the Manage Disks panel of the Media pool, find our bad drive, make note of the serial number, and hit Offline. Once that's done, we check [diskshelfmap](./DISKSHELFMAP.md) to see where that drive was located. We physically remove the caddy from the shelf, then the drive from the caddy. Throw the new drive in, and note its serial number and document the swap in diskshelfmap. We wait a bit for the drive to be recognized. We run a quick sanity check on the new drive to make sure its SMART info looks good and the serial number matches `smartctl -a /dev/sdx`, then we kick off the replacement and resilver with `zpool replace Media d50abb30-81fd-49c6-b22e-43fcee2022fe /dev/sdx`. 
+So we get the disk ID from the part uuid (we already knew it was `/dev/sdx` because of the email notifications I was getting spammed with during the move, but let's follow the exercise) with `ls -l /dev/disk/by-partuuid | grep d50abb30-81fd-49c6-b22e-43fcee2022fe`, which informed us that the partition label was `../../sdx2`. So we open the web UI, navigate to the Manage Disks panel of the Media pool, find our bad drive, make note of the serial number, and hit Offline. Once that's done, we check diskshelfmap to see where that drive was located. We physically remove the caddy from the shelf, then the drive from the caddy. Throw the new drive in, and note its serial number and document the swap in diskshelfmap. We wait a bit for the drive to be recognized. We run a quick sanity check on the new drive to make sure its SMART info looks good and the serial number matches `smartctl -a /dev/sdx`, then we kick off the replacement and resilver with `zpool replace Media d50abb30-81fd-49c6-b22e-43fcee2022fe /dev/sdx`.
 
 Now we wait like 2 days for the resilver to finish and we hope no other drives fail in the meantime.
