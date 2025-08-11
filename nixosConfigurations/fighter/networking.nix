@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   services.tailscale.enable = true;
   systemd.network = {
     enable = true;
@@ -10,7 +10,7 @@
         "192.168.1.1"
         "10.0.0.1"
       ];
-      gateway = [ "192.168.1.1" ];
+      gateway = ["192.168.1.1"];
       routes = [
         {
           Gateway = "192.168.1.1";
@@ -19,7 +19,7 @@
           Source = "192.168.1.23";
         }
       ];
-      matchConfig.Name = "enp3s0";
+      matchConfig.Name = "enp3s0*";
       linkConfig.RequiredForOnline = "routable";
     };
   };
