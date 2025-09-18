@@ -1,4 +1,4 @@
-name: Build and Deploy Jafner.dev with Hugo
+name: Build and Deploy Jafner.dev with Marmite
 on:
   push:
     branches: [main]
