@@ -122,9 +122,24 @@ Could do: /etc/flake
 
 ### `,` Comma - Run commands from packages you don't have installed
 
+[nix-community/comma](https://github.com/nix-community/comma)
+Comma in one hand and `nix-shell -p <package> --run <command>` in the other was all I needed to address NixOS innate inflexibility.
+
+It's in Nixpkgs and doesn't need any configuration.
+
+```nix
+environment.systemPackages = [
+  comma
+];
+```
+
 ### Sops Nix - Safely and securely include secrets in your NixOS code
 
+[Mic92/sops-nix](https://github.com/Mic92/sops-nix)
+
 ### NixGL - Make OpenGL applications work as expected
+
+[nix-community/nixGL](https://github.com/nix-community/nixGL)
 
 ## Common Nix/OS Usage Pitfalls
 
