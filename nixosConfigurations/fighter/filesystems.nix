@@ -23,10 +23,46 @@
     }
   ];
 
-  fileSystems."/mnt/av" = {
+  fileSystems."/mnt/stash" = {
     enable = true;
-    mountPoint = "/mnt/av";
+    mountPoint = "/mnt/stash";
     device = "//192.168.1.12/AV";
+    fsType = "cifs";
+    options = [
+      "vers=3"
+      "credentials=/run/secrets/paladin/smb"
+      "uid=1000,forceuid"
+      "gid=1000,forcegid"
+    ];
+  };
+  fileSystems."/mnt/torrenting" = {
+    enable = true;
+    mountPoint = "/mnt/torrenting";
+    device = "//192.168.1.12/torrenting";
+    fsType = "cifs";
+    options = [
+      "vers=3"
+      "credentials=/run/secrets/paladin/smb"
+      "uid=1000,forceuid"
+      "gid=1000,forcegid"
+    ];
+  };
+  fileSystems."/mnt/movies" = {
+    enable = true;
+    mountPoint = "/mnt/movies";
+    device = "//192.168.1.12/Movies";
+    fsType = "cifs";
+    options = [
+      "vers=3"
+      "credentials=/run/secrets/paladin/smb"
+      "uid=1000,forceuid"
+      "gid=1000,forcegid"
+    ];
+  };
+  fileSystems."/mnt/shows" = {
+    enable = true;
+    mountPoint = "/mnt/shows";
+    device = "//192.168.1.12/Shows";
     fsType = "cifs";
     options = [
       "vers=3"
