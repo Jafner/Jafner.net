@@ -1,6 +1,7 @@
-{ pkgs
-, username
-, ...
+{
+  pkgs,
+  username,
+  ...
 }: {
   boot = {
     loader.systemd-boot.enable = true;
@@ -12,12 +13,15 @@
       "usb_storage"
       "sd_mod"
     ];
-    initrd.kernelModules = [ ];
+    initrd.kernelModules = [];
     kernelModules = [
       "amdgpu"
       "kvm-amd"
+      "iptable_nat"
+      "ip6table_nat"
+      "iptable_filter"
     ];
-    extraModulePackages = [ ];
+    extraModulePackages = [];
   };
   hardware = {
     amdgpu.amdvlk.enable = false;
