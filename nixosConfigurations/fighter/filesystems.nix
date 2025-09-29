@@ -33,6 +33,10 @@
       "credentials=/run/secrets/paladin/smb"
       "uid=1000,forceuid"
       "gid=1000,forcegid"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "noauto,x-systemd.idle-timeout=30"
     ];
   };
   fileSystems."/mnt/torrenting" = {
@@ -45,6 +49,10 @@
       "credentials=/run/secrets/paladin/smb"
       "uid=1000,forceuid"
       "gid=1000,forcegid"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "noauto,x-systemd.idle-timeout=30"
     ];
   };
   fileSystems."/mnt/movies" = {
@@ -57,6 +65,10 @@
       "credentials=/run/secrets/paladin/smb"
       "uid=1000,forceuid"
       "gid=1000,forcegid"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "noauto,x-systemd.idle-timeout=30"
     ];
   };
   fileSystems."/mnt/shows" = {
@@ -69,6 +81,10 @@
       "credentials=/run/secrets/paladin/smb"
       "uid=1000,forceuid"
       "gid=1000,forcegid"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "noauto,x-systemd.idle-timeout=30"
     ];
   };
 }
