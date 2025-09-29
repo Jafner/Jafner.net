@@ -20,7 +20,7 @@
     age.generateKey = false;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_6_16;
   # Read more: https://wiki.nixos.org/wiki/Linux_kernel
   # Other options:
   # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
