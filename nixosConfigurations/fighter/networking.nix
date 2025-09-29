@@ -1,5 +1,5 @@
 {...}: {
-  services.tailscale.enable = true;
+  services.tailscale.enable = false;
   systemd.network = {
     enable = true;
     networks."50-enp3s0" = {
