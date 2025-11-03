@@ -24,7 +24,6 @@
     extraModulePackages = [];
   };
   hardware = {
-    amdgpu.amdvlk.enable = false;
     graphics = {
       enable = true;
       enable32Bit = true;
