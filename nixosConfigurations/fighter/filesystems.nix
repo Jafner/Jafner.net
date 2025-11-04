@@ -87,4 +87,20 @@
       "noauto,x-systemd.idle-timeout=30"
     ];
   };
+  fileSystems."/mnt/music" = {
+    enable = true;
+    mountPoint = "/mnt/music";
+    device = "//192.168.1.12/Music";
+    fsType = "cifs";
+    options = [
+      "vers=3"
+      "credentials=/run/secrets/paladin/smb"
+      "uid=1000,forceuid"
+      "gid=1000,forcegid"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "noauto,x-systemd.idle-timeout=30"
+    ];
+  };
 }
