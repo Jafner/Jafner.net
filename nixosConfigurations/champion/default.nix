@@ -21,7 +21,7 @@
     touchpad.naturalScrolling = true;
   };
 
-  boot.kernelPackages = pkgs.linuxKernel.packages."linux_6_13";
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # Read more: https://wiki.nixos.org/wiki/Linux_kernel
   # Other options:
   # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
