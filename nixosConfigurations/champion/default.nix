@@ -27,8 +27,8 @@
   # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
   # - https://mynixos.com/nixpkgs/packages/linuxPackages
   boot.kernelModules = [
-    wireguard
-    nft_masq
+    "wireguard"
+    "nft_masq"
   ];
   environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
