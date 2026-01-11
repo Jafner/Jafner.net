@@ -107,16 +107,6 @@
     '';
   };
 
-  networking.hostName = hostname;
-  networking.hosts = {
-    "192.168.1.1" = ["wizard"];
-    "192.168.1.12" = ["paladin"];
-    "192.168.1.23" = ["fighter"];
-    "192.168.1.135" = ["desktop"];
-    "143.198.68.202" = ["artificer"];
-    "172.245.108.219" = ["champion"];
-  };
-
   system.stateVersion = "24.11";
 
   # User Programs

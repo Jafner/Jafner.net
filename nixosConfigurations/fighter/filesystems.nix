@@ -26,7 +26,7 @@
   fileSystems."/mnt/stash" = {
     enable = true;
     mountPoint = "/mnt/stash";
-    device = "//192.168.1.12/AV";
+    device = "//192.168.0.45/AV";
     fsType = "cifs";
     options = [
       "vers=3"
@@ -42,7 +42,7 @@
   fileSystems."/mnt/torrenting" = {
     enable = true;
     mountPoint = "/mnt/torrenting";
-    device = "//192.168.1.12/torrenting";
+    device = "//192.168.0.45/torrenting";
     fsType = "cifs";
     options = [
       "vers=3"
@@ -58,7 +58,7 @@
   fileSystems."/mnt/movies" = {
     enable = true;
     mountPoint = "/mnt/movies";
-    device = "//192.168.1.12/Movies";
+    device = "//192.168.0.45/Movies";
     fsType = "cifs";
     options = [
       "vers=3"
@@ -74,7 +74,7 @@
   fileSystems."/mnt/shows" = {
     enable = true;
     mountPoint = "/mnt/shows";
-    device = "//192.168.1.12/Shows";
+    device = "//192.168.0.45/Shows";
     fsType = "cifs";
     options = [
       "vers=3"
@@ -90,7 +90,7 @@
   fileSystems."/mnt/music" = {
     enable = true;
     mountPoint = "/mnt/music";
-    device = "//192.168.1.12/Music";
+    device = "//192.168.0.45/Music";
     fsType = "cifs";
     options = [
       "vers=3"
