@@ -4,7 +4,7 @@
 }: {
   home-manager.users.${username}.programs.git = {
     enable = true;
-    userName = "${username}@${hostname}";
-    userEmail = "noreply@jafner.net";
+    settings.user.name = "${username}@${hostname}";
+    settings.user.email = "noreply@jafner.net";
   };
 }
