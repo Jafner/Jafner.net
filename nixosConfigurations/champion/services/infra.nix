@@ -64,7 +64,7 @@
               container_name: vaultwarden
               restart: unless-stopped
               env_file:
-                - path: /run/secrets/stacks/bitwarden.env
+                - path: /run/secrets/stacks/vaultwarden.env
               environment:
                 DOMAIN: "https://bitwarden.jafner.net"
               volumes:
