@@ -21,3 +21,7 @@ creation_rules:
 #
 # Once a host has an age pubkey, add it to the keys array here.
 # Finally, re-encrypt any relevant secrets files: sops updatekeys path/to/file.secrets.env
+#
+# USEFUL COMMANDS:
+# List all files to which sops rules apply:
+#   find . -regextype posix-extended -regex '.*/[^/]*(\.(secrets|token|passwd)|secrets\.env|config\.boot)[^/]*'
