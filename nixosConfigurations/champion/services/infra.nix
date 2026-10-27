@@ -5,6 +5,12 @@
     format = "dotenv";
     owner = username;
   };
+  sops.secrets."stacks/vaultwarden.env" = {
+    sopsFile = ./vaultwarden.secrets.env;
+    mode = "0440";
+    format = "dotenv";
+    owner = username;
+  };
   home-manager.users.${username} = {
     home.file = {
       "stacks/caddy/docker-compose.yml" = {
@@ -57,6 +63,8 @@
               image: vaultwarden/server:latest
               container_name: vaultwarden
               restart: unless-stopped
+              env_file:
+                - path: /run/secrets/stacks/bitwarden.env
               environment:
                 DOMAIN: "https://bitwarden.jafner.net"
               volumes:
