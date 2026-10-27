@@ -1,8 +1,9 @@
-{ pkgs
-, username
-, hostname
-, system
-, ...
+{
+  pkgs,
+  username,
+  hostname,
+  system,
+  ...
 }: {
   imports = [
     ./git.nix
@@ -18,11 +19,11 @@
   };
 
   sops = {
-    age.sshKeyPaths = [ "/home/${username}/.ssh/${username}@${hostname}" ];
+    age.sshKeyPaths = ["/home/${username}/.ssh/${username}@${hostname}"];
     age.generateKey = false;
   };
 
-  boot.kernelPackages = pkgs.linuxKernel.packages."linux_6_13";
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # Read more: https://wiki.nixos.org/wiki/Linux_kernel
   # Other options:
   # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
@@ -78,10 +79,10 @@
         commands = [
           {
             command = "ALL";
-            options = [ "NOPASSWD" ];
+            options = ["NOPASSWD"];
           }
         ];
-        groups = [ "wheel" ];
+        groups = ["wheel"];
       }
     ];
   };
@@ -114,7 +115,7 @@
       username = "${username}";
       homeDirectory = "/home/${username}";
     };
-    xdg.systemDirs.data = [ "/usr/share" ];
+    xdg.systemDirs.data = ["/usr/share"];
     home.stateVersion = "24.11";
   };
 
