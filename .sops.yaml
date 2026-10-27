@@ -3,7 +3,7 @@ keys:
   - &joey_age age1zswcq6t5wl8spr3g2wpxhxukjklngcav0vw8py0jnfkqd2jm2ypq53ga00
   - &admin_fighter age1nq652a3y063dy5wllucf5ww29g7sx3lt8ehhspxk6u9d28t8ndgq9q0926
   - &admin_artificer age1mmy5xx4nxun5fexpxdl2tjx60akc4sgktrquq8c6ggvtehcpa3ss2hh2tj
-  - &admin_champion age10k706un6exgaym7yt8jnxz8m8n25wd9fezqxr43zkzatjleagg2s64mwt6
+  - &admin_champion age12vay0d5agal6lvkhcn3gvvv8emsnfxnyt7hlzljlutfzxel0ffsqnmnccw
 creation_rules:
   - path_regex: ^.*(\.(secrets|token|passwd)|secrets.env|config.boot)
     key_groups:
@@ -13,3 +13,11 @@ creation_rules:
           - *admin_fighter
           - *admin_artificer
           - *admin_champion
+
+# Configure a fresh host with a new key:
+#   Generate the host's SSH key: ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N ""
+#   Generate an age key from the SSH key: nix run github:Mic92/ssh-to-age -- -private-key -i ~/.ssh/id_ed25519 -o ~/.ssh/key.txt
+#   Get the pubkey from that age key: age-keygen -y ~/.ssh/key.txt
+#
+# Once a host has an age pubkey, add it to the keys array here.
+# Finally, re-encrypt any relevant secrets files: sops updatekeys path/to/file.secrets.env
